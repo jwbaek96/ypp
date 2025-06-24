@@ -361,6 +361,7 @@ a:hover {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding-bottom: 15vh; /* 버튼들을 아래로 이동 */
 }
 
 .hero-background {
@@ -411,6 +412,7 @@ a:hover {
     gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 2rem; /* 제목과 간격 추가 */
 }
 
 .scroll-indicator {

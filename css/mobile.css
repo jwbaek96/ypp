@@ -348,8 +348,7 @@
     }
     
     .groupware-btn {
-        padding: 0.375rem 0.75rem;
-        font-size: 0.75rem;
+        display: none; /* 모바일에서 숨김 */
     }
     
     .language-switch {
@@ -365,6 +364,7 @@
     .hero-section {
         height: 100vh;
         padding-top: 70px;
+        padding-bottom: 20vh; /* 모바일에서 더 아래로 */
     }
     
     .hero-content {
@@ -384,12 +384,15 @@
     .hero-actions {
         flex-direction: column;
         gap: 1rem;
+        margin-top: 2.5rem; /* 모바일에서 더 큰 간격 */
     }
     
     .hero-btn {
-        width: 100%;
-        max-width: 280px;
+        width: 90%; /* 모바일에서 크기 축소 */
+        max-width: 260px; /* 최대 크기 제한 */
         text-align: center;
+        padding: 0.875rem 1.5rem; /* 패딩 축소 */
+        font-size: 0.9rem; /* 폰트 크기 축소 */
     }
     
     /* Section adjustments */

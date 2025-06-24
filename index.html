@@ -1,11 +1,520 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="YPP - 1982년부터 40년간 전력계통 분야를 선도해온 에너지 전문기업">
+    <meta name="keywords" content="YPP, 디지털 보호계전기, 삼중화 보호 TRIUMP, 고장기록장치, 전력설비, 계통보호">
+    <title>YPP - 안전하고 지속가능한 에너지의 미래를 여는 기업</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/components-extended.css">
+    <link rel="stylesheet" href="./css/mobile.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/images/logo/favicon.ico">
 </head>
 <body>
-    
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <img src="./assets/images/logo/ypp-logo.png" alt="YPP 로고" class="loading-logo">
+    </div>
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="./assets/images/logo/ypp-logo.png" alt="YPP 로고">
+                </a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#company" class="nav-link">회사소개</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="./pages/company/overview.html">기업현황</a></li>
+                            <li><a href="./pages/company/history.html">연혁</a></li>
+                            <li><a href="./pages/company/organization.html">조직도</a></li>
+                            <li><a href="./pages/company/location.html">오시는 길</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#business" class="nav-link">사업분야</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="./pages/business/system.html">시스템공급</a></li>
+                            <li><a href="./pages/business/solution.html">솔루션개발</a></li>
+                            <li><a href="./pages/business/engineering.html">엔지니어링</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#products" class="nav-link">제품</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="./pages/products/digital-relay.html">디지털 보호계전기</a></li>
+                            <li><a href="./pages/products/triump.html">삼중화 보호 TRIUMP</a></li>
+                            <li><a href="./pages/products/fault-recorder.html">고장기록장치</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#education" class="nav-link">교육훈련</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="./pages/education/relay-school.html">Relay School</a></li>
+                            <li><a href="./pages/education/psac.html">PSAC</a></li>
+                            <li><a href="#" onclick="openAcademyPopup()">YPP Academy</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#support" class="nav-link">고객지원</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="./pages/support/faq.html">FAQ</a></li>
+                            <li><a href="./pages/support/contact.html">문의하기</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- 그룹웨어 링크 -->
+                <a href="#" class="groupware-btn" target="_blank">
+                    <span>그룹웨어</span>
+                </a>
+                
+                <!-- 언어 전환 -->
+                <div class="language-switch">
+                    <button class="lang-btn active" data-lang="ko">KOR</button>
+                    <button class="lang-btn" data-lang="en">ENG</button>
+                </div>
+                
+                <!-- Mobile Hamburger Button -->
+                <button class="hamburger-btn" id="hamburger-btn" aria-label="메뉴 열기">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <aside id="mobile-sidebar" class="mobile-sidebar">
+        <div class="sidebar-header">
+            <img src="./assets/images/logo/ypp-logo.png" alt="YPP 로고" class="sidebar-logo">
+            <button class="sidebar-close" id="sidebar-close" aria-label="메뉴 닫기">
+                <span>✕</span>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="#company" class="sidebar-link">🏢 회사소개</a>
+                    <ul class="sidebar-submenu">
+                        <li><a href="./pages/company/overview.html">기업현황</a></li>
+                        <li><a href="./pages/company/history.html">연혁</a></li>
+                        <li><a href="./pages/company/organization.html">조직도</a></li>
+                        <li><a href="./pages/company/location.html">오시는 길</a></li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#business" class="sidebar-link">⚡ 사업분야</a>
+                    <ul class="sidebar-submenu">
+                        <li><a href="./pages/business/system.html">시스템공급</a></li>
+                        <li><a href="./pages/business/solution.html">솔루션개발</a></li>
+                        <li><a href="./pages/business/engineering.html">엔지니어링</a></li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#products" class="sidebar-link">🔧 제품</a>
+                    <ul class="sidebar-submenu">
+                        <li><a href="./pages/products/digital-relay.html">디지털 보호계전기</a></li>
+                        <li><a href="./pages/products/triump.html">삼중화 보호 TRIUMP</a></li>
+                        <li><a href="./pages/products/fault-recorder.html">고장기록장치</a></li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#education" class="sidebar-link">🎓 교육훈련</a>
+                    <ul class="sidebar-submenu">
+                        <li><a href="./pages/education/relay-school.html">Relay School</a></li>
+                        <li><a href="./pages/education/psac.html">PSAC</a></li>
+                        <li><a href="#" onclick="openAcademyPopup()">YPP Academy</a></li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#support" class="sidebar-link">📞 고객지원</a>
+                    <ul class="sidebar-submenu">
+                        <li><a href="./pages/support/faq.html">FAQ</a></li>
+                        <li><a href="./pages/support/contact.html">문의하기</a></li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <!-- Sidebar Footer -->
+            <div class="sidebar-footer">
+                <a href="#" class="sidebar-groupware" target="_blank">🔗 그룹웨어 바로가기</a>
+                <div class="sidebar-lang">
+                    <button class="sidebar-lang-btn active">한국어</button>
+                    <button class="sidebar-lang-btn">English</button>
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-background">
+                <img src="./assets/images/company/hero-bg.jpg" alt="YPP 메인 배경" class="hero-bg-image">
+            </div>
+            <div class="hero-content">
+                <div class="hero-container">
+                    <h1 class="hero-title">
+                        안전하고 지속가능한<br>
+                        <span class="highlight">에너지의 미래</span>를 여는 YPP
+                    </h1>
+                    <p class="hero-subtitle">
+                        1982년부터 40년간 전력계통 분야를 선도해온 기술력으로<br>
+                        글로벌 에너지 솔루션의 새로운 표준을 제시합니다
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#company" class="hero-btn primary">회사소개 보기</a>
+                        <a href="#products" class="hero-btn secondary">제품 카탈로그</a>
+                        <button onclick="openAcademyPopup()" class="hero-btn accent">교육 신청하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span class="scroll-text">Scroll Down</span>
+                <div class="scroll-arrow"></div>
+            </div>
+        </section>
+
+        <!-- Company Overview -->
+        <section id="company" class="company-overview">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">YPP 핵심 정보</h2>
+                    <p class="section-subtitle">40년간 축적된 기술력과 신뢰성</p>
+                </div>
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <span class="icon">📅</span>
+                        </div>
+                        <h3 class="overview-title">설립연도</h3>
+                        <p class="overview-value">1982년</p>
+                        <p class="overview-desc">40년 업력의 전문성</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <span class="icon">⚡</span>
+                        </div>
+                        <h3 class="overview-title">주요사업</h3>
+                        <p class="overview-value">전력설비 계통보호</p>
+                        <p class="overview-desc">디지털 보호계전기 전문</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <span class="icon">🌍</span>
+                        </div>
+                        <h3 class="overview-title">비전</h3>
+                        <p class="overview-value">글로벌 선도기업</p>
+                        <p class="overview-desc">에너지 솔루션 혁신</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business Areas -->
+        <section id="business" class="business-areas">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">주요 사업분야</h2>
+                    <p class="section-subtitle">전력계통 보호의 모든 영역을 포괄하는 토탈 솔루션</p>
+                </div>
+                <div class="business-grid">
+                    <div class="business-card">
+                        <div class="business-icon">
+                            <img src="./assets/images/business/system-icon.png" alt="시스템공급">
+                        </div>
+                        <h3 class="business-title">시스템공급</h3>
+                        <ul class="business-features">
+                            <li>전력계통 보호시스템</li>
+                            <li>보호계전기 통합시스템</li>
+                            <li>디지털화 솔루션</li>
+                        </ul>
+                        <a href="./pages/business/system.html" class="business-link">자세히 보기 →</a>
+                    </div>
+                    <div class="business-card">
+                        <div class="business-icon">
+                            <img src="./assets/images/business/solution-icon.png" alt="솔루션개발">
+                        </div>
+                        <h3 class="business-title">솔루션개발</h3>
+                        <ul class="business-features">
+                            <li>스마트그리드 기술</li>
+                            <li>IoT 기반 모니터링</li>
+                            <li>AI 예측 진단</li>
+                        </ul>
+                        <a href="./pages/business/solution.html" class="business-link">자세히 보기 →</a>
+                    </div>
+                    <div class="business-card">
+                        <div class="business-icon">
+                            <img src="./assets/images/business/engineering-icon.png" alt="엔지니어링">
+                        </div>
+                        <h3 class="business-title">엔지니어링 서비스</h3>
+                        <ul class="business-features">
+                            <li>설계 및 시공</li>
+                            <li>시운전 및 점검</li>
+                            <li>유지보수 서비스</li>
+                        </ul>
+                        <a href="./pages/business/engineering.html" class="business-link">자세히 보기 →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Products -->
+        <section id="products" class="core-products">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">핵심 제품</h2>
+                    <p class="section-subtitle">검증된 기술력으로 완성된 프리미엄 제품군</p>
+                </div>
+                <div class="products-slider">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="./assets/images/products/digital-relay.jpg" alt="디지털 보호계전기">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">디지털 보호계전기</h3>
+                            <p class="product-desc">
+                                최신 디지털 기술을 적용한 고성능 보호계전기로 
+                                전력계통의 안정성과 신뢰성을 보장합니다.
+                            </p>
+                            <ul class="product-features">
+                                <li>고속 처리 능력</li>
+                                <li>다중 보호 기능</li>
+                                <li>원격 모니터링</li>
+                            </ul>
+                            <a href="./pages/products/digital-relay.html" class="product-btn">상세보기</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="./assets/images/products/triump.jpg" alt="삼중화 보호 TRIUMP">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">삼중화 보호 TRIUMP</h3>
+                            <p class="product-desc">
+                                Triple redundancy 기술을 적용한 최고 수준의 
+                                안정성을 자랑하는 보호시스템입니다.
+                            </p>
+                            <ul class="product-features">
+                                <li>삼중화 구조</li>
+                                <li>무정전 운전</li>
+                                <li>자동 절체 기능</li>
+                            </ul>
+                            <a href="./pages/products/triump.html" class="product-btn">상세보기</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="./assets/images/products/fault-recorder.jpg" alt="고장기록장치">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">고장기록장치</h3>
+                            <p class="product-desc">
+                                전력계통 고장 시 정확한 파형 데이터를 기록하여 
+                                신속한 사고 분석과 복구를 지원합니다.
+                            </p>
+                            <ul class="product-features">
+                                <li>고정밀 측정</li>
+                                <li>대용량 저장</li>
+                                <li>실시간 분석</li>
+                            </ul>
+                            <a href="./pages/products/fault-recorder.html" class="product-btn">상세보기</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-action">
+                    <a href="./pages/products/" class="btn-large">전체 제품 보기</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- YPP Academy -->
+        <section id="education" class="ypp-academy">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">YPP Academy</h2>
+                    <p class="section-subtitle">전력계통 보호 전문가 양성을 위한 체계적인 교육 프로그램</p>
+                </div>
+                <div class="academy-content">
+                    <div class="academy-info">
+                        <div class="academy-card">
+                            <h3 class="academy-title">Relay School 2025</h3>
+                            <p class="academy-period">교육기간: 3월 ~ 11월</p>
+                            <p class="academy-desc">
+                                보호계전기의 기초부터 고급 활용까지 체계적으로 학습할 수 있는 
+                                전문 교육과정입니다.
+                            </p>
+                            <a href="./pages/education/relay-school.html" class="academy-link">과정 상세보기</a>
+                        </div>
+                        <div class="academy-card">
+                            <h3 class="academy-title">PSAC 2025</h3>
+                            <p class="academy-period">교육기간: 9월 ~ 12월</p>
+                            <p class="academy-desc">
+                                Power System Analysis Course로 전력계통 해석 및 
+                                보호협조에 대한 전문지식을 습득합니다.
+                            </p>
+                            <a href="./pages/education/psac.html" class="academy-link">과정 상세보기</a>
+                        </div>
+                    </div>
+                    <div class="academy-action">
+                        <button onclick="openAcademyPopup()" class="academy-btn">
+                            교육 신청하기
+                        </button>
+                        <p class="academy-contact">
+                            교육 문의: 02-2104-8720, 4683 | yppedu@ypp.co.kr
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">연락처 & 지원</h2>
+                    <p class="section-subtitle">언제든지 문의하세요. 전문가가 신속하게 도움을 드립니다.</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <h3 class="contact-title">📞 대표 연락처</h3>
+                            <p class="contact-value">02-2104-8700</p>
+                            <p class="contact-desc">일반 문의 및 상담</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3 class="contact-title">🎓 교육 문의</h3>
+                            <p class="contact-value">02-2104-8720, 4683</p>
+                            <p class="contact-desc">yppedu@ypp.co.kr</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3 class="contact-title">🏢 본사 위치</h3>
+                            <p class="contact-value">서울특별시 금천구</p>
+                            <p class="contact-desc">가산디지털2로 24</p>
+                        </div>
+                    </div>
+                    <div class="contact-actions">
+                        <a href="./pages/support/contact.html" class="contact-btn primary">문의하기</a>
+                        <a href="./pages/support/faq.html" class="contact-btn secondary">FAQ</a>
+                        <a href="./pages/company/location.html" class="contact-btn secondary">오시는 길</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="./assets/images/logo/ypp-logo-white.png" alt="YPP 로고">
+                    </div>
+                    <p class="footer-desc">
+                        안전하고 지속가능한 에너지의 미래를 여는<br>
+                        YPP가 함께합니다.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">빠른 링크</h3>
+                    <ul class="footer-links">
+                        <li><a href="./pages/company/overview.html">회사소개</a></li>
+                        <li><a href="./pages/products/">제품</a></li>
+                        <li><a href="./pages/education/">교육훈련</a></li>
+                        <li><a href="./pages/support/contact.html">문의하기</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">연락처</h3>
+                    <ul class="footer-contact">
+                        <li>📞 02-2104-8700</li>
+                        <li>📧 yppedu@ypp.co.kr</li>
+                        <li>📍 서울특별시 금천구 가산디지털2로 24</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2025 YPP Corporation. All rights reserved.
+                </p>
+                <div class="footer-legal">
+                    <a href="#">개인정보처리방침</a>
+                    <a href="#">이용약관</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- YPP Academy Popup -->
+    <div id="academy-popup" class="academy-popup">
+        <div class="popup-overlay" onclick="closeAcademyPopup()"></div>
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2 class="popup-title">YPP Academy</h2>
+                <button class="popup-close" onclick="closeAcademyPopup()">✕</button>
+            </div>
+            <div class="popup-body">
+                <div class="education-section">
+                    <h3 class="education-title">Relay School 2025 (3월 ~ 11월)</h3>
+                    <div class="education-downloads">
+                        <button onclick="downloadFile('relay-school-plan.pdf')" class="download-btn">
+                            📋 교육계획 다운로드
+                        </button>
+                        <button onclick="downloadFile('relay-school-application.pdf')" class="download-btn">
+                            📝 교육신청서 다운로드
+                        </button>
+                        <button onclick="downloadFile('relay-school-brochure.pdf')" class="download-btn">
+                            📘 브로슈어 다운로드
+                        </button>
+                    </div>
+                </div>
+                <div class="education-section">
+                    <h3 class="education-title">PSAC 2025 (9월 ~ 12월)</h3>
+                    <div class="education-downloads">
+                        <button onclick="downloadFile('psac-plan.pdf')" class="download-btn">
+                            📋 교육신청서 다운로드
+                        </button>
+                        <button onclick="downloadFile('psac-brochure.pdf')" class="download-btn">
+                            📘 브로슈어 다운로드
+                        </button>
+                    </div>
+                </div>
+                <div class="education-contact">
+                    <h4>🏢 교육 문의</h4>
+                    <p>📞 02-2104-8720, 4683</p>
+                    <p>📧 yppedu@ypp.co.kr</p>
+                    <button onclick="closeAcademyPopup()" class="close-btn">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="./js/main.js"></script>
+    <script src="./js/main-extended.js"></script>
+    <script src="./js/components.js"></script>
+    <script src="./js/mobile-menu.js"></script>
 </body>
 </html>

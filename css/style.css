@@ -818,6 +818,8 @@ a:hover {
 .footer-logo img {
     height: 40px;
     margin-bottom: 1rem;
+    filter: brightness(0) saturate(100%) invert(70%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(85%);
+    /* 밝은 회색으로 변환 */
 }
 
 .footer-desc {

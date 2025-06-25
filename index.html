@@ -30,32 +30,47 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Hero Section -->
+        <!-- index.html Hero 섹션 수정 -->
         <section id="hero" class="hero-section">
-            <div class="hero-background">
-                <img src="./assets/images/company/hero-bg.jpg" alt="YPP 메인 배경" class="hero-bg-image">
-            </div>
-            <div class="hero-content">
-                <div class="hero-container">
-                    <h1 class="hero-title">
-                        안전하고 지속가능한<br>
-                        <span class="highlight">에너지의 미래</span>를 여는 YPP
-                    </h1>
-                    <p class="hero-subtitle">
-                        1982년부터 40년간 전력계통 분야를 선도해온 기술력으로<br>
-                        글로벌 에너지 솔루션의 새로운 표준을 제시합니다
-                    </p>
-                    <div class="hero-actions">
-                        <a href="#company" class="hero-btn primary">회사소개 보기</a>
-                        <a href="#products" class="hero-btn secondary">제품 카탈로그</a>
-                        <button onclick="openAcademyPopup()" class="hero-btn accent">교육 신청하기</button>
-                    </div>
+        <div class="hero-background">
+            <!-- 동영상 배경 -->
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="./assets/videos/hero-bg.mp4" type="video/mp4">
+                <source src="./assets/videos/hero-bg.webm" type="video/webm">
+                <!-- 동영상 로드 실패시 이미지 대체 -->
+                <img src="./assets/images/company/hero-bg.jpg" alt="YPP 메인 배경" class="hero-bg-fallback">
+            </video>
+            <!-- 동영상 오버레이 -->
+            <div class="video-overlay"></div>
+        </div>
+        
+        <!-- 기존 콘텐츠 유지 -->
+        <div class="hero-content">
+            <div class="hero-container">
+                <h1 class="hero-title">
+                    안전하고 지속가능한<br>
+                    <span class="highlight">에너지의 미래</span>를 여는 YPP
+                </h1>
+                <p class="hero-subtitle">
+                    1982년부터 40년간 전력계통 분야를 선도해온 기술력으로<br>
+                    글로벌 에너지 솔루션의 새로운 표준을 제시합니다
+                </p>
+                <div class="hero-actions">
+                    <a href="#company" class="hero-btn primary">회사소개 보기</a>
+                    <a href="#products" class="hero-btn secondary">제품 카탈로그</a>
+                    <button onclick="openAcademyPopup()" class="hero-btn accent">교육 신청하기</button>
                 </div>
             </div>
-            <div class="scroll-indicator">
-                <span class="scroll-text">Scroll Down</span>
-                <div class="scroll-arrow"></div>
-            </div>
+        </div>
+        
+        
+        
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll Down</span>
+            <div class="scroll-arrow"></div>
+        </div>
+        </section>
+
         </section>
 
         <!-- Company Overview -->
@@ -334,6 +349,27 @@
     </div>
 
     <!-- JavaScript Files -->
+    <script>
+        // 동영상 로드 에러 처리
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.hero-video');
+            const fallback = document.querySelector('.hero-bg-fallback');
+            
+            video.addEventListener('error', function() {
+                video.style.display = 'none';
+                fallback.style.display = 'block';
+            });
+            
+            // 모바일에서 자동재생 실패시 대체
+            video.addEventListener('loadstart', function() {
+                setTimeout(() => {
+                    if (video.paused && video.currentTime === 0) {
+                        fallback.style.display = 'block';
+                    }
+                }, 2000);
+            });
+        });
+    </script>
     <script src="./js/components.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/main-extended.js"></script>

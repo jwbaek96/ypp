@@ -287,3 +287,185 @@ document.addEventListener('keydown', function(e) {
 console.log('%c🏢 YPP Website', 'color: #0066CC; font-size: 24px; font-weight: bold;');
 console.log('%cBuilt with ❤️ using Vanilla JavaScript', 'color: #666; font-size: 14px;');
 console.log('%cContact: yppedu@ypp.co.kr', 'color: #CC0033; font-size: 12px;');
+
+// *********************************************************
+
+
+
+// Hero 섹션 UX 개선 JavaScript (main.js에 추가)
+
+// ===== HERO SECTION ENHANCEMENTS =====
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // ===== 동적 뷰포트 높이 조정 =====
+    function setDynamicVH() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    setDynamicVH();
+    window.addEventListener('resize', setDynamicVH);
+    window.addEventListener('orientationchange', setDynamicVH);
+
+    // ===== Hero 버튼 개선된 애니메이션 =====
+    const heroButtons = document.querySelectorAll('.hero-btn');
+    
+    heroButtons.forEach(button => {
+        // 마우스 엔터 효과
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px) scale(1.02)';
+        });
+        
+        // 마우스 리브 효과
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+        
+        // 클릭 효과
+        button.addEventListener('mousedown', function() {
+            this.style.transform = 'translateY(-1px) scale(0.98)';
+        });
+        
+        button.addEventListener('mouseup', function() {
+            this.style.transform = 'translateY(-3px) scale(1.02)';
+        });
+    });
+
+    // ===== 스크롤 인디케이터 자동 숨김 =====
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    
+    function handleScroll() {
+        const scrollY = window.scrollY;
+        
+        if (scrollIndicator) {
+            if (scrollY > 100) {
+                scrollIndicator.style.opacity = '0';
+                scrollIndicator.style.transform = 'translateX(-50%) translateY(20px)';
+            } else {
+                scrollIndicator.style.opacity = '1';
+                scrollIndicator.style.transform = 'translateX(-50%) translateY(0)';
+            }
+        }
+    }
+    
+    window.addEventListener('scroll', handleScroll);
+
+    // ===== Hero 배경 패럴랙스 효과 =====
+    const heroBgImage = document.querySelector('.hero-bg-image');
+    
+    function parallaxEffect() {
+        const scrollY = window.scrollY;
+        const rate = scrollY * -0.3;
+        
+        if (heroBgImage) {
+            heroBgImage.style.transform = `translateY(${rate}px)`;
+        }
+    }
+    
+    window.addEventListener('scroll', parallaxEffect);
+
+    // ===== 타이핑 효과 (선택사항) =====
+    function typewriterEffect() {
+        const titleElement = document.querySelector('.hero-title');
+        if (!titleElement) return;
+        
+        const originalText = titleElement.innerHTML;
+        const lines = originalText.split('<br>');
+        
+        titleElement.innerHTML = '';
+        titleElement.style.opacity = '1';
+        
+        let lineIndex = 0;
+        let charIndex = 0;
+        
+        function typeNextChar() {
+            if (lineIndex < lines.length) {
+                const currentLine = lines[lineIndex];
+                
+                if (charIndex < currentLine.length) {
+                    titleElement.innerHTML += currentLine.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeNextChar, 50);
+                } else {
+                    if (lineIndex < lines.length - 1) {
+                        titleElement.innerHTML += '<br>';
+                    }
+                    lineIndex++;
+                    charIndex = 0;
+                    setTimeout(typeNextChar, 200);
+                }
+            }
+        }
+        
+        // 로딩 완료 2.5초 후 타이핑 시작
+        setTimeout(typeNextChar, 2500);
+    }
+    
+    // 타이핑 효과 활성화 (원하면 주석 해제)
+    // typewriterEffect();
+
+    // ===== 모바일 터치 개선 =====
+    heroButtons.forEach(button => {
+        button.addEventListener('touchstart', function() {
+            this.style.transform = 'translateY(-1px) scale(0.98)';
+        }, { passive: true });
+        
+        button.addEventListener('touchend', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        }, { passive: true });
+    });
+
+    // ===== 접근성 개선 =====
+    // 키보드 네비게이션
+    heroButtons.forEach(button => {
+        button.addEventListener('focus', function() {
+            this.style.outline = '3px solid rgba(255, 255, 255, 0.5)';
+            this.style.outlineOffset = '3px';
+        });
+        
+        button.addEventListener('blur', function() {
+            this.style.outline = 'none';
+        });
+    });
+
+    // ===== 반응형 폰트 크기 조정 =====
+    function adjustFontSizes() {
+        const heroTitle = document.querySelector('.hero-title');
+        const heroSubtitle = document.querySelector('.hero-subtitle');
+        const vw = window.innerWidth;
+        
+        if (heroTitle && heroSubtitle) {
+            if (vw <= 480) {
+                heroTitle.style.fontSize = 'clamp(1.8rem, 5vw, 2.2rem)';
+                heroSubtitle.style.fontSize = 'clamp(0.85rem, 3vw, 1rem)';
+            } else if (vw <= 768) {
+                heroTitle.style.fontSize = 'clamp(2rem, 5vw, 2.5rem)';
+                heroSubtitle.style.fontSize = 'clamp(0.9rem, 3vw, 1.1rem)';
+            } else {
+                heroTitle.style.fontSize = '';
+                heroSubtitle.style.fontSize = '';
+            }
+        }
+    }
+    
+    adjustFontSizes();
+    window.addEventListener('resize', adjustFontSizes);
+});
+
+// ===== CSS 변수 사용 (CSS와 함께 적용) =====
+document.documentElement.style.setProperty('--hero-vh', '100vh');
+
+// iOS Safari 뷰포트 버그 해결
+if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    function iosVHFix() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--hero-vh', `${vh * 100}px`);
+    }
+    
+    window.addEventListener('resize', iosVHFix);
+    window.addEventListener('orientationchange', () => {
+        setTimeout(iosVHFix, 500);
+    });
+    
+    iosVHFix();
+}

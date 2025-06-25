@@ -1,74 +1,88 @@
-<!-- Header Component -->
+<!-- YPP Website - Header Component -->
 <header id="header" class="header">
     <div class="header-container">
         <!-- Logo -->
         <div class="logo">
-            <a href="./index.html">
+            <a href="/">
                 <img src="./assets/images/logo/symbol.png" alt="YPP 로고">
             </a>
         </div>
-        
+
         <!-- Desktop Navigation -->
         <nav class="desktop-nav">
             <ul class="nav-menu">
+                <!-- 회사소개 -->
                 <li class="nav-item">
                     <a href="#company" class="nav-link">회사소개</a>
                     <ul class="dropdown-menu">
-                        <li><a href="./pages/company/overview.html">기업현황</a></li>
-                        <li><a href="./pages/company/history.html">연혁</a></li>
-                        <li><a href="./pages/company/organization.html">조직도</a></li>
-                        <li><a href="./pages/company/location.html">오시는 길</a></li>
+                        <li><a href="../pages/company/about.html">기업개요</a></li>
+                        <li><a href="../pages/company/history.html">연혁</a></li>
+                        <li><a href="../pages/company/organization.html">조직도</a></li>
+                        <li><a href="../pages/company/location.html">오시는 길</a></li>
                     </ul>
                 </li>
+
+                <!-- 사업분야 -->
                 <li class="nav-item">
                     <a href="#business" class="nav-link">사업분야</a>
                     <ul class="dropdown-menu">
-                        <li><a href="./pages/business/system.html">시스템공급</a></li>
-                        <li><a href="./pages/business/solution.html">솔루션개발</a></li>
-                        <li><a href="./pages/business/engineering.html">엔지니어링</a></li>
+                        <li><a href="../pages/business/system.html">시스템공급</a></li>
+                        <li><a href="../pages/business/solution.html">솔루션개발</a></li>
+                        <li><a href="../pages/business/engineering.html">엔지니어링</a></li>
+                        <li><a href="../pages/business/esg.html">ESG경영</a></li>
                     </ul>
                 </li>
+
+                <!-- 제품소개 -->
                 <li class="nav-item">
-                    <a href="#products" class="nav-link">제품</a>
+                    <a href="#products" class="nav-link">제품소개</a>
                     <ul class="dropdown-menu">
-                        <li><a href="./pages/products/digital-relay.html">디지털 보호계전기</a></li>
-                        <li><a href="./pages/products/triump.html">삼중화 보호 TRIUMP</a></li>
-                        <li><a href="./pages/products/fault-recorder.html">고장기록장치</a></li>
+                        <li><a href="../pages/products/digital-relay.html">디지털 보호계전기</a></li>
+                        <li><a href="../pages/products/triump.html">삼중화 보호 TRIUMP</a></li>
+                        <li><a href="../pages/products/fault-recorder.html">고장기록장치</a></li>
+                        <li><a href="../pages/products/">전체 제품 보기</a></li>
                     </ul>
                 </li>
+
+                <!-- 교육센터 -->
                 <li class="nav-item">
-                    <a href="#education" class="nav-link">교육훈련</a>
+                    <a href="#education" class="nav-link">교육센터</a>
                     <ul class="dropdown-menu">
-                        <li><a href="./pages/education/relay-school.html">Relay School</a></li>
-                        <li><a href="./pages/education/psac.html">PSAC</a></li>
-                        <li><a href="#" onclick="openAcademyPopup()">YPP Academy</a></li>
+                        <li><a href="../pages/education/relay-school.html">Relay School</a></li>
+                        <li><a href="../pages/education/psac.html">PSAC</a></li>
+                        <li><a href="../pages/education/schedule.html">교육일정</a></li>
+                        <li><a onclick="openAcademyPopup()">교육신청</a></li>
                     </ul>
                 </li>
+
+                <!-- 고객지원 -->
                 <li class="nav-item">
                     <a href="#support" class="nav-link">고객지원</a>
                     <ul class="dropdown-menu">
-                        <li><a href="./pages/support/faq.html">FAQ</a></li>
-                        <li><a href="./pages/support/contact.html">문의하기</a></li>
+                        <li><a href="../pages/support/contact.html">문의하기</a></li>
+                        <li><a href="../pages/support/faq.html">FAQ</a></li>
+                        <li><a href="../pages/support/download.html">자료실</a></li>
+                        <li><a href="../pages/support/manual.html">매뉴얼</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
-        
+
         <!-- Header Actions -->
         <div class="header-actions">
             <!-- 그룹웨어 링크 -->
-            <a href="#" class="groupware-btn" target="_blank">
-                <span>그룹웨어</span>
+            <a href="https://groupware.ypp.co.kr" class="groupware-btn" target="_blank">
+                그룹웨어
             </a>
-            
-            <!-- 언어 전환 -->
+
+            <!-- 언어 선택 -->
             <div class="language-switch">
                 <button class="lang-btn active" data-lang="ko">KOR</button>
                 <button class="lang-btn" data-lang="en">ENG</button>
             </div>
-            
-            <!-- Mobile Hamburger Button -->
-            <button class="hamburger-btn" id="hamburger-btn" aria-label="메뉴 열기">
+
+            <!-- 모바일 햄버거 버튼 -->
+            <button class="hamburger-btn" id="hamburger-btn" aria-label="메뉴 열기" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>

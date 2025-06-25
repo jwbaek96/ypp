@@ -137,7 +137,7 @@ a:hover {
 }
 
 /* ===== BUTTONS ===== */
-.btn, .hero-btn, .academy-btn, .contact-btn {
+.btn, .academy-btn, .contact-btn {
     display: inline-block;
     padding: 1rem 2rem;
     border: none;
@@ -361,7 +361,7 @@ a:hover {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding-bottom: 15vh; /* 버튼들을 아래로 이동 */
+    padding-top: 80px; /* 헤더 높이만큼 */
 }
 
 .hero-background {
@@ -394,6 +394,7 @@ a:hover {
     font-weight: 700;
     margin-bottom: 1.5rem;
     color: var(--white);
+    line-height: 1.2;
 }
 
 .hero-title .highlight {
@@ -403,8 +404,8 @@ a:hover {
 .hero-subtitle {
     font-size: 1.25rem;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 3rem;
-    line-height: 1.8;
+    margin-bottom: 2.5rem; /* 버튼과의 간격 축소 */
+    line-height: 1.6;
 }
 
 .hero-actions {
@@ -412,7 +413,7 @@ a:hover {
     gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 2rem; /* 제목과 간격 추가 */
+    margin-top: 0; /* 기존 2rem 제거 */
 }
 
 .scroll-indicator {
@@ -425,6 +426,91 @@ a:hover {
     animation: bounce 2s infinite;
 }
 
+
+.hero-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    min-width: 180px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.hero-btn:hover::before {
+    left: 100%;
+}
+
+/* Hero 동영상 배경 스타일 */
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.hero-bg-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+
+
+/* 데이터 절약 모드 */
+@media (prefers-reduced-motion: reduce) {
+    .hero-video {
+        display: none;
+    }
+    
+    .hero-bg-fallback {
+        display: block;
+    }
+}
+/* 스크롤 인디케이터 위치 조정 */
+.scroll-indicator {
+    position: absolute;
+    bottom: 3rem; /* 더 위로 이동 */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: var(--white);
+    animation: bounce 2s infinite;
+}
 .scroll-text {
     display: block;
     font-size: 0.875rem;

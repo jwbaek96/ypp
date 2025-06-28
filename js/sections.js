@@ -15,10 +15,10 @@ const SECTIONS_CONFIG = {
         path: './components/index/epc-business.html',
         container: 'epc-business-container'
     },
-    protectionProducts: {
-        path: './components/index/protection-products.html',
-        container: 'protection-products-container'
-    },
+    // protectionProducts: {
+    //     path: './components/index/protection-products.html',
+    //     container: 'protection-products-container'
+    // },
     companyOverview: {
         path: './components/index/company-overview.html',
         container: 'company-overview-container'

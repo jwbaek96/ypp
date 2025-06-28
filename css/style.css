@@ -1,3 +1,14 @@
+@import "./base/reset.css";
+@import "./base/variables.css";
+@import "./base/loading.css";
+/* ===== 전역 COMPONENTS ===== */
+@import "./components/header.css";
+@import "./components/footer.css";
+
+/* ===== LAYOUT COMPONENTS ===== */
+@import "./components/index/hero.css";
+@import "./components/index/intro.css";
+
 /* YPP Website - Main Stylesheet */
 
 /* ===== CSS RESET & BASE ===== */
@@ -18,71 +29,6 @@ body {
     color: #333;
     background-color: #ffffff;
     overflow-x: hidden;
-}
-
-/* ===== COLOR VARIABLES ===== */
-:root {
-    /* Primary Colors */
-    --primary-blue: #0066CC;
-    --primary-red: #CC0033;
-    
-    /* Grayscale */
-    --black: #000000;
-    --dark-gray: #2C2C2C;
-    --medium-gray: #666666;
-    --light-gray: #CCCCCC;
-    --very-light-gray: #F5F5F5;
-    --white: #FFFFFF;
-    
-    /* Functional Colors */
-    --text-primary: #2C2C2C;
-    --text-secondary: #666666;
-    --text-light: #999999;
-    --border-color: #E0E0E0;
-    --shadow: rgba(0, 0, 0, 0.1);
-    
-    /* Typography */
-    --font-size-h1: 3rem;
-    --font-size-h2: 2.5rem;
-    --font-size-h3: 1.8rem;
-    --font-size-body: 1rem;
-    --font-size-small: 0.875rem;
-    
-    /* Spacing */
-    --section-padding: 5rem 0;
-    --container-padding: 0 2rem;
-    --card-padding: 2rem;
-}
-
-/* ===== LOADING SCREEN ===== */
-.loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--white);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 0.5s ease-out;
-}
-
-.loading-screen.fade-out {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.loading-logo {
-    max-width: 200px;
-    height: auto;
-    animation: logoFadeIn 1s ease-in-out;
-}
-
-@keyframes logoFadeIn {
-    0% { opacity: 0; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1); }
 }
 
 /* ===== TYPOGRAPHY ===== */
@@ -112,18 +58,15 @@ a:hover {
     color: var(--primary-red);
 }
 
+/* ===== 전역 COMPONENTS ===== */
+
 /* ===== LAYOUT COMPONENTS ===== */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: var(--container-padding);
 }
-
-.section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
+/* ===== SECTION COMPONENTS ===== */
 .section-title {
     color: var(--text-primary);
     margin-bottom: 1rem;
@@ -172,12 +115,12 @@ a:hover {
     color: var(--white);
 }
 
-.btn.accent, .hero-btn.accent, .academy-btn {
+.btn.accent, .academy-btn {
     background-color: var(--primary-red);
     color: var(--white);
 }
 
-.btn.accent:hover, .hero-btn.accent:hover, .academy-btn:hover {
+.btn.accent:hover, .academy-btn:hover {
     /* background-color: var(--primary-blue);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px var(--shadow); */
@@ -203,376 +146,6 @@ a:hover {
     box-shadow: 0 8px 20px var(--shadow);
 }
 
-/* ===== HEADER ===== */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
-    z-index: 1000;
-    transition: all 0.3s ease;
-}
-
-.header-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 80px;
-}
-
-.logo img {
-    height: 50px;
-    width: auto;
-}
-
-.desktop-nav {
-    display: flex;
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-item {
-    position: relative;
-}
-
-.nav-link {
-    color: var(--text-primary);
-    font-weight: 500;
-    padding: 0.5rem 0;
-    transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-    color: var(--primary-blue);
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: var(--white);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 1rem 0;
-    min-width: 200px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 20px var(--shadow);
-}
-
-.nav-item:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-menu li {
-    list-style: none;
-}
-
-.dropdown-menu a {
-    display: block;
-    padding: 0.5rem 1.5rem;
-    color: var(--text-secondary);
-    transition: all 0.3s ease;
-}
-
-.dropdown-menu a:hover {
-    background-color: var(--very-light-gray);
-    color: var(--primary-blue);
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.groupware-btn {
-    padding: 0.5rem 1rem;
-    background-color: var(--dark-gray);
-    color: var(--white);
-    border-radius: 5px;
-    font-size: 0.875rem;
-    transition: all 0.3s ease;
-}
-
-.groupware-btn:hover {
-    background-color: var(--primary-blue);
-}
-
-.language-switch {
-    display: flex;
-    background-color: var(--very-light-gray);
-    border-radius: 20px;
-    padding: 3px;
-}
-
-.lang-btn {
-    padding: 0.25rem 0.75rem;
-    border: none;
-    background: transparent;
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    border-radius: 17px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.lang-btn.active {
-    background-color: var(--white);
-    color: var(--primary-blue);
-    box-shadow: 0 2px 5px var(--shadow);
-}
-
-.hamburger-btn {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.hamburger-line {
-    width: 25px;
-    height: 3px;
-    background-color: var(--text-primary);
-    margin: 3px 0;
-    transition: all 0.3s ease;
-}
-
-/* ===== HERO SECTION ===== */
-.hero-section {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.hero-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hero-bg-fallback {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-}
-
-.scroll-indicator {
-    position: absolute;
-    bottom: 3rem;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: var(--white);
-    animation: bounce 2s infinite;
-    z-index: 10;
-}
-
-.scroll-text {
-    display: block;
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
-    opacity: 0.8;
-}
-
-.scroll-arrow {
-    width: 20px;
-    height: 20px;
-    border-right: 2px solid var(--white);
-    border-bottom: 2px solid var(--white);
-    transform: rotate(45deg);
-    margin: 0 auto;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    40% {
-        transform: translateX(-50%) translateY(-10px);
-    }
-    60% {
-        transform: translateX(-50%) translateY(-5px);
-    }
-}
-
-/* 데이터 절약 모드 */
-/* @media (prefers-reduced-motion: reduce) {
-    .hero-video {
-        display: none;
-    }
-    
-    .hero-bg-fallback {
-        display: block;
-    }
-} */
-
-
-/* 인트로 섹션 - 기존 Hero 컨텐츠 */
-.intro-section {
-    background: var(--white);
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: center;
-}
-.intro-section .container {
-    max-width: none;
-}
-
-.intro-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 80px;
-    height: 100%;
-}
-.intro-content {
-    text-align: left;
-}
-
-.intro-title {
-    font-size: 3.5rem;
-    font-weight: 400;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-    line-height: 1.2;
-}
-
-.intro-title .bold-text {
-    font-weight: 900;
-}
-
-.intro-subtitle {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    margin-bottom: 3rem;
-    line-height: 1.6;
-}
-
-.intro-actions {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.hero-btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-
-.hero-btn.primary {
-    background: var(--primary-blue);
-    color: var(--white);
-}
-
-.hero-btn.primary:hover {
-    background: var(--primary-red);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.3);
-}
-
-.intro-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.intro-image {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-/* 모바일 반응형 */
-@media (max-width: 768px) {
-    .intro-section {
-        height: auto;
-        padding: 60px 0;
-    }
-    
-    .intro-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .intro-title {
-        font-size: 2.2rem;
-    }
-    
-    .intro-subtitle {
-        font-size: 1rem;
-        margin-bottom: 2rem;
-    }
-    
-    .intro-actions {
-        justify-content: flex-start;
-    }
-    
-    .hero-btn {
-        padding: 0.9rem 1.5rem;
-        font-size: 0.95rem;
-    }
-    
-    .scroll-indicator {
-        bottom: 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .intro-title {
-        font-size: 1.9rem;
-    }
-    
-    .intro-subtitle {
-        font-size: 0.9rem;
-    }
-}
 
 
 /* ===== SECTIONS ===== */
@@ -917,96 +490,6 @@ a:hover {
     align-items: center;
 }
 
-/* ===== FOOTER ===== */
-.footer {
-    background-color: var(--black);
-    color: var(--white);
-    padding: 3rem 0 1rem;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 2rem;
-}
-
-.footer-logo img {
-    height: 40px;
-    margin-bottom: 1rem;
-    filter: brightness(0) saturate(100%) invert(70%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(85%);
-    /* 밝은 회색으로 변환 */
-}
-
-.footer-desc {
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-}
-
-.footer-title {
-    color: var(--white);
-    margin-bottom: 1rem;
-    font-size: 1.125rem;
-}
-
-.footer-links,
-.footer-contact {
-    list-style: none;
-}
-
-.footer-links li,
-.footer-contact li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.8);
-    transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: var(--primary-blue);
-}
-
-.footer-contact li {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.875rem;
-}
-
-.footer-bottom {
-    border-top: 1px solid var(--dark-gray);
-    padding-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.footer-copyright {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.875rem;
-}
-
-.footer-legal {
-    display: flex;
-    gap: 1.5rem;
-}
-
-.footer-legal a {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.875rem;
-}
-
-.footer-legal a:hover {
-    color: var(--white);
-}
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
@@ -1031,15 +514,5 @@ a:hover {
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
     }
 }

@@ -269,4 +269,15 @@ if (!window.YPP.videoEscapeHandlerAdded) {
     });
     window.YPP.videoEscapeHandlerAdded = true;
 }
+
+// 함수 존재 확인
+console.log(typeof window.openVideoPopup); // "function"이어야 함
+console.log(typeof window.YPP.openVideoPopup); // "function"이어야 함
+
+// 요소 존재 확인
+console.log(document.getElementById('video-popup')); // null이면 문제
+console.log(document.getElementById('popup-video')); // null이면 문제
+
+// 수동 팝업 테스트
+window.YPP.openVideoPopup();
 </script>

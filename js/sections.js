@@ -240,3 +240,61 @@ window.getLoadedSections = function() {
         return container && container.innerHTML.trim() !== '';
     });
 };
+
+// ===== 히어로 섹션 =====
+// 헤더 높이 기반 히어로 섹션 패딩 조정 (최적화 버전)
+function adjustHeroSectionPadding() {
+    const header = document.querySelector('#header, header, .header');
+    const heroSection = document.querySelector('#hero, .hero-section');
+    
+    if (header && heroSection) {
+        const styles = getComputedStyle(header);
+        const totalHeight = header.offsetHeight + 
+                          (parseInt(styles.marginTop) || 0) + 
+                          (parseInt(styles.marginBottom) || 0);
+        
+        heroSection.style.paddingTop = `${totalHeight}px`;
+        return totalHeight;
+    }
+    return 0;
+}
+
+// 헤더 높이 변화 감지
+function initHeaderHeightWatcher() {
+    const header = document.querySelector('#header, header, .header');
+    if (!header) return;
+    
+    let lastHeight = 0;
+    
+    const update = () => {
+        const currentHeight = header.offsetHeight;
+        if (currentHeight !== lastHeight) {
+            lastHeight = currentHeight;
+            adjustHeroSectionPadding();
+        }
+    };
+    
+    // ResizeObserver 사용 (지원되는 경우)
+    if (window.ResizeObserver) {
+        new ResizeObserver(update).observe(header);
+    }
+    
+    // 이벤트 리스너
+    window.addEventListener('resize', update);
+    if (document.fonts?.ready) {
+        document.fonts.ready.then(() => setTimeout(update, 100));
+    }
+}
+
+// 자동 실행
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        adjustHeroSectionPadding();
+        initHeaderHeightWatcher();
+    }, 100);
+});
+
+// 컴포넌트 로딩 완료 시 재실행
+// document.addEventListener('sectionsLoaded', () => {
+//     setTimeout(adjustHeroSectionPadding, 50);
+// });

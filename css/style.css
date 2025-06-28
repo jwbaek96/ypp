@@ -6,9 +6,7 @@
 @import "./components/footer.css";
 
 /* ===== LAYOUT COMPONENTS ===== */
-@import "./components/index/hero.css";
-@import "./components/index/intro.css";
-
+@import "./components/index/index.css";
 /* YPP Website - Main Stylesheet */
 
 /* ===== CSS RESET & BASE ===== */
@@ -93,24 +91,24 @@ a:hover {
     text-decoration: none;
 }
 
-.btn.primary, .hero-btn.primary, .contact-btn.primary {
+.btn.primary, .contact-btn.primary {
     background-color: var(--primary-blue);
     color: var(--white);
 }
 
-.btn.primary:hover, .hero-btn.primary:hover, .contact-btn.primary:hover {
+.btn.primary:hover, .contact-btn.primary:hover {
     background-color: var(--primary-red);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px var(--shadow);
 }
 
-.btn.secondary, .hero-btn.secondary, .contact-btn.secondary {
+.btn.secondary, .contact-btn.secondary {
     background-color: transparent;
     color: var(--primary-blue);
     border: 2px solid var(--primary-blue);
 }
 
-.btn.secondary:hover, .hero-btn.secondary:hover, .contact-btn.secondary:hover {
+.btn.secondary:hover, .contact-btn.secondary:hover {
     background-color: var(--primary-blue);
     color: var(--white);
 }
@@ -499,15 +497,6 @@ a:hover {
     
     .hamburger-btn {
         display: flex;
-    }
-    
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-actions {
-        flex-direction: column;
-        align-items: center;
     }
     
     .academy-content,

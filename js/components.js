@@ -74,14 +74,14 @@ function initializeComponentEvents() {
                 clearTimeout(timeout);
                 dropdown.style.opacity = '1';
                 dropdown.style.visibility = 'visible';
-                dropdown.style.transform = 'translateY(0)';
+                dropdown.style.transform = 'translateY(15px) translateX(-50%)';
             });
             
             item.addEventListener('mouseleave', function() {
                 timeout = setTimeout(() => {
                     dropdown.style.opacity = '0';
                     dropdown.style.visibility = 'hidden';
-                    dropdown.style.transform = 'translateY(-10px)';
+                    dropdown.style.transform = 'translateY(-10px) translateX(-50%)';
                 }, 150);
             });
         }

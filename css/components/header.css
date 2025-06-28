@@ -94,15 +94,16 @@
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 50%;
     background-color: var(--white);
+    /* backdrop-filter: blur(10px); */
     border: 1px solid var(--border-color);
     border-radius: 5px;
     padding: 1rem 0;
     min-width: 200px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
+    transform: translateY(-10px) translateX(-50%);
     transition: all 0.3s ease;
     box-shadow: 0 5px 20px var(--shadow);
 }

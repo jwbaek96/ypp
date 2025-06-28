@@ -295,6 +295,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // 컴포넌트 로딩 완료 시 재실행
-// document.addEventListener('sectionsLoaded', () => {
-//     setTimeout(adjustHeroSectionPadding, 50);
-// });
+document.addEventListener('sectionsLoaded', () => {
+    setTimeout(adjustHeroSectionPadding, 50);
+});

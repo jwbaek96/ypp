@@ -1,0 +1,260 @@
+/* EPC 비즈니스 섹션 - 심플 디자인 */
+.epc-business-areas {
+    padding: 100px 0;
+    background-color: var(--very-light-gray);
+}
+
+.epc-business-areas .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 4rem;
+}
+
+/* ===== 카테고리 컨테이너 그리드 ===== */
+.business-categories-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+/* 개별 카테고리 */
+.business-category {
+    margin-bottom: 0;
+}
+
+/* 카테고리 제목 스타일링 */
+.category-title {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--primary-blue);
+    border-radius: 2px;
+}
+
+/* ===== 카테고리 내 카드 그리드 ===== */
+.business-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.business-card {
+    background-color: var(--white);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    /* height: 270px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.business-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* 이미지 영역 */
+.business-image {
+    overflow: hidden;
+    position: relative;
+}
+
+.business-image img {
+    /* width: 100%; */
+    height: 100%;
+    max-height: 270px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* 콘텐츠 영역 */
+.business-content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.65) 100%
+        );
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.business-content h4 {
+    color: var(--white);
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.business-content p {
+    color: var(--white);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    height: 0;
+    margin: 0;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease;
+}
+
+/* 호버 시 확장 효과 */
+
+.business-card:hover .business-image img {
+    transform: scale(1.05);
+}
+
+.business-card:hover .business-content {
+    backdrop-filter: blur(4px);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.business-card:hover .business-content p {
+    -webkit-line-clamp: unset;
+    height: auto;
+}
+
+/* 태블릿 반응형 */
+@media (max-width: 1024px) {
+    .epc-business-areas {
+        padding: 80px 0;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .business-categories-container {
+        gap: 2.5rem;
+    }
+    
+    .category-title {
+        font-size: 1.3rem;
+    }
+    
+    .business-grid {
+        gap: 1.2rem;
+    }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 900px) {
+    .business-areas {
+        padding: 60px 0;
+    }
+    
+    .business-areas .container {
+        padding: 0 1rem;
+    }
+    
+    .business-section-title {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .business-section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+    }
+    .business-categories-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .business-grid {
+        gap: 1.2rem;
+    }
+    .business-card{
+        
+    }
+}
+
+@media (max-width: 480px) {
+    .epc-business-areas {
+        padding: 40px 0;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .business-categories-container {
+        gap: 1.5rem;
+    }
+    
+    .category-title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .business-card {
+        height: 260px;
+    }
+    
+    .business-content {
+        padding: 1.2rem;
+    }
+    
+    .business-content h4 {
+        font-size: 1.1rem;
+    }
+    
+    .business-content p {
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+    }
+    
+    .business-card:hover .business-content p {
+        margin-top: 0.5rem;
+    }
+    
+    .business-card:hover .business-content {
+        padding: 1.5rem;
+    }
+}

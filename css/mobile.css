@@ -363,7 +363,6 @@
     
     /* Section adjustments */
     .company-overview,
-    .business-areas,
     .core-products,
     .ypp-academy,
     .contact-section {
@@ -384,7 +383,6 @@
     
     /* Grid adjustments */
     .overview-grid,
-    .business-grid,
     .products-slider {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -392,7 +390,6 @@
     
     /* Card adjustments */
     .overview-card,
-    .business-card,
     .product-card {
         padding: 1.5rem;
     }
@@ -465,7 +462,6 @@
     }
     
     .overview-card,
-    .business-card,
     .product-card {
         padding: 1.25rem;
     }

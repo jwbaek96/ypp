@@ -148,7 +148,6 @@ a:hover {
 
 /* ===== SECTIONS ===== */
 .company-overview,
-.business-areas,
 .core-products,
 .ypp-academy,
 .contact-section {
@@ -157,10 +156,6 @@ a:hover {
 
 .company-overview {
     background-color: var(--very-light-gray);
-}
-
-.business-areas {
-    background-color: var(--white);
 }
 
 .core-products {
@@ -224,79 +219,6 @@ a:hover {
     font-size: 0.875rem;
 }
 
-/* ===== BUSINESS AREAS ===== */
-.business-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 3rem;
-    margin-top: 3rem;
-}
-
-.business-card {
-    background-color: var(--white);
-    padding: var(--card-padding);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px var(--shadow);
-    transition: all 0.3s ease;
-    border-top: 4px solid var(--primary-blue);
-}
-
-.business-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px var(--shadow);
-}
-
-.business-card:nth-child(2) {
-    border-top-color: var(--primary-red);
-}
-
-.business-card:nth-child(3) {
-    border-top-color: var(--medium-gray);
-}
-
-.business-icon {
-    margin-bottom: 1.5rem;
-}
-
-.business-icon img {
-    width: 60px;
-    height: 60px;
-}
-
-.business-title {
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-}
-
-.business-features {
-    list-style: none;
-    margin-bottom: 2rem;
-}
-
-.business-features li {
-    padding: 0.5rem 0;
-    color: var(--text-secondary);
-    position: relative;
-    padding-left: 1.5rem;
-}
-
-.business-features li::before {
-    content: "•";
-    color: var(--primary-blue);
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-}
-
-.business-link {
-    color: var(--primary-blue);
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.business-link:hover {
-    color: var(--primary-red);
-}
 
 /* ===== CORE PRODUCTS ===== */
 .products-slider {

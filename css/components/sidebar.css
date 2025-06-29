@@ -1,5 +1,5 @@
 /* ===== MOBILE SIDEBAR ===== */
-.mobile-sidebar {
+.sidebar-container {
     position: fixed;
     top: 0;
     right: -100%;
@@ -12,7 +12,7 @@
     overflow-y: auto;
 }
 
-.mobile-sidebar.active {
+.sidebar-container.active {
     right: 0;
 }
 

@@ -1,39 +1,211 @@
-<!-- YPP Academy -->
-<section id="education" class="ypp-academy">
+<!-- YPP Academy - Simple Design -->
+<section id="academy" class="academy-section">
     <div class="container">
-        <div class="section-header">
-            <h2 class="section-title">YPP Academy</h2>
-            <p class="section-subtitle">전력계통 보호 전문가 양성을 위한 체계적인 교육 프로그램</p>
+        <!-- Section Header -->
+        <div class="academy-header">
+            <h2 class="academy-title">YPP Academy</h2>
+            <p class="academy-subtitle">전력계통 보호 전문가 양성을 위한 체계적인 교육 프로그램</p>
+            <p class="academy-subtitle">실무중심의 교육서비스 제공, 디지털 보호계전기에 정통한 계통보호 전문가 양성 시대가 원하는 전문가, 와이피피㈜와 함께 하세요.</p>
         </div>
-        <div class="academy-content">
-            <div class="academy-info">
-                <div class="academy-card">
-                    <h3 class="academy-title">Relay School 2025</h3>
-                    <p class="academy-period">교육기간: 3월 ~ 11월</p>
-                    <p class="academy-desc">
-                        보호계전기의 기초부터 고급 활용까지 체계적으로 학습할 수 있는 
-                        전문 교육과정입니다.
-                    </p>
-                    <a href="./pages/education/relay-school.html" class="academy-link">과정 상세보기</a>
+
+        <!-- Academy Programs -->
+        <div class="academy-programs">
+            <!-- Relay School -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="./assets/images/index/relay-school.jpg" alt="Relay School 교육 현장">
                 </div>
-                <div class="academy-card">
-                    <h3 class="academy-title">PSAC 2025</h3>
-                    <p class="academy-period">교육기간: 9월 ~ 12월</p>
-                    <p class="academy-desc">
-                        Power System Analysis Course로 전력계통 해석 및 
-                        보호협조에 대한 전문지식을 습득합니다.
+                <div class="program-content">
+                    <h3 class="program-title">Relay School 2025</h3>
+                    <p class="program-period">교육기간: 3월 ~ 11월</p>
+                    <p class="program-description">
+                        보호계전기의 기초부터 고급 활용까지 체계적으로 학습할 수 있는 전문 교육과정입니다.
                     </p>
-                    <a href="./pages/education/psac.html" class="academy-link">과정 상세보기</a>
+                    <a href="./pages/academy/relay-school.html" class="program-link">과정 상세보기</a>
                 </div>
             </div>
-            <div class="academy-action">
-                <button onclick="openAcademyPopup()" class="academy-btn">
-                    교육 신청하기
-                </button>
-                <p class="academy-contact">
-                    교육 문의: 02-2104-8720, 4683 | yppedu@ypp.co.kr
-                </p>
+
+            <!-- PSAC -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="./assets/images/index/psac.jpg" alt="PSAC 교육 현장">
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">PSAC 2025</h3>
+                    <p class="program-period">교육기간: 9월 ~ 12월</p>
+                    <p class="program-description">
+                        Power System Analysis Course로 전력계통 해석 및 보호협조에 대한 전문지식을 습득합니다.
+                    </p>
+                    <a href="./pages/academy/psac.html" class="program-link">과정 상세보기</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academy Action -->
+        <div class="academy-action">
+            <button onclick="openAcademyPopup()" class="academy-btn">교육 신청하기</button>
+            <div class="academy-contact">
+                <p>교육 문의: 02-2104-8720, 4683 | yppedu@ypp.co.kr</p>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+/* ===== YPP ACADEMY SECTION ===== */
+.academy-section {
+    padding: 5rem 0;
+    background-color: var(--white, #ffffff);
+}
+
+.academy-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.academy-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary, #333);
+    margin-bottom: 1rem;
+}
+
+.academy-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary, #666);
+    max-width: 1000px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Academy Programs */
+.academy-programs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.program-card {
+    background: var(--white, #ffffff);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.program-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.program-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.program-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.program-card:hover .program-image img {
+    transform: scale(1.05);
+}
+
+.program-content {
+    padding: 2rem;
+}
+
+.program-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-primary, #333);
+    margin-bottom: 0.5rem;
+}
+
+.program-period {
+    font-size: 0.9rem;
+    color: var(--text-secondary, #666);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.program-description {
+    color: var(--text-secondary, #666);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.program-link {
+    color: var(--primary-blue, #0066cc);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.program-link:hover {
+    color: #004499;
+    text-decoration: underline;
+}
+
+/* Academy Action */
+.academy-action {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--background-light, #f8f9fa);
+    border-radius: 8px;
+}
+
+.academy-btn {
+    padding: 1rem 2rem;
+    background-color: var(--primary-blue, #0066cc);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.academy-btn:hover {
+    background-color: #004499;
+}
+
+.academy-contact {
+    color: var(--text-secondary, #666);
+    font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .academy-section {
+        padding: 3rem 0;
+    }
+    
+    .academy-title {
+        font-size: 2rem;
+    }
+    
+    .academy-programs {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .program-image {
+        height: 180px;
+    }
+    
+    .program-content {
+        padding: 1.5rem;
+    }
+    
+    .academy-action {
+        padding: 1.5rem;
+    }
+}
+</style>

@@ -1,0 +1,48 @@
+ypp/
+├── index.html                 (메인 페이지)
+├── assets/
+│   └── images/
+│       ├── logo/
+│       ├── index/
+│       ├── sign/
+│       └── favicon/
+│   └── videos/
+├── components/
+│   ├── index/
+│   ├── header.html
+│   ├── footer.html
+│   └── sidebar.html
+├── css/
+│   ├── style.css
+│   ├── base/
+│       ├── base.css
+│       ├── reset.css
+│       ├── variables.css
+│   ├── index/
+│       ├── index.css
+│       ├── loading.css
+│       ├── hero.css
+│       ├── intro.css
+│       ├── eco-business.css
+│       ├── education.css
+│       └── contact.css
+│   ├── expand/
+│       ├── breadcrumb.css
+│       ├── scrolltotop.css
+│   ├── components/
+│       ├── footer.css
+│       ├── header.css
+│       └── sidebar.css
+├── js/
+│   ├── head-meta.js
+│   ├── loading-screen.js
+│   ├── index-sections.js
+│   ├── main-top-padding.js
+│   ├── index-popup.js
+│   ├── components.js
+│   ├── header-menu.js
+│   ├── hamburger.js
+│   └── sidebar.js
+├── downloads/
+├── pages/
+└── README.md

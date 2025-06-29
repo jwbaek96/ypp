@@ -1,0 +1,263 @@
+/* ===== DESKTOP NAVIGATION ===== */
+.desktop-nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.main-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* ===== MENU ITEMS ===== */
+.menu-item {
+    position: relative;
+    height: 100%;
+}
+
+.menu-item.depth-1 {
+    margin-right: 1.5rem;
+}
+
+.menu-item:last-child {
+    margin-right: 0;
+}
+
+/* ===== MENU LINKS ===== */
+.menu-link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 1.2rem;
+    text-decoration: none;
+    color: var(--text-primary, #333);
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+}
+
+.menu-link:hover {
+    color: var(--primary-blue, #0066cc);
+}
+
+.menu-link:focus {
+    outline: 2px solid var(--primary-blue, #0066cc);
+    outline-offset: 2px;
+    color: var(--primary-blue, #0066cc);
+}
+
+/* ===== SUB MENUS (사이드바 스타일 적용) ===== */
+.sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--white, #ffffff);
+    border: 1px solid var(--border-color, #e5e5e5);
+    border-radius:8px;
+    /* border-top: none; */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 220px;
+    width: max-content;
+    z-index: 1000;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-item.active .sub-menu,
+.menu-item:hover .sub-menu {
+    max-height: 500px;
+    opacity: 1;
+    /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); */
+}
+
+/* ===== DEPTH 2 MENU ITEMS ===== */
+.sub-menu .menu-item {
+    position: relative;
+    height: auto;
+    margin: 0;
+    border-bottom: 1px solid var(--border-color, #e5e5e5);
+}
+
+.sub-menu .menu-item:last-child {
+    border-bottom: none;
+}
+
+.sub-menu .menu-link {
+    padding: 1rem 1.5rem;
+    height: auto;
+    border-bottom: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text-primary, #333);
+    display: block;
+    width: 100%;
+}
+
+.sub-menu .menu-link:hover {
+    color: var(--primary-blue, #0066cc);
+}   
+
+/* ===== DEPTH 3 SUB MENUS (중첩 아코디언) ===== */
+.sub-menu .sub-menu {
+    position: static;
+    top: auto;
+    left: auto;
+    margin-left: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: var(--very-light-gray, #f8f9fa);
+    width: 100%;
+    min-width: auto;
+}
+
+.sub-menu .sub-menu .menu-link {
+    padding: 0.75rem 2.5rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-secondary, #666);
+    background-color: var(--very-light-gray, #f8f9fa);
+}
+
+.sub-menu .sub-menu .menu-link:hover {
+    color: var(--primary-blue, #0066cc);
+    padding-left: 3rem;
+    transition: all 0.2s ease;
+}
+
+.sub-menu .sub-menu .sub-menu .menu-link {
+    padding: 0.65rem 3.5rem;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-secondary, #666);
+}
+
+.sub-menu .sub-menu .sub-menu .menu-link:hover {
+    background-color: rgba(0, 102, 204, 0.05);
+    color: var(--primary-blue, #0066cc);
+    padding-left: 4rem;
+}
+
+/* ===== HAS CHILDREN STYLING ===== */
+.menu-item.has-children > .menu-link {
+    position: relative;
+}
+
+/* ===== ACTIVE STATES ===== */
+.menu-item.has-children.active > .menu-link {
+    color: var(--primary-blue, #0066cc);
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+
+/* 태블릿 */
+@media (max-width: 1024px) {
+    .menu-item.depth-1 {
+        margin-right: 1rem;
+    }
+    
+    .menu-link {
+        padding: 0 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .sub-menu {
+        min-width: 200px;
+    }
+}
+
+/* 작은 데스크톱 */
+@media (max-width: 900px) {
+    .menu-item.depth-1 {
+        margin-right: 0.8rem;
+    }
+    
+    .menu-link {
+        padding: 0 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .sub-menu {
+        min-width: 180px;
+    }
+}
+
+/* 모바일에서는 숨김 */
+@media (max-width: 768px) {
+    .desktop-nav {
+        display: none;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+.menu-item:focus-within .sub-menu {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.menu-link:focus {
+    z-index: 1001;
+}
+
+/* ===== SMOOTH ANIMATION ===== */
+.sub-menu .menu-item {
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.menu-item.active .sub-menu .menu-item,
+.menu-item:hover .sub-menu .menu-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 순차적 애니메이션 */
+.sub-menu .menu-item:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+.sub-menu .menu-item:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+.sub-menu .menu-item:nth-child(3) {
+    transition-delay: 0.15s;
+}
+
+.sub-menu .menu-item:nth-child(4) {
+    transition-delay: 0.2s;
+}
+
+.sub-menu .menu-item:nth-child(5) {
+    transition-delay: 0.25s;
+}
+
+/* ===== SPECIAL CASES ===== */
+
+/* 긴 메뉴 이름을 위한 처리 */
+.menu-link {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sub-menu .menu-link {
+    white-space: normal;
+    word-break: keep-all;
+}
+
+/* ===== HOVER EFFECTS ===== */

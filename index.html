@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <script src="./js/head-meta.js"></script>
-    <meta charset="UTF-8">
+    <head>
+        <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- CSS Files -->
+    <!-- SEO 메타 태그 -->
+    <title>YPP - 디지털 보호계전기 전문기업 | 삼중화 보호 TRIUMP</title>
+    <meta name="description" content="YPP는 디지털 보호계전기, 삼중화 보호 TRIUMP, 고장기록장치 전문 제조기업입니다. 전력계통 보호 솔루션을 제공합니다.">
+    <meta name="keywords" content="보호계전기, 디지털보호계전기, TRIUMP, 고장기록장치, 전력계통보호, YPP">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="YPP - 디지털 보호계전기 전문기업">
+    <meta property="og:description" content="전력계통 보호 솔루션 전문기업 YPP">
+    <meta property="og:type" content="website">
+    
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/ico" href="./assets/images/favicon/favicon.ico">
+    
+    <!-- Critical CSS 우선 로딩 -->
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/components/index/index.css">
-    <link rel="stylesheet" href="./css/components.css">
-    <link rel="stylesheet" href="./css/components-extended.css">
-    <link rel="stylesheet" href="./css/mobile.css">
+    
+    <!-- 섹션별 CSS -->
+    <link rel="stylesheet" href="./css/index/index.css">
+
+    <!-- 헤더 메타테그 추가 -->
+    <script src="./js/head-meta.js"></script>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -20,10 +34,15 @@
 
     <!-- Header Container -->
     <div id="header-container"></div>
-    <div id="mobile-sidebar-container"></div>
+    
+    <!-- Mobile Sidebar Container -->
+    <div id="sidebar-container"></div>
 
     <!-- Main Content -->
     <main class="main-content">
+        <!-- 브레드크럼 (필요시) -->
+        <!-- <div id="breadcrumb-container"></div> -->
+        
         <!-- 섹션 컨테이너들 -->
         <div id="hero-section-container"></div>
         <div id="intro-section-container"></div>
@@ -36,56 +55,24 @@
 
     <!-- Footer Container -->
     <div id="footer-container"></div>
+    <!-- Popup Container -->
+    <div id="popup-container"></div>
 
-    <!-- YPP Academy Popup -->
-    <div id="academy-popup" class="academy-popup">
-        <div class="popup-overlay" onclick="closeAcademyPopup()"></div>
-        <div class="popup-content">
-            <div class="popup-header">
-                <h2 class="popup-title">YPP Academy</h2>
-                <button class="popup-close" onclick="closeAcademyPopup()">✕</button>
-            </div>
-            <div class="popup-body">
-                <div class="education-section">
-                    <h3 class="education-title">Relay School 2025 (3월 ~ 11월)</h3>
-                    <div class="education-downloads">
-                        <button onclick="downloadFile('relay-school-plan.pdf')" class="download-btn">
-                            교육계획 다운로드
-                        </button>
-                        <button onclick="downloadFile('relay-school-application.pdf')" class="download-btn">
-                            교육신청서 다운로드
-                        </button>
-                        <button onclick="downloadFile('relay-school-brochure.pdf')" class="download-btn">
-                            브로슈어 다운로드
-                        </button>
-                    </div>
-                </div>
-                <div class="education-section">
-                    <h3 class="education-title">PSAC 2025 (9월 ~ 12월)</h3>
-                    <div class="education-downloads">
-                        <button onclick="downloadFile('psac-plan.pdf')" class="download-btn">
-                            교육신청서 다운로드
-                        </button>
-                        <button onclick="downloadFile('psac-brochure.pdf')" class="download-btn">
-                            브로슈어 다운로드
-                        </button>
-                    </div>
-                </div>
-                <div class="education-contact">
-                    <h4>교육 문의</h4>
-                    <p>02-2104-8720, 4683</p>
-                    <p>yppedu@ypp.co.kr</p>
-                    <button onclick="closeAcademyPopup()" class="close-btn">닫기</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- JavaScript Files -->
+    <!-- 첫 로딩화면 구현하기 -->
+    <script src="./js/loading-screen.js"></script>
+    <!-- 공통 컴포넌트 불러오기(헤더,푸터,사이드바) -->
     <script src="./js/components.js"></script>
-    <script src="./js/menu-generator.js"></script>
-    <script src="./js/sections.js"></script>
-    <script src="./js/main.js"></script>
-    <script src="./js/main-extended.js"></script>
+    <!-- 헤더 메뉴 불러오기 -->
+    <script src="./js/header-menu.js"></script>
+    <!-- 햄버거 메뉴버튼 기능 -->
+    <script src="./js/hamburger.js"></script>
+    <!-- 사이드바 생성하기 -->
+    <script src="./js/sidebar.js"></script>
+    <!-- 히어로 섹션에 헤더 높이만큼 패딩 top주기 -->
+    <script src="./js/main-top-padding.js"></script>
+    <!-- 인덱스 페이지의 섹션들 html 불러오기 -->
+    <script src="./js/index-sections.js"></script>
+    <!-- 팝업창 구현하기 -->
+    <script src="./js/index-popup.js"></script>
 </body>
 </html>

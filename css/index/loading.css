@@ -19,6 +19,7 @@
 }
 
 .loading-logo {
+    opacity: 0;
     max-width: 200px;
     height: auto;
     animation: logoFadeIn 1s ease-in-out;

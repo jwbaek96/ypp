@@ -298,3 +298,47 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('sectionsLoaded', () => {
     setTimeout(adjustHeroSectionPadding, 50);
 });
+// Edge 브라우저 감지 및 처리
+function isEdge() {
+    return /Edge|Edg/i.test(navigator.userAgent);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const heroVideo = document.querySelector('.hero-video');
+    
+    if (heroVideo && isEdge()) {
+        console.log('Edge 브라우저 감지됨');
+        
+        // Edge에서 더 공격적인 재생 시도
+        setTimeout(() => {
+            heroVideo.muted = true; // 다시 한번 확실히
+            heroVideo.load(); // 비디오 다시 로드
+            
+            const playPromise = heroVideo.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log('✅ Edge에서 동영상 재생 성공');
+                }).catch(error => {
+                    console.log('❌ Edge에서 동영상 재생 실패:', error);
+                    handleEdgeVideoFailure();
+                });
+            }
+        }, 500); // 약간의 지연 후 시도
+    }
+});
+
+function handleEdgeVideoFailure() {
+    const heroVideo = document.querySelector('.hero-video');
+    const heroBackground = document.querySelector('.hero-background');
+    
+    if (heroVideo && heroBackground) {
+        // 비디오 숨기고 배경 이미지로 대체
+        heroVideo.style.opacity = '0';
+        heroBackground.style.backgroundImage = 'url(./assets/images/hero-fallback.jpg)';
+        heroBackground.style.backgroundSize = 'cover';
+        heroBackground.style.backgroundPosition = 'center';
+        
+        console.log('Edge 폴백 이미지로 전환됨');
+    }
+}

@@ -122,8 +122,11 @@
     background: var(--very-light-gray, #f8f9fa);
     width: 100%;
     min-width: auto;
+    height: 0;
 }
-
+.menu-item:has(.sub-menu):hover .sub-menu {
+    height: auto;
+}
 .sub-menu .sub-menu .menu-link {
     padding: 0.75rem 2.5rem;
     font-size: 0.9rem;

@@ -21,12 +21,6 @@ const SECTION_CONFIG = [
         priority: 3
     },
     {
-        name: 'company-overview',
-        containerId: 'company-overview-container',
-        filePath: './components/index/company-overview.html',
-        priority: 4
-    },
-    {
         name: 'academy',
         containerId: 'academy-container',
         filePath: './components/index/academy.html',

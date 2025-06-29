@@ -1,4 +1,4 @@
-// YPP Website - Components Loader
+// YPP Website - Components Loader (수정된 버전)
 
 // ===== COMPONENT LOADER =====
 async function loadComponent(elementId, componentPath) {
@@ -37,21 +37,50 @@ async function loadAllComponents() {
         await Promise.all(promises);
         console.log('🎉 All components loaded successfully');
         
-        // Re-initialize event listeners after components are loaded
+        // MenuGenerator 초기화 대기
+        await initializeMenuGenerator();
+        
+        // 컴포넌트 이벤트 초기화
         initializeComponentEvents();
+        
     } catch (error) {
         console.error('❌ Some components failed to load:', error);
     }
 }
 
+// ===== MENU GENERATOR 초기화 =====
+async function initializeMenuGenerator() {
+    try {
+        if (window.menuGenerator) {
+            await window.menuGenerator.init();
+            console.log('✅ MenuGenerator 초기화 완료');
+        } else {
+            console.warn('⚠️ MenuGenerator not found, using static menu');
+        }
+    } catch (error) {
+        console.error('❌ MenuGenerator 초기화 실패:', error);
+    }
+}
+
 // ===== INITIALIZE COMPONENT EVENTS =====
 function initializeComponentEvents() {
-    // Re-run hamburger menu initialization
-    if (window.initializeMobileMenu) {
-        window.initializeMobileMenu();
-    }
+    // 햄버거 메뉴 초기화
+    initializeMobileMenu();
     
-    // Re-run language switch initialization
+    // 언어 전환 버튼
+    initializeLanguageSwitch();
+    
+    // 데스크톱 드롭다운
+    initializeDesktopDropdown();
+    
+    // 3단계 모바일 사이드바
+    initializeMobileSidebar3Level();
+    
+    console.log('🔧 모든 컴포넌트 이벤트 초기화 완료');
+}
+
+// ===== 언어 전환 초기화 =====
+function initializeLanguageSwitch() {
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -61,8 +90,10 @@ function initializeComponentEvents() {
             console.log(`Language switched to: ${lang}`);
         });
     });
+}
 
-    // Re-run dropdown menu initialization for desktop
+// ===== 데스크톱 드롭다운 초기화 =====
+function initializeDesktopDropdown() {
     document.querySelectorAll('.nav-item').forEach(item => {
         const link = item.querySelector('.nav-link');
         const dropdown = item.querySelector('.dropdown-menu');
@@ -86,132 +117,18 @@ function initializeComponentEvents() {
             });
         }
     });
-
-    console.log('🔧 Component events initialized');
 }
 
-// ===== MOBILE MENU INITIALIZATION =====
+// ===== 모바일 메뉴 초기화 (햄버거 버튼만) =====
 function initializeMobileMenu() {
     const hamburgerBtn = document.getElementById('hamburger-btn');
-    const mobileSidebar = document.getElementById('mobile-sidebar');
-    const sidebarOverlay = document.getElementById('sidebar-overlay');
-    const sidebarClose = document.getElementById('sidebar-close');
-
-    function openMobileSidebar() {
-        if (mobileSidebar && sidebarOverlay) {
-            mobileSidebar.classList.add('active');
-            sidebarOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // Animate hamburger to X
-            if (hamburgerBtn) {
-                const lines = hamburgerBtn.querySelectorAll('.hamburger-line');
-                if (lines.length >= 3) {
-                    lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                    lines[1].style.opacity = '0';
-                    lines[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-                }
-            }
-        }
-    }
-
-    function closeMobileSidebar() {
-        if (mobileSidebar && sidebarOverlay) {
-            mobileSidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-            
-            // Reset hamburger animation
-            if (hamburgerBtn) {
-                const lines = hamburgerBtn.querySelectorAll('.hamburger-line');
-                if (lines.length >= 3) {
-                    lines[0].style.transform = 'none';
-                    lines[1].style.opacity = '1';
-                    lines[2].style.transform = 'none';
-                }
-            }
-        }
-    }
-
-    // Event listeners
+    
     if (hamburgerBtn) {
         hamburgerBtn.addEventListener('click', openMobileSidebar);
     }
-
-    if (sidebarClose) {
-        sidebarClose.addEventListener('click', closeMobileSidebar);
-    }
-
-    if (sidebarOverlay) {
-        sidebarOverlay.addEventListener('click', closeMobileSidebar);
-    }
-
-    // Close sidebar when clicking on navigation links
-    document.querySelectorAll('.sidebar-link').forEach(link => {
-        link.addEventListener('click', function() {
-            if (this.getAttribute('href').startsWith('#')) {
-                closeMobileSidebar();
-            }
-        });
-    });
-
-    // Dropdown menu handling in mobile sidebar
-    document.querySelectorAll('.sidebar-item').forEach(item => {
-        const link = item.querySelector('.sidebar-link');
-        const submenu = item.querySelector('.sidebar-submenu');
-        
-        if (submenu && link) {
-            link.addEventListener('click', function(e) {
-                if (this.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    
-                    // Toggle submenu
-                    const isOpen = submenu.style.maxHeight && submenu.style.maxHeight !== '0px';
-                    
-                    // Close all other submenus
-                    document.querySelectorAll('.sidebar-submenu').forEach(menu => {
-                        menu.style.maxHeight = '0px';
-                        menu.style.opacity = '0';
-                    });
-                    
-                    // Toggle current submenu
-                    if (!isOpen) {
-                        submenu.style.maxHeight = submenu.scrollHeight + 'px';
-                        submenu.style.opacity = '1';
-                    }
-                }
-            });
-        }
-    });
-
-    // Make functions globally available
-    window.openMobileSidebar = openMobileSidebar;
-    window.closeMobileSidebar = closeMobileSidebar;
 }
 
-// Make initialization function globally available
-window.initializeMobileMenu = initializeMobileMenu;
-
-// ===== AUTO LOAD ON DOM CONTENT LOADED =====
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Starting component loading...');
-    loadAllComponents();
-});
-
-// ===== EXPORT FUNCTIONS =====
-window.loadComponent = loadComponent;
-window.loadAllComponents = loadAllComponents;
-
-// 3단계 모바일 사이드바 JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    initializeMobileSidebar3Level();
-});
-
-// 컴포넌트 로딩 후에도 초기화
-document.addEventListener('sectionsLoaded', function() {
-    setTimeout(initializeMobileSidebar3Level, 100);
-});
-
+// ===== 3단계 모바일 사이드바 초기화 =====
 function initializeMobileSidebar3Level() {
     console.log('🔄 3단계 사이드바 초기화 중...');
     
@@ -221,56 +138,46 @@ function initializeMobileSidebar3Level() {
         link.parentNode.replaceChild(newLink, link);
     });
     
-    // 새로운 이벤트 리스너 추가
+    // 사이드바 닫기 버튼
+    const sidebarClose = document.getElementById('sidebar-close');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    
+    if (sidebarClose) {
+        sidebarClose.addEventListener('click', closeMobileSidebar);
+    }
+    
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeMobileSidebar);
+    }
+    
+    // 메뉴 토글 이벤트
     document.querySelectorAll('[data-toggle="submenu"]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
-            console.log('📱 메뉴 클릭됨:', this.textContent.trim());
-            
             const parentItem = this.closest('.sidebar-item, .sidebar-subitem');
             const submenu = parentItem.querySelector('.sidebar-submenu, .sidebar-sub-submenu');
             
             if (submenu) {
-                // 현재 아이템이 열려있는지 확인
-                const isActive = parentItem.classList.contains('active');
-                
-                console.log('현재 상태:', isActive ? '열림' : '닫힘');
-                
-                // 같은 레벨의 다른 메뉴들 닫기
-                const parentContainer = parentItem.parentElement;
-                Array.from(parentContainer.children).forEach(sibling => {
-                    if (sibling !== parentItem && sibling.classList.contains('sidebar-item', 'sidebar-subitem')) {
-                        sibling.classList.remove('active');
-                        const siblingSubmenu = sibling.querySelector('.sidebar-submenu, .sidebar-sub-submenu');
-                        if (siblingSubmenu) {
-                            siblingSubmenu.classList.remove('active');
-                        }
-                        
-                        // 하위 메뉴들도 모두 닫기
-                        sibling.querySelectorAll('.sidebar-subitem, .sidebar-sub-submenu').forEach(subItem => {
-                            subItem.classList.remove('active');
-                        });
-                    }
-                });
-                
-                // 현재 아이템 토글
-                if (isActive) {
-                    parentItem.classList.remove('active');
-                    submenu.classList.remove('active');
-                    
-                    // 하위 메뉴들도 모두 닫기
-                    parentItem.querySelectorAll('.sidebar-subitem, .sidebar-sub-submenu').forEach(subItem => {
-                        subItem.classList.remove('active');
-                    });
-                    
-                    console.log('✅ 메뉴 닫힘');
-                } else {
-                    parentItem.classList.add('active');
-                    submenu.classList.add('active');
-                    console.log('✅ 메뉴 열림');
-                }
+                toggleSubmenu(parentItem, submenu);
+            }
+        });
+    });
+    
+    // 일반 링크 클릭 시 사이드바 닫기
+    document.querySelectorAll('.sidebar-link, .sidebar-sublink, .sidebar-sub-submenu a').forEach(link => {
+        link.addEventListener('click', function() {
+            const href = this.getAttribute('href');
+            
+            // 실제 링크인 경우 사이드바 닫기
+            if (href && !href.startsWith('#') && !this.hasAttribute('data-toggle')) {
+                closeMobileSidebar();
+            }
+            
+            // onclick 속성이 있는 경우 (교육신청 등)
+            if (this.hasAttribute('onclick')) {
+                closeMobileSidebar();
             }
         });
     });
@@ -278,14 +185,63 @@ function initializeMobileSidebar3Level() {
     console.log('✅ 3단계 사이드바 초기화 완료');
 }
 
+// ===== 서브메뉴 토글 함수 =====
+function toggleSubmenu(parentItem, submenu) {
+    const isActive = parentItem.classList.contains('active');
+    
+    // 같은 레벨의 다른 메뉴들 닫기
+    const parentContainer = parentItem.parentElement;
+    Array.from(parentContainer.children).forEach(sibling => {
+        if (sibling !== parentItem && (sibling.classList.contains('sidebar-item') || sibling.classList.contains('sidebar-subitem'))) {
+            sibling.classList.remove('active');
+            const siblingSubmenu = sibling.querySelector('.sidebar-submenu, .sidebar-sub-submenu');
+            if (siblingSubmenu) {
+                siblingSubmenu.classList.remove('active');
+            }
+            
+            // 하위 메뉴들도 모두 닫기
+            sibling.querySelectorAll('.sidebar-subitem, .sidebar-sub-submenu').forEach(subItem => {
+                subItem.classList.remove('active');
+            });
+        }
+    });
+    
+    // 현재 아이템 토글
+    if (isActive) {
+        parentItem.classList.remove('active');
+        submenu.classList.remove('active');
+        
+        // 하위 메뉴들도 모두 닫기
+        parentItem.querySelectorAll('.sidebar-subitem, .sidebar-sub-submenu').forEach(subItem => {
+            subItem.classList.remove('active');
+        });
+    } else {
+        parentItem.classList.add('active');
+        submenu.classList.add('active');
+    }
+}
+
+// ===== 모바일 사이드바 열기/닫기 =====
 function openMobileSidebar() {
     const mobileSidebar = document.getElementById('mobile-sidebar');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const hamburgerBtn = document.getElementById('hamburger-btn');
     
     if (mobileSidebar && sidebarOverlay) {
         mobileSidebar.classList.add('active');
         sidebarOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        // 햄버거 버튼 애니메이션
+        if (hamburgerBtn) {
+            const lines = hamburgerBtn.querySelectorAll('.hamburger-line');
+            if (lines.length >= 3) {
+                lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                lines[1].style.opacity = '0';
+                lines[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            }
+        }
+        
         console.log('📱 모바일 사이드바 열림');
     }
 }
@@ -293,11 +249,22 @@ function openMobileSidebar() {
 function closeMobileSidebar() {
     const mobileSidebar = document.getElementById('mobile-sidebar');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const hamburgerBtn = document.getElementById('hamburger-btn');
     
     if (mobileSidebar && sidebarOverlay) {
         mobileSidebar.classList.remove('active');
         sidebarOverlay.classList.remove('active');
         document.body.style.overflow = 'auto';
+        
+        // 햄버거 버튼 리셋
+        if (hamburgerBtn) {
+            const lines = hamburgerBtn.querySelectorAll('.hamburger-line');
+            if (lines.length >= 3) {
+                lines[0].style.transform = 'none';
+                lines[1].style.opacity = '1';
+                lines[2].style.transform = 'none';
+            }
+        }
         
         // 모든 서브메뉴 닫기
         document.querySelectorAll('.sidebar-item, .sidebar-subitem').forEach(item => {
@@ -312,7 +279,27 @@ function closeMobileSidebar() {
     }
 }
 
-// 전역 함수로 등록
+// ===== 전역 함수 등록 =====
+window.loadComponent = loadComponent;
+window.loadAllComponents = loadAllComponents;
 window.openMobileSidebar = openMobileSidebar;
 window.closeMobileSidebar = closeMobileSidebar;
 window.initializeMobileSidebar3Level = initializeMobileSidebar3Level;
+
+// ===== 자동 초기화 =====
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Starting component loading...');
+    loadAllComponents();
+});
+
+// 컴포넌트 로딩 완료 후 재초기화
+document.addEventListener('sectionsLoaded', function() {
+    setTimeout(initializeComponentEvents, 100);
+});
+
+// ESC 키로 사이드바 닫기
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeMobileSidebar();
+    }
+});

@@ -2,7 +2,7 @@
   "navigation": {
     "company": {
       "title": "회사소개",
-      "url": "/pages/company/",
+      "url": "/pages/company/about.html",
       "children": {
         "status": {
           "title": "기업현황",
@@ -28,7 +28,7 @@
     },
     "business": {
       "title": "사업분야",
-      "url": "/pages/business/",
+      "url": "/pages/business/epc.html",
       "children": {
         "epc": {
           "title": "EPC",
@@ -85,7 +85,7 @@
     },
     "esg": {
       "title": "ESG",
-      "url": "/pages/esg/",
+      "url": "/pages/esg/esg.html",
       "children": {
         "esg": {
           "title": "경영",
@@ -117,7 +117,7 @@
     },
     "media": {
       "title": "홍보",
-      "url": "/pages/media/",
+      "url": "/pages/media/press.html",
       "children": {
         "newsroom": {
           "title": "미디어룸",

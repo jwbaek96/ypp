@@ -201,3 +201,118 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===== EXPORT FUNCTIONS =====
 window.loadComponent = loadComponent;
 window.loadAllComponents = loadAllComponents;
+
+// 3단계 모바일 사이드바 JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    initializeMobileSidebar3Level();
+});
+
+// 컴포넌트 로딩 후에도 초기화
+document.addEventListener('sectionsLoaded', function() {
+    setTimeout(initializeMobileSidebar3Level, 100);
+});
+
+function initializeMobileSidebar3Level() {
+    console.log('🔄 3단계 사이드바 초기화 중...');
+    
+    // 기존 이벤트 리스너 제거 (중복 방지)
+    document.querySelectorAll('[data-toggle="submenu"]').forEach(link => {
+        const newLink = link.cloneNode(true);
+        link.parentNode.replaceChild(newLink, link);
+    });
+    
+    // 새로운 이벤트 리스너 추가
+    document.querySelectorAll('[data-toggle="submenu"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('📱 메뉴 클릭됨:', this.textContent.trim());
+            
+            const parentItem = this.closest('.sidebar-item, .sidebar-subitem');
+            const submenu = parentItem.querySelector('.sidebar-submenu, .sidebar-sub-submenu');
+            
+            if (submenu) {
+                // 현재 아이템이 열려있는지 확인
+                const isActive = parentItem.classList.contains('active');
+                
+                console.log('현재 상태:', isActive ? '열림' : '닫힘');
+                
+                // 같은 레벨의 다른 메뉴들 닫기
+                const parentContainer = parentItem.parentElement;
+                Array.from(parentContainer.children).forEach(sibling => {
+                    if (sibling !== parentItem && sibling.classList.contains('sidebar-item', 'sidebar-subitem')) {
+                        sibling.classList.remove('active');
+                        const siblingSubmenu = sibling.querySelector('.sidebar-submenu, .sidebar-sub-submenu');
+                        if (siblingSubmenu) {
+                            siblingSubmenu.classList.remove('active');
+                        }
+                        
+                        // 하위 메뉴들도 모두 닫기
+                        sibling.querySelectorAll('.sidebar-subitem, .sidebar-sub-submenu').forEach(subItem => {
+                            subItem.classList.remove('active');
+                        });
+                    }
+                });
+                
+                // 현재 아이템 토글
+                if (isActive) {
+                    parentItem.classList.remove('active');
+                    submenu.classList.remove('active');
+                    
+                    // 하위 메뉴들도 모두 닫기
+                    parentItem.querySelectorAll('.sidebar-subitem, .sidebar-sub-submenu').forEach(subItem => {
+                        subItem.classList.remove('active');
+                    });
+                    
+                    console.log('✅ 메뉴 닫힘');
+                } else {
+                    parentItem.classList.add('active');
+                    submenu.classList.add('active');
+                    console.log('✅ 메뉴 열림');
+                }
+            }
+        });
+    });
+    
+    console.log('✅ 3단계 사이드바 초기화 완료');
+}
+
+function openMobileSidebar() {
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    
+    if (mobileSidebar && sidebarOverlay) {
+        mobileSidebar.classList.add('active');
+        sidebarOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        console.log('📱 모바일 사이드바 열림');
+    }
+}
+
+function closeMobileSidebar() {
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    
+    if (mobileSidebar && sidebarOverlay) {
+        mobileSidebar.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        
+        // 모든 서브메뉴 닫기
+        document.querySelectorAll('.sidebar-item, .sidebar-subitem').forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        document.querySelectorAll('.sidebar-submenu, .sidebar-sub-submenu').forEach(submenu => {
+            submenu.classList.remove('active');
+        });
+        
+        console.log('📱 모바일 사이드바 닫힘');
+    }
+}
+
+// 전역 함수로 등록
+window.openMobileSidebar = openMobileSidebar;
+window.closeMobileSidebar = closeMobileSidebar;
+window.initializeMobileSidebar3Level = initializeMobileSidebar3Level;

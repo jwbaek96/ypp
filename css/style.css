@@ -4,6 +4,7 @@
 /* ===== 전역 COMPONENTS ===== */
 @import "./components/header.css";
 @import "./components/footer.css";
+/* @import "./components/sidebar.css"; */
 
 /* ===== LAYOUT COMPONENTS ===== */
 @import "./components/index/index.css";

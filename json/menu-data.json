@@ -11,12 +11,12 @@
         },
         "business": {
           "title": "주요사업",
-          "url": "/pages/company/business.html",
+          "url": "/pages/company/about.html#business",
           "sections": ["사업소개", "파트너", "인허가", "유자격"]
         },
         "culture": {
           "title": "기업문화",
-          "url": "/pages/company/culture.html",
+          "url": "/pages/company/about.html#culture",
           "sections": ["비전&핵심가치", "조직문화", "사회공헌"]
         },
         "location": {
@@ -32,7 +32,8 @@
       "children": {
         "epc": {
           "title": "EPC",
-          "url": "/pages/business/epc.html"
+          "url": "/pages/business/epc.html",
+          "sections": ["플랜트 전기분야 설계", "플랜트 계측분야 설계", "전력계통 컨설팅", "CGID"]
         },
         "engineering": {
           "title": "엔지니어링",
@@ -87,7 +88,7 @@
       "url": "/pages/esg/",
       "children": {
         "esg": {
-          "title": "ESG",
+          "title": "경영",
           "url": "/pages/esg/esg.html",
           "sections": ["ESG 전략체계", "ESG경영보고서", "ESG자료실"]
         },

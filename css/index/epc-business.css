@@ -261,10 +261,6 @@
         gap: 0;
     }
     
-    .category-title:has(+ * .business-card:hover)::after{
-        width: 100%;
-
-    }
     
     .business-card {
         height: 225px;

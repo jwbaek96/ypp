@@ -14,13 +14,12 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/pages/about.css">
+    <link rel="stylesheet" href="../../css/pages/layout.css">
     
     <!-- 메타 시스템 -->
     <script src="../../js/head-meta.js"></script>
 </head>
 <body>
-
     <!-- Header Container -->
     <div id="header-container"></div>
     
@@ -34,7 +33,7 @@
             <div class="container">
                 <div class="page-header-content">
                     <h1 class="page-title">회사소개</h1>
-                    <p class="page-subtitle">1982년부터 40년간 전력계통 분야를 선도해온 에너지 전문기업</p>
+                    <p class="page-subtitle">1982년부터 40여년간 전력계통 분야를 선도해온 에너지 전문기업</p>
                 </div>
             </div>
         </section>
@@ -59,6 +58,37 @@
                     <a href="#culture" class="tab-link" data-tab="culture">기업문화</a>
                     <a href="#location" class="tab-link" data-tab="location">오시는길</a>
                 </nav>
+                
+                <!-- Section Navigation for 기업현황 -->
+                <div class="section-nav" id="section-nav-status">
+                    <a href="#status-intro" class="section-nav-link">소개</a>
+                    <a href="#status-greeting" class="section-nav-link">인사말</a>
+                    <a href="#status-history" class="section-nav-link">연혁</a>
+                    <a href="#status-organization" class="section-nav-link">조직도</a>
+                </div>
+                
+                <!-- Section Navigation for 주요사업 -->
+                <div class="section-nav" id="section-nav-business" style="display: none;">
+                    <a href="#business-intro" class="section-nav-link">사업소개</a>
+                    <a href="#business-partners" class="section-nav-link">파트너</a>
+                    <a href="#business-license" class="section-nav-link">인허가</a>
+                    <a href="#business-qualification" class="section-nav-link">유자격</a>
+                </div>
+                
+                <!-- Section Navigation for 기업문화 -->
+                <div class="section-nav" id="section-nav-culture" style="display: none;">
+                    <a href="#culture-vision" class="section-nav-link">비전&핵심가치</a>
+                    <a href="#culture-organization" class="section-nav-link">조직문화</a>
+                    <a href="#culture-contribution" class="section-nav-link">사회공헌</a>
+                </div>
+                
+                <!-- Section Navigation for 오시는길 -->
+                <div class="section-nav" id="section-nav-location" style="display: none;">
+                    <a href="#location-headquarters" class="section-nav-link">본사</a>
+                    <a href="#location-factory" class="section-nav-link">공장</a>
+                    <a href="#location-branch" class="section-nav-link">지사</a>
+                    <a href="#location-map" class="section-nav-link">위치안내</a>
+                </div>
             </div>
         </section>
 
@@ -74,7 +104,7 @@
                     
                     <div class="content-grid">
                         <!-- 소개 -->
-                        <div class="content-block">
+                        <div id="status-intro" class="content-block">
                             <h3 class="block-title">소개</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -82,7 +112,7 @@
                         </div>
                         
                         <!-- 인사말 -->
-                        <div class="content-block">
+                        <div id="status-greeting" class="content-block">
                             <h3 class="block-title">인사말</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -90,7 +120,7 @@
                         </div>
                         
                         <!-- 연혁 -->
-                        <div class="content-block full-width">
+                        <div id="status-history" class="content-block full-width">
                             <h3 class="block-title">연혁</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -98,7 +128,7 @@
                         </div>
                         
                         <!-- 조직도 -->
-                        <div class="content-block full-width">
+                        <div id="status-organization" class="content-block full-width">
                             <h3 class="block-title">조직도</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -116,7 +146,7 @@
                     
                     <div class="content-grid">
                         <!-- 사업소개 -->
-                        <div class="content-block">
+                        <div id="business-intro" class="content-block">
                             <h3 class="block-title">사업소개</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -124,7 +154,7 @@
                         </div>
                         
                         <!-- 파트너 -->
-                        <div class="content-block">
+                        <div id="business-partners" class="content-block">
                             <h3 class="block-title">파트너</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -132,7 +162,7 @@
                         </div>
                         
                         <!-- 인허가 -->
-                        <div class="content-block">
+                        <div id="business-license" class="content-block">
                             <h3 class="block-title">인허가</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -140,7 +170,7 @@
                         </div>
                         
                         <!-- 유자격 -->
-                        <div class="content-block">
+                        <div id="business-qualification" class="content-block">
                             <h3 class="block-title">유자격</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -158,7 +188,7 @@
                     
                     <div class="content-grid">
                         <!-- 비전&핵심가치 -->
-                        <div class="content-block full-width">
+                        <div id="culture-vision" class="content-block full-width">
                             <h3 class="block-title">비전 & 핵심가치</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -166,7 +196,7 @@
                         </div>
                         
                         <!-- 조직문화 -->
-                        <div class="content-block">
+                        <div id="culture-organization" class="content-block">
                             <h3 class="block-title">조직문화</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -174,7 +204,7 @@
                         </div>
                         
                         <!-- 사회공헌 -->
-                        <div class="content-block">
+                        <div id="culture-contribution" class="content-block">
                             <h3 class="block-title">사회공헌</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -192,7 +222,7 @@
                     
                     <div class="content-grid">
                         <!-- 본사 -->
-                        <div class="content-block">
+                        <div id="location-headquarters" class="content-block">
                             <h3 class="block-title">본사</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -200,7 +230,7 @@
                         </div>
                         
                         <!-- 공장 -->
-                        <div class="content-block">
+                        <div id="location-factory" class="content-block">
                             <h3 class="block-title">공장</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -208,7 +238,7 @@
                         </div>
                         
                         <!-- 지사 -->
-                        <div class="content-block">
+                        <div id="location-branch" class="content-block">
                             <h3 class="block-title">지사</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
@@ -216,7 +246,7 @@
                         </div>
                         
                         <!-- 지도 -->
-                        <div class="content-block full-width">
+                        <div id="location-map" class="content-block full-width">
                             <h3 class="block-title">위치 안내</h3>
                             <div class="block-content">
                                 <p>지도 영역</p>
@@ -237,201 +267,336 @@
     <script src="../../js/sidebar.js"></script>
     <script src="../../js/hamburger.js"></script>
     <script src="../../js/main-top-padding.js"></script>
-    <!-- <script src="../../js/pages/about.js"></script> -->
+    <script src="../../js/pages/about.js"></script>
+    <script>
+        // about.js - About 페이지 탭/섹션 네비게이션 기능
+
+// ===== About 페이지 컨트롤러 클래스 =====
+class AboutPageController {
+    constructor() {
+        this.currentTab = 'status';
+        this.currentSection = null;
+        
+        this.init();
+    }
+    
+    // 초기화
+    init() {
+        this.setupTabNavigation();
+        this.setupSectionNavigation();
+        this.handleUrlHash();
+        this.attachEvents();
+    }
+    
+    // 탭 네비게이션 설정
+    setupTabNavigation() {
+        const tabLinks = document.querySelectorAll('.tab-link');
+        
+        tabLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabId = link.getAttribute('data-tab');
+                this.switchTab(tabId);
+                
+                // URL 해시 업데이트
+                window.history.pushState(null, null, `#${tabId}`);
+            });
+        });
+    }
+    
+    // 섹션 네비게이션 설정
+    setupSectionNavigation() {
+        const sectionLinks = document.querySelectorAll('.section-nav-link');
+        
+        sectionLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                const sectionId = href.substring(1); // # 제거
+                
+                this.scrollToSection(sectionId);
+                this.updateSectionActiveState(link);
+                
+                // URL 해시 업데이트
+                window.history.pushState(null, null, href);
+            });
+        });
+    }
+    
+    // URL 해시 처리
+    handleUrlHash() {
+        const hash = window.location.hash.substring(1);
+        
+        if (hash) {
+            // 탭 ID인지 섹션 ID인지 확인
+            if (this.isTabId(hash)) {
+                this.switchTab(hash);
+            } else if (this.isSectionId(hash)) {
+                const tabId = this.getTabIdFromSection(hash);
+                this.switchTab(tabId);
+                setTimeout(() => {
+                    this.scrollToSection(hash);
+                }, 100);
+            }
+        }
+        
+        // 브라우저 뒤로가기/앞으로가기 처리
+        window.addEventListener('popstate', () => {
+            this.handleUrlHash();
+        });
+    }
+    
+    // 탭 전환
+    switchTab(tabId) {
+        this.currentTab = tabId;
+        
+        // 모든 탭 링크 비활성화
+        document.querySelectorAll('.tab-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // 해당 탭 링크 활성화
+        const activeTabLink = document.querySelector(`[data-tab="${tabId}"]`);
+        if (activeTabLink) {
+            activeTabLink.classList.add('active');
+        }
+        
+        // 모든 탭 콘텐츠 숨기기
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        // 해당 탭 콘텐츠 표시
+        const activeTabContent = document.getElementById(tabId);
+        if (activeTabContent) {
+            activeTabContent.classList.add('active');
+        }
+        
+        // 섹션 네비게이션 전환
+        this.switchSectionNav(tabId);
+    }
+    
+    // 섹션 네비게이션 전환
+    switchSectionNav(tabId) {
+        // 모든 섹션 네비게이션 숨기기
+        document.querySelectorAll('.section-nav').forEach(nav => {
+            nav.style.display = 'none';
+        });
+        
+        // 해당 탭의 섹션 네비게이션 표시
+        const activeSectionNav = document.getElementById(`section-nav-${tabId}`);
+        if (activeSectionNav) {
+            activeSectionNav.style.display = 'flex';
+        }
+        
+        // 섹션 활성화 상태 초기화
+        this.clearSectionActiveStates();
+    }
+    
+    // 섹션으로 스크롤
+    scrollToSection(sectionId) {
+        const targetSection = document.getElementById(sectionId);
+        if (!targetSection) return;
+        
+        // 헤더 높이 + 탭 네비게이션 높이 계산
+        const header = document.querySelector('.header');
+        const tabNavigation = document.querySelector('.tab-navigation');
+        
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        const tabNavHeight = tabNavigation ? tabNavigation.getBoundingClientRect().height : 0;
+        const totalOffset = headerHeight + tabNavHeight + 20; // 여유 공간 20px
+        
+        const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+        const adjustedPosition = targetPosition - totalOffset;
+        
+        window.scrollTo({
+            top: adjustedPosition,
+            behavior: 'smooth'
+        });
+        
+        this.currentSection = sectionId;
+    }
+    
+    // 섹션 활성화 상태 업데이트
+    updateSectionActiveState(activeLink) {
+        // 현재 표시된 섹션 네비게이션 내의 모든 링크 비활성화
+        const currentSectionNav = document.querySelector('.section-nav[style*="flex"]');
+        if (currentSectionNav) {
+            currentSectionNav.querySelectorAll('.section-nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+        }
+        
+        // 클릭된 링크 활성화
+        activeLink.classList.add('active');
+    }
+    
+    // 섹션 활성화 상태 초기화
+    clearSectionActiveStates() {
+        document.querySelectorAll('.section-nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+    }
+    
+    // 탭 ID인지 확인
+    isTabId(id) {
+        const tabIds = ['status', 'business', 'culture', 'location'];
+        return tabIds.includes(id);
+    }
+    
+    // 섹션 ID인지 확인
+    isSectionId(id) {
+        const sectionPrefixes = ['status-', 'business-', 'culture-', 'location-'];
+        return sectionPrefixes.some(prefix => id.startsWith(prefix));
+    }
+    
+    // 섹션 ID로부터 탭 ID 추출
+    getTabIdFromSection(sectionId) {
+        if (sectionId.startsWith('status-')) return 'status';
+        if (sectionId.startsWith('business-')) return 'business';
+        if (sectionId.startsWith('culture-')) return 'culture';
+        if (sectionId.startsWith('location-')) return 'location';
+        return 'status'; // 기본값
+    }
+    
+    // 추가 이벤트 처리
+    attachEvents() {
+        // 스크롤 시 현재 보이는 섹션 감지 (옵션)
+        this.setupScrollSpy();
+        
+        // 키보드 네비게이션 (옵션)
+        this.setupKeyboardNavigation();
+    }
+    
+    // 스크롤 스파이 (현재 보이는 섹션 자동 감지)
+    setupScrollSpy() {
+        let ticking = false;
+        
+        const updateActiveSection = () => {
+            const sections = document.querySelectorAll('.content-block[id]');
+            const scrollPosition = window.pageYOffset + window.innerHeight / 2;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top + window.pageYOffset;
+                const sectionBottom = sectionTop + rect.height;
+                
+                if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+                    const sectionId = section.id;
+                    const correspondingLink = document.querySelector(`[href="#${sectionId}"]`);
+                    
+                    if (correspondingLink && !correspondingLink.classList.contains('active')) {
+                        this.updateSectionActiveState(correspondingLink);
+                    }
+                }
+            });
+            
+            ticking = false;
+        };
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateActiveSection);
+                ticking = true;
+            }
+        });
+    }
+    
+    // 키보드 네비게이션
+    setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            // 탭 키로 탭 간 이동 (Ctrl + Arrow)
+            if (e.ctrlKey) {
+                const tabIds = ['status', 'business', 'culture', 'location'];
+                const currentIndex = tabIds.indexOf(this.currentTab);
+                
+                if (e.key === 'ArrowRight' && currentIndex < tabIds.length - 1) {
+                    e.preventDefault();
+                    this.switchTab(tabIds[currentIndex + 1]);
+                    window.history.pushState(null, null, `#${tabIds[currentIndex + 1]}`);
+                } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                    e.preventDefault();
+                    this.switchTab(tabIds[currentIndex - 1]);
+                    window.history.pushState(null, null, `#${tabIds[currentIndex - 1]}`);
+                }
+            }
+        });
+    }
+    
+    // 외부에서 호출 가능한 메서드들
+    goToTab(tabId) {
+        this.switchTab(tabId);
+        window.history.pushState(null, null, `#${tabId}`);
+    }
+    
+    goToSection(sectionId) {
+        const tabId = this.getTabIdFromSection(sectionId);
+        this.switchTab(tabId);
+        setTimeout(() => {
+            this.scrollToSection(sectionId);
+        }, 100);
+        window.history.pushState(null, null, `#${sectionId}`);
+    }
+    
+    getCurrentTab() {
+        return this.currentTab;
+    }
+    
+    getCurrentSection() {
+        return this.currentSection;
+    }
+}
+
+// ===== 전역 변수 =====
+let aboutPageController = null;
+
+// ===== 초기화 함수 =====
+function initAboutPage() {
+    if (!aboutPageController) {
+        aboutPageController = new AboutPageController();
+    }
+    return aboutPageController;
+}
+
+// ===== 전역 함수들 =====
+function goToTab(tabId) {
+    if (aboutPageController) {
+        aboutPageController.goToTab(tabId);
+    }
+}
+
+function goToSection(sectionId) {
+    if (aboutPageController) {
+        aboutPageController.goToSection(sectionId);
+    }
+}
+
+function getCurrentTab() {
+    return aboutPageController ? aboutPageController.getCurrentTab() : null;
+}
+
+function getCurrentSection() {
+    return aboutPageController ? aboutPageController.getCurrentSection() : null;
+}
+
+// ===== 자동 초기화 =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 컴포넌트 로딩 완료 후 초기화
+    if (document.querySelector('.tab-navigation')) {
+        initAboutPage();
+    } else {
+        document.addEventListener('componentsLoaded', () => {
+            setTimeout(initAboutPage, 200);
+        });
+    }
+});
+
+// ===== 전역 함수 내보내기 =====
+window.initAboutPage = initAboutPage;
+window.goToTab = goToTab;
+window.goToSection = goToSection;
+window.getCurrentTab = getCurrentTab;
+window.getCurrentSection = getCurrentSection;
+    </script>
 </body>
 </html>
-
-<style>
-/* ===== ABOUT PAGE LAYOUT ===== */
-
-/* Page Header */
-.page-header {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    padding: 3rem 0;
-    text-align: center;
-}
-
-.page-title {
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--text-primary, #333);
-    margin-bottom: 1rem;
-}
-
-.page-subtitle {
-    font-size: 1.2rem;
-    color: var(--text-secondary, #666);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* Breadcrumb */
-.breadcrumb-section {
-    background-color: var(--white, #ffffff);
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--border-light, #e5e5e5);
-}
-
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-}
-
-.breadcrumb a {
-    color: var(--primary-blue, #0066cc);
-    text-decoration: none;
-}
-
-.breadcrumb a:hover {
-    text-decoration: underline;
-}
-
-.breadcrumb-separator {
-    color: var(--text-secondary, #666);
-}
-
-.breadcrumb-current {
-    color: var(--text-secondary, #666);
-    font-weight: 500;
-}
-
-/* Tab Navigation */
-.tab-navigation {
-    background-color: var(--white, #ffffff);
-    border-bottom: 1px solid var(--border-light, #e5e5e5);
-    position: sticky;
-    top: 80px;
-    z-index: 100;
-}
-
-.tab-nav {
-    display: flex;
-    gap: 0;
-    overflow-x: auto;
-}
-
-.tab-link {
-    padding: 1rem 2rem;
-    text-decoration: none;
-    color: var(--text-secondary, #666);
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    font-weight: 500;
-}
-
-.tab-link:hover {
-    color: var(--primary-blue, #0066cc);
-    background-color: var(--background-light, #f8f9fa);
-}
-
-.tab-link.active {
-    color: var(--primary-blue, #0066cc);
-    border-bottom-color: var(--primary-blue, #0066cc);
-    background-color: var(--background-light, #f8f9fa);
-}
-
-/* Tab Content */
-.tab-content-section {
-    padding: 3rem 0;
-    background-color: var(--white, #ffffff);
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-.content-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.content-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--text-primary, #333);
-    margin-bottom: 1rem;
-}
-
-.content-subtitle {
-    font-size: 1.1rem;
-    color: var(--text-secondary, #666);
-}
-
-/* Content Grid */
-.content-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.content-block {
-    background: var(--white, #ffffff);
-    border: 1px solid var(--border-light, #e5e5e5);
-    border-radius: 8px;
-    padding: 2rem;
-    transition: box-shadow 0.3s ease;
-}
-
-.content-block:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.content-block.full-width {
-    grid-column: 1 / -1;
-}
-
-.block-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--text-primary, #333);
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--primary-blue, #0066cc);
-}
-
-.block-content {
-    color: var(--text-secondary, #666);
-    line-height: 1.6;
-    min-height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--background-light, #f8f9fa);
-    border-radius: 4px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .page-title {
-        font-size: 2rem;
-    }
-    
-    .content-title {
-        font-size: 2rem;
-    }
-    
-    .tab-nav {
-        padding: 0 1rem;
-    }
-    
-    .tab-link {
-        padding: 1rem 1.5rem;
-    }
-    
-    .content-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .content-block {
-        padding: 1.5rem;
-    }
-}
-</style>

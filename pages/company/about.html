@@ -56,7 +56,6 @@
                     <a href="#status" class="tab-link active" data-tab="status">기업현황</a>
                     <a href="#business" class="tab-link" data-tab="business">주요사업</a>
                     <a href="#culture" class="tab-link" data-tab="culture">기업문화</a>
-                    <a href="#location" class="tab-link" data-tab="location">오시는길</a>
                 </nav>
                 
                 <!-- Section Navigation for 기업현황 -->
@@ -80,14 +79,6 @@
                     <a href="#culture-vision" class="section-nav-link">비전&핵심가치</a>
                     <a href="#culture-organization" class="section-nav-link">조직문화</a>
                     <a href="#culture-contribution" class="section-nav-link">사회공헌</a>
-                </div>
-                
-                <!-- Section Navigation for 오시는길 -->
-                <div class="section-nav" id="section-nav-location" style="display: none;">
-                    <a href="#location-headquarters" class="section-nav-link">본사</a>
-                    <a href="#location-factory" class="section-nav-link">공장</a>
-                    <a href="#location-branch" class="section-nav-link">지사</a>
-                    <a href="#location-map" class="section-nav-link">위치안내</a>
                 </div>
             </div>
         </section>
@@ -208,48 +199,6 @@
                             <h3 class="block-title">사회공헌</h3>
                             <div class="block-content">
                                 <p>콘텐츠 영역</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 오시는길 -->
-                <div id="location" class="tab-content">
-                    <div class="content-header">
-                        <h2 class="content-title">오시는길</h2>
-                        <p class="content-subtitle">YPP 본사, 공장, 지사 위치 안내</p>
-                    </div>
-                    
-                    <div class="content-grid">
-                        <!-- 본사 -->
-                        <div id="location-headquarters" class="content-block">
-                            <h3 class="block-title">본사</h3>
-                            <div class="block-content">
-                                <p>콘텐츠 영역</p>
-                            </div>
-                        </div>
-                        
-                        <!-- 공장 -->
-                        <div id="location-factory" class="content-block">
-                            <h3 class="block-title">공장</h3>
-                            <div class="block-content">
-                                <p>콘텐츠 영역</p>
-                            </div>
-                        </div>
-                        
-                        <!-- 지사 -->
-                        <div id="location-branch" class="content-block">
-                            <h3 class="block-title">지사</h3>
-                            <div class="block-content">
-                                <p>콘텐츠 영역</p>
-                            </div>
-                        </div>
-                        
-                        <!-- 지도 -->
-                        <div id="location-map" class="content-block full-width">
-                            <h3 class="block-title">위치 안내</h3>
-                            <div class="block-content">
-                                <p>지도 영역</p>
                             </div>
                         </div>
                     </div>
@@ -440,13 +389,13 @@ class AboutPageController {
     
     // 탭 ID인지 확인
     isTabId(id) {
-        const tabIds = ['status', 'business', 'culture', 'location'];
+        const tabIds = ['status', 'business', 'culture', ];
         return tabIds.includes(id);
     }
     
     // 섹션 ID인지 확인
     isSectionId(id) {
-        const sectionPrefixes = ['status-', 'business-', 'culture-', 'location-'];
+        const sectionPrefixes = ['status-', 'business-', 'culture-', ];
         return sectionPrefixes.some(prefix => id.startsWith(prefix));
     }
     
@@ -455,7 +404,7 @@ class AboutPageController {
         if (sectionId.startsWith('status-')) return 'status';
         if (sectionId.startsWith('business-')) return 'business';
         if (sectionId.startsWith('culture-')) return 'culture';
-        if (sectionId.startsWith('location-')) return 'location';
+        // if (sectionId.startsWith('location-')) return 'location';
         return 'status'; // 기본값
     }
     
@@ -507,7 +456,7 @@ class AboutPageController {
         document.addEventListener('keydown', (e) => {
             // 탭 키로 탭 간 이동 (Ctrl + Arrow)
             if (e.ctrlKey) {
-                const tabIds = ['status', 'business', 'culture', 'location'];
+                const tabIds = ['status', 'business', 'culture'];
                 const currentIndex = tabIds.indexOf(this.currentTab);
                 
                 if (e.key === 'ArrowRight' && currentIndex < tabIds.length - 1) {
@@ -598,5 +547,6 @@ window.goToSection = goToSection;
 window.getCurrentTab = getCurrentTab;
 window.getCurrentSection = getCurrentSection;
     </script>
+    
 </body>
 </html>

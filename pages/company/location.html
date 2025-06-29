@@ -3,514 +3,773 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="YPP 오시는 길 - 서울시 금천구 가산디지털2로 24 가산YPP아르센타워">
-    <title>오시는 길 - YPP</title>
     
+    <!-- SEO 메타 태그 -->
+    <title>오시는 길 - YPP</title>
+    <meta name="description" content="YPP 본사, 공장, 지사 위치 안내 및 찾아오는 길">
+    <meta name="keywords" content="YPP, 오시는길, 본사, 공장, 지사, 위치, 주소, 교통편">
+    
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/ico" href="../../assets/images/favicon/favicon.ico">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/components.css">
-    <link rel="stylesheet" href="../../css/mobile.css">
-    <link rel="icon" type="image/x-icon" href="../../assets/images/logo/favicon.ico">
+    <link rel="stylesheet" href="../../css/pages/layout.css">
+    
+    <!-- 메타 시스템 -->
+    <script src="../../js/head-meta.js"></script>
 </head>
 <body>
+    <!-- Header Container -->
     <div id="header-container"></div>
-    <div id="mobile-sidebar-container"></div>
+    
+    <!-- Mobile Sidebar Container -->
+    <div id="sidebar-container"></div>
 
+    <!-- Main Content -->
     <main class="main-content">
         <!-- Page Header -->
         <section class="page-header">
             <div class="container">
-                <div class="breadcrumb">
-                    <span class="breadcrumb-item"><a href="/">홈</a></span>
-                    <span class="breadcrumb-item"><a href="/pages/company/about.html">회사소개</a></span>
-                    <span class="breadcrumb-item">오시는 길</span>
-                </div>
-                <h1 class="page-title">오시는 길</h1>
-                <p class="page-subtitle">서울시 금천구 가산디지털2로 24 가산YPP아르센타워</p>
-            </div>
-        </section>
-
-        <!-- Map Section -->
-        <section class="map-section">
-            <div class="container">
-                <div class="map-container">
-                    <div class="map-placeholder">
-                        <!-- 실제 구현시 네이버/카카오 지도 API 연동 -->
-                        <div class="map-info">
-                            <h3>📍 YPP 본사 위치</h3>
-                            <p>서울시 금천구 가산디지털2로 24<br>가산YPP아르센타워 (B2층, 8층, 20층)</p>
-                            <div class="map-buttons">
-                                <button onclick="openMap('naver')" class="map-btn">네이버 지도</button>
-                                <button onclick="openMap('kakao')" class="map-btn">카카오맵</button>
-                                <button onclick="openMap('google')" class="map-btn">구글맵</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="page-header-content">
+                    <h1 class="page-title">오시는 길</h1>
+                    <p class="page-subtitle">YPP 본사, 공장, 지사 위치 안내</p>
                 </div>
             </div>
         </section>
 
-        <!-- Location Info -->
-        <section class="location-info">
+        <!-- Breadcrumb -->
+        <section class="breadcrumb-section">
             <div class="container">
-                <div class="info-grid">
-                    <!-- 주소 정보 -->
-                    <div class="info-card">
-                        <div class="card-icon">🏢</div>
-                        <h3>주소</h3>
-                        <div class="address-info">
-                            <p><strong>본사:</strong> 서울시 금천구 가산디지털2로 24</p>
-                            <p><strong>건물명:</strong> 가산YPP아르센타워</p>
-                            <p><strong>층수:</strong> B2층, 8층, 20층</p>
-                            <p><strong>우편번호:</strong> 08506</p>
-                        </div>
-                    </div>
-
-                    <!-- 연락처 -->
-                    <div class="info-card">
-                        <div class="card-icon">📞</div>
-                        <h3>연락처</h3>
-                        <div class="contact-list">
-                            <p><strong>대표전화:</strong> 02-2104-8700</p>
-                            <p><strong>팩스:</strong> 02-2104-8711</p>
-                            <p><strong>교육문의:</strong> 02-2104-8720, 4683</p>
-                            <p><strong>이메일:</strong> yppedu@ypp.co.kr</p>
-                        </div>
-                    </div>
-
-                    <!-- 운영시간 -->
-                    <div class="info-card">
-                        <div class="card-icon">🕒</div>
-                        <h3>운영시간</h3>
-                        <div class="hours-info">
-                            <p><strong>평일:</strong> 09:00 - 18:00</p>
-                            <p><strong>점심시간:</strong> 12:00 - 13:00</p>
-                            <p><strong>토요일:</strong> 휴무</p>
-                            <p><strong>일요일/공휴일:</strong> 휴무</p>
-                        </div>
-                    </div>
-                </div>
+                <nav class="breadcrumb">
+                    <a href="../../index.html">홈</a>
+                    <span class="breadcrumb-separator">></span>
+                    <a href="./about.html">회사소개</a>
+                    <span class="breadcrumb-separator">></span>
+                    <span class="breadcrumb-current">오시는 길</span>
+                </nav>
             </div>
         </section>
 
-        <!-- Transportation -->
-        <section class="transportation">
+        <!-- Tab Navigation -->
+        <section class="tab-navigation">
             <div class="container">
-                <h2 class="section-title">교통편 안내</h2>
+                <nav class="tab-nav">
+                    <a href="#headquarters" class="tab-link active" data-tab="headquarters">본사</a>
+                    <a href="#factory" class="tab-link" data-tab="factory">공장</a>
+                    <a href="#branches" class="tab-link" data-tab="branches">지사</a>
+                    <a href="#transportation" class="tab-link" data-tab="transportation">교통편</a>
+                </nav>
                 
-                <div class="transport-tabs">
-                    <div class="tab-nav">
-                        <button class="tab-button active" data-tab="subway">🚇 지하철</button>
-                        <button class="tab-button" data-tab="bus">🚌 버스</button>
-                        <button class="tab-button" data-tab="car">🚗 자가용</button>
-                    </div>
-
-                    <!-- 지하철 -->
-                    <div class="tab-content active" data-tab-content="subway">
-                        <div class="transport-info">
-                            <div class="route-card">
-                                <h4>7호선 가산디지털단지역</h4>
-                                <p><strong>도보:</strong> 3번 출구에서 약 5분</p>
-                                <p><strong>방향:</strong> 3번 출구 → 가산디지털2로 → YPP아르센타워</p>
-                            </div>
-                            <div class="route-card">
-                                <h4>1호선 가산디지털단지역</h4>
-                                <p><strong>도보:</strong> 4번 출구에서 약 7분</p>
-                                <p><strong>방향:</strong> 4번 출구 → 가산디지털1로 → 가산디지털2로</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 버스 -->
-                    <div class="tab-content" data-tab-content="bus">
-                        <div class="transport-info">
-                            <div class="bus-info">
-                                <h4>간선버스</h4>
-                                <div class="bus-numbers">
-                                    <span class="bus-number blue">503</span>
-                                    <span class="bus-number blue">504</span>
-                                    <span class="bus-number blue">571</span>
-                                </div>
-                            </div>
-                            <div class="bus-info">
-                                <h4>지선버스</h4>
-                                <div class="bus-numbers">
-                                    <span class="bus-number green">5530</span>
-                                    <span class="bus-number green">5536</span>
-                                    <span class="bus-number green">5616</span>
-                                </div>
-                            </div>
-                            <p><strong>정류장:</strong> 가산디지털단지역 정류장 하차</p>
-                        </div>
-                    </div>
-
-                    <!-- 자가용 -->
-                    <div class="tab-content" data-tab-content="car">
-                        <div class="transport-info">
-                            <div class="route-card">
-                                <h4>서울외곽순환고속도로</h4>
-                                <p>서울외곽순환고속도로 → 가산IC → 가산디지털2로</p>
-                            </div>
-                            <div class="route-card">
-                                <h4>경부고속도로</h4>
-                                <p>경부고속도로 → 서초IC → 강남대로 → 가산디지털2로</p>
-                            </div>
-                            <div class="parking-info">
-                                <h4>🅿️ 주차장 안내</h4>
-                                <p><strong>위치:</strong> 건물 지하 1~3층</p>
-                                <p><strong>요금:</strong> 방문객 2시간 무료</p>
-                                <p><strong>운영:</strong> 24시간</p>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Section Navigation for 본사 -->
+                <div class="section-nav" id="section-nav-headquarters">
+                    <a href="#headquarters-info" class="section-nav-link">위치정보</a>
+                    <a href="#headquarters-contact" class="section-nav-link">연락처</a>
+                    <a href="#headquarters-map" class="section-nav-link">지도</a>
+                </div>
+                
+                <!-- Section Navigation for 공장 -->
+                <div class="section-nav" id="section-nav-factory" style="display: none;">
+                    <a href="#factory-info" class="section-nav-link">공장위치</a>
+                    <a href="#factory-facilities" class="section-nav-link">시설현황</a>
+                    <a href="#factory-map" class="section-nav-link">지도</a>
+                </div>
+                
+                <!-- Section Navigation for 지사 -->
+                <div class="section-nav" id="section-nav-branches" style="display: none;">
+                    <a href="#branches-domestic" class="section-nav-link">국내지사</a>
+                    <a href="#branches-overseas" class="section-nav-link">해외지사</a>
+                    <a href="#branches-contact" class="section-nav-link">연락처</a>
+                </div>
+                
+                <!-- Section Navigation for 교통편 -->
+                <div class="section-nav" id="section-nav-transportation" style="display: none;">
+                    <a href="#transportation-subway" class="section-nav-link">지하철</a>
+                    <a href="#transportation-bus" class="section-nav-link">버스</a>
+                    <a href="#transportation-car" class="section-nav-link">자가용</a>
                 </div>
             </div>
         </section>
 
-        <!-- Nearby Facilities -->
-        <section class="nearby-facilities">
+        <!-- Tab Content -->
+        <section class="tab-content-section">
             <div class="container">
-                <h2 class="section-title">주변 시설</h2>
-                <div class="facilities-grid">
-                    <div class="facility-card">
-                        <div class="facility-icon">🏨</div>
-                        <h4>숙박시설</h4>
-                        <ul>
-                            <li>라마다 가산디지털단지 호텔</li>
-                            <li>스테이 가산</li>
-                            <li>가산 비즈니스 호텔</li>
-                        </ul>
+                <!-- 본사 -->
+                <div id="headquarters" class="tab-content active">
+                    <div class="content-header">
+                        <h2 class="content-title">본사</h2>
+                        <p class="content-subtitle">YPP 본사 위치 및 연락처 안내</p>
                     </div>
-                    <div class="facility-card">
-                        <div class="facility-icon">🍽️</div>
-                        <h4>식음료</h4>
-                        <ul>
-                            <li>가산디지털단지 푸드코트</li>
-                            <li>스타벅스 가산점</li>
-                            <li>맥도날드 가산점</li>
-                        </ul>
-                    </div>
-                    <div class="facility-card">
-                        <div class="facility-icon">🏪</div>
-                        <h4>편의시설</h4>
-                        <ul>
-                            <li>롯데마트 가산점</li>
-                            <li>GS25 편의점</li>
-                            <li>우체국</li>
-                        </ul>
+                    
+                    <div class="content-grid-location">
+                        <!-- 지도 -->
+                        <div id="headquarters-map" class="content-block full-width">
+                            <h3 class="block-title">오시는 길</h3>
+                            <div class="block-content map-container">
+                                <div class="map-placeholder">
+                                    <p>지도 영역 (지도 API 연동 예정)</p>
+                                    <div class="map-info">
+                                        <p><strong>지하철:</strong> 가산디지털단지역 1번 출구에서 도보 5분</p>
+                                        <p><strong>버스:</strong> 가산디지털단지역 정류장 하차</p>
+                                        <p><strong>주차:</strong> 지하주차장 이용 가능</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 위치정보 -->
+                        <div id="headquarters-info" class="content-block">
+                            <h3 class="block-title">위치정보</h3>
+                            <div class="block-content location-info">
+                                <div class="location-details">
+                                    <div class="location-item">
+                                        <strong>주소</strong>
+                                        <p>서울시 금천구 가산디지털2로 24<br>(가산동 327-30) 가산YPP아르센타워</p>
+                                    </div>
+                                    <div class="location-item">
+                                        <strong>우편번호</strong>
+                                        <p>08506</p>
+                                    </div>
+                                    <div class="location-item">
+                                        <strong>층별 안내</strong>
+                                        <p>B2층, 8층, 20층</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 연락처 -->
+                        <div id="headquarters-contact" class="content-block">
+                            <h3 class="block-title">연락처</h3>
+                            <div class="block-content contact-info">
+                                <div class="contact-details">
+                                    <div class="contact-item">
+                                        <strong>대표전화</strong>
+                                        <p>02-2104-8700</p>
+                                    </div>
+                                    <div class="contact-item">
+                                        <strong>팩스</strong>
+                                        <p>02-2104-8711</p>
+                                    </div>
+                                    <div class="contact-item">
+                                        <strong>교육문의</strong>
+                                        <p>02-2104-8720, 4683</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Contact CTA -->
-        <section class="contact-cta">
-            <div class="container">
-                <div class="cta-content">
-                    <h2>방문 전 연락하세요</h2>
-                    <p>원활한 미팅을 위해 사전 연락 부탁드립니다.</p>
-                    <div class="cta-buttons">
-                        <a href="tel:02-2104-8700" class="btn primary">📞 전화하기</a>
-                        <a href="../support/contact.html" class="btn secondary">📧 문의하기</a>
+                <!-- 공장 -->
+                <div id="factory" class="tab-content">
+                    <div class="content-header">
+                        <h2 class="content-title">공장</h2>
+                        <p class="content-subtitle">YPP 생산시설 위치 및 시설 현황</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- 공장위치 -->
+                        <div id="factory-info" class="content-block">
+                            <h3 class="block-title">공장위치</h3>
+                            <div class="block-content">
+                                <p>공장 위치 정보</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 시설현황 -->
+                        <div id="factory-facilities" class="content-block">
+                            <h3 class="block-title">시설현황</h3>
+                            <div class="block-content">
+                                <p>생산시설 및 장비 현황</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 지도 -->
+                        <div id="factory-map" class="content-block full-width">
+                            <h3 class="block-title">공장 위치</h3>
+                            <div class="block-content">
+                                <p>공장 지도 및 찾아오는 길</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 지사 -->
+                <div id="branches" class="tab-content">
+                    <div class="content-header">
+                        <h2 class="content-title">지사</h2>
+                        <p class="content-subtitle">YPP 국내외 지사 현황 및 연락처</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- 국내지사 -->
+                        <div id="branches-domestic" class="content-block">
+                            <h3 class="block-title">국내지사</h3>
+                            <div class="block-content">
+                                <p>국내 지사 위치 및 연락처</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 해외지사 -->
+                        <div id="branches-overseas" class="content-block">
+                            <h3 class="block-title">해외지사</h3>
+                            <div class="block-content">
+                                <p>해외 지사 위치 및 연락처</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 연락처 -->
+                        <div id="branches-contact" class="content-block full-width">
+                            <h3 class="block-title">지사 연락처</h3>
+                            <div class="block-content">
+                                <p>각 지사별 상세 연락처</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 교통편 -->
+                <div id="transportation" class="tab-content">
+                    <div class="content-header">
+                        <h2 class="content-title">교통편</h2>
+                        <p class="content-subtitle">대중교통 및 자가용 이용 안내</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- 지하철 -->
+                        <div id="transportation-subway" class="content-block">
+                            <h3 class="block-title">지하철</h3>
+                            <div class="block-content transportation-info">
+                                <div class="transport-details">
+                                    <div class="transport-item">
+                                        <strong>1호선</strong>
+                                        <p>가산디지털단지역 1번 출구<br>도보 5분</p>
+                                    </div>
+                                    <div class="transport-item">
+                                        <strong>7호선</strong>
+                                        <p>가산디지털단지역 1번 출구<br>도보 5분</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 버스 -->
+                        <div id="transportation-bus" class="content-block">
+                            <h3 class="block-title">버스</h3>
+                            <div class="block-content transportation-info">
+                                <div class="transport-details">
+                                    <div class="transport-item">
+                                        <strong>간선버스</strong>
+                                        <p>503, 504, 571번<br>가산디지털단지역 정류장</p>
+                                    </div>
+                                    <div class="transport-item">
+                                        <strong>지선버스</strong>
+                                        <p>5619, 5620번<br>가산디지털단지 정류장</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 자가용 -->
+                        <div id="transportation-car" class="content-block full-width">
+                            <h3 class="block-title">자가용</h3>
+                            <div class="block-content transportation-info">
+                                <div class="car-info">
+                                    <div class="route-item">
+                                        <strong>서울 시내에서</strong>
+                                        <p>서부간선도로 → 가산IC → 가산디지털2로</p>
+                                    </div>
+                                    <div class="route-item">
+                                        <strong>경기도에서</strong>
+                                        <p>서해안고속도로 → 가산IC → 가산디지털2로</p>
+                                    </div>
+                                    <div class="parking-info">
+                                        <strong>주차안내</strong>
+                                        <p>지하주차장 이용 가능 (방문 시 안내데스크 문의)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Footer Container -->
     <div id="footer-container"></div>
 
+    <!-- Scripts -->
+    <script src="../../js/components.js"></script>
+    <script src="../../js/header-menu.js"></script>
+    <script src="../../js/sidebar.js"></script>
+    <script src="../../js/hamburger.js"></script>
+    <script src="../../js/main-top-padding.js"></script>
+    <script src="../../js/pages/location.js"></script>
     <script>
-        // 서브페이지용 컴포넌트 로더 (기존 코드 교체)
-      async function loadComponent(elementId, componentPath) {
-          try {
-              const response = await fetch(componentPath);
-              const html = await response.text();
-              document.getElementById(elementId).innerHTML = html;
-          } catch (error) {
-              console.error('컴포넌트 로드 실패:', error);
-          }
-      }
-      
-      // 로고 경로 동적 수정
-      function fixLogoPaths() {
-          const currentPath = window.location.pathname;
-          let basePath = '';
-          
-          // 현재 페이지 깊이에 따라 기본 경로 설정
-          if (currentPath.includes('/pages/')) {
-              const depth = (currentPath.match(/\//g) || []).length;
-              basePath = depth === 3 ? '../../' : '../'; // /pages/company/ = 3레벨
-          }
-          
-          // 모든 로고 이미지 경로 수정
-          setTimeout(() => {
-              const logoImages = document.querySelectorAll('img[src*="./assets/images/logo/"]');
-              logoImages.forEach(img => {
-                  img.src = basePath + 'assets/images/logo/symbol.png';
-              });
-          }, 50);
-      }
-      
-      document.addEventListener('DOMContentLoaded', function() {
-          loadComponent('header-container', '../../components/header.html');
-          loadComponent('footer-container', '../../components/footer.html');
-          loadComponent('mobile-sidebar-container', '../../components/mobile-sidebar.html');
-          
-          // 컴포넌트 로드 후 로고 경로 수정
-          setTimeout(fixLogoPaths, 100);
-      });
+        // about.js - About 페이지 탭/섹션 네비게이션 기능
+
+// ===== About 페이지 컨트롤러 클래스 =====
+class AboutPageController {
+    constructor() {
+        this.currentTab = 'status';
+        this.currentSection = null;
+        
+        this.init();
+    }
+    
+    // 초기화
+    init() {
+        this.setupTabNavigation();
+        this.setupSectionNavigation();
+        this.handleUrlHash();
+        this.attachEvents();
+    }
+    
+    // 탭 네비게이션 설정
+    setupTabNavigation() {
+        const tabLinks = document.querySelectorAll('.tab-link');
+        
+        tabLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabId = link.getAttribute('data-tab');
+                this.switchTab(tabId);
+                
+                // URL 해시 업데이트
+                window.history.pushState(null, null, `#${tabId}`);
+            });
+        });
+    }
+    
+    // 섹션 네비게이션 설정
+    setupSectionNavigation() {
+        const sectionLinks = document.querySelectorAll('.section-nav-link');
+        
+        sectionLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                const sectionId = href.substring(1); // # 제거
+                
+                this.scrollToSection(sectionId);
+                this.updateSectionActiveState(link);
+                
+                // URL 해시 업데이트
+                window.history.pushState(null, null, href);
+            });
+        });
+    }
+    
+    // URL 해시 처리
+    handleUrlHash() {
+        const hash = window.location.hash.substring(1);
+        
+        if (hash) {
+            // 탭 ID인지 섹션 ID인지 확인
+            if (this.isTabId(hash)) {
+                this.switchTab(hash);
+            } else if (this.isSectionId(hash)) {
+                const tabId = this.getTabIdFromSection(hash);
+                this.switchTab(tabId);
+                setTimeout(() => {
+                    this.scrollToSection(hash);
+                }, 100);
+            }
+        }
+        
+        // 브라우저 뒤로가기/앞으로가기 처리
+        window.addEventListener('popstate', () => {
+            this.handleUrlHash();
+        });
+    }
+    
+    // 탭 전환
+    switchTab(tabId) {
+        this.currentTab = tabId;
+        
+        // 모든 탭 링크 비활성화
+        document.querySelectorAll('.tab-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // 해당 탭 링크 활성화
+        const activeTabLink = document.querySelector(`[data-tab="${tabId}"]`);
+        if (activeTabLink) {
+            activeTabLink.classList.add('active');
+        }
+        
+        // 모든 탭 콘텐츠 숨기기
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        // 해당 탭 콘텐츠 표시
+        const activeTabContent = document.getElementById(tabId);
+        if (activeTabContent) {
+            activeTabContent.classList.add('active');
+        }
+        
+        // 섹션 네비게이션 전환
+        this.switchSectionNav(tabId);
+    }
+    
+    // 섹션 네비게이션 전환
+    switchSectionNav(tabId) {
+        // 모든 섹션 네비게이션 숨기기
+        document.querySelectorAll('.section-nav').forEach(nav => {
+            nav.style.display = 'none';
+        });
+        
+        // 해당 탭의 섹션 네비게이션 표시
+        const activeSectionNav = document.getElementById(`section-nav-${tabId}`);
+        if (activeSectionNav) {
+            activeSectionNav.style.display = 'flex';
+        }
+        
+        // 섹션 활성화 상태 초기화
+        this.clearSectionActiveStates();
+    }
+    
+    // 섹션으로 스크롤
+    scrollToSection(sectionId) {
+        const targetSection = document.getElementById(sectionId);
+        if (!targetSection) return;
+        
+        // 헤더 높이 + 탭 네비게이션 높이 계산
+        const header = document.querySelector('.header');
+        const tabNavigation = document.querySelector('.tab-navigation');
+        
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        const tabNavHeight = tabNavigation ? tabNavigation.getBoundingClientRect().height : 0;
+        const totalOffset = headerHeight + tabNavHeight + 20; // 여유 공간 20px
+        
+        const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+        const adjustedPosition = targetPosition - totalOffset;
+        
+        window.scrollTo({
+            top: adjustedPosition,
+            behavior: 'smooth'
+        });
+        
+        this.currentSection = sectionId;
+    }
+    
+    // 섹션 활성화 상태 업데이트
+    updateSectionActiveState(activeLink) {
+        // 현재 표시된 섹션 네비게이션 내의 모든 링크 비활성화
+        const currentSectionNav = document.querySelector('.section-nav[style*="flex"]');
+        if (currentSectionNav) {
+            currentSectionNav.querySelectorAll('.section-nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+        }
+        
+        // 클릭된 링크 활성화
+        activeLink.classList.add('active');
+    }
+    
+    // 섹션 활성화 상태 초기화
+    clearSectionActiveStates() {
+        document.querySelectorAll('.section-nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+    }
+    
+    // 탭 ID인지 확인
+    isTabId(id) {
+        const tabIds = ['status', 'business', 'culture', ];
+        return tabIds.includes(id);
+    }
+    
+    // 섹션 ID인지 확인
+    isSectionId(id) {
+        const sectionPrefixes = ['status-', 'business-', 'culture-', ];
+        return sectionPrefixes.some(prefix => id.startsWith(prefix));
+    }
+    
+    // 섹션 ID로부터 탭 ID 추출
+    getTabIdFromSection(sectionId) {
+        if (sectionId.startsWith('status-')) return 'status';
+        if (sectionId.startsWith('business-')) return 'business';
+        if (sectionId.startsWith('culture-')) return 'culture';
+        // if (sectionId.startsWith('location-')) return 'location';
+        return 'status'; // 기본값
+    }
+    
+    // 추가 이벤트 처리
+    attachEvents() {
+        // 스크롤 시 현재 보이는 섹션 감지 (옵션)
+        this.setupScrollSpy();
+        
+        // 키보드 네비게이션 (옵션)
+        this.setupKeyboardNavigation();
+    }
+    
+    // 스크롤 스파이 (현재 보이는 섹션 자동 감지)
+    setupScrollSpy() {
+        let ticking = false;
+        
+        const updateActiveSection = () => {
+            const sections = document.querySelectorAll('.content-block[id]');
+            const scrollPosition = window.pageYOffset + window.innerHeight / 2;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top + window.pageYOffset;
+                const sectionBottom = sectionTop + rect.height;
+                
+                if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+                    const sectionId = section.id;
+                    const correspondingLink = document.querySelector(`[href="#${sectionId}"]`);
+                    
+                    if (correspondingLink && !correspondingLink.classList.contains('active')) {
+                        this.updateSectionActiveState(correspondingLink);
+                    }
+                }
+            });
+            
+            ticking = false;
+        };
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateActiveSection);
+                ticking = true;
+            }
+        });
+    }
+    
+    // 키보드 네비게이션
+    setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            // 탭 키로 탭 간 이동 (Ctrl + Arrow)
+            if (e.ctrlKey) {
+                const tabIds = [];
+                const currentIndex = tabIds.indexOf(this.currentTab);
+                
+                if (e.key === 'ArrowRight' && currentIndex < tabIds.length - 1) {
+                    e.preventDefault();
+                    this.switchTab(tabIds[currentIndex + 1]);
+                    window.history.pushState(null, null, `#${tabIds[currentIndex + 1]}`);
+                } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                    e.preventDefault();
+                    this.switchTab(tabIds[currentIndex - 1]);
+                    window.history.pushState(null, null, `#${tabIds[currentIndex - 1]}`);
+                }
+            }
+        });
+    }
+    
+    // 외부에서 호출 가능한 메서드들
+    goToTab(tabId) {
+        this.switchTab(tabId);
+        window.history.pushState(null, null, `#${tabId}`);
+    }
+    
+    goToSection(sectionId) {
+        const tabId = this.getTabIdFromSection(sectionId);
+        this.switchTab(tabId);
+        setTimeout(() => {
+            this.scrollToSection(sectionId);
+        }, 100);
+        window.history.pushState(null, null, `#${sectionId}`);
+    }
+    
+    getCurrentTab() {
+        return this.currentTab;
+    }
+    
+    getCurrentSection() {
+        return this.currentSection;
+    }
+}
+
+// ===== 전역 변수 =====
+let aboutPageController = null;
+
+// ===== 초기화 함수 =====
+function initAboutPage() {
+    if (!aboutPageController) {
+        aboutPageController = new AboutPageController();
+    }
+    return aboutPageController;
+}
+
+// ===== 전역 함수들 =====
+function goToTab(tabId) {
+    if (aboutPageController) {
+        aboutPageController.goToTab(tabId);
+    }
+}
+
+function goToSection(sectionId) {
+    if (aboutPageController) {
+        aboutPageController.goToSection(sectionId);
+    }
+}
+
+function getCurrentTab() {
+    return aboutPageController ? aboutPageController.getCurrentTab() : null;
+}
+
+function getCurrentSection() {
+    return aboutPageController ? aboutPageController.getCurrentSection() : null;
+}
+
+// ===== 자동 초기화 =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 컴포넌트 로딩 완료 후 초기화
+    if (document.querySelector('.tab-navigation')) {
+        initAboutPage();
+    } else {
+        document.addEventListener('componentsLoaded', () => {
+            setTimeout(initAboutPage, 200);
+        });
+    }
+});
+
+// ===== 전역 함수 내보내기 =====
+window.initAboutPage = initAboutPage;
+window.goToTab = goToTab;
+window.goToSection = goToSection;
+window.getCurrentTab = getCurrentTab;
+window.getCurrentSection = getCurrentSection;
     </script>
-    <script src="../../js/main.js"></script>
-    <script src="../../js/main-extended.js"></script>
 </body>
 </html>
 
 <style>
-.page-header {
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
-    color: var(--white);
-    padding: 150px 0 80px;
-    text-align: center;
+/* ===== LOCATION PAGE SPECIFIC STYLES ===== */
+
+/* Location Info Styling */
+.location-info,
+.contact-info,
+.transportation-info {
+    display: block;
+    text-align: left;
+    padding: 1.5rem;
 }
 
-.map-section {
-    padding: 80px 0;
-    background: var(--very-light-gray);
+.location-details,
+.contact-details,
+.transport-details,
+.car-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
+.location-item,
+.contact-item,
+.transport-item,
+.route-item {
+    padding: 1rem;
+    background-color: var(--white, #ffffff);
+    border: 1px solid var(--border-light, #e5e5e5);
+    border-radius: 6px;
+}
+
+.location-item strong,
+.contact-item strong,
+.transport-item strong,
+.route-item strong {
+    display: block;
+    color: var(--primary-blue, #0066cc);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.location-item p,
+.contact-item p,
+.transport-item p,
+.route-item p {
+    color: var(--text-primary, #333);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Map Container */
 .map-container {
-    background: var(--white);
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 2rem;
+    min-height: 300px;
 }
 
 .map-placeholder {
-    height: 400px;
-    background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    background-color: var(--background-light, #f8f9fa);
+    border: 2px dashed var(--border-light, #e5e5e5);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-secondary, #666);
 }
 
 .map-info {
-    text-align: center;
-    background: rgba(255,255,255,0.95);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-
-.map-buttons {
+    margin-top: 1.5rem;
     display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 20px;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.map-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    background: var(--primary-blue);
-    color: var(--white);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.map-btn:hover {
-    background: var(--primary-red);
-    transform: translateY(-2px);
-}
-
-.location-info {
-    padding: 80px 0;
-    background: var(--white);
-}
-
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-}
-
-.info-card {
-    background: var(--very-light-gray);
-    padding: 40px;
-    border-radius: 15px;
-    text-align: center;
-    border-top: 4px solid var(--primary-blue);
-}
-
-.card-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.transportation {
-    padding: 80px 0;
-    background: var(--very-light-gray);
-}
-
-.transport-tabs {
-    background: var(--white);
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-
-.tab-nav {
-    display: flex;
-    background: var(--primary-blue);
-}
-
-.tab-button {
-    flex: 1;
-    padding: 20px;
-    border: none;
-    background: transparent;
-    color: rgba(255,255,255,0.7);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1.1rem;
-}
-
-.tab-button.active {
-    background: var(--white);
-    color: var(--primary-blue);
-}
-
-.tab-content {
-    display: none;
-    padding: 40px;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-.transport-info {
-    display: grid;
-    gap: 30px;
-}
-
-.route-card {
-    background: var(--very-light-gray);
-    padding: 25px;
-    border-radius: 10px;
-    border-left: 4px solid var(--primary-blue);
-}
-
-.bus-info {
-    margin-bottom: 20px;
-}
-
-.bus-numbers {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.bus-number {
-    padding: 5px 15px;
-    border-radius: 15px;
-    color: var(--white);
-    font-weight: 600;
+.map-info p {
+    margin: 0;
     font-size: 0.9rem;
 }
 
-.bus-number.blue {
-    background: #1E90FF;
+.map-info strong {
+    color: var(--primary-blue, #0066cc);
 }
 
-.bus-number.green {
-    background: #32CD32;
-}
-
+/* Parking Info */
 .parking-info {
-    background: rgba(0, 102, 204, 0.1);
-    padding: 25px;
-    border-radius: 10px;
-    margin-top: 20px;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgba(0, 102, 204, 0.05);
+    border-radius: 6px;
+    border-left: 4px solid var(--primary-blue, #0066cc);
 }
 
-.nearby-facilities {
-    padding: 80px 0;
-    background: var(--white);
+.parking-info strong {
+    display: block;
+    color: var(--primary-blue, #0066cc);
+    margin-bottom: 0.5rem;
 }
 
-.facilities-grid {
+.content-grid-location {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
 }
-
-.facility-card {
-    background: var(--very-light-gray);
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-}
-
-.facility-icon {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-.facility-card ul {
-    list-style: none;
-    text-align: left;
-}
-
-.facility-card li {
-    padding: 5px 0;
-    color: var(--text-secondary);
-}
-
-.contact-cta {
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
-    color: var(--white);
-    padding: 80px 0;
-    text-align: center;
-}
-
-.cta-content h2 {
-    color: var(--white);
-    margin-bottom: 20px;
-}
-
-.cta-buttons {
-    margin-top: 40px;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
-
+ 
+/* Responsive */
 @media (max-width: 768px) {
-    .info-grid,
-    .facilities-grid {
+    .content-grid-location {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 1.5rem;
+    }
+    .location-details,
+    .contact-details,
+    .transport-details {
+        gap: 1rem;
     }
     
-    .tab-nav {
-        flex-direction: column;
+    .location-item,
+    .contact-item,
+    .transport-item,
+    .route-item {
+        padding: 0.75rem;
     }
     
-    .map-buttons {
-        flex-direction: column;
-        align-items: center;
+    .map-container {
+        padding: 1rem;
+        min-height: 250px;
     }
     
-    .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .bus-numbers {
-        justify-content: center;
-        flex-wrap: wrap;
+    .map-placeholder {
+        padding: 1.5rem;
     }
 }
 </style>

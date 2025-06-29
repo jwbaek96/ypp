@@ -12,7 +12,7 @@ function getBasePath() {
     const pathSegments = currentPath.split('/').filter(segment => segment !== '');
     
     // 개인 도메인인 경우 (ypp.co.kr)
-    if (window.location.hostname !== 'jwbaek96.github.io') {
+    if (window.location.hostname !== 'username.github.io') {
         // 루트 경로인 경우
         if (pathSegments.length === 0 || pathSegments[pathSegments.length - 1] === 'index.html') {
             return './';
@@ -62,10 +62,31 @@ async function loadComponent(componentName, containerId) {
         
         if (container) {
             container.innerHTML = html;
+            
+            // 이미지 경로 수정
+            fixImagePaths(container, basePath);
         }
     } catch (error) {
         // 에러 무시 (콘솔 로그 제거)
     }
+}
+
+// ===== 이미지 경로 수정 함수 =====
+function fixImagePaths(container, basePath) {
+    // 모든 img 태그 찾기
+    const images = container.querySelectorAll('img');
+    
+    images.forEach(img => {
+        const currentSrc = img.getAttribute('src');
+        
+        // 상대 경로인 경우에만 수정 (http:// 또는 https://로 시작하지 않는 경우)
+        if (currentSrc && !currentSrc.startsWith('http') && !currentSrc.startsWith('//')) {
+            // ./ 로 시작하는 경우 제거
+            const cleanSrc = currentSrc.replace(/^\.\//, '');
+            // basePath 적용
+            img.setAttribute('src', basePath + cleanSrc);
+        }
+    });
 }
 
 // ===== 모든 컴포넌트 로딩 =====

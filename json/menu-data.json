@@ -22,7 +22,7 @@
         "location": {
           "title": "오시는길",
           "url": "/pages/company/location.html",
-          "sections": ["본사", "공장", "지사"]
+          "sections": ["본사", "공장", "지사", "교통편"]
         }
       }
     },

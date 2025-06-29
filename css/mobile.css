@@ -41,7 +41,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
 }
 
 .sidebar-logo {
@@ -60,7 +59,7 @@
 }
 
 .sidebar-close:hover {
-    background-color: var(--very-light-gray);
+    /* background-color: var(--very-light-gray); */
     color: var(--primary-red);
 }
 
@@ -146,7 +145,8 @@
 }
 
 .sidebar-groupware:hover {
-    background-color: var(--primary-blue);
+    background-color: var(--white);
+    color: var(--dark-gray);
 }
 
 .sidebar-lang {
@@ -169,6 +169,34 @@
     background-color: var(--primary-blue);
     color: var(--white);
     border-color: var(--primary-blue);
+}
+.sidebar-submenu {
+    background-color: var(--very-light-gray);
+    border-left: 3px solid var(--primary-blue);
+}
+
+.sidebar-link {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.sidebar-submenu a {
+    font-size: 0.9rem;
+    padding-left: 2.5rem;
+    color: var(--text-secondary);
+}
+
+.sidebar-submenu a:hover {
+    color: var(--primary-blue);
+    background-color: rgba(0, 102, 204, 0.1);
+}
+
+/* 모바일에서만 표시 */
+@media (min-width: 769px) {
+    .mobile-sidebar,
+    .sidebar-overlay {
+        display: none !important;
+    }
 }
 
 /* ===== YPP ACADEMY POPUP ===== */
@@ -347,13 +375,14 @@
         gap: 1rem;
     }
     
-    .groupware-btn {
+    .groupware-btn,
+    .language-switch {
         display: none; /* 모바일에서 숨김 */
     }
     
-    .language-switch {
+    /* .language-switch {
         padding: 2px;
-    }
+    } */
     
     .lang-btn {
         padding: 0.2rem 0.5rem;

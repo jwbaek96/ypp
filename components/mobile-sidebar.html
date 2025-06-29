@@ -6,8 +6,8 @@
 <!-- 모바일 사이드바 -->
 <div id="mobile-sidebar" class="mobile-sidebar" aria-hidden="true">
     <!-- 사이드바 헤더 -->
-    <div class="sidebar-header">
-        <img src="../assets/images/logo/symbol.png" alt="YPP 로고" class="sidebar-logo">
+    <div class="sidebar-header">    
+        <img src="../assets/images/logo/slogan03.png" alt="YPP 로고" class="sidebar-logo">
         <button id="sidebar-close" class="sidebar-close" aria-label="메뉴 닫기">✕</button>
     </div>
 
@@ -16,7 +16,7 @@
         <ul class="sidebar-menu">
             <!-- 회사소개 -->
             <li class="sidebar-item">
-                <a href="#company" class="sidebar-link">
+                <a class="sidebar-link">
                     회사소개
                 </a>
                 <ul class="sidebar-submenu" aria-hidden="true">
@@ -29,7 +29,7 @@
 
             <!-- 사업분야 -->
             <li class="sidebar-item">
-                <a href="#business" class="sidebar-link">
+                <a class="sidebar-link">
                     사업분야
                 </a>
                 <ul class="sidebar-submenu" aria-hidden="true">
@@ -42,7 +42,7 @@
 
             <!-- 제품소개 -->
             <li class="sidebar-item">
-                <a href="#products" class="sidebar-link">
+                <a class="sidebar-link">
                     제품소개
                 </a>
                 <ul class="sidebar-submenu" aria-hidden="true">
@@ -55,7 +55,7 @@
 
             <!-- 교육센터 -->
             <li class="sidebar-item">
-                <a href="#education" class="sidebar-link">
+                <a class="sidebar-link">
                     교육센터
                 </a>
                 <ul class="sidebar-submenu" aria-hidden="true">
@@ -68,7 +68,7 @@
 
             <!-- 고객지원 -->
             <li class="sidebar-item">
-                <a href="#support" class="sidebar-link">
+                <a href="" class="sidebar-link">
                     고객지원
                 </a>
                 <ul class="sidebar-submenu" aria-hidden="true">
@@ -96,9 +96,17 @@
 
     <!-- 사이드바 푸터 -->
     <div class="sidebar-footer">
+        
+        <!-- 연락처 정보 -->
+        <!-- <div class="sidebar-contact">
+            <p><strong>대표전화</strong></p>
+            <p>02-2104-8700</p>
+            <p><strong>교육문의</strong></p>
+            <p>yppedu@ypp.co.kr</p>
+        </div> -->
         <!-- 그룹웨어 링크 -->
-        <a href="https://groupware.ypp.co.kr" class="sidebar-groupware" target="_blank">
-            🏢 그룹웨어 접속
+        <a href="http://gwa.ypp.co.kr/gw/uat/uia/egovLoginUsr.do" class="sidebar-groupware" target="_blank">
+            GROUPWARE
         </a>
 
         <!-- 언어 선택 -->
@@ -106,62 +114,5 @@
             <button class="sidebar-lang-btn active" data-lang="ko">한국어</button>
             <button class="sidebar-lang-btn" data-lang="en">English</button>
         </div>
-
-        <!-- 연락처 정보 -->
-        <div class="sidebar-contact">
-            <p><strong>📞 대표전화</strong></p>
-            <p>02-2104-8700</p>
-            <p><strong>📧 교육문의</strong></p>
-            <p>yppedu@ypp.co.kr</p>
-        </div>
     </div>
 </div>
-
-<style>
-/* 사이드바 추가 스타일 (mobile.css 보완) */
-.sidebar-contact {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: rgba(0, 102, 204, 0.1);
-    border-radius: 5px;
-    font-size: 0.8rem;
-}
-
-.sidebar-contact p {
-    margin: 0.25rem 0;
-    color: var(--text-secondary);
-}
-
-.sidebar-contact strong {
-    color: var(--primary-blue);
-}
-
-.sidebar-submenu {
-    background-color: var(--very-light-gray);
-    border-left: 3px solid var(--primary-blue);
-}
-
-.sidebar-link {
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-.sidebar-submenu a {
-    font-size: 0.9rem;
-    padding-left: 2.5rem;
-    color: var(--text-secondary);
-}
-
-.sidebar-submenu a:hover {
-    color: var(--primary-blue);
-    background-color: rgba(0, 102, 204, 0.1);
-}
-
-/* 모바일에서만 표시 */
-@media (min-width: 769px) {
-    .mobile-sidebar,
-    .sidebar-overlay {
-        display: none !important;
-    }
-}
-</style>

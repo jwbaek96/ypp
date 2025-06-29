@@ -1,7 +1,6 @@
 /* 인트로 섹션 - 개선된 버전 */
 .intro-section {
     background: var(--white);
-    min-height: 100vh;
     display: flex;
     align-items: center;
     padding: 100px 0;
@@ -229,7 +228,7 @@
     }
     
     .intro-subtitle {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         margin-bottom: 1.5rem;
     }
     

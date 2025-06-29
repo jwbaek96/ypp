@@ -40,11 +40,12 @@
 .category-title {
     font-size: 1.5rem;
     color: var(--text-primary);
-    margin-bottom: 2rem;
+    margin: auto auto 1rem auto;
     text-align: center;
     font-weight: 600;
     position: relative;
     padding-bottom: 0.75rem;
+    translate: all .3s ease-in-out;
 }
 
 .category-title::after {
@@ -234,34 +235,51 @@
     .epc-business-areas {
         padding: 40px 0;
     }
-    
+    .epc-business-areas .container {
+        max-width: auto;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .epc-business-areas .section-header{
+        padding: 0 2rem;
+    }
     .section-title {
         font-size: 1.6rem;
     }
     
     .business-categories-container {
-        gap: 1.5rem;
+        gap: 2rem;
     }
     
     .category-title {
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
+        font-size: 1.3rem;
+        /* margin-bottom: 1rem; */
+    }
+    .business-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .category-title:has(+ * .business-card:hover)::after{
+        width: 100%;
+
     }
     
     .business-card {
-        height: 260px;
+        height: 225px;
     }
     
     .business-content {
-        padding: 1.2rem;
+        padding: .5rem;
     }
     
     .business-content h4 {
-        font-size: 1.1rem;
+        font-size: 1.4rem;
     }
     
     .business-content p {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         transition: all 0.3s ease;
     }
     
@@ -270,6 +288,9 @@
     }
     
     .business-card:hover .business-content {
-        padding: 1.5rem;
+        padding: .5rem;
     }
+    .business-card:hover {
+        transform: translateY(0);
+    }    
 }

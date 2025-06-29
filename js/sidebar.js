@@ -1,11 +1,35 @@
 // sidebar.js - 모바일 사이드바 메뉴 생성
 
+// sidebar.js - 모바일 사이드바 메뉴 생성
+
+// ===== 경로 계산 함수 =====
+function getBasePath() {
+    const currentPath = window.location.pathname;
+    
+    // 루트 경로인 경우 (index.html)
+    if (currentPath === '/' || currentPath.endsWith('/index.html') || currentPath.split('/').length <= 2) {
+        return './';
+    }
+    
+    // 하위 페이지인 경우 (pages/company/about.html 등)
+    const depth = (currentPath.match(/\//g) || []).length;
+    
+    if (depth >= 3) {
+        return '../../';  // pages/company/about.html
+    } else if (depth === 2) {
+        return '../';     // pages/about.html
+    }
+    
+    return './';
+}
+
 // ===== 메뉴 데이터 로딩 =====
 let sidebarMenuData = null;
 
 async function loadSidebarMenuData() {
     try {
-        const response = await fetch('./json/menu-data.json');
+        const basePath = getBasePath();
+        const response = await fetch(`${basePath}json/menu-data.json`);
         if (!response.ok) {
             throw new Error(`Failed to load menu data: ${response.status}`);
         }

@@ -1,234 +1,227 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="YPP 회사소개 - 1982년부터 40년간 전력계통 분야를 선도해온 에너지 전문기업">
+    
+    <!-- SEO 메타 태그 -->
     <title>회사소개 - YPP</title>
-    <link rel="shortcut icon" href="../../assets/images/favicon/favicon.ico">
-    <link rel="apple-touch-icon" sizes="57x57" href="../../assets/images/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="../../assets/images/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="../../assets/images/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/images/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="../../assets/images/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="../../assets/images/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="../../assets/images/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="../../assets/images/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="../../assets/images/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="../../assets/images/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon-16x16.png">
-    <!--  -->
+    <meta name="description" content="YPP 회사소개 - 기업개요, 연혁, 조직도, 오시는 길">
+    <meta name="keywords" content="YPP, 회사소개, 기업개요, 연혁, 조직도, 오시는길">
+    
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/ico" href="../../assets/images/favicon/favicon.ico">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/components.css">
-    <link rel="stylesheet" href="../../css/mobile.css">
-    <link rel="icon" type="image/x-icon" href="../../assets/images/logo/favicon.ico">
+    <link rel="stylesheet" href="../../css/pages/about.css">
+    
+    <!-- 메타 시스템 -->
+    <script src="../../js/head-meta.js"></script>
 </head>
 <body>
+
     <!-- Header Container -->
     <div id="header-container"></div>
-    <div id="mobile-sidebar-container"></div>
+    
+    <!-- Mobile Sidebar Container -->
+    <div id="sidebar-container"></div>
 
+    <!-- Main Content -->
     <main class="main-content">
         <!-- Page Header -->
         <section class="page-header">
             <div class="container">
-                <div class="breadcrumb">
-                    <span class="breadcrumb-item"><a href="/">홈</a></span>
-                    <span class="breadcrumb-item">회사소개</span>
+                <div class="page-header-content">
+                    <h1 class="page-title">회사소개</h1>
+                    <p class="page-subtitle">1982년부터 40년간 전력계통 분야를 선도해온 에너지 전문기업</p>
                 </div>
-                <h1 class="page-title">회사소개</h1>
-                <p class="page-subtitle">안전하고 지속가능한 에너지의 미래를 여는 YPP</p>
             </div>
         </section>
 
-        <!-- Company Overview -->
-        <section class="company-intro">
+        <!-- Breadcrumb -->
+        <section class="breadcrumb-section">
             <div class="container">
-                <div class="intro-grid">
-                    <div class="intro-content">
-                        <h2 class="section-title">40년 전통의 에너지 전문기업</h2>
-                        <p class="intro-text">
-                            YPP는 1982년 설립 이래 40년간 전력계통 보호 분야에서 축적된 기술력과 경험을 바탕으로, 
-                            국내외 전력설비의 안정성과 신뢰성 향상에 기여해 왔습니다.
-                        </p>
-                        <p class="intro-text">
-                            디지털 보호계전기, 삼중화 보호시스템 TRIUMP, 고장기록장치 등 핵심 제품을 통해 
-                            전력계통의 안전한 운영을 지원하며, 지속적인 기술혁신으로 글로벌 시장을 선도하고 있습니다.
-                        </p>
-                        <div class="company-values">
-                            <div class="value-item">
-                                <h3>혁신</h3>
-                                <p>지속적인 R&D를 통한 기술혁신</p>
-                            </div>
-                            <div class="value-item">
-                                <h3>신뢰</h3>
-                                <p>40년간 축적된 기술력과 신뢰성</p>
-                            </div>
-                            <div class="value-item">
-                                <h3>협력</h3>
-                                <p>고객과 함께하는 지속가능한 성장</p>
+                <nav class="breadcrumb">
+                    <a href="../../index.html">홈</a>
+                    <span class="breadcrumb-separator">></span>
+                    <span class="breadcrumb-current">회사소개</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Tab Navigation -->
+        <section class="tab-navigation">
+            <div class="container">
+                <nav class="tab-nav">
+                    <a href="#status" class="tab-link active" data-tab="status">기업현황</a>
+                    <a href="#business" class="tab-link" data-tab="business">주요사업</a>
+                    <a href="#culture" class="tab-link" data-tab="culture">기업문화</a>
+                    <a href="#location" class="tab-link" data-tab="location">오시는길</a>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Tab Content -->
+        <section class="tab-content-section">
+            <div class="container">
+                <!-- 기업현황 -->
+                <div id="status" class="tab-content active">
+                    <div class="content-header">
+                        <h2 class="content-title">기업현황</h2>
+                        <p class="content-subtitle">YPP의 기업 개요와 현황을 소개합니다</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- 소개 -->
+                        <div class="content-block">
+                            <h3 class="block-title">소개</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="intro-visual">
-                        <img src="../../assets/images/company/about-main.jpg" alt="YPP 회사 전경">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Company Stats -->
-        <section class="company-stats">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">📅</div>
-                        <div class="stat-number counter" data-target="1982">1982</div>
-                        <div class="stat-label">설립년도</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">⚡</div>
-                        <div class="stat-number counter" data-target="40">40+</div>
-                        <div class="stat-label">년간 업력</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🏭</div>
-                        <div class="stat-number counter" data-target="1000">1000+</div>
-                        <div class="stat-label">프로젝트 수행</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🌍</div>
-                        <div class="stat-number counter" data-target="15">15+</div>
-                        <div class="stat-label">해외 진출국가</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Business Areas -->
-        <section class="business-overview">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">주요 사업분야</h2>
-                    <p class="section-subtitle">전력계통 보호의 모든 영역을 포괄하는 토탈 솔루션</p>
-                </div>
-                <div class="business-cards">
-                    <div class="business-card">
-                        <div class="card-icon">🔧</div>
-                        <h3>시스템공급</h3>
-                        <p>전력계통 보호시스템, 보호계전기 통합시스템, 디지털화 솔루션</p>
-                        <a href="../business/system.html" class="card-link">자세히 보기 →</a>
-                    </div>
-                    <div class="business-card">
-                        <div class="card-icon">💡</div>
-                        <h3>솔루션개발</h3>
-                        <p>스마트그리드 기술, IoT 기반 모니터링, AI 예측 진단</p>
-                        <a href="../business/solution.html" class="card-link">자세히 보기 →</a>
-                    </div>
-                    <div class="business-card">
-                        <div class="card-icon">⚙️</div>
-                        <h3>엔지니어링</h3>
-                        <p>설계 및 시공, 시운전 및 점검, 유지보수 서비스</p>
-                        <a href="../business/engineering.html" class="card-link">자세히 보기 →</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Certification & Awards -->
-        <section class="certifications">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">인증 및 수상</h2>
-                </div>
-                <div class="cert-grid">
-                    <div class="cert-item">
-                        <div class="cert-badge">ISO 9001</div>
-                        <p>품질경영시스템</p>
-                    </div>
-                    <div class="cert-item">
-                        <div class="cert-badge">ISO 14001</div>
-                        <p>환경경영시스템</p>
-                    </div>
-                    <div class="cert-item">
-                        <div class="cert-badge">ISO 45001</div>
-                        <p>안전보건경영시스템</p>
-                    </div>
-                    <div class="cert-item">
-                        <div class="cert-badge">벤처기업</div>
-                        <p>기술혁신형 중소기업</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Company Info -->
-        <section class="company-info">
-            <div class="container">
-                <div class="info-grid">
-                    <div class="info-section">
-                        <h3>회사 정보</h3>
-                        <table class="info-table">
-                            <tr>
-                                <td>회사명</td>
-                                <td>와이피피 주식회사 (YPP Corporation)</td>
-                            </tr>
-                            <tr>
-                                <td>설립일</td>
-                                <td>1982년</td>
-                            </tr>
-                            <tr>
-                                <td>대표이사</td>
-                                <td>YPP 대표</td>
-                            </tr>
-                            <tr>
-                                <td>자본금</td>
-                                <td>100억원</td>
-                            </tr>
-                            <tr>
-                                <td>직원수</td>
-                                <td>150명</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="info-section">
-                        <h3>연락처</h3>
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <strong>본사</strong>
-                                <p>서울시 금천구 가산디지털2로 24<br>
-                                가산YPP아르센타워 (B2층, 8층, 20층)</p>
+                        
+                        <!-- 인사말 -->
+                        <div class="content-block">
+                            <h3 class="block-title">인사말</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
                             </div>
-                            <div class="contact-item">
-                                <strong>대표전화</strong>
-                                <p>02-2104-8700</p>
+                        </div>
+                        
+                        <!-- 연혁 -->
+                        <div class="content-block full-width">
+                            <h3 class="block-title">연혁</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
                             </div>
-                            <div class="contact-item">
-                                <strong>팩스</strong>
-                                <p>02-2104-8711</p>
-                            </div>
-                            <div class="contact-item">
-                                <strong>정보관리책임자</strong>
-                                <p>손재영</p>
+                        </div>
+                        
+                        <!-- 조직도 -->
+                        <div class="content-block full-width">
+                            <h3 class="block-title">조직도</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-content">
-                    <h2>더 자세한 정보가 필요하신가요?</h2>
-                    <p>YPP의 기술력과 솔루션에 대해 더 알아보세요.</p>
-                    <div class="cta-buttons">
-                        <a href="../support/contact.html" class="btn primary">문의하기</a>
-                        <a href="../support/download.html" class="btn secondary">회사소개서 다운로드</a>
+                <!-- 주요사업 -->
+                <div id="business" class="tab-content">
+                    <div class="content-header">
+                        <h2 class="content-title">주요사업</h2>
+                        <p class="content-subtitle">YPP의 핵심 사업 영역과 역량을 소개합니다</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- 사업소개 -->
+                        <div class="content-block">
+                            <h3 class="block-title">사업소개</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 파트너 -->
+                        <div class="content-block">
+                            <h3 class="block-title">파트너</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 인허가 -->
+                        <div class="content-block">
+                            <h3 class="block-title">인허가</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 유자격 -->
+                        <div class="content-block">
+                            <h3 class="block-title">유자격</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 기업문화 -->
+                <div id="culture" class="tab-content">
+                    <div class="content-header">
+                        <h2 class="content-title">기업문화</h2>
+                        <p class="content-subtitle">YPP의 비전과 가치, 기업문화를 소개합니다</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- 비전&핵심가치 -->
+                        <div class="content-block full-width">
+                            <h3 class="block-title">비전 & 핵심가치</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 조직문화 -->
+                        <div class="content-block">
+                            <h3 class="block-title">조직문화</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 사회공헌 -->
+                        <div class="content-block">
+                            <h3 class="block-title">사회공헌</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 오시는길 -->
+                <div id="location" class="tab-content">
+                    <div class="content-header">
+                        <h2 class="content-title">오시는길</h2>
+                        <p class="content-subtitle">YPP 본사, 공장, 지사 위치 안내</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- 본사 -->
+                        <div class="content-block">
+                            <h3 class="block-title">본사</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 공장 -->
+                        <div class="content-block">
+                            <h3 class="block-title">공장</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 지사 -->
+                        <div class="content-block">
+                            <h3 class="block-title">지사</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 지도 -->
+                        <div class="content-block full-width">
+                            <h3 class="block-title">위치 안내</h3>
+                            <div class="block-content">
+                                <p>지도 영역</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -238,273 +231,207 @@
     <!-- Footer Container -->
     <div id="footer-container"></div>
 
-    <script>
-        // 서브페이지용 컴포넌트 로더 (기존 코드 교체)
-    async function loadComponent(elementId, componentPath) {
-    try {
-        const response = await fetch(componentPath);
-        const html = await response.text();
-        document.getElementById(elementId).innerHTML = html;
-    } catch (error) {
-        console.error('컴포넌트 로드 실패:', error);
-    }
-    }
-    
-    // 로고 경로 동적 수정
-    function fixLogoPaths() {
-    const currentPath = window.location.pathname;
-    let basePath = '';
-    
-    // 현재 페이지 깊이에 따라 기본 경로 설정
-    if (currentPath.includes('/pages/')) {
-        const depth = (currentPath.match(/\//g) || []).length;
-        basePath = depth === 3 ? '../../' : '../'; // /pages/company/ = 3레벨
-    }
-    
-    // 모든 로고 이미지 경로 수정
-    setTimeout(() => {
-        const logoImages = document.querySelectorAll('img[src*="./assets/images/logo/"]');
-        logoImages.forEach(img => {
-            img.src = basePath + 'assets/images/logo/symbol.png';
-        });
-    }, 50);
-    }
-    
-    document.addEventListener('DOMContentLoaded', function() {
-    loadComponent('header-container', '../../components/header.html');
-    loadComponent('footer-container', '../../components/footer.html');
-    loadComponent('mobile-sidebar-container', '../../components/mobile-sidebar.html');
-    
-    // 컴포넌트 로드 후 로고 경로 수정
-    setTimeout(fixLogoPaths, 100);
-    });
-    </script>
-    <script src="../../js/main.js"></script>
-    <script src="../../js/main-extended.js"></script>
+    <!-- Scripts -->
+    <script src="../../js/components.js"></script>
+    <script src="../../js/header-menu.js"></script>
+    <script src="../../js/sidebar.js"></script>
+    <script src="../../js/hamburger.js"></script>
+    <script src="../../js/main-top-padding.js"></script>
+    <!-- <script src="../../js/pages/about.js"></script> -->
 </body>
 </html>
 
 <style>
-/* Page-specific styles */
+/* ===== ABOUT PAGE LAYOUT ===== */
+
+/* Page Header */
 .page-header {
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
-    color: var(--white);
-    padding: 150px 0 80px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 3rem 0;
     text-align: center;
 }
 
 .page-title {
     font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary, #333);
     margin-bottom: 1rem;
-    color: var(--white);
 }
 
 .page-subtitle {
     font-size: 1.2rem;
-    opacity: 0.9;
+    color: var(--text-secondary, #666);
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.company-intro {
-    padding: 80px 0;
-    background: var(--white);
+/* Breadcrumb */
+.breadcrumb-section {
+    background-color: var(--white, #ffffff);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-light, #e5e5e5);
 }
 
-.intro-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-}
-
-.intro-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    color: var(--text-secondary);
-}
-
-.company-values {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.value-item {
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    background: var(--very-light-gray);
-}
-
-.value-item h3 {
-    color: var(--primary-blue);
-    margin-bottom: 10px;
-}
-
-.company-stats {
-    background: var(--very-light-gray);
-    padding: 80px 0;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-}
-
-.stat-card {
-    text-align: center;
-    background: var(--white);
-    padding: 40px 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-
-.stat-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.stat-number {
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--primary-blue);
-    display: block;
-    margin-bottom: 10px;
-}
-
-.business-overview {
-    padding: 80px 0;
-    background: var(--white);
-}
-
-.business-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-}
-
-.business-card {
-    background: var(--white);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    border-top: 4px solid var(--primary-blue);
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.business-card:hover {
-    transform: translateY(-5px);
-}
-
-.card-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.certifications {
-    background: var(--very-light-gray);
-    padding: 80px 0;
-}
-
-.cert-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-}
-
-.cert-item {
-    text-align: center;
-    background: var(--white);
-    padding: 30px;
-    border-radius: 10px;
-}
-
-.cert-badge {
-    background: var(--primary-blue);
-    color: var(--white);
-    padding: 15px 20px;
-    border-radius: 25px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    display: inline-block;
-}
-
-.company-info {
-    padding: 80px 0;
-    background: var(--white);
-}
-
-.info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-}
-
-.info-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.info-table td {
-    padding: 15px 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.info-table td:first-child {
-    font-weight: 600;
-    width: 30%;
-}
-
-.cta-section {
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
-    color: var(--white);
-    padding: 80px 0;
-    text-align: center;
-}
-
-.cta-content h2 {
-    color: var(--white);
-    margin-bottom: 20px;
-}
-
-.cta-buttons {
-    margin-top: 40px;
+.breadcrumb {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    color: var(--primary-blue, #0066cc);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    color: var(--text-secondary, #666);
+}
+
+.breadcrumb-current {
+    color: var(--text-secondary, #666);
+    font-weight: 500;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+    background-color: var(--white, #ffffff);
+    border-bottom: 1px solid var(--border-light, #e5e5e5);
+    position: sticky;
+    top: 80px;
+    z-index: 100;
+}
+
+.tab-nav {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+}
+
+.tab-link {
+    padding: 1rem 2rem;
+    text-decoration: none;
+    color: var(--text-secondary, #666);
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.tab-link:hover {
+    color: var(--primary-blue, #0066cc);
+    background-color: var(--background-light, #f8f9fa);
+}
+
+.tab-link.active {
+    color: var(--primary-blue, #0066cc);
+    border-bottom-color: var(--primary-blue, #0066cc);
+    background-color: var(--background-light, #f8f9fa);
+}
+
+/* Tab Content */
+.tab-content-section {
+    padding: 3rem 0;
+    background-color: var(--white, #ffffff);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.content-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.content-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary, #333);
+    margin-bottom: 1rem;
+}
+
+.content-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary, #666);
+}
+
+/* Content Grid */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.content-block {
+    background: var(--white, #ffffff);
+    border: 1px solid var(--border-light, #e5e5e5);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.content-block:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.content-block.full-width {
+    grid-column: 1 / -1;
+}
+
+.block-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary, #333);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-blue, #0066cc);
+}
+
+.block-content {
+    color: var(--text-secondary, #666);
+    line-height: 1.6;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    background-color: var(--background-light, #f8f9fa);
+    border-radius: 4px;
 }
 
-/* Mobile responsive */
+/* Responsive */
 @media (max-width: 768px) {
-    .intro-grid,
-    .info-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
+    .page-title {
+        font-size: 2rem;
     }
     
-    .stats-grid,
-    .business-cards,
-    .cert-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .content-title {
+        font-size: 2rem;
     }
     
-    .company-values {
-        grid-template-columns: 1fr;
+    .tab-nav {
+        padding: 0 1rem;
     }
     
-    .cta-buttons {
-        flex-direction: column;
-        align-items: center;
+    .tab-link {
+        padding: 1rem 1.5rem;
     }
-}
-
-@media (max-width: 480px) {
-    .stats-grid,
-    .cert-grid {
+    
+    .content-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .content-block {
+        padding: 1.5rem;
     }
 }
 </style>

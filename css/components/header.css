@@ -114,3 +114,12 @@
     margin: 3px 0;
     transition: all 0.3s ease;
 }
+
+
+/* 모바일에서는 숨김 */
+@media (max-width: 768px) {
+
+    .header-links, .lang-btn {
+        display: none;
+    }
+}

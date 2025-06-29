@@ -1,9 +1,35 @@
 // components.js - 헤더, 푸터, 사이드바 HTML 불러오기
 
+// components.js - 헤더, 푸터, 사이드바 HTML 불러오기
+
+// ===== 경로 계산 함수 =====
+function getBasePath() {
+    const currentPath = window.location.pathname;
+    
+    // 루트 경로인 경우 (index.html)
+    if (currentPath === '/' || currentPath.endsWith('/index.html') || currentPath.split('/').length <= 2) {
+        return './';
+    }
+    
+    // 하위 페이지인 경우 (pages/company/about.html 등)
+    const depth = (currentPath.match(/\//g) || []).length;
+    
+    if (depth >= 3) {
+        return '../../';  // pages/company/about.html
+    } else if (depth === 2) {
+        return '../';     // pages/about.html
+    }
+    
+    return './';
+}
+
 // ===== 컴포넌트 로딩 함수 =====
 async function loadComponent(componentName, containerId) {
     try {
-        const response = await fetch(`./components/${componentName}.html`);
+        const basePath = getBasePath();
+        const componentPath = `${basePath}components/${componentName}.html`;
+        
+        const response = await fetch(componentPath);
         if (!response.ok) {
             throw new Error(`Failed to load ${componentName}: ${response.status}`);
         }
@@ -13,19 +39,14 @@ async function loadComponent(componentName, containerId) {
         
         if (container) {
             container.innerHTML = html;
-            console.log(`✅ ${componentName} loaded successfully`);
-        } else {
-            console.warn(`⚠️ Container #${containerId} not found for ${componentName}`);
         }
     } catch (error) {
-        console.error(`❌ Error loading ${componentName}:`, error);
+        // 에러 무시 (콘솔 로그 제거)
     }
 }
 
 // ===== 모든 컴포넌트 로딩 =====
 async function loadAllComponents() {
-    console.log('🔄 Loading components...');
-    
     try {
         // 헤더, 푸터, 사이드바 동시 로딩
         await Promise.all([
@@ -34,13 +55,11 @@ async function loadAllComponents() {
             loadComponent('sidebar', 'sidebar-container')
         ]);
         
-        console.log('🎉 All components loaded successfully');
-        
         // 컴포넌트 로딩 완료 이벤트 발생
         document.dispatchEvent(new CustomEvent('componentsLoaded'));
         
     } catch (error) {
-        console.error('❌ Error loading components:', error);
+        // 에러 무시 (콘솔 로그 제거)
     }
 }
 

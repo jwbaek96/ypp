@@ -1,20 +1,42 @@
 // header-menu.js - 데스크톱 네비게이션 메뉴 생성
 
+// header-menu.js - 데스크톱 네비게이션 메뉴 생성
+
+// ===== 경로 계산 함수 =====
+function getBasePath() {
+    const currentPath = window.location.pathname;
+    
+    // 루트 경로인 경우 (index.html)
+    if (currentPath === '/' || currentPath.endsWith('/index.html') || currentPath.split('/').length <= 2) {
+        return './';
+    }
+    
+    // 하위 페이지인 경우 (pages/company/about.html 등)
+    const depth = (currentPath.match(/\//g) || []).length;
+    
+    if (depth >= 3) {
+        return '../../';  // pages/company/about.html
+    } else if (depth === 2) {
+        return '../';     // pages/about.html
+    }
+    
+    return './';
+}
+
 // ===== 메뉴 데이터 로딩 =====
 let menuData = null;
 
 async function loadMenuData() {
     try {
-        const response = await fetch('./json/menu-data.json');
+        const basePath = getBasePath();
+        const response = await fetch(`${basePath}json/menu-data.json`);
         if (!response.ok) {
             throw new Error(`Failed to load menu data: ${response.status}`);
         }
         
         menuData = await response.json();
-        console.log('✅ Menu data loaded successfully');
         return menuData;
     } catch (error) {
-        console.error('❌ Error loading menu data:', error);
         return null;
     }
 }
@@ -118,14 +140,12 @@ async function insertDesktopMenu() {
     const container = document.getElementById('desktop-nav-container');
     
     if (!container) {
-        console.warn('⚠️ Desktop nav container not found');
         return;
     }
     
     // 메뉴 데이터 로딩
     const data = await loadMenuData();
     if (!data || !data.navigation) {
-        console.error('❌ Failed to load navigation data');
         return;
     }
     
@@ -133,8 +153,6 @@ async function insertDesktopMenu() {
     const menuElement = createDesktopMenu(data.navigation);
     container.innerHTML = ''; // 기존 내용 제거
     container.appendChild(menuElement);
-    
-    console.log('🎯 Desktop navigation menu inserted successfully');
 }
 
 // ===== 초기화 함수 =====

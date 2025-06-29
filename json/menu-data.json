@@ -6,7 +6,7 @@
       "children": {
         "status": {
           "title": "기업현황",
-          "url": "/pages/company/status.html",
+          "url": "/pages/company/about.html",
           "sections": ["소개", "인사말", "연혁", "조직도"]
         },
         "business": {

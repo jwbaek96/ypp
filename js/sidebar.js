@@ -2,22 +2,43 @@
 
 // sidebar.js - 모바일 사이드바 메뉴 생성
 
-// ===== 경로 계산 함수 =====
+// ===== 경로 계산 함수 (GitHub Pages 대응) =====
 function getBasePath() {
     const currentPath = window.location.pathname;
     
-    // 루트 경로인 경우 (index.html)
-    if (currentPath === '/' || currentPath.endsWith('/index.html') || currentPath.split('/').length <= 2) {
+    // GitHub Pages 저장소명 감지
+    const pathSegments = currentPath.split('/').filter(segment => segment !== '');
+    
+    // 개인 도메인인 경우 (ypp.co.kr)
+    if (window.location.hostname !== 'username.github.io') {
+        // 루트 경로인 경우
+        if (pathSegments.length === 0 || pathSegments[pathSegments.length - 1] === 'index.html') {
+            return './';
+        }
+        
+        // 하위 페이지인 경우
+        const depth = pathSegments.length;
+        if (pathSegments[pathSegments.length - 1].includes('.html')) {
+            return '../'.repeat(depth - 1) || './';
+        }
+        return '../'.repeat(depth) || './';
+    }
+    
+    // GitHub Pages인 경우 (username.github.io/repository-name)
+    // 첫 번째 세그먼트가 저장소명
+    if (pathSegments.length <= 1 || 
+        (pathSegments.length === 2 && pathSegments[1] === 'index.html')) {
         return './';
     }
     
-    // 하위 페이지인 경우 (pages/company/about.html 등)
-    const depth = (currentPath.match(/\//g) || []).length;
+    // pages/about.html -> ../
+    if (pathSegments.length === 3) {
+        return '../';
+    }
     
-    if (depth >= 3) {
-        return '../../';  // pages/company/about.html
-    } else if (depth === 2) {
-        return '../';     // pages/about.html
+    // pages/company/about.html -> ../../
+    if (pathSegments.length === 4) {
+        return '../../';
     }
     
     return './';

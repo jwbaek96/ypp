@@ -2,7 +2,7 @@
 
 // ===== 로딩 화면 설정 =====
 const LOADING_CONFIG = {
-    minDisplayTime: 2000,    // 최소 표시 시간 (1초)
+    minDisplayTime: 3000,    // 최소 표시 시간 (1초)
     fadeOutDuration: 500,    // 페이드아웃 시간 (0.5초)
     logoAnimationDelay: 200  // 로고 애니메이션 지연 시간
 };

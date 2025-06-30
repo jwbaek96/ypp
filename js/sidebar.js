@@ -43,7 +43,7 @@ let sidebarMenuData = null;
 async function loadSidebarMenuData() {
     try {
         const basePath = getBasePath();
-        const menuPath = `${basePath}json/menu-data.json`;
+        const menuPath = `${basePath}/json/menu-data.json`;
         
         console.log(`Loading sidebar menu data from: ${menuPath}`); // 디버깅용
         

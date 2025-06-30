@@ -43,7 +43,7 @@ let menuData = null;
 async function loadMenuData() {
     try {
         const basePath = getBasePath();
-        const menuPath = `${basePath}json/menu-data.json`;
+        const menuPath = `${basePath}/json/menu-data.json`;
         
         console.log(`Loading menu data from: ${menuPath}`); // 디버깅용
         

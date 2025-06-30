@@ -12,7 +12,7 @@ function getBasePath() {
     const pathSegments = currentPath.split('/').filter(segment => segment !== '');
     
     // 개인 도메인인 경우 (ypp.co.kr)
-    if (window.location.hostname !== 'jwbaek96.github.io/ypp') {
+    if (window.location.hostname !== 'jwbaek96.github.io/') {
         // 루트 경로인 경우
         if (pathSegments.length === 0 || pathSegments[pathSegments.length - 1] === 'index.html') {
             return './';

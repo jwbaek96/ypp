@@ -122,4 +122,8 @@
     .header-links, .lang-btn {
         display: none;
     }
+    .header-container {
+    padding: 0 1rem;
+    height: 70px;
+    }
 }

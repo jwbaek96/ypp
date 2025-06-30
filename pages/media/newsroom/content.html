@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO 메타 태그 -->
+    <title>미디어컨텐츠 - YPP</title>
+    <meta name="description" content="YPP 미디어컨텐츠 - 기존 미디어룸 자료, 유튜브 자료, 나무위키 링크">
+    <meta name="keywords" content="YPP, 미디어컨텐츠, 유튜브, 나무위키, 미디어룸">
+    
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/ico" href="../../../assets/images/favicon/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/pages/layout.css">
+    
+    <!-- 메타 시스템 -->
+    <script src="../../../js/head-meta.js"></script>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+    
+    <!-- Mobile Sidebar Container -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="page-header-content">
+                    <h1 class="page-title">미디어컨텐츠</h1>
+                    <p class="page-subtitle">다양한 미디어를 통한 YPP 컨텐츠</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Breadcrumb -->
+        <section class="breadcrumb-section">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="../../../index.html">홈</a>
+                    <span class="breadcrumb-separator">></span>
+                    <a href="../../media/">홍보</a>
+                    <span class="breadcrumb-separator">></span>
+                    <a href="../newsroom/">미디어룸</a>
+                    <span class="breadcrumb-separator">></span>
+                    <span class="breadcrumb-current">미디어컨텐츠</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Section Navigation -->
+        <section class="section-navigation">
+            <div class="container">
+                <nav class="section-nav">
+                    <a href="#existing-media" class="section-nav-link active">기존 미디어룸 자료</a>
+                    <a href="#youtube-content" class="section-nav-link">유튜브 자료</a>
+                    <a href="#external-links" class="section-nav-link">나무위키 링크</a>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <div class="container">
+                <div class="content-header">
+                    <h2 class="content-title">미디어컨텐츠</h2>
+                    <p class="content-subtitle">YPP의 다양한 미디어 자료와 외부 링크를 제공합니다</p>
+                </div>
+                
+                <div class="content-grid">
+                    <!-- 기존 미디어룸 자료 -->
+                    <div id="existing-media" class="content-block full-width">
+                        <h3 class="block-title">기존 미디어룸 자료</h3>
+                        <div class="block-content">
+                            <p>콘텐츠 영역</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 유튜브 자료 -->
+                    <div id="youtube-content" class="content-block full-width">
+                        <h3 class="block-title">유튜브 자료</h3>
+                        <div class="block-content">
+                            <p>콘텐츠 영역</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 나무위키 링크 -->
+                    <div id="external-links" class="content-block full-width">
+                        <h3 class="block-title">나무위키 링크</h3>
+                        <div class="block-content">
+                            <p>콘텐츠 영역</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="../../../js/components.js"></script>
+    <script src="../../../js/header-menu.js"></script>
+    <script src="../../../js/sidebar.js"></script>
+    <script src="../../../js/hamburger.js"></script>
+    <script src="../../../js/main-top-padding.js"></script>
+    <script>
+        // content.js - 미디어컨텐츠 페이지 섹션 네비게이션 기능 (engineering.js 기반)
+
+// ===== 미디어컨텐츠 페이지 컨트롤러 클래스 =====
+class ContentPageController {
+    constructor() {
+        this.currentSection = null;
+        this.init();
+    }
+    
+    // 초기화
+    init() {
+        this.setupSectionNavigation();
+        this.handleUrlHash();
+        this.setupScrollSpy();
+    }
+    
+    // 섹션 네비게이션 설정
+    setupSectionNavigation() {
+        const sectionLinks = document.querySelectorAll('.section-nav-link');
+        
+        sectionLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                const sectionId = href.substring(1); // # 제거
+                
+                this.scrollToSection(sectionId);
+                this.updateSectionActiveState(link);
+                
+                // URL 해시 업데이트
+                window.history.pushState(null, null, href);
+            });
+        });
+    }
+    
+    // URL 해시 처리
+    handleUrlHash() {
+        const hash = window.location.hash.substring(1);
+        
+        if (hash && document.getElementById(hash)) {
+            setTimeout(() => {
+                this.scrollToSection(hash);
+                const correspondingLink = document.querySelector(`[href="#${hash}"]`);
+                if (correspondingLink) {
+                    this.updateSectionActiveState(correspondingLink);
+                }
+            }, 100);
+        }
+        
+        // 브라우저 뒤로가기/앞으로가기 처리
+        window.addEventListener('popstate', () => {
+            this.handleUrlHash();
+        });
+    }
+    
+    // 섹션으로 스크롤
+    scrollToSection(sectionId) {
+        const targetSection = document.getElementById(sectionId);
+        if (!targetSection) return;
+        
+        // 헤더 높이 + 섹션 네비게이션 높이 계산
+        const header = document.querySelector('.header');
+        const sectionNavigation = document.querySelector('.section-navigation');
+        
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        const sectionNavHeight = sectionNavigation ? sectionNavigation.getBoundingClientRect().height : 0;
+        const totalOffset = headerHeight + sectionNavHeight + 20; // 여유 공간 20px
+        
+        const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+        const adjustedPosition = targetPosition - totalOffset;
+        
+        window.scrollTo({
+            top: adjustedPosition,
+            behavior: 'smooth'
+        });
+        
+        this.currentSection = sectionId;
+    }
+    
+    // 섹션 활성화 상태 업데이트
+    updateSectionActiveState(activeLink) {
+        // 모든 섹션 링크 비활성화
+        document.querySelectorAll('.section-nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // 클릭된 링크 활성화
+        activeLink.classList.add('active');
+    }
+    
+    // 스크롤 스파이 (현재 보이는 섹션 자동 감지)
+    setupScrollSpy() {
+        let ticking = false;
+        
+        const updateActiveSection = () => {
+            const sections = document.querySelectorAll('.content-block[id]');
+            const scrollPosition = window.pageYOffset + window.innerHeight / 2;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top + window.pageYOffset;
+                const sectionBottom = sectionTop + rect.height;
+                
+                if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+                    const sectionId = section.id;
+                    const correspondingLink = document.querySelector(`[href="#${sectionId}"]`);
+                    
+                    if (correspondingLink && !correspondingLink.classList.contains('active')) {
+                        this.updateSectionActiveState(correspondingLink);
+                        this.currentSection = sectionId;
+                    }
+                }
+            });
+            
+            ticking = false;
+        };
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateActiveSection);
+                ticking = true;
+            }
+        });
+    }
+    
+    // 외부에서 호출 가능한 메서드들
+    goToSection(sectionId) {
+        this.scrollToSection(sectionId);
+        const correspondingLink = document.querySelector(`[href="#${sectionId}"]`);
+        if (correspondingLink) {
+            this.updateSectionActiveState(correspondingLink);
+        }
+        window.history.pushState(null, null, `#${sectionId}`);
+    }
+    
+    getCurrentSection() {
+        return this.currentSection;
+    }
+}
+
+// ===== 전역 변수 =====
+let contentPageController = null;
+
+// ===== 초기화 함수 =====
+function initContentPage() {
+    if (!contentPageController) {
+        contentPageController = new ContentPageController();
+    }
+    return contentPageController;
+}
+
+// ===== 전역 함수들 =====
+function goToSection(sectionId) {
+    if (contentPageController) {
+        contentPageController.goToSection(sectionId);
+    }
+}
+
+function getCurrentSection() {
+    return contentPageController ? contentPageController.getCurrentSection() : null;
+}
+
+// ===== 자동 초기화 =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 컴포넌트 로딩 완료 후 초기화
+    if (document.querySelector('.section-navigation')) {
+        initContentPage();
+    } else {
+        document.addEventListener('componentsLoaded', () => {
+            setTimeout(initContentPage, 200);
+        });
+    }
+});
+
+// ===== 전역 함수 내보내기 =====
+window.initContentPage = initContentPage;
+window.goToSection = goToSection;
+window.getCurrentSection = getCurrentSection;
+    </script>
+</body>
+</html>
+
+<style>
+/* ===== CONTENT PAGE SPECIFIC STYLES ===== */
+
+/* Section Navigation */
+.section-navigation {
+    background-color: var(--white, #ffffff);
+    border-bottom: 1px solid var(--border-light, #e5e5e5);
+    position: sticky;
+    top: 80px;
+    z-index: 100;
+}
+
+.section-navigation .container {
+    max-width: none !important;
+    width: 100vw !important;
+    margin: 0;
+    padding: 0;
+}
+
+.section-navigation .section-nav {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+}
+
+/* Content Section */
+.content-section {
+    padding: 3rem 0;
+    background-color: var(--white, #ffffff);
+}
+
+/* Smooth Scrolling for Sections */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Section Scroll Offset */
+.content-block[id] {
+    scroll-margin-top: 140px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-navigation .section-nav {
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+}
+</style>

@@ -50,33 +50,33 @@
           "children": {
             "system": {
               "title": "시스템공급",
-              "url": "/ypp/pages/business/mro/system.html",
+              "url": "/ypp/pages/business/mro/mro.html#system",
               "children": {
                 "power": {
                   "title": "전력보호시스템",
-                  "url": "/ypp/pages/business/mro/system/power.html",
+                  "url": "/ypp/pages/business/mro/mro.html#system-power",
                   "sections": ["전력계통 보호시스템"]
                 },
                 "plant": {
                   "title": "플랜트제어시스템",
-                  "url": "/ypp/pages/business/mro/system/plant.html",
+                  "url": "/ypp/pages/business/mro/mro.html#system-plant",
                   "sections": ["Aux/Local control", "HVAC control"]
                 },
                 "monitoring": {
                   "title": "전기설비감시제어시스템",
-                  "url": "/ypp/pages/business/mro/system/monitoring.html",
+                  "url": "/ypp/pages/business/mro/mro.html#system-monitoring",
                   "sections": ["Sampling System", "Vibration Monitoring System"]
                 },
                 "diagnosis": {
                   "title": "설비진단시스템",
-                  "url": "/ypp/pages/business/mro/system/diagnosis.html",
+                  "url": "/ypp/pages/business/mro/mro.html#system-diagnosis",
                   "sections": ["디지털 변전소 운영시스템"]
                 }
               }
             },
             "maintenance": {
               "title": "유지보수",
-              "url": "/ypp/pages/business/mro/maintenance.html",
+              "url": "/ypp/pages/business/mro.html#maintenance",
               "sections": ["보호계전기", "발전기차단기(GCB)", "UPS"]
             }
           }

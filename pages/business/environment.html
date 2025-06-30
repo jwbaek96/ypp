@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO 메타 태그 -->
-    <title>엔지니어링 - YPP</title>
-    <meta name="description" content="YPP 엔지니어링 사업 - 플랜트 전기분야 설계, 계측분야 설계, 전력계통 컨설팅, CGID">
-    <meta name="keywords" content="YPP, 엔지니어링, 플랜트설계, 전기설계, 계측설계, 전력계통, CGID">
+    <title>장비공급 - YPP</title>
+    <meta name="description" content="YPP 장비공급 사업 - 전력계통 관련 장비 공급 및 솔루션">
+    <meta name="keywords" content="YPP, 장비공급, 전력장비, 계측장비, 제어장비">
     
     <!-- 파비콘 -->
     <link rel="icon" type="image/ico" href="../../assets/images/favicon/favicon.ico">
@@ -32,8 +32,8 @@
         <section class="page-header">
             <div class="container">
                 <div class="page-header-content">
-                    <h1 class="page-title">엔지니어링</h1>
-                    <p class="page-subtitle">전력계통 전문 엔지니어링 서비스</p>
+                    <h1 class="page-title">장비공급</h1>
+                    <p class="page-subtitle">전력계통 전문 장비 공급 및 솔루션</p>
                 </div>
             </div>
         </section>
@@ -51,20 +51,54 @@
             </div>
         </section>
 
-
+        <!-- Section Navigation -->
+        <section class="section-navigation">
+            <div class="container">
+                <nav class="section-nav">
+                    <a href="#power-equipment" class="section-nav-link active">전력장비</a>
+                    <a href="#control-equipment" class="section-nav-link">제어장비</a>
+                    <a href="#measurement-equipment" class="section-nav-link">계측장비</a>
+                    <a href="#protection-equipment" class="section-nav-link">보호장비</a>
+                </nav>
+            </div>
+        </section>
 
         <!-- Content Section -->
         <section class="content-section">
             <div class="container">
                 <div class="content-header">
                     <h2 class="content-title">장비공급</h2>
-                    <p class="content-subtitle">콘텐츠 영역</p>
+                    <p class="content-subtitle">신뢰성 높은 전력계통 전문 장비 공급으로 안정적인 전력 인프라를 구축합니다</p>
                 </div>
                 
                 <div class="content-grid">
-                    <!-- 플랜트 전기분야 설계 -->
-                    <div id="electrical-design" class="content-block full-width">
-                        <h3 class="block-title">타이틀영역</h3>
+                    <!-- 전력장비 -->
+                    <div id="power-equipment" class="content-block full-width">
+                        <h3 class="block-title">전력장비</h3>
+                        <div class="block-content">
+                            <p>콘텐츠 영역</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 제어장비 -->
+                    <div id="control-equipment" class="content-block full-width">
+                        <h3 class="block-title">제어장비</h3>
+                        <div class="block-content">
+                            <p>콘텐츠 영역</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 계측장비 -->
+                    <div id="measurement-equipment" class="content-block full-width">
+                        <h3 class="block-title">계측장비</h3>
+                        <div class="block-content">
+                            <p>콘텐츠 영역</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 보호장비 -->
+                    <div id="protection-equipment" class="content-block full-width">
+                        <h3 class="block-title">보호장비</h3>
                         <div class="block-content">
                             <p>콘텐츠 영역</p>
                         </div>
@@ -83,67 +117,11 @@
     <script src="../../js/sidebar.js"></script>
     <script src="../../js/hamburger.js"></script>
     <script src="../../js/main-top-padding.js"></script>
-</body>
-</html>
+    <script>
+        // equipment.js - 장비공급 페이지 섹션 네비게이션 기능 (engineering.js 기반)
 
-<style>
-/* ===== ENGINEERING PAGE SPECIFIC STYLES ===== */
-
-/* Section Navigation */
-.section-navigation {
-    background-color: var(--white, #ffffff);
-    border-bottom: 1px solid var(--border-light, #e5e5e5);
-    position: sticky;
-    top: 80px;
-    z-index: 100;
-}
-
-.section-navigation .container {
-    max-width: none !important;
-    width: 100vw !important;
-    margin: 0;
-    padding: 0;
-}
-
-.section-navigation .section-nav {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0;
-}
-
-/* Content Section */
-.content-section {
-    padding: 3rem 0;
-    background-color: var(--white, #ffffff);
-}
-
-/* Smooth Scrolling for Sections */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Section Scroll Offset */
-.content-block[id] {
-    scroll-margin-top: 140px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .section-navigation .section-nav {
-        padding: 1rem;
-        gap: 0.5rem;
-    }
-}
-</style>
-
-<script>
-// engineering.js - 엔지니어링 페이지 섹션 네비게이션 기능
-
-// ===== 엔지니어링 페이지 컨트롤러 클래스 =====
-class EngineeringPageController {
+// ===== 장비공급 페이지 컨트롤러 클래스 =====
+class EquipmentPageController {
     constructor() {
         this.currentSection = null;
         this.init();
@@ -281,41 +259,96 @@ class EngineeringPageController {
 }
 
 // ===== 전역 변수 =====
-let engineeringPageController = null;
+let equipmentPageController = null;
 
 // ===== 초기화 함수 =====
-function initEngineeringPage() {
-    if (!engineeringPageController) {
-        engineeringPageController = new EngineeringPageController();
+function initEquipmentPage() {
+    if (!equipmentPageController) {
+        equipmentPageController = new EquipmentPageController();
     }
-    return engineeringPageController;
+    return equipmentPageController;
 }
 
 // ===== 전역 함수들 =====
 function goToSection(sectionId) {
-    if (engineeringPageController) {
-        engineeringPageController.goToSection(sectionId);
+    if (equipmentPageController) {
+        equipmentPageController.goToSection(sectionId);
     }
 }
 
 function getCurrentSection() {
-    return engineeringPageController ? engineeringPageController.getCurrentSection() : null;
+    return equipmentPageController ? equipmentPageController.getCurrentSection() : null;
 }
 
 // ===== 자동 초기화 =====
 document.addEventListener('DOMContentLoaded', function() {
     // 컴포넌트 로딩 완료 후 초기화
     if (document.querySelector('.section-navigation')) {
-        initEngineeringPage();
+        initEquipmentPage();
     } else {
         document.addEventListener('componentsLoaded', () => {
-            setTimeout(initEngineeringPage, 200);
+            setTimeout(initEquipmentPage, 200);
         });
     }
 });
 
 // ===== 전역 함수 내보내기 =====
-window.initEngineeringPage = initEngineeringPage;
+window.initEquipmentPage = initEquipmentPage;
 window.goToSection = goToSection;
 window.getCurrentSection = getCurrentSection;
-</script>
+    </script>
+</body>
+</html>
+
+<style>
+/* ===== EQUIPMENT PAGE SPECIFIC STYLES ===== */
+
+/* Section Navigation */
+.section-navigation {
+    background-color: var(--white, #ffffff);
+    border-bottom: 1px solid var(--border-light, #e5e5e5);
+    position: sticky;
+    top: 80px;
+    z-index: 100;
+}
+
+.section-navigation .container {
+    max-width: none !important;
+    width: 100vw !important;
+    margin: 0;
+    padding: 0;
+}
+
+.section-navigation .section-nav {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+}
+
+/* Content Section */
+.content-section {
+    padding: 3rem 0;
+    background-color: var(--white, #ffffff);
+}
+
+/* Smooth Scrolling for Sections */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Section Scroll Offset */
+.content-block[id] {
+    scroll-margin-top: 140px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-navigation .section-nav {
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+}
+</style>

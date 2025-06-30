@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO 메타 태그 -->
+    <title>모먼트 - YPP</title>
+    <meta name="description" content="YPP 모먼트 - 내부용 갤러리">
+    <meta name="keywords" content="YPP, 모먼트, 갤러리, 내부용">
+    
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/ico" href="../../../assets/images/favicon/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/pages/layout.css">
+    
+    <!-- 메타 시스템 -->
+    <script src="../../../js/head-meta.js"></script>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+    
+    <!-- Mobile Sidebar Container -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="page-header-content">
+                    <h1 class="page-title">모먼트</h1>
+                    <p class="page-subtitle">특별한 순간들의 기록 (내부용)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Breadcrumb -->
+        <section class="breadcrumb-section">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="../../../index.html">홈</a>
+                    <span class="breadcrumb-separator">></span>
+                    <a href="../../media/">홍보</a>
+                    <span class="breadcrumb-separator">></span>
+                    <a href="../gallery/">갤러리</a>
+                    <span class="breadcrumb-separator">></span>
+                    <span class="breadcrumb-current">모먼트</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <div class="container">
+                <div class="content-header">
+                    <h2 class="content-title">모먼트</h2>
+                    <p class="content-subtitle">YPP의 소중한 순간들을 기록합니다</p>
+                </div>
+                
+                <div class="access-notice">
+                    <div class="notice-icon">🔒</div>
+                    <h3>내부 전용 콘텐츠</h3>
+                    <p>이 페이지는 YPP 내부 구성원만 접근 가능합니다.</p>
+                </div>
+                
+                <div class="gallery-content">
+                    <div class="gallery-grid">
+                        <div class="gallery-placeholder">
+                            <p>콘텐츠 영역</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="../../../js/components.js"></script>
+    <script src="../../../js/header-menu.js"></script>
+    <script src="../../../js/sidebar.js"></script>
+    <script src="../../../js/hamburger.js"></script>
+    <script src="../../../js/main-top-padding.js"></script>
+</body>
+</html>
+
+<style>
+/* ===== MOMENT PAGE SPECIFIC STYLES ===== */
+
+/* Content Section */
+.content-section {
+    padding: 3rem 0;
+    background-color: var(--white, #ffffff);
+}
+
+/* Access Notice */
+.access-notice {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--background-light, #f8f9fa);
+    border: 1px solid var(--border-light, #e5e5e5);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.notice-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.access-notice h3 {
+    color: var(--text-primary, #333);
+    margin-bottom: 0.5rem;
+}
+
+.access-notice p {
+    color: var(--text-secondary, #666);
+    margin: 0;
+}
+
+/* Gallery Content */
+.gallery-content {
+    margin-top: 2rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-placeholder {
+    min-height: 400px;
+    background-color: var(--background-light, #f8f9fa);
+    border: 1px solid var(--border-light, #e5e5e5);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary, #666);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .access-notice {
+        padding: 1.5rem;
+    }
+    
+    .notice-icon {
+        font-size: 2.5rem;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .gallery-placeholder {
+        min-height: 300px;
+    }
+}
+</style>

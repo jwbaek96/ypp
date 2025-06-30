@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO 메타 태그 -->
+    <title>GCLP - YPP</title>
+    <meta name="description" content="YPP GCLP - GCLP 브로셔, 홍보용 영상, 유튜브 영상">
+    <meta name="keywords" content="YPP, GCLP, 브로셔, 홍보영상, 유튜브">
+    
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/ico" href="../../../assets/images/favicon/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/pages/layout.css">
+    
+    <!-- 메타 시스템 -->
+    <script src="../../../js/head-meta.js"></script>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+    
+    <!-- Mobile Sidebar Container -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="page-header-content">
+                    <h1 class="page-title">GCLP</h1>
+                    <p class="page-subtitle">GCLP 관련 자료 및 링크</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Breadcrumb -->
+        <section class="breadcrumb-section">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="../../../index.html">홈</a>
+                    <span class="breadcrumb-separator">></span>
+                    <a href="../../media/">홍보</a>
+                    <span class="breadcrumb-separator">></span>
+                    <a href="../gallery/">갤러리</a>
+                    <span class="breadcrumb-separator">></span>
+                    <span class="breadcrumb-current">GCLP</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Section Navigation -->
+        <section class="section-navigation">
+            <div class="container">
+                <nav class="section-nav">
+                    <a href="#brochure" class="section-nav-link active">GCLP 브로셔</a>
+                    <a href="#videos" class="section-nav-link">홍보용 영상</a>
+                    <a href="#youtube" class="section-nav-link">유튜브 영상</a>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <div class="container">
+                <div class="content-header">
+                    <h2 class="content-title">GCLP</h2>
+                    <p class="content-subtitle">GCLP 관련 브로셔, 영상 및 외부 링크를 제공합니다</p>
+                </div>
+                
+                <div class="content-grid">
+                    <!-- GCLP 브로셔 -->
+                    <div id="brochure" class="content-block full-width">
+                        <h3 class="block-title">GCLP 브로셔</h3>
+                        <div class="block-content">
+                            <p>콘텐츠 영역</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 홍보용 영상 -->
+                    <div id="videos" class="content-block full-width">
+                        <h3 class="block-title">홍보용 영상</h3>
+                        <div class="block-content">
+                            <p>콘텐츠 영역</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 유튜브 영상 -->
+                    <div id="youtube" class="content-block full-width">
+                        <h3 class="block-title">유튜브 영상</h3>
+                        <div class="block-content">
+                            <p>콘텐츠 영역</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- External Links -->
+                <div class="external-links-section">
+                    <h3 class="external-links-title">관련 링크</h3>
+                    <div class="external-links-grid">
+                        <a href="https://arcengclp.com/home" target="_blank" class="external-link-card">
+                            <div class="link-icon">🌐</div>
+                            <h4>GCLP 홈페이지</h4>
+                            <p>arcengclp.com</p>
+                        </a>
+                        <a href="https://namu.wiki/w/GCLP(gclp)" target="_blank" class="external-link-card">
+                            <div class="link-icon">📚</div>
+                            <h4>나무위키 GCLP</h4>
+                            <p>namu.wiki</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="../../../js/components.js"></script>
+    <script src="../../../js/header-menu.js"></script>
+    <script src="../../../js/sidebar.js"></script>
+    <script src="../../../js/hamburger.js"></script>
+    <script src="../../../js/main-top-padding.js"></script>
+    <script>
+        // gclp.js - GCLP 페이지 섹션 네비게이션 기능
+
+// ===== GCLP 페이지 컨트롤러 클래스 =====
+class GCLPPageController {
+    constructor() {
+        this.currentSection = null;
+        this.init();
+    }
+    
+    // 초기화
+    init() {
+        this.setupSectionNavigation();
+        this.handleUrlHash();
+        this.setupScrollSpy();
+    }
+    
+    // 섹션 네비게이션 설정
+    setupSectionNavigation() {
+        const sectionLinks = document.querySelectorAll('.section-nav-link');
+        
+        sectionLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                const sectionId = href.substring(1); // # 제거
+                
+                this.scrollToSection(sectionId);
+                this.updateSectionActiveState(link);
+                
+                // URL 해시 업데이트
+                window.history.pushState(null, null, href);
+            });
+        });
+    }
+    
+    // URL 해시 처리
+    handleUrlHash() {
+        const hash = window.location.hash.substring(1);
+        
+        if (hash && document.getElementById(hash)) {
+            setTimeout(() => {
+                this.scrollToSection(hash);
+                const correspondingLink = document.querySelector(`[href="#${hash}"]`);
+                if (correspondingLink) {
+                    this.updateSectionActiveState(correspondingLink);
+                }
+            }, 100);
+        }
+        
+        // 브라우저 뒤로가기/앞으로가기 처리
+        window.addEventListener('popstate', () => {
+            this.handleUrlHash();
+        });
+    }
+    
+    // 섹션으로 스크롤
+    scrollToSection(sectionId) {
+        const targetSection = document.getElementById(sectionId);
+        if (!targetSection) return;
+        
+        // 헤더 높이 + 섹션 네비게이션 높이 계산
+        const header = document.querySelector('.header');
+        const sectionNavigation = document.querySelector('.section-navigation');
+        
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        const sectionNavHeight = sectionNavigation ? sectionNavigation.getBoundingClientRect().height : 0;
+        const totalOffset = headerHeight + sectionNavHeight + 20; // 여유 공간 20px
+        
+        const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+        const adjustedPosition = targetPosition - totalOffset;
+        
+        window.scrollTo({
+            top: adjustedPosition,
+            behavior: 'smooth'
+        });
+        
+        this.currentSection = sectionId;
+    }
+    
+    // 섹션 활성화 상태 업데이트
+    updateSectionActiveState(activeLink) {
+        // 모든 섹션 링크 비활성화
+        document.querySelectorAll('.section-nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // 클릭된 링크 활성화
+        activeLink.classList.add('active');
+    }
+    
+    // 스크롤 스파이 (현재 보이는 섹션 자동 감지)
+    setupScrollSpy() {
+        let ticking = false;
+        
+        const updateActiveSection = () => {
+            const sections = document.querySelectorAll('.content-block[id]');
+            const scrollPosition = window.pageYOffset + window.innerHeight / 2;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top + window.pageYOffset;
+                const sectionBottom = sectionTop + rect.height;
+                
+                if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+                    const sectionId = section.id;
+                    const correspondingLink = document.querySelector(`[href="#${sectionId}"]`);
+                    
+                    if (correspondingLink && !correspondingLink.classList.contains('active')) {
+                        this.updateSectionActiveState(correspondingLink);
+                        this.currentSection = sectionId;
+                    }
+                }
+            });
+            
+            ticking = false;
+        };
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateActiveSection);
+                ticking = true;
+            }
+        });
+    }
+    
+    // 외부에서 호출 가능한 메서드들
+    goToSection(sectionId) {
+        this.scrollToSection(sectionId);
+        const correspondingLink = document.querySelector(`[href="#${sectionId}"]`);
+        if (correspondingLink) {
+            this.updateSectionActiveState(correspondingLink);
+        }
+        window.history.pushState(null, null, `#${sectionId}`);
+    }
+    
+    getCurrentSection() {
+        return this.currentSection;
+    }
+}
+
+// ===== 전역 변수 =====
+let gclpPageController = null;
+
+// ===== 초기화 함수 =====
+function initGCLPPage() {
+    if (!gclpPageController) {
+        gclpPageController = new GCLPPageController();
+    }
+    return gclpPageController;
+}
+
+// ===== 전역 함수들 =====
+function goToSection(sectionId) {
+    if (gclpPageController) {
+        gclpPageController.goToSection(sectionId);
+    }
+}
+
+function getCurrentSection() {
+    return gclpPageController ? gclpPageController.getCurrentSection() : null;
+}
+
+// ===== 자동 초기화 =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 컴포넌트 로딩 완료 후 초기화
+    if (document.querySelector('.section-navigation')) {
+        initGCLPPage();
+    } else {
+        document.addEventListener('componentsLoaded', () => {
+            setTimeout(initGCLPPage, 200);
+        });
+    }
+});
+
+// ===== 전역 함수 내보내기 =====
+window.initGCLPPage = initGCLPPage;
+window.goToSection = goToSection;
+window.getCurrentSection = getCurrentSection;
+    </script>
+</body>
+</html>
+
+<style>
+/* ===== GCLP PAGE SPECIFIC STYLES ===== */
+
+/* Section Navigation */
+.section-navigation {
+    background-color: var(--white, #ffffff);
+    border-bottom: 1px solid var(--border-light, #e5e5e5);
+    position: sticky;
+    top: 80px;
+    z-index: 100;
+}
+
+.section-navigation .container {
+    max-width: none !important;
+    width: 100vw !important;
+    margin: 0;
+    padding: 0;
+}
+
+.section-navigation .section-nav {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+}
+
+/* Content Section */
+.content-section {
+    padding: 3rem 0;
+    background-color: var(--white, #ffffff);
+}
+
+/* External Links Section */
+.external-links-section {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 2px solid var(--border-light, #e5e5e5);
+}
+
+.external-links-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary, #333);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.external-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.external-link-card {
+    display: block;
+    padding: 2rem;
+    background-color: var(--white, #ffffff);
+    border: 1px solid var(--border-light, #e5e5e5);
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: inherit;
+}
+
+.external-link-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-blue, #0066cc);
+}
+
+.link-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.external-link-card h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary, #333);
+    margin-bottom: 0.5rem;
+}
+
+.external-link-card p {
+    color: var(--text-secondary, #666);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Smooth Scrolling for Sections */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Section Scroll Offset */
+.content-block[id] {
+    scroll-margin-top: 140px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-navigation .section-nav {
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+    
+    .external-links-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .external-link-card {
+        padding: 1.5rem;
+    }
+}
+</style>

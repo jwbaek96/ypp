@@ -1,0 +1,88 @@
+<button class="scroll-to-top" id="scrollToTop" aria-label="맨 위로 이동">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+</button>
+<style>
+/* ===== SCROLL TO TOP BUTTON - 글래스모피즘 ===== */
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 55, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+    color: #fff;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(0, 55, 255, 0.3);
+}
+
+.scroll-to-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(0, 65, 187, 0.2) 0%,
+        rgba(0, 65, 187, 0.1) 50%,
+        rgba(220, 220, 220, 0.05) 100%);
+    border-radius: inherit;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.scroll-to-top:hover::before {
+    opacity: 1;
+}
+
+.scroll-to-top:active {
+    transform: translateY(-1px);
+    transition: all 0.1s ease;
+}
+
+@media (max-width: 768px) {
+    .scroll-to-top {
+        right: 10px;
+        bottom: 10px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* 애니메이션 감소 옵션 */
+@media (prefers-reduced-motion: reduce) {
+    .scroll-to-top {
+        transition: none;
+    }
+    
+    .scroll-to-top::before {
+        transition: none;
+    }
+}
+</style>

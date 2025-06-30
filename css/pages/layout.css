@@ -223,7 +223,9 @@
     .content-title {
         font-size: 2rem;
     }
-    
+    .tab-navigation {
+        top: 70px;
+    }
     .tab-nav {
         padding: 0 1rem;
     }

@@ -94,7 +94,8 @@ async function loadAllComponents() {
         await Promise.all([
             loadComponent('header', 'header-container'),
             loadComponent('footer', 'footer-container'),
-            loadComponent('sidebar', 'sidebar-container')
+            loadComponent('sidebar', 'sidebar-container'),
+            loadComponent('scrolltotop', 'scrolltotop-container')
         ]);
         
         // 컴포넌트 로딩 완료 이벤트 발생

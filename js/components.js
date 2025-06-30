@@ -21,7 +21,7 @@ function getBasePath() {
             return '../../';
         } else if (pathSegments.length === 4) {
             // /ypp/pages/company/about.html
-            return '../../';
+            return '../../../';
         }
     } else {
         // 로컬 개발 환경 또는 일반 도메인

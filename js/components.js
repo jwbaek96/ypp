@@ -21,6 +21,9 @@ function getBasePath() {
             return '../../';
         } else if (pathSegments.length === 4) {
             // /ypp/pages/company/about.html
+            return '../../';
+        } else if (pathSegments.length === 5) {
+            // /ypp/pages/media/gallery/archive.html
             return '../../../';
         }
     } else {
@@ -31,6 +34,8 @@ function getBasePath() {
             return '../';
         } else if (pathSegments.length === 2) {
             return '../../';
+        } else if (pathSegments.length === 3) {
+            return '../../../';
         }
     }
     

@@ -6,8 +6,8 @@
     
     <!-- SEO 메타 태그 -->
     <title>EPC - YPP</title>
-    <meta name="description" content="YPP EPC 사업 - 플랜트 전기분야 설계, 계측분야 설계, 전력계통 컨설팅, CGID">
-    <meta name="keywords" content="YPP, EPC, 플랜트설계, 전기설계, 계측설계, 전력계통, CGID">
+    <meta name="description" content="YPP EPC 사업 - Fossil, Nuclear Power, Renewable, US Military and Other Business, US Military Bases Business">
+    <meta name="keywords" content="YPP, EPC, Fossil, Nuclear Power, Renewable, US Military">
     
     <!-- 파비콘 -->
     <link rel="icon" type="image/ico" href="../../assets/images/favicon/favicon.ico">
@@ -33,7 +33,7 @@
             <div class="container">
                 <div class="page-header-content">
                     <h1 class="page-title">EPC</h1>
-                    <p class="page-subtitle">Engineering, Procurement, Construction - 통합 프로젝트 솔루션</p>
+                    <p class="page-subtitle">Engineering, Procurement, Construction</p>
                 </div>
             </div>
         </section>
@@ -51,56 +51,169 @@
             </div>
         </section>
 
-        <!-- Section Navigation -->
-        <section class="section-navigation">
+        <!-- Tab Navigation -->
+        <section class="tab-navigation">
             <div class="container">
-                <nav class="section-nav">
-                    <a href="#electrical-design" class="section-nav-link active">플랜트 전기분야 설계</a>
-                    <a href="#instrumentation-design" class="section-nav-link">플랜트 계측분야 설계</a>
-                    <a href="#power-consulting" class="section-nav-link">전력계통 컨설팅</a>
-                    <a href="#cgid" class="section-nav-link">CGID</a>
+                <nav class="tab-nav">
+                    <a href="#fossil" class="tab-link active" data-tab="fossil">Fossil</a>
+                    <a href="#nuclear-power" class="tab-link" data-tab="nuclear-power">Nuclear Power</a>
+                    <a href="#renewable" class="tab-link" data-tab="renewable">Renewable</a>
+                    <a href="#us-military-other" class="tab-link" data-tab="us-military-other">US Military and Other Business</a>
+                    <a href="#us-military-bases" class="tab-link" data-tab="us-military-bases">US Military Bases Business</a>
                 </nav>
+                
+                <!-- Section Navigation for Fossil -->
+                <div class="section-nav" id="section-nav-fossil">
+                    <a href="#fossil-gas-turbine" class="section-nav-link">Gas Turbine Plants(CCPP, SCPP)</a>
+                    <a href="#fossil-coal-power" class="section-nav-link">Coal Power Plant(CFBC) with CCUS</a>
+                </div>
+                
+                <!-- Section Navigation for Nuclear Power -->
+                <div class="section-nav" id="section-nav-nuclear-power" style="display: none;">
+                    <a href="#nuclear-power-plants" class="section-nav-link">Nuclear Power</a>
+                    <a href="#nuclear-smr" class="section-nav-link">SMR</a>
+                </div>
+                
+                <!-- Section Navigation for Renewable -->
+                <div class="section-nav" id="section-nav-renewable" style="display: none;">
+                    <a href="#renewable-wind-solar" class="section-nav-link">Wind and Solar Power Plant</a>
+                    <a href="#renewable-green-hydrogen" class="section-nav-link">Green Hydrogen and Green Ammonia Plant</a>
+                </div>
+                
+                <!-- Section Navigation for US Military and Other Business -->
+                <div class="section-nav" id="section-nav-us-military-other" style="display: none;">
+                    <a href="#us-military" class="section-nav-link">US Military</a>
+                    <a href="#data-center" class="section-nav-link">Data Center</a>
+                </div>
+                
+                <!-- Section Navigation for US Military Bases Business -->
+                <div class="section-nav" id="section-nav-us-military-bases" style="display: none;">
+                    <a href="#substation-upgrade" class="section-nav-link">Substation Upgrade</a>
+                </div>
             </div>
         </section>
 
-        <!-- Content Section -->
-        <section class="content-section">
+        <!-- Tab Content -->
+        <section class="tab-content-section">
             <div class="container">
-                <div class="content-header">
-                    <h2 class="content-title">EPC 사업</h2>
-                    <p class="content-subtitle">40여년간 축적된 전력계통 전문 기술력으로 최적의 EPC 솔루션을 제공합니다</p>
+                <!-- Fossil -->
+                <div id="fossil" class="tab-content active">
+                    <div class="content-header">
+                        <h2 class="content-title">Fossil</h2>
+                        <p class="content-subtitle">화석연료 기반 발전소 EPC 프로젝트</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- Gas Turbine Plants -->
+                        <div id="fossil-gas-turbine" class="content-block full-width">
+                            <h3 class="block-title">Gas Turbine Plants(CCPP, SCPP)</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Coal Power Plant -->
+                        <div id="fossil-coal-power" class="content-block full-width">
+                            <h3 class="block-title">Coal Power Plant(CFBC) with CCUS</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="content-grid">
-                    <!-- 플랜트 전기분야 설계 -->
-                    <div id="electrical-design" class="content-block full-width">
-                        <h3 class="block-title">플랜트 전기분야 설계</h3>
-                        <div class="block-content">
-                            <p>콘텐츠 영역</p>
-                        </div>
+
+                <!-- Nuclear Power -->
+                <div id="nuclear-power" class="tab-content">
+                    <div class="content-header">
+                        <h2 class="content-title">Nuclear Power</h2>
+                        <p class="content-subtitle">원자력 발전소 EPC 프로젝트</p>
                     </div>
                     
-                    <!-- 플랜트 계측분야 설계 -->
-                    <div id="instrumentation-design" class="content-block full-width">
-                        <h3 class="block-title">플랜트 계측분야 설계</h3>
-                        <div class="block-content">
-                            <p>콘텐츠 영역</p>
+                    <div class="content-grid">
+                        <!-- Nuclear Power Plants -->
+                        <div id="nuclear-power-plants" class="content-block full-width">
+                            <h3 class="block-title">Nuclear Power</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- SMR -->
+                        <div id="nuclear-smr" class="content-block full-width">
+                            <h3 class="block-title">SMR</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
                         </div>
                     </div>
-                    
-                    <!-- 전력계통 컨설팅 -->
-                    <div id="power-consulting" class="content-block full-width">
-                        <h3 class="block-title">전력계통 컨설팅</h3>
-                        <div class="block-content">
-                            <p>콘텐츠 영역</p>
-                        </div>
+                </div>
+
+                <!-- Renewable -->
+                <div id="renewable" class="tab-content">
+                    <div class="content-header">
+                        <h2 class="content-title">Renewable</h2>
+                        <p class="content-subtitle">신재생에너지 발전소 EPC 프로젝트</p>
                     </div>
                     
-                    <!-- CGID -->
-                    <div id="cgid" class="content-block full-width">
-                        <h3 class="block-title">CGID</h3>
-                        <div class="block-content">
-                            <p>콘텐츠 영역</p>
+                    <div class="content-grid">
+                        <!-- Wind and Solar Power Plant -->
+                        <div id="renewable-wind-solar" class="content-block full-width">
+                            <h3 class="block-title">Wind and Solar Power Plant</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Green Hydrogen and Green Ammonia Plant -->
+                        <div id="renewable-green-hydrogen" class="content-block full-width">
+                            <h3 class="block-title">Green Hydrogen and Green Ammonia Plant</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- US Military and Other Business -->
+                <div id="us-military-other" class="tab-content">
+                    <div class="content-header">
+                        <h2 class="content-title">US Military and Other Business</h2>
+                        <p class="content-subtitle">미군 및 기타 산업시설 EPC 프로젝트</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- US Military -->
+                        <div id="us-military" class="content-block full-width">
+                            <h3 class="block-title">US Military</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Data Center -->
+                        <div id="data-center" class="content-block full-width">
+                            <h3 class="block-title">Data Center</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- US Military Bases Business -->
+                <div id="us-military-bases" class="tab-content">
+                    <div class="content-header">
+                        <h2 class="content-title">US Military Bases Business</h2>
+                        <p class="content-subtitle">미군 기지 전력 인프라 구축 프로젝트</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- Substation Upgrade -->
+                        <div id="substation-upgrade" class="content-block full-width">
+                            <h3 class="block-title">Substation Upgrade</h3>
+                            <div class="block-content">
+                                <p>콘텐츠 영역</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,77 +231,40 @@
     <script src="../../js/hamburger.js"></script>
     <script src="../../js/main-top-padding.js"></script>
     <script src="../../js/pages/epc.js"></script>
-</body>
-</html>
-
-<style>
-/* ===== EPC PAGE SPECIFIC STYLES ===== */
-
-/* Section Navigation */
-.section-navigation {
-    background-color: var(--white, #ffffff);
-    border-bottom: 1px solid var(--border-light, #e5e5e5);
-    position: sticky;
-    top: 80px;
-    z-index: 100;
-}
-
-.section-navigation .container {
-    max-width: none !important;
-    width: 100vw !important;
-    margin: 0;
-    padding: 0;
-}
-
-.section-navigation .section-nav {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0;
-}
-
-/* Content Section */
-.content-section {
-    padding: 3rem 0;
-    background-color: var(--white, #ffffff);
-}
-
-/* Smooth Scrolling for Sections */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Section Scroll Offset */
-.content-block[id] {
-    scroll-margin-top: 140px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .section-navigation .section-nav {
-        padding: 1rem;
-        gap: 0.5rem;
-    }
-}
-</style>
-
-<script>
-// epc.js - EPC 페이지 섹션 네비게이션 기능
+    <script>
+        // epc.js - EPC 페이지 탭/섹션 네비게이션 기능 (about.js 기반)
 
 // ===== EPC 페이지 컨트롤러 클래스 =====
 class EPCPageController {
     constructor() {
+        this.currentTab = 'fossil';
         this.currentSection = null;
+        
         this.init();
     }
     
     // 초기화
     init() {
+        this.setupTabNavigation();
         this.setupSectionNavigation();
         this.handleUrlHash();
-        this.setupScrollSpy();
+        this.attachEvents();
+    }
+    
+    // 탭 네비게이션 설정
+    setupTabNavigation() {
+        const tabLinks = document.querySelectorAll('.tab-link');
+        
+        tabLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabId = link.getAttribute('data-tab');
+                this.switchTab(tabId);
+                
+                // URL 해시 업데이트
+                window.history.pushState(null, null, `#${tabId}`);
+            });
+        });
     }
     
     // 섹션 네비게이션 설정
@@ -214,14 +290,17 @@ class EPCPageController {
     handleUrlHash() {
         const hash = window.location.hash.substring(1);
         
-        if (hash && document.getElementById(hash)) {
-            setTimeout(() => {
-                this.scrollToSection(hash);
-                const correspondingLink = document.querySelector(`[href="#${hash}"]`);
-                if (correspondingLink) {
-                    this.updateSectionActiveState(correspondingLink);
-                }
-            }, 100);
+        if (hash) {
+            // 탭 ID인지 섹션 ID인지 확인
+            if (this.isTabId(hash)) {
+                this.switchTab(hash);
+            } else if (this.isSectionId(hash)) {
+                const tabId = this.getTabIdFromSection(hash);
+                this.switchTab(tabId);
+                setTimeout(() => {
+                    this.scrollToSection(hash);
+                }, 100);
+            }
         }
         
         // 브라우저 뒤로가기/앞으로가기 처리
@@ -230,18 +309,65 @@ class EPCPageController {
         });
     }
     
+    // 탭 전환
+    switchTab(tabId) {
+        this.currentTab = tabId;
+        
+        // 모든 탭 링크 비활성화
+        document.querySelectorAll('.tab-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // 해당 탭 링크 활성화
+        const activeTabLink = document.querySelector(`[data-tab="${tabId}"]`);
+        if (activeTabLink) {
+            activeTabLink.classList.add('active');
+        }
+        
+        // 모든 탭 콘텐츠 숨기기
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        // 해당 탭 콘텐츠 표시
+        const activeTabContent = document.getElementById(tabId);
+        if (activeTabContent) {
+            activeTabContent.classList.add('active');
+        }
+        
+        // 섹션 네비게이션 전환
+        this.switchSectionNav(tabId);
+    }
+    
+    // 섹션 네비게이션 전환
+    switchSectionNav(tabId) {
+        // 모든 섹션 네비게이션 숨기기
+        document.querySelectorAll('.section-nav').forEach(nav => {
+            nav.style.display = 'none';
+        });
+        
+        // 해당 탭의 섹션 네비게이션 표시
+        const activeSectionNav = document.getElementById(`section-nav-${tabId}`);
+        if (activeSectionNav) {
+            activeSectionNav.style.display = 'flex';
+        }
+        
+        // 섹션 활성화 상태 초기화
+        this.clearSectionActiveStates();
+    }
+    
     // 섹션으로 스크롤
     scrollToSection(sectionId) {
         const targetSection = document.getElementById(sectionId);
         if (!targetSection) return;
         
-        // 헤더 높이 + 섹션 네비게이션 높이 계산
+        // 헤더 높이 + 탭 네비게이션 높이 계산
         const header = document.querySelector('.header');
-        const sectionNavigation = document.querySelector('.section-navigation');
+        const tabNavigation = document.querySelector('.tab-navigation');
         
         const headerHeight = header ? header.getBoundingClientRect().height : 0;
-        const sectionNavHeight = sectionNavigation ? sectionNavigation.getBoundingClientRect().height : 0;
-        const totalOffset = headerHeight + sectionNavHeight + 20; // 여유 공간 20px
+        const tabNavHeight = tabNavigation ? tabNavigation.getBoundingClientRect().height : 0;
+        const totalOffset = headerHeight + tabNavHeight + 20; // 여유 공간 20px
         
         const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
         const adjustedPosition = targetPosition - totalOffset;
@@ -256,13 +382,54 @@ class EPCPageController {
     
     // 섹션 활성화 상태 업데이트
     updateSectionActiveState(activeLink) {
-        // 모든 섹션 링크 비활성화
-        document.querySelectorAll('.section-nav-link').forEach(link => {
-            link.classList.remove('active');
-        });
+        // 현재 표시된 섹션 네비게이션 내의 모든 링크 비활성화
+        const currentSectionNav = document.querySelector('.section-nav[style*="flex"]');
+        if (currentSectionNav) {
+            currentSectionNav.querySelectorAll('.section-nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+        }
         
         // 클릭된 링크 활성화
         activeLink.classList.add('active');
+    }
+    
+    // 섹션 활성화 상태 초기화
+    clearSectionActiveStates() {
+        document.querySelectorAll('.section-nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+    }
+    
+    // 탭 ID인지 확인
+    isTabId(id) {
+        const tabIds = ['fossil', 'nuclear-power', 'renewable', 'us-military-other', 'us-military-bases'];
+        return tabIds.includes(id);
+    }
+    
+    // 섹션 ID인지 확인
+    isSectionId(id) {
+        const sectionPrefixes = ['fossil-', 'nuclear-', 'renewable-', 'us-military', 'data-center', 'substation-'];
+        return sectionPrefixes.some(prefix => id.startsWith(prefix));
+    }
+    
+    // 섹션 ID로부터 탭 ID 추출
+    getTabIdFromSection(sectionId) {
+        if (sectionId.startsWith('fossil-')) return 'fossil';
+        if (sectionId.startsWith('nuclear-')) return 'nuclear-power';
+        if (sectionId.startsWith('renewable-')) return 'renewable';
+        if (sectionId === 'us-military' || sectionId === 'data-center') return 'us-military-other';
+        if (sectionId.startsWith('substation-')) return 'us-military-bases';
+        return 'fossil'; // 기본값
+    }
+    
+    // 추가 이벤트 처리
+    attachEvents() {
+        // 스크롤 시 현재 보이는 섹션 감지 (옵션)
+        this.setupScrollSpy();
+        
+        // 키보드 네비게이션 (옵션)
+        this.setupKeyboardNavigation();
     }
     
     // 스크롤 스파이 (현재 보이는 섹션 자동 감지)
@@ -284,7 +451,6 @@ class EPCPageController {
                     
                     if (correspondingLink && !correspondingLink.classList.contains('active')) {
                         this.updateSectionActiveState(correspondingLink);
-                        this.currentSection = sectionId;
                     }
                 }
             });
@@ -300,14 +466,44 @@ class EPCPageController {
         });
     }
     
+    // 키보드 네비게이션
+    setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            // 탭 키로 탭 간 이동 (Ctrl + Arrow)
+            if (e.ctrlKey) {
+                const tabIds = ['fossil', 'nuclear-power', 'renewable', 'us-military-other', 'us-military-bases'];
+                const currentIndex = tabIds.indexOf(this.currentTab);
+                
+                if (e.key === 'ArrowRight' && currentIndex < tabIds.length - 1) {
+                    e.preventDefault();
+                    this.switchTab(tabIds[currentIndex + 1]);
+                    window.history.pushState(null, null, `#${tabIds[currentIndex + 1]}`);
+                } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                    e.preventDefault();
+                    this.switchTab(tabIds[currentIndex - 1]);
+                    window.history.pushState(null, null, `#${tabIds[currentIndex - 1]}`);
+                }
+            }
+        });
+    }
+    
     // 외부에서 호출 가능한 메서드들
+    goToTab(tabId) {
+        this.switchTab(tabId);
+        window.history.pushState(null, null, `#${tabId}`);
+    }
+    
     goToSection(sectionId) {
-        this.scrollToSection(sectionId);
-        const correspondingLink = document.querySelector(`[href="#${sectionId}"]`);
-        if (correspondingLink) {
-            this.updateSectionActiveState(correspondingLink);
-        }
+        const tabId = this.getTabIdFromSection(sectionId);
+        this.switchTab(tabId);
+        setTimeout(() => {
+            this.scrollToSection(sectionId);
+        }, 100);
         window.history.pushState(null, null, `#${sectionId}`);
+    }
+    
+    getCurrentTab() {
+        return this.currentTab;
     }
     
     getCurrentSection() {
@@ -327,10 +523,20 @@ function initEPCPage() {
 }
 
 // ===== 전역 함수들 =====
+function goToTab(tabId) {
+    if (epcPageController) {
+        epcPageController.goToTab(tabId);
+    }
+}
+
 function goToSection(sectionId) {
     if (epcPageController) {
         epcPageController.goToSection(sectionId);
     }
+}
+
+function getCurrentTab() {
+    return epcPageController ? epcPageController.getCurrentTab() : null;
 }
 
 function getCurrentSection() {
@@ -340,7 +546,7 @@ function getCurrentSection() {
 // ===== 자동 초기화 =====
 document.addEventListener('DOMContentLoaded', function() {
     // 컴포넌트 로딩 완료 후 초기화
-    if (document.querySelector('.section-navigation')) {
+    if (document.querySelector('.tab-navigation')) {
         initEPCPage();
     } else {
         document.addEventListener('componentsLoaded', () => {
@@ -351,6 +557,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== 전역 함수 내보내기 =====
 window.initEPCPage = initEPCPage;
+window.goToTab = goToTab;
 window.goToSection = goToSection;
+window.getCurrentTab = getCurrentTab;
 window.getCurrentSection = getCurrentSection;
-</script>
+    </script>
+</body>
+</html>

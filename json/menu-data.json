@@ -33,7 +33,7 @@
         "epc": {
           "title": "EPC",
           "url": "/pages/business/epc.html",
-          "sections": ["플랜트 전기분야 설계", "플랜트 계측분야 설계", "전력계통 컨설팅", "CGID"]
+          "sections": ["Fossil", "Nuclear Power", "Renewable", "US Military and Other Business","US Military Bases Business"]
         },
         "engineering": {
           "title": "엔지니어링",
@@ -158,12 +158,12 @@
               "access": "public"
             },
             "moment": {
-              "title": "모먼트",
+              "title": "모먼트(내부용)",
               "url": "/pages/media/gallery/moment.html",
               "access": "internal"
             },
             "archive": {
-              "title": "아카이브",
+              "title": "아카이브(내부용)",
               "url": "/pages/media/gallery/archive.html",
               "access": "internal",
               "sections": ["회장님 사진 모음", "2025년 2월 3일", "2023 웨스터민스터 방문", "국민일보 역경의 열매"]

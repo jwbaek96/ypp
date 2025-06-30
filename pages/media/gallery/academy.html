@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO 메타 태그 -->
+    <title>아카데미갤러리 - YPP</title>
+    <meta name="description" content="YPP 아카데미갤러리 - PSAC, Relay School 교육 프로그램 갤러리">
+    <meta name="keywords" content="YPP, 아카데미갤러리, PSAC, Relay School, 교육">
+    
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/ico" href="../../../assets/images/favicon/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/pages/layout.css">
+    
+    <!-- 메타 시스템 -->
+    <script src="../../../js/head-meta.js"></script>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+    
+    <!-- Mobile Sidebar Container -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="page-header-content">
+                    <h1 class="page-title">아카데미갤러리</h1>
+                    <p class="page-subtitle">YPP아카데미 교육 프로그램 갤러리</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Breadcrumb -->
+        <section class="breadcrumb-section">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="../../../index.html">홈</a>
+                    <span class="breadcrumb-separator">></span>
+                    <a href="../../media/">홍보</a>
+                    <span class="breadcrumb-separator">></span>
+                    <a href="../gallery/">갤러리</a>
+                    <span class="breadcrumb-separator">></span>
+                    <span class="breadcrumb-current">아카데미갤러리</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Section Navigation -->
+        <section class="section-navigation">
+            <div class="container">
+                <nav class="section-nav">
+                    <a href="#psac" class="section-nav-link active">PSAC</a>
+                    <a href="#relay-school" class="section-nav-link">Relay School</a>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <div class="container">
+                <div class="content-header">
+                    <h2 class="content-title">아카데미갤러리</h2>
+                    <p class="content-subtitle">YPP아카데미 교육 프로그램의 생생한 현장을 만나보세요</p>
+                </div>
+                
+                <div class="content-grid">
+                    <!-- PSAC -->
+                    <div id="psac" class="content-block full-width">
+                        <h3 class="block-title">PSAC</h3>
+                        <div class="block-content">
+                            <p>콘텐츠 영역</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Relay School -->
+                    <div id="relay-school" class="content-block full-width">
+                        <h3 class="block-title">Relay School</h3>
+                        <div class="block-content">
+                            <p>콘텐츠 영역</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="../../../js/components.js"></script>
+    <script src="../../../js/header-menu.js"></script>
+    <script src="../../../js/sidebar.js"></script>
+    <script src="../../../js/hamburger.js"></script>
+    <script src="../../../js/main-top-padding.js"></script>
+    <script>
+        // academy-gallery.js - 아카데미갤러리 페이지 섹션 네비게이션 기능
+
+// ===== 아카데미갤러리 페이지 컨트롤러 클래스 =====
+class AcademyGalleryPageController {
+    constructor() {
+        this.currentSection = null;
+        this.init();
+    }
+    
+    // 초기화
+    init() {
+        this.setupSectionNavigation();
+        this.handleUrlHash();
+        this.setupScrollSpy();
+    }
+    
+    // 섹션 네비게이션 설정
+    setupSectionNavigation() {
+        const sectionLinks = document.querySelectorAll('.section-nav-link');
+        
+        sectionLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                const sectionId = href.substring(1); // # 제거
+                
+                this.scrollToSection(sectionId);
+                this.updateSectionActiveState(link);
+                
+                // URL 해시 업데이트
+                window.history.pushState(null, null, href);
+            });
+        });
+    }
+    
+    // URL 해시 처리
+    handleUrlHash() {
+        const hash = window.location.hash.substring(1);
+        
+        if (hash && document.getElementById(hash)) {
+            setTimeout(() => {
+                this.scrollToSection(hash);
+                const correspondingLink = document.querySelector(`[href="#${hash}"]`);
+                if (correspondingLink) {
+                    this.updateSectionActiveState(correspondingLink);
+                }
+            }, 100);
+        }
+        
+        // 브라우저 뒤로가기/앞으로가기 처리
+        window.addEventListener('popstate', () => {
+            this.handleUrlHash();
+        });
+    }
+    
+    // 섹션으로 스크롤
+    scrollToSection(sectionId) {
+        const targetSection = document.getElementById(sectionId);
+        if (!targetSection) return;
+        
+        // 헤더 높이 + 섹션 네비게이션 높이 계산
+        const header = document.querySelector('.header');
+        const sectionNavigation = document.querySelector('.section-navigation');
+        
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        const sectionNavHeight = sectionNavigation ? sectionNavigation.getBoundingClientRect().height : 0;
+        const totalOffset = headerHeight + sectionNavHeight + 20; // 여유 공간 20px
+        
+        const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+        const adjustedPosition = targetPosition - totalOffset;
+        
+        window.scrollTo({
+            top: adjustedPosition,
+            behavior: 'smooth'
+        });
+        
+        this.currentSection = sectionId;
+    }
+    
+    // 섹션 활성화 상태 업데이트
+    updateSectionActiveState(activeLink) {
+        // 모든 섹션 링크 비활성화
+        document.querySelectorAll('.section-nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // 클릭된 링크 활성화
+        activeLink.classList.add('active');
+    }
+    
+    // 스크롤 스파이 (현재 보이는 섹션 자동 감지)
+    setupScrollSpy() {
+        let ticking = false;
+        
+        const updateActiveSection = () => {
+            const sections = document.querySelectorAll('.content-block[id]');
+            const scrollPosition = window.pageYOffset + window.innerHeight / 2;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top + window.pageYOffset;
+                const sectionBottom = sectionTop + rect.height;
+                
+                if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+                    const sectionId = section.id;
+                    const correspondingLink = document.querySelector(`[href="#${sectionId}"]`);
+                    
+                    if (correspondingLink && !correspondingLink.classList.contains('active')) {
+                        this.updateSectionActiveState(correspondingLink);
+                        this.currentSection = sectionId;
+                    }
+                }
+            });
+            
+            ticking = false;
+        };
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateActiveSection);
+                ticking = true;
+            }
+        });
+    }
+    
+    // 외부에서 호출 가능한 메서드들
+    goToSection(sectionId) {
+        this.scrollToSection(sectionId);
+        const correspondingLink = document.querySelector(`[href="#${sectionId}"]`);
+        if (correspondingLink) {
+            this.updateSectionActiveState(correspondingLink);
+        }
+        window.history.pushState(null, null, `#${sectionId}`);
+    }
+    
+    getCurrentSection() {
+        return this.currentSection;
+    }
+}
+
+// ===== 전역 변수 =====
+let academyGalleryPageController = null;
+
+// ===== 초기화 함수 =====
+function initAcademyGalleryPage() {
+    if (!academyGalleryPageController) {
+        academyGalleryPageController = new AcademyGalleryPageController();
+    }
+    return academyGalleryPageController;
+}
+
+// ===== 전역 함수들 =====
+function goToSection(sectionId) {
+    if (academyGalleryPageController) {
+        academyGalleryPageController.goToSection(sectionId);
+    }
+}
+
+function getCurrentSection() {
+    return academyGalleryPageController ? academyGalleryPageController.getCurrentSection() : null;
+}
+
+// ===== 자동 초기화 =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 컴포넌트 로딩 완료 후 초기화
+    if (document.querySelector('.section-navigation')) {
+        initAcademyGalleryPage();
+    } else {
+        document.addEventListener('componentsLoaded', () => {
+            setTimeout(initAcademyGalleryPage, 200);
+        });
+    }
+});
+
+// ===== 전역 함수 내보내기 =====
+window.initAcademyGalleryPage = initAcademyGalleryPage;
+window.goToSection = goToSection;
+window.getCurrentSection = getCurrentSection;

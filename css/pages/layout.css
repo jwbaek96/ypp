@@ -227,6 +227,11 @@
     .tab-nav {
         padding: 0 1rem;
     }
+    .tab-nav {
+    display: flex;
+    justify-content:flex-start;
+    overflow-x: scroll;
+}
     
     .tab-link {
         padding: 1rem 1.5rem;

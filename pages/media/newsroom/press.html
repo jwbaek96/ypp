@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO 메타 태그 -->
+    <title>보도자료 - YPP</title>
+    <meta name="description" content="YPP 보도자료 - 최신 뉴스 및 언론 보도 자료">
+    <meta name="keywords" content="YPP, 보도자료, 뉴스, 언론보도, 미디어">
+    
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/ico" href="../../../assets/images/favicon/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/pages/layout.css">
+    
+    <!-- 메타 시스템 -->
+    <script src="../../../js/head-meta.js"></script>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+    
+    <!-- Mobile Sidebar Container -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="page-header-content">
+                    <h1 class="page-title">보도자료</h1>
+                    <p class="page-subtitle">YPP의 최신 소식과 언론 보도 자료</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Breadcrumb -->
+        <section class="breadcrumb-section">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="../../../index.html">홈</a>
+                    <span class="breadcrumb-separator">></span>
+                    <a href="../../media/">홍보</a>
+                    <span class="breadcrumb-separator">></span>
+                    <a href="../newsroom/">미디어룸</a>
+                    <span class="breadcrumb-separator">></span>
+                    <span class="breadcrumb-current">보도자료</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <div class="container">
+                <div class="content-header">
+                    <h2 class="content-title">보도자료</h2>
+                    <p class="content-subtitle">YPP의 주요 활동과 성과를 언론을 통해 소개합니다</p>
+                </div>
+                
+                <!-- Search & Filter -->
+                <div class="search-filter-section">
+                    <div class="search-box">
+                        <input type="text" placeholder="검색어를 입력하세요" class="search-input">
+                        <button class="search-btn">검색</button>
+                    </div>
+                    <div class="filter-box">
+                        <select class="year-filter">
+                            <option value="all">전체 연도</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                        <select class="category-filter">
+                            <option value="all">전체 분야</option>
+                            <option value="business">사업</option>
+                            <option value="technology">기술</option>
+                            <option value="award">수상</option>
+                            <option value="partnership">협력</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Press Release List -->
+                <div class="press-list">
+                    <div class="list-header">
+                        <span class="total-count">총 <strong>0</strong>건</span>
+                        <div class="sort-options">
+                            <button class="sort-btn active" data-sort="date">최신순</button>
+                            <button class="sort-btn" data-sort="title">제목순</button>
+                        </div>
+                    </div>
+
+                    <div class="press-items">
+                        <!-- 보도자료 항목들이 여기에 동적으로 추가됩니다 -->
+                        <div class="empty-message">
+                            <p>등록된 보도자료가 없습니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="page-btn prev" disabled>이전</button>
+                        <div class="page-numbers">
+                            <button class="page-number active">1</button>
+                        </div>
+                        <button class="page-btn next" disabled>다음</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="../../../js/components.js"></script>
+    <script src="../../../js/header-menu.js"></script>
+    <script src="../../../js/sidebar.js"></script>
+    <script src="../../../js/hamburger.js"></script>
+    <script src="../../../js/main-top-padding.js"></script>
+    <script>
+        // press.js - 보도자료 페이지 기능
+
+// ===== 보도자료 데이터 (실제로는 서버에서 가져옴) =====
+const pressData = [
+    // 샘플 데이터 - 실제 구현 시 서버 API에서 가져옴
+];
+
+// ===== 보도자료 페이지 컨트롤러 클래스 =====
+class PressPageController {
+    constructor() {
+        this.currentPage = 1;
+        this.itemsPerPage = 10;
+        this.filteredData = [...pressData];
+        this.currentSort = 'date';
+        
+        this.init();
+    }
+    
+    // 초기화
+    init() {
+        this.setupEventListeners();
+        this.renderList();
+        this.updateTotalCount();
+    }
+    
+    // 이벤트 리스너 설정
+    setupEventListeners() {
+        // 검색
+        const searchBtn = document.querySelector('.search-btn');
+        const searchInput = document.querySelector('.search-input');
+        
+        searchBtn.addEventListener('click', () => this.handleSearch());
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.handleSearch();
+        });
+        
+        // 필터
+        const yearFilter = document.querySelector('.year-filter');
+        const categoryFilter = document.querySelector('.category-filter');
+        
+        yearFilter.addEventListener('change', () => this.handleFilter());
+        categoryFilter.addEventListener('change', () => this.handleFilter());
+        
+        // 정렬
+        const sortBtns = document.querySelectorAll('.sort-btn');
+        sortBtns.forEach(btn => {
+            btn.addEventListener('click', () => this.handleSort(btn.dataset.sort));
+        });
+        
+        // 페이지네이션
+        const prevBtn = document.querySelector('.page-btn.prev');
+        const nextBtn = document.querySelector('.page-btn.next');
+        
+        prevBtn.addEventListener('click', () => this.goToPage(this.currentPage - 1));
+        nextBtn.addEventListener('click', () => this.goToPage(this.currentPage + 1));
+    }
+    
+    // 검색 처리
+    handleSearch() {
+        const keyword = document.querySelector('.search-input').value.trim();
+        
+        if (keyword) {
+            this.filteredData = pressData.filter(item => 
+                item.title.includes(keyword) || 
+                item.content.includes(keyword)
+            );
+        } else {
+            this.filteredData = [...pressData];
+        }
+        
+        this.currentPage = 1;
+        this.applyCurrentFilters();
+        this.renderList();
+        this.updateTotalCount();
+    }
+    
+    // 필터 처리
+    handleFilter() {
+        const year = document.querySelector('.year-filter').value;
+        const category = document.querySelector('.category-filter').value;
+        
+        this.filteredData = pressData.filter(item => {
+            const yearMatch = year === 'all' || item.year === year;
+            const categoryMatch = category === 'all' || item.category === category;
+            return yearMatch && categoryMatch;
+        });
+        
+        this.currentPage = 1;
+        this.renderList();
+        this.updateTotalCount();
+    }
+    
+    // 정렬 처리
+    handleSort(sortType) {
+        this.currentSort = sortType;
+        
+        // 정렬 버튼 상태 업데이트
+        document.querySelectorAll('.sort-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`[data-sort="${sortType}"]`).classList.add('active');
+        
+        // 데이터 정렬
+        this.filteredData.sort((a, b) => {
+            if (sortType === 'date') {
+                return new Date(b.date) - new Date(a.date);
+            } else if (sortType === 'title') {
+                return a.title.localeCompare(b.title);
+            }
+            return 0;
+        });
+        
+        this.renderList();
+    }
+    
+    // 페이지 이동
+    goToPage(page) {
+        const totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
+        
+        if (page < 1 || page > totalPages) return;
+        
+        this.currentPage = page;
+        this.renderList();
+        this.updatePagination();
+    }
+    
+    // 리스트 렌더링
+    renderList() {
+        const container = document.querySelector('.press-items');
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        const endIndex = startIndex + this.itemsPerPage;
+        const currentItems = this.filteredData.slice(startIndex, endIndex);
+        
+        if (currentItems.length === 0) {
+            container.innerHTML = `
+                <div class="empty-message">
+                    <p>조건에 맞는 보도자료가 없습니다.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        container.innerHTML = currentItems.map(item => `
+            <article class="press-item">
+                <div class="press-content">
+                    <div class="press-meta">
+                        <span class="press-date">${this.formatDate(item.date)}</span>
+                        <span class="press-category">${this.getCategoryName(item.category)}</span>
+                    </div>
+                    <h3 class="press-title">
+                        <a href="${item.link || '#'}" target="_blank">${item.title}</a>
+                    </h3>
+                    <p class="press-summary">${item.summary}</p>
+                    <div class="press-source">
+                        <span>출처: ${item.source}</span>
+                    </div>
+                </div>
+            </article>
+        `).join('');
+        
+        this.updatePagination();
+    }
+    
+    // 날짜 포맷팅
+    formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        }).replace(/\./g, '.').replace(/\s/g, '');
+    }
+    
+    // 카테고리 이름 변환
+    getCategoryName(category) {
+        const categories = {
+            'business': '사업',
+            'technology': '기술',
+            'award': '수상',
+            'partnership': '협력'
+        };
+        return categories[category] || '기타';
+    }
+    
+    // 총 개수 업데이트
+    updateTotalCount() {
+        const countElement = document.querySelector('.total-count strong');
+        countElement.textContent = this.filteredData.length;
+    }
+    
+    // 페이지네이션 업데이트
+    updatePagination() {
+        const totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
+        
+        // 이전/다음 버튼 상태
+        const prevBtn = document.querySelector('.page-btn.prev');
+        const nextBtn = document.querySelector('.page-btn.next');
+        
+        prevBtn.disabled = this.currentPage === 1;
+        nextBtn.disabled = this.currentPage === totalPages || totalPages === 0;
+        
+        // 페이지 번호 생성
+        const pageNumbers = document.querySelector('.page-numbers');
+        const startPage = Math.max(1, this.currentPage - 2);
+        const endPage = Math.min(totalPages, startPage + 4);
+        
+        pageNumbers.innerHTML = '';
+        for (let i = startPage; i <= endPage; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.className = `page-number ${i === this.currentPage ? 'active' : ''}`;
+            pageBtn.textContent = i;
+            pageBtn.addEventListener('click', () => this.goToPage(i));
+            pageNumbers.appendChild(pageBtn);
+        }
+    }
+    
+    // 현재 필터 적용
+    applyCurrentFilters() {
+        const year = document.querySelector('.year-filter').value;
+        const category = document.querySelector('.category-filter').value;
+        
+        if (year !== 'all' || category !== 'all') {
+            this.filteredData = this.filteredData.filter(item => {
+                const yearMatch = year === 'all' || item.year === year;
+                const categoryMatch = category === 'all' || item.category === category;
+                return yearMatch && categoryMatch;
+            });
+        }
+    }
+}
+
+// ===== 전역 변수 =====
+let pressPageController = null;
+
+// ===== 초기화 함수 =====
+function initPressPage() {
+    if (!pressPageController) {
+        pressPageController = new PressPageController();
+    }
+    return pressPageController;
+}
+
+// ===== 자동 초기화 =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 컴포넌트 로딩 완료 후 초기화
+    if (document.querySelector('.press-list')) {
+        initPressPage();
+    } else {
+        document.addEventListener('componentsLoaded', () => {
+            setTimeout(initPressPage, 200);
+        });
+    }
+});
+
+// ===== 전역 함수 내보내기 =====
+window.initPressPage = initPressPage;
+    </script>
+</body>
+</html>
+
+<style>
+/* ===== PRESS PAGE SPECIFIC STYLES ===== */
+
+/* Content Section */
+.content-section {
+    padding: 3rem 0;
+    background-color: var(--white, #ffffff);
+}
+
+/* Search & Filter Section */
+.search-filter-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 2rem;
+}
+
+.search-box {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
+    max-width: 400px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-light, #e5e5e5);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.search-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-blue, #0066cc);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: var(--primary-red, #cc0033);
+}
+
+.filter-box {
+    display: flex;
+    gap: 1rem;
+}
+
+.year-filter,
+.category-filter {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-light, #e5e5e5);
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* List Header */
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-light, #e5e5e5);
+}
+
+.total-count {
+    color: var(--text-secondary, #666);
+    font-size: 0.9rem;
+}
+
+.sort-options {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.sort-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-light, #e5e5e5);
+    background-color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.sort-btn.active,
+.sort-btn:hover {
+    background-color: var(--primary-blue, #0066cc);
+    color: white;
+    border-color: var(--primary-blue, #0066cc);
+}
+
+/* Press Items */
+.press-items {
+    min-height: 400px;
+}
+
+.press-item {
+    padding: 1.5rem;
+    border: 1px solid var(--border-light, #e5e5e5);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.press-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.press-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.press-date {
+    color: var(--text-secondary, #666);
+}
+
+.press-category {
+    color: var(--primary-blue, #0066cc);
+    font-weight: 500;
+}
+
+.press-title {
+    margin-bottom: 0.75rem;
+}
+
+.press-title a {
+    color: var(--text-primary, #333);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.press-title a:hover {
+    color: var(--primary-blue, #0066cc);
+}
+
+.press-summary {
+    color: var(--text-secondary, #666);
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+}
+
+.press-source {
+    font-size: 0.85rem;
+    color: var(--text-light, #999);
+}
+
+/* Empty Message */
+.empty-message {
+    text-align: center;
+    padding: 3rem 0;
+    color: var(--text-secondary, #666);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-light, #e5e5e5);
+}
+
+.page-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-light, #e5e5e5);
+    background-color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.page-btn:not(:disabled):hover {
+    background-color: var(--background-light, #f8f9fa);
+}
+
+.page-numbers {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.page-number {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border-light, #e5e5e5);
+    background-color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.page-number.active {
+    background-color: var(--primary-blue, #0066cc);
+    color: white;
+    border-color: var(--primary-blue, #0066cc);
+}
+
+.page-number:not(.active):hover {
+    background-color: var(--background-light, #f8f9fa);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .search-filter-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    .search-box {
+        max-width: none;
+    }
+    
+    .filter-box {
+        flex-direction: column;
+    }
+    
+    .list-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+    
+    .press-meta {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+    }
+}
+</style>

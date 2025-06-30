@@ -136,7 +136,7 @@
         },
         "gallery": {
           "title": "갤러리",
-          "url": "/ypp/pages/media/gallery/",
+          "url": "/ypp/pages/media/gallery/academy.html",
           "children": {
             "academy": {
               "title": "아카데미갤러리",

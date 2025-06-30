@@ -113,3 +113,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== 전역 함수 내보내기 =====
 window.loadAllComponents = loadAllComponents;
+
+// 현재 URL 확인하여 로고 링크 제어
+function updateLogoLink() {
+    const currentUrl = window.location.href;
+    const targetUrl = 'https://jwbaek96.github.io/ypp/';
+    const logoLink = document.getElementById('logo-link');
+    
+    if (currentUrl === targetUrl) {
+        logoLink.href = '';
+        logoLink.style.cursor = 'default';
+    }
+}
+
+// DOM 로드 완료 후 실행
+document.addEventListener('DOMContentLoaded', updateLogoLink);

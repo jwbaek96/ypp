@@ -1,44 +1,37 @@
-// sidebar.js - 모바일 사이드바 메뉴 생성
+// sidebar.js - 모바일 사이드바 메뉴 생성 (GitHub Pages 수정)
 
-// sidebar.js - 모바일 사이드바 메뉴 생성
-
-// ===== 경로 계산 함수 (GitHub Pages 대응) =====
+// ===== 경로 계산 함수 (GitHub Pages ypp 저장소 대응) =====
 function getBasePath() {
     const currentPath = window.location.pathname;
-    
-    // GitHub Pages 저장소명 감지
     const pathSegments = currentPath.split('/').filter(segment => segment !== '');
     
-    // 개인 도메인인 경우 (ypp.co.kr)
-    if (window.location.hostname !== 'jwbaek96.github.io') {
-        // 루트 경로인 경우
+    // GitHub Pages 저장소명 확인
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    
+    if (isGitHubPages && pathSegments[0] === 'ypp') {
+        // GitHub Pages: jwbaek96.github.io/ypp/
+        if (pathSegments.length === 1) {
+            // /ypp/ (루트)
+            return './';
+        } else if (pathSegments.length === 2) {
+            // /ypp/pages/ 폴더
+            return '../';
+        } else if (pathSegments.length === 3) {
+            // /ypp/pages/company/ 폴더
+            return '../../';
+        } else if (pathSegments.length === 4) {
+            // /ypp/pages/company/about.html
+            return '../../';
+        }
+    } else {
+        // 로컬 개발 환경 또는 일반 도메인
         if (pathSegments.length === 0 || pathSegments[pathSegments.length - 1] === 'index.html') {
             return './';
+        } else if (pathSegments.length === 1) {
+            return '../';
+        } else if (pathSegments.length === 2) {
+            return '../../';
         }
-        
-        // 하위 페이지인 경우
-        const depth = pathSegments.length;
-        if (pathSegments[pathSegments.length - 1].includes('.html')) {
-            return '../'.repeat(depth - 1) || './';
-        }
-        return '../'.repeat(depth) || './';
-    }
-    
-    // GitHub Pages인 경우 (username.github.io/repository-name)
-    // 첫 번째 세그먼트가 저장소명
-    if (pathSegments.length <= 1 || 
-        (pathSegments.length === 2 && pathSegments[1] === 'index.html')) {
-        return './';
-    }
-    
-    // pages/about.html -> ../
-    if (pathSegments.length === 3) {
-        return '../';
-    }
-    
-    // pages/company/about.html -> ../../
-    if (pathSegments.length === 4) {
-        return '../../';
     }
     
     return './';
@@ -50,14 +43,21 @@ let sidebarMenuData = null;
 async function loadSidebarMenuData() {
     try {
         const basePath = getBasePath();
-        const response = await fetch(`${basePath}json/menu-data.json`);
+        // menu-data.json이 루트에 있으므로 경로 수정
+        const menuPath = `${basePath}menu-data.json`;
+        
+        console.log(`Loading sidebar menu data from: ${menuPath}`); // 디버깅용
+        
+        const response = await fetch(menuPath);
         if (!response.ok) {
             throw new Error(`Failed to load menu data: ${response.status}`);
         }
         
         sidebarMenuData = await response.json();
+        console.log('Sidebar menu data loaded successfully'); // 디버깅용
         return sidebarMenuData;
     } catch (error) {
+        console.error('Error loading sidebar menu data:', error); // 디버깅용
         return null;
     }
 }
@@ -214,7 +214,7 @@ function toggleSidebarSubmenu(menuItem) {
 
 // ===== 3단계 서브메뉴 토글 =====
 function toggleSidebarSubSubmenu(menuItem) {
-    const subSubmenu = menuItem.querySelector('.sidebar-submenu:last-child'); // 마지막 서브메뉴 선택
+    const subSubmenu = menuItem.querySelector('.sidebar-sub-submenu');
     if (!subSubmenu) return;
     
     const isOpen = subSubmenu.style.maxHeight && subSubmenu.style.maxHeight !== '0px';
@@ -329,12 +329,14 @@ async function insertSidebarMenu() {
     const container = document.querySelector('#mobile-sidebar #desktop-nav-container');
     
     if (!container) {
+        console.log('Sidebar nav container not found'); // 디버깅용
         return;
     }
     
     // 메뉴 데이터 로딩
     const data = await loadSidebarMenuData();
     if (!data || !data.navigation) {
+        console.log('Sidebar menu data not available'); // 디버깅용
         return;
     }
     
@@ -342,6 +344,8 @@ async function insertSidebarMenu() {
     const menuElement = createSidebarMenu(data.navigation);
     container.innerHTML = '';
     container.appendChild(menuElement);
+    
+    console.log('Sidebar menu inserted successfully'); // 디버깅용
 }
 
 // ===== 언어 버튼 이벤트 =====

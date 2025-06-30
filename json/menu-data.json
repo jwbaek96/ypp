@@ -89,22 +89,22 @@
       "children": {
         "esg": {
           "title": "경영",
-          "url": "/ypp/pages/esg/esg.html",
+          "url": "/ypp/pages/esg/esg.html#esg",
           "sections": ["ESG 전략체계", "ESG경영보고서", "ESG자료실"]
         },
         "environment": {
           "title": "환경",
-          "url": "/ypp/pages/esg/environment.html",
+          "url": "/ypp/pages/esg/esg.html#environment",
           "sections": ["환경경영", "기후변화와 탄소중립"]
         },
         "social": {
           "title": "사회",
-          "url": "/ypp/pages/esg/social.html",
+          "url": "/ypp/pages/esg/esg.html#social",
           "sections": ["품질경영", "안전보건", "인권경영", "사회공헌"]
         },
         "governance": {
           "title": "지배구조",
-          "url": "/ypp/pages/esg/governance.html",
+          "url": "/ypp/pages/esg/esg.html#governance",
           "sections": ["윤리경영", "협력사ESG행동규범", "부패 및 비윤리신고"]
         }
       }

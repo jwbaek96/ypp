@@ -64,6 +64,11 @@ async function loadComponent(componentName, containerId) {
             // 이미지 경로 수정
             fixImagePaths(container, basePath);
             
+            // 헤더인 경우 로고 링크와 이미지 경로 설정
+            if (componentName === 'header') {
+                fixHeaderPaths(basePath);
+            }
+            
             console.log(`${componentName} loaded successfully`); // 디버깅용
         }
     } catch (error) {
@@ -83,6 +88,21 @@ function fixImagePaths(container, basePath) {
             img.setAttribute('src', basePath + cleanSrc);
         }
     });
+}
+
+// ===== 헤더 경로 수정 함수 =====
+function fixHeaderPaths(basePath) {
+    // 로고 링크 설정
+    const logoLink = document.getElementById('logo-link');
+    if (logoLink) {
+        logoLink.href = basePath + 'index.html';
+    }
+    
+    // 로고 이미지 경로 설정
+    const logoImage = document.getElementById('logo-image');
+    if (logoImage) {
+        logoImage.src = basePath + 'assets/images/logo/symbol.png';
+    }
 }
 
 // ===== 모든 컴포넌트 로딩 =====

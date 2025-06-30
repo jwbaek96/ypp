@@ -2,81 +2,81 @@
   "navigation": {
     "company": {
       "title": "회사소개",
-      "url": "/pages/company/about.html",
+      "url": "./pages/company/about.html",
       "children": {
         "status": {
           "title": "기업현황",
-          "url": "/pages/company/about.html",
+          "url": "./pages/company/about.html",
           "sections": ["소개", "인사말", "연혁", "조직도"]
         },
         "business": {
           "title": "주요사업",
-          "url": "/pages/company/about.html#business",
+          "url": "./pages/company/about.html#business",
           "sections": ["사업소개", "파트너", "인허가", "유자격"]
         },
         "culture": {
           "title": "기업문화",
-          "url": "/pages/company/about.html#culture",
+          "url": "./pages/company/about.html#culture",
           "sections": ["비전&핵심가치", "조직문화", "사회공헌"]
         },
         "location": {
           "title": "오시는길",
-          "url": "/pages/company/location.html",
+          "url": "./pages/company/location.html",
           "sections": ["본사", "공장", "지사", "교통편"]
         }
       }
     },
     "business": {
       "title": "사업분야",
-      "url": "/pages/business/epc.html",
+      "url": "./pages/business/epc.html",
       "children": {
         "epc": {
           "title": "EPC",
-          "url": "/pages/business/epc.html",
+          "url": "./pages/business/epc.html",
           "sections": ["Fossil", "Nuclear Power", "Renewable", "US Military and Other Business","US Military Bases Business"]
         },
         "engineering": {
           "title": "엔지니어링",
-          "url": "/pages/business/engineering.html",
+          "url": "./pages/business/engineering.html",
           "sections": ["플랜트 전기분야 설계", "플랜트 계측분야 설계", "전력계통 컨설팅", "CGID"]
         },
         "equipment": {
           "title": "장비공급",
-          "url": "/pages/business/equipment.html"
+          "url": "./pages/business/equipment.html"
         },
         "mro": {
           "title": "MRO",
-          "url": "/pages/business/mro.html",
+          "url": "./pages/business/mro.html",
           "children": {
             "system": {
               "title": "시스템공급",
-              "url": "/pages/business/mro/system.html",
+              "url": "./pages/business/mro/system.html",
               "children": {
                 "power": {
                   "title": "전력보호시스템",
-                  "url": "/pages/business/mro/system/power.html",
+                  "url": "./pages/business/mro/system/power.html",
                   "sections": ["전력계통 보호시스템"]
                 },
                 "plant": {
                   "title": "플랜트제어시스템",
-                  "url": "/pages/business/mro/system/plant.html",
+                  "url": "./pages/business/mro/system/plant.html",
                   "sections": ["Aux/Local control", "HVAC control"]
                 },
                 "monitoring": {
                   "title": "전기설비감시제어시스템",
-                  "url": "/pages/business/mro/system/monitoring.html",
+                  "url": "./pages/business/mro/system/monitoring.html",
                   "sections": ["Sampling System", "Vibration Monitoring System"]
                 },
                 "diagnosis": {
                   "title": "설비진단시스템",
-                  "url": "/pages/business/mro/system/diagnosis.html",
+                  "url": "./pages/business/mro/system/diagnosis.html",
                   "sections": ["디지털 변전소 운영시스템"]
                 }
               }
             },
             "maintenance": {
               "title": "유지보수",
-              "url": "/pages/business/mro/maintenance.html",
+              "url": "./pages/business/mro/maintenance.html",
               "sections": ["보호계전기", "발전기차단기(GCB)", "UPS"]
             }
           }

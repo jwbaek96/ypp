@@ -117,7 +117,7 @@
     },
     "media": {
       "title": "홍보",
-      "url": "/ypp/pages/media/press.html",
+      "url": "/ypp/pages/media/newsroom/press.html",
       "children": {
         "newsroom": {
           "title": "미디어룸",

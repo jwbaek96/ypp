@@ -89,7 +89,7 @@ function createMenuItem(item, key, depth) {
     
     // 메인 링크 생성
     const link = document.createElement('a');
-    link.href = `/ypp` + item.url || '#';
+    link.href = item.url || '#';
     link.textContent = item.title;
     link.className = 'menu-link';
     

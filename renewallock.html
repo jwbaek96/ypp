@@ -541,11 +541,11 @@
             });
             
             // 한글 버전에서만 영어 번역 표시
-            if (lang === 'ko') {
-                englishNotices.forEach(notice => notice.style.display = 'block');
-            } else {
-                englishNotices.forEach(notice => notice.style.display = 'none');
-            }
+            // if (lang === 'ko') {
+            //     englishNotices.forEach(notice => notice.style.display = 'block');
+            // } else {
+            //     englishNotices.forEach(notice => notice.style.display = 'none');
+            // }
             
             // 로고 alt 속성 변경
             const logoImg = document.getElementById('logo-image');
@@ -555,23 +555,37 @@
         }
 
         // PDF 다운로드 함수
-        function downloadFile(filename) {
+        // PDF 다운로드 함수 (파일 존재 여부 자동 감지)
+        async function downloadFile(filename) {
             const currentLang = document.querySelector('.lang-btn.active').textContent;
             const isKorean = currentLang === '한국어';
             
-            // const message = isKorean 
-            //     ? '현재 ' + filename + ' 파일을 준비중입니다.\n완료 후 다운로드가 가능합니다.'
-            //     : 'The ' + filename + ' file is currently being prepared.\nDownload will be available after completion.';
-            
-            // alert(message);
-            
-            // 실제 구현 시 아래 코드 사용
-            const link = document.createElement('a');
-            link.href = 'documents/' + filename;
-            link.download = filename;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            try {
+                // 파일 존재 여부 확인
+                const response = await fetch('documents/' + filename, { method: 'HEAD' });
+                
+                if (response.ok) {
+                    // 파일이 존재하는 경우 - 실제 다운로드
+                    const link = document.createElement('a');
+                    link.href = 'documents/' + filename;
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    console.log('다운로드 완료:', filename);
+                } else {
+                    // 파일이 없는 경우 - 준비중 알림
+                    throw new Error('File not found');
+                }
+            } catch (error) {
+                // 파일이 없거나 오류 발생 시
+                const message = isKorean 
+                    ? '현재 ' + filename + ' 파일을 준비중입니다.\n완료 후 다운로드가 가능합니다.'
+                    : 'The ' + filename + ' file is currently being prepared.\nDownload will be available after completion.';
+                
+                alert(message);
+            }
         }
 
         // 페이지 로드 완료 후 실행

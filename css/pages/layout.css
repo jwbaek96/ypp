@@ -58,7 +58,7 @@
     background-color: var(--white, #ffffff);
     border-bottom: 1px solid var(--border-light, #e5e5e5);
     position: sticky;
-    top: 80px;
+    top: 70px;
     z-index: 100;
 }
 
@@ -107,6 +107,7 @@
 }
 
 /* Section Navigation */
+
 .section-nav {
     display: flex;
     gap: 1rem;
@@ -238,7 +239,7 @@
     .tab-link {
         padding: 1rem 1.5rem;
     }
-    
+
     .section-nav {
         padding: 1rem;
         /* justify-content: flex-start; */

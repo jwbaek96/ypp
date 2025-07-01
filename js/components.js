@@ -1,54 +1,64 @@
-// components.js - 헤더, 푸터, 사이드바 HTML 불러오기 (GitHub Pages 수정)
+// components.js - 헤더, 푸터, 사이드바 HTML 불러오기 (통합 최적화 버전)
 
-// ===== 경로 계산 함수 (GitHub Pages ypp 저장소 대응) =====
-function getBasePath() {
-    const currentPath = window.location.pathname;
-    const pathSegments = currentPath.split('/').filter(segment => segment !== '');
+// ===== 환경별 경로 설정 초기화 =====
+function initPathConfig() {
+    const hostname = window.location.hostname;
+    const pathname = window.location.pathname;
     
-    // GitHub Pages 저장소명 확인
-    const isGitHubPages = window.location.hostname.includes('github.io');
+    // 환경 감지
+    const isGitHubPages = hostname.includes('github.io');
+    const isProduction = hostname.includes('ypp.co.kr');
+    const isLocal = hostname.includes('127.0.0.1') || hostname.includes('localhost');
     
-    if (isGitHubPages && pathSegments[0] === 'ypp') {
-        // GitHub Pages: jwbaek96.github.io/ypp/
-        if (pathSegments.length === 1) {
-            // /ypp/ (루트)
-            return './';
-        } else if (pathSegments.length === 2) {
-            // /ypp/pages/ 폴더
-            return '../';
-        } else if (pathSegments.length === 3) {
-            // /ypp/pages/company/ 폴더
-            return '../../';
-        } else if (pathSegments.length === 4) {
-            // /ypp/pages/company/about.html
-            return '../../';
-        } else if (pathSegments.length === 5) {
-            // /ypp/pages/media/gallery/archive.html
-            return '../../../';
-        }
-    } else {
-        // 로컬 개발 환경 또는 일반 도메인
-        if (pathSegments.length === 0 || pathSegments[pathSegments.length - 1] === 'index.html') {
-            return './';
-        } else if (pathSegments.length === 1) {
-            return '../';
-        } else if (pathSegments.length === 2) {
-            return '../../';
-        } else if (pathSegments.length === 3) {
-            return '../../../';
-        }
+    // GitHub Pages용 기본 경로 설정
+    let basePath = '';
+    if (isGitHubPages) {
+        basePath = '/ypp';
     }
     
-    return './';
+    // 전역 경로 설정 객체
+    window.YPP_CONFIG = {
+        environment: isGitHubPages ? 'github' : (isProduction ? 'production' : 'local'),
+        basePath: basePath,
+        isGitHubPages: isGitHubPages,
+        isProduction: isProduction,
+        isLocal: isLocal
+    };
+    
+    console.log('YPP_CONFIG 초기화:', window.YPP_CONFIG);
 }
 
-// ===== 컴포넌트 로딩 함수 =====
+// ===== 상대 경로 계산 함수 (더 이상 사용하지 않음 - 제거 예정) =====
+// 절대 경로 기반으로 전환하여 더 이상 필요 없음
+
+// ===== 절대 경로 생성 함수 =====
+function getAbsolutePath(relativePath) {
+    if (!window.YPP_CONFIG) return relativePath;
+    
+    const { basePath, isGitHubPages } = window.YPP_CONFIG;
+    
+    // 이미 절대 경로인 경우
+    if (relativePath.startsWith('http') || relativePath.startsWith('//')) {
+        return relativePath;
+    }
+    
+    // 상대 경로 처리
+    if (relativePath.startsWith('./')) {
+        return basePath + relativePath.substring(1);
+    } else if (relativePath.startsWith('/')) {
+        return basePath + relativePath;
+    } else {
+        return basePath + '/' + relativePath;
+    }
+}
+
+// ===== 절대 경로 기반 컴포넌트 로딩 함수 =====
 async function loadComponent(componentName, containerId) {
     try {
-        const basePath = getBasePath();
-        const componentPath = `${basePath}components/${componentName}.html`;
+        const { basePath } = window.YPP_CONFIG;
+        const componentPath = `${basePath}/components/${componentName}.html`;
         
-        console.log(`Loading component: ${componentPath}`); // 디버깅용
+        console.log(`Loading component: ${componentPath}`);
         
         const response = await fetch(componentPath);
         if (!response.ok) {
@@ -61,34 +71,104 @@ async function loadComponent(componentName, containerId) {
         if (container) {
             container.innerHTML = html;
             
-            // 이미지 경로 수정
-            fixImagePaths(container, basePath);
+            // 컴포넌트 내부 경로 수정
+            fixComponentPaths(container);
             
-            console.log(`${componentName} loaded successfully`); // 디버깅용
+            console.log(`${componentName} loaded successfully`);
         }
     } catch (error) {
-        console.error(`Error loading ${componentName}:`, error); // 디버깅용
+        console.error(`Error loading ${componentName}:`, error);
     }
 }
 
-// ===== 이미지 경로 수정 함수 =====
-function fixImagePaths(container, basePath) {
-    const images = container.querySelectorAll('img');
+// ===== 컴포넌트 내부 경로 수정 함수 =====
+function fixComponentPaths(container) {
+    if (!window.YPP_CONFIG) return;
     
+    const { basePath, isGitHubPages } = window.YPP_CONFIG;
+    
+    // 이미지 경로 수정
+    const images = container.querySelectorAll('img');
     images.forEach(img => {
         const currentSrc = img.getAttribute('src');
-        
-        if (currentSrc && !currentSrc.startsWith('http') && !currentSrc.startsWith('//')) {
-            const cleanSrc = currentSrc.replace(/^\.\//, '');
-            img.setAttribute('src', basePath + cleanSrc);
+        if (currentSrc) {
+            // 상대 경로인 경우만 수정
+            if (currentSrc.startsWith('./')) {
+                img.setAttribute('src', basePath + currentSrc.substring(1));
+            } else if (currentSrc.startsWith('/') && isGitHubPages && !currentSrc.startsWith('http')) {
+                img.setAttribute('src', basePath + currentSrc);
+            }
         }
     });
+    
+    // 링크 경로 수정
+    const links = container.querySelectorAll('a[href]');
+    links.forEach(link => {
+        const currentHref = link.getAttribute('href');
+        if (currentHref) {
+            // 내부 링크만 수정 (외부 링크 제외)
+            if (currentHref.startsWith('/') && isGitHubPages && !currentHref.startsWith('http')) {
+                link.setAttribute('href', basePath + currentHref);
+            }
+        }
+    });
+    
+    // CSS 배경 이미지 경로 수정 (인라인 스타일)
+    const elementsWithBg = container.querySelectorAll('[style*="background"]');
+    elementsWithBg.forEach(element => {
+        const style = element.getAttribute('style');
+        if (style && style.includes('url(')) {
+            const updatedStyle = style.replace(/url\(['"]?\.\/([^'")\s]+)['"]?\)/g, `url('${basePath}/$1')`);
+            if (isGitHubPages) {
+                const finalStyle = updatedStyle.replace(/url\(['"]?\/([^'")\s]+)['"]?\)/g, `url('${basePath}/$1')`);
+                element.setAttribute('style', finalStyle);
+            } else {
+                element.setAttribute('style', updatedStyle);
+            }
+        }
+    });
+}
+
+// ===== 로고 링크 제어 함수 =====
+function updateLogoLink() {
+    // 컴포넌트가 로드된 후 실행되도록 지연
+    setTimeout(() => {
+        const logoLink = document.getElementById('logo-link');
+        if (!logoLink) return;
+        
+        const currentUrl = window.location.href;
+        const { basePath, isGitHubPages } = window.YPP_CONFIG;
+        
+        // 홈페이지 URL 확인
+        const homeUrls = [
+            'https://jwbaek96.github.io/ypp/',
+            'https://ypp.co.kr/',
+            'http://127.0.0.1:5500/',
+            'http://localhost:5500/'
+        ];
+        
+        const isHomePage = homeUrls.some(url => currentUrl.startsWith(url)) && 
+                          (currentUrl.endsWith('/') || currentUrl.endsWith('/index.html'));
+        
+        if (isHomePage) {
+            logoLink.href = '';
+            logoLink.style.cursor = 'default';
+            logoLink.onclick = function(e) { e.preventDefault(); };
+        } else {
+            // 홈페이지로 이동하는 링크 설정
+            if (isGitHubPages) {
+                logoLink.href = basePath + '/';
+            } else {
+                logoLink.href = '/';
+            }
+        }
+    }, 100);
 }
 
 // ===== 모든 컴포넌트 로딩 =====
 async function loadAllComponents() {
     try {
-        console.log('Loading all components...'); // 디버깅용
+        console.log('Loading all components...');
         
         // 헤더, 푸터, 사이드바 동시 로딩
         await Promise.all([
@@ -98,34 +178,44 @@ async function loadAllComponents() {
             loadComponent('scrolltotop', 'scrolltotop-container')
         ]);
         
+        // 로고 링크 제어
+        updateLogoLink();
+        
         // 컴포넌트 로딩 완료 이벤트 발생
         document.dispatchEvent(new CustomEvent('componentsLoaded'));
-        console.log('All components loaded successfully'); // 디버깅용
+        console.log('All components loaded successfully');
         
     } catch (error) {
-        console.error('Error loading components:', error); // 디버깅용
+        console.error('Error loading components:', error);
     }
 }
 
-// ===== 자동 실행 =====
+// ===== 전역 헬퍼 함수들 =====
+window.getPath = function(relativePath) {
+    return getAbsolutePath(relativePath);
+};
+
+window.getImagePath = function(imagePath) {
+    return getAbsolutePath('/assets/images/' + imagePath);
+};
+
+window.getCSSPath = function(cssPath) {
+    return getAbsolutePath('/css/' + cssPath);
+};
+
+window.getJSPath = function(jsPath) {
+    return getAbsolutePath('/js/' + jsPath);
+};
+
+// ===== 초기화 및 자동 실행 =====
+// 페이지 로드 즉시 환경 설정 초기화
+initPathConfig();
+
+// DOM 로드 완료 후 컴포넌트 로딩
 document.addEventListener('DOMContentLoaded', function() {
     loadAllComponents();
 });
 
 // ===== 전역 함수 내보내기 =====
 window.loadAllComponents = loadAllComponents;
-
-// 현재 URL 확인하여 로고 링크 제어
-function updateLogoLink() {
-    const currentUrl = window.location.href;
-    const targetUrl = 'https://jwbaek96.github.io/ypp/';
-    const logoLink = document.getElementById('logo-link');
-    
-    if (currentUrl === targetUrl) {
-        logoLink.href = '';
-        logoLink.style.cursor = 'default';
-    }
-}
-
-// DOM 로드 완료 후 실행
-document.addEventListener('DOMContentLoaded', updateLogoLink);
+window.YPP_CONFIG = window.YPP_CONFIG;

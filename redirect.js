@@ -19,8 +19,8 @@ function autoRedirect() {
     
     // 배포 환경이면서 lockwebsite가 아닌 경우 리다이렉션
     if ((
-        isGitHubPages 
-        || 
+        // isGitHubPages 
+        // || 
         isProductionDomain 
         // || 
         // isLocalTest

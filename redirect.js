@@ -26,7 +26,7 @@ function autoRedirect() {
         // isLocalTest
         ) && !isLockWebsite) {
         console.log('리다이렉션 실행: renewallock.html로 이동');
-        window.location.replace('/renewallock.html');
+        window.location.replace('./renewallock.html');
     }
 }
 

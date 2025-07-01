@@ -71,17 +71,14 @@
 }
 
 .btn.accent, .academy-btn {
-    background-color: var(--primary-red);
+    /* background-color: var(--primary-red); */
     color: var(--white);
 }
 
 .btn.accent:hover, .academy-btn:hover {
-    /* background-color: var(--primary-blue);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px var(--shadow); */
     background: var(--primary-blue);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(204, 0, 51, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.342);
 }
 
 .btn-large {

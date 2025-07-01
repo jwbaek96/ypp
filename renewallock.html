@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YPP - 사이트 리뉴얼 진행중</title>
+    <meta name="description" content="YPP 웹사이트가 더 나은 서비스를 위해 리뉴얼 중입니다.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .lock-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            background: rgba(255,255,255,0.9);
+            color: #4facfe;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .notice {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .notice h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .notice p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .admin-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .admin-notice h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .admin-notice p {
+            color: #856404;
+        }
+
+        .company-info {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .company-info h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            min-width: 80px;
+            margin-right: 15px;
+        }
+
+        .info-value {
+            color: #666;
+            flex: 1;
+        }
+
+        .download-section {
+            background: #f1f3f4;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .download-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .download-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .download-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid #e9ecef;
+            background: #f8f9fa;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            background: #d4edda;
+            color: #155724;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 20px 0;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #28a745;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .company-info,
+            .download-section {
+                padding: 20px;
+            }
+
+            .info-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .info-label {
+                margin-bottom: 5px;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="lock-card">
+            <div class="header">
+                <div class="lang-switcher">
+                    <button class="lang-btn active" onclick="switchLanguage('ko')">한국어</button>
+                    <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+                </div>
+                <div class="logo">
+                    <img src="slogan01.png" alt="YPP 로고" id="logo-image">
+                </div>
+                <p data-ko="더 나은 서비스를 위한 준비중" data-en="Preparing for Better Service">더 나은 서비스를 위한 준비중</p>
+            </div>
+
+            <div class="content">
+                <div class="notice">
+                    <h2 data-ko="사이트 리뉴얼 진행중" data-en="Website Renewal in Progress">사이트 리뉴얼 진행중</h2>
+                    <p data-ko="현재 YPP 웹사이트가 더 나은 사용자 경험을 위해 리뉴얼 작업을 진행하고 있습니다." data-en="YPP website is currently undergoing renewal for better user experience.">현재 YPP 웹사이트가 더 나은 사용자 경험을 위해 리뉴얼 작업을 진행하고 있습니다.</p>
+                    <p data-ko="이용에 불편을 드려 대단히 죄송합니다." data-en="We sincerely apologize for any inconvenience.">이용에 불편을 드려 대단히 죄송합니다.</p>
+                    <p class="english-notice" style="color: #888; font-style: italic; margin-top: 10px;">YPP website is currently undergoing renewal for better user experience.</p>
+                    <p class="english-notice" style="color: #888; font-style: italic;">We sincerely apologize for any inconvenience.</p>
+                    
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span data-ko="리뉴얼 진행중 (완료 예정: 2025년 7월 6일)" data-en="Renewal in Progress (Expected Completion: July 6, 2025)">리뉴얼 진행중 (완료 예정: 2025년 7월 6일)</span>
+                    </div>
+                </div>
+
+                <div class="admin-notice">
+                    <h3 data-ko="관리자 전용 접근" data-en="Administrator Access Only">관리자 전용 접근</h3>
+                    <p data-ko="현재 페이지는 관리자만 접근 가능합니다." data-en="This page is currently accessible to administrators only.">현재 페이지는 관리자만 접근 가능합니다.<br>
+                    <span data-ko="일반 사용자는 리뉴얼 완료 후 이용 가능합니다." data-en="General users will be able to access after renewal completion.">일반 사용자는 리뉴얼 완료 후 이용 가능합니다.</span></p>
+                </div>
+
+                <div class="company-info">
+                    <h3 data-ko="회사 정보" data-en="Company Information">회사 정보</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label" data-ko="주소" data-en="Address">주소</div>
+                            <div class="info-value" data-ko="서울시 금천구 가산디지털2로 24 (가산동 327-30)<br>가산YPP아르센타워 (B2층, 8층, 20층)" data-en="24, Gasan Digital 2-ro, Geumcheon-gu, Seoul (327-30, Gasan-dong)<br>Gasan YPP Arts Center Tower (B2F, 8F, 20F)">서울시 금천구 가산디지털2로 24 (가산동 327-30)<br>가산YPP아르센타워 (B2층, 8층, 20층)</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label" data-ko="대표전화" data-en="Main Phone">대표전화</div>
+                            <div class="info-value">02-2104-8700</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label" data-ko="FAX" data-en="FAX">FAX</div>
+                            <div class="info-value">02-2104-8711</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label" data-ko="정보관리책임자" data-en="Information Manager">정보관리책임자</div>
+                            <div class="info-value" data-ko="손재영" data-en="Son Jae Young">손재영</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="download-section">
+                    <h3 data-ko="필요 문서 다운로드" data-en="Document Downloads">필요 문서 다운로드</h3>
+                    <div class="download-grid">
+                        <div class="download-item">
+                            <h4 data-ko="회사 소개서" data-en="Company Profile">회사 소개서</h4>
+                            <p data-ko="YPP 회사 개요 및 사업분야" data-en="YPP Company Overview and Business Areas">YPP 회사 개요 및 사업분야</p>
+                            <a href="#" class="download-btn" onclick="downloadFile('company-profile.pdf')" data-ko="다운로드" data-en="Download">다운로드</a>
+                        </div>
+                        <div class="download-item">
+                            <h4 data-ko="사업 제안서" data-en="Business Proposal">사업 제안서</h4>
+                            <p data-ko="주요 사업 및 서비스 안내" data-en="Main Business and Service Information">주요 사업 및 서비스 안내</p>
+                            <a href="#" class="download-btn" onclick="downloadFile('business-proposal.pdf')" data-ko="다운로드" data-en="Download">다운로드</a>
+                        </div>
+                        <div class="download-item">
+                            <h4 data-ko="연락처 안내" data-en="Contact Information">연락처 안내</h4>
+                            <p data-ko="부서별 연락처 및 담당자 정보" data-en="Department Contacts and Contact Person Information">부서별 연락처 및 담당자 정보</p>
+                            <a href="#" class="download-btn" onclick="downloadFile('contact-info.pdf')" data-ko="다운로드" data-en="Download">다운로드</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p data-ko="&copy; 2025 YPP. All rights reserved." data-en="&copy; 2025 YPP. All rights reserved.">&copy; 2025 YPP. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 로고 이미지 로드 실패 시 대체 텍스트 표시
+        document.getElementById('logo-image').onerror = function() {
+            this.style.display = 'none';
+            this.parentElement.innerHTML = '<span style="font-size: 24px; font-weight: bold; color: #667eea;">YPP</span>';
+        };
+
+        // 언어 전환 함수
+        function switchLanguage(lang) {
+            const elements = document.querySelectorAll('[data-ko][data-en]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const englishNotices = document.querySelectorAll('.english-notice');
+            
+            // 버튼 활성화 상태 변경
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[onclick="switchLanguage('${lang}')"]`).classList.add('active');
+            
+            // 텍스트 변경
+            elements.forEach(element => {
+                if (lang === 'ko') {
+                    element.innerHTML = element.getAttribute('data-ko');
+                } else {
+                    element.innerHTML = element.getAttribute('data-en');
+                }
+            });
+            
+            // 한글 버전에서만 영어 번역 표시
+            if (lang === 'ko') {
+                englishNotices.forEach(notice => notice.style.display = 'block');
+            } else {
+                englishNotices.forEach(notice => notice.style.display = 'none');
+            }
+            
+            // 로고 alt 속성 변경
+            const logoImg = document.getElementById('logo-image');
+            if (logoImg) {
+                logoImg.alt = lang === 'ko' ? 'YPP 로고' : 'YPP Logo';
+            }
+        }
+
+        // PDF 다운로드 함수
+        function downloadFile(filename) {
+            const currentLang = document.querySelector('.lang-btn.active').textContent;
+            const isKorean = currentLang === '한국어';
+            
+            const message = isKorean 
+                ? '현재 ' + filename + ' 파일을 준비중입니다.\n완료 후 다운로드가 가능합니다.'
+                : 'The ' + filename + ' file is currently being prepared.\nDownload will be available after completion.';
+            
+            alert(message);
+            
+            // 실제 구현 시 아래 코드 사용
+            // const link = document.createElement('a');
+            // link.href = 'documents/' + filename;
+            // link.download = filename;
+            // document.body.appendChild(link);
+            // link.click();
+            // document.body.removeChild(link);
+        }
+
+        // 페이지 로드 완료 후 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            // 배포 환경에서 자동 리다이렉션 (필요시 활성화)
+            // if (window.location.hostname === 'jwbaek96.github.io') {
+            //     console.log('배포 환경에서 lockwebsite.html 실행중');
+            // }
+        });
+    </script>
+</body>
+</html>

@@ -4,8 +4,7 @@
         <!-- Section Header -->
         <div class="academy-header">
             <h2 class="academy-title">YPP Academy</h2>
-            <p class="academy-subtitle">전력계통 보호 전문가 양성을 위한 체계적인 교육 프로그램</p>
-            <p class="academy-subtitle">실무중심의 교육서비스 제공, 디지털 보호계전기에 정통한 계통보호 전문가 양성 시대가 원하는 전문가, 와이피피㈜와 함께 하세요.</p>
+            <p class="academy-subtitle">전력계통 보호 전문가 양성을 위한 체계적인 교육 프로그램 실무중심의 교육서비스 제공, 디지털 보호계전기에 정통한 계통보호 전문가 양성 시대가 원하는 전문가, 와이피피㈜와 함께 하세요.</p>
         </div>
 
         <!-- Academy Programs -->
@@ -61,6 +60,7 @@
 .academy-header {
     text-align: center;
     margin-bottom: 3rem;
+    padding: var(--container-padding, 0 2rem);
 }
 
 .academy-title {
@@ -192,8 +192,8 @@
     }
     
     .academy-programs {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
     }
     
     .program-image {
@@ -206,6 +206,18 @@
     
     .academy-action {
         padding: 1.5rem;
+    }
+}
+@media (max-width: 480px) {
+    .academy-section .container {
+        padding: 0;
+    }
+    .academy-programs {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .program-card {
+        border-radius: 0;
     }
 }
 </style>

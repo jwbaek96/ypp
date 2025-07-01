@@ -62,6 +62,19 @@
     color: var(--primary-red);
 }
 
+.mobile-sidebar{
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#desktop-nav-container{
+    height: 100%;
+    overflow-y: scroll;
+}
+#desktop-nav-container::-webkit-scrollbar {
+    display: none;
+}
 .sidebar-nav {
     padding: 1rem 0;
 }
@@ -71,60 +84,140 @@
 }
 
 .sidebar-item {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color, #e5e5e5);
 }
 
 .sidebar-link {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 1rem 1.5rem;
-    color: var(--text-primary);
-    font-weight: 500;
+    color: var(--text-primary, #333);
+    font-weight: 600;
+    font-size: 1rem;
     transition: all 0.3s ease;
     text-decoration: none;
+    cursor: pointer;
+    position: relative;
 }
 
 .sidebar-link:hover {
     background-color: var(--very-light-gray);
     color: var(--primary-blue);
 }
+.sidebar-link[aria-expanded="true"] {
+    color: var(--primary-blue, #0066cc);
+}
+
+.toggle-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    color: var(--text-secondary, #666);
+}
 
 .sidebar-submenu {
-    list-style: none;
-    background-color: var(--very-light-gray);
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
+            list-style: none;
+            background-color: var(--very-light-gray, #f8f9fa);
+            border-left: 3px solid var(--primary-blue, #0066cc);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin: 0;
+            padding: 0;
+        }
 
-.sidebar-submenu li {
-    border-bottom: 1px solid var(--border-color);
-}
+        .sidebar-submenu[aria-hidden="false"] {
+            max-height: 1000px;
+        }
 
-.sidebar-submenu li:last-child {
-    border-bottom: none;
-}
+        .sidebar-subitem {
+            border-bottom: 1px solid var(--border-color, #e5e5e5);
+        }
 
-.sidebar-submenu a {
-    display: block;
-    padding: 0.75rem 3rem;
-    color: var(--text-secondary);
-    font-size: 0.875rem;
+        .sidebar-subitem:last-child {
+            border-bottom: none;
+        }
+
+.sidebar-sublink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 2.5rem;
+    color: var(--text-secondary, #666);
+    font-size: 0.9rem;
     transition: all 0.3s ease;
     text-decoration: none;
 }
 
-.sidebar-submenu a:hover {
-    background-color: var(--white);
-    color: var(--primary-blue);
+.sidebar-sublink:hover {
+    color: var(--primary-blue, #0066cc);
+    background-color: rgba(0, 102, 204, 0.1);
 }
 
+.sidebar-sub-submenu {
+            list-style: none;
+            background-color: var(--border-light, #f0f0f0);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .sidebar-sub-submenu[aria-hidden="false"] {
+            max-height: 500px;
+        }
+        .sidebar-sub-sublink {
+            display: block;
+            padding: 0.6rem 3.5rem;
+            color: var(--text-secondary, #666);
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .sidebar-sub-sublink:hover {
+            color: var(--primary-blue, #0066cc);
+            background-color: rgba(0, 102, 204, 0.05);
+        }
+        
+        .sidebar-sub-subitem.current-page > .sidebar-sub-sublink {
+            background-color: var(--primary-blue, #0066cc);
+            color: white;
+        }
+
+
+
+
+
+
+
+
+
+
+/* .sidebar-link {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.sidebar-submenu a {
+    font-size: 0.9rem;
+    padding-left: 2.5rem;
+    color: var(--text-secondary);
+}
+
+.sidebar-submenu a:hover {
+    color: var(--primary-blue);
+    background-color: rgba(0, 102, 204, 0.1);
+} */
+
+/* ===사이드바 푸터=== */
+
 .sidebar-footer {
-    position: absolute;
+    /* position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
+    right: 0; */
     padding: 1.5rem;
     border-top: 1px solid var(--border-color);
     background-color: var(--very-light-gray);
@@ -169,31 +262,25 @@
     color: var(--white);
     border-color: var(--primary-blue);
 }
-.sidebar-submenu {
-    background-color: var(--very-light-gray);
-    border-left: 3px solid var(--primary-blue);
-}
-
-.sidebar-link {
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-.sidebar-submenu a {
-    font-size: 0.9rem;
-    padding-left: 2.5rem;
-    color: var(--text-secondary);
-}
-
-.sidebar-submenu a:hover {
-    color: var(--primary-blue);
-    background-color: rgba(0, 102, 204, 0.1);
-}
 
 /* 모바일에서만 표시 */
 @media (min-width: 769px) {
     .mobile-sidebar,
     .sidebar-overlay {
         display: none !important;
+    }
+    .sidebar-link {
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .sidebar-sublink {
+        padding: 0.625rem 2rem;
+        font-size: 0.85rem;
+    }
+    
+    .sidebar-sub-sublink {
+        padding: 0.5rem 3rem;
+        font-size: 0.8rem;
     }
 }

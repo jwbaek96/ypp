@@ -278,12 +278,50 @@ function toggleSidebarSubSubmenu(menuItem) {
         subSubmenu.setAttribute('aria-hidden', 'true');
         link.setAttribute('aria-expanded', 'false');
         if (toggleIcon) toggleIcon.style.transform = 'rotate(0deg)';
+        
+        // 부모 높이 업데이트 (지연)
+        setTimeout(() => {
+            updateParentSubmenuHeight(menuItem);
+        }, 50);
     } else {
-        // 열기
-        subSubmenu.style.maxHeight = subSubmenu.scrollHeight + 'px';
-        subSubmenu.setAttribute('aria-hidden', 'false');
-        link.setAttribute('aria-expanded', 'true');
-        if (toggleIcon) toggleIcon.style.transform = 'rotate(90deg)';
+        // 먼저 부모 서브메뉴 높이를 충분히 늘려놓기
+        const parentSubmenu = menuItem.closest('.sidebar-submenu');
+        if (parentSubmenu) {
+            parentSubmenu.style.maxHeight = '2000px'; // 임시로 충분한 높이 설정
+        }
+        
+        // 그 다음 서브서브메뉴 열기
+        setTimeout(() => {
+            subSubmenu.style.maxHeight = subSubmenu.scrollHeight + 'px';
+            subSubmenu.setAttribute('aria-hidden', 'false');
+            link.setAttribute('aria-expanded', 'true');
+            if (toggleIcon) toggleIcon.style.transform = 'rotate(90deg)';
+            
+            // 실제 필요한 높이로 부모 업데이트
+            setTimeout(() => {
+                updateParentSubmenuHeight(menuItem);
+            }, 100);
+        }, 10);
+    }
+}
+
+// ===== 부모 서브메뉴 높이 업데이트 함수 =====
+function updateParentSubmenuHeight(childMenuItem) {
+    const parentSubmenu = childMenuItem.closest('.sidebar-submenu');
+    if (parentSubmenu) {
+        // 잠시 후에 정확한 높이 계산 (애니메이션 완료 대기)
+        setTimeout(() => {
+            // 모든 자식 요소들의 실제 높이 합계 계산
+            let totalHeight = 0;
+            Array.from(parentSubmenu.children).forEach(child => {
+                totalHeight += child.offsetHeight;
+            });
+            
+            // 부모 서브메뉴 높이 업데이트
+            parentSubmenu.style.maxHeight = Math.max(totalHeight, 500) + 'px';
+            
+            console.log('부모 서브메뉴 높이 업데이트:', totalHeight + 'px');
+        }, 350); // CSS transition 시간보다 조금 더 길게
     }
 }
 
@@ -356,11 +394,13 @@ function addSidebarMenuStyles() {
         }
         
         .sidebar-submenu[aria-hidden="false"] {
-            max-height: 1000px;
+            max-height: 1000px !important;
         }
         
         .sidebar-subitem {
             border-bottom: 1px solid var(--border-color, #e5e5e5);
+            display: block !important;
+            visibility: visible !important;
         }
         
         .sidebar-subitem:last-child {
@@ -368,7 +408,7 @@ function addSidebarMenuStyles() {
         }
         
         .sidebar-sublink {
-            display: flex;
+            display: flex !important;
             align-items: center;
             justify-content: space-between;
             padding: 0.75rem 2.5rem;
@@ -376,6 +416,7 @@ function addSidebarMenuStyles() {
             font-size: 0.9rem;
             transition: all 0.3s ease;
             text-decoration: none;
+            visibility: visible !important;
         }
         
         .sidebar-sublink:hover {
@@ -493,9 +534,6 @@ function initLanguageButtons() {
 
 // ===== 초기화 함수 =====
 function initSidebar() {
-    // 스타일 추가
-    addSidebarMenuStyles();
-    
     // 컴포넌트 로딩 완료 후 실행
     if (document.querySelector('#mobile-sidebar')) {
         insertSidebarMenu();

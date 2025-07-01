@@ -40,7 +40,7 @@
 
         .lang-switcher {
             position: absolute;
-            top: 15px;
+            top: 20px;
             right: 20px;
             display: flex;
             gap: 10px;
@@ -50,7 +50,7 @@
             background: rgba(255,255,255,0.2);
             color: white;
             border: 1px solid rgba(255,255,255,0.3);
-            padding: 8px 16px;
+            padding: 7px 15px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.9rem;
@@ -210,9 +210,78 @@
             transition: transform 0.3s ease;
         }
 
-        .download-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        .section-title {
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .section-title h4 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .education-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .education-section h5 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .download-item h6 {
+            color: #495057;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .download-item h5 {
+            color: #495057;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .contact-info-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-details h6 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .contact-details p {
+            margin: 5px 0;
+            opacity: 0.9;
         }
 
         .download-btn {
@@ -311,6 +380,7 @@
                 <div class="logo">
                     <img src="slogan01.png" alt="YPP 로고" id="logo-image">
                 </div>
+                <h1>YPP</h1>
                 <p data-ko="더 나은 서비스를 위한 준비중" data-en="Preparing for Better Service">더 나은 서비스를 위한 준비중</p>
             </div>
 
@@ -318,13 +388,13 @@
                 <div class="notice">
                     <h2 data-ko="사이트 리뉴얼 진행중" data-en="Website Renewal in Progress">사이트 리뉴얼 진행중</h2>
                     <p data-ko="현재 YPP 웹사이트가 더 나은 사용자 경험을 위해 리뉴얼 작업을 진행하고 있습니다." data-en="YPP website is currently undergoing renewal for better user experience.">현재 YPP 웹사이트가 더 나은 사용자 경험을 위해 리뉴얼 작업을 진행하고 있습니다.</p>
-                    <p data-ko="이용에 불편을 드려 대단히 죄송합니다." data-en="We sincerely apologize for any inconvenience.">이용에 불편을 드려 대단히 죄송합니다.</p>
                     <p class="english-notice" style="color: #888; font-style: italic; margin-top: 10px;">YPP website is currently undergoing renewal for better user experience.</p>
+                    <p data-ko="이용에 불편을 드려 대단히 죄송합니다." data-en="We sincerely apologize for any inconvenience.">이용에 불편을 드려 대단히 죄송합니다.</p>
                     <p class="english-notice" style="color: #888; font-style: italic;">We sincerely apologize for any inconvenience.</p>
                     
                     <div class="status-indicator">
                         <div class="status-dot"></div>
-                        <span data-ko="리뉴얼 진행중 (완료 예정: 2025년 7월 7일)" data-en="Renewal in Progress (Expected Completion: July 7, 2025)">리뉴얼 진행중 (완료 예정: 2025년 7월 7일)</span>
+                        <span data-ko="리뉴얼 진행중 (완료 예정: 2025년 7월 6일)" data-en="Renewal in Progress (Expected Completion: July 6, 2025)">리뉴얼 진행중 (완료 예정: 2025년 7월 6일)</span>
                     </div>
                 </div>
 
@@ -358,21 +428,80 @@
 
                 <div class="download-section">
                     <h3 data-ko="필요 문서 다운로드" data-en="Document Downloads">필요 문서 다운로드</h3>
+                    
+                    <!-- 회사 일반 자료 -->
+                    <div class="section-title">
+                        <h4 data-ko="회사 자료" data-en="Company Documents">회사 자료</h4>
+                    </div>
                     <div class="download-grid">
                         <div class="download-item">
-                            <h4 data-ko="회사 소개서" data-en="Company Profile">회사 소개서</h4>
+                            <h5 data-ko="회사 소개서" data-en="Company Profile">회사 소개서</h5>
                             <p data-ko="YPP 회사 개요 및 사업분야" data-en="YPP Company Overview and Business Areas">YPP 회사 개요 및 사업분야</p>
                             <a href="#" class="download-btn" onclick="downloadFile('company-profile.pdf')" data-ko="다운로드" data-en="Download">다운로드</a>
                         </div>
                         <div class="download-item">
-                            <h4 data-ko="사업 제안서" data-en="Business Proposal">사업 제안서</h4>
+                            <h5 data-ko="사업 제안서" data-en="Business Proposal">사업 제안서</h5>
                             <p data-ko="주요 사업 및 서비스 안내" data-en="Main Business and Service Information">주요 사업 및 서비스 안내</p>
                             <a href="#" class="download-btn" onclick="downloadFile('business-proposal.pdf')" data-ko="다운로드" data-en="Download">다운로드</a>
                         </div>
                         <div class="download-item">
-                            <h4 data-ko="연락처 안내" data-en="Contact Information">연락처 안내</h4>
+                            <h5 data-ko="연락처 안내" data-en="Contact Information">연락처 안내</h5>
                             <p data-ko="부서별 연락처 및 담당자 정보" data-en="Department Contacts and Contact Person Information">부서별 연락처 및 담당자 정보</p>
                             <a href="#" class="download-btn" onclick="downloadFile('contact-info.pdf')" data-ko="다운로드" data-en="Download">다운로드</a>
+                        </div>
+                    </div>
+
+                    <!-- YPP Academy 교육 자료 -->
+                    <div class="section-title">
+                        <h4 data-ko="YPP Academy 교육자료" data-en="YPP Academy Education Materials">YPP Academy 교육자료</h4>
+                    </div>
+                    
+                    <!-- Relay School 2025 -->
+                    <div class="education-section">
+                        <h5 data-ko="Relay School 2025 (3월~11월)" data-en="Relay School 2025 (March~November)">Relay School 2025 (3월~11월)</h5>
+                        <div class="download-grid">
+                            <div class="download-item">
+                                <h6 data-ko="교육계획서" data-en="Education Plan">교육계획서</h6>
+                                <p data-ko="2025년 Relay School 교육 계획" data-en="2025 Relay School Education Plan">2025년 Relay School 교육 계획</p>
+                                <a href="#" class="download-btn" onclick="downloadFile('2025_Relay_School_planning.pdf')" data-ko="다운로드" data-en="Download">다운로드</a>
+                            </div>
+                            <div class="download-item">
+                                <h6 data-ko="교육신청서" data-en="Application Form">교육신청서</h6>
+                                <p data-ko="Relay School 교육 신청서" data-en="Relay School Application Form">Relay School 교육 신청서</p>
+                                <a href="#" class="download-btn" onclick="downloadFile('2025_Relay_School_application2.pdf')" data-ko="다운로드" data-en="Download">다운로드</a>
+                            </div>
+                            <div class="download-item">
+                                <h6 data-ko="브로슈어" data-en="Brochure">브로슈어</h6>
+                                <p data-ko="Relay School 교육 안내 브로슈어" data-en="Relay School Education Brochure">Relay School 교육 안내 브로슈어</p>
+                                <a href="#" class="download-btn" onclick="downloadFile('2025_Relay_School_brochure_250304.pdf')" data-ko="다운로드" data-en="Download">다운로드</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PSAC 2025 -->
+                    <div class="education-section">
+                        <h5 data-ko="PSAC 2025 (9월~12월)" data-en="PSAC 2025 (September~December)">PSAC 2025 (9월~12월)</h5>
+                        <div class="download-grid">
+                            <div class="download-item">
+                                <h6 data-ko="교육신청 안내" data-en="Application Guide">교육신청 안내</h6>
+                                <p data-ko="PSAC 교육 신청 안내서" data-en="PSAC Education Application Guide">PSAC 교육 신청 안내서</p>
+                                <a href="#" class="download-btn" onclick="downloadFile('2025_PSAC_교육신청 안내.pdf')" data-ko="다운로드" data-en="Download">다운로드</a>
+                            </div>
+                            <div class="download-item">
+                                <h6 data-ko="브로슈어" data-en="Brochure">브로슈어</h6>
+                                <p data-ko="PSAC 교육 안내 브로슈어" data-en="PSAC Education Brochure">PSAC 교육 안내 브로슈어</p>
+                                <a href="#" class="download-btn" onclick="downloadFile('2025_PSAC_brochure.pdf')" data-ko="다운로드" data-en="Download">다운로드</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 교육 문의 정보 -->
+                    <div class="contact-info-box">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h6 data-ko="교육 문의" data-en="Education Inquiries">교육 문의</h6>
+                            <p><strong>Tel:</strong> 02-2104-8720, 4683</p>
+                            <p><strong>Email:</strong> yppedu@ypp.co.kr</p>
                         </div>
                     </div>
                 </div>
@@ -380,6 +509,7 @@
 
             <div class="footer">
                 <p data-ko="&copy; 2025 YPP. All rights reserved." data-en="&copy; 2025 YPP. All rights reserved.">&copy; 2025 YPP. All rights reserved.</p>
+                <p data-ko="리뉴얼 관련 문의: 02-2104-8700" data-en="Renewal Inquiries: 02-2104-8700">리뉴얼 관련 문의: 02-2104-8700</p>
             </div>
         </div>
     </div>
@@ -429,19 +559,19 @@
             const currentLang = document.querySelector('.lang-btn.active').textContent;
             const isKorean = currentLang === '한국어';
             
-            const message = isKorean 
-                ? '현재 ' + filename + ' 파일을 준비중입니다.\n완료 후 다운로드가 가능합니다.'
-                : 'The ' + filename + ' file is currently being prepared.\nDownload will be available after completion.';
+            // const message = isKorean 
+            //     ? '현재 ' + filename + ' 파일을 준비중입니다.\n완료 후 다운로드가 가능합니다.'
+            //     : 'The ' + filename + ' file is currently being prepared.\nDownload will be available after completion.';
             
-            alert(message);
+            // alert(message);
             
             // 실제 구현 시 아래 코드 사용
-            // const link = document.createElement('a');
-            // link.href = 'documents/' + filename;
-            // link.download = filename;
-            // document.body.appendChild(link);
-            // link.click();
-            // document.body.removeChild(link);
+            const link = document.createElement('a');
+            link.href = 'documents/' + filename;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         // 페이지 로드 완료 후 실행

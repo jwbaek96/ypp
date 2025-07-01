@@ -1,5 +1,5 @@
 // redirect.js
-function autoRedirect() {
+function fileRedirect() {
     const hostname = window.location.hostname;
     const pathname = window.location.pathname;
     console.log('현재 hostname:', hostname);
@@ -9,26 +9,16 @@ function autoRedirect() {
     const isGitHubPages = hostname.includes('github.io');
     const isProductionDomain = hostname.includes('ypp.co.kr');
     const isLocalTest = hostname.includes('127.0.0.1') && window.location.port === '5500'; // 로컬 테스트용
-    
-    const isLockWebsite = pathname.includes('renewallock.html');
-    
-    console.log('GitHub Pages:', isGitHubPages);
-    console.log('Production:', isProductionDomain);
-    console.log('Local Test:', isLocalTest);
-    console.log('Is Lock Website:', isLockWebsite);
-    
+
     // 배포 환경이면서 lockwebsite가 아닌 경우 리다이렉션
-    if ((
-        isGitHubPages 
-        || 
-        isProductionDomain 
-        // || 
-        // isLocalTest
-        ) && !isLockWebsite) {
-        console.log('리다이렉션 실행: renewallock.html로 이동');
-        window.location.replace('./renewallock.html');
+    if (isGitHubPages) {
+
+    } else if (isProductionDomain){
+
+    } else{
+        
     }
 }
 
 // 즉시 실행
-autoRedirect();
+fileRedirect();

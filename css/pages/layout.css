@@ -259,9 +259,9 @@
 }
 
 /* Section Scroll Offset */
-/* .content-block[id] {
+.content-block[id] {
     scroll-margin-top: 140px;
-} */
+}
 
 /* Responsive */
 @media (max-width: 768px) {

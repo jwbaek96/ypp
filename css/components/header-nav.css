@@ -203,6 +203,9 @@
     .desktop-nav {
         display: none;
     }
+    .desktop-nav .sub-menu {
+        display: none !important; /* 모바일에서 완전 숨김 */
+    }
 }
 
 /* ===== ACCESSIBILITY ===== */
@@ -264,3 +267,18 @@
 }
 
 /* ===== HOVER EFFECTS ===== */
+
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .desktop-nav {
+        display: none;
+    }
+    
+    .hamburger-btn {
+        display: flex;
+    }
+    
+}
+
+/* ===== 사이드바 스타일 적용 ===== */

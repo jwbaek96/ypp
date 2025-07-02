@@ -175,14 +175,3 @@
 
 
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 768px) {
-    .desktop-nav {
-        display: none;
-    }
-    
-    .hamburger-btn {
-        display: flex;
-    }
-    
-}

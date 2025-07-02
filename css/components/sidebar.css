@@ -68,11 +68,11 @@
     flex-direction: column;
     justify-content: space-between;
 }
-#desktop-nav-container{
+.mobile-sidebar #desktop-nav-container{
     height: 100%;
     overflow-y: scroll;
 }
-#desktop-nav-container::-webkit-scrollbar {
+.mobile-sidebar #desktop-nav-container::-webkit-scrollbar {
     display: none;
 }
 .sidebar-nav {

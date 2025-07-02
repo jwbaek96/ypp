@@ -51,7 +51,7 @@ function createDesktopMenu(navigation) {
     return nav;
 }
 
-// ===== 메뉴 아이템 생성 (재귀적) =====
+// ===== 메뉴 아이템 생성 (재귀적) - 완전 단순화 =====
 function createMenuItem(item, key, depth) {
     const li = document.createElement('li');
     li.className = `menu-item depth-${depth}`;
@@ -72,19 +72,15 @@ function createMenuItem(item, key, depth) {
     // 현재 페이지 활성 상태 체크
     if (item.url && window.location.pathname.includes(item.url.replace('.html', ''))) {
         li.classList.add('current-page');
-        link.setAttribute('aria-current', 'page');
     }
     
     // 하위 메뉴가 있는 경우
     if (item.children && Object.keys(item.children).length > 0) {
-        li.classList.add('has-children');
-        link.setAttribute('aria-haspopup', 'true');
-        link.setAttribute('aria-expanded', 'false');
+        li.classList.add('has-children'); // 이것만 추가하고 나머지는 CSS가 처리
         
         // 서브메뉴 생성
         const subMenu = document.createElement('ul');
         subMenu.className = `sub-menu depth-${depth + 1}`;
-        subMenu.setAttribute('aria-hidden', 'true');
         
         Object.keys(item.children).forEach(childKey => {
             const childItem = item.children[childKey];
@@ -95,8 +91,7 @@ function createMenuItem(item, key, depth) {
         li.appendChild(link);
         li.appendChild(subMenu);
         
-        // 상호작용 이벤트 추가
-        addMenuInteraction(li, link, subMenu);
+        console.log('서브메뉴 생성됨:', item.title); // 디버깅용
     } else {
         li.appendChild(link);
     }
@@ -109,16 +104,21 @@ function addMenuInteraction(menuItem, link, subMenu) {
     let hoverTimeout;
     let isKeyboardNavigation = false;
     
+    // 데스크톱 메뉴에서만 작동하도록 체크
+    if (!menuItem.closest('.desktop-nav')) {
+        return; // 사이드바 메뉴는 제외
+    }
+    
     // 마우스 호버 이벤트
     menuItem.addEventListener('mouseenter', () => {
-        if (!isKeyboardNavigation) {
+        if (!isKeyboardNavigation && window.innerWidth > 768) { // 데스크톱에서만
             clearTimeout(hoverTimeout);
             showSubmenu(menuItem, link, subMenu);
         }
     });
     
     menuItem.addEventListener('mouseleave', () => {
-        if (!isKeyboardNavigation) {
+        if (!isKeyboardNavigation && window.innerWidth > 768) { // 데스크톱에서만
             hoverTimeout = setTimeout(() => {
                 hideSubmenu(menuItem, link, subMenu);
             }, 150);
@@ -127,6 +127,8 @@ function addMenuInteraction(menuItem, link, subMenu) {
     
     // 키보드 네비게이션
     link.addEventListener('keydown', (e) => {
+        if (window.innerWidth <= 768) return; // 모바일에서는 키보드 네비게이션 비활성화
+        
         isKeyboardNavigation = true;
         
         switch (e.key) {
@@ -157,6 +159,8 @@ function addMenuInteraction(menuItem, link, subMenu) {
     const submenuLinks = subMenu.querySelectorAll('a');
     submenuLinks.forEach((submenuLink, index) => {
         submenuLink.addEventListener('keydown', (e) => {
+            if (window.innerWidth <= 768) return;
+            
             switch (e.key) {
                 case 'ArrowUp':
                     e.preventDefault();
@@ -183,15 +187,33 @@ function addMenuInteraction(menuItem, link, subMenu) {
 
 // ===== 서브메뉴 표시/숨김 함수들 =====
 function showSubmenu(menuItem, link, subMenu) {
+    console.log('서브메뉴 표시:', menuItem, subMenu); // 디버깅용
+    
     menuItem.classList.add('active');
     link.setAttribute('aria-expanded', 'true');
     subMenu.setAttribute('aria-hidden', 'false');
+    
+    // CSS의 max-height와 overflow 문제 해결
+    subMenu.style.maxHeight = '500px';
+    subMenu.style.overflow = 'visible';
+    subMenu.style.display = 'block';
+    subMenu.style.visibility = 'visible';
+    subMenu.style.opacity = '1';
 }
 
 function hideSubmenu(menuItem, link, subMenu) {
+    console.log('서브메뉴 숨김:', menuItem, subMenu); // 디버깅용
+    
     menuItem.classList.remove('active');
     link.setAttribute('aria-expanded', 'false');
     subMenu.setAttribute('aria-hidden', 'true');
+    
+    // CSS 초기값으로 되돌리기
+    subMenu.style.maxHeight = '0px';
+    subMenu.style.overflow = 'hidden';
+    subMenu.style.display = '';
+    subMenu.style.visibility = '';
+    subMenu.style.opacity = '0';
 }
 
 function toggleSubmenu(menuItem, link, subMenu) {
@@ -231,26 +253,40 @@ async function insertDesktopMenu() {
         return;
     }
     
+    console.log('메뉴 데이터:', data.navigation); // 디버깅용
+    
     // 메뉴 생성 및 삽입
     const menuElement = createDesktopMenu(data.navigation);
     container.innerHTML = '';
     container.appendChild(menuElement);
     
-    // 외부 클릭 시 모든 서브메뉴 닫기
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.desktop-nav')) {
-            const activeMenus = document.querySelectorAll('.menu-item.active');
-            activeMenus.forEach(menu => {
-                const link = menu.querySelector('.menu-link');
-                const subMenu = menu.querySelector('.sub-menu');
-                if (link && subMenu) {
-                    hideSubmenu(menu, link, subMenu);
-                }
-            });
+    // 생성된 메뉴 확인
+    const hasChildrenItems = container.querySelectorAll('.has-children');
+    const subMenus = container.querySelectorAll('.sub-menu');
+    console.log('하위 메뉴가 있는 항목들:', hasChildrenItems.length);
+    console.log('서브메뉴 개수:', subMenus.length);
+    
+    console.log('Desktop menu inserted - 모든 상호작용은 CSS가 처리합니다');
+}
+
+// ===== 외부 클릭 핸들러 =====
+function handleOutsideClick(e) {
+    // 데스크톱에서만 작동 & 사이드바나 그 오버레이 클릭은 제외
+    if (window.innerWidth <= 768 || 
+        e.target.closest('.sidebar-container') || 
+        e.target.closest('.sidebar-overlay') ||
+        e.target.closest('.desktop-nav')) {
+        return;
+    }
+    
+    const activeMenus = document.querySelectorAll('.desktop-nav .menu-item.active');
+    activeMenus.forEach(menu => {
+        const link = menu.querySelector('.menu-link');
+        const subMenu = menu.querySelector('.sub-menu');
+        if (link && subMenu) {
+            hideSubmenu(menu, link, subMenu);
         }
     });
-    
-    console.log('Desktop menu inserted successfully');
 }
 
 // ===== 초기화 함수 =====

@@ -21,6 +21,9 @@
     margin: 0 auto;
     padding: var(--container-padding);
 }
+.main-content img{
+    max-width: 100%;
+}
 /* ===== SECTION COMPONENTS ===== */
 .section-title {
     color: var(--text-primary);
@@ -131,7 +134,7 @@
 }
 
 /* ===== COMPANY OVERVIEW ===== */
-.overview-grid {
+/* .overview-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
@@ -171,7 +174,7 @@
 .overview-desc {
     color: var(--text-secondary);
     font-size: 0.875rem;
-}
+} */
 
 
 

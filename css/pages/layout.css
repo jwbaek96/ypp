@@ -55,7 +55,7 @@
 
 /* Navigations */
 .tab-navigation, .section-navigation {
-    background-color: var(--white, #ffffff);
+    /* background-color: var(--white, #ffffff); */
     border-bottom: 1px solid var(--border-light, #e5e5e5);
     position: sticky;
     top: 80px;
@@ -82,6 +82,11 @@
     align-items: center;
     gap: 0;
     overflow-x: auto;
+    background-color: var(--white, #ffffff);
+    
+    /* background-color: #ffffff54;
+    backdrop-filter: blur(10px); */
+
 }
 .tab-nav::-webkit-scrollbar {
     display: none;
@@ -110,8 +115,10 @@
 
 /* Section Navigation */
 .section-nav {
+    background-color: #ffffff54;
+    backdrop-filter: blur(10px); 
     border-top: 1px solid var(--border-light, #e5e5e5);
-    padding: 1rem 2rem;
+    padding: .6rem 2rem;
     margin: 0;
     
     display: flex;
@@ -175,14 +182,23 @@
     color: var(--text-secondary, #666);
 }
 
+/* Content*/
+.container {
+    width: 100%;
+    max-width: 1200px;
+    /* padding: var(--container-padding); */
+}
 /* Content Grid */
 .content-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
     gap: 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .content-block {
+    width: 100%;
     background: var(--white, #ffffff);
     border: 1px solid var(--border-light, #e5e5e5);
     border-radius: 8px;
@@ -214,7 +230,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--background-light, #f8f9fa);
+    /* background-color: var(--background-light, #f8f9fa); */
     border-radius: 4px;
 }
 
@@ -240,9 +256,7 @@
         padding: 1rem 1.5rem;
     }
 
-    .section-nav {
-        padding: 1rem;
-        /* justify-content: flex-start; */
+    .section-navigation .section-nav {
         gap: 0.5rem;
     }
     
@@ -259,17 +273,13 @@
     .content-block {
         padding: 1.5rem;
     }
+    /* !!! */
+    .tab-content-section > .container{
+        padding: 0 0.5em;
+    }
 }
 
 /* Section Scroll Offset */
 .content-block[id] {
     scroll-margin-top: 140px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .section-navigation .section-nav {
-        padding: 1rem;
-        gap: 0.5rem;
-    }
 }

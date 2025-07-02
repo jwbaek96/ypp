@@ -1,0 +1,34 @@
+"gallery": {
+          "title": "갤러리",
+          "url": "/pages/media/gallery/academy.html",
+          "children": {
+            "academy": {
+              "title": "아카데미갤러리",
+              "url": "/pages/media/gallery/academy.html",
+              "sections": ["PSAC", "Relay School"]
+            },
+            "gclp": {
+              "title": "GCLP",
+              "url": "/pages/media/gallery/gclp.html",
+              "sections": ["GCLP 브로셔", "홍보용 영상", "유튜브 영상"],
+              "external_links": {
+                "homepage": "https://arcengclp.com/home",
+                "namu_wiki": "https://namu.wiki/w/GCLP(gclp)"
+              }
+            },
+            "inside": {
+              "title": "인사이드",
+              "url": "/pages/media/gallery/inside.html",
+              "access": "public"
+            },
+            "moment": {
+              "title": "모먼트(내부용)",
+              "url": "/pages/media/gallery/moment.html",
+              "access": "internal"
+            },
+            "archive": {
+              "title": "아카이브(내부용)",
+              "url": "/pages/media/gallery/archive.html",
+              "access": "internal",
+              "sections": ["회장님 사진 모음", "2025년 2월 3일", "2023 웨스터민스터 방문", "국민일보 역경의 열매"]
+            }

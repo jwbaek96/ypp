@@ -33,7 +33,33 @@
         "epc": {
           "title": "EPC",
           "url": "/pages/business/epc.html",
-          "sections": ["Fossil", "Nuclear Power", "Renewable", "US Military and Other Business","US Military Bases Business"]
+          "children": {
+            "substation": {
+              "title": "Substation",
+              "url": "/pages/business/epc.html#substation",
+              "sections": ["해외변전소 AIS, 해외변전소 GIS, Turnkey 사업참여, 건설 및 개발"]
+            },
+            "renewable-energy": {
+              "title": "Renewable Energy",
+              "url": "/pages/business/epc.html#renewable-energy",
+              "sections": ["Solar PV, BESS, 사업참여, 건설 및 개발"]
+            },
+            "green-hydrogen": {
+              "title": "Green Hydrogen",
+              "url": "/pages/business/epc.html#green-hydrogen",
+              "sections": ["H2 Generation System", "그린수소발전사업참여","건설 및 개발"]
+            },
+            "ebop": {
+              "title": "eBoP",
+              "url": "/pages/business/epc.html#ebop",
+              "sections": ["Electrical Systems", "Balance of Plant","전력계통 솔루션"]
+            },
+            "power-plants": {
+              "title": "Power Plants",
+              "url": "/pages/business/epc.html#power-plants",
+              "sections": ["발전소사업참여, 건설 및 개발"]
+            }
+          }
         },
         "engineering": {
           "title": "엔지니어링",
@@ -156,17 +182,6 @@
               "title": "인사이드",
               "url": "/pages/media/gallery/inside.html",
               "access": "public"
-            },
-            "moment": {
-              "title": "모먼트(내부용)",
-              "url": "/pages/media/gallery/moment.html",
-              "access": "internal"
-            },
-            "archive": {
-              "title": "아카이브(내부용)",
-              "url": "/pages/media/gallery/archive.html",
-              "access": "internal",
-              "sections": ["회장님 사진 모음", "2025년 2월 3일", "2023 웨스터민스터 방문", "국민일보 역경의 열매"]
             }
           }
         },

@@ -58,7 +58,7 @@
     background-color: var(--white, #ffffff);
     border-bottom: 1px solid var(--border-light, #e5e5e5);
     position: sticky;
-    top: 70px;
+    top: 80px;
     z-index: 100;
 }
 
@@ -226,6 +226,9 @@
     
     .content-title {
         font-size: 2rem;
+    }
+    .tab-navigation, .section-navigation {
+        top: 70px;
     }
     .tab-nav {
         display: flex;

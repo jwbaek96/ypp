@@ -30,6 +30,34 @@
             line-height: 1.8;
             font-size: 1.05rem;
         }
+        
+        /* 페이지 헤더 배경 이미지 */
+        .page-header {
+            position: relative;
+            background: url(./header-bg.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6); 
+            z-index: 1;
+        }
+        
+        .page-header > * {
+            position: relative;
+            z-index: 2
+        }
+        .page-header-content h1,
+        .page-header-content p{
+            color: var(--white);
+        }
     </style>
 </head>
 <body>
@@ -143,7 +171,7 @@
                                 <!-- 회사 이미지 -->
                                 <div class="company-footer">
                                     <div class="company-footer-a">
-                                        <img src="../../assets/images/company/building.jpg" alt="가산YPP아르센타워 이미지" class="building-photo">
+                                        <img src="../../assets/images/index/YPP아르센타워.jpg" alt="가산YPP아르센타워 이미지" class="building-photo">
                                     </div>
                                     <div class="company-footer-b">
                                         <!-- 기업 정보 -->
@@ -315,7 +343,7 @@
                         </style>
                         
                         <!-- 인사말 -->
-                        <div id="status-greeting" class="content-block full-width">
+                        <div id="status-greeting" class="content-block">
                             <h3 class="block-title">인사말</h3>
                             <div class="block-content">
                                 <!-- 인사말 -->
@@ -340,27 +368,38 @@
                                 </div>
                             </div>
                         </div>
+                        <style>
+                            .greeting-content{
+                                padding: 2rem;
+                            }
+                            .greeting-content img{
+                                margin-top: 10px;
+                            }
+                            .greeting-content img:first-child{
+                                margin-bottom: 15px;
+                            }
+                            .greeting-content img:last-child{
+                                max-width: 55%;
+                            }
+                        </style>
                         
                         <!-- 연혁 -->
-                        <!-- 연혁 -->
-                        <div id="status-history" class="content-block full-width">
+                        <div id="status-history" class="content-block">
                             <h3 class="block-title">회사 연혁</h3>
                             <div class="block-content">
                                 <div class="history-tabs">
                                     
                                     <!-- 탭 헤더 -->
+                                     
+                                    <input type="radio" id="history-tab-2010" name="history-tab" class="history-tab-radio" checked>
+                                    <input type="radio" id="history-tab-2000" name="history-tab" class="history-tab-radio">
+                                    <input type="radio" id="history-tab-1990" name="history-tab" class="history-tab-radio">
+                                    <input type="radio" id="history-tab-1980" name="history-tab" class="history-tab-radio">
                                     
                                     <div class="history-tab-headers">
-                                        <input type="radio" id="history-tab-2010" name="history-tab" class="history-tab-radio" checked>
                                         <label for="history-tab-2010" class="history-tab-header">2010년대 ~</label>
-                                        
-                                        <input type="radio" id="history-tab-2000" name="history-tab" class="history-tab-radio">
                                         <label for="history-tab-2000" class="history-tab-header">2000년대</label>
-                                        
-                                        <input type="radio" id="history-tab-1990" name="history-tab" class="history-tab-radio">
                                         <label for="history-tab-1990" class="history-tab-header">1990년대</label>
-                                        
-                                        <input type="radio" id="history-tab-1980" name="history-tab" class="history-tab-radio">
                                         <label for="history-tab-1980" class="history-tab-header">1980년대</label>
                                     </div>
                                     
@@ -661,12 +700,6 @@
                                 color: #333;
                             }
                             
-                            /* 활성화된 탭 헤더 */
-                            .history-tab-radio:checked + .history-tab-header {
-                                background: linear-gradient(135deg, #0066cc 0%, #4a90e2 100%);
-                                color: #fff;
-                            }
-                            
                             /* 탭 컨텐츠 영역 */
                             .history-tab-contents {
                                 position: relative;
@@ -681,8 +714,17 @@
                                 padding: 2rem;
                             }
                             
+                            /* 활성화된 탭 헤더 */
+                            #history-tab-2010:checked ~ .history-tab-headers label[for="history-tab-2010"],
+                            #history-tab-2000:checked ~ .history-tab-headers label[for="history-tab-2000"],
+                            #history-tab-1990:checked ~ .history-tab-headers label[for="history-tab-1990"],
+                            #history-tab-1980:checked ~ .history-tab-headers label[for="history-tab-1980"] {
+                                background: linear-gradient(135deg, #0066cc 0%, #4a90e2 100%);
+                                color: #fff;
+                            }
+                            
                             /* 활성화된 탭 컨텐츠 */
-                            .history-tab-header(:has .#history-tab-2010:checked) ~ .history-tab-contents #history-content-2010,
+                            #history-tab-2010:checked ~ .history-tab-contents #history-content-2010,
                             #history-tab-2000:checked ~ .history-tab-contents #history-content-2000,
                             #history-tab-1990:checked ~ .history-tab-contents #history-content-1990,
                             #history-tab-1980:checked ~ .history-tab-contents #history-content-1980 {
@@ -732,10 +774,6 @@
                                     opacity: 1;
                                     transform: translateY(0);
                                 }
-                            }
-                            
-                            .history-timeline-item:last-child {
-                                margin-bottom: 0;
                             }
                             
                             .history-timeline-item::before {
@@ -810,12 +848,61 @@
                             }
                         </style>
                         <!-- 조직도 -->
-                        <div id="status-organization" class="content-block full-width">
+                        <div id="status-organization" class="content-block">
                             <h3 class="block-title">조직도</h3>
                             <div class="block-content">
-                                <p>콘텐츠 영역</p>
+                                <div class="organization-chart">
+                                    <a href="./org_img2.jpg" target="_blank" rel="noopener noreferrer">
+                                        <img src="./org_img2.jpg" 
+                                             alt="YPP 조직도" 
+                                             class="org-chart-image">
+                                    </a>
+                                    <p class="org-chart-caption">조직도를 클릭하면 크게 보실 수 있습니다.</p>
+                                </div>
                             </div>
                         </div>
+                        <style>
+                            /* 조직도 스타일 */
+                            .organization-chart {
+                                text-align: center;
+                                border-radius: 12px;
+                            }
+                            
+                            .organization-chart a {
+                                display: inline-block;
+                                text-decoration: none;
+                            }
+                            
+                            .org-chart-image {
+                                max-width: 100%;
+                                height: auto;
+                                border-radius: 8px;
+                                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                                cursor: pointer;
+                                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                                background: #fff;
+                                padding: 1rem;
+                            }
+                            
+                            .org-chart-image:hover {
+                                transform: scale(1.02);
+                                box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+                            }
+                            
+                            .org-chart-caption {
+                                margin-top: 1rem;
+                                font-size: 0.9rem;
+                                color: #666;
+                                font-style: italic;
+                            }
+                            
+                            /* 모바일 반응형 */
+                            @media (max-width: 768px) {
+                                .organization-chart {
+                                    padding: 1rem;
+                                }
+                            }
+                        </style>
                     </div>
                 </div>
 

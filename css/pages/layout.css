@@ -282,6 +282,9 @@
     .block-content {
         padding: 0;
     }
+    .block-content p{
+        font-size: .8rem;
+    }
 }
 /* Section Scroll Offset */
 .content-block[id] {

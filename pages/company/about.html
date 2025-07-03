@@ -26,10 +26,6 @@
             grid-template-columns: 1fr;
             gap: 2rem;
         }
-        .greeting-content {
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
         
         /* 페이지 헤더 배경 이미지 */
         .page-header {
@@ -220,7 +216,6 @@
                             }
                             
                             .intro-logo {
-                                /* flex: 1; */
                                 max-width: 300px;
                                 text-align: center;
                             }
@@ -334,11 +329,29 @@
                             
                             /* 모바일 반응형 */
                                 @media (max-width: 768px) {
-                                    .company-footer-a,
+                                    .intro-logo {
+                                        max-width: 250px;
+                                    }
+                                    .company-footer-a{
+                                        width: 100%;
+                                    }
                                     .company-footer-b{
                                         width: 100%;
                                     }
-                                    
+                                    .detail-label{
+                                        padding-left: 0;
+                                    }
+                                    .detail-row{
+                                        padding: 1rem 0;
+                                    }                
+                                }
+                                @media (max-width: 425px) {
+                                    .intro-logo {
+                                        max-width: 200px;
+                                    }
+                                    .block-content p{
+                                        font-size: .8rem;
+                                    }
                                 }
                         </style>
                         
@@ -369,7 +382,9 @@
                             </div>
                         </div>
                         <style>
-                            .greeting-content{
+                            .greeting-content {
+                                line-height: 1.8;
+                                font-size: 1.05rem;
                                 padding: 2rem;
                             }
                             .greeting-content img{
@@ -380,6 +395,21 @@
                             }
                             .greeting-content img:last-child{
                                 max-width: 55%;
+                            }
+                            @media (max-width: 768px) {
+                            .greeting-content img:last-child{
+                                max-width: 100%;
+                                height: auto;
+                                }
+                                #status-greeting{
+                                    padding-left: .5rem;
+                                    padding-right: .5rem;
+                                }
+                            }
+                            @media (max-width: 425px) {
+                                .greeting-content {
+                                    padding: .25rem;
+                                }
                             }
                         </style>
                         
@@ -932,32 +962,32 @@
                                     <h4 class="partner-section-title">공급사</h4>
                                     <div class="supplier-grid">
                                         <div class="supplier-item">
-                                            <img src="../../assets/images/partners/ge-renewable.png" alt="GE RENEWABLE ENERGY" class="supplier-logo">
+                                            <img src="ge-renewable.png" alt="GE RENEWABLE ENERGY" class="supplier-logo">
                                             <div class="supplier-name">GE RENEWABLE ENERGY</div>
                                         </div>
                                         
                                         <div class="supplier-item">
-                                            <img src="../../assets/images/partners/grid-solutions.png" alt="GRID SOLUTIONS" class="supplier-logo">
+                                            <img src="grid-solutions.png" alt="GRID SOLUTIONS" class="supplier-logo">
                                             <div class="supplier-name">GRID SOLUTIONS</div>
                                         </div>
                                         
                                         <div class="supplier-item">
-                                            <img src="../../assets/images/partners/ametek.png" alt="AMETEK" class="supplier-logo">
+                                            <img src="ametek.png" alt="AMETEK" class="supplier-logo">
                                             <div class="supplier-name">AMETEK</div>
                                         </div>
                                         
                                         <div class="supplier-item">
-                                            <img src="../../assets/images/partners/schneider.png" alt="SCHNEIDER" class="supplier-logo">
+                                            <img src="schneider.png" alt="SCHNEIDER" class="supplier-logo">
                                             <div class="supplier-name">SCHNEIDER</div>
                                         </div>
                                         
                                         <div class="supplier-item">
-                                            <img src="../../assets/images/partners/is5.png" alt="IS5 COMMUNICATIONS" class="supplier-logo">
+                                            <img src="is5.png" alt="IS5 COMMUNICATIONS" class="supplier-logo">
                                             <div class="supplier-name">IS5 COMMUNICATIONS</div>
                                         </div>
                                         
                                         <div class="supplier-item">
-                                            <img src="../../assets/images/partners/framatome.png" alt="FRAMATOME" class="supplier-logo">
+                                            <img src="framatome.png" alt="FRAMATOME" class="supplier-logo">
                                             <div class="supplier-name">FRAMATOME</div>
                                         </div>
                                     </div>
@@ -970,35 +1000,35 @@
                                         <div class="client-category">
                                             <h5 class="client-category-title">공기업</h5>
                                             <div class="client-image-container">
-                                                <img src="../../assets/images/partners/m_part_cs_img1.png" alt="공기업 고객사" class="client-image">
+                                                <img src="client_public_companies.png" alt="공기업 고객사" class="client-image">
                                             </div>
                                         </div>
                                         
                                         <div class="client-category">
                                             <h5 class="client-category-title">민간기업</h5>
                                             <div class="client-image-container">
-                                                <img src="../../assets/images/partners/m_part_cs_img2.png" alt="민간기업 고객사" class="client-image">
+                                                <img src="client_private_companies.png" alt="민간기업 고객사" class="client-image">
                                             </div>
                                         </div>
                                         
                                         <div class="client-category">
                                             <h5 class="client-category-title">해외기업</h5>
                                             <div class="client-image-container">
-                                                <img src="../../assets/images/partners/m_part_cs_img3.png" alt="해외기업 고객사" class="client-image">
+                                                <img src="client_overseas_companie.png" alt="해외기업 고객사" class="client-image">
                                             </div>
                                         </div>
                                         
                                         <div class="client-category">
                                             <h5 class="client-category-title">정부산하 연구기관</h5>
                                             <div class="client-image-container">
-                                                <img src="../../assets/images/partners/m_part_cs_img4.png" alt="정부산하 연구기관" class="client-image">
+                                                <img src="client_government_researc.png" alt="정부산하 연구기관" class="client-image">
                                             </div>
                                         </div>
                                         
                                         <div class="client-category">
                                             <h5 class="client-category-title">비영리단체</h5>
                                             <div class="client-image-container">
-                                                <img src="../../assets/images/partners/part_cs_img5.png" alt="비영리단체" class="client-image">
+                                                <img src="client_nonprofit_orgs.png" alt="비영리단체" class="client-image">
                                             </div>
                                         </div>
                                     </div>
@@ -1037,7 +1067,6 @@
                             
                             .supplier-item {
                                 background: #fff;
-                                padding: 1.5rem;
                                 border-radius: 12px;
                                 text-align: center;
                                 box-shadow: 0 2px 8px rgba(0,0,0,0.08);
@@ -1052,12 +1081,8 @@
                             
                             .supplier-logo {
                                 width: 100%;
-                                max-width: 120px;
-                                height: 60px;
                                 object-fit: contain;
-                                margin-bottom: 1rem;
                                 background: #f8f9fa;
-                                padding: 0.5rem;
                                 border-radius: 8px;
                             }
                             
@@ -1067,6 +1092,7 @@
                                 color: #333;
                                 text-align: center;
                                 line-height: 1.3;
+                                padding: 1rem;
                             }
                             
                             /* 주요 고객 스타일 */
@@ -1117,20 +1143,11 @@
                             @media (max-width: 768px) {
                                 .supplier-grid {
                                     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                                    gap: 1rem;
-                                }
-                                
-                                .supplier-item {
-                                    padding: 1rem;
-                                }
-                                
-                                .supplier-logo {
-                                    height: 50px;
-                                    max-width: 100px;
+                                    gap: .5rem;
                                 }
                                 
                                 .supplier-name {
-                                    font-size: 0.8rem;
+                                    font-size: 0.5rem;
                                 }
                                 
                                 .client-category-title {

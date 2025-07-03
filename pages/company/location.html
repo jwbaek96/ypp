@@ -107,7 +107,9 @@
                             <h3 class="block-title">오시는 길</h3>
                             <div class="block-content map-container">
                                 <div class="map-placeholder">
-                                    <p>지도 영역 (지도 API 연동 예정)</p>
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3166.5713296942845!2d126.8810957552351!3d37.47084199999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b61ef519e8d49%3A0xc6a7965a6e4d8f1!2z7JWE66W07IS87YOA7JuM!5e0!3m2!1sko!2skr!4v1751529700768!5m2!1sko!2skr" width="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+                                <div class="map-placeholder">
                                     <div class="map-info">
                                         <p><strong>지하철:</strong> 가산디지털단지역 1번 출구에서 도보 5분</p>
                                         <p><strong>버스:</strong> 가산디지털단지역 정류장 하차</p>
@@ -657,7 +659,7 @@ window.getCurrentSection = getCurrentSection;
 .transportation-info {
     display: block;
     text-align: left;
-    padding: 1.5rem;
+    /* padding: 1.5rem; */
 }
 
 .location-details,
@@ -701,21 +703,29 @@ window.getCurrentSection = getCurrentSection;
 
 /* Map Container */
 .map-container {
-    padding: 2rem;
-    min-height: 300px;
+    display: block;
+    /* padding: 2rem; */
+    min-height: 250px;
+    width: 100%;    
 }
 
 .map-placeholder {
-    background-color: var(--background-light, #f8f9fa);
-    border: 2px dashed var(--border-light, #e5e5e5);
-    border-radius: 8px;
-    padding: 2rem;
     text-align: center;
     color: var(--text-secondary, #666);
+    max-height: 500px;
+}
+.map-placeholder iframe {
+    aspect-ratio: 5/2;
+    max-height: 500px;
+    border-radius: 8px;
 }
 
 .map-info {
-    margin-top: 1.5rem;
+    background-color: var(--background-light, #f8f9fa);
+    border: 2px dashed var(--border-light, #e5e5e5);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -771,12 +781,13 @@ window.getCurrentSection = getCurrentSection;
     }
     
     .map-container {
-        padding: 1rem;
+        /* padding: 1rem; */
         min-height: 250px;
     }
-    
-    .map-placeholder {
-        padding: 1.5rem;
+}
+@media (max-width: 425px) {
+    .map-placeholder iframe {
+        aspect-ratio: 5/3.5;
     }
 }
 </style>

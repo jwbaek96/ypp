@@ -923,12 +923,232 @@
                         </div>
                         
                         <!-- 파트너 -->
-                        <div id="business-partners" class="content-block">
-                            <h3 class="block-title">파트너</h3>
+                        <div id="business-partners" class="content-block full-width">
+                            <h3 class="block-title">주요 파트너</h3>
                             <div class="block-content">
-                                <p>콘텐츠 영역</p>
+                                
+                                <!-- 공급사 섹션 -->
+                                <div class="partner-section">
+                                    <h4 class="partner-section-title">공급사</h4>
+                                    <div class="supplier-grid">
+                                        <div class="supplier-item">
+                                            <img src="../../assets/images/partners/ge-renewable.png" alt="GE RENEWABLE ENERGY" class="supplier-logo">
+                                            <div class="supplier-name">GE RENEWABLE ENERGY</div>
+                                        </div>
+                                        
+                                        <div class="supplier-item">
+                                            <img src="../../assets/images/partners/grid-solutions.png" alt="GRID SOLUTIONS" class="supplier-logo">
+                                            <div class="supplier-name">GRID SOLUTIONS</div>
+                                        </div>
+                                        
+                                        <div class="supplier-item">
+                                            <img src="../../assets/images/partners/ametek.png" alt="AMETEK" class="supplier-logo">
+                                            <div class="supplier-name">AMETEK</div>
+                                        </div>
+                                        
+                                        <div class="supplier-item">
+                                            <img src="../../assets/images/partners/schneider.png" alt="SCHNEIDER" class="supplier-logo">
+                                            <div class="supplier-name">SCHNEIDER</div>
+                                        </div>
+                                        
+                                        <div class="supplier-item">
+                                            <img src="../../assets/images/partners/is5.png" alt="IS5 COMMUNICATIONS" class="supplier-logo">
+                                            <div class="supplier-name">IS5 COMMUNICATIONS</div>
+                                        </div>
+                                        
+                                        <div class="supplier-item">
+                                            <img src="../../assets/images/partners/framatome.png" alt="FRAMATOME" class="supplier-logo">
+                                            <div class="supplier-name">FRAMATOME</div>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <!-- 주요 고객 섹션 -->
+                                <div class="partner-section">
+                                    <h4 class="partner-section-title">주요 고객</h4>
+                                    <div class="clients">
+                                        <div class="client-category">
+                                            <h5 class="client-category-title">공기업</h5>
+                                            <div class="client-image-container">
+                                                <img src="../../assets/images/partners/m_part_cs_img1.png" alt="공기업 고객사" class="client-image">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="client-category">
+                                            <h5 class="client-category-title">민간기업</h5>
+                                            <div class="client-image-container">
+                                                <img src="../../assets/images/partners/m_part_cs_img2.png" alt="민간기업 고객사" class="client-image">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="client-category">
+                                            <h5 class="client-category-title">해외기업</h5>
+                                            <div class="client-image-container">
+                                                <img src="../../assets/images/partners/m_part_cs_img3.png" alt="해외기업 고객사" class="client-image">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="client-category">
+                                            <h5 class="client-category-title">정부산하 연구기관</h5>
+                                            <div class="client-image-container">
+                                                <img src="../../assets/images/partners/m_part_cs_img4.png" alt="정부산하 연구기관" class="client-image">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="client-category">
+                                            <h5 class="client-category-title">비영리단체</h5>
+                                            <div class="client-image-container">
+                                                <img src="../../assets/images/partners/part_cs_img5.png" alt="비영리단체" class="client-image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
+                        <style>
+                            /* 파트너 섹션 공통 */
+                            #business-partners .block-content{
+                                display: block;
+                            }
+                            .partner-section {
+                                margin-bottom: 3rem;
+                            }
+                            
+                            .partner-section:last-child {
+                                margin-bottom: 0;
+                            }
+                            
+                            .partner-section-title {
+                                font-size: 1.3rem;
+                                font-weight: 700;
+                                color: #0066cc;
+                                margin-bottom: 1.5rem;
+                                padding-bottom: 0.5rem;
+                                border-bottom: 2px solid #e8f4ff;
+                            }
+                            
+                            /* 공급사 스타일 */
+                            .supplier-grid {
+                                display: grid;
+                                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                                gap: 1.5rem;
+                            }
+                            
+                            .supplier-item {
+                                background: #fff;
+                                padding: 1.5rem;
+                                border-radius: 12px;
+                                text-align: center;
+                                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+                                border: 1px solid #f0f0f0;
+                                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                            }
+                            
+                            .supplier-item:hover {
+                                transform: translateY(-4px);
+                                box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+                            }
+                            
+                            .supplier-logo {
+                                width: 100%;
+                                max-width: 120px;
+                                height: 60px;
+                                object-fit: contain;
+                                margin-bottom: 1rem;
+                                background: #f8f9fa;
+                                padding: 0.5rem;
+                                border-radius: 8px;
+                            }
+                            
+                            .supplier-name {
+                                font-size: 0.9rem;
+                                font-weight: 600;
+                                color: #333;
+                                text-align: center;
+                                line-height: 1.3;
+                            }
+                            
+                            /* 주요 고객 스타일 */
+                            .clients {
+                                display: block;
+                            }
+                            
+                            .client-category {
+                                background: #fff;
+                                border-radius: 12px;
+                                overflow: hidden;
+                                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+                                border: 1px solid #f0f0f0;
+                                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                            }
+                            
+                            .client-category:hover {
+                                transform: translateY(-4px);
+                                box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+                            }
+                            
+                            .client-category-title {
+                                background: linear-gradient(135deg, #f8fafb 0%, #e8f4ff 100%);
+                                color: #0066cc;
+                                font-size: 1rem;
+                                font-weight: 600;
+                                padding: 1rem;
+                                margin: 0;
+                                text-align: center;
+                                border-bottom: 1px solid #e9ecef;
+                            }
+                            
+                            .client-image-container {
+                                padding: 1rem;
+                                text-align: center;
+                                background: #fff;
+                            }
+                            
+                            .client-image {
+                                width: 100%;
+                                height: auto;
+                                max-height: 200px;
+                                object-fit: contain;
+                                border-radius: 8px;
+                            }
+                            
+                            /* 모바일 반응형 */
+                            @media (max-width: 768px) {
+                                .supplier-grid {
+                                    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                                    gap: 1rem;
+                                }
+                                
+                                .supplier-item {
+                                    padding: 1rem;
+                                }
+                                
+                                .supplier-logo {
+                                    height: 50px;
+                                    max-width: 100px;
+                                }
+                                
+                                .supplier-name {
+                                    font-size: 0.8rem;
+                                }
+                                
+                                .client-category-title {
+                                    font-size: 0.9rem;
+                                    padding: 0.75rem;
+                                }
+                                
+                                .client-image-container {
+                                    padding: 0.75rem;
+                                }
+                            }
+                            
+                            @media (max-width: 480px) {
+                                .supplier-grid {
+                                    grid-template-columns: repeat(2, 1fr);
+                                }
+                            }
+                        </style>
                         
                         <!-- 인허가 -->
                         <div id="business-license" class="content-block">

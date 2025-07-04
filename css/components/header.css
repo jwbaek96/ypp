@@ -58,7 +58,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 80px;
+    height: var(--header-container-height);
 }
 
 .logo img {
@@ -124,6 +124,8 @@
     }
     .header-container {
     padding: 0 1rem;
-    height: 70px;
+    }
+    :root{
+        --header-container-height : 60px;
     }
 }

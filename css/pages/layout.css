@@ -1,5 +1,7 @@
 /* ===== COMMON PAGE LAYOUT ===== */
-
+.main-content{
+    padding-top: var(--header-container-height);
+}
 /* Page Header */
 .page-header {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -58,7 +60,7 @@
     /* background-color: var(--white, #ffffff); */
     border-bottom: 1px solid var(--border-light, #e5e5e5);
     position: sticky;
-    top: 80px;
+    top: var(--header-container-height);
     z-index: 100;
 }
 
@@ -245,9 +247,9 @@
     .content-title {
         font-size: 2rem;
     }
-    .tab-navigation, .section-navigation {
+    /* .tab-navigation, .section-navigation {
         top: 70px;
-    }
+    } */
     .tab-nav {
         display: flex;
         justify-content:flex-start;
@@ -284,8 +286,9 @@
     .block-content {
         padding: 0;
     }
+    .history-timeline-content,
     .block-content p{
-        font-size: .8rem;
+        font-size: .9rem;
     }
 }
 /* Section Scroll Offset */

@@ -15,46 +15,10 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/pages/layout.css">
+    <link rel="stylesheet" href="./about.css">
     
     <!-- 메타 시스템 -->
     <script src="../../js/head-meta.js"></script>
-    
-    <!-- CSS -->
-    <style>
-        .content-grid{
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        
-        /* 페이지 헤더 배경 이미지 */
-        .page-header {
-            position: relative;
-            background: url(./header-bg.jpg);
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6); 
-            z-index: 1;
-        }
-        
-        .page-header > * {
-            position: relative;
-            z-index: 2
-        }
-        .page-header-content h1,
-        .page-header-content p{
-            color: var(--white);
-        }
-    </style>
 </head>
 <body>
     <!-- Header Container -->
@@ -194,166 +158,6 @@
                                 
                             </div>
                         </div>
-                        <style>
-                            #status-intro .block-content{
-                                display: block;
-                                text-align: center;
-                            }
-                            #status-intro p{
-                                text-align: center;
-                            }
-                            /* 심플한 소개 파트 스타일 */
-                            .intro-header {
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                gap: 3rem;
-                                margin-bottom: 3rem;
-                            }
-                            
-                            .intro-text {
-                                flex: 2;
-                            }
-                            
-                            .intro-logo {
-                                max-width: 300px;
-                                text-align: center;
-                            }
-                            
-                            .intro-greeting {
-                                font-size: 1.4rem;
-                                color: #1a1a1a;
-                                margin-bottom: 1rem;
-                                line-height: 1.5;
-                            }
-                            
-                            .intro-description {
-                                font-size: 1.1rem;
-                                color: #666;
-                                line-height: 1.6;
-                                margin: 0;
-                            }
-                            
-                            .company-logo {
-                                max-width: 120px;
-                                height: auto;
-                            }
-                            
-                            .company-story {
-                                margin-bottom: 3rem;
-                            }
-                            
-                            .company-story p {
-                                font-size: 1.05rem;
-                                line-height: 1.7;
-                                color: #333;
-                                margin-bottom: 1.5rem;
-                            }
-                            
-                            .company-story p:last-child {
-                                margin-bottom: 0;
-                            }
-                            
-                            .company-footer{
-                                display: flex;
-                                flex-wrap: wrap;
-                                gap: 10px;
-                            }
-                            .company-footer-a{
-                                width: 40%;
-                            }
-                            .company-footer-b{
-                                /* margin: auto; */
-                                /* width: 100%; */
-                                flex: 1;
-                            }
-                            
-                            .building-photo {
-                                width: 100%;
-                                height: 250px;
-                                object-fit: cover;
-                                border-radius: 8px;
-                                background: #f5f5f5;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                color: #999;
-                                font-size: 1rem;
-                            }
-                            
-                            .business-intro {
-                                text-align: center;
-                                margin-bottom: 3rem;
-                                padding: 2rem;
-                                background: #f8f9fa;
-                                border-radius: 8px;
-                            }
-                            
-                            .business-intro p {
-                                font-size: 1.1rem;
-                                line-height: 1.6;
-                                color: #333;
-                                margin: 0;
-                                font-weight: 500;
-                            }
-                            
-                            .company-details {
-                                background: #fff;
-                                /* border: 1px solid #e9ecef; */
-                                border-radius: 8px;
-                                overflow: hidden;
-                            }
-                            
-                            .detail-row {
-                                display: flex;
-                                padding: 1rem 1.5rem;
-                                border-bottom: 1px solid #f1f3f4;
-                            }
-                            
-                            .detail-row:last-child {
-                                border-bottom: none;
-                            }
-                            
-                            .detail-label {
-                                font-weight: 600;
-                                color: #333;
-                                padding: 0 1.5rem;
-                                flex-shrink: 0;
-                            }
-                            
-                            .detail-value {
-                                color: #666;
-                                line-height: 1.5;
-                                text-align: left;
-                            }
-                            
-                            /* 모바일 반응형 */
-                                @media (max-width: 768px) {
-                                    .intro-logo {
-                                        max-width: 250px;
-                                    }
-                                    .company-footer-a{
-                                        width: 100%;
-                                    }
-                                    .company-footer-b{
-                                        width: 100%;
-                                    }
-                                    .detail-label{
-                                        padding-left: 0;
-                                    }
-                                    .detail-row{
-                                        padding: 1rem 0;
-                                    }                
-                                }
-                                @media (max-width: 425px) {
-                                    .intro-logo {
-                                        max-width: 200px;
-                                    }
-                                    .block-content p{
-                                        font-size: .8rem;
-                                    }
-                                }
-                        </style>
                         
                         <!-- 인사말 -->
                         <div id="status-greeting" class="content-block">
@@ -381,37 +185,7 @@
                                 </div>
                             </div>
                         </div>
-                        <style>
-                            .greeting-content {
-                                line-height: 1.8;
-                                font-size: 1.05rem;
-                                padding: 2rem;
-                            }
-                            .greeting-content img{
-                                margin-top: 10px;
-                            }
-                            .greeting-content img:first-child{
-                                margin-bottom: 15px;
-                            }
-                            .greeting-content img:last-child{
-                                max-width: 55%;
-                            }
-                            @media (max-width: 768px) {
-                            .greeting-content img:last-child{
-                                max-width: 100%;
-                                height: auto;
-                                }
-                                #status-greeting{
-                                    padding-left: .5rem;
-                                    padding-right: .5rem;
-                                }
-                            }
-                            @media (max-width: 425px) {
-                                .greeting-content {
-                                    padding: .25rem;
-                                }
-                            }
-                        </style>
+
                         
                         <!-- 연혁 -->
                         <div id="status-history" class="content-block">
@@ -683,200 +457,7 @@
                                 </div>
                             </div>
                         </div>
-                        <style>
-                            .history-tabs {
-                                background: #fff;
-                                border-radius: 12px;
-                                overflow: hidden;
-                                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-                                border: 1px solid #e9ecef;
-                                width: 100%;
-                            }
-                            
-                            /* 라디오 버튼 숨기기 */
-                            .history-tab-radio {
-                                display: none;
-                            }
-                            
-                            /* 탭 헤더 영역 */
-                            .history-tab-headers {
-                                display: flex;
-                                background: #f8f9fa;
-                                border-bottom: 1px solid #e9ecef;
-                            }
-                            
-                            /* 탭 헤더 스타일 */
-                            .history-tab-header {
-                                flex: 1;
-                                padding: 1.5rem 1rem;
-                                text-align: center;
-                                font-weight: 600;
-                                font-size: 1.1rem;
-                                color: #666;
-                                background: #f8f9fa;
-                                cursor: pointer;
-                                transition: all 0.3s ease;
-                                border-right: 1px solid #e9ecef;
-                                user-select: none;
-                                position: relative;
-                            }
-                            
-                            .history-tab-header:last-child {
-                                border-right: none;
-                            }
-                            
-                            .history-tab-header:hover {
-                                background: #e9ecef;
-                                color: #333;
-                            }
-                            
-                            /* 탭 컨텐츠 영역 */
-                            .history-tab-contents {
-                                position: relative;
-                             }
-                            
-                            /* 탭 컨텐츠 */
-                            .history-tab-content {
-                                display: none;
-                                width: 100%;
-                                transform: translateY(20px);
-                                transition: all 0.4s ease;
-                                padding: 2rem;
-                            }
-                            
-                            /* 활성화된 탭 헤더 */
-                            #history-tab-2010:checked ~ .history-tab-headers label[for="history-tab-2010"],
-                            #history-tab-2000:checked ~ .history-tab-headers label[for="history-tab-2000"],
-                            #history-tab-1990:checked ~ .history-tab-headers label[for="history-tab-1990"],
-                            #history-tab-1980:checked ~ .history-tab-headers label[for="history-tab-1980"] {
-                                background: linear-gradient(135deg, #0066cc 0%, #4a90e2 100%);
-                                color: #fff;
-                            }
-                            
-                            /* 활성화된 탭 컨텐츠 */
-                            #history-tab-2010:checked ~ .history-tab-contents #history-content-2010,
-                            #history-tab-2000:checked ~ .history-tab-contents #history-content-2000,
-                            #history-tab-1990:checked ~ .history-tab-contents #history-content-1990,
-                            #history-tab-1980:checked ~ .history-tab-contents #history-content-1980 {
-                                display: block;
-                            }
-                            
-                            /* 타임라인 스타일 */
-                            .history-timeline {
-                                position: relative;
-                                padding-left: 2rem;
-                            }
-                            
-                            .history-timeline::before {
-                                content: '';
-                                position: absolute;
-                                left: 0;
-                                top: 0;
-                                bottom: 0;
-                                width: 2px;
-                                max-height: 0%;
-                                background: linear-gradient(to bottom, #0066cc, #4a90e2);
-                                animation: historySlideBarIn .8s ease forwards;
-                            }
-                            @keyframes historySlideBarIn {
-                                to {
-                                    max-height: 100%;
-                                }
-                            }
-                            
-                            .history-timeline-item {
-                                position: relative;
-                                margin-bottom: 2rem;
-                                padding-left: 2rem;
-                                opacity: 0;
-                                transform: translateY(10px);
-                                animation: historySlideIn 0.6s ease forwards;
-                            }
-                            
-                            .history-timeline-item:nth-child(1) { animation-delay: 0.1s; }
-                            .history-timeline-item:nth-child(2) { animation-delay: 0.2s; }
-                            .history-timeline-item:nth-child(3) { animation-delay: 0.3s; }
-                            .history-timeline-item:nth-child(4) { animation-delay: 0.4s; }
-                            .history-timeline-item:nth-child(5) { animation-delay: 0.5s; }
-                            
-                            @keyframes historySlideIn {
-                                to {
-                                    opacity: 1;
-                                    transform: translateY(0);
-                                }
-                            }
-                            
-                            .history-timeline-item::before {
-                                content: '';
-                                position: absolute;
-                                left: -0.5rem;
-                                top: 0.5rem;
-                                width: 1rem;
-                                height: 1rem;
-                                background: #0066cc;
-                                border-radius: 50%;
-                                border: 3px solid #fff;
-                                box-shadow: 0 0 0 3px #e8f4ff;
-                            }
-                            
-                            .history-timeline-year {
-                                font-weight: 700;
-                                font-size: 1.2rem;
-                                color: #0066cc;
-                                margin-bottom: 0.5rem;
-                            }
-                            
-                            .history-timeline-content {
-                                color: #555;
-                                line-height: 1.6;
-                            }
-                            
-                            /* 모바일 반응형 */
-                            @media (max-width: 768px) {
-                                .history-tab-headers {
-                                    /* flex-direction: column; */
-                                }
-                                
-                                .history-tab-header {
-                                    border-right: none;
-                                    border-bottom: 1px solid #e9ecef;
-                                    padding: 1rem;
-                                    font-size: 1rem;
-                                }
-                                
-                                .history-tab-header:last-child {
-                                    border-bottom: none;
-                                }
-                                
-                                .history-tab-content {
-                                    padding: 1.5rem;
-                                }
-                                
-                                .history-timeline {
-                                    padding-left: 0;
-                                }
-                                
-                                .history-timeline::before {
-                                    display: none;
-                                }
-                                
-                                .history-timeline-item {
-                                    padding-left: 1.5rem;
-                                }
-                            }
-                            
-                            @media (max-width: 480px) {
-                                .history-tab-headers {
-                                    display: grid;
-                                    grid-template-columns: 1fr 1fr;
-                                }
-                                
-                                .history-tab-header {
-                                    font-size: 0.9rem;
-                                    padding: 0.75rem;
-                                }
-                            }
-                        </style>
+
                         <!-- 조직도 -->
                         <div id="status-organization" class="content-block">
                             <h3 class="block-title">조직도</h3>
@@ -891,41 +472,7 @@
                                 </div>
                             </div>
                         </div>
-                        <style>
-                            /* 조직도 스타일 */
-                            .organization-chart {
-                                text-align: center;
-                                border-radius: 12px;
-                            }
-                            
-                            .organization-chart a {
-                                display: inline-block;
-                                text-decoration: none;
-                            }
-                            
-                            .org-chart-image {
-                                max-width: 100%;
-                                height: auto;
-                                border-radius: 8px;
-                                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                                cursor: pointer;
-                                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                                background: #fff;
-                                padding: 1rem;
-                            }
-                            
-                            .org-chart-image:hover {
-                                transform: scale(1.02);
-                                box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-                            }
-                            
-                            .org-chart-caption {
-                                margin-top: 1rem;
-                                font-size: 0.9rem;
-                                color: #666;
-                                font-style: italic;
-                            }
-                        </style>
+
                     </div>
                 </div>
 
@@ -944,7 +491,9 @@
                                 
                                 <!-- 메인 비즈니스 이미지 -->
                                 <div class="business-main-image">
-                                    <img src="business_intro_kr.png" alt="YPP 사업 소개" class="main-business-img">
+                                    <a href="business_intro_kr.png" target="_blank" rel="noopener noreferrer">
+                                        <img src="business_intro_kr.png" alt="YPP 사업 소개" class="main-business-img">
+                                    </a>
                                 </div>
                                 
                                 <!-- 사업 소개 텍스트 -->
@@ -959,8 +508,10 @@
                                 
                                 <!-- 사업 프로세스 이미지 -->
                                 <div class="business-process-image">
-                                    <img src="business-process-image.jpg" alt="YPP 사업 프로세스" class="process-img">
-                                </div>
+                                    <a href="business-process-image.jpg" target="_blank" rel="noopener noreferrer">
+                                        <img src="business-process-image.jpg" alt="YPP 사업 프로세스" class="process-img">
+                                    </a>
+                                 </div>
                                 
                                 <!-- 사업 아이템들 -->
                                 <div class="business-grid">
@@ -1033,93 +584,6 @@
                                 
                             </div>
                         </div>
-                        <style>
-                            /* 메인 비즈니스 이미지 */
-                            .business-main-image {
-                                text-align: center;
-                                margin-bottom: 2rem;
-                            }
-                            
-                            .main-business-img {
-                                max-width: 100%;
-                                height: auto;
-                                border-radius: 12px;
-                                box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-                            }
-                            
-                            /* 사업 소개 텍스트 */
-                            .business-intro-text {
-                                background: linear-gradient(135deg, #f8fafb 0%, #e8f4ff 100%);
-                                padding: 2rem;
-                                border-radius: 12px;
-                                margin-bottom: 2rem;
-                            }
-                            
-                            .business-intro-text p {
-                                /* font-size: 1.1rem; */
-                                line-height: 1.8;
-                                color: #333;
-                                margin: 0;
-                                text-align: justify;
-                            }
-                            
-                            /* 사업 프로세스 이미지 */
-                            .business-process-image {
-                                text-align: center;
-                                margin-bottom: 3rem;
-                            }
-                            
-                            .process-img {
-                                max-width: 100%;
-                                height: auto;
-                                border-radius: 12px;
-                                box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-                            }
-                            
-                            /* 기존 business-grid 스타일 유지 */
-                            .business-grid {
-                                display: grid;
-                                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                                gap: 1.5rem;
-                                margin-top: 1rem;
-                            }
-                            
-                            .business-item {
-                                background: linear-gradient(135deg, #f8fafb 0%, #e8f4ff 100%);
-                                padding: 1.5rem;
-                                border-radius: 10px;
-                                border: 1px solid #e0e6ed;
-                                transition: transform 0.3s ease;
-                            }
-                            
-                            .business-item:hover {
-                                transform: translateY(-2px);
-                                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                            }
-                            
-                            .business-title {
-                                font-weight: 700;
-                                color: #0066cc;
-                                margin-bottom: 0.75rem;
-                                font-size: 1.1rem;
-                            }
-                            
-                            /* 모바일 반응형 */
-                            @media (max-width: 768px) {
-                                .business-intro-text {
-                                    padding: 1.5rem;
-                                }
-                                
-                                .business-intro-text p {
-                                    font-size: .8rem;
-                                    /* line-height: 1.7; */
-                                }
-                                
-                                .business-grid {
-                                    grid-template-columns: 1fr;
-                                }
-                            }
-                        </style>
                         
                         <!-- 파트너 -->
                         <div id="business-partners" class="content-block full-width">
@@ -1205,136 +669,7 @@
                                 
                             </div>
                         </div>
-                        <style>
-                            /* 파트너 섹션 공통 */
-                            #business-partners .block-content{
-                                display: block;
-                            }
-                            .partner-section {
-                                margin-bottom: 3rem;
-                            }
-                            
-                            .partner-section:last-child {
-                                margin-bottom: 0;
-                            }
-                            
-                            .partner-section-title {
-                                font-size: 1.3rem;
-                                font-weight: 700;
-                                color: #0066cc;
-                                margin-bottom: 1.5rem;
-                                padding-bottom: 0.5rem;
-                                border-bottom: 2px solid #e8f4ff;
-                            }
-                            
-                            /* 공급사 스타일 */
-                            .supplier-grid {
-                                display: grid;
-                                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                                gap: 1.5rem;
-                            }
-                            
-                            .supplier-item {
-                                background: #fff;
-                                border-radius: 12px;
-                                text-align: center;
-                                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-                                border: 1px solid #f0f0f0;
-                                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                            }
-                            
-                            .supplier-item:hover {
-                                transform: translateY(-4px);
-                                box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-                            }
-                            
-                            .supplier-logo {
-                                width: 100%;
-                                object-fit: contain;
-                                background: #f8f9fa;
-                                border-radius: 8px;
-                            }
-                            
-                            .supplier-name {
-                                font-size: 0.9rem;
-                                font-weight: 600;
-                                color: #333;
-                                text-align: center;
-                                line-height: 1.3;
-                                padding: 1rem;
-                            }
-                            
-                            /* 주요 고객 스타일 */
-                            .clients {
-                                display: block;
-                            }
-                            
-                            .client-category {
-                                background: #fff;
-                                border-radius: 12px;
-                                overflow: hidden;
-                                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-                                border: 1px solid #f0f0f0;
-                                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                            }
-                            
-                            .client-category:hover {
-                                transform: translateY(-4px);
-                                box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-                            }
-                            
-                            .client-category-title {
-                                background: linear-gradient(135deg, #f8fafb 0%, #e8f4ff 100%);
-                                color: #0066cc;
-                                font-size: 1rem;
-                                font-weight: 600;
-                                padding: 1rem;
-                                margin: 0;
-                                text-align: center;
-                                border-bottom: 1px solid #e9ecef;
-                            }
-                            
-                            .client-image-container {
-                                padding: 1rem;
-                                text-align: center;
-                                background: #fff;
-                            }
-                            
-                            .client-image {
-                                width: 100%;
-                                height: auto;
-                                max-height: 200px;
-                                object-fit: contain;
-                                border-radius: 8px;
-                            }
-                            
-                            /* 모바일 반응형 */
-                            @media (max-width: 768px) {
-                                .supplier-grid {
-                                    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                                    gap: .5rem;
-                                }
-                                
-                                .supplier-name {
-                                    font-size: 0.5rem;
-                                }
-                                
-                                .client-category-title {
-                                    font-size: 0.9rem;
-                                    padding: 0.75rem;
-                                }
-                                
-                                .client-image-container {
-                                    padding: 0.75rem;
-                                }
-                            }
-                            
-                            @media (max-width: 480px) {
-                                .supplier-grid {
-                                    grid-template-columns: repeat(2, 1fr);
-                                }
-                            }
-                        </style>
+
                         
                         <!-- 인허가 -->
                         <div id="business-license" class="content-block">
@@ -1445,190 +780,6 @@
                                 
                             </div>
                         </div>
-                        <style>
-                            /* 비전 & 핵심가치 전체 스타일 */
-                            .section-header {
-                                text-align: center;
-                                margin-bottom: 1.5rem;
-                                padding-bottom: 1rem;
-                                border-bottom: 2px solid #e0e6ed;
-                            }
-                            
-                            .section-title {
-                                font-size: 1.6rem;
-                                font-weight: 700;
-                                color: #333;
-                                margin-bottom: 0.5rem;
-                            }
-                            
-                            .section-subtitle {
-                                font-size: 1rem;
-                                color: #666;
-                                font-style: italic;
-                            }
-                            
-                            /* 미션 섹션 */
-                            .mission-section {
-                                background: #fff;
-                                padding: 2rem;
-                                border-radius: 8px;
-                                margin-bottom: 2rem;
-                                border: 2px solid #0066cc;
-                                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                            }
-                            
-                            .mission-content {
-                                text-align: center;
-                            }
-                            
-                            .mission-content h5 {
-                                font-size: 1.8rem;
-                                color: #0066cc;
-                                margin-bottom: 1rem;
-                                font-weight: 700;
-                            }
-                            
-                            .mission-content p {
-                                font-size: 1.1rem;
-                                color: #555;
-                                line-height: 1.6;
-                            }
-                            
-                            /* 비전 섹션 */
-                            .vision-section {
-                                background: #fff;
-                                padding: 2rem;
-                                border-radius: 8px;
-                                margin-bottom: 2rem;
-                                border: 2px solid #7B1FA2;
-                                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                            }
-                            
-                            .vision-content {
-                                text-align: center;
-                            }
-                            
-                            .vision-content h5 {
-                                font-size: 1.8rem;
-                                color: #7B1FA2;
-                                margin-bottom: 1rem;
-                                font-weight: 700;
-                            }
-                            
-                            .vision-content p {
-                                font-size: 1.1rem;
-                                color: #555;
-                                line-height: 1.6;
-                                margin-bottom: 0.5rem;
-                            }
-                            
-                            .vision-content .highlight {
-                                font-size: 1.3rem;
-                                font-weight: 700;
-                                color: #7B1FA2;
-                                margin-top: 0.5rem;
-                            }
-                            
-                            /* 핵심가치 & 행동강령 섹션 */
-                            .values-behavior-section {
-                                display: grid;
-                                grid-template-columns: 1fr 1fr;
-                                gap: 2rem;
-                            }
-                            
-                            .values-section {
-                                background: #fff;
-                                padding: 2rem;
-                                border-radius: 8px;
-                                border: 2px solid #4CAF50;
-                                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                            }
-                            
-                            .behavior-section {
-                                background: #fff;
-                                padding: 2rem;
-                                border-radius: 8px;
-                                border: 2px solid #2196F3;
-                                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                            }
-                            
-                            .values-grid,
-                            .behavior-grid {
-                                display: grid;
-                                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                                gap: 1rem;
-                                margin-top: 1rem;
-                            }
-                            
-                            .value-item,
-                            .behavior-item {
-                                background: #f8f9fa;
-                                padding: 1.5rem 1rem;
-                                border-radius: 8px;
-                                text-align: center;
-                                border: 1px solid #e0e6ed;
-                                transition: all 0.3s ease;
-                            }
-                            
-                            .value-item:hover,
-                            .behavior-item:hover {
-                                transform: translateY(-2px);
-                                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                                background: #fff;
-                            }
-                            
-                            .value-text,
-                            .behavior-text {
-                                font-size: 1rem;
-                                font-weight: 600;
-                                color: #333;
-                                line-height: 1.3;
-                            }
-                            
-                            .values-section .value-item {
-                                border-left: 4px solid #4CAF50;
-                            }
-                            
-                            .behavior-section .behavior-item {
-                                border-left: 4px solid #2196F3;
-                            }
-                            
-                            /* 모바일 반응형 */
-                            @media (max-width: 768px) {
-                                .values-behavior-section {
-                                    grid-template-columns: 1fr;
-                                    gap: 1rem;
-                                }
-                                
-                                .values-grid,
-                                .behavior-grid {
-                                    grid-template-columns: repeat(2, 1fr);
-                                }
-                                
-                                .mission-section,
-                                .vision-section,
-                                .values-section,
-                                .behavior-section {
-                                    padding: 1.5rem;
-                                }
-                                
-                                .section-title {
-                                    font-size: 1.4rem;
-                                }
-                            }
-                            
-                            @media (max-width: 480px) {
-                                .values-grid,
-                                .behavior-grid {
-                                    grid-template-columns: 1fr;
-                                }
-                                
-                                .value-item,
-                                .behavior-item {
-                                    padding: 1rem;
-                                }
-                            }
-                        </style>
                         
                         <!-- 조직문화 -->
                         <div id="culture-organization" class="content-block">
@@ -1637,8 +788,8 @@
                                 
                                 <!-- 조직문화 메인 타이틀 -->
                                 <div class="culture-header">
-                                    <h4 class="culture-main-title">와이피피㈜ 조직문화</h4>
-                                    <h5 class="culture-subtitle">"고품격 직원가치를 통한 고객가치의 창조"</h5>
+                                    <h5 class="culture-main-title">"고품격 직원가치를 통한 고객가치의 창조"</h5>
+                                    <!-- <h4 class="culture-subtitle">와이피피㈜ 조직문화</h4> -->
                                 </div>
                                 
                                 <!-- 3개 원형 조직문화 -->
@@ -1743,192 +894,96 @@
                                 
                             </div>
                         </div>
-                        <style>
-                            /* 조직문화 헤더 */
-                            .culture-header {
-                                text-align: center;
-                                margin-bottom: 3rem;
-                                padding: 2rem;
-                                background: #f8f9fa;
-                                border-radius: 8px;
-                                border: 2px solid #0066cc;
-                            }
-                            
-                            .culture-main-title {
-                                font-size: 1.8rem;
-                                font-weight: 700;
-                                color: #333;
-                                margin-bottom: 1rem;
-                            }
-                            
-                            .culture-subtitle {
-                                font-size: 1.3rem;
-                                color: #0066cc;
-                                font-weight: 600;
-                            }
-                            
-                            /* 3개 원형 조직문화 */
-                            .culture-circles {
-                                display: flex;
-                                flex-wrap: wrap;
-                                gap: 1rem;
-                                margin-bottom: 3rem;
-                            }
-                            
-                            .culture-circle {
-                                width: 280px;
-                                height: 280px;
-                                border-radius: 50%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                margin: 0 auto;
-                                padding: 2rem;
-                                box-sizing: border-box;
-                                border: 8px solid;
-                                background: #fff;
-                                transition: transform 0.3s ease;
-                            }
-                            
-                            .culture-circle:hover {
-                                transform: scale(1.02);
-                            }
-                            
-                            .culture-circle.blue {
-                                border-color: #2196F3;
-                            }
-                            
-                            .culture-circle.purple {
-                                border-color: #9C27B0;
-                            }
-                            
-                            .culture-circle.green {
-                                border-color: #4CAF50;
-                            }
-                            
-                            .circle-content {
-                                text-align: center;
-                                line-height: 1.6;
-                            }
-                            
-                            .circle-content p {
-                                font-size: 1rem;
-                                color: #333;
-                                margin-bottom: 0.5rem;
-                            }
-                            
-                            .circle-content strong {
-                                color: #0066cc;
-                                font-weight: 700;
-                            }
-                            
-                            .culture-circle.purple .circle-content strong {
-                                color: #9C27B0;
-                            }
-                            
-                            .culture-circle.green .circle-content strong {
-                                color: #4CAF50;
-                            }
-                            
-                            /* 기존 조직문화 그리드 */
-                            .culture-details {
-                                margin-bottom: 3rem;
-                            }
-                            
-                            .culture-grid {
-                                display: grid;
-                                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                                gap: 1.5rem;
-                                margin-top: 1rem;
-                            }
-                            
-                            .culture-item {
-                                background: #f8fafb;
-                                padding: 1.5rem;
-                                border-radius: 10px;
-                                border-left: 4px solid #0066cc;
-                                transition: transform 0.3s ease;
-                            }
-                            
-                            .culture-item:hover {
-                                transform: translateY(-2px);
-                                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                            }
-                            
-                            .culture-title {
-                                font-weight: 700;
-                                color: #0066cc;
-                                margin-bottom: 0.75rem;
-                                font-size: 1.1rem;
-                            }
-                            
-                            /* 복리후생 섹션 */
-                            .benefits-section {
-                                background: #e8f4ff;
-                                padding: 2rem;
-                                border-radius: 8px;
-                                border-left: 4px solid #0066cc;
-                            }
-                            
-                            .benefit-item {
-                                background: #fff;
-                                padding: 1rem;
-                                border-radius: 6px;
-                                border: 1px solid #e0e6ed;
-                            }
-                            
-                            /* 모바일 반응형 */
-                            @media (max-width: 768px) {
-                                .culture-circles {
-                                    grid-template-columns: 1fr;
-                                }
-                                
-                                .culture-circle {
-                                    width: 240px;
-                                    height: 240px;
-                                    padding: 1.5rem;
-                                }
-                                
-                                .circle-content p {
-                                    font-size: 0.9rem;
-                                }
-                                
-                                .culture-grid {
-                                    grid-template-columns: 1fr;
-                                }
-                                
-                                .culture-header {
-                                    padding: 1.5rem;
-                                }
-                                
-                                .culture-main-title {
-                                    font-size: 1.5rem;
-                                }
-                                
-                                .culture-subtitle {
-                                    font-size: 1.1rem;
-                                }
-                            }
-                            
-                            @media (max-width: 480px) {
-                                .culture-circle {
-                                    width: 200px;
-                                    height: 200px;
-                                    padding: 1rem;
-                                }
-                                
-                                .circle-content p {
-                                    font-size: 0.8rem;
-                                }
-                            }
-                        </style>
+
                         
                         <!-- 사회공헌 -->
                         <div id="culture-contribution" class="content-block">
-                            <h3 class="block-title">사회공헌</h3>
-                            <div class="block-content">
-                                <p>콘텐츠 영역</p>
-                            </div>
+                           <h3 class="block-title">사회공헌</h3>
+                           <div class="block-content">
+                               
+                               <!-- 사회공헌 헤더 -->
+                               <div class="contribution-header">
+                                   <h4 class="contribution-main-title">기업시민으로서 책임을 다합니다.</h4>
+                                   <div class="contribution-description">
+                                       <p>와이피피㈜는 기업시민으로서의 책임을 다하는 것이야말로 모든 기업의 신성한 의무이며,</p>
+                                       <p>이를 통해 얻어지는 존경과 신뢰야말로 기업이 얻을 수 있는 가장 중요한 자산이라 믿습니다.</p>
+                                       <p>그래서 와이피피㈜는 늘 우리가 가진 것을 더 많은 분들과 나누기 위해 노력합니다.</p>
+                                   </div>
+                               </div>
+                               
+                               <!-- 사회공헌 활동들 -->
+                               <div class="contribution-activities">
+                                   
+                                   <!-- 소외계층 지원 -->
+                                   <div class="contribution-item">
+                                       <div class="contribution-image">
+                                           <img src="contribution-children.png" alt="소외계층 지원 활동" class="activity-img">
+                                       </div>
+                                       <div class="contribution-content">
+                                           <h5 class="activity-title">소외계층 지원</h5>
+                                           <p class="activity-description">
+                                               소년소녀가장, 독거노인 등 사회적으로 소외된 분들에게 사랑을<br>
+                                               실천함으로써 기업의 사회적 책임을 다합니다.
+                                           </p>
+                                       </div>
+                                   </div>
+                                   
+                                   <!-- 봉사활동 -->
+                                   <div class="contribution-item">
+                                       <div class="contribution-image">
+                                           <img src="contribution-volunteer.png" alt="봉사활동" class="activity-img">
+                                       </div>
+                                       <div class="contribution-content">
+                                           <h5 class="activity-title">봉사활동</h5>
+                                           <p class="activity-description">
+                                               고아원, 양로원 등을 방문하여 행복나눔을 실천합니다.
+                                           </p>
+                                       </div>
+                                   </div>
+                                   
+                                   <!-- 교육 -->
+                                   <div class="contribution-item">
+                                       <div class="contribution-image">
+                                           <img src="contribution-education.png" alt="교육 지원 활동" class="activity-img">
+                                       </div>
+                                       <div class="contribution-content">
+                                           <h5 class="activity-title">교육</h5>
+                                           <p class="activity-description">
+                                               전력산업의 차기전력기술 고급인력 양성을 위해<br>
+                                               교육센터를 운영하고 있습니다.
+                                           </p>
+                                       </div>
+                                   </div>
+                                   
+                                   <!-- 선교사업 -->
+                                   <div class="contribution-item">
+                                       <div class="contribution-image">
+                                           <img src="contribution-mission.png" alt="선교사업 활동" class="activity-img">
+                                       </div>
+                                       <div class="contribution-content">
+                                           <h5 class="activity-title">선교사업</h5>
+                                           <p class="activity-description">
+                                               복음화 실천을 위한 선교사 및 교회를 후원하여<br>
+                                               직장선교에 앞장섭니다.
+                                           </p>
+                                       </div>
+                                   </div>
+                                   
+                                   <!-- 각종 단체 후원 -->
+                                   <div class="contribution-item">
+                                       <div class="contribution-image">
+                                           <img src="contribution-support.png" alt="각종 단체 후원 활동" class="activity-img">
+                                       </div>
+                                       <div class="contribution-content">
+                                           <h5 class="activity-title">각종 단체 후원</h5>
+                                           <p class="activity-description">
+                                               자선에방협회를 후원함으로써 생명의 가치를 지켜갑니다.<br>
+                                               보다 경쟁력있는 대한민국의 미래를 위해 새터민학교를 후원합니다.
+                                            </p>
+                                        </div>
+                                   </div>
+                               </div>
+                           </div>
                         </div>
                     </div>
                 </div>

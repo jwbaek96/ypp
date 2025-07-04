@@ -6,17 +6,17 @@
       "children": {
         "status": {
           "title": "기업현황",
-          "url": "/pages/company/about.html",
+          "url": "/pages/company/about.html?tab=status",
           "sections": ["소개", "인사말", "연혁", "조직도"]
         },
         "business": {
           "title": "주요사업",
-          "url": "/pages/company/about.html#business",
+          "url": "/pages/company/about.html?tab=business",
           "sections": ["사업소개", "파트너", "인허가", "유자격"]
         },
         "culture": {
           "title": "기업문화",
-          "url": "/pages/company/about.html#culture",
+          "url": "/pages/company/about.html?tab=culture",
           "sections": ["비전&핵심가치", "조직문화", "사회공헌"]
         },
         "location": {
@@ -32,47 +32,47 @@
       "children": {
         "thermal-power": {
           "title": "화력발전소",
-          "url": "/pages/business/index.html#thermal-power",
+          "url": "/pages/business/index.html?tab=thermal-power",
           "sections": ["화력발전소 개요", "주요 프로젝트", "기술 역량", "실적"]
         },
         "nuclear-power": {
           "title": "원자력발전소",
-          "url": "/pages/business/index.html#nuclear-power",
+          "url": "/pages/business/index.html?tab=nuclear-power",
           "sections": ["원자력발전소 개요", "주요 프로젝트", "기술 역량", "실적"]
         },
         "renewable-energy": {
           "title": "신재생에너지",
-          "url": "/pages/business/index.html#renewable-energy",
+          "url": "/pages/business/index.html?tab=renewable-energy",
           "sections": ["태양광", "풍력", "ESS", "주요 프로젝트"]
         },
         "green-hydrogen": {
           "title": "그린수소/암모니아",
-          "url": "/pages/business/index.html#green-hydrogen",
+          "url": "/pages/business/index.html?tab=green-hydrogen",
           "sections": ["그린수소", "암모니아", "기술 솔루션", "프로젝트"]
         },
         "substation": {
           "title": "변전소",
-          "url": "/pages/business/index.html#substation",
+          "url": "/pages/business/index.html?tab=substation",
           "sections": ["AIS 변전소", "GIS 변전소", "디지털 변전소", "주요 실적"]
         },
         "bess": {
           "title": "에너지저장장치",
-          "url": "/pages/business/index.html#bess",
+          "url": "/pages/business/index.html?tab=bess",
           "sections": ["BESS 개요", "시스템 구성", "제어 시스템", "프로젝트"]
         },
         "data-center": {
           "title": "데이터센터",
-          "url": "/pages/business/index.html#data-center",
+          "url": "/pages/business/index.html?tab=data-center",
           "sections": ["데이터센터 전력", "냉각 시스템", "모니터링", "실적"]
         },
         "control-valve": {
           "title": "콘트롤밸브",
-          "url": "/pages/business/index.html#control-valve",
+          "url": "/pages/business/index.html?tab=control-valve",
           "sections": ["밸브 종류", "제어 시스템", "유지보수", "공급 실적"]
         },
         "us-military": {
           "title": "미군기지",
-          "url": "/pages/business/index.html#us-military",
+          "url": "/pages/business/index.html?tab=us-military",
           "sections": ["미군기지 프로젝트", "보안 시스템", "전력 공급", "실적"]
         }
       }

@@ -42,7 +42,7 @@
         <section class="breadcrumb-section">
             <div class="container">
                 <nav class="breadcrumb">
-                    <a href="../../index.html">홈</a>
+                    <a href="/">홈</a>
                     <span class="breadcrumb-separator">></span>
                     <span class="breadcrumb-current">사업분야</span>
                 </nav>
@@ -518,7 +518,7 @@ class BusinessPageController {
     init() {
         this.setupTabNavigation();
         this.setupSectionNavigation();
-        this.handleUrlHash();
+        this.handleUrlParams();
         this.attachEvents();
     }
     
@@ -532,8 +532,9 @@ class BusinessPageController {
                 const tabId = link.getAttribute('data-tab');
                 this.switchTab(tabId);
                 
-                // URL 해시 업데이트
-                window.history.pushState(null, null, `#${tabId}`);
+                // URL 파라미터 업데이트 (페이지 내 탭 클릭 시)
+                const newUrl = `${window.location.pathname}?tab=${tabId}`;
+                window.history.pushState(null, null, newUrl);
             });
         });
     }
@@ -557,12 +558,18 @@ class BusinessPageController {
         });
     }
     
-    // URL 해시 처리
-    handleUrlHash() {
+    // URL 해시 처리 → URL 파라미터 처리로 변경
+    handleUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get('tab');
         const hash = window.location.hash.substring(1);
         
-        if (hash) {
-            // 탭 ID인지 섹션 ID인지 확인
+        if (tabParam && this.isTabId(tabParam)) {
+            // URL 파라미터로 탭 지정 시 (메뉴에서 직접 접근)
+            this.switchTab(tabParam);
+            // 스크롤하지 않음 - 최상단 유지
+        } else if (hash) {
+            // 해시로 접근 시 (페이지 내 네비게이션)
             if (this.isTabId(hash)) {
                 this.switchTab(hash);
             } else if (this.isSectionId(hash)) {
@@ -576,7 +583,7 @@ class BusinessPageController {
         
         // 브라우저 뒤로가기/앞으로가기 처리
         window.addEventListener('popstate', () => {
-            this.handleUrlHash();
+            this.handleUrlParams();
         });
     }
     
@@ -752,21 +759,24 @@ class BusinessPageController {
                 if (e.key === 'ArrowRight' && currentIndex < tabIds.length - 1) {
                     e.preventDefault();
                     this.switchTab(tabIds[currentIndex + 1]);
-                    window.history.pushState(null, null, `#${tabIds[currentIndex + 1]}`);
+                    const newUrl = `${window.location.pathname}?tab=${tabIds[currentIndex + 1]}`;
+                    window.history.pushState(null, null, newUrl);
                 } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
                     e.preventDefault();
                     this.switchTab(tabIds[currentIndex - 1]);
-                    window.history.pushState(null, null, `#${tabIds[currentIndex - 1]}`);
+                    const newUrl = `${window.location.pathname}?tab=${tabIds[currentIndex - 1]}`;
+                    window.history.pushState(null, null, newUrl);
                 }
             }
         });
     }
     
     // 외부에서 호출 가능한 메서드들
-    // goToTab(tabId) {
-    //     this.switchTab(tabId);
-    //     window.history.pushState(null, null, `#${tabId}`);
-    // }
+    goToTab(tabId) {
+        this.switchTab(tabId);
+        const newUrl = `${window.location.pathname}?tab=${tabId}`;
+        window.history.pushState(null, null, newUrl);
+    }
     
     goToSection(sectionId) {
         const tabId = this.getTabIdFromSection(sectionId);

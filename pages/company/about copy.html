@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO 메타 태그 -->
+    <title>회사소개 - YPP</title>
+    <meta name="description" content="YPP 회사소개 - 기업개요, 연혁, 조직도, 오시는 길">
+    <meta name="keywords" content="YPP, 회사소개, 기업개요, 연혁, 조직도, 오시는길">
+    
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/ico" href="../../assets/images/favicon/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/pages/layout.css">
+    
+    <!-- 메타 시스템 -->
+    <script src="../../js/head-meta.js"></script>
+    
+    <!-- CSS -->
+    <style>
+        .content-grid{
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        /* 페이지 헤더 배경 이미지 */
+        .page-header {
+            position: relative;
+            background: url(./header-bg.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6); 
+            z-index: 1;
+        }
+        
+        .page-header > * {
+            position: relative;
+            z-index: 2
+        }
+        .page-header-content h1,
+        .page-header-content p{
+            color: var(--white);
+        }
+        
+        /* 기존 스타일들 모두 포함 */
+        #status-intro .block-content{
+            display: block;
+            text-align: center;
+        }
+        #status-intro p{
+            text-align: center;
+        }
+        /* 심플한 소개 파트 스타일 */
+        .intro-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .intro-text {
+            flex: 2;
+        }
+        
+        .intro-logo {
+            max-width: 300px;
+            text-align: center;
+        }
+        
+        .intro-greeting {
+            font-size: 1.4rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .intro-description {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .company-logo {
+            max-width: 120px;
+            height: auto;
+        }
+        
+        .company-story {
+            margin-bottom: 3rem;
+        }
+        
+        .company-story p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .company-story p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .company-footer{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .company-footer-a{
+            width: 40%;
+        }
+        .company-footer-b{
+            flex: 1;
+        }
+        
+        .building-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1rem;
+        }
+        
+        .business-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .business-intro p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        .company-details {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .detail-row {
+            display: flex;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #f1f3f4;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #333;
+            padding: 0 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .detail-value {
+            color: #666;
+            line-height: 1.5;
+            text-align: left;
+        }
+        
+        .greeting-content {
+            line-height: 1.8;
+            font-size: 1.05rem;
+            padding: 2rem;
+        }
+        .greeting-content img{
+            margin-top: 10px;
+        }
+        .greeting-content img:first-child{
+            margin-bottom: 15px;
+        }
+        .greeting-content img:last-child{
+            max-width: 55%;
+        }
+        
+        /* 모바일 반응형 */
+        @media (max-width: 768px) {
+            .intro-logo {
+                max-width: 250px;
+            }
+            .company-footer-a{
+                width: 100%;
+            }
+            .company-footer-b{
+                width: 100%;
+            }
+            .detail-label{
+                padding-left: 0;
+            }
+            .detail-row{
+                padding: 1rem 0;
+            }
+            .greeting-content img:last-child{
+                max-width: 100%;
+                height: auto;
+            }
+            #status-greeting{
+                padding-left: .5rem;
+                padding-right: .5rem;
+            }
+        }
+        @media (max-width: 425px) {
+            .intro-logo {
+                max-width: 200px;
+            }
+            .block-content p{
+                font-size: .8rem;
+            }
+            .greeting-content {
+                padding: .25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+    
+    <!-- Mobile Sidebar Container -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="page-header-content">
+                    <h1 class="page-title">회사소개</h1>
+                    <p class="page-subtitle">1982년부터 40여년간 전력계통 분야를 선도해온 에너지 전문기업</p>
+                    <p><br>전력계통분야의 국내 선두주자로서 단일 컴포넌트부터 전사적인 전력설비 보호시스템까지, 최상의 에너지 전문 토털시스템 솔루션을 제공합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Breadcrumb -->
+        <section class="breadcrumb-section">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="../../">홈</a>
+                    <span class="breadcrumb-separator">></span>
+                    <span class="breadcrumb-current">회사소개</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Tab Navigation -->
+        <section class="tab-navigation">
+            <div class="container">
+                <nav class="tab-nav">
+                    <a href="#status" class="tab-link active" data-tab="status">기업현황</a>
+                    <a href="#business" class="tab-link" data-tab="business">주요사업</a>
+                    <a href="#culture" class="tab-link" data-tab="culture">기업문화</a>
+                </nav>
+                
+                <!-- Section Navigation for 기업현황 -->
+                <div class="section-nav" id="section-nav-status">
+                    <a href="#status-intro" class="section-nav-link">소개</a>
+                    <a href="#status-greeting" class="section-nav-link">인사말</a>
+                    <a href="#status-history" class="section-nav-link">연혁</a>
+                    <a href="#status-organization" class="section-nav-link">조직도</a>
+                </div>
+                
+                <!-- Section Navigation for 주요사업 -->
+                <div class="section-nav" id="section-nav-business" style="display: none;">
+                    <a href="#business-intro" class="section-nav-link">사업소개</a>
+                    <a href="#business-partners" class="section-nav-link">파트너</a>
+                    <a href="#business-license" class="section-nav-link">인허가</a>
+                    <a href="#business-qualification" class="section-nav-link">유자격</a>
+                </div>
+                
+                <!-- Section Navigation for 기업문화 -->
+                <div class="section-nav" id="section-nav-culture" style="display: none;">
+                    <a href="#culture-vision" class="section-nav-link">비전&핵심가치</a>
+                    <a href="#culture-organization" class="section-nav-link">조직문화</a>
+                    <a href="#culture-contribution" class="section-nav-link">사회공헌</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab Content -->
+        <section class="tab-content-section">
+            <div class="container">
+                <!-- 기업현황 -->
+                <div id="status" class="tab-content active">
+                    <div class="content-header">
+                        <h2 class="content-title">기업현황</h2>
+                        <p class="content-subtitle">YPP의 기업 개요와 현황을 소개합니다</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- 소개 -->
+                        <div id="status-intro" class="content-block">
+                            <h3 class="block-title">회사 소개</h3>
+                            <div class="block-content">
+                                <div class="intro-header">
+                                    <div class="intro-logo">
+                                        <img src="../../assets/images/logo/slogan01.png" alt="YPP 로고" class="company-logo">
+                                    </div>
+                                </div>
+                                <div class="intro-text">
+                                    <p class="intro-greeting">
+                                        안녕하세요! <br>
+                                        기술로 공헌하는 <strong>에너지 전문기업 와이피피㈜</strong>입니다.
+                                    </p>
+                                    <p class="intro-description">
+                                        와이피피㈜는 기술로 고객과 사회에 기여하기 위해 설립된 에너지 전문기업입니다.
+                                    </p>
+                                </div>
+                                
+                                <div class="company-story">
+                                    <p>
+                                        1982년 영풍물산으로 시작한 와이피피㈜는 지난 40여년간 오직 전력설비와 엔지니어링 시스템 분야에 매진함으로써 
+                                        우리나라가 전력계통 분야에서 세계 최고 수준의 기술력을 보유하는데 일조해왔습니다.
+                                    </p>
+                                    <p>
+                                        그동안 축적된 노하우와 기술력을 바탕으로 국내를 넘어 세계로 뻗어가는 글로벌 기업으로 도약하고 있습니다.
+                                    </p>
+                                </div>
+                                
+                                <div class="company-footer">
+                                    <div class="company-footer-a">
+                                        <img src="../../assets/images/index/YPP아르센타워.jpg" alt="가산YPP아르센타워 이미지" class="building-photo">
+                                    </div>
+                                    <div class="company-footer-b">
+                                        <div class="company-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">설립일</span>
+                                                <span class="detail-value">1982.1.1</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">대표자</span>
+                                                <span class="detail-value">대표이사 회장 백종만</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">주소지</span>
+                                                <span class="detail-value">
+                                                    서울시 금천구 가산디지털2로 24 (가산동 327-30)<br>
+                                                    가산YPP아르센타워(B2층, 8층, 20층)
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 인사말 -->
+                        <div id="status-greeting" class="content-block">
+                            <h3 class="block-title">인사말</h3>
+                            <div class="block-content">
+                                <div class="greeting-content">
+                                    <img src="./greeting_txt.png" alt="">
+                                    <p>
+                                        우리의 고객은 유한한 자원으로부터 무한한 가치를 생산하기 위해 노력하는, 분명한 사회적 필요와 미래 지향적 목표를 지닌 훌륭한 기업들 입니다.
+                                        그래서 와이피피㈜는 고객이 성공하는 것이 곧 사회가 발전하는 길이고, 그것을 돕는 것이 우리의 사명이라고 생각합니다. 우리가 할 수 있는 역할에 최선을 다하는 것이 곧 전체를 발전시키는 가장 빠른길이라고 말입니다.
+                                        <br><br>
+                                        그래서 와이피피㈜는 이 한가지 목표를 위해 혼신의 힘을 다합니다. 부단한 노력으로 최선의 제품과 서비스를 개발하고,
+                                        늘 고객의 목소리를 경청하며, 스스로 변화시켜 갑니다. 또 비록 중소기업이지만 최고의 기술 인재를 교육, 배출함으로써
+                                        고객을 돕고 국가 기술력 향상에도 기여합니다.
+                                        <br><br>
+                                        남다른 책임감과 진심이 빚어낸 믿을수 있는 파트너십
+                                        와이피피㈜는 고객의 성공을 위해 국가 기술력 향상을 위해 노력하는 믿을 수 있는 동반자이자 조력자 입니다.
+                                        <br><br>
+                                        홈페이지를 찾아주신 모든분들께 감사드리며, 앞으로도 고객과 사회를 위해 최선을 다하는 와이피피㈜가 되겠습니다.
+                                    </p>
+                                    <img src="../../assets/images/sign/chairman_sign.png" alt="와이피피㈜ 대표이사 회장 백종만">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 연혁 -->
+                        <div id="status-history" class="content-block">
+                            <h3 class="block-title">회사 연혁</h3>
+                            <div class="block-content">
+                                <p>연혁 콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 조직도 -->
+                        <div id="status-organization" class="content-block">
+                            <h3 class="block-title">조직도</h3>
+                            <div class="block-content">
+                                <p>조직도 콘텐츠 영역</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 주요사업 -->
+                <div id="business" class="tab-content">
+                    <div class="content-header">
+                        <h2 class="content-title">주요사업</h2>
+                        <p class="content-subtitle">YPP의 핵심 사업 영역과 역량을 소개합니다</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- 사업소개 -->
+                        <div id="business-intro" class="content-block">
+                            <h3 class="block-title">사업 소개</h3>
+                            <div class="block-content">
+                                <p>사업 소개 콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 파트너 -->
+                        <div id="business-partners" class="content-block">
+                            <h3 class="block-title">주요 파트너</h3>
+                            <div class="block-content">
+                                <p>파트너 콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 인허가 -->
+                        <div id="business-license" class="content-block">
+                            <h3 class="block-title">인허가</h3>
+                            <div class="block-content">
+                                <p>인허가 콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 유자격 -->
+                        <div id="business-qualification" class="content-block">
+                            <h3 class="block-title">유자격</h3>
+                            <div class="block-content">
+                                <p>유자격 콘텐츠 영역</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 기업문화 -->
+                <div id="culture" class="tab-content">
+                    <div class="content-header">
+                        <h2 class="content-title">기업문화</h2>
+                        <p class="content-subtitle">YPP의 비전과 가치, 기업문화를 소개합니다</p>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <!-- 비전&핵심가치 -->
+                        <div id="culture-vision" class="content-block">
+                            <h3 class="block-title">비전 & 핵심가치</h3>
+                            <div class="block-content">
+                                <p>비전 & 핵심가치 콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 조직문화 -->
+                        <div id="culture-organization" class="content-block">
+                            <h3 class="block-title">조직문화</h3>
+                            <div class="block-content">
+                                <p>조직문화 콘텐츠 영역</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 사회공헌 -->
+                        <div id="culture-contribution" class="content-block">
+                            <h3 class="block-title">사회공헌</h3>
+                            <div class="block-content">
+                                <p>사회공헌 콘텐츠 영역</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="../../js/components.js"></script>
+    <script src="../../js/header-menu.js"></script>
+    <script src="../../js/sidebar.js"></script>
+    <script src="../../js/hamburger.js"></script>
+    <!-- <script src="../../js/main-top-padding.js"></script> -->
+    
+    <!-- _________________________________________ -->
+    <!-- 스크롤 탑 버튼 -->
+    <div id="scrolltotop-container"></div>
+    <!-- 최상단 가기 버튼 구현하기 -->
+    <script src="../../js/scrolltotop.js"></script>
+    <!-- _________________________________________ -->
+
+    <script>
+        // about.js - About 페이지 탭/섹션 네비게이션 기능 (URL 파라미터 방식)
+
+        // ===== About 페이지 컨트롤러 클래스 =====
+        class AboutPageController {
+            constructor() {
+                this.currentTab = 'status';
+                this.currentSection = null;
+                
+                this.init();
+            }
+            
+            // 초기화
+            init() {
+                this.setupTabNavigation();
+                this.setupSectionNavigation();
+                this.handleUrlParams();
+                this.attachEvents();
+            }
+            
+            // 탭 네비게이션 설정
+            setupTabNavigation() {
+                const tabLinks = document.querySelectorAll('.tab-link');
+                
+                tabLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const tabId = link.getAttribute('data-tab');
+                        this.switchTab(tabId);
+                        
+                        // URL 파라미터 업데이트
+                        const newUrl = `${window.location.pathname}?tab=${tabId}`;
+                        window.history.pushState(null, null, newUrl);
+                    });
+                });
+            }
+            
+            // 섹션 네비게이션 설정
+            setupSectionNavigation() {
+                const sectionLinks = document.querySelectorAll('.section-nav-link');
+                
+                sectionLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const href = link.getAttribute('href');
+                        const sectionId = href.substring(1); // # 제거
+                        
+                        this.scrollToSection(sectionId);
+                        this.updateSectionActiveState(link);
+                        
+                        // URL 해시 업데이트 (섹션은 해시 사용)
+                        window.history.pushState(null, null, href);
+                    });
+                });
+            }
+            
+            // URL 파라미터 처리
+            handleUrlParams() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const tabParam = urlParams.get('tab');
+                const hash = window.location.hash.substring(1);
+                
+                if (tabParam && this.isTabId(tabParam)) {
+                    // URL 파라미터로 탭 지정 시 (메뉴에서 직접 접근)
+                    this.switchTab(tabParam);
+                    // 스크롤하지 않음 - 최상단 유지
+                } else if (hash) {
+                    // 해시로 접근 시 (페이지 내 네비게이션)
+                    if (this.isTabId(hash)) {
+                        this.switchTab(hash);
+                    } else if (this.isSectionId(hash)) {
+                        const tabId = this.getTabIdFromSection(hash);
+                        this.switchTab(tabId);
+                        setTimeout(() => {
+                            this.scrollToSection(hash);
+                        }, 100);
+                    }
+                }
+                
+                // 브라우저 뒤로가기/앞으로가기 처리
+                window.addEventListener('popstate', () => {
+                    this.handleUrlParams();
+                });
+            }
+            
+            // 탭 전환
+            switchTab(tabId) {
+                this.currentTab = tabId;
+                
+                // 모든 탭 링크 비활성화
+                document.querySelectorAll('.tab-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // 해당 탭 링크 활성화
+                const activeTabLink = document.querySelector(`[data-tab="${tabId}"]`);
+                if (activeTabLink) {
+                    activeTabLink.classList.add('active');
+                }
+                
+                // 모든 탭 콘텐츠 숨기기
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // 해당 탭 콘텐츠 표시
+                const activeTabContent = document.getElementById(tabId);
+                if (activeTabContent) {
+                    activeTabContent.classList.add('active');
+                }
+                
+                // 섹션 네비게이션 전환
+                this.switchSectionNav(tabId);
+            }
+            
+            // 섹션 네비게이션 전환
+            switchSectionNav(tabId) {
+                // 모든 섹션 네비게이션 숨기기
+                document.querySelectorAll('.section-nav').forEach(nav => {
+                    nav.style.display = 'none';
+                });
+                
+                // 해당 탭의 섹션 네비게이션 표시
+                const activeSectionNav = document.getElementById(`section-nav-${tabId}`);
+                if (activeSectionNav) {
+                    activeSectionNav.style.display = 'flex';
+                }
+                
+                // 섹션 활성화 상태 초기화
+                this.clearSectionActiveStates();
+            }
+            
+            // 섹션으로 스크롤
+            scrollToSection(sectionId) {
+                const targetSection = document.getElementById(sectionId);
+                if (!targetSection) return;
+                
+                // 헤더 높이 + 탭 네비게이션 높이 계산
+                const header = document.querySelector('.header');
+                const tabNavigation = document.querySelector('.tab-navigation');
+                
+                const headerHeight = header ? header.getBoundingClientRect().height : 0;
+                const tabNavHeight = tabNavigation ? tabNavigation.getBoundingClientRect().height : 0;
+                const totalOffset = headerHeight + tabNavHeight + 40; // 여유 공간 40px
+                
+                const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                const adjustedPosition = targetPosition - totalOffset;
+                
+                window.scrollTo({
+                    top: adjustedPosition,
+                    behavior: 'smooth'
+                });
+                
+                this.currentSection = sectionId;
+            }
+            
+            // 섹션 활성화 상태 업데이트
+            updateSectionActiveState(activeLink) {
+                // 현재 표시된 섹션 네비게이션 내의 모든 링크 비활성화
+                const currentSectionNav = document.querySelector('.section-nav[style*="flex"]');
+                if (currentSectionNav) {
+                    currentSectionNav.querySelectorAll('.section-nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                }
+                
+                // 클릭된 링크 활성화
+                activeLink.classList.add('active');
+            }
+            
+            // 섹션 활성화 상태 초기화
+            clearSectionActiveStates() {
+                document.querySelectorAll('.section-nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+            }
+            
+            // 탭 ID인지 확인
+            isTabId(id) {
+                const tabIds = ['status', 'business', 'culture'];
+                return tabIds.includes(id);
+            }
+            
+            // 섹션 ID인지 확인
+            isSectionId(id) {
+                const sectionPrefixes = ['status-', 'business-', 'culture-'];
+                return sectionPrefixes.some(prefix => id.startsWith(prefix));
+            }
+            
+            // 섹션 ID로부터 탭 ID 추출
+            getTabIdFromSection(sectionId) {
+                if (sectionId.startsWith('status-')) return 'status';
+                if (sectionId.startsWith('business-')) return 'business';
+                if (sectionId.startsWith('culture-')) return 'culture';
+                return 'status'; // 기본값
+            }
+            
+            // 스크롤 스파이 (현재 보이는 섹션 자동 감지)
+            setupScrollSpy() {
+                let ticking = false;
+                
+                const updateActiveSection = () => {
+                    const sections = document.querySelectorAll('.content-block[id]');
+                    const scrollPosition = window.pageYOffset + window.innerHeight / 2;
+                    
+                    sections.forEach(section => {
+                        const rect = section.getBoundingClientRect();
+                        const sectionTop = rect.top + window.pageYOffset;
+                        const sectionBottom = sectionTop + rect.height;
+                        
+                        if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+                            const sectionId = section.id;
+                            const correspondingLink = document.querySelector(`[href="#${sectionId}"]`);
+                            
+                            if (correspondingLink && !correspondingLink.classList.contains('active')) {
+                                this.updateSectionActiveState(correspondingLink);
+                            }
+                        }
+                    });
+                    
+                    ticking = false;
+                };
+                
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        requestAnimationFrame(updateActiveSection);
+                        ticking = true;
+                    }
+                });
+            }
+            
+            // 외부에서 호출 가능한 메서드들
+            goToTab(tabId) {
+                this.switchTab(tabId);
+                const newUrl = `${window.location.pathname}?tab=${tabId}`;
+                window.history.pushState(null, null, newUrl);
+            }
+            
+            goToSection(sectionId) {
+                const tabId = this.getTabIdFromSection(sectionId);
+                this.switchTab(tabId);
+                setTimeout(() => {
+                    this.scrollToSection(sectionId);
+                }, 100);
+                window.history.pushState(null, null, `#${sectionId}`);
+            }
+            
+            getCurrentTab() {
+                return this.currentTab;
+            }
+            
+            getCurrentSection() {
+                return this.currentSection;
+            }
+        }
+
+        // ===== 전역 변수 =====
+        let aboutPageController = null;
+
+        // ===== 초기화 함수 =====
+        function initAboutPage() {
+            if (!aboutPageController) {
+                aboutPageController = new AboutPageController();
+            }
+            return aboutPageController;
+        }
+
+        // ===== 전역 함수들 =====
+        function goToTab(tabId) {
+            if (aboutPageController) {
+                aboutPageController.goToTab(tabId);
+            }
+        }
+
+        function goToSection(sectionId) {
+            if (aboutPageController) {
+                aboutPageController.goToSection(sectionId);
+            }
+        }
+
+        function getCurrentTab() {
+            return aboutPageController ? aboutPageController.getCurrentTab() : null;
+        }
+
+        function getCurrentSection() {
+            return aboutPageController ? aboutPageController.getCurrentSection() : null;
+        }
+
+        // ===== 자동 초기화 =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // 컴포넌트 로딩 완료 후 초기화
+            if (document.querySelector('.tab-navigation')) {
+                initAboutPage();
+            } else {
+                document.addEventListener('componentsLoaded', () => {
+                    setTimeout(initAboutPage, 200);
+                });
+            }
+        });
+
+        // ===== 전역 함수 내보내기 =====
+        window.initAboutPage = initAboutPage;
+        window.goToTab = goToTab;
+        window.goToSection = goToSection;
+        window.getCurrentTab = getCurrentTab;
+        window.getCurrentSection = getCurrentSection;
+    </script>
+    
+</body>
+</html>

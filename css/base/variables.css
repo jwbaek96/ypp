@@ -31,4 +31,7 @@
     --section-padding: 5rem 0;
     --container-padding: 0 2rem;
     --card-padding: 2rem;
+
+    /* Header height */
+    --header-container-height : 80px;
 }

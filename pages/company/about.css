@@ -675,35 +675,34 @@
 /* 비전 & 핵심가치 전체 스타일 */
                             .section-header {
                                 text-align: center;
-                                margin-bottom: 1.5rem;
+                                margin-bottom: 0;
                                 padding-bottom: 1rem;
-                                border-bottom: 2px solid #e0e6ed;
                             }
                             
-                            .section-title {
-                                font-size: 1.6rem;
+                            #culture-vision .section-title {
+                                font-size: 3rem;
                                 font-weight: 700;
+                                font-style: italic;
                                 color: #333;
-                                margin-bottom: 0.5rem;
+                                margin: 0;
+                                margin-top: 2rem;
                             }
                             
                             .section-subtitle {
                                 font-size: 1rem;
                                 color: #666;
-                                font-style: italic;
                             }
-                            
+                            #culture-vision .block-content div div:last-child{
+                                background: #ffffff8f;
+                                backdrop-filter: blur(5px);
+                            }
                             /* 미션 섹션 */
-                            .mission-section {
-                                background: #fff;
+                            .mission-content {
                                 padding: 2rem;
                                 border-radius: 8px;
                                 margin-bottom: 2rem;
                                 border: 2px solid #0066cc;
                                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                            }
-                            
-                            .mission-content {
                                 text-align: center;
                             }
                             
@@ -721,16 +720,12 @@
                             }
                             
                             /* 비전 섹션 */
-                            .vision-section {
-                                background: #fff;
+                            .vision-content {
                                 padding: 2rem;
                                 border-radius: 8px;
                                 margin-bottom: 2rem;
                                 border: 2px solid #7B1FA2;
                                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                            }
-                            
-                            .vision-content {
                                 text-align: center;
                             }
                             
@@ -762,7 +757,8 @@
                                 gap: 2rem;
                             }
                             
-                            .values-section {
+                            /* .values-section, */
+                            .values-grid {
                                 background: #fff;
                                 padding: 2rem;
                                 border-radius: 8px;
@@ -770,7 +766,8 @@
                                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                             }
                             
-                            .behavior-section {
+                            /* .behavior-section, */
+                            .behavior-grid {
                                 background: #fff;
                                 padding: 2rem;
                                 border-radius: 8px;
@@ -787,7 +784,9 @@
                             }
                             
                             .value-item,
-                            .behavior-item {
+                            .behavior-item,
+                            .value-item:last-child,
+                            .behavior-item:last-child {
                                 background: #f8f9fa;
                                 padding: 1.5rem 1rem;
                                 border-radius: 8px;
@@ -810,7 +809,6 @@
                                 color: #333;
                                 line-height: 1.3;
                             }
-                            
                             .values-section .value-item {
                                 border-left: 4px solid #4CAF50;
                             }

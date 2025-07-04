@@ -12,6 +12,7 @@
     margin: 0;
     padding: 0;
     height: 100%;
+    gap: 0;
 }
 
 /* ===== MENU ITEMS ===== */
@@ -20,23 +21,15 @@
     height: 100%;
 }
 
-.menu-item.depth-1 {
-    margin-right: 1.5rem;
-}
-
-.menu-item:last-child {
-    margin-right: 0;
-}
-
 /* ===== MENU LINKS ===== */
 .menu-link {
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 0 1.2rem;
+    padding: 0 1rem;
     text-decoration: none;
     color: var(--text-primary, #333);
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1rem;
     white-space: nowrap;
     transition: all 0.3s ease;
@@ -168,9 +161,7 @@
 
 /* 태블릿 */
 @media (max-width: 1024px) {
-    .menu-item.depth-1 {
-        margin-right: 1rem;
-    }
+
     
     .menu-link {
         padding: 0 1rem;
@@ -184,9 +175,6 @@
 
 /* 작은 데스크톱 */
 @media (max-width: 900px) {
-    .menu-item.depth-1 {
-        margin-right: 0.8rem;
-    }
     
     .menu-link {
         padding: 0 0.8rem;

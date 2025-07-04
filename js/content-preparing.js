@@ -134,11 +134,13 @@
             <div class="content-preparing-notice" id="contentPreparingNotice">
                 <div class="notice-container">
                     <div class="notice-content">
-                        <div class="notice-title">
-                            <span class="notice-icon">⚠</span>
-                            컨텐츠 준비 중입니다.
+                        <div class="notice-title" 
+                        data-kor="<span class='notice-icon'>⚠</span>컨텐츠 준비 중입니다."
+                        data-eng="<span class='notice-icon'>⚠</span>Content Under Preparation">
                         </div>
-                        <p class="notice-description">
+                        <p class="notice-description" 
+                        data-kor="현재 페이지는 준비중입니다. 빠른 시일내에 서비스를 제공할 수 있도록 노력하겠습니다. 감사합니다."
+                        data-eng="Content is currently being prepared. This page is under construction. We are working hard to provide the service as soon as possible. Thank you.">
                             현재 페이지는 준비중입니다. 빠른 시일내에 서비스를 제공할 수 있도록 노력하겠습니다. 감사합니다.
                         </p>
                     </div>

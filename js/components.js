@@ -130,38 +130,60 @@ function fixComponentPaths(container) {
 }
 
 // ===== 로고 링크 제어 함수 =====
+// function updateLogoLink() {
+//     // 컴포넌트가 로드된 후 실행되도록 지연
+//     setTimeout(() => {
+//         const logoLink = document.getElementById('logo-link');
+//         if (!logoLink) return;
+        
+//         const currentUrl = window.location.href;
+//         const { basePath, isGitHubPages } = window.YPP_CONFIG;
+        
+//         // 홈페이지 URL 확인
+//         const homeUrls = [
+//             'https://jwbaek96.github.io/ypp/',
+//             'https://ypp.co.kr/',
+//             'http://127.0.0.1:5500/',
+//             'http://localhost:5500/'
+//         ];
+        
+//         const isHomePage = homeUrls.some(url => currentUrl.startsWith(url)) && 
+//                           (currentUrl.endsWith('/') || currentUrl.endsWith('/index.html'));
+        
+//         if (isHomePage) {
+//             logoLink.href = '';
+//             logoLink.style.cursor = 'default';
+//             logoLink.onclick = function(e) { e.preventDefault(); };
+//         } else {
+//             // 홈페이지로 이동하는 링크 설정
+//             if (isGitHubPages) {
+//                 logoLink.href = basePath + '/';
+//             } else {
+//                 logoLink.href = '/';
+//             }
+//         }
+//     }, 100);
+// }
 function updateLogoLink() {
     // 컴포넌트가 로드된 후 실행되도록 지연
     setTimeout(() => {
         const logoLink = document.getElementById('logo-link');
         if (!logoLink) return;
         
-        const currentUrl = window.location.href;
         const { basePath, isGitHubPages } = window.YPP_CONFIG;
         
-        // 홈페이지 URL 확인
-        const homeUrls = [
-            'https://jwbaek96.github.io/ypp/',
-            'https://ypp.co.kr/',
-            'http://127.0.0.1:5500/',
-            'http://localhost:5500/'
-        ];
-        
-        const isHomePage = homeUrls.some(url => currentUrl.startsWith(url)) && 
-                          (currentUrl.endsWith('/') || currentUrl.endsWith('/index.html'));
-        
-        if (isHomePage) {
-            logoLink.href = '';
-            logoLink.style.cursor = 'default';
-            logoLink.onclick = function(e) { e.preventDefault(); };
+        // 항상 홈페이지로 이동하는 링크 설정
+        if (isGitHubPages) {
+            logoLink.href = basePath + '/';
         } else {
-            // 홈페이지로 이동하는 링크 설정
-            if (isGitHubPages) {
-                logoLink.href = basePath + '/';
-            } else {
-                logoLink.href = '/';
-            }
+            logoLink.href = '/';
         }
+        
+        // 기본 커서로 되돌리기
+        logoLink.style.cursor = 'pointer';
+        logoLink.onclick = null; // 이벤트 리스너 제거
+        
+        console.log('로고 링크 설정 완료:', logoLink.href);
     }, 100);
 }
 

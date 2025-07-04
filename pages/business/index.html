@@ -763,10 +763,10 @@ class BusinessPageController {
     }
     
     // 외부에서 호출 가능한 메서드들
-    goToTab(tabId) {
-        this.switchTab(tabId);
-        window.history.pushState(null, null, `#${tabId}`);
-    }
+    // goToTab(tabId) {
+    //     this.switchTab(tabId);
+    //     window.history.pushState(null, null, `#${tabId}`);
+    // }
     
     goToSection(sectionId) {
         const tabId = this.getTabIdFromSection(sectionId);

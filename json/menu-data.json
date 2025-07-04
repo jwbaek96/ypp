@@ -28,7 +28,7 @@
     },
     "business": {
       "title": "사업분야",
-      "url": "/pages/business/index.html#thermal-power",
+      "url": "/pages/business/index.html",
       "children": {
         "thermal-power": {
           "title": "화력발전소",

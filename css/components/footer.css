@@ -12,10 +12,11 @@
 }
 
 .footer-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    /* display: grid;
+    grid-template-columns: 2fr 1fr 1fr; */
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 3rem;
     margin-bottom: 2rem;
 }

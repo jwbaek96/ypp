@@ -28,97 +28,82 @@
     },
     "business": {
       "title": "사업분야",
-      "url": "/pages/business/index.html#thermal-power",
-      "children": {
-        "thermal-power": {
-          "title": "화력발전소",
-          "url": "/pages/business/index.html#thermal-power",
-          "sections": ["화력발전소 개요", "주요 프로젝트", "기술 역량", "실적"]
-        },
-        "nuclear-power": {
-          "title": "원자력발전소",
-          "url": "/pages/business/index.html#nuclear-power",
-          "sections": ["원자력발전소 개요", "주요 프로젝트", "기술 역량", "실적"]
-        },
-        "renewable-energy": {
-          "title": "신재생에너지",
-          "url": "/pages/business/index.html#renewable-energy",
-          "sections": ["태양광", "풍력", "ESS", "주요 프로젝트"]
-        },
-        "green-hydrogen": {
-          "title": "그린수소/암모니아",
-          "url": "/pages/business/index.html#green-hydrogen",
-          "sections": ["그린수소", "암모니아", "기술 솔루션", "프로젝트"]
-        },
-        "substation": {
-          "title": "변전소",
-          "url": "/pages/business/index.html#substation",
-          "sections": ["AIS 변전소", "GIS 변전소", "디지털 변전소", "주요 실적"]
-        },
-        "bess": {
-          "title": "에너지저장장치",
-          "url": "/pages/business/index.html#bess",
-          "sections": ["BESS 개요", "시스템 구성", "제어 시스템", "프로젝트"]
-        },
-        "data-center": {
-          "title": "데이터센터",
-          "url": "/pages/business/index.html#data-center",
-          "sections": ["데이터센터 전력", "냉각 시스템", "모니터링", "실적"]
-        },
-        "control-valve": {
-          "title": "콘트롤밸브",
-          "url": "/pages/business/index.html#control-valve",
-          "sections": ["밸브 종류", "제어 시스템", "유지보수", "공급 실적"]
-        },
-        "us-military": {
-          "title": "미군기지",
-          "url": "/pages/business/index.html#us-military",
-          "sections": ["미군기지 프로젝트", "보안 시스템", "전력 공급", "실적"]
-        }
-      }
-    },
-    "workingscope": {
-      "title": "업무 및 서비스",
-      "url": "/pages/workingscope/epc.html",
+      "url": "/pages/business/epc.html",
       "children": {
         "epc": {
           "title": "EPC",
-          "url": "/pages/workingscope/epc.html",
-          "sections": ["EPC 개요", "설계", "조달", "건설", "주요 실적"]
+          "url": "/pages/business/epc.html",
+          "children": {
+            "substation": {
+              "title": "Substation",
+              "url": "/pages/business/epc.html#substation",
+              "sections": ["해외변전소 AIS, 해외변전소 GIS, Turnkey 사업참여, 건설 및 개발"]
+            },
+            "renewable-energy": {
+              "title": "Renewable Energy",
+              "url": "/pages/business/epc.html#renewable-energy",
+              "sections": ["Solar PV, BESS, 사업참여, 건설 및 개발"]
+            },
+            "green-hydrogen": {
+              "title": "Green Hydrogen",
+              "url": "/pages/business/epc.html#green-hydrogen",
+              "sections": ["H2 Generation System", "그린수소발전사업참여","건설 및 개발"]
+            },
+            "ebop": {
+              "title": "eBoP",
+              "url": "/pages/business/epc.html#ebop",
+              "sections": ["Electrical Systems", "Balance of Plant","전력계통 솔루션"]
+            },
+            "power-plants": {
+              "title": "Power Plants",
+              "url": "/pages/business/epc.html#power-plants",
+              "sections": ["발전소사업참여, 건설 및 개발"]
+            }
+          }
         },
         "engineering": {
           "title": "엔지니어링",
-          "url": "/pages/workingscope/engineering.html",
+          "url": "/pages/business/engineering.html",
           "sections": ["플랜트 전기분야 설계", "플랜트 계측분야 설계", "전력계통 컨설팅", "CGID"]
         },
-        "procurement": {
+        "equipment": {
           "title": "장비공급",
-          "url": "/pages/workingscope/procurement.html",
-          "sections": ["전력설비", "계측설비", "제어설비", "공급 실적"]
+          "url": "/pages/business/equipment.html"
         },
         "mro": {
           "title": "MRO",
-          "url": "/pages/workingscope/mro.html",
+          "url": "/pages/business/mro.html",
           "children": {
-            "power-protection": {
-              "title": "전력보호 및 안전",
-              "url": "/pages/workingscope/mro.html#power-protection",
-              "sections": ["전력계통 보호시스템", "안전 시스템", "보호계전기", "유지보수"]
+            "system": {
+              "title": "시스템공급",
+              "url": "/pages/business/mro.html#system",
+              "children": {
+                "power": {
+                  "title": "전력보호시스템",
+                  "url": "/pages/business/mro.html#system-power",
+                  "sections": ["전력계통 보호시스템"]
+                },
+                "plant": {
+                  "title": "플랜트제어시스템",
+                  "url": "/pages/business/mro.html#system-plant",
+                  "sections": ["Aux/Local control", "HVAC control"]
+                },
+                "monitoring": {
+                  "title": "전기설비감시제어시스템",
+                  "url": "/pages/business/mro.html#system-monitoring",
+                  "sections": ["Sampling System", "Vibration Monitoring System"]
+                },
+                "diagnosis": {
+                  "title": "설비진단시스템",
+                  "url": "/pages/business/mro.html#system-diagnosis",
+                  "sections": ["디지털 변전소 운영시스템"]
+                }
+              }
             },
-            "instrumentation": {
-              "title": "계측 및 제어",
-              "url": "/pages/workingscope/mro.html#instrumentation",
-              "sections": ["계측 시스템", "제어 시스템", "HVAC 제어", "Aux/Local 제어"]
-            },
-            "preventive-diagnostics": {
-              "title": "예방진단",
-              "url": "/pages/workingscope/mro.html#preventive-diagnostics",
-              "sections": ["설비 진단", "예측 정비", "진단 시스템", "분석 서비스"]
-            },
-            "monitoring-control": {
-              "title": "모니터링 & 컨트롤",
-              "url": "/pages/workingscope/mro.html#monitoring-control",
-              "sections": ["감시제어시스템", "샘플링 시스템", "진동 모니터링", "디지털 변전소"]
+            "maintenance": {
+              "title": "유지보수",
+              "url": "/pages/business/mro.html#maintenance",
+              "sections": ["보호계전기", "발전기차단기(GCB)", "UPS"]
             }
           }
         }

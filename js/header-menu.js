@@ -51,7 +51,7 @@ function createDesktopMenu(navigation) {
     return nav;
 }
 
-// ===== 메뉴 아이템 생성 (재귀적) - 완전 단순화 =====
+// ===== 메뉴 아이템 생성 (재귀적) - 한영 지원 버전 =====
 function createMenuItem(item, key, depth) {
     const li = document.createElement('li');
     li.className = `menu-item depth-${depth}`;
@@ -66,7 +66,19 @@ function createMenuItem(item, key, depth) {
         link.href = item.url || '#';
     }
     
-    link.textContent = item.title;
+    // 한영 텍스트 처리
+    if (typeof item.title === 'object' && item.title.ko && item.title.en) {
+        // JSON에서 title이 객체인 경우
+        link.setAttribute('data-kor', item.title.ko);
+        link.setAttribute('data-eng', item.title.en);
+        // 현재 언어에 맞는 텍스트 설정 (기본값: 한글)
+        const currentLang = localStorage.getItem('selectedLanguage') || 'ko';
+        link.textContent = currentLang === 'en' ? item.title.en : item.title.ko;
+    } else {
+        // 기존 방식 호환성 (문자열인 경우)
+        link.textContent = item.title || '';
+    }
+    
     link.className = 'menu-link';
     
     // 현재 페이지 활성 상태 체크
@@ -76,7 +88,7 @@ function createMenuItem(item, key, depth) {
     
     // 하위 메뉴가 있는 경우
     if (item.children && Object.keys(item.children).length > 0) {
-        li.classList.add('has-children'); // 이것만 추가하고 나머지는 CSS가 처리
+        li.classList.add('has-children');
         
         // 서브메뉴 생성
         const subMenu = document.createElement('ul');
@@ -97,6 +109,67 @@ function createMenuItem(item, key, depth) {
     }
     
     return li;
+}
+
+// ===== 메뉴 삽입 후 언어 적용 =====
+async function insertDesktopMenu() {
+    const container = document.getElementById('desktop-nav-container');
+    
+    if (!container) {
+        console.log('Desktop nav container not found');
+        return;
+    }
+    
+    // YPP_CONFIG 대기
+    let retryCount = 0;
+    while (!window.YPP_CONFIG && retryCount < 50) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        retryCount++;
+    }
+    
+    if (!window.YPP_CONFIG) {
+        console.warn('YPP_CONFIG not available after waiting');
+        return;
+    }
+    
+    // 메뉴 데이터 로딩
+    const data = await loadMenuData();
+    if (!data || !data.navigation) {
+        console.log('Menu data not available');
+        return;
+    }
+    
+    console.log('메뉴 데이터:', data.navigation); // 디버깅용
+    
+    // 메뉴 생성 및 삽입
+    const menuElement = createDesktopMenu(data.navigation);
+    container.innerHTML = '';
+    container.appendChild(menuElement);
+    
+    // 언어 전환 기능이 있으면 즉시 적용
+    if (window.languageSwitchInstance) {
+        const savedLang = localStorage.getItem('selectedLanguage') || 'ko';
+        window.languageSwitchInstance.applyLanguage(savedLang);
+    } else {
+        // 언어 전환 기능이 아직 로드되지 않은 경우, 저장된 언어로 설정
+        const savedLang = localStorage.getItem('selectedLanguage') || 'ko';
+        const menuLinks = container.querySelectorAll('[data-kor][data-eng]');
+        menuLinks.forEach(link => {
+            if (savedLang === 'en') {
+                link.textContent = link.getAttribute('data-eng');
+            } else {
+                link.textContent = link.getAttribute('data-kor');
+            }
+        });
+    }
+    
+    // 생성된 메뉴 확인
+    const hasChildrenItems = container.querySelectorAll('.has-children');
+    const subMenus = container.querySelectorAll('.sub-menu');
+    console.log('하위 메뉴가 있는 항목들:', hasChildrenItems.length);
+    console.log('서브메뉴 개수:', subMenus.length);
+    
+    console.log('Desktop menu inserted with bilingual support');
 }
 
 // ===== 메뉴 상호작용 이벤트 =====
@@ -125,64 +198,6 @@ function addMenuInteraction(menuItem, link, subMenu) {
         }
     });
     
-    // 키보드 네비게이션
-    link.addEventListener('keydown', (e) => {
-        if (window.innerWidth <= 768) return; // 모바일에서는 키보드 네비게이션 비활성화
-        
-        isKeyboardNavigation = true;
-        
-        switch (e.key) {
-            case 'Enter':
-            case ' ':
-                e.preventDefault();
-                toggleSubmenu(menuItem, link, subMenu);
-                break;
-            case 'Escape':
-                hideSubmenu(menuItem, link, subMenu);
-                link.focus();
-                break;
-            case 'ArrowDown':
-                e.preventDefault();
-                if (!menuItem.classList.contains('active')) {
-                    showSubmenu(menuItem, link, subMenu);
-                }
-                const firstSubmenuLink = subMenu.querySelector('a');
-                if (firstSubmenuLink) firstSubmenuLink.focus();
-                break;
-        }
-        
-        // 마우스 사용 시 키보드 모드 해제
-        setTimeout(() => { isKeyboardNavigation = false; }, 100);
-    });
-    
-    // 서브메뉴 내 키보드 네비게이션
-    const submenuLinks = subMenu.querySelectorAll('a');
-    submenuLinks.forEach((submenuLink, index) => {
-        submenuLink.addEventListener('keydown', (e) => {
-            if (window.innerWidth <= 768) return;
-            
-            switch (e.key) {
-                case 'ArrowUp':
-                    e.preventDefault();
-                    if (index > 0) {
-                        submenuLinks[index - 1].focus();
-                    } else {
-                        link.focus();
-                    }
-                    break;
-                case 'ArrowDown':
-                    e.preventDefault();
-                    if (index < submenuLinks.length - 1) {
-                        submenuLinks[index + 1].focus();
-                    }
-                    break;
-                case 'Escape':
-                    hideSubmenu(menuItem, link, subMenu);
-                    link.focus();
-                    break;
-            }
-        });
-    });
 }
 
 // ===== 서브메뉴 표시/숨김 함수들 =====

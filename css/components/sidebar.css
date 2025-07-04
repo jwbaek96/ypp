@@ -213,39 +213,6 @@
 
 /* ===사이드바 푸터=== */
 
-.sidebar-footer {
-    /* position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0; */
-    padding: 1.5rem;
-    border-top: 1px solid var(--border-color);
-    background-color: var(--very-light-gray);
-}
-
-.sidebar-groupware {
-    display: block;
-    width: 100%;
-    padding: 0.75rem;
-    background-color: var(--dark-gray);
-    color: var(--white);
-    text-align: center;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-
-.sidebar-groupware:hover {
-    background-color: var(--white);
-    color: var(--dark-gray);
-}
-
-.sidebar-lang {
-    display: flex;
-    gap: 0.5rem;
-}
-
 .sidebar-lang-btn {
     flex: 1;
     padding: 0.5rem;
@@ -257,11 +224,6 @@
     transition: all 0.3s ease;
 }
 
-.sidebar-lang-btn.active {
-    background-color: var(--primary-blue);
-    color: var(--white);
-    border-color: var(--primary-blue);
-}
 
 /* 모바일에서만 표시 */
 @media (min-width: 900px) {
@@ -282,5 +244,85 @@
     .sidebar-sub-sublink {
         padding: 0.5rem 3rem;
         font-size: 0.8rem;
+    }
+}
+/* ===== 간소화된 사이드바 푸터 ===== */
+
+.sidebar-footer {
+    padding: 1rem;
+    /* border-top: 1px solid var(--border-color); */
+    background-color: var(--white);
+}
+
+.sidebar-groupware {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: transparent;
+    color: var(--text-primary);
+    text-align: center;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.sidebar-groupware:hover {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border-color: var(--primary-blue);
+}
+
+.sidebar-lang {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.sidebar-lang-btn {
+    width: 40px;
+    height: 32px;
+    border: 1px solid var(--border-color);
+    background-color: var(--white);
+    color: var(--text-secondary);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-lang-btn:hover {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+.sidebar-lang-btn.active {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border-color: var(--primary-blue);
+}
+
+/* 모바일 최적화 */
+@media (max-width: 900px) {
+    .sidebar-footer {
+        padding: 0.875rem;
+    }
+    
+    .sidebar-groupware {
+        padding: 0.625rem;
+        font-size: 0.85rem;
+    }
+    
+    .sidebar-lang-btn {
+        width: 36px;
+        height: 30px;
+        font-size: 0.75rem;
     }
 }

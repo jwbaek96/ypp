@@ -693,7 +693,6 @@
                                 color: #666;
                             }
                             #culture-vision .block-content div div:last-child{
-                                background: #ffffff8f;
                                 backdrop-filter: blur(5px);
                             }
                             /* 미션 섹션 */
@@ -829,12 +828,12 @@
                                     grid-template-columns: repeat(2, 1fr);
                                 }
                                 
-                                .mission-section,
+                                /* .mission-section,
                                 .vision-section,
                                 .values-section,
                                 .behavior-section {
                                     padding: 1.5rem;
-                                }
+                                } */
                                 
                                 .section-title {
                                     font-size: 1.4rem;

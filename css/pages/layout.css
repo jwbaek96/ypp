@@ -57,7 +57,6 @@
 
 /* Navigations */
 .tab-navigation, .section-navigation {
-    /* background-color: var(--white, #ffffff); */
     border-bottom: 1px solid var(--border-light, #e5e5e5);
     position: sticky;
     top: var(--header-container-height);
@@ -85,11 +84,9 @@
     gap: 0;
     overflow-x: auto;
     background-color: var(--white, #ffffff);
-    
-    /* background-color: #ffffff54;
-    backdrop-filter: blur(10px); */
 
 }
+.section-nav::-webkit-scrollbar,
 .tab-nav::-webkit-scrollbar {
     display: none;
 }
@@ -124,7 +121,6 @@
     margin: 0;
     
     display: flex;
-    /* flex-wrap: wrap; */
     justify-content: center;
     gap: 1rem;
 
@@ -141,6 +137,7 @@
     font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .section-nav-link:hover {

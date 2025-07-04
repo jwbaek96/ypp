@@ -590,11 +590,14 @@
                                 text-align: center;
                                 line-height: 1.3;
                                 padding: 1rem;
+                                border-top: 1px solid #00000013;
                             }
                             
                             /* 주요 고객 스타일 */
                             .clients {
-                                display: block;
+                                display: flex;
+                                flex-direction: column;
+                                gap: 5px;
                             }
                             
                             .client-category {
@@ -640,26 +643,32 @@
                             @media (max-width: 768px) {
                                 .supplier-grid {
                                     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                                    gap: .5rem;
+                                    /* gap: .5rem; */
                                 }
                                 
                                 .supplier-name {
-                                    font-size: 0.5rem;
+                                    font-size: 0.8rem;
+                                    padding: 0.5rem;
                                 }
                                 
                                 .client-category-title {
                                     font-size: 0.9rem;
-                                    padding: 0.75rem;
+                                    padding: 0.5rem;
                                 }
                                 
                                 .client-image-container {
-                                    padding: 0.75rem;
+                                    padding: 0.25rem;
                                 }
                             }
                             
                             @media (max-width: 480px) {
                                 .supplier-grid {
                                     grid-template-columns: repeat(2, 1fr);
+                                }
+                            }
+                            @media (max-width: 425px) {
+                                .supplier-grid {
+                                    grid-template-columns:  1fr;
                                 }
                             }
 /* ++++++++++++++++++++++++++++++++++++++++++++ */
@@ -1079,6 +1088,7 @@
     .contribution-header{
         padding: 1.5rem 1rem;
     }
+    .content-block,
     #culture-contribution{
         padding: 1.5rem .5rem;
         border: 0;

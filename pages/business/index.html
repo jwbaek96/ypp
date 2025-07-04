@@ -18,6 +18,35 @@
     
     <!-- 메타 시스템 -->
     <script src="../../js/head-meta.js"></script>
+    <style>
+        /* 페이지 헤더 배경 이미지 */
+        .page-header {
+            position: relative;
+            background: url(page-header-bg.png);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6); 
+            z-index: 1;
+        }
+        
+        .page-header > * {
+            position: relative;
+            z-index: 2
+        }
+        .page-header-content h1,
+        .page-header-content p{
+            color: var(--white);
+        }
+    </style>
 </head>
 <body>
     <!-- Header Container -->

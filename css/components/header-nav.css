@@ -254,8 +254,8 @@
 /* 긴 메뉴 이름을 위한 처리 */
 .menu-link {
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /* overflow: hidden;
+    text-overflow: ellipsis; */
 }
 
 .sub-menu .menu-link {

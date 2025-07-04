@@ -292,3 +292,10 @@
 .content-block[id] {
     scroll-margin-top: 140px;
 }
+.content-section {
+    padding: 3rem 0;
+    background-color: var(--white, #ffffff);
+}
+html {
+    scroll-behavior: smooth;
+}

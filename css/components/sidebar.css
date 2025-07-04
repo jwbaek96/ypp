@@ -264,7 +264,7 @@
 }
 
 /* 모바일에서만 표시 */
-@media (min-width: 769px) {
+@media (min-width: 900px) {
     .mobile-sidebar,
     .sidebar-overlay {
         display: none !important;

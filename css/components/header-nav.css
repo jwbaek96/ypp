@@ -12,7 +12,7 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    gap: 0;
+    gap: .5rem;
 }
 
 /* ===== MENU ITEMS ===== */
@@ -161,10 +161,12 @@
 
 /* 태블릿 */
 @media (max-width: 1024px) {
-
+    .main-menu{
+        gap: 0;
+    }
     
     .menu-link {
-        padding: 0 1rem;
+        padding: 0 .5rem;
         font-size: 0.95rem;
     }
     
@@ -184,16 +186,23 @@
     .sub-menu {
         min-width: 180px;
     }
-}
-
-/* 모바일에서는 숨김 */
-@media (max-width: 768px) {
     .desktop-nav {
         display: none;
     }
     .desktop-nav .sub-menu {
         display: none !important; /* 모바일에서 완전 숨김 */
     }
+    .desktop-nav {
+        display: none;
+    }
+    
+    .hamburger-btn {
+        display: flex;
+    }
+}
+
+/* 모바일에서는 숨김 */
+@media (max-width: 768px) {
 }
 
 /* ===== ACCESSIBILITY ===== */
@@ -253,20 +262,3 @@
     white-space: normal;
     word-break: keep-all;
 }
-
-/* ===== HOVER EFFECTS ===== */
-
-
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 768px) {
-    .desktop-nav {
-        display: none;
-    }
-    
-    .hamburger-btn {
-        display: flex;
-    }
-    
-}
-
-/* ===== 사이드바 스타일 적용 ===== */

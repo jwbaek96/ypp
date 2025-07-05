@@ -1,0 +1,145 @@
+{
+  "popup": {
+    "title": {
+      "kor": "안내공지",
+      "eng": "Notice"
+    },
+    "message": {
+      "main": {
+        "kor": "YPP 웹사이트가 리뉴얼 중입니다.",
+        "eng": "YPP website is under renewal."
+      },
+      "sub": {
+        "kor": "일부 페이지와 서비스가 제한되고 있으며, 빠른 시일내에 모든 서비스를 제공할 수 있도록 노력하겠습니다.",
+        "eng": "Some pages and services are currently limited, and we are working hard to provide all services as soon as possible."
+      },
+      "thanks": {
+        "kor": "감사합니다.",
+        "eng": "Thank you."
+      },
+      "completion_date": {
+        "kor": "2025년 8월 4일",
+        "eng": "August 4, 2025"
+      },
+      "completion_label": {
+        "kor": "리뉴얼 완료 예정일:",
+        "eng": "Expected completion date:"
+      }
+    },
+    "downloads": {
+      "title": {
+        "kor": "자료 다운로드",
+        "eng": "Download Materials"
+      },
+      "files": [
+        {
+          "category": {
+            "kor": "회사소개서",
+            "eng": "Company Profile"
+          },
+          "items": [
+            {
+              "name": {
+                "kor": "회사소개서 (국문)",
+                "eng": "Company Profile (Korean)"
+              },
+              "filename": "ypp-company-profile-2021-kr.pdf",
+              "size": "PDF"
+            },
+            {
+              "name": {
+                "kor": "회사소개서 (영문)",
+                "eng": "Company Profile (English)"
+              },
+              "filename": "ypp-company-profile-2021-en.pdf",
+              "size": "PDF"
+            }
+          ]
+        },
+        {
+          "category": {
+            "kor": "Relay School 2025 (3월 ~ 11월)",
+            "eng": "Relay School 2025 (Mar ~ Nov)"
+          },
+          "items": [
+            {
+              "name": {
+                "kor": "Relay School 교육 신청서",
+                "eng": "Relay School Application Form"
+              },
+              "filename": "2025_Relay_School_application2.pdf",
+              "size": "PDF"
+            },
+            {
+              "name": {
+                "kor": "Relay School 브로슈어",
+                "eng": "Relay School Brochure"
+              },
+              "filename": "2025_Relay_School_brochure_250304.pdf",
+              "size": "PDF"
+            }
+          ]
+        },
+        {
+          "category": {
+            "kor": "PSAC 2025 (9월 ~ 12월)",
+            "eng": "PSAC 2025 (Sep ~ Dec)"
+          },
+          "items": [
+            {
+              "name": {
+                "kor": "PSAC 교육신청서",
+                "eng": "PSAC Application Form"
+              },
+              "filename": "2025_PSAC_교육신청 안내.pdf",
+              "size": "PDF"
+            },
+            {
+              "name": {
+                "kor": "PSAC 브로슈어",
+                "eng": "PSAC Brochure"
+              },
+              "filename": "2025_PSAC_brochure.pdf",
+              "size": "PDF"
+            }
+          ]
+        }
+      ]
+    },
+    "contact": {
+      "title": {
+        "kor": "연락처 정보",
+        "eng": "Contact Information"
+      },
+      "general": {
+        "label": {
+          "kor": "대표번호",
+          "eng": "Main Phone"
+        },
+        "phone": "02-2104-8700"
+      },
+      "education": {
+        "label": {
+          "kor": "교육 관련 문의",
+          "eng": "Education Inquiry"
+        },
+        "phone_label": {
+          "kor": "전화번호",
+          "eng": "Phone"
+        },
+        "email_label": {
+          "kor": "이메일",
+          "eng": "Email"
+        },
+        "phone": "02-2104-8720, 4683",
+        "email": "yppedu@ypp.co.kr"
+      }
+    },
+    "settings": {
+      "show_on_load": true,
+      "overlay_close": true,
+      "esc_close": true,
+      "size": "medium"
+    }
+  }
+}

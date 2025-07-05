@@ -1,0 +1,342 @@
+/**
+ * YPP 팝업 모달 스타일
+ * 작성일: 2025.07.06
+ * 디자인: 모던/미니멀
+ * 반응형: 모바일 퍼스트
+ */
+
+/* 팝업 오버레이 (배경) */
+.ypp-popup-overlay {
+  /* 화면 전체를 덮는 오버레이 설정 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* 반투명 검은색 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001; /* 다른 요소보다 위에 표시 */
+  padding: 20px;
+  box-sizing: border-box;
+}
+.ypp-popup-modal::-webkit-scrollbar {
+    display: none;
+}
+/* 팝업 모달 컨테이너 */
+.ypp-popup-modal {
+  background: white;
+  border-radius: 12px; /* 모던한 둥근 모서리 */
+  width: 100%;
+  max-width: 550px; /* 중간 크기 설정 */
+  max-height: 75vh; /* 화면 높이의 80%를 넘지 않도록 */
+  overflow-y: auto; /* 내용이 많을 때 스크롤 가능 */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); /* 부드러운 그림자 */
+  position: relative;
+  animation: popupFadeIn 0.3s ease-out; /* 부드러운 등장 애니메이션 */
+}
+
+/* 팝업 등장 애니메이션 */
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* 팝업 헤더 */
+.ypp-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px 22px 15px;
+  border-bottom: 1px solid #e5e7eb; /* 연한 회색 구분선 */
+}
+
+/* 팝업 제목 */
+.ypp-popup-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937; /* 진한 회색 */
+  line-height: 1.4;
+}
+
+/* 닫기 버튼 */
+.ypp-popup-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6b7280; /* 중간 회색 */
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.ypp-popup-close:hover {
+  background-color: #f3f4f6; /* 연한 회색 배경 */
+  color: #374151; /* 더 진한 회색 */
+}
+
+.ypp-popup-close:focus {
+  outline: 2px solid #3b82f6; /* 포커스 시 파란색 테두리 */
+  outline-offset: 2px;
+}
+
+/* 팝업 내용 */
+.ypp-popup-content {
+  padding: 15px 22px 20px;
+}
+
+/* 리뉴얼 안내 메시지 */
+.ypp-popup-message {
+  margin-bottom: 32px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); /* 연한 그라데이션 배경 */
+  border-radius: 8px;
+}
+
+.ypp-popup-message p {
+  margin: 0 0 8px 0;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.ypp-popup-message p:last-child {
+  margin-bottom: 0;
+}
+
+.message-main {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.completion-date {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #d1d5db;
+  /* color: #059669; 초록색 */
+}
+
+/* 다운로드 섹션 */
+.ypp-popup-downloads {
+  margin-bottom: 32px;
+}
+
+.ypp-popup-downloads h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* 다운로드 카테고리 */
+.download-category {
+  margin-bottom: 24px;
+}
+
+.download-category h4 {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* 다운로드 목록 */
+.download-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.download-list li {
+  margin-bottom: 8px;
+}
+
+/* 다운로드 링크 */
+.download-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f9fafb; /* 연한 회색 배경 */
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  color: #374151;
+}
+
+.download-link:hover {
+  background: #f3f4f6;
+  border-color: #3b82f6;
+  color: #1f2937;
+}
+
+.download-link:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.download-name {
+  font-weight: 500;
+}
+
+.download-size {
+  font-size: 0.875rem;
+  color: #6b7280;
+  background: #e5e7eb;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* 연락처 정보 */
+.ypp-popup-contact h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+.ypp-popup-contact 
+.contact-item {
+  margin-bottom: 12px;
+  line-height: 1.6;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f9fafb; /* 연한 회색 배경 */
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  color: #374151;
+  gap: 0;
+}
+.ypp-popup-contact 
+.contact-item:last-child {
+  margin-bottom: 0;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ypp-popup-contact 
+.contact-item:last-child strong {
+  width: 100%;
+  border-bottom: 1px solid #d1d5db;
+  color: #1f2937;
+  /* font-weight: 600; */
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+.ypp-popup-contact 
+.contact-item:last-child div{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 4px;
+  margin-bottom: 5px;
+}
+.ypp-popup-contact 
+.contact-item strong {
+  color: #374151;
+  display: inline-block;
+  min-width: 120px;
+}
+
+/* .ypp-popup-contact 
+.contact-item:last-child
+strong */
+
+.ypp-popup-contact 
+.contact-item a {
+  color: #3b82f6;
+  text-decoration: none;
+  margin-right: 12px;
+  transition: color 0.2s ease;
+}
+.ypp-popup-contact 
+.contact-item a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* 태블릿 사이즈 (768px 이상) */
+@media (min-width: 768px) {
+  .ypp-popup-modal {
+    max-width: 550px;
+  }
+  
+  .ypp-popup-header {
+    padding: 16px 32px;
+  }
+  
+  .ypp-popup-content {
+    padding: 15px 32px 32px;
+  }
+  
+  .ypp-popup-title {
+    font-size: 1.375rem;
+  }
+}
+
+/* 데스크톱 사이즈 (1024px 이상) */
+@media (min-width: 1024px) {
+  .ypp-popup-modal {
+    max-width: 550px;
+  }
+}
+
+/* 접근성 개선 */
+@media (prefers-reduced-motion: reduce) {
+  .ypp-popup-modal {
+    animation: none; /* 애니메이션 제거 */
+  }
+}
+
+/* 다크모드 지원 (사용자 설정에 따라) */
+@media (prefers-color-scheme: dark) {
+  .ypp-popup-modal {
+    background: #1f2937;
+    color: #f9fafb;
+  }
+  
+  .ypp-popup-header {
+    border-bottom-color: #374151;
+  }
+  
+  .ypp-popup-title {
+    color: #f9fafb;
+  }
+  
+  .ypp-popup-message {
+    background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+    color: #f9fafb;
+  }
+  
+  .download-link {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+  
+  .download-link:hover {
+    background: #4b5563;
+  }
+  .ypp-popup-contact 
+  .contact-info {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+}

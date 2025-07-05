@@ -46,6 +46,11 @@
         .page-header-content p{
             color: var(--white);
         }
+        /* tab-nav 스크롤화(영문이 너무 김) */
+        .tab-nav{
+        justify-content:flex-start;
+        overflow-x: scroll;
+    }
     </style>
 </head>
 <body>
@@ -61,8 +66,12 @@
         <section class="page-header">
             <div class="container">
                 <div class="page-header-content">
-                    <h1 class="page-title">사업분야</h1>
-                    <p class="page-subtitle">Business Industry</p>
+                    <h1 class="page-title"
+                            data-eng="Business Industry"
+                            data-kor="사업분야">사업분야</h1>
+                    <p class="page-subtitle"
+                            data-eng=""
+                            data-kor="Business Industry">Business Industry</p>
                 </div>
             </div>
         </section>
@@ -71,9 +80,13 @@
         <section class="breadcrumb-section">
             <div class="container">
                 <nav class="breadcrumb">
-                    <a href="/">홈</a>
+                    <a href="/"
+                            data-eng="Home"
+                            data-kor="홈">홈</a>
                     <span class="breadcrumb-separator">></span>
-                    <span class="breadcrumb-current">사업분야</span>
+                    <span class="breadcrumb-current"
+                            data-eng="Business Industry"
+                            data-kor="사업분야">사업분야</span>
                 </nav>
             </div>
         </section>
@@ -82,33 +95,65 @@
         <section class="tab-navigation">
             <div class="container">
                 <nav class="tab-nav">
-                    <a href="#thermal-power" class="tab-link active" data-tab="thermal-power">화력발전소</a>
-                    <a href="#nuclear-power" class="tab-link" data-tab="nuclear-power">원자력발전소</a>
-                    <a href="#renewable-energy" class="tab-link" data-tab="renewable-energy">신재생에너지</a>
-                    <a href="#green-hydrogen" class="tab-link" data-tab="green-hydrogen">그린수소/암모니아</a>
-                    <a href="#substation" class="tab-link" data-tab="substation">변전소</a>
-                <!-- </nav>
-                <nav class="tab-nav"> -->
-                    <a href="#bess" class="tab-link" data-tab="bess">에너지저장장치</a>
-                    <a href="#data-center" class="tab-link" data-tab="data-center">데이터센터</a>
-                    <a href="#control-valve" class="tab-link" data-tab="control-valve">콘트롤밸브</a>
-                    <a href="#us-military" class="tab-link" data-tab="us-military">미군기지</a>
+                    <a href="#thermal-power" class="tab-link active" data-tab="thermal-power"
+                        data-eng="Thermal Power Plant"
+                        data-kor="화력발전소">화력발전소</a>
+                    <a href="#nuclear-power" class="tab-link" data-tab="nuclear-power"
+                        data-eng="Nuclear Power Plant"
+                        data-kor="원자력발전소">원자력발전소</a>
+                    <a href="#renewable-energy" class="tab-link" data-tab="renewable-energy"
+                        data-eng="Renewable Energy"
+                        data-kor="신재생에너지">신재생에너지</a>
+                    <a href="#green-hydrogen" class="tab-link" data-tab="green-hydrogen"
+                        data-eng="Green Hydrogen/Ammonia"
+                        data-kor="그린수소/암모니아">그린수소/암모니아</a>
+                    <a href="#substation" class="tab-link" data-tab="substation"
+                        data-eng="Substation"
+                        data-kor="변전소">변전소</a>
+                    <a href="#bess" class="tab-link" data-tab="bess"
+                        data-eng="BESS"
+                        data-kor="에너지저장장치">에너지저장장치</a>
+                    <a href="#data-center" class="tab-link" data-tab="data-center"
+                        data-eng="Data Center"
+                        data-kor="데이터센터">데이터센터</a>
+                    <a href="#control-valve" class="tab-link" data-tab="control-valve"
+                        data-eng="Control Valve"
+                        data-kor="콘트롤밸브">콘트롤밸브</a>
+                    <a href="#us-military" class="tab-link" data-tab="us-military"
+                        data-eng="U.S. Military Base"
+                        data-kor="미군기지">미군기지</a>
                 </nav>
                 
                 <!-- Section Navigation for 화력발전소 -->
                 <div class="section-nav" id="section-nav-thermal-power">
-                    <a href="#thermal-overview" class="section-nav-link">화력발전소 개요</a>
-                    <a href="#thermal-projects" class="section-nav-link">주요 프로젝트</a>
-                    <a href="#thermal-technology" class="section-nav-link">기술 역량</a>
-                    <a href="#thermal-performance" class="section-nav-link">실적</a>
+                    <a href="#thermal-overview" class="section-nav-link"
+                    data-eng="Overview"
+                    data-kor="화력발전소 개요">화력발전소 개요</a>
+                    <a href="#thermal-projects" class="section-nav-link"
+                    data-eng="Major Projects"
+                    data-kor="주요 프로젝트">주요 프로젝트</a>
+                    <a href="#thermal-technology" class="section-nav-link"
+                    data-eng="Technical Capabilities"
+                    data-kor="기술 역량">기술 역량</a>
+                    <a href="#thermal-performance" class="section-nav-link"
+                    data-eng="Performance"
+                    data-kor="실적">실적</a>
                 </div>
                 
                 <!-- Section Navigation for 원자력발전소 -->
                 <div class="section-nav" id="section-nav-nuclear-power" style="display: none;">
-                    <a href="#nuclear-overview" class="section-nav-link">원자력발전소 개요</a>
-                    <a href="#nuclear-projects" class="section-nav-link">주요 프로젝트</a>
-                    <a href="#nuclear-technology" class="section-nav-link">기술 역량</a>
-                    <a href="#nuclear-performance" class="section-nav-link">실적</a>
+                    <a href="#nuclear-overview" class="section-nav-link"
+                    data-eng="Overview"
+                    data-kor="원자력발전소 개요">원자력발전소 개요</a>
+                 <a href="#nuclear-projects" class="section-nav-link"
+                    data-eng="Major Projects"
+                    data-kor="주요 프로젝트">주요 프로젝트</a>
+                 <a href="#nuclear-technology" class="section-nav-link"
+                    data-eng="Technical Capabilities"
+                    data-kor="기술 역량">기술 역량</a>
+                 <a href="#nuclear-performance" class="section-nav-link"
+                    data-eng="Performance"
+                    data-kor="실적">실적</a>
                 </div>
                 
                 <!-- Section Navigation for 신재생에너지 -->

@@ -397,6 +397,7 @@ class AboutPageController {
     
     // 탭 전환
     switchTab(tabId) {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
         this.currentTab = tabId;
         
         // 모든 탭 링크 비활성화

@@ -920,6 +920,7 @@ class BusinessPageController {
     
     // 탭 전환
     switchTab(tabId) {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
         this.currentTab = tabId;
         
         // 모든 탭 링크 비활성화
@@ -1040,9 +1041,6 @@ class BusinessPageController {
     attachEvents() {
         // 스크롤 시 현재 보이는 섹션 감지
         this.setupScrollSpy();
-        
-        // 키보드 네비게이션
-        this.setupKeyboardNavigation();
     }
     
     // 스크롤 스파이 (현재 보이는 섹션 자동 감지)
@@ -1075,29 +1073,6 @@ class BusinessPageController {
             if (!ticking) {
                 requestAnimationFrame(updateActiveSection);
                 ticking = true;
-            }
-        });
-    }
-    
-    // 키보드 네비게이션
-    setupKeyboardNavigation() {
-        document.addEventListener('keydown', (e) => {
-            // 탭 키로 탭 간 이동 (Ctrl + Arrow)
-            if (e.ctrlKey) {
-                const tabIds = ['thermal-power', 'nuclear-power', 'renewable-energy', 'green-hydrogen', 'substation', 'bess', 'data-center', 'control-valve', 'us-military'];
-                const currentIndex = tabIds.indexOf(this.currentTab);
-                
-                if (e.key === 'ArrowRight' && currentIndex < tabIds.length - 1) {
-                    e.preventDefault();
-                    this.switchTab(tabIds[currentIndex + 1]);
-                    const newUrl = `${window.location.pathname}?tab=${tabIds[currentIndex + 1]}`;
-                    window.history.pushState(null, null, newUrl);
-                } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
-                    e.preventDefault();
-                    this.switchTab(tabIds[currentIndex - 1]);
-                    const newUrl = `${window.location.pathname}?tab=${tabIds[currentIndex - 1]}`;
-                    window.history.pushState(null, null, newUrl);
-                }
             }
         });
     }

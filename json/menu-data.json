@@ -316,8 +316,8 @@
         },
         "ci": {
           "title": {
-            "ko": "CI 소개",
-            "en": "CI Introduction"
+            "ko": "CI",
+            "en": "CI"
           },
           "url": "/pages/media/ci.html"
         }

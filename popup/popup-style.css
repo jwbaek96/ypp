@@ -297,6 +297,14 @@ strong */
   }
 }
 
+@media (max-width: 425px) {
+  .ypp-popup-content {
+    padding: 15px 8px;
+  }
+  .ypp-popup-overlay {
+    padding: 5px;
+  }
+}
 /* 접근성 개선 */
 @media (prefers-reduced-motion: reduce) {
   .ypp-popup-modal {
@@ -305,7 +313,7 @@ strong */
 }
 
 /* 다크모드 지원 (사용자 설정에 따라) */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   .ypp-popup-modal {
     background: #1f2937;
     color: #f9fafb;
@@ -339,4 +347,4 @@ strong */
     border-color: #4b5563;
     color: #f9fafb;
   }
-}
+} */

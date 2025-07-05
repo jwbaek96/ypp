@@ -247,7 +247,8 @@
     /* .tab-navigation, .section-navigation {
         top: 70px;
     } */
-    .tab-nav {
+    .tab-nav,
+    .section-nav {
         display: flex;
         justify-content:flex-start;
         overflow-x: scroll;

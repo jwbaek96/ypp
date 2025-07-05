@@ -58,6 +58,17 @@
             /* justify-content:flex-start; */
             /* overflow-x: scroll; */
         }
+        @media (max-width: 768px) {
+            .tab-nav {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+            }
+            .tab-link {
+                flex: 0 0 auto;
+                padding: 0.8rem 1rem;
+            }
+            
+        }
     </style>
 </head>
 <body>
@@ -197,22 +208,18 @@
                 
                 <!-- Section Navigation for 변전소 -->
                 <div class="section-nav" id="section-nav-substation" style="display: none;">
-                    <div class="section-nav" id="section-nav-substation" style="display: none;"
-                         data-eng="Substation Navigation"
-                         data-kor="변전소 네비게이션">
-                        <a href="#substation-ais" class="section-nav-link"
-                           data-eng="AIS Substation"
-                           data-kor="AIS 변전소">AIS 변전소</a>
-                        <a href="#substation-gis" class="section-nav-link"
-                           data-eng="GIS Substation"
-                           data-kor="GIS 변전소">GIS 변전소</a>
-                        <a href="#substation-digital" class="section-nav-link"
-                           data-eng="Digital Substation"
-                           data-kor="디지털 변전소">디지털 변전소</a>
-                        <a href="#substation-performance" class="section-nav-link"
-                           data-eng="Major Performance"
-                           data-kor="주요 실적">주요 실적</a>
-                    </div>
+                    <a href="#substation-ais" class="section-nav-link"
+                        data-eng="AIS Substation"
+                        data-kor="AIS 변전소">AIS 변전소</a>
+                    <a href="#substation-gis" class="section-nav-link"
+                        data-eng="GIS Substation"
+                        data-kor="GIS 변전소">GIS 변전소</a>
+                    <a href="#substation-digital" class="section-nav-link"
+                        data-eng="Digital Substation"
+                        data-kor="디지털 변전소">디지털 변전소</a>
+                    <a href="#substation-performance" class="section-nav-link"
+                        data-eng="Major Performance"
+                        data-kor="주요 실적">주요 실적</a>
                 </div>
                 
                 <!-- Section Navigation for 에너지저장장치 -->
@@ -233,26 +240,50 @@
                 
                 <!-- Section Navigation for 데이터센터 -->
                 <div class="section-nav" id="section-nav-data-center" style="display: none;">
-                    <a href="#datacenter-power" class="section-nav-link">데이터센터 전력</a>
-                    <a href="#datacenter-cooling" class="section-nav-link">냉각 시스템</a>
-                    <a href="#datacenter-monitoring" class="section-nav-link">모니터링</a>
-                    <a href="#datacenter-performance" class="section-nav-link">실적</a>
+                    <a href="#datacenter-power" class="section-nav-link"
+                        data-eng="Data Center Power"
+                        data-kor="데이터센터 전력">데이터센터 전력</a>
+                    <a href="#datacenter-cooling" class="section-nav-link"
+                        data-eng="Cooling System"
+                        data-kor="냉각 시스템">냉각 시스템</a>
+                    <a href="#datacenter-monitoring" class="section-nav-link"
+                        data-eng="Monitoring"
+                        data-kor="모니터링">모니터링</a>
+                    <a href="#datacenter-performance" class="section-nav-link"
+                        data-eng="Performance"
+                        data-kor="실적">실적</a>
                 </div>
                 
                 <!-- Section Navigation for 콘트롤밸브 -->
                 <div class="section-nav" id="section-nav-control-valve" style="display: none;">
-                    <a href="#valve-types" class="section-nav-link">밸브 종류</a>
-                    <a href="#valve-control" class="section-nav-link">제어 시스템</a>
-                    <a href="#valve-maintenance" class="section-nav-link">유지보수</a>
-                    <a href="#valve-performance" class="section-nav-link">공급 실적</a>
+                    <a href="#valve-types" class="section-nav-link"
+                       data-eng="Valve Types"
+                       data-kor="밸브 종류">밸브 종류</a>
+                    <a href="#valve-control" class="section-nav-link"
+                       data-eng="Control System"
+                       data-kor="제어 시스템">제어 시스템</a>
+                    <a href="#valve-maintenance" class="section-nav-link"
+                       data-eng="Maintenance"
+                       data-kor="유지보수">유지보수</a>
+                    <a href="#valve-performance" class="section-nav-link"
+                       data-eng="Performance"
+                       data-kor="공급 실적">공급 실적</a>
                 </div>
                 
                 <!-- Section Navigation for 미군기지 -->
                 <div class="section-nav" id="section-nav-us-military" style="display: none;">
-                    <a href="#military-projects" class="section-nav-link">미군기지 프로젝트</a>
-                    <a href="#military-security" class="section-nav-link">보안 시스템</a>
-                    <a href="#military-power" class="section-nav-link">전력 공급</a>
-                    <a href="#military-performance" class="section-nav-link">실적</a>
+                    <a href="#military-projects" class="section-nav-link"
+                       data-eng="U.S. Military Base Projects"
+                       data-kor="미군기지 프로젝트">미군기지 프로젝트</a>
+                    <a href="#military-security" class="section-nav-link"
+                       data-eng="Security System"
+                       data-kor="보안 시스템">보안 시스템</a>
+                    <a href="#military-power" class="section-nav-link"
+                       data-eng="Power Supply"
+                       data-kor="전력 공급">전력 공급</a>
+                    <a href="#military-performance" class="section-nav-link"
+                       data-eng="Performance"
+                       data-kor="실적">실적</a>
                 </div>
             </div>
         </section>
@@ -263,8 +294,12 @@
                 <!-- 화력발전소 -->
                 <div id="thermal-power" class="tab-content active">
                     <div class="content-header">
-                        <h2 class="content-title">화력발전소</h2>
-                        <p class="content-subtitle">Thermal Power Plant</p>
+                        <h2 class="content-title"
+                            data-eng="Thermal Power Plant"
+                            data-kor="화력발전소">화력발전소</h2>
+                        <p class="content-subtitle"
+                            data-eng=""
+                            data-kor="Thermal Power Plant">Thermal Power Plant</p>
                     </div>
                     
                     <div class="content-grid">
@@ -309,8 +344,12 @@
                 <!-- 원자력발전소 -->
                 <div id="nuclear-power" class="tab-content">
                     <div class="content-header">
-                        <h2 class="content-title">원자력발전소</h2>
-                        <p class="content-subtitle">Nuclear Power Plant</p>
+                        <h2 class="content-title"
+                            data-eng="Nuclear Power Plant"
+                            data-kor="원자력발전소">원자력발전소</h2>
+                        <p class="content-subtitle"
+                            data-eng=""
+                            data-kor="Nuclear Power Plant">Nuclear Power Plant</p>
                     </div>
                     
                     <div class="content-grid">
@@ -355,8 +394,12 @@
                 <!-- 신재생에너지 -->
                 <div id="renewable-energy" class="tab-content">
                     <div class="content-header">
-                        <h2 class="content-title">신재생에너지</h2>
-                        <p class="content-subtitle">Renewable Energy</p>
+                        <h2 class="content-title"
+                            data-eng="Renewable Energy"
+                            data-kor="신재생에너지">신재생에너지</h2>
+                        <p class="content-subtitle"
+                            data-eng=""
+                            data-kor="Renewable Energy">Renewable Energy</p>
                     </div>
                     
                     <div class="content-grid">
@@ -401,8 +444,12 @@
                 <!-- 그린수소/암모니아 -->
                 <div id="green-hydrogen" class="tab-content">
                     <div class="content-header">
-                        <h2 class="content-title">그린수소/암모니아</h2>
-                        <p class="content-subtitle">Green Hydrogen & Ammonia</p>
+                        <h2 class="content-title"
+                            data-eng="Green Hydrogen & Ammonia"
+                            data-kor="그린수소/암모니아">그린수소/암모니아</h2>
+                        <p class="content-subtitle"
+                            data-eng=""
+                            data-kor="Green Hydrogen & Ammonia">Green Hydrogen & Ammonia</p>
                     </div>
                     
                     <div class="content-grid">
@@ -447,8 +494,12 @@
                 <!-- 변전소 -->
                 <div id="substation" class="tab-content">
                     <div class="content-header">
-                        <h2 class="content-title">변전소</h2>
-                        <p class="content-subtitle">Substation</p>
+                        <h2 class="content-title"
+                            data-eng="Substation"
+                            data-kor="변전소">변전소</h2>
+                        <p class="content-subtitle"
+                            data-eng=""
+                            data-kor="Substation">Substation</p>
                     </div>
                     
                     <div class="content-grid">
@@ -493,8 +544,12 @@
                 <!-- 에너지저장장치 -->
                 <div id="bess" class="tab-content">
                     <div class="content-header">
-                        <h2 class="content-title">에너지저장장치</h2>
-                        <p class="content-subtitle">Battery Energy Storage System</p>
+                        <h2 class="content-title"
+                            data-eng="BESS"
+                            data-kor="에너지저장장치">에너지저장장치</h2>
+                        <p class="content-subtitle"
+                            data-eng="Battery Energy Storage System"
+                            data-kor="Battery Energy Storage System">Battery Energy Storage System</p>
                     </div>
                     
                     <div class="content-grid">
@@ -539,8 +594,12 @@
                 <!-- 데이터센터 -->
                 <div id="data-center" class="tab-content">
                     <div class="content-header">
-                        <h2 class="content-title">데이터센터</h2>
-                        <p class="content-subtitle">Data Center</p>
+                        <h2 class="content-title"
+                            data-eng="Data Center"
+                            data-kor="데이터센터">데이터센터</h2>
+                        <p class="content-subtitle"
+                            data-eng=""
+                            data-kor="Data Center">Data Center</p>
                     </div>
                     
                     <div class="content-grid">
@@ -585,8 +644,12 @@
                 <!-- 콘트롤밸브 -->
                 <div id="control-valve" class="tab-content">
                     <div class="content-header">
-                        <h2 class="content-title">콘트롤밸브</h2>
-                        <p class="content-subtitle">Control Valve</p>
+                        <h2 class="content-title"
+                            data-eng="Control Valve"
+                            data-kor="콘트롤밸브">콘트롤밸브</h2>
+                        <p class="content-subtitle"
+                            data-eng=""
+                            data-kor="Control Valve">Control Valve</p>
                     </div>
                     
                     <div class="content-grid">
@@ -631,8 +694,12 @@
                 <!-- 미군기지 -->
                 <div id="us-military" class="tab-content">
                     <div class="content-header">
-                        <h2 class="content-title">미군기지</h2>
-                        <p class="content-subtitle">U.S. Military</p>
+                        <h2 class="content-title"
+                            data-eng="U.S. Military Base"
+                            data-kor="">미군기지</h2>
+                        <p class="content-subtitle"
+                            data-eng=""
+                            data-kor="U.S. Military Bass">U.S. Military Bass</p>
                     </div>
                     
                     <div class="content-grid">

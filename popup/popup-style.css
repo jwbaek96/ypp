@@ -101,6 +101,7 @@
   padding: 20px;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); /* 연한 그라데이션 배경 */
   border-radius: 8px;
+  text-align: center;
 }
 
 .ypp-popup-message p {

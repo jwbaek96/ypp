@@ -27,9 +27,15 @@
                     data-eng="This is a specialized training program that offers systematic learning from the basics to advanced applications of protective relays.">
                         보호계전기의 기초부터 고급 활용까지 체계적으로 학습할 수 있는 전문 교육과정입니다.
                     </p>
-                    <a href="./pages/academy/#relay-school" class="program-link"
+                    <!-- <a href="./pages/academy/#relay-school" class="program-link"
                     data-eng="View Course Details"
-                    data-kor="과정 상세보기">과정 상세보기</a>
+                    data-kor="과정 상세보기">과정 상세보기</a> -->
+                    <div class="program-btns">
+                        <a href="/documents/2025_Relay_School_brochure_250304.pdf" download class="program-btn-grey"
+                            data-eng="Brochure"data-kor="브로슈어 다운받기">브로슈어 다운받기</a>
+                        <a href="/documents/2025_Relay_School_application2.pdf" download class="program-btn-grey"
+                            data-eng="Application Form"data-kor="교육신청서 다운받기">교육신청서 다운받기</a>
+                    </div>
                 </div>
             </div>
 
@@ -48,9 +54,15 @@
                     data-kor="Power System Analysis Course로 전력계통 해석 및 보호협조에 대한 전문지식을 습득합니다.">
                         Power System Analysis Course로 전력계통 해석 및 보호협조에 대한 전문지식을 습득합니다.
                     </p>
-                    <a href="./pages/academy/#psac" class="program-link"
+                    <!-- <a href="./pages/academy/#psac" class="program-link"
                     data-eng="View Course Details"
-                    data-kor="과정 상세보기">과정 상세보기</a>
+                    data-kor="과정 상세보기">과정 상세보기</a> -->
+                    <div class="program-btns">
+                        <a href="/documents/2025_PSAC_brochure.pdf" download class="program-btn-grey"
+                            data-eng="Brochure"data-kor="브로슈어 다운받기">브로슈어 다운받기</a>
+                        <a href="/documents/2025_PSAC_교육신청 안내.pdf" download class="program-btn-grey"
+                            data-eng="Application Form"data-kor="교육신청서 다운받기">교육신청서 다운받기</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -234,6 +246,55 @@
     }
     .program-card {
         border-radius: 0;
+    }
+}
+</style>
+
+<style>
+.program-btns {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    justify-content: center;
+}
+.program-btn-grey {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 120px;
+    padding: 0.6em 1.4em;
+    font-size: 1em;
+    font-weight: 500;
+    color: #444;
+    background: #f6f7f8;
+    border: 1.5px solid #d1d5db;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px 0 rgba(60,60,60,0.04);
+    text-decoration: none;
+    transition: 
+        background 0.18s,
+        color 0.18s,
+        border 0.18s,
+        box-shadow 0.18s;
+    letter-spacing: 0.01em;
+}
+.program-btn-grey:hover, .program-btn-grey:focus {
+    background: #23272f;
+    color: #fff;
+    border-color: #23272f;
+    box-shadow: 0 4px 16px 0 rgba(60,60,60,0.10);
+    text-decoration: none;
+}
+@media (max-width: 600px) {
+    .program-btns {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: stretch;
+    }
+    .program-btn-grey {
+        width: 100%;
+        min-width: 0;
     }
 }
 </style>

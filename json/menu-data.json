@@ -44,7 +44,7 @@
     "business": {
       "title": {
         "ko": "사업분야",
-        "en": "Business Indestry"
+        "en": "Business Industry"
       },
       "url": "/pages/business/index.html",
       "children": {

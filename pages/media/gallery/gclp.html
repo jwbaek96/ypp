@@ -352,37 +352,6 @@ window.getCurrentSection = getCurrentSection;
 <style>
 /* ===== GCLP PAGE SPECIFIC STYLES ===== */
 
-/* Section Navigation */
-.section-navigation {
-    background-color: var(--white, #ffffff);
-    border-bottom: 1px solid var(--border-light, #e5e5e5);
-    position: sticky;
-    top: 80px;
-    z-index: 100;
-}
-
-.section-navigation .container {
-    max-width: none !important;
-    width: 100vw !important;
-    margin: 0;
-    padding: 0;
-}
-
-.section-navigation .section-nav {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0;
-}
-
-/* Content Section */
-.content-section {
-    padding: 3rem 0;
-    background-color: var(--white, #ffffff);
-}
-
 /* External Links Section */
 .external-links-section {
     margin: 1.5rem 0 3rem 0;
@@ -443,23 +412,8 @@ window.getCurrentSection = getCurrentSection;
     margin: 0;
 }
 
-/* Smooth Scrolling for Sections */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Section Scroll Offset */
-.content-block[id] {
-    scroll-margin-top: 140px;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
-    .section-navigation .section-nav {
-        padding: 1rem;
-        gap: 0.5rem;
-    }
-    
     .external-links-grid {
         grid-template-columns: 1fr;
         gap: 1rem;

@@ -58,12 +58,13 @@
   padding: 17px 22px 15px;
   border-bottom: 1px solid #e5e7eb; /* 연한 회색 구분선 */
 
-  position: fixed;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
-  width: 100%;
-  max-width: var(--max-width-popup-modal);
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  border-radius: 12px; /* 모던한 둥근 모서리 */
+  border-radius: 12px 12px 0 0; /* 모던한 둥근 모서리 */
 }
 
 /* 팝업 제목 */
@@ -284,7 +285,7 @@ strong */
 /* 태블릿 사이즈 (768px 이상) */
 @media (min-width: 768px) {
   .ypp-popup-modal {
-    max-width: 550px;
+    --max-width-popup-modal: 100%;
   }
   
   .ypp-popup-header {
@@ -303,7 +304,7 @@ strong */
 /* 데스크톱 사이즈 (1024px 이상) */
 @media (min-width: 1024px) {
   .ypp-popup-modal {
-    max-width: 550px;
+    --max-width-popup-modal: 550px;
   }
 }
 

@@ -29,7 +29,8 @@
   background: white;
   border-radius: 12px; /* 모던한 둥근 모서리 */
   width: 100%;
-  max-width: 550px; /* 중간 크기 설정 */
+  --max-width-popup-modal: 550px; /* 최대 너비 설정 */
+  max-width: var(--max-width-popup-modal); /* 중간 크기 설정 */
   max-height: 75vh; /* 화면 높이의 80%를 넘지 않도록 */
   overflow-y: auto; /* 내용이 많을 때 스크롤 가능 */
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); /* 부드러운 그림자 */
@@ -56,6 +57,13 @@
   align-items: center;
   padding: 17px 22px 15px;
   border-bottom: 1px solid #e5e7eb; /* 연한 회색 구분선 */
+
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  max-width: var(--max-width-popup-modal);
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px; /* 모던한 둥근 모서리 */
 }
 
 /* 팝업 제목 */
@@ -92,6 +100,7 @@
 
 /* 팝업 내용 */
 .ypp-popup-content {
+  margin-top: 4.5rem;
   padding: 15px 22px 20px;
 }
 
@@ -300,10 +309,10 @@ strong */
 
 @media (max-width: 425px) {
   .ypp-popup-content {
-    padding: 15px 8px;
+    padding: 15px 15px;
   }
   .ypp-popup-overlay {
-    padding: 5px;
+    padding: 15px;
   }
 }
 /* 접근성 개선 */

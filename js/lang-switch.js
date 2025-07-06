@@ -19,6 +19,7 @@ class LanguageSwitch {
             button.addEventListener('click', (e) => {
                 const selectedLang = e.target.dataset.lang;
                 this.switchLanguage(selectedLang);
+                console.log('언어 버튼 클릭:', e.target.dataset.lang);
             });
         });
     }

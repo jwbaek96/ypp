@@ -88,7 +88,7 @@
     <link rel="stylesheet" href="/popup/popup-style.css">
 
     <!-- 최초 접속 시 한국어 자동 선택 -->
-    <script>
+<script>
     // 최초 접속 시 한국어 자동 선택
     (function() {
         const savedLanguage = localStorage.getItem('selectedLanguage');
@@ -125,7 +125,130 @@
             }
         }
     })();
-    </script>
+
+</script>
+<script>
+    // 히어로 섹션 비디오 한영 전환 기능
+function switchHeroVideo(lang) {
+    // 메인 페이지에서만 실행
+    if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
+        return;
+    }
+    
+    const videoElement = document.querySelector('#hero-section video, .hero-section video, .hero-video');
+    
+    if (!videoElement) {
+        console.log('히어로 비디오를 찾을 수 없습니다.');
+        return;
+    }
+    
+    console.log('히어로 비디오 찾음:', videoElement);
+    
+    // 비디오 소스 매핑 (실제 파일 경로로 수정하세요)
+    const videoSources = {
+        en: '/assets/videos/hero-video-2-eng.mp4',  // 한국어 비디오 경로
+        ko: '/assets/videos/hero-bg.mp4'  // 영어 비디오 경로
+    };
+    
+    const newVideoSrc = videoSources[lang];
+    
+    if (!newVideoSrc) {
+        console.log('해당 언어의 비디오 소스가 없습니다:', lang);
+        return;
+    }
+    
+    // 현재 재생 시간과 상태 저장
+    const currentTime = videoElement.currentTime;
+    const wasPlaying = !videoElement.paused;
+    
+    try {
+        // 비디오 소스 변경
+        videoElement.src = newVideoSrc;
+        
+        // 비디오 로드 후 이전 위치와 상태 복원
+        videoElement.addEventListener('loadeddata', function restoreVideo() {
+            videoElement.currentTime = currentTime;
+            
+            if (wasPlaying) {
+                videoElement.play().catch(error => {
+                    console.log('비디오 자동 재생 실패:', error);
+                });
+            }
+            
+            // 이벤트 리스너 제거 (한 번만 실행)
+            videoElement.removeEventListener('loadeddata', restoreVideo);
+        });
+        
+        // 비디오 로드
+        videoElement.load();
+        
+        console.log('비디오 소스 변경 성공:', newVideoSrc);
+        
+    } catch (error) {
+        console.error('비디오 변경 실패:', error);
+        
+        // 비디오 변경이 실패하면 페이지 리로드
+        console.log('비디오 변경 실패 - 페이지 리로드 실행');
+        setTimeout(() => {
+            window.location.reload();
+        }, 500);
+    }
+}
+
+// 페이지 리로드 방식 (대안)
+function reloadPageForVideoSwitch(lang) {
+    // 메인 페이지에서만 실행
+    if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
+        return;
+    }
+    
+    console.log('언어 전환으로 인한 페이지 리로드');
+    
+    // 언어 설정 후 페이지 리로드
+    setTimeout(() => {
+        window.location.reload();
+    }, 300); // 언어 전환 애니메이션 후 리로드
+}
+
+// 메인 언어 전환 기능에 통합
+// lang-switch.js의 switchLanguage 함수에 추가하거나
+// 별도로 언어 전환 이벤트를 감지
+
+// 방법 1: MutationObserver로 언어 전환 감지
+function observeLanguageChange() {
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const target = mutation.target;
+                if (target.classList.contains('lang-btn') && target.classList.contains('active')) {
+                    const selectedLang = target.dataset.lang;
+                    console.log('언어 전환 감지:', selectedLang);
+                    
+                    // 비디오 교체 시도
+                    switchHeroVideo(selectedLang);
+                    
+                    // 또는 페이지 리로드 (주석 해제해서 사용)
+                    // reloadPageForVideoSwitch(selectedLang);
+                }
+            }
+        });
+    });
+    
+    // 언어 버튼들을 관찰
+    document.querySelectorAll('.lang-btn').forEach(button => {
+        observer.observe(button, { attributes: true });
+    });
+}
+
+// 페이지 로드 후 관찰 시작
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(observeLanguageChange, 1000);
+});
+
+// 방법 2: 직접 언어 전환 함수에 추가 (더 간단)
+// lang-switch.js의 switchLanguage 함수 마지막에 추가:
+// switchHeroVideo(selectedLang);
+</script>
 
 </body>
 </html>

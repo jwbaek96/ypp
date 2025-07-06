@@ -63,9 +63,9 @@ const YppPopupModal = {
           <p class="message-main" data-kor='${popup.message.main.kor}' data-eng='${popup.message.main.eng}'></p>
           <p class="message-sub" data-kor='${popup.message.sub.kor}' data-eng='${popup.message.sub.eng}'></p>
           <p class="message-thanks" data-kor='${popup.message.thanks.kor}' data-eng='${popup.message.thanks.eng}'></p>
-          <p class="completion-date">
+          <!-- <p class="completion-date">
             <strong data-kor='리뉴얼 완료 예정일: ${popup.message.completion_date.kor}' data-eng='Expected Completion: ${popup.message.completion_date.eng}'></strong>
-          </p>
+          </p>-->
         </div>
         
         <!-- 자료 다운로드 섹션 -->

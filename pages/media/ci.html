@@ -78,15 +78,17 @@
             data-eng="Symbol Mark"
             data-kor="심볼마크">심볼마크</h3>
         <div class="ci-section-content" style="flex-direction: column; align-items: flex-start;">
-            <img src="/assets/images/ci/ci-symbol-main.jpg" alt="YPP 심볼마크" style="max-width:300px; margin-bottom:1rem;">
+            <div style="width: 100%; text-align: center;">
+                <img src="/assets/images/ci/ci-symbol-main.jpg" alt="YPP 심볼마크" style="max-width:300px; margin-bottom:1rem;">
+            </div>
+            <p style="margin-top:1rem; color: #272727;" data-eng="The YPP symbol mark combines the English abbreviation 'YPP' of the slogan 'Your Permanent Partner' with symbolic imagery. The red circle at the beginning of the 'Y' symbolizes 'eternity, unity, and completeness,' representing harmony between nature, people, and technology. It embodies YPP as a united community where members love and support each other, moving towards becoming a leading comprehensive solution provider in the new energy sector of the 21st century."
+            data-kor="와이피피㈜의 심볼마크는 슬로건인 ‘Your Permanent Partner'의 약자인 YPP의 영문표기와 상징적 이미지를 조합한 것으로, 'Y'자 시작 부분의 붉은 원은 ‘영원과 합일, 완전’ 등을 의미하며 원은 큰 조화를 뜻하는 어울림의 상징으로 자연환경과 사람과 기계기술 사이의 조화를 의미.합니다. 또한, 와이피피㈜가 하나 된 공동체로 조직 구성원들이 서로 사랑하며, 인화단결을 통해 서로 감싸 안고, 어우러짐으로써 21세기 꿈과 미래가 있는 새로운 에너지 분야의 종합 솔루션 선도기업으로 나아가는 모습을 형상화한 것입니다.">
+            와이피피㈜의 심볼마크는 슬로건인 ‘Your Permanent Partner'의 약자인 YPP의 영문표기와 상징적 이미지를 조합한 것으로, 'Y'자 시작 부분의 붉은 원은 ‘영원과 합일, 완전’ 등을 의미하며 원은 큰 조화를 뜻하는 어울림의 상징으로 자연환경과 사람과 기계기술 사이의 조화를 의미.합니다. 또한, 와이피피㈜가 하나 된 공동체로 조직 구성원들이 서로 사랑하며, 인화단결을 통해 서로 감싸 안고, 어우러짐으로써 21세기 꿈과 미래가 있는 새로운 에너지 분야의 종합 솔루션 선도기업으로 나아가는 모습을 형상화한 것입니다.
+            </p>
             <div>
                 <a href="/assets/images/ci/ci-symbol-main.jpg" download class="ci-download-btn">JPG 다운로드</a>
                 <a href="/assets/images/ci/ci-symbol-main.ai" download class="ci-download-btn">AI 다운로드</a>
             </div>
-            <p style="margin-top:1rem; color: #272727;" data-eng="The YPP symbol mark combines the English abbreviation 'YPP' of the slogan 'Your Permanent Partner' with symbolic imagery. The red circle at the beginning of the 'Y' symbolizes 'eternity, unity, and completeness,' representing harmony between nature, people, and technology. It embodies YPP as a united community where members love and support each other, moving towards becoming a leading comprehensive solution provider in the new energy sector of the 21st century."
-               data-kor="와이피피㈜의 심볼마크는 슬로건인 ‘Your Permanent Partner'의 약자인 YPP의 영문표기와 상징적 이미지를 조합한 것으로, 'Y'자 시작 부분의 붉은 원은 ‘영원과 합일, 완전’ 등을 의미하며 원은 큰 조화를 뜻하는 어울림의 상징으로 자연환경과 사람과 기계기술 사이의 조화를 의미.합니다. 또한, 와이피피㈜가 하나 된 공동체로 조직 구성원들이 서로 사랑하며, 인화단결을 통해 서로 감싸 안고, 어우러짐으로써 21세기 꿈과 미래가 있는 새로운 에너지 분야의 종합 솔루션 선도기업으로 나아가는 모습을 형상화한 것입니다.">
-                와이피피㈜의 심볼마크는 슬로건인 ‘Your Permanent Partner'의 약자인 YPP의 영문표기와 상징적 이미지를 조합한 것으로, 'Y'자 시작 부분의 붉은 원은 ‘영원과 합일, 완전’ 등을 의미하며 원은 큰 조화를 뜻하는 어울림의 상징으로 자연환경과 사람과 기계기술 사이의 조화를 의미.합니다. 또한, 와이피피㈜가 하나 된 공동체로 조직 구성원들이 서로 사랑하며, 인화단결을 통해 서로 감싸 안고, 어우러짐으로써 21세기 꿈과 미래가 있는 새로운 에너지 분야의 종합 솔루션 선도기업으로 나아가는 모습을 형상화한 것입니다.
-            </p>
         </div>
     </div>
     <!-- 브랜드 아이덴티티 -->
@@ -771,8 +773,8 @@ gap: 1rem;
     margin-top: 0.1em;
 }
 .color-card:hover, .color-card:focus {
-    transform: translateY(-1px) scale(1.01);
-    box-shadow: 0 8px 32px 0 var(--color-shadow, rgba(0,102,204,0.18));
+    transform: translateY(-0px) scale(1.01);
+    box-shadow: 0 4px 16px 0 var(--color-shadow, rgba(0,102,204,0.18));
     border-color: #cc0000;
     z-index: 2;
     border-color: #ffffff;
@@ -820,7 +822,7 @@ gap: 1rem;
 document.querySelectorAll('.color-card').forEach(function(card) {
     const color = card.querySelector('.color-card-sample').style.background;
     card.addEventListener('mouseenter', function() {
-        card.style.setProperty('--color-shadow', color.replace(')', ',0.4)').replace('rgb', 'rgba'));
+        card.style.setProperty('--color-shadow', color.replace(')', ',0.3)').replace('rgb', 'rgba'));
         card.style.borderColor = color; // border 색상도 변경
 
     });

@@ -34,24 +34,24 @@
       "files": [
         {
           "category": {
-            "kor": "회사소개서",
-            "eng": "Company Profile"
+            "kor": "PSAC 2025 (9월 ~ 12월) <span style='color:red;'>*7월부터 접수중</span>",
+            "eng": "PSAC 2025 (Sep ~ Dec)  <span style='color:red;'>*Registration open from July</span>"
           },
           "items": [
             {
               "name": {
-                "kor": "회사소개서 (국문)",
-                "eng": "Company Profile (Korean)"
+                "kor": "PSAC 교육신청서",
+                "eng": "PSAC Application Form"
               },
-              "filename": "ypp-company-profile-2021-kr.pdf",
+              "filename": "2025_PSAC_교육신청 안내.pdf",
               "size": "PDF"
             },
             {
               "name": {
-                "kor": "회사소개서 (영문)",
-                "eng": "Company Profile (English)"
+                "kor": "PSAC 브로슈어",
+                "eng": "PSAC Brochure"
               },
-              "filename": "ypp-company-profile-2021-en.pdf",
+              "filename": "2025_PSAC_brochure.pdf",
               "size": "PDF"
             }
           ]
@@ -82,24 +82,24 @@
         },
         {
           "category": {
-            "kor": "PSAC 2025 (9월 ~ 12월)",
-            "eng": "PSAC 2025 (Sep ~ Dec)"
+            "kor": "회사소개서",
+            "eng": "Company Profile"
           },
           "items": [
             {
               "name": {
-                "kor": "PSAC 교육신청서",
-                "eng": "PSAC Application Form"
+                "kor": "회사소개서 (국문)",
+                "eng": "Company Profile (Korean)"
               },
-              "filename": "2025_PSAC_교육신청 안내.pdf",
+              "filename": "ypp-company-profile-2021-kr.pdf",
               "size": "PDF"
             },
             {
               "name": {
-                "kor": "PSAC 브로슈어",
-                "eng": "PSAC Brochure"
+                "kor": "회사소개서 (영문)",
+                "eng": "Company Profile (English)"
               },
-              "filename": "2025_PSAC_brochure.pdf",
+              "filename": "ypp-company-profile-2021-en.pdf",
               "size": "PDF"
             }
           ]

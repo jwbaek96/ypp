@@ -16,6 +16,15 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/pages/layout.css">
     <link rel="stylesheet" href="academy.css">
+    <style>
+        .rs-section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary, #333);
+            margin: 30px 0 0;
+            padding-bottom: 0.5rem;
+        }
+    </style>
     
     <!-- 메타 시스템 -->
     <script src="../../js/head-meta.js"></script>
@@ -79,6 +88,18 @@
                         data-eng="Curriculum"
                         data-kor="교육 과정">교육 과정</a>
                 </div>
+
+                <!-- Section Navigation for Relay School -->
+                <div class="section-nav" id="section-nav-relay-school" style="display: none;">
+                    <a href="#rs-overview" class="section-nav-link"
+                        data-eng="Overview"
+                        data-kor="개요">개요</a>
+                    <a href="#rs-info" class="section-nav-link"
+                        data-eng="Course Information"
+                        data-kor="교육 안내">교육 안내</a>
+                    <a href="#rs-info" class="section-nav-link"
+                        data-eng="Curriculum"
+                        data-kor="교육 과정">교육 과정</a>
             </div>
         </section>
 
@@ -265,17 +286,17 @@
                                         data-kor="교육 목표">교육 목표</h4>
                                     <div class="goals-content">
                                         <div class="goal-main">
-                                            <h5 data-eng="Cultivation of advanced power system protection/control/analysis technology experts based on state-of-the-art energy and HVDC technologies, ensuring perfect acquisition of future power industry core technologies"
-                                                data-kor="첨단전력 전력계통 보호/제어/해석 핵심기술을 바탕으로 신재생에너지 및 HVDC 등 인버터 계통의 안정성 확보 그리고 미래 전력 산업 통찰력을 갖는 최고 수준의 계통 전문가 양성">첨단전력 전력계통 보호/제어/해석 핵심기술을 바탕으로<br>신재생에너지 및 HVDC 등 인버터 계통의 안정성 확보<br>그리고 미래 전력 산업 통찰력을 갖는 최고 수준의 계통 전문가 양성</h5>
+                                            <h5 data-eng="To cultivate top-level power system experts with insights into future power industries based on core technologies of traditional power system protection/control/analysis, ensuring stability of inverter systems such as renewable energy and HVDC."
+                                                data-kor="전통적인 전력계통 보호/제어/해석 핵심기술을 바탕으로<br>신재생에너지 및 HVDC 등 인버터 계통의 안정성 확보<br>그리고 미래 전력 신산업 통찰력을 갖는 최고 수준의 계통 전문가 양성">전통적인 전력계통 보호/제어/해석 핵심기술을 바탕으로<br>신재생에너지 및 HVDC 등 인버터 계통의 안정성 확보<br>그리고 미래 전력 신산업 통찰력을 갖는 최고 수준의 계통 전문가 양성</h5>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- 전력계통 고급기술 현황 다이어그램 -->
                                 <div class="psac-diagram-section">
-                                    <h4 class="section-title"
+                                    <!-- <h4 class="section-title"
                                         data-eng="Power System Advanced Technology Status"
-                                        data-kor="전력계통 고급기술 현황">전력계통 고급기술 현황</h4>
+                                        data-kor="전력계통 고급기술 현황">전력계통 고급기술 현황</h4> -->
                                     <div class="psac-pyramid">
                                         <div class="pyramid-top">
                                             <div class="pyramid-level level-top">
@@ -283,8 +304,8 @@
                                                       data-eng="Training Target"
                                                       data-kor="교육 목표">교육 목표</span>
                                                 <div class="level-content">
-                                                    <span data-eng="Power System Advanced Technology Experts"
-                                                          data-kor="전력계통 고급기술 전문가">전력계통 고급기술 전문가</span>
+                                                    <span data-eng="Cultivation of advanced power system technology experts"
+                                                          data-kor="전력계통 고급기술 함양">전력계통 고급기술 함양</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -299,19 +320,21 @@
                                                         <h6 data-eng="Technical TOPIC Course-1"
                                                             data-kor="전력계통 TOPIC 기술 학습-1">전력계통 TOPIC 기술<br>학습-1</h6>
                                                         <p data-eng="Modern grid load modeling, AI technology-based power system operation, digital grid, smart grid technology, automated grid operation"
-                                                           data-kor="현대적 전력계 부하모델, AI 기반 전력계통 운용, 디지털그리드, 스마트그리드, 자동화된 계통 운용 기술">현대적 전력계 부하모델<br>AI 기반 전력계통 운용<br>디지털그리드, 스마트그리드<br>자동화된 계통 운용 기술<br>(10, 11, 12, 13주)</p>
+                                                           data-kor="에너지 전환과 4차산업 신기술(AI, 디지털 트윈 등) 에너지 신산업기술, 탄소중립, 신재생에너지 발전기술(10, 11, 12, 13주)">에너지 전환과 4차산업 신기술
+                                                            (AI, 디지털 트윈 등) 에너지 신산업기술, 탄소중립, 신재생에너지 발전기술
+                                                            (10, 11, 12, 13주)</p>
                                                     </div>
                                                     <div class="skill-card card-blue">
                                                         <h6 data-eng="Power System Core Technology Learning"
                                                             data-kor="전력계통 핵심기술 학습">전력계통 핵심기술<br>학습</h6>
-                                                        <p data-eng="Power system modeling, grid protection device operation and modeling, power market operation, power system optimization modeling, grid failure analysis technology, power quality management technology, effective modeling"
-                                                           data-kor="전력계통모델링, 계통보호 장치 동작 모델링, 전력시장 운영, 전력계통 최적화 모델링, 계통고장 해석기술, 전력품질 관리기술, 효과적인 모델링 정격보호 운영기법별 다양한 발전기, 송전선로, 변압기의 지락고장 분석">전력계통모델링<br>계통보호 장치 동작 모델링<br>전력시장 운영<br>전력계통 최적화 모델링<br>계통고장 해석기술<br>전력품질 관리기술<br>효과적인 모델링 정격보호 운영기법별<br>다양한 발전기, 송전선로, 변압기의<br>지락고장 분석<br>(1, 2, 3, 4, 5, 6, 10, 12주)</p>
+                                                        <p data-eng="In-depth analysis and insights into power system planning and operation technologies in the era of carbon neutrality, wind power generation technology, dynamic characteristics of power systems, reactive power operation, power system protection technologies, energy markets, and power system engineering"
+                                                           data-kor="탄소중립시대의 전력계통 계획기술과 전력계통 운영기술, 통기발전기 전반적인 기술,전력계통의 동특성, 무효전력운영, 전력계통 보호기술, 에너지시장, 전력계통 엔지니어링에 대한 심도있는 분석과 통찰력 습득 (2, 3, 6, 8, 10, 12주)">탄소중립시대의 전력계통 계획기술과 전력계통 운영기술, 통기발전기 전반적인 기술,전력계통의 동특성, 무효전력운영, 전력계통 보호기술, 에너지시장, 전력계통 엔지니어링에 대한 심도있는 분석과 통찰력 습득 (2, 3, 6, 8, 10, 12주)</p>
                                                     </div>
-                                                    <div class="skill-card card-green">
+                                                    <div class="skill-card card-yellow">
                                                         <h6 data-eng="Technical TOPIC Course-2"
                                                             data-kor="전력계통 TOPIC 기술 학습-2">전력계통 TOPIC 기술<br>학습-2</h6>
-                                                        <p data-eng="HVDC, FACTS, ESS protection algorithms, power quality, data analysis technology"
-                                                           data-kor="HVDC, FACTS, ESS 보호 알고리즘, 전력품질, 데이터 분석 기술">HVDC, FACTS, ESS 보호<br>알고리즘, 전력품질<br>데이터 분석 기술<br>(7, 8, 13주)</p>
+                                                        <p data-eng="Protection and control technologies for HVDC, FACTS, ESS, and digital substations"
+                                                           data-kor="HVDC, FACTS, ESS 등 보호제어기술, 디지털 변전기술(7, 9, 13주)">HVDC, FACTS, ESS 등 보호제어기술, 디지털 변전기술(7, 9, 13주)</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -321,16 +344,16 @@
                                             <div class="pyramid-level level-bottom">
                                                 <div class="level-cards">
                                                     <div class="foundation-card card-green-dark">
-                                                        <h6 data-eng="Fundamental Technology-1"
-                                                            data-kor="관련분야 기술 습득-1">관련분야 기술 습득-1</h6>
-                                                        <p data-eng="Power system modeling and analysis technology practice"
-                                                           data-kor="전력시스템 모델링과 보호분석 기술 실무">전력시스템 모델링과<br>보호분석 기술 실무 (4주)</p>
+                                                        <h6 data-eng="Related Field Technology Acquisition-1"
+                                                            data-kor="관련분야 기술 습득-1<br>전력계통 핵심기술 학습">관련분야 기술 습득-1</h6>
+                                                        <p data-eng="Protective Relay Setting and Coordination: Practical Techniques (4 weeks)"
+                                                           data-kor="보호릴레이 정정법과 보호협조 기술 실무 (4주)">보호릴레이 정정법과 보호협조 기술 실무 (4주)</p>
                                                     </div>
                                                     <div class="foundation-card card-green-light">
-                                                        <h6 data-eng="Fundamental Technology-2"
-                                                            data-kor="관련분야 기술-2">관련분야 기술-2</h6>
-                                                        <p data-eng="Field practice with protective devices and electrical equipment"
-                                                           data-kor="차세대 보호기기 시설에서의 전력설비 현황 분석">차세대 보호기기 시설에서의<br>전력설비 현황 분석 (5, 9주)</p>
+                                                        <h6 data-eng="Related Field Technology Acquisition-2"
+                                                            data-kor="관련분야 기술 습득-1<br>전력계통 핵심기술 학습">관련분야 기술-2</h6>
+                                                        <p data-eng="Next-Generation Instrument Transformers, Surge Analysis, and Power System Applications (5, 9 Weeks)"
+                                                           data-kor="차세대 변성기와 서지해석과 전력설비 응용 등 (5, 9주)">차세대 변성기와 서지해석과 전력설비 응용 등 (5, 9주)</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -342,8 +365,11 @@
                                                       data-eng="University Graduate Level"
                                                       data-kor="학습 기반 교육">학습 기반 교육</span>
                                                 <div class="foundation-content">
-                                                    <span data-eng="Power system planning/operation, current technology education, and practical field experience (13 sessions)"
-                                                          data-kor="전력계통 계획/운영의 이론 학습과 현장 업무와 이상에 반영 현황 습득 (13강)">전력계통 계획/운영의 이론 학습과 현장 업무와 이상에 반영 현황 습득 (13강)</span>
+                                                    <h6 
+                                                    data-eng="Basic Theory and Analysis of Power Systems" 
+                                                    data-kor="전력계통 기본 이론과 해석">전력계통 기본 이론과 해석</h6>
+                                                    <span data-eng="Learning the basic theories of power system planning/operation and gaining insights into key stability issues (1 week)  "
+                                                          data-kor="전력계통 계획/운영의 기본 이론 학습과 핵심 안정도 이슈에 관한 통찰력 습득 (1주)">전력계통 계획/운영의 기본 이론 학습과 핵심 안정도 이슈에 관한 통찰력 습득 (1주)</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -353,11 +379,21 @@
                                 <!-- 현대 전력계통의 핵심기술 현황 -->
                                 <div class="psac-summary-section">
                                     <h4 class="section-title"
-                                        data-eng="Modern Power System Core Technology Status"
-                                        data-kor="현대 전력계통의 핵심기술 현황">현대 전력계통의 핵심기술 현황</h4>
+                                        data-eng="Core Technology Education Program for Modern Power System Analysis and Control (PSAC)"
+                                        data-kor="현대 전력계통의 해석제어 핵심 기술교육을 목표로 하는 고급교육 프로그램 PSAC">현대 전력계통의 해석제어 핵심 기술교육을 목표로 하는 고급교육 프로그램 PSAC</h4>
                                     <div class="summary-content">
-                                        <p data-eng="Providing advanced education programs for modern power systems professionals based on the latest technologies"
-                                           data-kor="현대 전력계통의 핵심기술에 의하여 전력 시스템/운영의 이론 학습과 현재 한국의 요청과 이상에 반영 현황 습득">현대 전력계통의 핵심기술에 의하여 전력 시스템/운영의 이론 학습과 현재 한국의 요청과 이상에 반영 현황 습득</p>
+                                        <p data-eng='2024 will see a significant restructuring of the curriculum for core subjects by theme to enhance educational efficiency.'
+                                           data-kor="2024년 핵심 주제별 중점과목의 커리큘럼 대폭조정 : 교육 효율성 제고">2024년 핵심 주제별 중점과목의 커리큘럼 대폭조정 : 교육 효율성 제고</p>
+                                        <p data-eng="The Power System Advanced Course (PSAC) is Korea's only comprehensive power technology training program, held annually to cultivate advanced technical professionals in modern power system protection, control, and analysis. PSAC was first established in 2012 through the commitment of private companies to social contribution and public good. Since then, it has produced numerous talents vital to national industries and operates as a non-profit initiative."
+                                           data-kor="「전력계통 고급기술 교육과정(Power System Advanced Course : PSAC)」은 현대 전력계통 보호/제어/해석 기술 분야의 고급 기술인력 양성을 목적으로 매년 1회 개최되는 국내 유일의 전력기술 종합 교육 프로그램입니다. PSAC는 민간기업의 사회공헌 의지와 공익적 목표로 2012년 국내 처음으로 개설된 이래 국가산업이 필요로 하는 많은 인재를 배출하고 있으며 최대한 비수익성 사업으로 진행되고 있습니다."></p>
+                                        <p data-eng="Previously, companies needing advanced power system professionals had to bear enormous costs to send and train employees at foreign educational institutions. However, with PSAC now offered annually domestically, it's possible to provide high-quality expert training that surpasses foreign institutions at a much lower cost than overseas dispatches."
+                                            data-kor="지금까지 전력계통 고급인력을 필요로 하는 기업들은, 자체적으로 막대한 비용을 들여 외국의 교육기관으로 직원을 파견·교육해야 했습니다. 그러나 이제 매년 PSAC가 국내에서 개설됨에 따라, 외국 파견 교육 비용보다 훨씬 저렴한 비용으로 외국기관을 능가하는 질 높은 전문가 양성교육을 시행할 수 있게 되었습니다."></p>
+                                        <p data-eng="PSAC is an educational program designed to help participants acquire current and future promising technologies of interest, including core control and analysis technologies related to power systems, as well as the latest power facilities, HVDC technology, energy markets, new energy industries, and digital transformation technologies, all at a graduate-level standard. It's characterized by its comprehensive structure, enabling participants to learn both theory and practical skills, featuring an excellent faculty composed of the nation's top experts in each field, and state-of-the-art educational infrastructure including comfortable and fully equipped audiovisual IT training facilities, all designed to achieve the best educational outcomes."
+                                            data-kor="PSAC는 전력계통 관련 핵심 제어해석 기술은 물론 최신 전력설비, HVDC기술, 에너지 시장, 에너지신산업 및 디지털변환 기술 등에 관한 현재와 미래의 유망 관심기술을 대학원 과정 수준으로 습득할 수 있도록 기획된 교육과정으로, 이론과 실무를 함께 익힐 수 있는 교육과 각 분야별 국내최고의 전문가들로 구성된 우수한 강사진, 쾌적하고 완벽한 시청각 IT 교육시설 등 수준 높은 교육 인프라와 교육방법을 통해 최고의 교육성과를 얻을 수 있도록 구성된 것이 특징입니다."></p>
+                                        <p data-eng="PSAC2024, which begins this September, has incorporated feedback from past experiences, instructors, students, and experts. Some topics have been removed or modified, and lecture times for key subjects within each topic have been significantly adjusted to enhance educational efficiency. Furthermore, weekly lectures organized by topic can now be selected individually. Especially in anticipation of the carbon neutrality and digital transformation era, the curriculum for all courses has been updated to reflect these global trends. Additionally, the content on 4th Industrial Revolution technologies, HV/MV/LV DC technologies, and power system protection coordination technologies has been substantially enhanced. New technologies and technological development trends have also been incorporated into all course subjects."
+                                            data-kor="올해 9월에 개강하는 PSAC2024은 그동안의 경험과 참여하는 강사들, 수강생 및 전문가들의 의견을 종합하여 일부 주제를 삭제 변경하고 각 주제별의 중점과목 중심으로 강의시간을 대폭조정 하여 교육의 효율성을 제고하였으며 주제별로 구성된 주별 강의를 선택 수강할 수 있도록 하였습니다. 특히 탄소중립과 디지털변환시대를 맞이하여 모든 과정의 교육내용을 이러한 세계적인 추세를 반영토록 하였으며, 아울러 4차 산업혁명기술과 HV, MV/LV DC기술, 계통보호 협조기술의 내용을 보다 내실있게 보강하였습니다. 또한 모든 교육과목에 대하여 신기술 및 기술 발전추세를 반영하였습니다."></p>
+                                        <p data-eng="We are confident that PSAC will play a significant role in advancing Korea into a leading technological powerhouse by contributing to the development of advanced electrical engineers needed across the entire electrical industry. Building on the successful outcomes since its inaugural launch in 2012, we warmly invite you to participate in the PSAC2024 curriculum. We hope for broad participation from all sectors of the electrical industry that are facing challenges in securing specialized personnel."
+                                            data-kor="PSAC는 전기산업 전반에 걸쳐 필요한 고급 전기기술자 양성에 기여함으로써 우리나라를 선진 기술 강국으로 도약시키는 데 큰 역할을 할 것으로 확신합니다. 2012년 최초 개강 이후 그동안의 성공적인 결실을 바탕으로, PSAC2024의 교육과정에 적극 초대합니다. 전문인력 수급에 어려움을 겪고 있는 전기산업과 관련한 모든 분야에서 많은 참여가 있기를 바랍니다."></p>
                                     </div>
                                 </div>
                             </div>
@@ -2176,19 +2212,993 @@
                     <div class="content-header">
                         <h2 class="content-title">Relay School</h2>
                         <p class="content-subtitle"
-                           data-eng="Professional protection and control education program for power system specialists"
-                           data-kor="전력계통 전문가를 위한 전문 보호제어 교육 프로그램">전력계통 전문가를 위한 전문 보호제어 교육 프로그램</p>
+                           data-eng="Digital Power System Protection Control Technology - Premier Education and Training"
+                           data-kor="디지털 계통보호 제어기술 최고의 교육훈련">디지털 계통보호 제어기술 최고의 교육훈련</p>
                     </div>
                     
                     <div class="content-grid">
-                        <div class="content-block full-width">
-                            <div class="block-content">
-                                <p class="preparation-notice"
-                                   data-eng="Content Under Preparation"
-                                   data-kor="준비중입니다.">준비중입니다.</p>
+                    <!-- 과정 개요 -->
+                    <div id="rs-overview" class="content-block full-width">
+                        <h3 class="block-title"
+                            data-eng="Course Overview"
+                            data-kor="과정 개요">과정 개요</h3>
+                        <div class="block-content">
+                            <!-- 메인 소개 -->
+                            <div class="rs-intro-section">
+                                <div class="rs-intro-content">
+                                    <div class="rs-intro-layout">
+                                        <div class="rs-intro-text">
+                                            <p class="rs-intro-description"
+                                            data-eng="YPP Relay School has been a specialized educational institution for power system protection and control technology since its establishment in 2008, making significant contributions to the development of technical personnel for numerous domestic and international electrical engineers. Relay School is open to engineers from all sectors including YPP customers, power companies, generation companies, plants, research institutions, and universities, and has been leading the way to becoming a power technology powerhouse by producing numerous graduates from Korea, Japan, Taiwan, and the UAE."
+                                            data-kor="YPP Relay School은 전력계통 보호제어기술 전문 교육기관으로서 2008년 개설된 이래 수많은 국내외 전기기술자들의 기술인력 양성에 지대한 공헌을 하고 있습니다. Relay school은 YPP 고객사는 물론 전력회사, 발전사, 플랜트, 연구기관, 대학 등의 기술자 누구에게나 개방되어 있으며 그동안 국내와 일본, 대만, UAE 등의 수많은 수료생들을 배출함으로써 전력기술 강국으로 도약하는데 앞장서고 있습니다.">YPP Relay School은 전력계통 보호제어기술 전문 교육기관으로서 2008년 개설된 이래 수많은 국내외 전기기술자들의 기술인력 양성에 지대한 공헌을 하고 있습니다. Relay school은 YPP 고객사는 물론 전력회사, 발전사, 플랜트, 연구기관, 대학 등의 기술자 누구에게나 개방되어 있으며 그동안 국내와 일본, 대만, UAE 등의 수많은 수료생들을 배출함으로써 전력기술 강국으로 도약하는데 앞장서고 있습니다.</p>
+                                            <p class="core-description"
+                                            data-eng="Relay school's core educational areas include digital protective relay basic and advanced courses, power system fault analysis courses, power facility protection monitoring control system (ECMS) operation courses, digital relay UR practical courses, nuclear specialization courses, and customized special courses designed according to customer requirements."
+                                            data-kor="Relay school의 핵심 교육분야는 디지털 보호릴레이의 기본반 및 고급반, 전력계통 고장분석반, 전력설비보호 감시제어시스템(ECMS) 운영반, 디지털릴레이 UR실무반, 원자력특성화반 및 고객이 직접 요구하여 교육과정을 구성하는 맞춤형 특별과정반 등으로 운영하고 있습니다.">Relay school의 핵심 교육분야는 <strong class="highlight-blue">디지털 보호릴레이의 기본반 및 고급반, 전력계통 고장분석반, 전력설비보호 감시제어시스템(ECMS) 운영반, 디지털릴레이 UR실무반, 원자력특성화반 및 고객이 직접 요구하여 교육과정을 구성하는 맞춤형 특별과정반 등으로 운영</strong>하고 있습니다.</p>
+                                            <p class="improvement-note"
+                                            data-eng="This year, YPP Relay school has further enhanced and strengthened the content of each educational course. We plan to continue enhancing and revising the content and level of our educational programs, with particular emphasis on new technology and practical education. Relay school will continue to provide high-quality power system protection and control technology education to improve the expertise of responsible electrical engineers for maintaining reliability and stable operation of power systems and facilities."
+                                            data-kor="올해도 YPP Relay school은 각 교육과정의 내용을 보다 내실 있게 개편 보강하였습니다. 앞으로도 교육과정의 내용과 수준을 더욱 알차게 보강 개편해 나아갈 계획이며, 특히 새로운 기술과 실무교육을 중점적으로 시행할 것입니다. Relay school은 전력계통과 설비의 신뢰도 유지와 안정된 운영을 위한 책임있는 전기기술자들의 전문성 향상을 위해 앞으로도 고품격 전력계통 보호제어기술 교육을 제공할 것입니다.">올해도 YPP Relay school은 각 교육과정의 내용을 보다 내실 있게 개편 보강하였습니다. 앞으로도 교육과정의 내용과 수준을 더욱 알차게 보강 개편해 나아갈 계획이며, 특히 새로운 기술과 실무교육을 중점적으로 시행할 것 입니다.<br><br>Relay school은 전력계통과 설비의 신뢰도 유지와 안정된 운영을 위한 책임있는 전기기술자들의 전문성 향상을 위해 앞으로도 고품격 전력계통 보호제어기술 교육을 제공할 것입니다. 모든 사업분야에서 많은 전기기술자가 참여하여 알찬 성과를 거두시기를 기대합니다. 감사합니다.</p>
+                                        </div>
+                                        <div class="rs-intro-image">
+                                            <a href="relay_school_img.png" target="_blank">
+                                                <img src="relay_school_img.png" alt="전력계통 보호제어기술 교육체계도" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 교육 목표 -->
+                            <div class="rs-goals-section">
+                                <h4 class="rs-section-title"
+                                    data-eng="Training Objectives"
+                                    data-kor="교육 목표">교육 목표</h4>
+                                <div class="goals-grid">
+                                    <div class="goal-box">
+                                        <div class="goal-content">
+                                            <h5 data-eng="Training digital protective relay specialists with comprehensive system protection expertise"
+                                                data-kor="디지털 보호계전기에 정통한 계통보호 전문가 양성">디지털 보호계전기에 정통한 계통보호 <strong>전문가 양성</strong></h5>
+                                        </div>
+                                    </div>
+                                    <div class="goal-box">
+                                        <div class="goal-content">
+                                            <h5 data-eng="Providing practical-oriented educational services"
+                                                data-kor="실무중심의 교육서비스 제공">실무중심의 <strong>교육서비스</strong> 제공</h5>
+                                        </div>
+                                    </div>
+                                    <div class="goal-box">
+                                        <div class="goal-content">
+                                            <h5 data-eng="Target audience: Power industry professionals and institutions/companies requiring power system education"
+                                                data-kor="교육대상 : 전력사업 종사자 및 전력계통 교육 필요기관/기업체">교육대상 : 전력사업 종사자 및 전력계통 교육 필요기관/기업체</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 교육일정 -->
+                            <div class="rs-schedule-section">
+                                <h4 class="rs-section-title"
+                                    data-eng="Training Schedule"
+                                    data-kor="교육일정">교육일정(2025년)</h4>
+                                <div class="rs-schedule-table">
+                                    <table class="info-table schedule-table">
+                                        <thead>
+                                            <tr>
+                                                <th data-eng="Course" data-kor="개설과정">개설과정</th>
+                                                <th data-eng="Days" data-kor="일수">일수</th>
+                                                <th data-eng="Hours" data-kor="시간">시간</th>
+                                                <th data-eng="Fee (10,000 KRW)" data-kor="월/일 수강료 (만원)">月/日<br>수강료<br><span class="small-text">(만원)</span></th>
+                                                <th>3</th>
+                                                <th>4</th>
+                                                <th>5</th>
+                                                <th>6</th>
+                                                <th>7</th>
+                                                <th>8</th>
+                                                <th>9</th>
+                                                <th>10</th>
+                                                <th>11</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th class="course-name" data-eng="Digital Relay Basic Course (UR, 8-Series)" data-kor="디지털릴레이 기본반 (UR, 8-Series)">디지털릴레이 기본반<br>(UR, 8-Series)</th>
+                                                <td>3</td>
+                                                <td>17</td>
+                                                <td>77</td>
+                                                <td class="schedule-active">19<br>~21</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="schedule-secondary">17<br>~19</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="course-name" data-eng="Digital Relay Advanced Course (UR, 8-Series)" data-kor="디지털릴레이 고급반 (UR, 8-Series)">디지털릴레이 고급반<br>(UR, 8-Series)</th>
+                                                <td>3</td>
+                                                <td>17</td>
+                                                <td>77</td>
+                                                <td></td>
+                                                <td class="schedule-active">16<br>~18</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="schedule-secondary">22<br>~24</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="course-name" data-eng="Fault Analysis Course" data-kor="고장분석반">고장분석반</th>
+                                                <td>3</td>
+                                                <td>17</td>
+                                                <td>77</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="schedule-active">21<br>~23</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="schedule-secondary">19<br>~21</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="course-name" data-eng="ECMS Operation Course" data-kor="ECMS 운영반">ECMS 운영반</th>
+                                                <td>3</td>
+                                                <td>17</td>
+                                                <td>77</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="schedule-active">18<br>~20</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="course-name" data-eng="Nuclear Specialization Course" data-kor="원자력 특성화반">원자력 특성화반</th>
+                                                <td>3</td>
+                                                <td>17</td>
+                                                <td>110</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="schedule-active">16<br>~18</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="course-name" data-eng="Special Course" data-kor="특별과정반">특별과정반</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td colspan="9" class="year-round" data-eng="Year-round" data-kor="연 중">연 중</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="rs-schedule-header">
+                                    <div class="rs-schedule-note">
+                                        <span data-eng="VAT included" data-kor="부가세(VAT) 포함">부가세(VAT) 포함</span>
+                                    </div>
+                                </div>
+                                <p class="schedule-note-text"
+                                data-eng="☞ Special courses are conducted after consultation with education consumers on curriculum, schedule, and tuition fees (detailed annual training schedules are separately disclosed at the beginning of each year)"
+                                data-kor="<br>☞ 특별과정은 교육 수요자와의 사전 협의를 통해 교육과정, 일정과 교육비 책정 후 진행 (매년 년도별 세부 교육일정은 매년 초, 별도 공개)">☞ 특별과정은 교육 수요자와의 사전 협의를 통해 교육과정, 일정과 교육비 책정 후 진행 (매년 년도별 세부 교육일정은 매년 초, 별도 공개)</p>
+                            </div>
+                            <!-- 교육장소 -->
+                            <div class="rs-location-section">
+                                <h4 class="rs-section-title"
+                                    data-eng="Training Location"
+                                    data-kor="장소">장소</h4>
+                                <div class="curriculum-intro">
+                                    <p data-eng="RelaySchool Training Room, 8th Floor, Gasan YPP Arsentech Tower, 24 Gasan Digital 2-ro, Geumcheon-gu, Seoul (Gasan-dong 327-30)"
+                                    data-kor="RelaySchool 교육실 서울시 금천구 가산디지털2로 24 (가산동 327-30) 가산YPP아르센타워 8층 교육실">RelaySchool 교육실<br>서울시 금천구 가산디지털2로 24 (가산동 327-30) 가산YPP아르센타워 8층 교육실</p>
+                                </div>
+                            </div>
+
+                            <!-- 교육신청 방법 -->
+                            <div class="rs-application-section">
+                                <h4 class="rs-section-title"
+                                    data-eng="Application Method"
+                                    data-kor="신청 방법">신청 방법</h4>
+                                <div class="application-table">
+                                    <table class="info-table">
+                                        <tbody>
+                                            <tr>
+                                                <th data-eng="Course Registration" data-kor="교육신청">교육신청</th>
+                                                <td data-eng="Website registration: www.ypp.co.kr → Training → RelaySchool2025 → Course Application"
+                                                    data-kor="홈페이지 등록: www.ypp.co.kr → 교육훈련 → RelaySchool2025 → 수강신청">홈페이지 등록: www.ypp.co.kr → 교육훈련 → RelaySchool2025 → 수강신청</td>
+                                            </tr>
+                                            <tr>
+                                                <th data-eng="Tuition Payment (1 week before course start)" data-kor="교육비 입금<br>(개강 1주일 전)">교육비 입금<br>(개강 1주일 전)</th>
+                                                <td>
+                                                    <div class="payment-options">
+                                                        <p data-eng="Options:" data-kor="선택">선택</p>
+                                                        <p data-eng="① Bank transfer: (IBK Bank) 137-031847-04-013, Account holder: YPP"
+                                                        data-kor="①계좌이체: (기업은행) 137-031847-04-013 예금주: 와이피피">①계좌이체: (기업은행) 137-031847-04-013 예금주: 와이피피</p>
+                                                        <p data-eng="② Card payment: On-site payment"
+                                                        data-kor="②카드결제: 현장결제">②카드결제: 현장결제</p>
+                                                        <p class="fee-note"
+                                                        data-eng="Training fee: 770,000 KRW (VAT included) ※ This is a non-refundable course, and tax invoices will be issued for bank transfers (10% VAT)."
+                                                        data-kor="교육비: 770,000원(VAT 포함) ※ 본 과정은 비환급과정이며, 계좌이체시 세금계산서를 발행(10% 부가세)해 드립니다.">교육비: 770,000원(VAT 포함) ※ 본 과정은 비환급과정이며, 계좌이체시 세금계산서를 발행(10% 부가세)해 드립니다.</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th data-eng="Registration Completion (Course start notification)" data-kor="접수 완료<br>(개강안내문 확인)">접수 완료<br>(개강안내문 확인)</th>
+                                                <td>
+                                                    <div class="completion-info">
+                                                        <p data-eng="Registration is completed after course application and tuition payment, on a first-come-first-served basis"
+                                                        data-kor="접수는 교육 신청과 교육비 입금후 접수완료, 선착순 마감">접수는 교육 신청과 교육비 입금후 접수완료, 선착순 마감</p>
+                                                        <p data-eng="▸ Course start notification (text message) will be sent before the course begins ※ Registration deadline: Friday before course start (until 17:00)"
+                                                        data-kor="▸개강전, 개강안내문(문자메세시)수신 ※ 접수마감: 개강 전주 금요일(17:00까지)">▸개강전, 개강안내문(문자메세시)수신 ※ 접수마감: 개강 전주 금요일(17:00까지)</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
+<style>
+/* Relay School 메인 소개 레이아웃 */
+    .rs-intro-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+        margin-top: 2rem;
+    }
+    .rs-intro-text {
+        order: 1;
+    }
+    .rs-intro-image {
+        order: 2;
+        text-align: center;
+    }
+    .rs-intro-image a {
+        display: inline-block;
+        transition: transform 0.3s ease;
+    }
+    .rs-intro-image a:hover {
+        transform: scale(1.05);
+    }
+    .rs-intro-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    /* 교육 목표 박스 스타일 */
+    .goals-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    .goal-box {
+        background: #ffffff;
+        background: #4a90e2;
+        border: 2px solid #e8eef7;
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .goal-box:hover{
+        border-color: #4a90e2;
+        box-shadow: 0 4px 16px rgba(74, 144, 226, 0.15);
+        transform: translateY(-2px);
+    }
+    .goal-content h5 {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        color: #fff;
+        margin: 0;
+    }
+    .goal-content strong {
+        color: #4a90e2;
+    }
+
+    .rs-schedule-header{
+        text-align: right;
+        padding: 0 .8rem;
+    }
+    .rs-schedule-table{
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .rs-schedule-table .info-table th{
+        padding: 8px 15px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    /* 모바일 반응형 */
+    @media (max-width: 768px) {
+        .rs-intro-layout {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        .rs-intro-text {
+            order: 1;
+        }
+        .rs-intro-image {
+            order: 2;
+        }
+        .goals-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        .goal-box {
+            padding: 1.5rem;
+        }   
+        .goal-content h5 {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .rs-intro-layout {
+            gap: 1.5rem;
+        }
+        
+        .goals-grid {
+            gap: 1rem;
+        }
+        
+        .goal-box {
+            padding: 1rem;
+        }
+        
+        .goal-content h5 {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+
+                    <!-- 교육 안내 -->
+                    <!-- <div id="rs-info" class="content-block full-width">
+                        <h3 class="block-title"
+                            data-eng="Course Information"
+                            data-kor="교육 안내">교육 안내</h3>
+                        <div class="block-content">
+                            
+                        </div>
+                    </div> -->
+
+                    <!-- 교육 과정 -->
+                    <div id="rs-curriculum" class="content-block full-width">
+                        <h3 class="block-title" data-eng="Curriculum"data-kor="교육 과정">교육 과정</h3>
+                        <div class="block-content">
+                            <div class="curriculum-container">
+                                <!-- 디지털릴레이 기본반 (UR, 8-Series) -->
+                                <div class="curriculum-week">
+                                    <input type="checkbox" id="basic-class" class="curriculum-checkbox">
+                                    <label for="basic-class" class="curriculum-header">
+                                        <div class="week-info">
+                                            <span class="week-title">디지털릴레이 기본반 (UR, 8-Series)</span>
+                                        </div>
+                                    </label>
+                                    <div class="curriculum-content">
+                                        <div class="curriculum-content-inner">
+                                            <!-- 과정 정보 -->
+                                            <div class="course-info-section">
+                                                <div class="info-grid">
+                                                    <div class="info-item">
+                                                        <dt data-eng="Training Period" data-kor="교육기간">교육기간</dt>
+                                                        <dd data-eng="2025. 3. 19 ~ 21 / 2025. 9. 17 ~ 19 (2 times per year)" data-kor="2025. 3. 19 ~ 21 / 2025. 9. 17 ~ 19 (연 2회)">2025. 3. 19 ~ 21 / 2025. 9. 17 ~ 19 (연 2회)</dd>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <dt data-eng="Learning Objectives" data-kor="학습목표">학습목표</dt>
+                                                        <dd data-eng="Based on learning power system protection technology, acquire introduction and operation methods of GE's UR and 8-Series, which possess the highest level digital protective relay technology" data-kor="전력계통 보호기술 학습을 기본으로 하고, 디지털보호릴레이 최고급 기술을 보유한 GE社의 UR과 8-Series의 개론 및 운용 방법을 습득">전력계통 보호기술 학습을 기본으로 하고, 디지털보호릴레이 최고급 기술을 보유한 GE社의 UR과 8-Series의 개론 및 운용 방법을 습득</dd>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <dt data-eng="Instructors" data-kor="강사">강사</dt>
+                                                        <dd>
+                                                            * 이   진 와이피피㈜ 중앙연구소장(사장)<br>
+                                                            * 김치환 와이피피㈜ 기술총괄본부 기술2팀장(이사)<br>
+                                                            * 최대진 와이피피㈜ 기술총괄본부 기술1팀장(이사)<br>
+                                                            * 이태호 와이피피㈜ 기술총괄본부 T&D팀장(부장)<br>
+                                                            * 박영춘 와이피피㈜ 기술총괄본부 시험검사팀장(부장)
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- 시간표 -->
+                                            <div class="schedule-section">
+                                                <div class="schedule-table-container">
+                                                    <table class="schedule-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th data-eng="Period" data-kor="구분">구분</th>
+                                                                <th data-eng="Wed" data-kor="수">수</th>
+                                                                <th data-eng="Thu" data-kor="목">목</th>
+                                                                <th data-eng="Fri" data-kor="금">금</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th class="time-cell">1교시<br>09:10∼10:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">전력계통보호 기술의 기초</div>
+                                                                    <div class="instructor">(이 진)</div>
+                                                                </td>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">8-Series 디지털릴레이 개론</div>
+                                                                    <div class="instructor">(김치환)</div>
+                                                                </td>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">디지털릴레이 실습(기본):<br>운영, 시험, 유지보수</div>
+                                                                    <div class="instructor">(박영춘)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">2교시<br>10:10∼11:00</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">3교시<br>11:10∼12:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">디지털 보호릴레이의<br>동작원리</div>
+                                                                    <div class="instructor">(이 진)</div>
+                                                                </td>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">UR Set up & Setting</div>
+                                                                    <div class="instructor">(이태호)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">4교시<br>13:10∼14:00</th>
+                                                                <td rowspan="4" class="empty-cell"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">5교시<br>14:10∼15:00</th>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">UR의 구조와 기능</div>
+                                                                    <div class="instructor">(최대진)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">6교시<br>15:10∼16:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">UR 통신</div>
+                                                                    <div class="instructor">(김치환)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">7교시<br>16:10∼17:00</th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 디지털릴레이 고급반 (UR, 8-Series) -->
+                                <div class="curriculum-week">
+                                    <input type="checkbox" id="advanced-class" class="curriculum-checkbox">
+                                    <label for="advanced-class" class="curriculum-header">
+                                        <div class="week-info">
+                                            <span class="week-title">디지털릴레이 고급반 (UR, 8-Series)</span>
+                                        </div>
+                                    </label>
+                                    <div class="curriculum-content">
+                                        <div class="curriculum-content-inner">
+                                            <!-- 과정 정보 -->
+                                            <div class="course-info-section">
+                                                <div class="info-grid">
+                                                    <div class="info-item">
+                                                        <dt data-eng="Training Period" data-kor="교육기간">교육기간</dt>
+                                                        <dd data-eng="2025. 4. 16 ~ 18 / 2025. 10. 22 ~ 24 (2 times per year)" data-kor="2025. 4. 16 ~ 18 / 2025. 10. 22 ~ 24 (연 2회)">2025. 4. 16 ~ 18 / 2025. 10. 22 ~ 24 (연 2회)</dd>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <dt data-eng="Learning Objectives" data-kor="학습목표">학습목표</dt>
+                                                        <dd data-eng="Understanding the basic aspects of digital relays and learning the overall functional elements of transmission/transformer/generator/feeder/motor protection to acquire necessary matters for actual operation" data-kor="디지털릴레이의 기본적인 사항을 이해하고, 송전/변압/발전/피더/전동기 보호의 전반적인 기능적 요소를 학습함으로써 실제 운영에 필요한 제반 사항을 습득">디지털릴레이의 기본적인 사항을 이해하고, 송전/변압/발전/피더/전동기 보호의 전반적인 기능적 요소를 학습함으로써 실제 운영에 필요한 제반 사항을 습득</dd>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <dt data-eng="Instructors" data-kor="강사">강사</dt>
+                                                        <dd>
+                                                            * 유영식 와이피피㈜ 기술총괄본부장(사장)<br>
+                                                            * 정승연 와이피피㈜ 기술총괄본부 설계팀장(상무)<br>
+                                                            * 최정환 와이피피㈜ 기술총괄본부 설계팀 (부장)<br>
+                                                            * 이태호 와이피피㈜ 기술총괄본부 T&D팀장(부장)<br>
+                                                            * 김영도 와이피피㈜ 기술총괄본부 설계팀 (과장)<br>
+                                                            * 박영춘 와이피피㈜ 기술총괄본부 시험검사팀장(부장)
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- 시간표 -->
+                                            <div class="schedule-section">
+                                                <div class="schedule-table-container">
+                                                    <table class="schedule-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th data-eng="Period" data-kor="구분">구분</th>
+                                                                <th data-eng="Wed" data-kor="수">수</th>
+                                                                <th data-eng="Thu" data-kor="목">목</th>
+                                                                <th data-eng="Fri" data-kor="금">금</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th class="time-cell">1교시<br>09:10∼10:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">UR 디지털<br>보호릴레이 개론</div>
+                                                                    <div class="instructor">(김영도)</div>
+                                                                </td>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">발전기보호(G60)</div>
+                                                                    <div class="instructor">(유영식)</div>
+                                                                </td>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">디지털릴레이 실습(고급)<br>: 운영, 시험, 유지보수</div>
+                                                                    <div class="instructor">(박영춘)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">2교시<br>10:10∼11:00</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">3교시<br>11:10∼12:00</th>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">UR송전선보호<br>(L90, D60)</div>
+                                                                    <div class="instructor">(이태호)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">4교시<br>13:10∼14:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">피더보호(F60, 850)</div>
+                                                                    <div class="instructor">(최정환)</div>
+                                                                </td>
+                                                                <td rowspan="4" class="empty-cell"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">5교시<br>14:10∼15:00</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">6교시<br>15:10∼16:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">UR변압기보호<br>(T60)</div>
+                                                                    <div class="instructor">(정승연)</div>
+                                                                </td>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">전동기보호<br>(M60, 869, 339)</div>
+                                                                    <div class="instructor">(최정환)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">7교시<br>16:10∼17:00</th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 고장분석반 -->
+                                <div class="curriculum-week">
+                                    <input type="checkbox" id="fault-analysis" class="curriculum-checkbox">
+                                    <label for="fault-analysis" class="curriculum-header">
+                                        <div class="week-info">
+                                            <span class="week-title">고장분석반</span>
+                                        </div>
+                                    </label>
+                                    <div class="curriculum-content">
+                                        <div class="curriculum-content-inner">
+                                            <!-- 과정 정보 -->
+                                            <div class="course-info-section">
+                                                <div class="info-grid">
+                                                    <div class="info-item">
+                                                        <dt data-eng="Training Period" data-kor="교육기간">교육기간</dt>
+                                                        <dd data-eng="2025. 5. 21 ~ 23 / 2025. 11. 19 ~ 21 (2 times per year)" data-kor="2025. 5. 21 ~ 23 / 2025. 11. 19 ~ 21 (연 2회)">2025. 5. 21 ~ 23 / 2025. 11. 19 ~ 21 (연 2회)</dd>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <dt data-eng="Learning Objectives" data-kor="학습목표">학습목표</dt>
+                                                        <dd data-eng="Learning analysis and calculation methods for various faults occurring in power systems, along with calculation practice, while comprehensively studying power equipment fault recording device theory and analysis methods, protective relay operation analysis, and digital relay troubleshooting to develop power system fault analysis capabilities" data-kor="전력계통에서 발생하는 각종 고장에 대한 해석과 계산 방법, 계산 실습을 학습함과 동시에 전력설비 고장기록장치의 이론과 분석방법, 보호릴레이 동작상황 분석 및 디지털릴레이의 자체트러블 슈팅 등을 종합적으로 학습함으로써 전력계통 고장해석 능력을 배양하는데 목표를 둠">전력계통에서 발생하는 각종 고장에 대한 해석과 계산 방법, 계산 실습을 학습함과 동시에 전력설비 고장기록장치의 이론과 분석방법, 보호릴레이 동작상황 분석 및 디지털릴레이의 자체트러블 슈팅 등을 종합적으로 학습함으로써 전력계통 고장해석 능력을 배양하는데 목표를 둠</dd>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <dt data-eng="Instructors" data-kor="강사">강사</dt>
+                                                        <dd>
+                                                            * 이   진 와이피피㈜ 중앙연구소장(사장)<br>
+                                                            * 유영식 와이피피㈜ 기술총괄본부 본부장(사장)<br>
+                                                            * 장화윤 와이피피㈜ 기술총괄본부 C&E팀 팀장(부장)<br>
+                                                            * 이태호 와이피피㈜ 기술총괄본부 T&D팀 팀장(부장)
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- 시간표 -->
+                                            <div class="schedule-section">
+                                                <div class="schedule-table-container">
+                                                    <table class="schedule-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th data-eng="Period" data-kor="구분">구분</th>
+                                                                <th data-eng="Wed" data-kor="수">수</th>
+                                                                <th data-eng="Thu" data-kor="목">목</th>
+                                                                <th data-eng="Fri" data-kor="금">금</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th class="time-cell">1교시<br>09:10∼10:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">전력설비 계통의<br>고장현상과 특성</div>
+                                                                    <div class="instructor">(이 진)</div>
+                                                                </td>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">보호릴레이<br>동작원리</div>
+                                                                    <div class="instructor">(이 진)</div>
+                                                                </td>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">디지털릴레이 트러블 슈팅<br>(Trouble Shooting) 사례<br>분석</div>
+                                                                    <div class="instructor">(이태호)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">2교시<br>10:10∼11:00</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">3교시<br>11:10∼12:00</th>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">고장계산 기본사항<br>및 해석·계산법</div>
+                                                                    <div class="instructor">(장화윤)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">4교시<br>13:10∼14:00</th>
+                                                                <td rowspan="4" class="subject-cell">
+                                                                    <div class="subject-title">보호릴레이 동작 상황분석</div>
+                                                                    <div class="instructor">(유영식)</div>
+                                                                </td>
+                                                                <td rowspan="4" class="empty-cell"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">5교시<br>14:10∼15:00</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">6교시<br>15:10∼16:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">고장계산 실습</div>
+                                                                    <div class="instructor">(장화윤)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">7교시<br>16:10∼17:00</th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ECMS운영반 -->
+                                <div class="curriculum-week">
+                                    <input type="checkbox" id="ecms-operation" class="curriculum-checkbox">
+                                    <label for="ecms-operation" class="curriculum-header">
+                                        <div class="week-info">
+                                            <span class="week-title">ECMS운영반</span>
+                                        </div>
+                                    </label>
+                                    <div class="curriculum-content">
+                                        <div class="curriculum-content-inner">
+                                            <!-- 과정 정보 -->
+                                            <div class="course-info-section">
+                                                <div class="info-grid">
+                                                    <div class="info-item">
+                                                        <dt data-eng="Training Period" data-kor="교육기간">교육기간</dt>
+                                                        <dd data-eng="2025. 6. 18 ~ 20" data-kor="2025. 6. 18 ~ 20">2025. 6. 18 ~ 20</dd>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <dt data-eng="Learning Objectives" data-kor="학습목표">학습목표</dt>
+                                                        <dd data-eng="Focusing on matters related to the operation of ECMS (Electric Power Comprehensive Monitoring & Control System) supplied by YPP in technical partnership with GE USA, learning basic concepts, functions and configuration of ECMS, matters necessary for actual operation, and maintenance to acquire overall matters for ECMS operation" data-kor="YPP가 미국 GE와 기술 제휴하여 공급하고 있는 전력설비 종합감시제어시스템(ECMS)의 운영과 관련된 사항을 중심으로, 주로 ECMS의 기본적인 개념, 기능과 구성, 실제 운영에 필요한 사항, 유지보수 등에 대한 내용을 학습함으로써 ECMS운영을 위한 전반적인 사항을 습득하기 위함">YPP가 미국 GE와 기술 제휴하여 공급하고 있는 전력설비 종합감시제어시스템(ECMS)의 운영과 관련된 사항을 중심으로, 주로 ECMS의 기본적인 개념, 기능과 구성, 실제 운영에 필요한 사항, 유지보수 등에 대한 내용을 학습함으로써 ECMS운영을 위한 전반적인 사항을 습득하기 위함</dd>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <dt data-eng="Instructors" data-kor="강사">강사</dt>
+                                                        <dd>
+                                                            * 김치환 와이피피㈜ 기술총괄본부 기술2팀장(이사)<br>
+                                                            * 장우철 와이피피㈜ 기술총괄본부 설계팀 (부장)
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- 시간표 -->
+                                            <div class="schedule-section">
+                                                <div class="schedule-table-container">
+                                                    <table class="schedule-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th data-eng="Period" data-kor="구분">구분</th>
+                                                                <th data-eng="Wed" data-kor="수">수</th>
+                                                                <th data-eng="Thu" data-kor="목">목</th>
+                                                                <th data-eng="Fri" data-kor="금">금</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th class="time-cell">1교시<br>09:10~10:00</th>
+                                                                <td class="subject-cell">
+                                                                    <div class="subject-title">ECMS의 개념 및 기능</div>
+                                                                    <div class="instructor">(김치환)</div>
+                                                                </td>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">Project 및 Point 생성<br>(실습)-계속</div>
+                                                                    <div class="instructor">(김치환)</div>
+                                                                </td>
+                                                                <td class="subject-cell">
+                                                                    <div class="subject-title">UR Set-up 접속 및 Status<br>확인방법</div>
+                                                                    <div class="instructor">(장우철)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">2교시<br>10:10~11:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">ECMS H/W 및 S/W</div>
+                                                                    <div class="instructor">(김치환)</div>
+                                                                </td>
+                                                                <td class="subject-cell">
+                                                                    <div class="subject-title">Viewpoint Monitoring</div>
+                                                                    <div class="instructor">(장우철)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">3교시<br>11:10~12:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">Graphic Design(실습)</div>
+                                                                    <div class="instructor">(장우철)</div>
+                                                                </td>
+                                                                <td class="subject-cell">
+                                                                    <div class="subject-title">ECMS 유지보수</div>
+                                                                    <div class="instructor">(장우철)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">4교시<br>13:10~14:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">ECMS의 통신(Protocol)</div>
+                                                                    <div class="instructor">(김치환)</div>
+                                                                </td>
+                                                                <td rowspan="4" class="empty-cell"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">5교시<br>14:10~15:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">Logging, Trending & Tag<br>Scripting, Alarm Viewer, History &<br>Configuration</div>
+                                                                    <div class="instructor">(장우철)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">6교시<br>15:10~16:00</th>
+                                                                <td class="subject-cell">
+                                                                    <div class="subject-title">Network구성</div>
+                                                                    <div class="instructor">(김치환)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">7교시<br>16:10~17:00</th>
+                                                                <td class="subject-cell">
+                                                                    <div class="subject-title">Project 및 Point 생성(실습)</div>
+                                                                    <div class="instructor">(김치환)</div>
+                                                                </td>
+                                                                <td class="subject-cell">
+                                                                    <div class="subject-title">ECMS조작방법 및 화면설명</div>
+                                                                    <div class="instructor">(장우철)</div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 원자력 특성화반 -->
+                                <div class="curriculum-week">
+                                    <input type="checkbox" id="nuclear-specialization" class="curriculum-checkbox">
+                                    <label for="nuclear-specialization" class="curriculum-header">
+                                        <div class="week-info">
+                                            <span class="week-title">원자력 특성화반</span>
+                                        </div>
+                                    </label>
+                                    <div class="curriculum-content">
+                                        <div class="curriculum-content-inner">
+                                            <!-- 과정 정보 -->
+                                            <div class="course-info-section">
+                                                <div class="info-grid">
+                                                    <div class="info-item">
+                                                        <dt data-eng="Training Period" data-kor="교육기간">교육기간</dt>
+                                                        <dd data-eng="2025. 7. 16 ~ 20" data-kor="2025. 7. 16 ~ 20">2025. 7. 16 ~ 20</dd>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <dt data-eng="Learning Objectives" data-kor="학습목표">학습목표</dt>
+                                                        <dd data-eng="Improving job capabilities of engineers engaged in facility operation, maintenance, and upkeep of nuclear power plants and securing expertise to maintain stability and improve reliability of nuclear power generation" data-kor="원자력 발전소의 설비운영, 정비, 유지보수 등에 종사하는 엔지니어의 직무능력 향상과 원자력 발전의 안정화를 유지하고 신뢰도를 향상시키기 전문성 확보">원자력 발전소의 설비운영, 정비, 유지보수 등에 종사하는 엔지니어의 직무능력 향상과 원자력 발전의 안정화를 유지하고 신뢰도를 향상시키기 전문성 확보</dd>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <dt data-eng="Instructors" data-kor="강사">강사</dt>
+                                                        <dd>
+                                                            * 이   진 와이피피㈜ 중앙연구소장(사장)<br>
+                                                            * 유영식 와이피피㈜ 기술총괄본부 본부장(사장)<br>
+                                                            * 정승연 와이피피㈜ 기술총괄본부 설계팀장(상무)<br>
+                                                            * 이태호 와이피피㈜ 기술총괄본부 T&D팀장(부장)<br>
+                                                            * 선현규 와이피피㈜ 기술본부 CGID팀 (전무)<br>
+                                                            * 송이철 ㈜원택 TC5 Div. 품질보증팀 (이사)
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- 시간표 -->
+                                            <div class="schedule-section">
+                                                <div class="schedule-table-container">
+                                                    <table class="schedule-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th data-eng="Period" data-kor="구분">구분</th>
+                                                                <th data-eng="Wed" data-kor="수">수</th>
+                                                                <th data-eng="Thu" data-kor="목">목</th>
+                                                                <th data-eng="Fri" data-kor="금">금</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th class="time-cell">1교시<br>09:10~10:00</th>
+                                                                <td class="empty-cell"></td>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">발전기 보호</div>
+                                                                    <div class="instructor">(유영식)</div>
+                                                                </td>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">CGID수행절차</div>
+                                                                    <div class="instructor">(선현규)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">2교시<br>10:10~11:00</th>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">전력계통 보호기술 개론</div>
+                                                                    <div class="instructor">(이 진)</div>
+                                                                    <div class="note">※10:00~12:30 (150분)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">3교시<br>11:10~12:00</th>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">변압기 보호</div>
+                                                                    <div class="instructor">(정승연)</div>
+                                                                </td>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">Relay전자파 적합성검증<br>(EMI/RFI, Surge)</div>
+                                                                    <div class="instructor">(송이철)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">4교시<br>13:10~14:00</th>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">디지털 보호릴레이 개론</div>
+                                                                    <div class="instructor">(이태호)</div>
+                                                                    <div class="note">※13:30~15:00 (90분)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">5교시<br>14:10~15:00</th>
+                                                                <td rowspan="4" class="empty-cell"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">6교시<br>15:10~16:00</th>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">전동기 보호</div>
+                                                                    <div class="instructor">(정승연)</div>
+                                                                </td>
+                                                                <td rowspan="2" class="subject-cell">
+                                                                    <div class="subject-title">UR Set up & Setting</div>
+                                                                    <div class="instructor">(이태호)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="time-cell">7교시<br>16:10~17:00</th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+<style>
+/* 과정 정보 스타일 */
+.course-info-section {
+    margin: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.info-grid .info-item {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-grid .info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-grid dt {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.info-grid dd {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 시간표 스타일 개선 */
+.time-cell {
+    background: #4a90e2 !important;
+    color: white !important;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+    width: 80px;
+}
+
+.note {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.25rem;
+    font-style: italic;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .course-info-section {
+        padding: 1rem;
+    }
+    
+    .info-grid dt {
+        font-size: 0.9rem;
+    }
+    
+    .info-grid dd {
+        font-size: 0.85rem;
+    }
+    
+    .time-cell {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.25rem;
+    }
+}
+</style>
                 </div>
             </div>
         </section>

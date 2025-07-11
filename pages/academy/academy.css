@@ -1,0 +1,1637 @@
+/* YPP 아카데미 전용 CSS - academy.css */
+
+/* ===== 아카데미 소개 섹션 ===== */
+
+/* 메인 소개 섹션 */
+.academy-intro-section {
+    margin-bottom: 60px;
+    padding: 40px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+}
+
+.intro-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.intro-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+}
+
+.intro-description {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: #334155;
+    margin-bottom: 16px;
+}
+
+.intro-sub-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #64748b;
+}
+
+/* 교육 수료 통계 섹션 */
+.academy-stats-section {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.stats-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 40px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.stat-item.total {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    grid-column: 1 / -1;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+.stat-item.total .stat-label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 5px;
+}
+
+.stat-item.total .stat-number {
+    color: white;
+}
+
+.stat-unit {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.stat-item.total .stat-unit {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-note {
+    font-size: 0.9rem;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+/* VISION 프로세스 섹션 */
+.academy-vision-section {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.vision-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 40px;
+}
+
+.vision-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.vision-step {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.vision-step:hover {
+    transform: translateY(-5px);
+}
+
+.step-number {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 12px 24px;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.step-content h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #334155;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.vision-arrow {
+    font-size: 2rem;
+    color: #1e3a8a;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* 주요 연혁 섹션 */
+.academy-history-section {
+    margin-bottom: 60px;
+}
+
+.history-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.history-timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.history-timeline::before {
+    content: '';
+    position: absolute;
+    left: 60px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #1e3a8a, #3b82f6);
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.timeline-year {
+    background: #1e3a8a;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border-radius: 25px;
+    min-width: 80px;
+    text-align: center;
+    margin-right: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.timeline-year::after {
+    content: '';
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #1e3a8a;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px #1e3a8a;
+}
+
+.timeline-content {
+    background: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    flex: 1;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #334155;
+}
+
+/* ===== PSAC 전용 스타일 ===== */
+
+/* PSAC 소개 섹션 */
+.psac-intro-section {
+    margin-bottom: 50px;
+    padding: 40px 0;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e6f3ff 100%);
+    border-radius: 12px;
+}
+
+.psac-intro-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.psac-intro-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+}
+
+.psac-intro-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #334155;
+}
+
+/* 교육 목표 섹션 */
+.psac-goals-section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #3b82f6;
+    margin: 10px auto 0;
+}
+
+.goals-content {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.goal-main h5 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* PSAC 피라미드 다이어그램 */
+.psac-diagram-section {
+    margin-bottom: 50px;
+}
+
+.psac-pyramid {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.pyramid-level {
+    padding: 20px;
+    text-align: center;
+}
+
+.level-label {
+    display: inline-block;
+    background: #64748b;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.level-top {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+    color: white;
+}
+
+.level-top .level-label {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.level-top .level-content {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.level-middle {
+    background: #f8fafc;
+    padding: 30px 20px;
+}
+
+.level-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.skill-card {
+    background: white;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+}
+
+.skill-card.card-yellow {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.skill-card.card-blue {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.skill-card.card-green {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+}
+
+.skill-card h6 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.skill-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #475569;
+    margin: 0;
+}
+
+.level-bottom {
+    background: #f1f5f9;
+    padding: 25px 20px;
+}
+
+.foundation-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    margin: 0 10px;
+    flex: 1;
+}
+
+.foundation-card h6 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.foundation-card p {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.pyramid-foundation {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+    color: white;
+    padding: 25px;
+}
+
+.foundation-level .level-label {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.foundation-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+/* PSAC 요약 섹션 */
+.psac-summary-section {
+    margin-bottom: 50px;
+}
+
+.summary-content {
+    background: #f8fafc;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.summary-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #334155;
+    margin: 0;
+}
+
+/* PSAC 교육안내 테이블 */
+.psac-info-table {
+    margin-top: 30px;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.info-table th {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    font-weight: 600;
+    padding: 18px 20px;
+    text-align: left;
+    width: 150px;
+    font-size: 1rem;
+}
+
+.info-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.info-table tr:last-child td {
+    border-bottom: none;
+}
+
+.date-highlight {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.fee-structure {
+    line-height: 1.8;
+}
+
+.fee-note {
+    font-size: 0.9rem;
+    color: #059669;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+.fee-warning {
+    font-size: 0.9rem;
+    color: #dc2626;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+.preparation-notice {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #64748b;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    border: 2px dashed #cbd5e1;
+}
+
+/* ===== 커리큘럼 아코디언 스타일 (순수 CSS) ===== */
+
+.curriculum-intro {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.curriculum-intro p {
+    font-size: 1.1rem;
+    color: #334155;
+    margin: 0;
+}
+
+.curriculum-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.curriculum-week {
+    margin-bottom: 16px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.curriculum-week:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.curriculum-toggle {
+    display: none;
+}
+
+.curriculum-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 24px;
+    background: #f8fafc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.curriculum-header:hover {
+    background: #f1f5f9;
+}
+
+.curriculum-toggle:checked + .curriculum-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+    color: white;
+}
+
+.week-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.week-number {
+    background: #1e3a8a;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 60px;
+    text-align: center;
+}
+
+
+.week-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.curriculum-toggle:checked + .curriculum-header .week-title {
+    color: white;
+}
+
+.curriculum-content {
+    /* display: none; */
+    padding: 0;
+    background: white;
+}
+
+
+/* 시간표 스타일 */
+.schedule-section {
+    padding: 24px;
+}
+
+.schedule-table-container {
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.schedule-table {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+    background: white;
+}
+
+.schedule-table th {
+    background: #f8fafc;
+    color: #374151;
+    padding: 12px 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    border: 1px solid #e5e7eb;
+}
+
+.schedule-table td {
+    padding: 12px 8px;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+    font-size: 0.9rem;
+    vertical-align: middle;
+    background: white;
+}
+
+.schedule-table tr:last-child td {
+    /* 마지막 행 스타일 유지 */
+}
+
+.schedule-table td:last-child {
+    /* 마지막 열 스타일 유지 */
+}
+
+.schedule-note {
+    background: #fffbeb;
+}
+
+.schedule-note-text {
+    color: #92400e;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.orientation-day {
+    background: #f0f9ff;
+}
+
+.date-cell {
+    background: #f8fafc;
+    font-weight: 600;
+    color: #1e293b;
+    width: 80px;
+}
+
+.orientation-cell {
+    background: #dbeafe;
+    color: #1e40af;
+    font-weight: 600;
+}
+
+.subject-cell {
+    padding: 16px 12px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.subject-title {
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 4px;
+    font-size: 0.85rem;
+}
+
+.instructor {
+    color: #64748b;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.schedule-note-bottom {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.schedule-note-bottom p {
+    color: #dc2626;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* 강사진 스타일 */
+.instructor-section {
+    padding: 24px;
+    background: #f8fafc;
+    border-top: 1px solid #e5e7eb;
+}
+
+.instructor-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.instructor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.instructor-card {
+    background: white;
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #374151;
+    transition: transform 0.2s ease;
+}
+
+.instructor-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.instructor-card strong {
+    color: #1e3a8a;
+    font-weight: 600;
+}
+
+/* ===== 반응형 디자인 ===== */
+@media (max-width: 768px) {
+    .intro-title,
+    .psac-intro-title {
+        font-size: 2rem;
+    }
+    
+    .intro-description {
+        font-size: 1.1rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .stat-item.total {
+        grid-column: 1;
+    }
+    
+    .vision-steps {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .vision-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .history-timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .timeline-year {
+        margin-bottom: 15px;
+        margin-right: 0;
+    }
+    
+    .timeline-year::after {
+        right: auto;
+        left: 50%;
+        top: auto;
+        bottom: -15px;
+        transform: translateX(-50%);
+    }
+    
+    .timeline-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .preparation-notice {
+        font-size: 1.2rem;
+        padding: 60px 20px;
+    }
+    
+    .level-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-table th {
+        width: 120px;
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .info-table td {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .curriculum-header {
+        padding: 16px 20px;
+    }
+    
+    .week-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .week-title {
+        font-size: 1.1rem;
+    }
+    
+    .schedule-table {
+        min-width: 600px;
+    }
+    
+    .schedule-table th,
+    .schedule-table td {
+        padding: 8px 6px;
+        font-size: 0.8rem;
+    }
+    
+    .instructor-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .schedule-section,
+    .instructor-section {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-title,
+    .psac-intro-title {
+        font-size: 1.8rem;
+    }
+    
+    .preparation-notice {
+        font-size: 1.1rem;
+        padding: 40px 15px;
+    }
+    
+    .stats-title,
+    .vision-title,
+    .history-title,
+    .section-title {
+        font-size: 1.7rem;
+    }
+    
+    .info-table th,
+    .info-table td {
+        padding: 12px;
+        font-size: 0.85rem;
+    }
+    
+    .curriculum-header {
+        padding: 12px 16px;
+    }
+    
+    .week-number {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .week-title {
+        font-size: 1rem;
+    }
+    
+    .schedule-table {
+        min-width: 500px;
+    }
+    
+    .schedule-table th,
+    .schedule-table td {
+        padding: 6px 4px;
+        font-size: 0.75rem;
+    }
+    
+    .subject-title {
+        font-size: 0.8rem;
+    }
+    
+    .instructor {
+        font-size: 0.7rem;
+    }
+}/* YPP 아카데미 전용 CSS - academy.css */
+
+/* ===== 아카데미 소개 섹션 ===== */
+
+/* 메인 소개 섹션 */
+.academy-intro-section {
+    margin-bottom: 60px;
+    padding: 40px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+}
+
+.intro-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.intro-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+}
+
+.intro-description {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: #334155;
+    margin-bottom: 16px;
+}
+
+.intro-sub-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #64748b;
+}
+
+/* 교육 수료 통계 섹션 */
+.academy-stats-section {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.stats-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 40px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.stat-item.total {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    grid-column: 1 / -1;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+.stat-item.total .stat-label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 5px;
+}
+
+.stat-item.total .stat-number {
+    color: white;
+}
+
+.stat-unit {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.stat-item.total .stat-unit {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-note {
+    font-size: 0.9rem;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+/* VISION 프로세스 섹션 */
+.academy-vision-section {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.vision-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 40px;
+}
+
+.vision-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.vision-step {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.vision-step:hover {
+    transform: translateY(-5px);
+}
+
+.step-number {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 12px 24px;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.step-content h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #334155;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.vision-arrow {
+    font-size: 2rem;
+    color: #1e3a8a;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* 주요 연혁 섹션 */
+.academy-history-section {
+    margin-bottom: 60px;
+}
+
+.history-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.history-timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.history-timeline::before {
+    content: '';
+    position: absolute;
+    left: 60px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #1e3a8a, #3b82f6);
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.timeline-year {
+    background: #1e3a8a;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border-radius: 25px;
+    min-width: 80px;
+    text-align: center;
+    margin-right: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.timeline-year::after {
+    content: '';
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #1e3a8a;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px #1e3a8a;
+}
+
+.timeline-content {
+    background: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    flex: 1;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #334155;
+}
+
+/* ===== PSAC 전용 스타일 ===== */
+
+/* PSAC 소개 섹션 */
+.psac-intro-section {
+    margin-bottom: 50px;
+    padding: 40px 0;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e6f3ff 100%);
+    border-radius: 12px;
+}
+
+.psac-intro-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.psac-intro-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+}
+
+.psac-intro-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #334155;
+}
+
+/* 교육 목표 섹션 */
+.psac-goals-section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #3b82f6;
+    margin: 10px auto 0;
+}
+
+.goals-content {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.goal-main h5 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* PSAC 피라미드 다이어그램 */
+.psac-diagram-section {
+    margin-bottom: 50px;
+}
+
+.psac-pyramid {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.pyramid-level {
+    padding: 20px;
+    text-align: center;
+}
+
+.level-label {
+    display: inline-block;
+    background: #64748b;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.level-top {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+    color: white;
+}
+
+.level-top .level-label {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.level-top .level-content {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.level-middle {
+    background: #f8fafc;
+    padding: 30px 20px;
+}
+
+.level-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.skill-card {
+    background: white;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+}
+
+.skill-card.card-yellow {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.skill-card.card-blue {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.skill-card.card-green {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+}
+
+.skill-card h6 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.skill-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #475569;
+    margin: 0;
+}
+
+.level-bottom {
+    background: #f1f5f9;
+    padding: 25px 20px;
+}
+
+.foundation-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    margin: 0 10px;
+    flex: 1;
+}
+
+.foundation-card h6 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.foundation-card p {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.pyramid-foundation {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+    color: white;
+    padding: 25px;
+}
+
+.foundation-level .level-label {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.foundation-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+/* PSAC 요약 섹션 */
+.psac-summary-section {
+    margin-bottom: 50px;
+}
+
+.summary-content {
+    background: #f8fafc;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.summary-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #334155;
+    margin: 0;
+}
+
+/* PSAC 교육안내 테이블 */
+.psac-info-table {
+    margin-top: 30px;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.info-table th {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    font-weight: 600;
+    padding: 18px 20px;
+    text-align: left;
+    width: 150px;
+    font-size: 1rem;
+}
+
+.info-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.info-table tr:last-child td {
+    border-bottom: none;
+}
+
+.date-highlight {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.fee-structure {
+    line-height: 1.8;
+}
+
+.fee-note {
+    font-size: 0.9rem;
+    color: #059669;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+.fee-warning {
+    font-size: 0.9rem;
+    color: #dc2626;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+.preparation-notice {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #64748b;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    border: 2px dashed #cbd5e1;
+}
+
+/* ===== 반응형 디자인 ===== */
+@media (max-width: 768px) {
+    .intro-title,
+    .psac-intro-title {
+        font-size: 2rem;
+    }
+    
+    .intro-description {
+        font-size: 1.1rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .stat-item.total {
+        grid-column: 1;
+    }
+    
+    .vision-steps {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .vision-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .history-timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .timeline-year {
+        margin-bottom: 15px;
+        margin-right: 0;
+    }
+    
+    .timeline-year::after {
+        right: auto;
+        left: 50%;
+        top: auto;
+        bottom: -15px;
+        transform: translateX(-50%);
+    }
+    
+    .timeline-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .preparation-notice {
+        font-size: 1.2rem;
+        padding: 60px 20px;
+    }
+    
+    .level-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-table th {
+        width: 120px;
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .info-table td {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-title,
+    .psac-intro-title {
+        font-size: 1.8rem;
+    }
+    
+    .preparation-notice {
+        font-size: 1.1rem;
+        padding: 40px 15px;
+    }
+    
+    .stats-title,
+    .vision-title,
+    .history-title,
+    .section-title {
+        font-size: 1.7rem;
+    }
+    
+    .info-table th,
+    .info-table td {
+        padding: 12px;
+        font-size: 0.85rem;
+    }
+}
+
+
+
+/* ___ */
+.curriculum-checkbox{
+    display: none;
+}
+.curriculum-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.curriculum-checkbox:checked + .curriculum-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+    color: white;
+}
+.curriculum-checkbox:checked + .curriculum-header .week-title {
+    color: white;
+}
+
+.curriculum-checkbox:checked + .curriculum-header + .curriculum-content {
+    max-height: 1500px;
+}   

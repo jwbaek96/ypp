@@ -173,13 +173,6 @@
     margin: 0;
 }
 
-.vision-arrow {
-    font-size: 2rem;
-    color: #1e3a8a;
-    font-weight: 700;
-    flex-shrink: 0;
-}
-
 /* 주요 연혁 섹션 */
 .academy-history-section {
     margin-bottom: 60px;
@@ -793,14 +786,6 @@
         gap: 30px;
     }
     
-    .vision-arrow {
-        transform: rotate(90deg);
-    }
-    
-    .history-timeline::before {
-        left: 30px;
-    }
-    
     .timeline-item {
         flex-direction: column;
         align-items: flex-start;
@@ -1101,13 +1086,6 @@
     margin: 0;
 }
 
-.vision-arrow {
-    font-size: 2rem;
-    color: #1e3a8a;
-    font-weight: 700;
-    flex-shrink: 0;
-}
-
 /* 주요 연혁 섹션 */
 .academy-history-section {
     margin-bottom: 60px;
@@ -1125,16 +1103,6 @@
     max-width: 800px;
     margin: 0 auto;
     position: relative;
-}
-
-.history-timeline::before {
-    content: '';
-    position: absolute;
-    left: 60px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, #1e3a8a, #3b82f6);
 }
 
 .timeline-item {
@@ -1495,10 +1463,6 @@
     
     .vision-arrow {
         transform: rotate(90deg);
-    }
-    
-    .history-timeline::before {
-        left: 30px;
     }
     
     .timeline-item {

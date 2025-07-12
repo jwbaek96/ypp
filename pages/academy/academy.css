@@ -60,7 +60,7 @@
 
 .stat-item {
     background: white;
-    padding: 30px 20px;
+    padding: 20px 20px;
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -295,104 +295,6 @@
 }
 
 /* PSAC 피라미드 다이어그램 */
-.psac-diagram-section {
-    margin-bottom: 50px;
-}
-
-.psac-pyramid {
-    max-width: 1000px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-.pyramid-level {
-    padding: 20px;
-    text-align: center;
-}
-
-.level-label {
-    display: inline-block;
-    background: #64748b;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.level-top {
-    background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
-    color: white;
-}
-
-.level-top .level-label {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.level-top .level-content {
-    font-size: 1.4rem;
-    font-weight: 700;
-}
-
-.level-middle {
-    background: #f8fafc;
-    padding: 30px 20px;
-}
-
-.level-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.skill-card {
-    background: white;
-    padding: 25px 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
-}
-
-.skill-card:hover {
-    transform: translateY(-5px);
-}
-
-.skill-card.card-yellow {
-    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-}
-
-.skill-card.card-blue {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-}
-
-.skill-card.card-green {
-    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-}
-
-.skill-card h6 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 12px;
-    line-height: 1.3;
-}
-
-.skill-card p {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #475569;
-    margin: 0;
-}
-
-.level-bottom {
-    background: #f1f5f9;
-    padding: 25px 20px;
-}
 
 .foundation-card {
     background: white;
@@ -452,77 +354,7 @@
 }
 
 /* PSAC 교육안내 테이블 */
-.psac-info-table {
-    margin-top: 30px;
-}
 
-.info-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.info-table th {
-    background: #3b82f6;
-    color: white;
-    font-weight: 600;
-    padding: 18px 20px;
-    text-align: left;
-    width: 160px;
-    font-size: 1rem;
-}
-
-.info-table td {
-    padding: 18px 20px;
-    border-bottom: 1px solid #e5e7eb;
-    color: #374151;
-    font-size: 1rem;
-    line-height: 1.6;
-    /* border-bottom: 1px solid #00000030; */
-}
-
-.info-table tr:last-child td {
-    border-bottom: none;
-}
-
-.date-highlight {
-    background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 6px;
-    font-weight: 600;
-}
-
-.fee-structure {
-    line-height: 1.8;
-}
-
-.fee-note {
-    font-size: 0.9rem;
-    color: #059669;
-    font-weight: 500;
-    margin-top: 8px;
-}
-
-.fee-warning {
-    font-size: 0.9rem;
-    color: #dc2626;
-    font-weight: 500;
-    margin-top: 8px;
-}
-
-.preparation-notice {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #64748b;
-    padding: 80px 20px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 12px;
-    border: 2px dashed #cbd5e1;
-}
 
 /* ===== 커리큘럼 아코디언 스타일 (순수 CSS) ===== */
 
@@ -794,6 +626,7 @@
     .timeline-year {
         margin-bottom: 15px;
         margin-right: 0;
+        padding: 2px;
     }
     
     
@@ -994,7 +827,7 @@
     font-size: 1.1rem;
     font-weight: 600;
     color: #64748b;
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
 
 .stat-item.total .stat-label {
@@ -1005,7 +838,7 @@
     font-size: 3rem;
     font-weight: 700;
     color: #1e3a8a;
-    margin-bottom: 5px;
+    margin-bottom: 0;
 }
 
 .stat-item.total .stat-number {
@@ -1024,7 +857,7 @@
 
 .stat-note {
     font-size: 0.9rem;
-    margin-top: 10px;
+    margin-top: 0;
     opacity: 0.8;
 }
 
@@ -1117,7 +950,7 @@
     color: white;
     font-weight: 700;
     font-size: 1.1rem;
-    padding: 12px 20px;
+    padding: 8px 20px;
     border-radius: 25px;
     min-width: 80px;
     text-align: center;
@@ -1466,6 +1299,11 @@
         flex-direction: column;
         gap: 30px;
     }
+    .vision-step{
+        width: 100%;
+        max-width: 100%;
+        min-height: auto;
+    }
     
     .vision-arrow {
         transform: rotate(90deg);
@@ -1477,16 +1315,12 @@
     }
     
     .timeline-year {
-        margin-bottom: 15px;
+        margin-bottom: 3px;
         margin-right: 0;
-    }
-    
-    .timeline-year::after {
-        right: auto;
-        left: 50%;
-        top: auto;
-        bottom: -15px;
-        transform: translateX(-50%);
+        padding: 2px;
+        min-width: 60px;
+        border-radius: 8px;
+        font-size: 0.95rem;
     }
     
     .timeline-content {
@@ -1504,8 +1338,8 @@
     }
     
     .info-table th {
-        width: 120px;
-        padding: 15px;
+        width: auto;
+        padding: 5px 15px;
         font-size: 0.9rem;
     }
     
@@ -1537,6 +1371,12 @@
     .info-table td {
         padding: 12px;
         font-size: 0.85rem;
+    }
+    .content-block{
+        padding: 1.5rem .5rem;
+    }
+    .block-title{
+        padding: 0 .5rem .5rem;
     }
 }
 

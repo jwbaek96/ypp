@@ -1,0 +1,416 @@
+/* YPP 아카데미 신청 폼 통합 스타일 */
+
+/* ==========================================================================
+   공통 스타일 (ac-form-)
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Malgun Gothic', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.ac-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.ac-form-header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 0;
+}
+
+.ac-form-header h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.ac-form-header p {
+    opacity: 0.9;
+    font-size: 14px;
+}
+
+.ac-form-content {
+    background: white;
+    padding: 30px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.ac-form-section {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+}
+
+.ac-form-section:last-child {
+    border-bottom: none;
+}
+
+.ac-form-section-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1e3c72;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #1e3c72;
+}
+
+.ac-form-group {
+    margin-bottom: 20px;
+}
+
+.ac-form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.ac-form-row .ac-form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.ac-form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+.ac-form-required::after {
+    content: " *";
+    color: #e74c3c;
+}
+
+.ac-form-input,
+.ac-form-textarea,
+.ac-form-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.ac-form-input:focus,
+.ac-form-textarea:focus,
+.ac-form-select:focus {
+    outline: none;
+    border-color: #1e3c72;
+    box-shadow: 0 0 0 2px rgba(30, 60, 114, 0.1);
+}
+
+.ac-form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.ac-form-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.ac-form-btn-primary {
+    background: #1e3c72;
+    color: white;
+}
+
+.ac-form-btn-primary:hover {
+    background: #16325a;
+}
+
+.ac-form-btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.ac-form-btn-secondary:hover {
+    background: #545b62;
+}
+
+.ac-form-btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.ac-form-btn-danger:hover {
+    background: #c82333;
+}
+
+.ac-form-btn-success {
+    background: #28a745;
+    color: white;
+    font-size: 16px;
+    padding: 15px 30px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.ac-form-btn-success:hover {
+    background: #218838;
+}
+
+.ac-form-add-btn {
+    margin-bottom: 20px;
+}
+
+.ac-form-loading {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.ac-form-message {
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+    display: none;
+}
+
+.ac-form-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.ac-form-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.ac-form-student-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.ac-form-student-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ac-form-student-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1e3c72;
+}
+
+.ac-form-course-info {
+    background: #e8f4f8;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #1e3c72;
+    margin-bottom: 30px;
+}
+
+.ac-form-course-info h3 {
+    color: #1e3c72;
+    margin-bottom: 10px;
+}
+
+/* ==========================================================================
+   PSAC 전용 스타일 (psac-)
+   ========================================================================== */
+
+.psac-checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.psac-checkbox-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #e9ecef;
+}
+
+.psac-checkbox-item input[type="checkbox"] {
+    margin-right: 10px;
+    width: auto;
+}
+
+.psac-course-list {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #e9ecef;
+    margin-top: 10px;
+}
+
+.psac-course-list h4 {
+    color: #1e3c72;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.psac-course-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.psac-course-list li {
+    padding: 5px 0;
+    font-size: 13px;
+    color: #666;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.psac-course-list li:last-child {
+    border-bottom: none;
+}
+
+/* ==========================================================================
+   Relay School 전용 스타일 (relayschool-)
+   ========================================================================== */
+
+.relayschool-course-selector {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    margin-bottom: 20px;
+}
+
+.relayschool-course-option {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin: 10px 0;
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.relayschool-course-option:hover {
+    border-color: #1e3c72;
+    background: #f8f9fa;
+}
+
+.relayschool-course-option input[type="radio"] {
+    margin-right: 15px;
+    width: auto;
+}
+
+.relayschool-course-option.selected {
+    border-color: #1e3c72;
+    background: #e8f4f8;
+}
+
+.relayschool-course-details {
+    flex: 1;
+}
+
+.relayschool-course-name {
+    font-weight: bold;
+    color: #1e3c72;
+    margin-bottom: 5px;
+}
+
+.relayschool-course-schedule {
+    font-size: 14px;
+    color: #666;
+}
+
+.relayschool-course-description {
+    font-size: 13px;
+    color: #888;
+    margin-top: 5px;
+}
+
+.relayschool-selected-course {
+    background: #e8f4f8;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #1e3c72;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.relayschool-selected-course.show {
+    display: block;
+}
+
+/* ==========================================================================
+   반응형 디자인
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .ac-form-container {
+        padding: 10px;
+    }
+    
+    .ac-form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .psac-checkbox-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .ac-form-student-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .relayschool-course-option {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+    
+    .relayschool-course-option input[type="radio"] {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ac-form-header {
+        padding: 20px;
+    }
+    
+    .ac-form-header h1 {
+        font-size: 20px;
+    }
+    
+    .ac-form-content {
+        padding: 20px;
+    }
+    
+    .ac-form-section-title {
+        font-size: 16px;
+    }
+}

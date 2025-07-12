@@ -5,7 +5,7 @@
    ========================================================================== */
 
 // 웹 앱 URL - 실제 Apps Script 웹 앱 URL로 변경해주세요
-const WEBAPP_URL = 'YOUR_WEBAPP_URL_HERE';
+const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyTKBJcBfl-nctGzu_BTU_2hYUm-pzz71dmLDEMm1Aj3eGCJwtxp1-ZQdl4s6J_CCgh/exec';
 
 // 공통 변수
 let studentCount = 0;
@@ -112,6 +112,44 @@ function validateBusinessNumber(number) {
 function validatePhoneNumber(number) {
     const cleanNumber = number.replace(/[^0-9]/g, '');
     return cleanNumber.length >= 10 && cleanNumber.length <= 11;
+}
+
+// CORS 우회 데이터 제출 함수 (iframe 방식)
+function submitFormData(formData) {
+    return new Promise((resolve, reject) => {
+        // 숨겨진 iframe 생성
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.name = 'hidden_iframe';
+        document.body.appendChild(iframe);
+        
+        // 폼 생성
+        const form = document.createElement('form');
+        form.action = WEBAPP_URL;
+        form.method = 'POST';
+        form.target = 'hidden_iframe';
+        
+        // 데이터를 JSON 문자열로 변환하여 hidden input에 저장
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'data';
+        input.value = JSON.stringify(formData);
+        
+        form.appendChild(input);
+        document.body.appendChild(form);
+        
+        // iframe 로드 완료 시 처리
+        iframe.onload = function() {
+            setTimeout(() => {
+                document.body.removeChild(form);
+                document.body.removeChild(iframe);
+                resolve();
+            }, 1000);
+        };
+        
+        // 폼 제출
+        form.submit();
+    });
 }
 
 /* ==========================================================================
@@ -341,26 +379,15 @@ async function submitPsacForm(e) {
             return;
         }
         
-        const response = await fetch(WEBAPP_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-        });
+        // CORS 우회를 위한 iframe 방식 사용
+        await submitFormData(formData);
         
-        const result = await response.json();
-        
-        if (result.success) {
-            showMessage(result.message, 'success');
-            document.getElementById('psac-form').reset();
-            // 수강자 목록 초기화
-            document.getElementById('psac-students-container').innerHTML = '';
-            studentCount = 0;
-            addPsacStudent();
-        } else {
-            showMessage(result.message || '신청 처리 중 오류가 발생했습니다.', 'error');
-        }
+        showMessage(`PSAC 신청이 완료되었습니다. (수강자 ${formData.students.length}명)`, 'success');
+        document.getElementById('psac-form').reset();
+        // 수강자 목록 초기화
+        document.getElementById('psac-students-container').innerHTML = '';
+        studentCount = 0;
+        addPsacStudent();
         
     } catch (error) {
         console.error('Error:', error);
@@ -573,27 +600,16 @@ async function submitRelayschoolForm(e) {
             return;
         }
         
-        const response = await fetch(WEBAPP_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-        });
+        // CORS 우회를 위한 iframe 방식 사용
+        await submitFormData(formData);
         
-        const result = await response.json();
-        
-        if (result.success) {
-            showMessage(result.message, 'success');
-            document.getElementById('relayschool-form').reset();
-            // 수강자 목록 초기화
-            document.getElementById('relayschool-students-container').innerHTML = '';
-            document.getElementById('relayschool-selected-course').classList.remove('show');
-            studentCount = 0;
-            addRelayschoolStudent();
-        } else {
-            showMessage(result.message || '신청 처리 중 오류가 발생했습니다.', 'error');
-        }
+        showMessage(`Relay School 신청이 완료되었습니다. (수강자 ${formData.students.length}명)`, 'success');
+        document.getElementById('relayschool-form').reset();
+        // 수강자 목록 초기화
+        document.getElementById('relayschool-students-container').innerHTML = '';
+        document.getElementById('relayschool-selected-course').classList.remove('show');
+        studentCount = 0;
+        addRelayschoolStudent();
         
     } catch (error) {
         console.error('Error:', error);

@@ -3236,6 +3236,7 @@
 class AcademyPageController {
     constructor() {
         this.currentTab = 'intro';
+        this.currentSection = null;
         this.init();
     }
     
@@ -3244,6 +3245,7 @@ class AcademyPageController {
         this.setupTabNavigation();
         this.setupSectionNavigation();
         this.handleUrlHash();
+        this.attachEvents();
     }
     
     // 탭 네비게이션 설정
@@ -3260,6 +3262,25 @@ class AcademyPageController {
                 
                 // URL 해시 업데이트
                 window.history.pushState(null, null, `#${tabId}`);
+            });
+        });
+    }
+    
+    // 섹션 네비게이션 설정
+    setupSectionNavigation() {
+        const sectionLinks = document.querySelectorAll('.section-nav-link');
+        
+        sectionLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                const sectionId = href.substring(1); // # 제거
+                
+                this.scrollToSection(sectionId);
+                this.updateSectionActiveState(link);
+                
+                // URL 해시 업데이트
+                window.history.pushState(null, null, href);
             });
         });
     }
@@ -3375,6 +3396,7 @@ class AcademyPageController {
         });
     }
     
+    
     // 섹션 활성화 상태 업데이트
     updateSectionActiveState(activeLink) {
         // 모든 섹션 링크 비활성화
@@ -3385,6 +3407,49 @@ class AcademyPageController {
         // 클릭된 링크 활성화
         activeLink.classList.add('active');
     }데이트
+        // 추가 이벤트 처리
+    attachEvents() {
+        // 스크롤 시 현재 보이는 섹션 감지 (옵션)
+        this.setupScrollSpy();
+        
+        // 키보드 네비게이션 (옵션)
+        this.setupKeyboardNavigation();
+    }
+    
+    // 스크롤 스파이 (현재 보이는 섹션 자동 감지)
+    setupScrollSpy() {
+        let ticking = false;
+        
+        const updateActiveSection = () => {
+            const sections = document.querySelectorAll('.content-block[id]');
+            const scrollPosition = window.pageYOffset + window.innerHeight / 2;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top + window.pageYOffset;
+                const sectionBottom = sectionTop + rect.height;
+                
+                if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+                    const sectionId = section.id;
+                    const correspondingLink = document.querySelector(`[href="#${sectionId}"]`);
+                    
+                    if (correspondingLink && !correspondingLink.classList.contains('active')) {
+                        this.updateSectionActiveState(correspondingLink);
+                    }
+                }
+            });
+            
+            ticking = false;
+        };
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateActiveSection);
+                ticking = true;
+            }
+        });
+    }
+    
     updateTabActiveState(activeLink) {
         // 모든 탭 링크 비활성화
         document.querySelectorAll('.tab-link').forEach(link => {

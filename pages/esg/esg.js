@@ -233,27 +233,6 @@ class ESGPageController {
         });
     }
     
-    // 키보드 네비게이션
-    setupKeyboardNavigation() {
-        document.addEventListener('keydown', (e) => {
-            // 탭 키로 탭 간 이동 (Ctrl + Arrow)
-            if (e.ctrlKey) {
-                const tabIds = ['esg', 'environment', 'social', 'governance'];
-                const currentIndex = tabIds.indexOf(this.currentTab);
-                
-                if (e.key === 'ArrowRight' && currentIndex < tabIds.length - 1) {
-                    e.preventDefault();
-                    this.switchTab(tabIds[currentIndex + 1]);
-                    window.history.pushState(null, null, `#${tabIds[currentIndex + 1]}`);
-                } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
-                    e.preventDefault();
-                    this.switchTab(tabIds[currentIndex - 1]);
-                    window.history.pushState(null, null, `#${tabIds[currentIndex - 1]}`);
-                }
-            }
-        });
-    }
-    
     // 외부에서 호출 가능한 메서드들
     goToTab(tabId) {
         this.switchTab(tabId);

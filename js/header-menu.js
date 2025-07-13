@@ -14,7 +14,7 @@ async function loadMenuData() {
         const { basePath } = window.YPP_CONFIG;
         const menuPath = `${basePath}/json/menu-data.json`;
         
-        // console.log(`Loading menu data from: ${menuPath}`);
+        console.log(`Loading menu data from: ${menuPath}`);
         
         const response = await fetch(menuPath);
         if (!response.ok) {
@@ -22,7 +22,7 @@ async function loadMenuData() {
         }
         
         menuData = await response.json();
-        // console.log('Menu data loaded successfully');
+        console.log('Menu data loaded successfully');
         return menuData;
     } catch (error) {
         console.error('Error loading menu data:', error);
@@ -103,7 +103,7 @@ function createMenuItem(item, key, depth) {
         li.appendChild(link);
         li.appendChild(subMenu);
         
-        // console.log('서브메뉴 생성됨:', item.title); // 디버깅용
+        console.log('서브메뉴 생성됨:', item.title); // 디버깅용
     } else {
         li.appendChild(link);
     }
@@ -115,10 +115,10 @@ function createMenuItem(item, key, depth) {
 async function insertDesktopMenu() {
     const container = document.getElementById('desktop-nav-container');
     
-    // if (!container) {
-    //     console.log('Desktop nav container not found');
-    //     return;
-    // }
+    if (!container) {
+        console.log('Desktop nav container not found');
+        return;
+    }
     
     // YPP_CONFIG 대기
     let retryCount = 0;
@@ -134,12 +134,12 @@ async function insertDesktopMenu() {
     
     // 메뉴 데이터 로딩
     const data = await loadMenuData();
-    // if (!data || !data.navigation) {
-    //     console.log('Menu data not available');
-    //     return;
-    // }
+    if (!data || !data.navigation) {
+        console.log('Menu data not available');
+        return;
+    }
     
-    // console.log('메뉴 데이터:', data.navigation); // 디버깅용
+    console.log('메뉴 데이터:', data.navigation); // 디버깅용
     
     // 메뉴 생성 및 삽입
     const menuElement = createDesktopMenu(data.navigation);
@@ -166,11 +166,11 @@ async function insertDesktopMenu() {
     // 생성된 메뉴 확인
     const hasChildrenItems = container.querySelectorAll('.has-children');
     const subMenus = container.querySelectorAll('.sub-menu');
-//     console.log('하위 메뉴가 있는 항목들:', hasChildrenItems.length);
-//     console.log('서브메뉴 개수:', subMenus.length);
+    console.log('하위 메뉴가 있는 항목들:', hasChildrenItems.length);
+    console.log('서브메뉴 개수:', subMenus.length);
     
-//     console.log('Desktop menu inserted with bilingual support');
-// }
+    console.log('Desktop menu inserted with bilingual support');
+}
 
 // ===== 메뉴 상호작용 이벤트 =====
 function addMenuInteraction(menuItem, link, subMenu) {
@@ -202,7 +202,7 @@ function addMenuInteraction(menuItem, link, subMenu) {
 
 // ===== 서브메뉴 표시/숨김 함수들 =====
 function showSubmenu(menuItem, link, subMenu) {
-    // console.log('서브메뉴 표시:', menuItem, subMenu); // 디버깅용
+    console.log('서브메뉴 표시:', menuItem, subMenu); // 디버깅용
     
     menuItem.classList.add('active');
     link.setAttribute('aria-expanded', 'true');
@@ -217,7 +217,7 @@ function showSubmenu(menuItem, link, subMenu) {
 }
 
 function hideSubmenu(menuItem, link, subMenu) {
-    // console.log('서브메뉴 숨김:', menuItem, subMenu); // 디버깅용
+    console.log('서브메뉴 숨김:', menuItem, subMenu); // 디버깅용
     
     menuItem.classList.remove('active');
     link.setAttribute('aria-expanded', 'false');
@@ -244,6 +244,11 @@ function toggleSubmenu(menuItem, link, subMenu) {
 async function insertDesktopMenu() {
     const container = document.getElementById('desktop-nav-container');
     
+    if (!container) {
+        console.log('Desktop nav container not found');
+        return;
+    }
+    
     // YPP_CONFIG 대기
     let retryCount = 0;
     while (!window.YPP_CONFIG && retryCount < 50) {
@@ -257,13 +262,13 @@ async function insertDesktopMenu() {
     }
     
     // 메뉴 데이터 로딩
-    // const data = await loadMenuData();
-    // if (!data || !data.navigation) {
-    //     console.log('Menu data not available');
-    //     return;
-    // }
+    const data = await loadMenuData();
+    if (!data || !data.navigation) {
+        console.log('Menu data not available');
+        return;
+    }
     
-    // console.log('메뉴 데이터:', data.navigation); // 디버깅용
+    console.log('메뉴 데이터:', data.navigation); // 디버깅용
     
     // 메뉴 생성 및 삽입
     const menuElement = createDesktopMenu(data.navigation);
@@ -273,6 +278,10 @@ async function insertDesktopMenu() {
     // 생성된 메뉴 확인
     const hasChildrenItems = container.querySelectorAll('.has-children');
     const subMenus = container.querySelectorAll('.sub-menu');
+    console.log('하위 메뉴가 있는 항목들:', hasChildrenItems.length);
+    console.log('서브메뉴 개수:', subMenus.length);
+    
+    console.log('Desktop menu inserted - 모든 상호작용은 CSS가 처리합니다');
 }
 
 // ===== 외부 클릭 핸들러 =====

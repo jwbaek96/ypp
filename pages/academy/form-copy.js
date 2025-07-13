@@ -1,35 +1,52 @@
 // YPP 아카데미 신청 폼 통합 JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-    
     // Relay School 폼이 있을 경우 첫 번째 수강자 자동 추가
-    // if (document.getElementById('relayschool-students-container')) {
-    // }
-    addRelayschoolStudent();
-    
-    // 첫 번째 수강자 자동 추가
-    addPsacStudent();
+    if (document.getElementById('relayschool-students-container')) {
+        addRelayschoolStudent();
+    }
+
+    // PSAC 폼이 있을 경우 첫 번째 수강자 자동 추가
+    if (document.getElementById('psac-students-container')) {
+        addPsacStudent();
+    }
 
     // 폼 제출 이벤트 연결
-    document.getElementById('psac-form').addEventListener('submit', submitPsacForm);
+    const psacForm = document.getElementById('psac-form');
+    if (psacForm) {
+        psacForm.addEventListener('submit', submitPsacForm);
+    }
 
-    document.getElementById('relayschool-form').addEventListener('submit', submitRelayschoolForm);
-    // Relay School 폼 제출 이벤트 연결 (존재할 경우)
-    // const relayForm = document.getElementById('relayschool-form');
-    // if (relayForm) {
-    //     relayForm.addEventListener('submit', submitRelayschoolForm);
-    // }
-    // ---------------------------------
-    // 사업자등록번호 포맷팅
-    const businessNumberInput = document.getElementById('businessNumber');
-    if (businessNumberInput) {
-        businessNumberInput.addEventListener('input', function(e) {
+    const relayForm = document.getElementById('relayschool-form');
+    if (relayForm) {
+        relayForm.addEventListener('submit', submitRelayschoolForm);
+    }
+
+    // 사업자등록번호 포맷팅 (각 폼별로 id가 다르면 각각 처리)
+    const psacBusinessNumberInput = document.getElementById('psac-businessNumber');
+    if (psacBusinessNumberInput) {
+        psacBusinessNumberInput.addEventListener('input', function(e) {
             e.target.value = formatBusinessNumber(e.target.value);
         });
     }
-    
-    // 전화번호 포맷팅 (담당자)
-    const managerPhoneInputs = ['managerPhone', 'managerMobile'];
-    managerPhoneInputs.forEach(id => {
+    const relayBusinessNumberInput = document.getElementById('relayschool-businessNumber');
+    if (relayBusinessNumberInput) {
+        relayBusinessNumberInput.addEventListener('input', function(e) {
+            e.target.value = formatBusinessNumber(e.target.value);
+        });
+    }
+
+    // 전화번호 포맷팅 (담당자, 각 폼별로 id가 다르면 각각 처리)
+    const psacManagerPhoneInputs = ['psac-managerPhone', 'psac-managerMobile'];
+    psacManagerPhoneInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', function(e) {
+                e.target.value = formatPhoneNumber(e.target.value);
+            });
+        }
+    });
+    const relayManagerPhoneInputs = ['relayschool-managerPhone', 'relayschool-managerMobile'];
+    relayManagerPhoneInputs.forEach(id => {
         const input = document.getElementById(id);
         if (input) {
             input.addEventListener('input', function(e) {
@@ -43,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
    ========================================================================== */
 
 // 웹 앱 URL - 실제 Apps Script 웹 앱 URL로 변경해주세요
-const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyTKBJcBfl-nctGzu_BTU_2hYUm-pzz71dmLDEMm1Aj3eGCJwtxp1-ZQdl4s6J_CCgh/exec';
+const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwCdoOc7_nFbr5NJHnOFmUvxkTLGBClIim3Ad6tyGlBgRlcUO46tv9nGRNlUcY5a0Mp/exec';
 
 // 공통 변수
 let psacStudentCount = 0;
@@ -198,28 +215,6 @@ function submitFormData(formData) {
    공통 이벤트 리스너
    ========================================================================== */
 
-// 페이지 로드 시 공통 이벤트 설정
-// document.addEventListener('DOMContentLoaded', function() {
-//     // 사업자등록번호 포맷팅
-//     const businessNumberInput = document.getElementById('businessNumber');
-//     if (businessNumberInput) {
-//         businessNumberInput.addEventListener('input', function(e) {
-//             e.target.value = formatBusinessNumber(e.target.value);
-//         });
-//     }
-    
-//     // 전화번호 포맷팅 (담당자)
-//     const managerPhoneInputs = ['managerPhone', 'managerMobile'];
-//     managerPhoneInputs.forEach(id => {
-//         const input = document.getElementById(id);
-//         if (input) {
-//             input.addEventListener('input', function(e) {
-//                 e.target.value = formatPhoneNumber(e.target.value);
-//             });
-//         }
-//     });
-// });
-
 // 동적으로 추가되는 수강자 전화번호 포맷팅
 document.addEventListener('input', function(e) {
     if (e.target.type === 'tel' && (e.target.id.includes('studentPhone') || e.target.id.includes('studentMobile'))) {
@@ -334,19 +329,19 @@ function collectPsacFormData() {
     return {
         formType: 'psac',
         companyInfo: {
-            companyName: document.getElementById('companyName').value,
-            representative: document.getElementById('representative').value,
-            businessNumber: document.getElementById('businessNumber').value,
-            businessType: document.getElementById('businessType').value,
-            address: document.getElementById('address').value
+            companyName: document.getElementById('psac-companyName').value,
+            representative: document.getElementById('psac-representative').value,
+            businessNumber: document.getElementById('psac-businessNumber').value,
+            businessType: document.getElementById('psac-businessType').value,
+            address: document.getElementById('psac-address').value
         },
         managerInfo: {
-            name: document.getElementById('managerName').value,
-            department: document.getElementById('managerDepartment').value,
-            position: document.getElementById('managerPosition').value,
-            phone: document.getElementById('managerPhone').value,
-            mobile: document.getElementById('managerMobile').value,
-            email: document.getElementById('managerEmail').value
+            name: document.getElementById('psac-managerName').value,
+            department: document.getElementById('psac-managerDepartment').value,
+            position: document.getElementById('psac-managerPosition').value,
+            phone: document.getElementById('psac-managerPhone').value,
+            mobile: document.getElementById('psac-managerMobile').value,
+            email: document.getElementById('psac-managerEmail').value
         },
         students: students
     };
@@ -559,19 +554,19 @@ function collectRelayschoolFormData() {
     return {
         formType: 'relay',
         companyInfo: {
-            companyName: document.getElementById('companyName').value,
-            representative: document.getElementById('representative').value,
-            businessNumber: document.getElementById('businessNumber').value,
-            businessType: document.getElementById('businessType').value,
-            address: document.getElementById('address').value
+            companyName: document.getElementById('relayschool-companyName').value,
+            representative: document.getElementById('relayschool-representative').value,
+            businessNumber: document.getElementById('relayschool-businessNumber').value,
+            businessType: document.getElementById('relayschool-businessType').value,
+            address: document.getElementById('relayschool-address').value
         },
         managerInfo: {
-            name: document.getElementById('managerName').value,
-            department: document.getElementById('managerDepartment').value,
-            position: document.getElementById('managerPosition').value,
-            phone: document.getElementById('managerPhone').value,
-            mobile: document.getElementById('managerMobile').value,
-            email: document.getElementById('managerEmail').value
+            name: document.getElementById('relayschool-managerName').value,
+            department: document.getElementById('relayschool-managerDepartment').value,
+            position: document.getElementById('relayschool-managerPosition').value,
+            phone: document.getElementById('relayschool-managerPhone').value,
+            mobile: document.getElementById('relayschool-managerMobile').value,
+            email: document.getElementById('relayschool-managerEmail').value
         },
         students: students
     };
@@ -581,6 +576,7 @@ function collectRelayschoolFormData() {
 function validateRelayschoolForm(formData) {
     // 수강자 정보 유효성 검사
     if (formData.students.length === 0) {
+        alert('수강자 없음');
         showMessage('최소 1명의 수강자를 등록해 주세요.', 'error');
         return false;
     }
@@ -588,24 +584,28 @@ function validateRelayschoolForm(formData) {
     // 각 수강자별 과정/일정 선택 확인
     for (let i = 0; i < formData.students.length; i++) {
         const student = formData.students[i];
-
         if (!student.name.trim()) {
+            alert(`수강자 ${i + 1} 이름 없음`);
             showMessage(`수강자 ${i + 1}의 이름을 입력해 주세요.`, 'error');
             return false;
         }
         if (!validateEmail(student.email)) {
+            alert(`수강자 ${i + 1} 이메일 오류: ${student.email}`);
             showMessage(`수강자 ${i + 1}의 올바른 이메일을 입력해 주세요.`, 'error');
             return false;
         }
         if (!validatePhoneNumber(student.mobile)) {
+            alert(`수강자 ${i + 1} 핸드폰 오류: ${student.mobile}`);
             showMessage(`수강자 ${i + 1}의 올바른 핸드폰 번호를 입력해 주세요.`, 'error');
             return false;
         }
         if (!student.course) {
+            alert(`수강자 ${i + 1} 과정 미선택`);
             showMessage(`수강자 ${i + 1}의 과정을 선택해 주세요.`, 'error');
             return false;
         }
         if (!student.schedule) {
+            alert(`수강자 ${i + 1} 일정 미선택`);
             showMessage(`수강자 ${i + 1}의 일정을 선택해 주세요.`, 'error');
             return false;
         }
@@ -613,18 +613,22 @@ function validateRelayschoolForm(formData) {
 
     // 기본 정보 유효성 검사 (PSAC와 동일)
     if (!formData.companyInfo.companyName.trim()) {
+        alert('회사명을 입력해 주세요.');
         showMessage('회사명을 입력해 주세요.', 'error');
         return false;
     }
     if (!validateBusinessNumber(formData.companyInfo.businessNumber)) {
+        alert('올바른 사업자등록번호를 입력해 주세요.');
         showMessage('올바른 사업자등록번호를 입력해 주세요. (000-00-00000)', 'error');
         return false;
     }
     if (!validateEmail(formData.managerInfo.email)) {
+        alert('올바른 담당자 이메일을 입력해 주세요.');
         showMessage('올바른 담당자 이메일을 입력해 주세요.', 'error');
         return false;
     }
     if (!validatePhoneNumber(formData.managerInfo.mobile)) {
+        alert('올바른 담당자 핸드폰 번호를 입력해 주세요.');
         showMessage('올바른 담당자 핸드폰 번호를 입력해 주세요.', 'error');
         return false;
     }
@@ -635,40 +639,36 @@ function validateRelayschoolForm(formData) {
 // Relay School 폼 제출 처리
 async function submitRelayschoolForm(e) {
     e.preventDefault();
-    
+    // alert('1. 함수 진입');
     toggleLoading(true);
-    
+
     try {
         const formData = collectRelayschoolFormData();
-        
+        console.log(formData);
+        console.log('students:', formData.students);
+        console.log('formType:', formData.formType);
+            if (formData.students.length > 0) {
+                console.log('첫번째 수강자:', formData.students[0]);
+            }
+        alert('2. 데이터 수집 완료');
+
         if (!validateRelayschoolForm(formData)) {
+            alert('3. 유효성 검사 실패');
             return;
         }
-        
-        // CORS 우회를 위한 iframe 방식 사용
+        // alert('4. 유효성 검사 통과');
+
         await submitFormData(formData);
-        
+        alert('5. 데이터 전송 완료');
+
         showMessage(`Relay School 신청이 완료되었습니다. (수강자 ${formData.students.length}명)`, 'success');
         document.getElementById('relayschool-form').reset();
-        // 수강자 목록 초기화
         document.getElementById('relayschool-students-container').innerHTML = '';
-        document.getElementById('relayschool-selected-course').classList.remove('show');
         relayStudentCount = 0;
-        // addRelayschoolStudent();
-        
     } catch (error) {
-        console.error('Error:', error);
+        alert('6. 에러 발생: ' + error);
         showMessage('서버 연결에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
     } finally {
         toggleLoading(false);
     }
-}
-
-const relayForm = document.getElementById('relayschool-form');
-if (relayForm) {
-    relayForm.addEventListener('submit', function(e) {
-        alert('Relay School 폼 제출 이벤트 발생!');
-        // e.preventDefault();
-        // submitRelayschoolForm(e);
-    });
 }

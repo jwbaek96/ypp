@@ -110,7 +110,7 @@ const relayCoursesData = {
    ========================================================================== */
 
 // 메시지 표시 함수
-function showMessage(message, type, containerId = 'message') {
+function showMessage(message, type, containerId) {
     const messageDiv = document.getElementById(containerId);
     if (messageDiv) {
         messageDiv.textContent = message;
@@ -126,7 +126,7 @@ function showMessage(message, type, containerId = 'message') {
 }
 
 // 로딩 상태 표시/숨김
-function toggleLoading(show, containerId = 'loading') {
+function toggleLoading(show, containerId) {
     const loadingDiv = document.getElementById(containerId);
     if (loadingDiv) {
         loadingDiv.style.display = show ? 'block' : 'none';
@@ -429,7 +429,7 @@ function validatePsacForm(formData) {
 async function submitPsacForm(e) {
     e.preventDefault();
     
-    toggleLoading(true);
+    toggleLoading(true, 'psac-loading');
     
     try {
         const formData = collectPsacFormData();
@@ -441,7 +441,7 @@ async function submitPsacForm(e) {
         // CORS 우회를 위한 iframe 방식 사용
         await submitFormData(formData);
         
-        showMessage(`PSAC 신청이 완료되었습니다. (수강자 ${formData.students.length}명)`, 'success');
+        showMessage(`PSAC 신청이 완료되었습니다. (수강자 ${formData.students.length}명)`, 'success','psac-message');
         document.getElementById('psac-form').reset();
         // 수강자 목록 초기화
         document.getElementById('psac-students-container').innerHTML = '';
@@ -662,7 +662,7 @@ function validateRelayschoolForm(formData) {
 async function submitRelayschoolForm(e) {
     e.preventDefault();
     // alert('1. 함수 진입');
-    toggleLoading(true);
+    toggleLoading(true, 'rs-loading');
 
     try {
         const formData = collectRelayschoolFormData();
@@ -683,7 +683,7 @@ async function submitRelayschoolForm(e) {
         await submitFormData(formData);
         // alert('5. 데이터 전송 완료');
 
-        showMessage(`Relay School 신청이 완료되었습니다. (수강자 ${formData.students.length}명)`, 'success');
+        showMessage(`Relay School 신청이 완료되었습니다. (수강자 ${formData.students.length}명)`, 'success','rs-message');
         document.getElementById('relayschool-form').reset();
         document.getElementById('relayschool-students-container').innerHTML = '';
         relayStudentCount = 0;

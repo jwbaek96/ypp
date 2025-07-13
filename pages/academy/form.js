@@ -1,5 +1,12 @@
 // YPP 아카데미 신청 폼 통합 JavaScript
-
+// PSAC 페이지 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            // 첫 번째 수강자 자동 추가
+            addPsacStudent();
+            
+            // 폼 제출 이벤트 연결
+            document.getElementById('psac-form').addEventListener('submit', submitPsacForm);
+        });
 /* ==========================================================================
    공통 설정 및 변수
    ========================================================================== */

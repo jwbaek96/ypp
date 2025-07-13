@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/pages/layout.css">
     <link rel="stylesheet" href="academy.css">
+    <link rel="stylesheet" href="form.css">
     <style>
         .rs-section-title {
             font-size: 1.5rem;
@@ -87,19 +88,25 @@
                     <a href="#psac-curriculum" class="section-nav-link"
                         data-eng="Curriculum"
                         data-kor="교육 과정">교육 과정</a>
-                </div>
-
-                <!-- Section Navigation for Relay School -->
-                <div class="section-nav" id="section-nav-relay-school" style="display: none;">
-                    <a href="#rs-overview" class="section-nav-link"
+                    <a href="#psac-apply" class="section-nav-link"
+                        data-eng="Apply for Training"
+                        data-kor="교육 신청">교육 신청</a>
+                    </div>
+                    
+                    <!-- Section Navigation for Relay School -->
+                    <div class="section-nav" id="section-nav-relay-school" style="display: none;">
+                        <a href="#rs-overview" class="section-nav-link"
                         data-eng="Overview"
                         data-kor="개요">개요</a>
-                    <!-- <a href="#rs-info" class="section-nav-link"
+                        <!-- <a href="#rs-info" class="section-nav-link"
                         data-eng="Course Information"
                         data-kor="교육 안내">교육 안내</a> -->
-                    <a href="#rs-curriculum" class="section-nav-link"
-                        data-eng="Curriculum"
-                        data-kor="교육 과정">교육 과정</a>
+                        <a href="#rs-curriculum" class="section-nav-link"
+                            data-eng="Curriculum"
+                            data-kor="교육 과정">교육 과정</a>
+                        <a href="#rs-apply" class="section-nav-link"
+                            data-eng="Apply for Training"
+                            data-kor="교육 신청">교육 신청</a>
             </div>
         </section>
 
@@ -254,7 +261,7 @@
                     
                     <div class="content-grid">
                         <!-- 과정 개요 -->
-                        <div id="psac-overview" class="content-block full-width">
+                        <div id="psac-overview" class="content-block">
                             <h3 class="block-title"
                                 data-eng="Course Overview"
                                 data-kor="과정 개요">과정 개요</h3>
@@ -392,7 +399,7 @@
                         </div>
 
                         <!-- 교육 안내 -->
-                        <div id="psac-info" class="content-block full-width">
+                        <div id="psac-info" class="content-block">
                             <h3 class="block-title"
                                 data-eng="Course Information"
                                 data-kor="교육 안내">교육 안내</h3>
@@ -458,7 +465,7 @@
                         </div>
 
                         <!-- 교육 과정 -->
-                        <div id="psac-curriculum" class="content-block full-width">
+                        <div id="psac-curriculum" class="content-block">
                             <h3 class="block-title"
                                 data-eng="Curriculum"
                                 data-kor="교육 과정">교육 과정</h3>
@@ -2208,6 +2215,140 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- 교육 신청 -->
+                        <div id="psac-apply" class="ac-form-container content-block">
+                                <h3 class="block-title"
+                                data-eng="Apply for PSAC 2025 Training"
+                                data-kor="YPP 아카데미 PSAC 2025 교육 신청"
+                                >YPP 아카데미 PSAC 2025 교육 신청</h3>
+                                <!-- <p>Power System Advanced Course 전력계통 전문 과정 신청서</p> -->
+                            <div class="ac-form-content">
+                                <form id="psac-form">
+                                    <!-- 과정 정보 -->
+                                    <div class="ac-form-course-info">
+                                        <h3>PSAC 2025 (Power System Advanced Course)</h3>
+                                        <p><strong>교육일정:</strong> 2024년 9월 3일(화) ~ 12월 5일(목)</p>
+                                        <p><strong>교육방식:</strong> 12주 커리큘럼 중 선택 수강 (수강자별 개별 선택 가능)</p>
+                                        
+                                        <div class="psac-course-list">
+                                            <h4>전체 커리큘럼</h4>
+                                            <ul>
+                                                <li>1주: 전력계통 개론 및 기초 (9.3 - 5)</li>
+                                                <li>2주: 전력계통(설비) 보호기술 (9.9 - 11)</li>
+                                                <li>3주: 동기발전기 전문적 기술 (9.24 - 27)</li>
+                                                <li>4주: 전력계통 안정도 해석 (10.1 - 3)</li>
+                                                <li>5주: 전력계통 운영 및 제어 (10.8 - 10)</li>
+                                                <li>6주: 신재생에너지 연계 기술 (10.15 - 17)</li>
+                                                <li>7주: 전력품질 및 고조파 (10.22 - 24)</li>
+                                                <li>8주: 전력계통 시뮬레이션 (10.29 - 31)</li>
+                                                <li>9주: 스마트그리드 기술 (11.5 - 7)</li>
+                                                <li>10주: 전력계통 보안 및 사이버보안 (11.12 - 14)</li>
+                                                <li>11주: 전력시장 및 경제성 분석 (11.19 - 21)</li>
+                                                <li>12주: 종합 프로젝트 발표 (11.26 - 28)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 신청업체 정보 -->
+                                    <div class="ac-form-section">
+                                        <h2 class="ac-form-section-title">신청업체 정보</h2>
+                                        
+                                        <div class="ac-form-row">
+                                            <div class="ac-form-group">
+                                                <label for="companyName" class="ac-form-label ac-form-required">회사명</label>
+                                                <input type="text" id="companyName" name="companyName" class="ac-form-input" required>
+                                            </div>
+                                            <div class="ac-form-group">
+                                                <label for="representative" class="ac-form-label ac-form-required">대표자</label>
+                                                <input type="text" id="representative" name="representative" class="ac-form-input" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="ac-form-row">
+                                            <div class="ac-form-group">
+                                                <label for="businessNumber" class="ac-form-label ac-form-required">사업자등록번호</label>
+                                                <input type="text" id="businessNumber" name="businessNumber" class="ac-form-input" placeholder="000-00-00000" required>
+                                            </div>
+                                            <div class="ac-form-group">
+                                                <label for="businessType" class="ac-form-label">종목/업태</label>
+                                                <input type="text" id="businessType" name="businessType" class="ac-form-input">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="ac-form-group">
+                                            <label for="address" class="ac-form-label ac-form-required">주소</label>
+                                            <textarea id="address" name="address" class="ac-form-textarea" required></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 담당자 정보 -->
+                                    <div class="ac-form-section">
+                                        <h2 class="ac-form-section-title">담당자 정보</h2>
+                                        
+                                        <div class="ac-form-row">
+                                            <div class="ac-form-group">
+                                                <label for="managerName" class="ac-form-label ac-form-required">교육담당자</label>
+                                                <input type="text" id="managerName" name="managerName" class="ac-form-input" required>
+                                            </div>
+                                            <div class="ac-form-group">
+                                                <label for="managerDepartment" class="ac-form-label">담당부서</label>
+                                                <input type="text" id="managerDepartment" name="managerDepartment" class="ac-form-input">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="ac-form-row">
+                                            <div class="ac-form-group">
+                                                <label for="managerPosition" class="ac-form-label">직급</label>
+                                                <input type="text" id="managerPosition" name="managerPosition" class="ac-form-input">
+                                            </div>
+                                            <div class="ac-form-group">
+                                                <label for="managerPhone" class="ac-form-label">전화번호</label>
+                                                <input type="tel" id="managerPhone" name="managerPhone" class="ac-form-input" placeholder="000-0000-0000">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="ac-form-row">
+                                            <div class="ac-form-group">
+                                                <label for="managerMobile" class="ac-form-label ac-form-required">핸드폰</label>
+                                                <input type="tel" id="managerMobile" name="managerMobile" class="ac-form-input" placeholder="010-0000-0000" required>
+                                            </div>
+                                            <div class="ac-form-group">
+                                                <label for="managerEmail" class="ac-form-label ac-form-required">이메일</label>
+                                                <input type="email" id="managerEmail" name="managerEmail" class="ac-form-input" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 수강자 정보 -->
+                                    <div class="ac-form-section">
+                                        <h2 class="ac-form-section-title">수강자 정보</h2>
+                                        <p style="margin-bottom: 20px; color: #666; font-size: 14px;">
+                                            각 수강자별로 원하는 세부교육을 개별 선택할 수 있습니다.
+                                        </p>
+                                        
+                                        <button type="button" class="ac-form-btn ac-form-btn-secondary ac-form-add-btn" onclick="addPsacStudent()">
+                                            + 수강자 추가
+                                        </button>
+                                        
+                                        <div id="psac-students-container">
+                                            <!-- 수강자 정보가 동적으로 추가됩니다 -->
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 메시지 및 로딩 -->
+                                    <div class="ac-form-message" id="message"></div>
+                                    <div class="ac-form-loading" id="loading">
+                                        <p>신청서를 제출하는 중입니다...</p>
+                                    </div>
+                                    
+                                    <!-- 제출 버튼 -->
+                                    <button type="submit" class="ac-form-btn ac-form-btn-success">
+                                        PSAC 교육 신청서 제출
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -2418,8 +2559,8 @@
                                         <tbody>
                                             <tr>
                                                 <th data-eng="Course Registration" data-kor="교육신청">교육신청</th>
-                                                <td data-eng="Website registration: www.ypp.co.kr → Training → RelaySchool2025 → Course Application"
-                                                    data-kor="홈페이지 등록: www.ypp.co.kr → 교육훈련 → RelaySchool2025 → 수강신청">홈페이지 등록: www.ypp.co.kr → 교육훈련 → RelaySchool2025 → 수강신청</td>
+                                                <td data-eng="Website registration: www.ypp.co.kr → YPP Academy → RelaySchool → Course Application"
+                                                    data-kor="홈페이지 등록: www.ypp.co.kr → 교육훈련 → RelaySchool2025 → 수강신청">홈페이지 등록: www.ypp.co.kr → YPP아카데미 → RelaySchool → 교육신청</td>
                                             </tr>
                                             <tr>
                                                 <th data-eng="Tuition Payment (1 week before course start)" data-kor="교육비 입금<br>(개강 1주일 전)">교육비 입금<br>(개강 1주일 전)</th>
@@ -3098,7 +3239,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <th class="time-cell">4교시<br>13:10~14:00</th>
-                                                                <td rowspan="3" class="subject-cell">
+                                                                <td rowspan="2" class="subject-cell">
                                                                     <div class="subject-title">디지털 보호릴레이 개론</div>
                                                                     <div class="instructor">(이태호)</div>
                                                                     <div class="note">※13:30~15:00 (90분)</div>
@@ -3110,13 +3251,13 @@
                                                             </tr>
                                                             <tr>
                                                                 <th class="time-cell">6교시<br>15:10~16:00</th>
-                                                                <td rowspan="3" class="subject-cell">
-                                                                    <div class="subject-title">전동기 보호</div>
-                                                                    <div class="instructor">(정승연)</div>
-                                                                </td>
                                                                 <td rowspan="2" class="subject-cell">
                                                                     <div class="subject-title">UR Set up & Setting</div>
                                                                     <div class="instructor">(이태호)</div>
+                                                                </td>
+                                                                <td rowspan="3" class="subject-cell">
+                                                                    <div class="subject-title">전동기 보호</div>
+                                                                    <div class="instructor">(정승연)</div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -3227,7 +3368,9 @@
     <script src="/js/scrolltotop.js"></script>
     <!-- 한영 전환 기능 -->
     <script src="/js/lang-switch.js"></script>
-    <!-- _________________________________________ -->
+    <!-- 교육 신청 기능 -->
+    <script src="form.js"></script>
+
 
     <script>
 // academy.js - YPP아카데미 페이지 탭 네비게이션 기능 (ESG 페이지 기반)

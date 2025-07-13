@@ -1,21 +1,70 @@
 // YPP 아카데미 신청 폼 통합 JavaScript
-// PSAC 페이지 초기화
-        document.addEventListener('DOMContentLoaded', function() {
-            // 첫 번째 수강자 자동 추가
-            addPsacStudent();
-            
-            // 폼 제출 이벤트 연결
-            document.getElementById('psac-form').addEventListener('submit', submitPsacForm);
+document.addEventListener('DOMContentLoaded', function() {
+    // Relay School 폼이 있을 경우 첫 번째 수강자 자동 추가
+    if (document.getElementById('relayschool-students-container')) {
+        addRelayschoolStudent();
+    }
+
+    // PSAC 폼이 있을 경우 첫 번째 수강자 자동 추가
+    if (document.getElementById('psac-students-container')) {
+        addPsacStudent();
+    }
+
+    // 폼 제출 이벤트 연결
+    const psacForm = document.getElementById('psac-form');
+    if (psacForm) {
+        psacForm.addEventListener('submit', submitPsacForm);
+    }
+
+    const relayForm = document.getElementById('relayschool-form');
+    if (relayForm) {
+        relayForm.addEventListener('submit', submitRelayschoolForm);
+    }
+
+    // 사업자등록번호 포맷팅 (각 폼별로 id가 다르면 각각 처리)
+    const psacBusinessNumberInput = document.getElementById('psac-businessNumber');
+    if (psacBusinessNumberInput) {
+        psacBusinessNumberInput.addEventListener('input', function(e) {
+            e.target.value = formatBusinessNumber(e.target.value);
         });
+    }
+    const relayBusinessNumberInput = document.getElementById('relayschool-businessNumber');
+    if (relayBusinessNumberInput) {
+        relayBusinessNumberInput.addEventListener('input', function(e) {
+            e.target.value = formatBusinessNumber(e.target.value);
+        });
+    }
+
+    // 전화번호 포맷팅 (담당자, 각 폼별로 id가 다르면 각각 처리)
+    const psacManagerPhoneInputs = ['psac-managerPhone', 'psac-managerMobile'];
+    psacManagerPhoneInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', function(e) {
+                e.target.value = formatPhoneNumber(e.target.value);
+            });
+        }
+    });
+    const relayManagerPhoneInputs = ['relayschool-managerPhone', 'relayschool-managerMobile'];
+    relayManagerPhoneInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', function(e) {
+                e.target.value = formatPhoneNumber(e.target.value);
+            });
+        }
+    });
+});
 /* ==========================================================================
    공통 설정 및 변수
    ========================================================================== */
 
 // 웹 앱 URL - 실제 Apps Script 웹 앱 URL로 변경해주세요
-const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyTKBJcBfl-nctGzu_BTU_2hYUm-pzz71dmLDEMm1Aj3eGCJwtxp1-ZQdl4s6J_CCgh/exec';
+const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwCdoOc7_nFbr5NJHnOFmUvxkTLGBClIim3Ad6tyGlBgRlcUO46tv9nGRNlUcY5a0Mp/exec';
 
 // 공통 변수
-let studentCount = 0;
+let psacStudentCount = 0;
+let relayStudentCount = 0;
 
 // 세부 교육 과정 리스트 (PSAC)
 const psacCourses = [
@@ -34,22 +83,25 @@ const psacCourses = [
 ];
 
 // Relay School 과정별 일정
-const relayschoolSchedules = {
-    'A과정': {
-        name: 'Relay School 2025 A과정 (기초)',
-        schedule: '2025년 3월 3일(월) ~ 3월 7일(금)',
-        description: '보호계전기 기초 과정'
-    },
-    'B과정': {
-        name: 'Relay School 2025 B과정 (중급)',
-        schedule: '2025년 6월 2일(월) ~ 6월 6일(금)',
-        description: '보호계전기 중급 과정'
-    },
-    'C과정': {
-        name: 'Relay School 2025 C과정 (고급)',
-        schedule: '2025년 9월 1일(월) ~ 9월 5일(금)',
-        description: '보호계전기 고급 과정'
-    }
+const relayCoursesData = {
+    '디지털릴레이 기본반': [
+        '2025년 3월 19일(수) ~ 3월 21일(금)',
+        '2025년 9월 17일(수) ~ 9월 19일(금)'
+    ],
+    '디지털릴레이 고급반': [
+        '2025년 4월 16일(수) ~ 4월 18일(금)',
+        '2025년 10월 22일(수) ~ 10월 24일(금)'
+    ],
+    '고장분석반': [
+        '2025년 5월 21일(수) ~ 5월 23일(금)',
+        '2025년 11월 19일(수) ~ 11월 21일(금)'
+    ],
+    'ECMS운영반': [
+        '2025년 6월 18일(수) ~ 6월 20일(금)'
+    ],
+    '원자력 특성화반': [
+        '2025년 7월 16일(수) ~ 7월 20일(일)'
+    ]
 };
 
 /* ==========================================================================
@@ -95,11 +147,32 @@ function formatBusinessNumber(value) {
 // 전화번호 포맷팅
 function formatPhoneNumber(value) {
     value = value.replace(/[^0-9]/g, '');
-    if (value.length >= 3 && value.length <= 7) {
-        value = value.substring(0, 3) + '-' + value.substring(3);
-    } else if (value.length >= 8) {
-        value = value.substring(0, 3) + '-' + value.substring(3, 7) + '-' + value.substring(7, 11);
+
+    // 02 지역번호 (서울)
+    if (value.startsWith('02')) {
+        if (value.length > 2 && value.length <= 5) {
+            value = value.slice(0, 2) + '-' + value.slice(2);
+        } else if (value.length > 5 && value.length <= 9) {
+            value = value.slice(0, 2) + '-' + value.slice(2, value.length - 4) + '-' + value.slice(-4);
+        } else if (value.length > 9) {
+            value = value.slice(0, 2) + '-' + value.slice(2, value.length - 4) + '-' + value.slice(-4);
+        }
     }
+    // 그 외 지역번호 (3자리)
+    else if (value.length >= 9 && value.length <= 11) {
+        if (value.length === 9) { // 3-3-3
+            value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6);
+        } else if (value.length === 10) { // 3-3-4 or 3-4-3
+            value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6);
+        } else if (value.length === 11) { // 3-4-4 (휴대폰)
+            value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7);
+        }
+    }
+    // 8자리(옛날번호 등)
+    else if (value.length === 8) {
+        value = value.slice(0, 4) + '-' + value.slice(4);
+    }
+
     return value;
 }
 
@@ -163,28 +236,6 @@ function submitFormData(formData) {
    공통 이벤트 리스너
    ========================================================================== */
 
-// 페이지 로드 시 공통 이벤트 설정
-document.addEventListener('DOMContentLoaded', function() {
-    // 사업자등록번호 포맷팅
-    const businessNumberInput = document.getElementById('businessNumber');
-    if (businessNumberInput) {
-        businessNumberInput.addEventListener('input', function(e) {
-            e.target.value = formatBusinessNumber(e.target.value);
-        });
-    }
-    
-    // 전화번호 포맷팅 (담당자)
-    const managerPhoneInputs = ['managerPhone', 'managerMobile'];
-    managerPhoneInputs.forEach(id => {
-        const input = document.getElementById(id);
-        if (input) {
-            input.addEventListener('input', function(e) {
-                e.target.value = formatPhoneNumber(e.target.value);
-            });
-        }
-    });
-});
-
 // 동적으로 추가되는 수강자 전화번호 포맷팅
 document.addEventListener('input', function(e) {
     if (e.target.type === 'tel' && (e.target.id.includes('studentPhone') || e.target.id.includes('studentMobile'))) {
@@ -198,56 +249,56 @@ document.addEventListener('input', function(e) {
 
 // PSAC 수강자 추가
 function addPsacStudent() {
-    studentCount++;
+    psacStudentCount++;
     const container = document.getElementById('psac-students-container');
     
     const studentDiv = document.createElement('div');
     studentDiv.className = 'ac-form-student-section';
-    studentDiv.id = `psac-student-${studentCount}`;
-    
+    studentDiv.id = `psac-student-${psacStudentCount}`;
+    // 
     const courseCheckboxes = psacCourses.map((course, index) => `
         <div class="psac-checkbox-item">
-            <input type="checkbox" id="psac-course-${studentCount}-${index}" name="psac-student-${studentCount}-courses" value="${course}">
-            <label for="psac-course-${studentCount}-${index}">${course}</label>
+            <input type="checkbox" id="psac-course-${psacStudentCount}-${index}" name="psac-student-${psacStudentCount}-courses" value="${course}">
+            <label for="psac-course-${psacStudentCount}-${index}">${course}</label>
         </div>
     `).join('');
     
     studentDiv.innerHTML = `
         <div class="ac-form-student-header">
-            <div class="ac-form-student-title">수강자 ${studentCount}</div>
-            ${studentCount > 1 ? `<button type="button" class="ac-form-btn ac-form-btn-danger" onclick="removePsacStudent(${studentCount})">삭제</button>` : ''}
+            <div class="ac-form-student-title">수강자 ${psacStudentCount}</div>
+            ${psacStudentCount > 1 ? `<button type="button" class="ac-form-btn ac-form-btn-danger" onclick="removePsacStudent(${psacStudentCount})">삭제</button>` : ''}
         </div>
         
         <div class="ac-form-row">
             <div class="ac-form-group">
-                <label for="psac-studentName-${studentCount}" class="ac-form-label ac-form-required">수강자명</label>
-                <input type="text" id="psac-studentName-${studentCount}" name="studentName-${studentCount}" class="ac-form-input" required>
+                <label for="psac-studentName-${psacStudentCount}" class="ac-form-label ac-form-required">수강자명</label>
+                <input type="text" id="psac-studentName-${psacStudentCount}" name="studentName-${psacStudentCount}" class="ac-form-input" required>
             </div>
             <div class="ac-form-group">
-                <label for="psac-studentDepartment-${studentCount}" class="ac-form-label ac-form-required">부서</label>
-                <input type="text" id="psac-studentDepartment-${studentCount}" name="studentDepartment-${studentCount}" class="ac-form-input" required>
-            </div>
-        </div>
-        
-        <div class="ac-form-row">
-            <div class="ac-form-group">
-                <label for="psac-studentPosition-${studentCount}" class="ac-form-label ac-form-required">직급</label>
-                <input type="text" id="psac-studentPosition-${studentCount}" name="studentPosition-${studentCount}" class="ac-form-input" required>
-            </div>
-            <div class="ac-form-group">
-                <label for="psac-studentPhone-${studentCount}" class="ac-form-label">전화번호</label>
-                <input type="tel" id="psac-studentPhone-${studentCount}" name="studentPhone-${studentCount}" class="ac-form-input" placeholder="000-0000-0000">
+                <label for="psac-studentDepartment-${psacStudentCount}" class="ac-form-label ac-form-required">부서</label>
+                <input type="text" id="psac-studentDepartment-${psacStudentCount}" name="studentDepartment-${psacStudentCount}" class="ac-form-input" required>
             </div>
         </div>
         
         <div class="ac-form-row">
             <div class="ac-form-group">
-                <label for="psac-studentMobile-${studentCount}" class="ac-form-label ac-form-required">핸드폰</label>
-                <input type="tel" id="psac-studentMobile-${studentCount}" name="studentMobile-${studentCount}" class="ac-form-input" placeholder="010-0000-0000" required>
+                <label for="psac-studentPosition-${psacStudentCount}" class="ac-form-label ac-form-required">직급</label>
+                <input type="text" id="psac-studentPosition-${psacStudentCount}" name="studentPosition-${psacStudentCount}" class="ac-form-input" required>
             </div>
             <div class="ac-form-group">
-                <label for="psac-studentEmail-${studentCount}" class="ac-form-label ac-form-required">이메일</label>
-                <input type="email" id="psac-studentEmail-${studentCount}" name="studentEmail-${studentCount}" class="ac-form-input" required>
+                <label for="psac-studentPhone-${psacStudentCount}" class="ac-form-label">전화번호</label>
+                <input type="tel" id="psac-studentPhone-${psacStudentCount}" name="studentPhone-${psacStudentCount}" class="ac-form-input" placeholder="000-0000-0000">
+            </div>
+        </div>
+        
+        <div class="ac-form-row">
+            <div class="ac-form-group">
+                <label for="psac-studentMobile-${psacStudentCount}" class="ac-form-label ac-form-required">핸드폰</label>
+                <input type="tel" id="psac-studentMobile-${psacStudentCount}" name="studentMobile-${psacStudentCount}" class="ac-form-input" placeholder="010-0000-0000" required>
+            </div>
+            <div class="ac-form-group">
+                <label for="psac-studentEmail-${psacStudentCount}" class="ac-form-label ac-form-required">이메일</label>
+                <input type="email" id="psac-studentEmail-${psacStudentCount}" name="studentEmail-${psacStudentCount}" class="ac-form-input" required>
             </div>
         </div>
         
@@ -299,19 +350,19 @@ function collectPsacFormData() {
     return {
         formType: 'psac',
         companyInfo: {
-            companyName: document.getElementById('companyName').value,
-            representative: document.getElementById('representative').value,
-            businessNumber: document.getElementById('businessNumber').value,
-            businessType: document.getElementById('businessType').value,
-            address: document.getElementById('address').value
+            companyName: document.getElementById('psac-companyName').value,
+            representative: document.getElementById('psac-representative').value,
+            businessNumber: document.getElementById('psac-businessNumber').value,
+            businessType: document.getElementById('psac-businessType').value,
+            address: document.getElementById('psac-address').value
         },
         managerInfo: {
-            name: document.getElementById('managerName').value,
-            department: document.getElementById('managerDepartment').value,
-            position: document.getElementById('managerPosition').value,
-            phone: document.getElementById('managerPhone').value,
-            mobile: document.getElementById('managerMobile').value,
-            email: document.getElementById('managerEmail').value
+            name: document.getElementById('psac-managerName').value,
+            department: document.getElementById('psac-managerDepartment').value,
+            position: document.getElementById('psac-managerPosition').value,
+            phone: document.getElementById('psac-managerPhone').value,
+            mobile: document.getElementById('psac-managerMobile').value,
+            email: document.getElementById('psac-managerEmail').value
         },
         students: students
     };
@@ -393,8 +444,8 @@ async function submitPsacForm(e) {
         document.getElementById('psac-form').reset();
         // 수강자 목록 초기화
         document.getElementById('psac-students-container').innerHTML = '';
-        studentCount = 0;
-        addPsacStudent();
+        psacStudentCount = 0;
+        // addPsacStudent();
         
     } catch (error) {
         console.error('Error:', error);
@@ -410,51 +461,69 @@ async function submitPsacForm(e) {
 
 // Relay School 수강자 추가
 function addRelayschoolStudent() {
-    studentCount++;
+    relayStudentCount++;
     const container = document.getElementById('relayschool-students-container');
     
     const studentDiv = document.createElement('div');
     studentDiv.className = 'ac-form-student-section';
-    studentDiv.id = `relayschool-student-${studentCount}`;
+    studentDiv.id = `relayschool-student-${relayStudentCount}`;
     
     studentDiv.innerHTML = `
         <div class="ac-form-student-header">
-            <div class="ac-form-student-title">수강자 ${studentCount}</div>
-            ${studentCount > 1 ? `<button type="button" class="ac-form-btn ac-form-btn-danger" onclick="removeRelayschoolStudent(${studentCount})">삭제</button>` : ''}
+            <div class="ac-form-student-title">수강자 ${relayStudentCount}</div>
+            ${relayStudentCount > 1 ? `<button type="button" class="ac-form-btn ac-form-btn-danger" onclick="removeRelayschoolStudent(${relayStudentCount})">삭제</button>` : ''}
         </div>
         
         <div class="ac-form-row">
             <div class="ac-form-group">
-                <label for="relayschool-studentName-${studentCount}" class="ac-form-label ac-form-required">수강자명</label>
-                <input type="text" id="relayschool-studentName-${studentCount}" name="studentName-${studentCount}" class="ac-form-input" required>
+                <label for="relayschool-studentName-${relayStudentCount}" class="ac-form-label ac-form-required">수강자명</label>
+                <input type="text" id="relayschool-studentName-${relayStudentCount}" name="studentName-${relayStudentCount}" class="ac-form-input" required>
             </div>
             <div class="ac-form-group">
-                <label for="relayschool-studentDepartment-${studentCount}" class="ac-form-label ac-form-required">부서</label>
-                <input type="text" id="relayschool-studentDepartment-${studentCount}" name="studentDepartment-${studentCount}" class="ac-form-input" required>
-            </div>
-        </div>
-        
-        <div class="ac-form-row">
-            <div class="ac-form-group">
-                <label for="relayschool-studentPosition-${studentCount}" class="ac-form-label ac-form-required">직급</label>
-                <input type="text" id="relayschool-studentPosition-${studentCount}" name="studentPosition-${studentCount}" class="ac-form-input" required>
-            </div>
-            <div class="ac-form-group">
-                <label for="relayschool-studentPhone-${studentCount}" class="ac-form-label">전화번호</label>
-                <input type="tel" id="relayschool-studentPhone-${studentCount}" name="studentPhone-${studentCount}" class="ac-form-input" placeholder="000-0000-0000">
+                <label for="relayschool-studentDepartment-${relayStudentCount}" class="ac-form-label ac-form-required">부서</label>
+                <input type="text" id="relayschool-studentDepartment-${relayStudentCount}" name="studentDepartment-${relayStudentCount}" class="ac-form-input" required>
             </div>
         </div>
         
         <div class="ac-form-row">
             <div class="ac-form-group">
-                <label for="relayschool-studentMobile-${studentCount}" class="ac-form-label ac-form-required">핸드폰</label>
-                <input type="tel" id="relayschool-studentMobile-${studentCount}" name="studentMobile-${studentCount}" class="ac-form-input" placeholder="010-0000-0000" required>
+                <label for="relayschool-studentPosition-${relayStudentCount}" class="ac-form-label ac-form-required">직급</label>
+                <input type="text" id="relayschool-studentPosition-${relayStudentCount}" name="studentPosition-${relayStudentCount}" class="ac-form-input" required>
             </div>
             <div class="ac-form-group">
-                <label for="relayschool-studentEmail-${studentCount}" class="ac-form-label ac-form-required">이메일</label>
-                <input type="email" id="relayschool-studentEmail-${studentCount}" name="studentEmail-${studentCount}" class="ac-form-input" required>
+                <label for="relayschool-studentPhone-${relayStudentCount}" class="ac-form-label">전화번호</label>
+                <input type="tel" id="relayschool-studentPhone-${relayStudentCount}" name="studentPhone-${relayStudentCount}" class="ac-form-input" placeholder="000-0000-0000">
             </div>
         </div>
+        
+        <div class="ac-form-row">
+            <div class="ac-form-group">
+                <label for="relayschool-studentMobile-${relayStudentCount}" class="ac-form-label ac-form-required">핸드폰</label>
+                <input type="tel" id="relayschool-studentMobile-${relayStudentCount}" name="studentMobile-${relayStudentCount}" class="ac-form-input" placeholder="010-0000-0000" required>
+            </div>
+            <div class="ac-form-group">
+                <label for="relayschool-studentEmail-${relayStudentCount}" class="ac-form-label ac-form-required">이메일</label>
+                <input type="email" id="relayschool-studentEmail-${relayStudentCount}" name="studentEmail-${relayStudentCount}" class="ac-form-input" required>
+            </div>
+        </div>
+        <div class="ac-form-row">
+        <div class="ac-form-group">
+            <label for="relayschool-course-a-${relayStudentCount}" class="ac-form-label ac-form-required">과정 선택</label>
+            <select id="relayschool-course-a-${relayStudentCount}" name="relayschool-course-a-${relayStudentCount}" class="ac-form-input" required
+                onchange="updateRelayCourseBOptions(${relayStudentCount})">
+                <option value="">과정을 선택하세요</option>
+                ${Object.keys(relayCoursesData).map(course =>
+                    `<option value="${course}">${course}</option>`
+                ).join('')}
+            </select>
+        </div>
+        <div class="ac-form-group">
+            <label for="relayschool-course-b-${relayStudentCount}" class="ac-form-label ac-form-required">일정 선택</label>
+            <select id="relayschool-course-b-${relayStudentCount}" name="relayschool-course-b-${relayStudentCount}" class="ac-form-input" required>
+                <option value="">일정을 선택하세요</option>
+            </select>
+        </div>
+    </div>
     `;
     
     container.appendChild(studentDiv);
@@ -469,26 +538,18 @@ function removeRelayschoolStudent(studentId) {
 }
 
 // Relay School 과정 선택 처리
-function selectRelaysschoolCourse(courseType) {
-    const courseInfo = relayschoolSchedules[courseType];
-    const selectedCourseDiv = document.getElementById('relayschool-selected-course');
-    
-    if (courseInfo && selectedCourseDiv) {
-        selectedCourseDiv.innerHTML = `
-            <h4>${courseInfo.name}</h4>
-            <p><strong>교육일정:</strong> ${courseInfo.schedule}</p>
-            <p><strong>과정 설명:</strong> ${courseInfo.description}</p>
-        `;
-        selectedCourseDiv.classList.add('show');
-    }
-    
-    // 라디오 버튼 시각적 선택 효과
-    const allOptions = document.querySelectorAll('.relayschool-course-option');
-    allOptions.forEach(option => option.classList.remove('selected'));
-    
-    const selectedOption = document.querySelector(`input[value="${courseType}"]`).closest('.relayschool-course-option');
-    if (selectedOption) {
-        selectedOption.classList.add('selected');
+
+function updateRelayCourseBOptions(studentNum) {
+    const courseA = document.getElementById(`relayschool-course-a-${studentNum}`);
+    const courseB = document.getElementById(`relayschool-course-b-${studentNum}`);
+    courseB.innerHTML = '<option value="">일정을 선택하세요</option>';
+    if (courseA && courseB && courseA.value && relayCoursesData[courseA.value]) {
+        relayCoursesData[courseA.value].forEach(schedule => {
+            const option = document.createElement('option');
+            option.value = schedule;
+            option.textContent = schedule;
+            courseB.appendChild(option);
+        });
     }
 }
 
@@ -499,39 +560,34 @@ function collectRelayschoolFormData() {
     
     studentSections.forEach(section => {
         const studentId = section.id.split('-')[2];
-        
         students.push({
             name: document.getElementById(`relayschool-studentName-${studentId}`).value,
             department: document.getElementById(`relayschool-studentDepartment-${studentId}`).value,
             position: document.getElementById(`relayschool-studentPosition-${studentId}`).value,
             phone: document.getElementById(`relayschool-studentPhone-${studentId}`).value,
             mobile: document.getElementById(`relayschool-studentMobile-${studentId}`).value,
-            email: document.getElementById(`relayschool-studentEmail-${studentId}`).value
+            email: document.getElementById(`relayschool-studentEmail-${studentId}`).value,
+            course: document.getElementById(`relayschool-course-a-${studentId}`).value,
+            schedule: document.getElementById(`relayschool-course-b-${studentId}`).value
         });
     });
-    
-    const selectedCourse = document.querySelector('input[name="selectedCourse"]:checked');
-    
+
     return {
         formType: 'relay',
-        courseInfo: {
-            selectedCourse: selectedCourse ? selectedCourse.value : '',
-            schedule: selectedCourse ? relayschoolSchedules[selectedCourse.value].schedule : ''
-        },
         companyInfo: {
-            companyName: document.getElementById('companyName').value,
-            representative: document.getElementById('representative').value,
-            businessNumber: document.getElementById('businessNumber').value,
-            businessType: document.getElementById('businessType').value,
-            address: document.getElementById('address').value
+            companyName: document.getElementById('relayschool-companyName').value,
+            representative: document.getElementById('relayschool-representative').value,
+            businessNumber: document.getElementById('relayschool-businessNumber').value,
+            businessType: document.getElementById('relayschool-businessType').value,
+            address: document.getElementById('relayschool-address').value
         },
         managerInfo: {
-            name: document.getElementById('managerName').value,
-            department: document.getElementById('managerDepartment').value,
-            position: document.getElementById('managerPosition').value,
-            phone: document.getElementById('managerPhone').value,
-            mobile: document.getElementById('managerMobile').value,
-            email: document.getElementById('managerEmail').value
+            name: document.getElementById('relayschool-managerName').value,
+            department: document.getElementById('relayschool-managerDepartment').value,
+            position: document.getElementById('relayschool-managerPosition').value,
+            phone: document.getElementById('relayschool-managerPhone').value,
+            mobile: document.getElementById('relayschool-managerMobile').value,
+            email: document.getElementById('relayschool-managerEmail').value
         },
         students: students
     };
@@ -539,87 +595,99 @@ function collectRelayschoolFormData() {
 
 // Relay School 폼 유효성 검사
 function validateRelayschoolForm(formData) {
-    // 과정 선택 확인
-    if (!formData.courseInfo.selectedCourse) {
-        showMessage('교육 과정을 선택해 주세요.', 'error');
-        return false;
-    }
-    
-    // 기본 정보 유효성 검사 (PSAC와 동일)
-    if (!formData.companyInfo.companyName.trim()) {
-        showMessage('회사명을 입력해 주세요.', 'error');
-        return false;
-    }
-    
-    if (!validateBusinessNumber(formData.companyInfo.businessNumber)) {
-        showMessage('올바른 사업자등록번호를 입력해 주세요. (000-00-00000)', 'error');
-        return false;
-    }
-    
-    if (!validateEmail(formData.managerInfo.email)) {
-        showMessage('올바른 담당자 이메일을 입력해 주세요.', 'error');
-        return false;
-    }
-    
-    if (!validatePhoneNumber(formData.managerInfo.mobile)) {
-        showMessage('올바른 담당자 핸드폰 번호를 입력해 주세요.', 'error');
-        return false;
-    }
-    
     // 수강자 정보 유효성 검사
     if (formData.students.length === 0) {
+        alert('수강자 없음');
         showMessage('최소 1명의 수강자를 등록해 주세요.', 'error');
         return false;
     }
-    
+
+    // 각 수강자별 과정/일정 선택 확인
     for (let i = 0; i < formData.students.length; i++) {
         const student = formData.students[i];
-        
         if (!student.name.trim()) {
+            alert(`수강자 ${i + 1} 이름 없음`);
             showMessage(`수강자 ${i + 1}의 이름을 입력해 주세요.`, 'error');
             return false;
         }
-        
         if (!validateEmail(student.email)) {
+            alert(`수강자 ${i + 1} 이메일 오류: ${student.email}`);
             showMessage(`수강자 ${i + 1}의 올바른 이메일을 입력해 주세요.`, 'error');
             return false;
         }
-        
         if (!validatePhoneNumber(student.mobile)) {
+            alert(`수강자 ${i + 1} 핸드폰 오류: ${student.mobile}`);
             showMessage(`수강자 ${i + 1}의 올바른 핸드폰 번호를 입력해 주세요.`, 'error');
             return false;
         }
+        if (!student.course) {
+            alert(`수강자 ${i + 1} 과정 미선택`);
+            showMessage(`수강자 ${i + 1}의 과정을 선택해 주세요.`, 'error');
+            return false;
+        }
+        if (!student.schedule) {
+            alert(`수강자 ${i + 1} 일정 미선택`);
+            showMessage(`수강자 ${i + 1}의 일정을 선택해 주세요.`, 'error');
+            return false;
+        }
     }
-    
+
+    // 기본 정보 유효성 검사 (PSAC와 동일)
+    if (!formData.companyInfo.companyName.trim()) {
+        alert('회사명을 입력해 주세요.');
+        showMessage('회사명을 입력해 주세요.', 'error');
+        return false;
+    }
+    if (!validateBusinessNumber(formData.companyInfo.businessNumber)) {
+        alert('올바른 사업자등록번호를 입력해 주세요.');
+        showMessage('올바른 사업자등록번호를 입력해 주세요. (000-00-00000)', 'error');
+        return false;
+    }
+    if (!validateEmail(formData.managerInfo.email)) {
+        alert('올바른 담당자 이메일을 입력해 주세요.');
+        showMessage('올바른 담당자 이메일을 입력해 주세요.', 'error');
+        return false;
+    }
+    if (!validatePhoneNumber(formData.managerInfo.mobile)) {
+        alert('올바른 담당자 핸드폰 번호를 입력해 주세요.');
+        showMessage('올바른 담당자 핸드폰 번호를 입력해 주세요.', 'error');
+        return false;
+    }
+
     return true;
 }
 
 // Relay School 폼 제출 처리
 async function submitRelayschoolForm(e) {
     e.preventDefault();
-    
+    // alert('1. 함수 진입');
     toggleLoading(true);
-    
+
     try {
         const formData = collectRelayschoolFormData();
-        
+        console.log(formData);
+        console.log('students:', formData.students);
+        console.log('formType:', formData.formType);
+            if (formData.students.length > 0) {
+                console.log('첫번째 수강자:', formData.students[0]);
+            }
+        alert('2. 데이터 수집 완료');
+
         if (!validateRelayschoolForm(formData)) {
+            alert('3. 유효성 검사 실패');
             return;
         }
-        
-        // CORS 우회를 위한 iframe 방식 사용
+        // alert('4. 유효성 검사 통과');
+
         await submitFormData(formData);
-        
+        alert('5. 데이터 전송 완료');
+
         showMessage(`Relay School 신청이 완료되었습니다. (수강자 ${formData.students.length}명)`, 'success');
         document.getElementById('relayschool-form').reset();
-        // 수강자 목록 초기화
         document.getElementById('relayschool-students-container').innerHTML = '';
-        document.getElementById('relayschool-selected-course').classList.remove('show');
-        studentCount = 0;
-        addRelayschoolStudent();
-        
+        relayStudentCount = 0;
     } catch (error) {
-        console.error('Error:', error);
+        alert('6. 에러 발생: ' + error);
         showMessage('서버 연결에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
     } finally {
         toggleLoading(false);

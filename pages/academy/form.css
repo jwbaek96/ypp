@@ -4,25 +4,6 @@
    공통 스타일 (ac-form-)
    ========================================================================== */
 
-/* .ac-form-header {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: white;
-    padding: 30px;
-    text-align: center;
-    border-radius: 10px 10px 0 0;
-    margin-bottom: 0;
-} */
-
-.ac-form-header h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.ac-form-header p {
-    opacity: 0.9;
-    font-size: 14px;
-}
-
 .ac-form-content {
     background: white;
     padding: 30px;
@@ -203,10 +184,6 @@
 }
 
 .ac-form-course-info {
-    background: #e8f4f8;
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 4px solid #1e3c72;
     margin-bottom: 30px;
 }
 
@@ -355,6 +332,10 @@
     .ac-form-row {
         flex-direction: column;
         gap: 0;
+        margin-bottom: 0;
+    }
+    .ac-form-row .ac-form-group {
+        margin-bottom: 15px;
     }
     
     .psac-checkbox-group {

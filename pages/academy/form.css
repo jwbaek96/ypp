@@ -320,6 +320,72 @@
     display: block;
 }
 
+/* 릴레이스쿨 폼 */
+/* Relay School 과정 그룹 스타일 */
+.relayschool-course-group {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.relayschool-course-title {
+    color: #1e3c72;
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.relayschool-course-desc {
+    color: #666;
+    margin: 0 0 15px 0;
+    font-size: 14px;
+}
+
+.relayschool-course-group .relayschool-course-option {
+    background: white;
+    margin: 10px 0;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.relayschool-course-group .relayschool-course-option:hover {
+    border-color: #1e3c72;
+    background: #f8f9fa;
+}
+
+.relayschool-course-group .relayschool-course-option.selected {
+    border-color: #1e3c72;
+    background: #e8f4f8;
+}
+
+.relayschool-course-group .relayschool-course-option input[type="radio"] {
+    margin-right: 12px;
+    width: auto;
+}
+
+.relayschool-course-group .relayschool-course-schedule {
+    font-weight: 500;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .relayschool-course-group {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .relayschool-course-title {
+        font-size: 16px;
+    }
+}
+
+
+
 /* ==========================================================================
    반응형 디자인
    ========================================================================== */

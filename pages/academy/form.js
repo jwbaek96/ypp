@@ -666,13 +666,13 @@ async function submitRelayschoolForm(e) {
 
     try {
         const formData = collectRelayschoolFormData();
-        console.log(formData);
-        console.log('students:', formData.students);
-        console.log('formType:', formData.formType);
+        // console.log(formData);
+        // console.log('students:', formData.students);
+        // console.log('formType:', formData.formType);
             if (formData.students.length > 0) {
                 console.log('첫번째 수강자:', formData.students[0]);
             }
-        alert('2. 데이터 수집 완료');
+        // alert('2. 데이터 수집 완료');
 
         if (!validateRelayschoolForm(formData)) {
             alert('3. 유효성 검사 실패');
@@ -681,7 +681,7 @@ async function submitRelayschoolForm(e) {
         // alert('4. 유효성 검사 통과');
 
         await submitFormData(formData);
-        alert('5. 데이터 전송 완료');
+        // alert('5. 데이터 전송 완료');
 
         showMessage(`Relay School 신청이 완료되었습니다. (수강자 ${formData.students.length}명)`, 'success');
         document.getElementById('relayschool-form').reset();

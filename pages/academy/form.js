@@ -452,7 +452,7 @@ async function submitPsacForm(e) {
         console.error('Error:', error);
         showMessage('서버 연결에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
     } finally {
-        toggleLoading(false);
+        toggleLoading(false, 'psac-loading');
     }
 }
 
@@ -691,6 +691,6 @@ async function submitRelayschoolForm(e) {
         alert('6. 에러 발생: ' + error);
         showMessage('서버 연결에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
     } finally {
-        toggleLoading(false);
+        toggleLoading(false, 'rs-loading');
     }
 }

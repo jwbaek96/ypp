@@ -303,7 +303,7 @@
     color: var(--primary-blue);
 }
 
-.sidebar-lang-btn.active {
+.sidebar-lang-btn:focus {
     background-color: var(--primary-blue);
     color: var(--white);
     border-color: var(--primary-blue);

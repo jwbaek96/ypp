@@ -456,7 +456,7 @@
                             }
                             
                             .main-business-img {
-                                max-width: 100%;
+                                max-width: 90%;
                                 height: auto;
                                 border-radius: 12px;
                             }
@@ -531,6 +531,9 @@
                                 
                                 .business-grid {
                                     grid-template-columns: 1fr;
+                                }
+                                .business-main-image{
+                                    margin-bottom: 1rem;
                                 }
                             }
 /* ++++++++++++++++++++++++++++++++++++++++++++ */
@@ -658,11 +661,17 @@
                                 .client-image-container {
                                     padding: 0.25rem;
                                 }
+                                .main-business-img{
+                                    max-width: 95%;
+                                }
                             }
                             
                             @media (max-width: 480px) {
                                 .supplier-grid {
                                     grid-template-columns: repeat(2, 1fr);
+                                }
+                                .main-business-img{
+                                    max-width: 100%;
                                 }
                             }
                             @media (max-width: 425px) {

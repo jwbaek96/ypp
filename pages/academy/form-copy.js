@@ -147,11 +147,32 @@ function formatBusinessNumber(value) {
 // 전화번호 포맷팅
 function formatPhoneNumber(value) {
     value = value.replace(/[^0-9]/g, '');
-    if (value.length >= 3 && value.length <= 7) {
-        value = value.substring(0, 3) + '-' + value.substring(3);
-    } else if (value.length >= 8) {
-        value = value.substring(0, 3) + '-' + value.substring(3, 7) + '-' + value.substring(7, 11);
+
+    // 02 지역번호 (서울)
+    if (value.startsWith('02')) {
+        if (value.length > 2 && value.length <= 5) {
+            value = value.slice(0, 2) + '-' + value.slice(2);
+        } else if (value.length > 5 && value.length <= 9) {
+            value = value.slice(0, 2) + '-' + value.slice(2, value.length - 4) + '-' + value.slice(-4);
+        } else if (value.length > 9) {
+            value = value.slice(0, 2) + '-' + value.slice(2, value.length - 4) + '-' + value.slice(-4);
+        }
     }
+    // 그 외 지역번호 (3자리)
+    else if (value.length >= 9 && value.length <= 11) {
+        if (value.length === 9) { // 3-3-3
+            value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6);
+        } else if (value.length === 10) { // 3-3-4 or 3-4-3
+            value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6);
+        } else if (value.length === 11) { // 3-4-4 (휴대폰)
+            value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7);
+        }
+    }
+    // 8자리(옛날번호 등)
+    else if (value.length === 8) {
+        value = value.slice(0, 4) + '-' + value.slice(4);
+    }
+
     return value;
 }
 

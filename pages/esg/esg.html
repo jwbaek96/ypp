@@ -1139,23 +1139,28 @@
                                                     data-kor="부패 및 비윤리 신고">부패 및 비윤리 신고</span>
                                                 <label for="report-popup-checkbox" class="report-popup-close" tabindex="0" style="cursor:pointer;">&times;</label>
                                             </div>
-                                            <form class="report-popup-form" onsubmit="document.getElementById('report-popup-checkbox').checked=false;alert('신고가 접수되었습니다.');return false;">
-                                                <label for="report-title"
-                                                    data-eng="Title"
-                                                    data-kor="제목">제목</label>
-                                                <input type="text" id="report-title" name="report-title" required maxlength="100" placeholder="제목을 입력하세요">
-                                                <label for="report-content"
-                                                    data-eng="Content"
-                                                    data-kor="내용">내용</label>
-                                                <textarea id="report-content" name="report-content" rows="6" required placeholder="신고 내용을 입력하세요"></textarea>
-                                                <label for="report-file"
-                                                    data-eng="Attachment"
-                                                    data-kor="첨부파일">첨부파일</label>
-                                                <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
-                                                <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
-                                                <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
-                                                <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
-                                                <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
+                                            <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfi7fge8Qpv5YyKIAi0rZaxaE6pKFyleu6ERUuzUqRNbouS-A/formResponse"
+                                                class="report-popup-form" 
+                                                >
+                                                <!-- onsubmit="document.getElementById('report-popup-checkbox').checked=false;alert('신고가 접수되었습니다.');return false;" -->
+                                                <label for="report-title"data-eng="Title"data-kor="제목">제목</label>
+                                                <input type="text" id="report-title" name="entry.84505636" required maxlength="100" placeholder="제목을 입력하세요">
+
+                                                <label for="report-content"data-eng="Content"data-kor="내용">내용</label>
+                                                <textarea id="report-content" name="entry.2037109469" rows="6" required placeholder="신고 내용을 입력하세요"></textarea>
+                                                
+                                                <!-- <label for="report-file"data-eng="Attachment"data-kor="첨부파일">첨부파일</label>
+                                                    <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
+                                                    <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
+                                                    <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
+                                                    <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
+                                                    <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp"> -->
+                                                    <!-- 첨부파일 영역을 임시 비활성화 -->
+                                                <div class="file-upload-area" style="opacity: 0.5; pointer-events: none;">
+                                                <p> 첨부파일 (준비 중)</p>
+                                                <small>현재 첨부파일 기능을 준비 중입니다.</small>
+                                                </div>
+
                                                 <div class="report-popup-actions">
                                                     <button type="submit" class="report-popup-submit"
                                                         data-eng="Submit"

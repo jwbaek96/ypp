@@ -102,30 +102,36 @@ class GallerySystem {
         this.currentPage = 1;
         this.totalPages = 1;
         this.galleryData = [];
+        this.filteredData = []; // 검색 결과 데이터
         this.currentItems = [];
-        
+        this.searchKeyword = '';
         this.init();
     }
-    
+
     // 초기화
     async init() {
         if (!this.container) {
             console.error('Gallery container not found:', this.containerId);
             return;
         }
-        
         this.createGalleryStructure();
         await this.loadGalleryData();
         this.setupEventListeners();
     }
-    
+
     // 갤러리 구조 생성
     createGalleryStructure() {
         this.container.innerHTML = `
+            
             <div class="gallery-container">
                 <div class="gallery-content">
                     <div class="gallery-loading">갤러리를 불러오는 중...</div>
                 </div>
+                <div class="gallery-search-wrap">
+                    <input type="text" class="gallery-search-input" placeholder="검색어를 입력하세요" />
+                    <button class="gallery-search-btn" type="button">검색</button>
+                </div>
+                
                 <div class="gallery-pagination" style="display: none;">
                     <button class="pagination-btn prev-btn" data-action="prev">
                         ◀
@@ -136,7 +142,6 @@ class GallerySystem {
                     </button>
                 </div>
             </div>
-            
             <!-- 팝업 오버레이 -->
             <div class="gallery-popup-overlay">
                 <div class="gallery-popup-container">
@@ -199,6 +204,11 @@ class GallerySystem {
         // 슬라이더 상태 초기화
         this.currentImageIndex = 0;
         this.currentItemImages = [];
+        
+        // 검색 관련 요소들
+        this.searchInput = this.container.querySelector('.gallery-search-input');
+        this.searchBtn = this.container.querySelector('.gallery-search-btn');
+        // this.searchResetBtn = this.container.querySelector('.gallery-search-reset-btn');
     }
     
     // 갤러리 데이터 로드
@@ -217,6 +227,7 @@ class GallerySystem {
             }
             
             this.galleryData.reverse();
+            this.filteredData = this.galleryData; // 검색 미적용시 전체 데이터
             this.calculatePagination();
             this.updateGalleryDescription();
             this.renderCurrentPage();
@@ -230,8 +241,14 @@ class GallerySystem {
     
     // 페이지네이션 계산
     calculatePagination() {
-        this.totalPages = Math.ceil(this.galleryData.length / this.itemsPerPage);
+        const data = this.getActiveData();
+        this.totalPages = Math.ceil(data.length / this.itemsPerPage);
         this.currentPage = Math.max(1, Math.min(this.currentPage, this.totalPages));
+    }
+
+    // 현재 적용 데이터 반환 (검색 적용시 검색 결과)
+    getActiveData() {
+        return this.filteredData || this.galleryData;
     }
     
     // 갤러리 설명 업데이트 (전체 건수만 표시)
@@ -280,31 +297,34 @@ class GallerySystem {
     
     // 현재 페이지 렌더링
     renderCurrentPage() {
+        const data = this.getActiveData();
         const startIndex = (this.currentPage - 1) * this.itemsPerPage;
         const endIndex = startIndex + this.itemsPerPage;
-        this.currentItems = this.galleryData.slice(startIndex, endIndex);
-        
+        this.currentItems = data.slice(startIndex, endIndex);
+
         if (this.currentItems.length === 0) {
             this.showEmptyState();
             return;
         }
-        
+
         const galleryGrid = document.createElement('div');
         galleryGrid.className = 'gallery-grid';
-        
+
         this.currentItems.forEach((item, index) => {
             const galleryItem = this.createGalleryItem(item, startIndex + index);
             galleryGrid.appendChild(galleryItem);
         });
-        
+
         this.galleryContent.innerHTML = '';
         this.galleryContent.appendChild(galleryGrid);
-        
+
         // 페이지네이션 표시
         if (this.totalPages > 1) {
             this.pagination.style.display = 'flex';
+        } else {
+            this.pagination.style.display = 'none';
         }
-        
+
         // 갤러리 아이템들에 한영 전환 이벤트 리스너 추가
         this.setupGalleryItemsLanguageToggle();
     }
@@ -617,6 +637,27 @@ class GallerySystem {
         this.pagination.style.display = 'none';
     }
     
+    // 검색 기능
+    search(keyword) {
+        this.searchKeyword = keyword.trim();
+        if (!this.searchKeyword) {
+            this.filteredData = this.galleryData;
+            this.searchResetBtn.style.display = 'none';
+        } else {
+            const lower = this.searchKeyword.toLowerCase();
+            this.filteredData = this.galleryData.filter(item =>
+                (item.title && item.title.toLowerCase().includes(lower)) ||
+                (item.title_eng && item.title_eng.toLowerCase().includes(lower)) ||
+                (item.date && item.date.toLowerCase().includes(lower))
+            );
+            this.searchResetBtn.style.display = 'inline-block';
+        }
+        this.currentPage = 1;
+        this.calculatePagination();
+        this.renderCurrentPage();
+        this.updatePagination();
+    }
+
     // 이벤트 리스너 설정
     setupEventListeners() {
         // 갤러리 아이템 클릭
@@ -663,6 +704,24 @@ class GallerySystem {
                 this.closePopup();
             }
         });
+        
+        // 검색 이벤트
+        if (this.searchBtn && this.searchInput) {
+            this.searchBtn.addEventListener('click', () => {
+                this.search(this.searchInput.value);
+            });
+            this.searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    this.search(this.searchInput.value);
+                }
+            });
+        }
+        if (this.searchResetBtn) {
+            this.searchResetBtn.addEventListener('click', () => {
+                this.searchInput.value = '';
+                this.search('');
+            });
+        }
     }
     
     // 갤러리 새로고침

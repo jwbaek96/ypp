@@ -3,7 +3,9 @@
     grid-template-columns: 1fr;
     gap: 2rem;
 }
-
+.content-block:hover {
+    box-shadow: none
+}
 /* 페이지 헤더 배경 이미지 */
 .page-header {
     position: relative;
@@ -617,10 +619,10 @@
                             }
                             
                             .client-category-title {
-                                background: linear-gradient(135deg, #f8fafb 0%, #e8f4ff 100%);
-                                color: #0066cc;
+                                background: #e9e7e778 ; 
+                                color: #000000;
                                 font-size: 1rem;
-                                font-weight: 600;
+                                font-weight: 500;
                                 padding: 1rem;
                                 margin: 0;
                                 text-align: center;

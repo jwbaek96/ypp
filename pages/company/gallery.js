@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.galleryInstances.licenseGallery = initGallery(
                 'license-gallery',
                 './data/licenses.json',
-                16 // 페이지당 16개 아이템
+                12 // 페이지당 12개 아이템
             );
         }
         
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.galleryInstances.qualificationGallery = initGallery(
                 'qualification-gallery',
                 './data/qualifications.json',
-                16 // 페이지당 16개 아이템
+                12 // 페이지당 12개 아이템
             );
         }
     }
@@ -95,7 +95,7 @@ window.getGalleryStatus = getGalleryStatus;
 // ===== 갤러리 시스템 JavaScript =====
 
 class GallerySystem {
-    constructor(containerId, jsonUrl, itemsPerPage = 16) {
+    constructor(containerId, jsonUrl, itemsPerPage = 12) {
         this.container = document.getElementById(containerId);
         this.jsonUrl = jsonUrl;
         this.itemsPerPage = itemsPerPage;
@@ -149,9 +149,6 @@ class GallerySystem {
                             <button class="popup-btn download-btn" data-action="download" title="다운로드">
                                 ⬇
                             </button>
-                            <button class="popup-btn download-all-btn" data-action="download-all" title="전체 다운로드" style="display: none;">
-                                📦
-                            </button>
                             <button class="popup-btn close-btn" data-action="close" title="닫기">
                                 ✕
                             </button>
@@ -172,7 +169,6 @@ class GallerySystem {
                         <div class="image-counter">
                             <span class="current-image">1</span> / <span class="total-images">1</span>
                         </div>
-                        <div class="image-description"></div>
                     </div>
                 </div>
             </div>
@@ -190,7 +186,7 @@ class GallerySystem {
         this.popupDate = this.container.querySelector('.gallery-popup-date');
         this.popupImage = this.container.querySelector('.gallery-popup-image');
         this.downloadBtn = this.container.querySelector('.download-btn');
-        this.downloadAllBtn = this.container.querySelector('.download-all-btn');
+        this.downloadAllBtn = null; // 전체 다운로드 버튼 없음
         this.closeBtn = this.container.querySelector('.close-btn');
         
         // 이미지 슬라이더 관련 요소들
@@ -199,7 +195,6 @@ class GallerySystem {
         this.popupImageInfo = this.container.querySelector('.popup-image-info');
         this.currentImageSpan = this.container.querySelector('.current-image');
         this.totalImagesSpan = this.container.querySelector('.total-images');
-        this.imageDescription = this.container.querySelector('.image-description');
         
         // 슬라이더 상태 초기화
         this.currentImageIndex = 0;
@@ -221,6 +216,7 @@ class GallerySystem {
                 return;
             }
             
+            this.galleryData.reverse();
             this.calculatePagination();
             this.updateGalleryDescription();
             this.renderCurrentPage();
@@ -244,18 +240,42 @@ class GallerySystem {
         if (!descriptionElement) return;
         
         const totalCount = this.galleryData.length;
-        const isKorean = document.documentElement.lang === 'ko' || !document.documentElement.lang;
         
-        // 건수만 표시
-        if (isKorean) {
-            descriptionElement.textContent = `총 ${totalCount}건`;
-            descriptionElement.setAttribute('data-eng', `Total: ${totalCount} items`);
-        } else {
-            descriptionElement.textContent = `Total: ${totalCount} items`;
-        }
+        // 한영 전환 지원
+        const koreanText = `총 ${totalCount}건`;
+        const englishText = `Total: ${totalCount} items`;
+        
+        descriptionElement.textContent = koreanText;
+        descriptionElement.setAttribute('data-kor', koreanText);
+        descriptionElement.setAttribute('data-eng', englishText);
         
         // 갤러리 카운트 클래스 추가
         descriptionElement.classList.add('with-count');
+        
+        // 한영 전환 이벤트 리스너 추가
+        this.setupLanguageToggle(descriptionElement);
+    }
+    
+    // 한영 전환 기능 설정
+    setupLanguageToggle(element) {
+        // 기존 이벤트 리스너 제거 (중복 방지)
+        element.removeEventListener('languageChanged', this.handleLanguageChange);
+        
+        // 새 이벤트 리스너 추가
+        this.handleLanguageChange = () => {
+            const isEnglish = document.documentElement.classList.contains('lang-en');
+            const korText = element.getAttribute('data-kor');
+            const engText = element.getAttribute('data-eng');
+            
+            if (isEnglish && engText) {
+                element.textContent = engText;
+            } else if (korText) {
+                element.textContent = korText;
+            }
+        };
+        
+        element.addEventListener('languageChanged', this.handleLanguageChange);
+        document.addEventListener('languageChanged', this.handleLanguageChange);
     }
     
     // 현재 페이지 렌더링
@@ -284,6 +304,35 @@ class GallerySystem {
         if (this.totalPages > 1) {
             this.pagination.style.display = 'flex';
         }
+        
+        // 갤러리 아이템들에 한영 전환 이벤트 리스너 추가
+        this.setupGalleryItemsLanguageToggle();
+    }
+    
+    // 갤러리 아이템들의 한영 전환 설정
+    setupGalleryItemsLanguageToggle() {
+        const galleryItems = this.galleryContent.querySelectorAll('.gallery-item-title');
+        
+        const handleItemLanguageChange = () => {
+            const isEnglish = document.documentElement.classList.contains('lang-en');
+            
+            galleryItems.forEach(titleElement => {
+                const korText = titleElement.getAttribute('data-kor');
+                const engText = titleElement.getAttribute('data-eng');
+                
+                if (isEnglish && engText) {
+                    titleElement.textContent = engText;
+                } else if (korText) {
+                    titleElement.textContent = korText;
+                }
+            });
+        };
+        
+        // 언어 전환 이벤트 리스너 추가
+        document.addEventListener('languageChanged', handleItemLanguageChange);
+        
+        // 갤러리가 새로 렌더링될 때마다 기존 리스너 제거하고 새로 추가하기 위해 저장
+        this.galleryItemsLanguageHandler = handleItemLanguageChange;
     }
     
     // 갤러리 아이템 생성
@@ -292,17 +341,20 @@ class GallerySystem {
         galleryItem.className = 'gallery-item';
         galleryItem.dataset.index = globalIndex;
         
-        // 단일 이미지 또는 다중 이미지 처리
-        const thumbnail = item.thumbnail || (item.images ? item.images[0].url : item.image);
+        // 썸네일: 첫 번째 이미지 자동 사용
+        const thumbnail = item.images ? item.images[0].url : item.image;
         const isMultipleImages = item.images && item.images.length > 1;
         
+        // 제목과 날짜 (한영 전환 지원)
+        const title = item.title || '';
+        const titleEng = item.title_eng || item.titleEng || title;
+        const date = item.date || '';
+        
         galleryItem.innerHTML = `
-            <img src="${thumbnail}" alt="${item.title}" loading="lazy">
-            <div class="gallery-item-overlay">
-                <div class="gallery-item-title">${item.title}</div>
-                <div class="gallery-item-date">${item.date || ''}</div>
-                ${isMultipleImages ? `<div class="gallery-item-count">${item.images.length}장</div>` : ''}
-            </div>
+        <img src="${thumbnail}" alt="${title}" loading="lazy">
+        <div class="gallery-item-overlay">
+            <div class="gallery-item-title" data-kor="${title}" data-eng="${titleEng}">${title}</div>
+        </div>
         `;
         
         return galleryItem;
@@ -365,8 +417,8 @@ class GallerySystem {
         const item = this.galleryData[index];
         if (!item) return;
         
-        this.popupTitle.textContent = item.title;
-        this.popupDate.textContent = item.date || '';
+        // 제목과 날짜 설정 (한영 전환 지원)
+        this.updatePopupTexts(item);
         
         // 다중 이미지 또는 단일 이미지 처리
         if (item.images && item.images.length > 0) {
@@ -376,8 +428,7 @@ class GallerySystem {
         } else {
             this.currentItemImages = [{
                 url: item.image,
-                fileName: item.fileName || item.title,
-                description: item.description || ''
+                fileName: item.title
             }];
             this.currentImageIndex = 0;
             this.setupSingleImage();
@@ -392,6 +443,46 @@ class GallerySystem {
         document.addEventListener('keydown', this.handleEscKey.bind(this));
         // 키보드 네비게이션 이벤트 추가
         document.addEventListener('keydown', this.handleKeyNavigation.bind(this));
+        
+        // 팝업에서 한영 전환 이벤트 리스너 추가
+        this.setupPopupLanguageToggle(item);
+    }
+    
+    // 팝업 텍스트 업데이트 (한영 전환 지원)
+    updatePopupTexts(item) {
+        // 제목 설정
+        const title = item.title || '';
+        const titleEng = item.title_eng || item.titleEng || title;
+        
+        this.popupTitle.textContent = title;
+        this.popupTitle.setAttribute('data-kor', title);
+        this.popupTitle.setAttribute('data-eng', titleEng);
+        
+        // 날짜는 그대로 (날짜는 보통 언어 상관없이 동일)
+        this.popupDate.textContent = item.date || '';
+    }
+    
+    // 팝업에서 한영 전환 설정
+    setupPopupLanguageToggle(item) {
+        const handlePopupLanguageChange = () => {
+            const isEnglish = document.documentElement.classList.contains('lang-en');
+            
+            // 제목 변경
+            const titleKor = this.popupTitle.getAttribute('data-kor');
+            const titleEng = this.popupTitle.getAttribute('data-eng');
+            
+            if (isEnglish && titleEng) {
+                this.popupTitle.textContent = titleEng;
+            } else if (titleKor) {
+                this.popupTitle.textContent = titleKor;
+            }
+        };
+        
+        // 이벤트 리스너 추가
+        document.addEventListener('languageChanged', handlePopupLanguageChange);
+        
+        // 팝업 닫을 때 이벤트 리스너 제거를 위해 저장
+        this.popupLanguageHandler = handlePopupLanguageChange;
     }
     
     // 다중 이미지 설정
@@ -399,8 +490,8 @@ class GallerySystem {
         this.prevImageBtn.style.display = 'block';
         this.nextImageBtn.style.display = 'block';
         this.popupImageInfo.style.display = 'block';
-        this.downloadAllBtn.style.display = 'block';
-        
+        // 전체 다운로드 버튼 없음
+        // this.downloadAllBtn.style.display = 'block';
         this.totalImagesSpan.textContent = this.currentItemImages.length;
         this.updateImageNavigation();
     }
@@ -410,7 +501,8 @@ class GallerySystem {
         this.prevImageBtn.style.display = 'none';
         this.nextImageBtn.style.display = 'none';
         this.popupImageInfo.style.display = 'none';
-        this.downloadAllBtn.style.display = 'none';
+        // 전체 다운로드 버튼 없음
+        // this.downloadAllBtn.style.display = 'none';
     }
     
     // 팝업 이미지 업데이트
@@ -419,7 +511,7 @@ class GallerySystem {
         if (!currentImage) return;
         
         this.popupImage.src = currentImage.url;
-        this.popupImage.alt = currentImage.description || this.popupTitle.textContent;
+        this.popupImage.alt = this.popupTitle.textContent;
         
         // 다운로드 버튼에 현재 이미지 정보 저장
         this.downloadBtn.dataset.imageUrl = currentImage.url;
@@ -428,7 +520,6 @@ class GallerySystem {
         // 이미지 정보 업데이트
         if (this.currentItemImages.length > 1) {
             this.currentImageSpan.textContent = this.currentImageIndex + 1;
-            this.imageDescription.textContent = currentImage.description || '';
             this.updateImageNavigation();
         }
     }
@@ -464,6 +555,12 @@ class GallerySystem {
         document.removeEventListener('keydown', this.handleEscKey.bind(this));
         document.removeEventListener('keydown', this.handleKeyNavigation.bind(this));
         
+        // 팝업 언어 전환 이벤트 리스너 제거
+        if (this.popupLanguageHandler) {
+            document.removeEventListener('languageChanged', this.popupLanguageHandler);
+            this.popupLanguageHandler = null;
+        }
+        
         // 슬라이더 상태 초기화
         this.currentImageIndex = 0;
         this.currentItemImages = [];
@@ -498,37 +595,6 @@ class GallerySystem {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-    }
-    
-    // 전체 이미지 다운로드 (ZIP)
-    async downloadAllImages() {
-        if (this.currentItemImages.length <= 1) return;
-        
-        try {
-            this.downloadAllBtn.classList.add('downloading');
-            this.downloadAllBtn.disabled = true;
-            
-            // 간단한 ZIP 다운로드 구현 (실제로는 서버 API 호출 필요)
-            const urls = this.currentItemImages.map(img => img.url);
-            const title = this.popupTitle.textContent;
-            
-            // 각 이미지를 개별적으로 다운로드하는 방식
-            for (let i = 0; i < this.currentItemImages.length; i++) {
-                const image = this.currentItemImages[i];
-                setTimeout(() => {
-                    this.downloadImage(image.url, image.fileName);
-                }, i * 500); // 500ms 간격으로 다운로드
-            }
-            
-        } catch (error) {
-            console.error('전체 다운로드 실패:', error);
-            alert('전체 다운로드에 실패했습니다.');
-        } finally {
-            setTimeout(() => {
-                this.downloadAllBtn.classList.remove('downloading');
-                this.downloadAllBtn.disabled = false;
-            }, 2000);
-        }
     }
     
     // 빈 상태 표시
@@ -579,15 +645,15 @@ class GallerySystem {
         // 팝업 제어 버튼들
         this.popupOverlay.addEventListener('click', (e) => {
             const action = e.target.dataset.action;
-            
             if (action === 'close') {
                 this.closePopup();
             } else if (action === 'download') {
                 const imageUrl = e.target.dataset.imageUrl;
                 const fileName = e.target.dataset.fileName;
                 this.downloadImage(imageUrl, fileName);
-            } else if (action === 'download-all') {
-                this.downloadAllImages();
+            // 전체 다운로드 관련 코드 제거
+            // } else if (action === 'download-all') {
+            //     this.downloadAllImages();
             } else if (action === 'prev-image') {
                 this.gotoPrevImage();
             } else if (action === 'next-image') {
@@ -637,7 +703,7 @@ class GallerySystem {
 }
 
 // ===== 갤러리 초기화 함수 =====
-function initGallery(containerId, jsonUrl, itemsPerPage = 16) {
+function initGallery(containerId, jsonUrl, itemsPerPage = 12) {
     return new GallerySystem(containerId, jsonUrl, itemsPerPage);
 }
 

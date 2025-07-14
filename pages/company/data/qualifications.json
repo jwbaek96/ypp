@@ -1,164 +1,280 @@
 [
     {
-        "id": 1,
-        "title": "한수원(주) 갑종보호계전기 Q등급",
-        "date": "2024-03-20",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-001.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-001.jpg",
-        "fileName": "한수원-갑종보호계전기-Q등급.jpg",
-        "category": "qualification"
+        "title": "3중화 디지털 보호계전기 TRIUMP IEC61850",
+        "title_eng": "Triple Redundant Digital Protection Relay TRIUMP IEC61850",
+        "date": "2025-07-14",
+        "images": [
+            {
+                "url": "/assets/images/gallery/qualifications/연구소_TRIUMP+IEC61850+인증서+(1).jpg",
+                "fileName": "연구소_TRIUMP+IEC61850+인증서+(1).jpg"
+            },
+            {
+                "url": "/assets/images/gallery/qualifications/연구소_TRIUMP+IEC61850+인증서+(2).jpg",
+                "fileName": "연구소_TRIUMP+IEC61850+인증서+(2).jpg"
+            }
+        ]
     },
     {
-        "id": 2,
-        "title": "한수원(주) 갑종보호계전기 A등급",
-        "date": "2024-02-15",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-002.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-002.jpg",
-        "fileName": "한수원-갑종보호계전기-A등급.jpg",
-        "category": "qualification"
+        "title": "발전5개사-DCS_Control card 정비적격기업",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/발전5개사-DCS_Control+card+정비적격기업+인증서.jpg",
+        "fileName": "발전5개사-DCS_Control+card+정비적격기업+인증서.jpg"
     },
     {
-        "id": 3,
-        "title": "한수원(주) 발전기차단기(GCB) 유지보수 A등급",
-        "date": "2024-01-10",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-003.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-003.jpg",
-        "fileName": "한수원-GCB-유지보수-A등급.jpg",
-        "category": "qualification"
+        "title": "발전5개사-DCS_Hardware 정비적격기업",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/발전5개사-DCS_Hardware+정비적격기업+인증서.jpg",
+        "fileName": "발전5개사-DCS_Hardware+정비적격기업+인증서.jpg"
     },
     {
-        "id": 4,
-        "title": "한수원(주) 보조/현장 제어반 Q등급",
-        "date": "2023-12-28",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-004.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-004.jpg",
-        "fileName": "한수원-보조현장제어반-Q등급.jpg",
-        "category": "qualification"
+        "title": "발전5개사-PLC 기자재공급",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "images": [
+            {
+                "url": "/assets/images/gallery/qualifications/발전5개사-PLC-기자재공급-유자격-등록증_YPP_2020(국문).jpg",
+                "fileName": "발전5개사-PLC-기자재공급-유자격-등록증_YPP_2020(국문).jpg"
+            },
+            {
+                "url": "/assets/images/gallery/qualifications/발전5개사-PLC-기자재공급-유자격-등록증_YPP_2020(영문).jpg",
+                "fileName": "발전5개사-PLC-기자재공급-유자격-등록증_YPP_2020(영문).jpg"
+            }
+        ]
     },
     {
-        "id": 5,
-        "title": "한수원(주) 전자/PLC 모듈 예비품공급",
-        "date": "2023-11-20",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-005.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-005.jpg",
-        "fileName": "한수원-전자PLC모듈-예비품공급.jpg",
-        "category": "qualification"
+        "title": "발전5개사-PLC_Control card 정비적격기업",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/발전5개사-PLC_Control+card+정비적격기업+인증서.jpg",
+        "fileName": "발전5개사-PLC_Control+card+정비적격기업+인증서.jpg"
     },
     {
-        "id": 6,
-        "title": "한수원(주) 공조설비제어반 A등급",
-        "date": "2023-10-12",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-006.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-006.jpg",
-        "fileName": "한수원-공조설비제어반-A등급.jpg",
-        "category": "qualification"
+        "title": "발전5개사-PLC_Hardware 정비적격기업",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/발전5개사-PLC_Hardware+정비적격기업+인증서.jpg",
+        "fileName": "발전5개사-PLC_Hardware+정비적격기업+인증서.jpg"
     },
     {
-        "id": 7,
-        "title": "한수원(주) 보안설비 전원공급계통 A등급",
-        "date": "2023-09-05",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-007.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-007.jpg",
-        "fileName": "한수원-보안설비전원공급계통-A등급.jpg",
-        "category": "qualification"
+        "title": "발전5개사-기자재공급_전기설비 감시시스템",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "images": [
+            {
+                "url": "/assets/images/gallery/qualifications/발전5개사-기자재-공급-유자격-등록증-전기설비-감시시스템(영문).jpg",
+                "fileName": "발전5개사-기자재-공급-유자격-등록증-전기설비-감시시스템(영문).jpg"
+            },
+            {
+                "url": "/assets/images/gallery/qualifications/발전5개사-기자재-공급-유자격-등록증-전기설비-감시시스템-(국문).jpg",
+                "fileName": "발전5개사-기자재-공급-유자격-등록증-전기설비-감시시스템-(국문).jpg"
+            }
+        ]
     },
     {
-        "id": 8,
-        "title": "한수원(주) PCS/PLC A등급",
-        "date": "2023-08-18",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-008.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-008.jpg",
-        "fileName": "한수원-PCS-PLC-A등급.jpg",
-        "category": "qualification"
+        "title": "발전5개사-보호계전기_갑종보호계전기 정비적격기업",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/발전5개사-보호계전기_갑종보호계전기+정비적격기업+인증서.jpg",
+        "fileName": "발전5개사-보호계기_갑종보호계전기+정비적격기업+인증서.jpg"
     },
     {
-        "id": 9,
-        "title": "한국전력기술(주) 원자력계측분야설계",
-        "date": "2023-07-25",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-009.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-009.jpg",
-        "fileName": "한국전력기술-원자력계측분야설계.jpg",
-        "category": "qualification"
+        "title": "발전5개사-보호계전기_을종보호계전기 정비적격기업",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/발전5개사-보호계전기_갑종보호계전기+정비적격기업+인증서.jpg",
+        "fileName": "발전5개사-보호계전기_갑종보호계전기+정비적격기업+인증서.jpg"
     },
     {
-        "id": 10,
-        "title": "한국동서발전 발전설비정비적격업체",
-        "date": "2023-06-30",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-010.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-010.jpg",
-        "fileName": "한국동서발전-발전설비정비적격업체.jpg",
-        "category": "qualification"
+        "title": "발전5개사-보호계전기_ECMS 정비적격기업",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/발전5개사-보호계전기_ECMS+정비적격기업+인증서.jpg",
+        "fileName": "발전5개사-보호계전기_ECMS+정비적격기업+인증서.jpg"
     },
     {
-        "id": 11,
-        "title": "한국남부발전 발전설비정비적격업체",
-        "date": "2023-05-15",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-011.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-011.jpg",
-        "fileName": "한국남부발전-발전설비정비적격업체.jpg",
-        "category": "qualification"
+        "title": "발전5개사-분산제어시스템 기자재공급",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "images": [
+            {
+                "url": "/assets/images/gallery/qualifications/발전5개사-분산제어시스템-기자재공급-유자격-등록증_YPP_2020-(국문).jpg",
+                "fileName": "발전5개사-분산제어시스템-기자재공급-유자격-등록증_YPP_2020-(국문).jpg"
+            },
+            {
+                "url": "/assets/images/gallery/qualifications/발전5개사-분산제어시스템-기자재공급-유자격-등록증_YPP_2020-(영문).jpg",
+                "fileName": "발전5개사-분산제어시스템-기자재공급-유자격-등록증_YPP_2020-(영문).jpg"
+            }
+        ]
     },
     {
-        "id": 12,
-        "title": "한국전력공사 154KV 송전선로 보호 IED반",
-        "date": "2023-04-20",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-012.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-012.jpg",
-        "fileName": "한전-154KV-송전선로보호-IED반.jpg",
-        "category": "qualification"
+        "title": "원자력-KEPIC-EN",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "images": [
+            {
+                "url": "/assets/images/gallery/qualifications/원자력-KEPIC-EN+자격인증서(국문).jpg",
+                "fileName": "원자력-KEPIC-EN+자격인증서(국문).jpg"
+            },
+            {
+                "url": "/assets/images/gallery/qualifications/원자력-KEPIC-EN+자격인증서(영문).jpg",
+                "fileName": "원자력-KEPIC-EN+자격인증서(영문).jpg"
+            }
+        ]
     },
     {
-        "id": 13,
-        "title": "한국전력공사 154KV 송전선로 보호배전반",
-        "date": "2023-03-10",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-013.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-013.jpg",
-        "fileName": "한전-154KV-송전선로보호배전반.jpg",
-        "category": "qualification"
+        "title": "한국전력기술 기술협정",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한국전력기술+기술협정.jpg",
+        "fileName": "한국전력기술+기술협정.jpg"
     },
     {
-        "id": 14,
-        "title": "한국전력공사 고장기록장치반",
-        "date": "2023-02-25",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-014.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-014.jpg",
-        "fileName": "한전-고장기록장치반.jpg",
-        "category": "qualification"
+        "title": "한수원-DCS,PLC,수력갑종보호계전기 시험",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원+한강수력본부-유자격+등록증+(DCS,PLC,수력갑종보호계전기+시험).jpg",
+        "fileName": "한수원+한강수력본부-유자격+등록증+(DCS,PLC,수력갑종보호계전기+시험).jpg"
     },
     {
-        "id": 15,
-        "title": "한국가스공사 계측제어분야 등록업체",
-        "date": "2023-01-18",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-015.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-015.jpg",
-        "fileName": "한국가스공사-계측제어분야-등록업체.jpg",
-        "category": "qualification"
+        "title": "한수원-유자격 등록증 (Aux Local Control Pannel)",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격+등록증+(Aux+Local+Control+Pannel).jpg",
+        "fileName": "한수원-유자격+등록증+(Aux+Local+Control+Pannel).jpg"
     },
     {
-        "id": 16,
-        "title": "한국석유공사 계측제어분야 등록업체",
-        "date": "2022-12-15",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-016.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-016.jpg",
-        "fileName": "한국석유공사-계측제어분야-등록업체.jpg",
-        "category": "qualification"
+        "title": "한수원-DCS&PLC",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (DCS&PLC).jpg",
+        "fileName": "한수원-유자격 등록증 (DCS&PLC).jpg"
     },
     {
-        "id": 17,
-        "title": "한국지역난방공사 전기분야 등록업체",
-        "date": "2022-11-20",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-017.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-017.jpg",
-        "fileName": "한국지역난방공사-전기분야-등록업체.jpg",
-        "category": "qualification"
+        "title": "한수원-Elecetric Control & Relay Panel_원자력",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (Elecetric Control & Relay Panel_원자력).jpg",
+        "fileName": "한수원-유자격 등록증 (Elecetric Control & Relay Panel_원자력).jpg"
     },
     {
-        "id": 18,
-        "title": "한국철도공사 전기/신호분야 등록업체",
-        "date": "2022-10-08",
-        "thumbnail": "/assets/images/gallery/qualifications/thumb/qual-018.jpg",
-        "image": "/assets/images/gallery/qualifications/qual-018.jpg",
-        "fileName": "한국철도공사-전기신호분야-등록업체.jpg",
-        "category": "qualification"
+        "title": "한수원-Electrical Control & Relay Panel_수력양수",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (Electrical Control & Relay Panel_수력양수).jpg",
+        "fileName": "한수원-유자격 등록증 (Electrical Control & Relay Panel_수력양수).jpg"
+    },
+    {
+        "title": "한수원-Electrical equipment & Monitoring System",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (Electrical equipment & Monitoring System).jpg",
+        "fileName": "한수원-유자격 등록증 (Electrical equipment & Monitoring System).jpg"
+    },
+    {
+        "title": "한수원-ELECTRONIC MODULE -INCLUDING PLC MODULE",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (ELECTRONIC MODULE -INCLUDING PLC MODULE).jpg",
+        "fileName": "한수원-유자격 등록증 (ELECTRONIC MODULE -INCLUDING PLC MODULE).jpg"
+    },
+    {
+        "title": "한수원-Fault Recorder",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (Fault Recorder).jpg",
+        "fileName": "한수원-유자격 등록증 (Fault Recorder).jpg"
+    },
+    {
+        "title": "한수원-HVAC Control",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (HVAC Controll).jpg",
+        "fileName": "한수원-유자격 등록증 (HVAC Controll).jpg"
+    },
+    {
+        "title": "한수원-Main Electrical Board & Protection Relay Panel",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (Main Electrical Board & Protection Relay Panel).jpg",
+        "fileName": "한수원-유자격 등록증 (Main Electrical Board & Protection Relay Panel).jpg"
+    },
+    {
+        "title": "한수원-Power Supply System for Security System",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (Power Supply System for Security System).jpg",
+        "fileName": "한수원-유자격 등록증 (Power Supply System for Security System).jpg"
+    },
+    {
+        "title": "한수원-Switchyard Bus & Tie Line Protection Panel 345KV",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (Switchyard Bus & Tie Line Protection Panel 345KV).jpg",
+        "fileName": "한수원-유자격 등록증 (Switchyard Bus & Tie Line Protection Panel 345KV).jpg"
+    },
+    {
+        "title": "한수원-Switchyard Bus & Tie Line Protection Panel 765KV",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (Switchyard Bus & Tie Line Protection Panel 765KV).jpg",
+        "fileName": "한수원-유자격 등록증 (Switchyard Bus & Tie Line Protection Panel 765KV).jpg"
+    },
+    {
+        "title": "한수원-대리점등록",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (대리점등록).jpg",
+        "fileName": "한수원-유자격 등록증 (대리점등록).jpg"
+    },
+    {
+        "title": "한수원-원자력 및 수력발전소 갑종보호계전기 시험 용역",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (원자력 및 수력발전소 갑종보호계전기 시험 용역).jpg",
+        "fileName": "한수원-유자격 등록증 (원자력 및 수력발전소 갑종보호계전기 시험 용역).jpg"
+    },
+    {
+        "title": "한수원-원자력발전소 전력설비 보호계통 시험용역",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (원자력발전소 전력설비 보호계통 시험용역).jpg",
+        "fileName": "한수원-유자격 등록증 (원자력발전소 전력설비 보호계통 시험용역).jpg"
+    },
+    {
+        "title": "한수원-전원공급기",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (전원공급기).jpg",
+        "fileName": "한수원-유자격 등록증 (전원공급기).jpg"
+    },
+    {
+        "title": "한수원-Vibration Monitoring System",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-유자격 등록증 (Vibration Monitoring System).jpg",
+        "fileName": ""
+    },
+    {
+        "title": "한수원-CGID (Commercial grade dedication)",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/CGID+유자격공급자+등록증.jpg",
+        "fileName": "CGID+유자격공급자+등록증.jpg"
+    },
+    {
+        "title": "한수원-경수로 사용후핵연료 소내운반 용역",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-경수로+사용후핵연료+소내운반+용역.jpeg",
+        "fileName": "한수원-경수로+사용후핵연료+소내운반+용역.jpeg"
+    },
+    {
+        "title": "한수원-중수로 사용후연료 건식 운반, 저장용역",
+        "title_eng": "",
+        "date": "2025-07-14",
+        "image": "/assets/images/gallery/qualifications/한수원-중수로+사용후연료+건식+운반,+저장용역.jpeg",
+        "fileName": "한수원-중수로+사용후연료+건식+운반,+저장용역.jpeg"
     }
 ]

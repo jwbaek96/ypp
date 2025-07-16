@@ -18,6 +18,276 @@
     
     <!-- 메타 시스템 -->
     <script src="../../../js/head-meta.js"></script>
+    <!-- =========================================================== -->
+     <style>
+        <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아카데미갤러리 - YPP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Gallery specific styles */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .filter-group {
+            flex: 1;
+        }
+
+        .filter-label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        /* Dropdown Filter */
+        .item-filter {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .item-filter-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .item-filter-top:hover {
+            background: #34495e;
+        }
+
+        .item-filter-top-text {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .item-filter-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .item-filter.active .item-filter-arrow {
+            transform: rotate(90deg);
+        }
+
+        .item-filter-option-container {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #2c3e50;
+            border-radius: 0 0 6px 6px;
+            z-index: 1000;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .item-filter.active .item-filter-option-container {
+            max-height: 300px;
+            border-top: 1px solid #34495e;
+        }
+
+        .item-filter-option {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            gap: 8px;
+        }
+
+        .item-filter-option:hover {
+            background: #34495e;
+        }
+
+        .item-filter-checksvg {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item-filter-checksvg svg {
+            width: 11px;
+            height: 11px;
+            stroke: currentColor;
+        }
+
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .results-count {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .filter-reset {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-reset:hover {
+            text-decoration: underline;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-info {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .card-date {
+            font-size: 0.8rem;
+            color: #95a5a6;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #e74c3c;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7f8c8d;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-container {
+                padding: 15px;
+            }
+
+            .filter-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .results-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+     </style>
 </head>
 <body>
     <!-- Header Container -->
@@ -34,7 +304,7 @@
                 <div class="page-header-content">
                     <h1 class="page-title"
                         data-eng="Academy Gallery"
-                        data-kor="아카데미갤러리">아카데미갤러리</h1>
+                        data-kor="아카데미 갤러리">아카데미갤러리</h1>
                     <p class="page-subtitle"
                         data-eng="YPP Academy Education Program Gallery"
                         data-kor="YPP아카데미 교육 프로그램 갤러리">YPP아카데미 교육 프로그램 갤러리</p>
@@ -54,51 +324,76 @@
                     <span class="breadcrumb-separator">></span>
                     <span class="breadcrumb-current"
           data-eng="Academy Gallery"
-          data-kor="아카데미갤러리">아카데미갤러리</span>
+          data-kor="아카데미갤러리">아카데미 갤러리</span>
                 </nav>
             </div>
         </section>
 
         <!-- Section Navigation -->
-        <section class="section-navigation">
+        <!-- <section class="section-navigation">
             <div class="container">
                 <nav class="section-nav">
                     <a href="#psac" class="section-nav-link active">PSAC</a>
                     <a href="#relay-school" class="section-nav-link">Relay School</a>
                 </nav>
             </div>
-        </section>
-
+        </section> -->
+    
         <!-- Content Section -->
         <section class="content-section">
             <div class="container">
                 <div class="content-header">
                     <h2 class="content-title"
                         data-eng="Academy Gallery"
-                        data-kor="아카데미갤러리">아카데미갤러리</h2>
+                        data-kor="아카데미 갤러리">아카데미 갤러리</h2>
                     <p class="content-subtitle"
                         data-eng="Experience the vivid scenes of YPP Academy's education programs"
                         data-kor="YPP아카데미 교육 프로그램의 생생한 현장을 만나보세요">YPP아카데미 교육 프로그램의 생생한 현장을 만나보세요</p>
                 </div>
                 
                 <div class="content-grid">
-                    <!-- PSAC -->
-                    <div id="psac" class="content-block full-width">
-                        <h3 class="block-title">PSAC</h3>
-                        <div class="block-content">
-                            <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">콘텐츠 영역</p>
+                    <div class="gallery-container">
+                        <!-- Filter Section -->
+                        <div class="filter-section">
+                            <div class="filter-row">
+                                <div class="filter-group">
+                                    <label class="filter-label">프로그램 유형</label>
+                                    <div class="item-filter" id="categoryFilter">
+                                        <label class="item-filter-top">
+                                            <span class="item-filter-top-text">ALL</span>
+                                            <div class="item-filter-arrow">&gt;</div>
+                                        </label>
+                                        <ol class="item-filter-option-container" id="categoryOptions">
+                                            <!-- 카테고리 옵션들은 JavaScript로 동적 생성 -->
+                                        </ol>
+                                    </div>
+                                </div>
+                                
+                                <div class="filter-group">
+                                    <label class="filter-label">년도</label>
+                                    <div class="item-filter" id="yearFilter">
+                                        <label class="item-filter-top">
+                                            <span class="item-filter-top-text">전체</span>
+                                            <div class="item-filter-arrow">&gt;</div>
+                                        </label>
+                                        <ol class="item-filter-option-container" id="yearOptions">
+                                            <!-- 년도 옵션들은 JavaScript로 동적 생성 -->
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <!-- Relay School -->
-                    <div id="relay-school" class="content-block full-width">
-                        <h3 class="block-title">Relay School</h3>
-                        <div class="block-content">
-                            <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">콘텐츠 영역</p>
+
+                        <!-- Results Info -->
+                        <div class="results-info">
+                            <span class="results-count" id="results-count">전체 0개</span>
+                            <a href="#" class="filter-reset" onclick="resetFilters()">필터 초기화</a>
+                        </div>
+
+                        <div id="gallery-container">
+                            <div class="loading">
+                                <p>갤러리를 불러오는 중...</p>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -18,6 +18,48 @@
     
     <!-- 메타 시스템 -->
     <script src="../../js/head-meta.js"></script>
+    <!-- ========================================== -->
+     <style>
+        .bc1{padding: 15px 10px;}
+        .bc-head {
+            padding-bottom: 20px;
+        }
+
+        .bc-head p {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .bc1 ol {
+            counter-reset: item;
+            list-style: none;
+        }
+
+        .bc1 ol > li {
+            counter-increment: item;
+            margin-bottom: 10px;
+            padding: 20px 25px;
+            background: #eef4fa;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            color: black;
+        }
+
+        .bc1 ol > li:hover {
+            background: #e8f4f8;
+            transform: translateX(5px);
+        }
+
+        .bc1 ol > li b {
+            color: #0e77bd;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+     </style>
 </head>
 <body>
     <!-- Header Container -->
@@ -92,14 +134,45 @@
                 <div class="content-grid">
                     <!-- 플랜트 전기분야 설계 -->
                     <div id="electrical-design" class="content-block full-width">
-                        <h3 class="block-title"
-        data-eng="Plant Electrical Design"
-        data-kor="플랜트 전기분야 설계">플랜트 전기분야 설계</h3>
-                        <div class="block-content">
-                            <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">콘텐츠 영역</p>
+                        <h3 class="block-title" data-eng="Plant Electrical Design" data-kor="플랜트 전기분야 설계">플랜트 전기분야 설계</h3>
+                        <div class="block-content bc1">
+                            <div class="bc-head">
+                                <p data-eng="Key Responsibilities in Electrical Design: Design and Review of Power Systems Components"
+                                   data-kor="전기설계 주요업무: 전력계통 구성 요소 설계 및 검토">전기설계 주요업무: 전력계통 구성 요소 설계 및 검토</p>
+                            </div>
+                            <ol
+                            data-kor='<li><b>Engineering Specification</b><br> 발주처의 기본 요구사항 및 적용 기준을 검토</li>
+                                <li><b>단선도 작성 또는 검토</b><br> 단락전류, 전압강하, 보호 협조, 정격, 보호방식, 조류해석, CT 포화 등 전력계통의 전반적인 계통 흐름을 파악</li>
+                                <li><b>플랜트 부하 리스트 수집 및 특성 파악</b><br> 부하율, 역률, 효율 등을 고려하여 전체 전력계통에 대한 공급될 주요 기자재 사양과 수량 선정</li>
+                                <li><b>플랜트 전기설비 배치계획 수립</b><br> 설계 기준에 따라 주요 기자재 배치 및 고려사항 검토, 변전소 및 전기실 Layout 설정, 배전반 등의 배치 계획 수립</li>
+                                <li><b>Main Cable Route Plan 및 Power Plan (with Cable Schedule)</b><br> 전기실에서 부하까지 케이블 결로 계획, 포설 방식, 전선단수, 케이블 사이즈 선정 등 포함</li>'
+                            data-eng="<li><b>Engineering Specification</b><br> Review the client’s basic requirements and applicable standards.</li>
+                                        <li><b>Single Line Diagram Drafting and Review</b><br> Understand the overall power system flow by analyzing short circuit current, voltage drop, protection coordination, ratings, protection methods, load flow, CT saturation, and other factors.</li>
+                                        <li><b>Plant Load List Collection and Characteristic Analysis</b><br> Determine the specifications and quantities of major equipment to be supplied to the entire power system by considering load factor, power factor, efficiency, etc.</li>
+                                        <li><b>Plant Electrical Facility Layout Planning</b><br> According to design standards, review the layout and considerations of major equipment, set the layout for substations and electrical rooms, and establish the arrangement plan for distribution panels.</li>
+                                        <li><b>Main Cable Route Plan and Power Plan (with Cable Schedule)</b><br> Include planning for cable routing from electrical rooms to loads, laying methods, number of conductors, cable size selection, etc.</li>">
+                            </ol>
                         </div>
+                        <!-- <div class="block-content">
+                            <div class="bc-head">
+                                <p data-eng="Key Responsibilities in Electrical Design: Design and Review of Power Systems Components"
+                                   data-kor="전기설계 주요업무: 전력계통 구성 요소 설계 및 검토">전기설계 주요업무: 전력계통 구성 요소 설계 및 검토</p>
+                                   <div 
+                                   data-kor='
+                                   <ol>
+                                       <li><b>Engineering Specification:</b> 발주처의 기본 요구사항 및 적용 기준을 검토</li>
+                                       <li><b>단선도 작성 또는 검토:</b> 단락전류, 전압강하, 보호 협조, 정격, 보호방식, 조류해석, CT 포화 등 전력계통의 전반적인 계통 흐름을 파악</li>
+                                       <li><b>플랜트 부하 리스트 수집 및 특성 파악:</b> 부하율, 역률, 효율 등을 고려하여 전체 전력계통에 대한 공급될 주요 기자재 사양과 수량 선정</li>
+                                       <li><b>플랜트 전기설비 배치계획 수립:</b> 설계 기준에 따라 주요 기자재 배치 및 고려사항 검토, 변전소 및 전기실 Layout 설정, 배전반 등의 배치 계획 수립</li>
+                                       <li><b>Main Cable Route Plan 및 Power Plan (with Cable Schedule):</b> 전기실에서 부하까지 케이블 결로 계획, 포설 방식, 전선단수, 케이블 사이즈 선정 등 포함</li>
+                                    </ol>'
+                                    data-eng='
+                                    <ol>
+                                        
+                                    </ol>'>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                     
                     <!-- 플랜트 계측분야 설계 -->

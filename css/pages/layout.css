@@ -187,7 +187,6 @@
 .container {
     width: 100%;
     max-width: 1200px;
-    /* padding: var(--container-padding); */
 }
 /* Content Grid */
 .content-grid {
@@ -237,6 +236,9 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+    :root{
+        --container-padding: .5rem;
+    }
     .page-title {
         font-size: 2rem;
     }
@@ -272,7 +274,7 @@
     }
     
     .content-block {
-        padding: 1.5rem;
+        padding: .85rem;
     }
     /* !!! */
     .tab-content-section > .container{

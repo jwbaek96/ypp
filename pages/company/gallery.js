@@ -127,11 +127,12 @@ class GallerySystem {
                 <div class="gallery-content">
                     <div class="gallery-loading">갤러리를 불러오는 중...</div>
                 </div>
+                <!--
                 <div class="gallery-search-wrap">
                     <input type="text" class="gallery-search-input" placeholder="검색어를 입력하세요" />
                     <button class="gallery-search-btn" type="button">검색</button>
                 </div>
-                
+                -->
                 <div class="gallery-pagination" style="display: none;">
                     <button class="pagination-btn prev-btn" data-action="prev">
                         ◀

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>YPP 갤러리 테스트</title>
+</head>
+<body>
+    <h1>YPP 갤러리 (테스트)</h1>
+    <div>
+        <label>카테고리:
+            <select id="categoryFilter">
+                <option value="">전체</option>
+            </select>
+        </label>
+        <label>연도:
+            <select id="yearFilter">
+                <option value="">전체</option>
+            </select>
+        </label>
+        <label>제목 검색:
+            <input type="text" id="searchInput" placeholder="제목을 입력하세요">
+        </label>
+    </div>
+    <div id="galleryGrid"></div>
+    <div id="noResults" style="display:none;">검색 결과가 없습니다.</div>
+
+    <!-- 이미지 모달 -->
+    <div id="imageModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1000;">
+        <button id="closeModal" style="position:absolute; top:20px; right:30px; font-size:2em;">&times;</button>
+        <button id="prevBtn" style="position:absolute; top:50%; left:30px; font-size:2em;">&#8249;</button>
+        <img id="modalImage" alt="갤러리 이미지" style="max-width:90vw; max-height:90vh; display:block; margin:auto;">
+        <button id="nextBtn" style="position:absolute; top:50%; right:30px; font-size:2em;">&#8250;</button>
+    </div>
+
+    <script>
+    // 구글 시트 Apps Script URL (테스트용 실제 URL로 교체)
+    const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycby7JNnJNK7qhJVWvHafME_ynzeShpLjIftFydUZO6AhwCwBA61wYeYzl702ArvyGKPJ/exec';
+
+    function fetchGoogleSheetData() {
+        return new Promise((resolve, reject) => {
+            const callbackName = 'jsonp_callback_' + Date.now();
+            window[callbackName] = function(data) {
+                if (data.error) reject(new Error(data.message));
+                else resolve(data);
+                delete window[callbackName];
+            };
+            const script = document.createElement('script');
+            script.src = `${GOOGLE_SHEET_URL}?callback=${callbackName}`;
+            script.onerror = () => reject(new Error('네트워크 오류'));
+            document.head.appendChild(script);
+            script.onload = () => document.head.removeChild(script);
+        });
+    }
+
+    let galleryData = [];
+    let currentImageIndex = 0;
+    let currentImages = [];
+
+    async function init() {
+        document.getElementById('galleryGrid').innerText = '데이터를 불러오는 중...';
+        try {
+            const rawData = await fetchGoogleSheetData();
+            console.log('rawData:', rawData); // 데이터 구조 확인
+            galleryData = rawData.filter(item => {
+                if (!item.publish) return false;
+                const val = String(item.publish).toLowerCase();
+                return val === 'true' || val === '1' || val === 'yes';
+            });
+            if (galleryData.length === 0) {
+                document.getElementById('galleryGrid').innerText = '게시된 데이터가 없습니다.';
+                return;
+            }
+            setupFilters();
+            renderGallery(galleryData);
+        } catch (e) {
+            document.getElementById('galleryGrid').innerText = '데이터를 불러올 수 없습니다.';
+            console.error(e);
+        }
+    }
+
+    function setupFilters() {
+        const categoryFilter = document.getElementById('categoryFilter');
+        const yearFilter = document.getElementById('yearFilter');
+        // 카테고리
+        const categories = [...new Set(galleryData.map(item => item.category))].filter(Boolean);
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            categoryFilter.appendChild(option);
+        });
+        // 연도
+        const years = [...new Set(galleryData.map(item => {
+            const date = new Date(item.date);
+            return date.getFullYear();
+        }))].filter(year => !isNaN(year));
+        years.sort((a, b) => b - a);
+        years.forEach(year => {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year + '년';
+            yearFilter.appendChild(option);
+        });
+        categoryFilter.addEventListener('change', applyFilters);
+        yearFilter.addEventListener('change', applyFilters);
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+    }
+
+    function applyFilters() {
+        const category = document.getElementById('categoryFilter').value;
+        const year = document.getElementById('yearFilter').value;
+        const search = document.getElementById('searchInput').value.toLowerCase();
+        let filtered = galleryData;
+        if (category) filtered = filtered.filter(item => item.category === category);
+        if (year) filtered = filtered.filter(item => new Date(item.date).getFullYear().toString() === year);
+        if (search) filtered = filtered.filter(item => item.title && item.title.toLowerCase().includes(search));
+        renderGallery(filtered);
+    }
+
+    function renderGallery(data) {
+        const grid = document.getElementById('galleryGrid');
+        const noResults = document.getElementById('noResults');
+        grid.innerHTML = '';
+        if (data.length === 0) {
+            noResults.style.display = 'block';
+            return;
+        }
+        noResults.style.display = 'none';
+        data.forEach(item => {
+            const div = document.createElement('div');
+            const images = item.images || [];
+            const mainImage = images[0] || '';
+            const date = new Date(item.date).toLocaleDateString('ko-KR');
+            div.innerHTML = `<img src="${mainImage}" alt="${item.title||''}" style="width:200px; height:150px; object-fit:cover; cursor:pointer;" onclick="openModal('${item.id}')"><br>
+                <b>${item.category||''}</b> | <b>${item.title||''}</b> | <span>${date}</span><br>
+                <span>${item.content||''}</span>`;
+            grid.appendChild(div);
+        });
+    }
+
+    window.openModal = function(itemId) {
+        const item = galleryData.find(data => data.id === itemId);
+        if (!item) return;
+        currentImages = item.images || [];
+        currentImageIndex = 0;
+        if (currentImages.length === 0) return;
+        document.getElementById('modalImage').src = currentImages[currentImageIndex];
+        document.getElementById('imageModal').style.display = 'flex';
+    };
+    function closeModal() {
+        document.getElementById('imageModal').style.display = 'none';
+    }
+    function prevImage() {
+        if (currentImages.length > 1) {
+            currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+            document.getElementById('modalImage').src = currentImages[currentImageIndex];
+        }
+    }
+    function nextImage() {
+        if (currentImages.length > 1) {
+            currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+            document.getElementById('modalImage').src = currentImages[currentImageIndex];
+        }
+    }
+    function handleKeyPress(e) {
+        if (e.key === 'Escape') closeModal();
+        else if (e.key === 'ArrowLeft') prevImage();
+        else if (e.key === 'ArrowRight') nextImage();
+    }
+    document.getElementById('closeModal').onclick = closeModal;
+    document.getElementById('prevBtn').onclick = prevImage;
+    document.getElementById('nextBtn').onclick = nextImage;
+    document.getElementById('imageModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+    document.addEventListener('keydown', handleKeyPress);
+    init();
+    </script>
+</body>
+</html>

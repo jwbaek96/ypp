@@ -20,24 +20,79 @@
     <script src="../../js/head-meta.js"></script>
     <!-- ========================================== -->
      <style>
+        p,li{color:rgb(48, 48, 48)}
+        /* =============================== */
         .bc1{padding: 15px 10px;}
         .bc-head {
             padding-bottom: 20px;
         }
-
+        
         .bc-head p {
             font-size: 24px;
             font-weight: 600;
-            color: #2c3e50;
             margin: 0;
         }
-
+        
         .bc1 ol {
             counter-reset: item;
             list-style: none;
         }
-
+        
         .bc1 ol > li {
+            counter-increment: item;
+            margin-bottom: 10px;
+            padding: 20px 25px;
+            background: #eef4fa;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            /* color: black; */
+        }
+        
+        .bc1 ol > li:hover {
+            background: #e8f4f8;
+            transform: translateX(5px);
+        }
+        
+        .bc1 ol > li b {
+            color: #0e77bd;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        /* =============================== */
+        .bc2 {padding: 15px 10px;}
+        
+        .bc2 section {
+            margin-bottom: 40px;
+        }
+        
+        .bc2 section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .bc2 h4 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        
+        
+        .bc2 p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        
+        .bc2 ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .bc2 ul li {
             counter-increment: item;
             margin-bottom: 10px;
             padding: 20px 25px;
@@ -47,19 +102,335 @@
             transition: all 0.3s ease;
             color: black;
         }
-
-        .bc1 ol > li:hover {
+        
+        .bc2 ul li:hover {
             background: #e8f4f8;
-            transform: translateX(5px);
+            transform: translateX(3px);
         }
-
-        .bc1 ol > li b {
+        
+        
+        .bc2 ul li b {
             color: #0e77bd;
             font-weight: 600;
             font-size: 16px;
         }
-
-     </style>
+        
+        .bc2 ul li br {
+            margin-bottom: 6px;
+        }
+        
+        .bc2 .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        .bc2 .image-container img:hover{transform: scale(1.02);}
+        
+        .bc2 .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #e2e8f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .bc2 .application-area {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .bc2 .application-area p {
+            margin: 0;
+            font-weight: 500;
+            color: #1e293b;
+        }
+        /* =============================== */
+        .bc3 {padding: 0 10px 15px 10px;}
+        
+        .bc3 section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .bc3 h4 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        
+        
+        .bc3 p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        
+        
+        .bc3 p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        /* 전력계통 지도 섹션 */
+        .power-map-section {
+            padding: 0 20px 20px;
+            margin-bottom: 35px;
+        }
+        
+        .power-map-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .power-map-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .power-map-title {
+            font-size: 18px;
+            font-weight: 600;
+            width: 100%;
+            max-width: 310px;
+            color: #1e293b;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            /* border: 1px solid #e0e0e0; */
+            /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); */
+            margin: 0 10px auto;
+        }
+        
+        .power-map-item img {
+            margin: auto;
+            max-height: 380px;
+            object-fit: scale-down;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); */
+        }
+        
+        .power-map-placeholder {
+            width: 100%;
+            height: 250px;
+            background: #e2e8f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+            border: 2px dashed #cbd5e1;
+        }
+        
+        /* 프로세스 섹션 */
+        .power-process-section {
+            background: linear-gradient(135deg, #bbcaef0e 0%, #006eff13 100%);
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #cbd5e170;
+        }
+        
+        .power-process-head {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .power-process-head p {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        .power-process-section > div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .power-process-section ul {
+            list-style: none;
+            margin: 0;
+            flex: 1;
+            background: linear-gradient(135deg, 
+            rgba(0, 65, 187, 0.2) 0%,
+            rgba(0, 65, 187, 0.1) 50%,
+            rgba(220, 220, 220, 0.05) 100%);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .power-process-section ul li {
+            /* color: #000000; */
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+            height: 100%;
+            white-space: nowrap;
+            text-align: center;
+        }
+        
+        .power-process-section ul:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            border-color: #1e40af33;
+        }
+        
+        
+        .power-process-section ul li b {
+            /* color: #ffffff; */
+            /* color: #1e293b; */
+            font-weight: 600;
+            font-size: 18px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        /* 해석툴 섹션 */
+        .power-tools-section {
+            border-radius: 16px;
+            padding: 40px 0;
+        }
+        
+        .power-tools-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .power-tool-item {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .power-tool-item:hover {
+            transform: translateY(-2px);
+            /* box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); */
+            border-color: #1e40af33;
+        }
+        
+        .power-tool-logo {
+            /* width: 80px; */
+            height: 80px;
+            margin: 0 auto 20px;
+            /* background: #f1f5f9; */
+            /* border-radius: 50%; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #1e40af;
+            font-size: 14px;
+        }
+        
+        .power-tool-logo img {
+            /* width: 60px;
+            height: 60px; */
+            object-fit: contain;
+        }
+        
+        .power-tool-desc {
+            font-size: 16px;
+            color: #475569;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+        
+        .power-tool-desc strong {
+            color: #1e293b;
+            font-weight: 600;
+        }
+        /* =============================== */
+        .bc4 .bc-head p{
+            padding: 10px 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .bc1 ol {
+            counter-reset: item;
+            list-style: none;
+        }
+        
+        .bc4 ol > li {
+            counter-increment: item;
+            margin-bottom: 10px;
+            padding: 20px 25px;
+            background: #eef4fa;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            text-align: center;
+            /* color: black; */
+        }
+        
+        .bc4 ol > li:hover {
+            background: #e8f4f8;
+            transform: translateY(-3px);
+        }
+        
+        .bc4 ol > li b {
+            color: #0e77bd;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .bc4 ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .bc4 ul li {
+            counter-increment: item;
+            margin-bottom: 10px;
+            padding: 20px 25px;
+            background: #eef4fa;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            color: black;
+        }
+        .bc4 h4 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        /* =============================== */
+        @media screen and (max-width: 768px) {
+            .power-process-section{
+                padding: 20px 10px;
+            }
+            
+        }
+        </style>
 </head>
 <body>
     <!-- Header Container -->
@@ -67,7 +438,7 @@
     
     <!-- Mobile Sidebar Container -->
     <div id="sidebar-container"></div>
-
+    
     <!-- Main Content -->
     <main class="main-content">
         <!-- Page Header -->
@@ -153,59 +524,249 @@
                                         <li><b>Main Cable Route Plan and Power Plan (with Cable Schedule)</b><br> Include planning for cable routing from electrical rooms to loads, laying methods, number of conductors, cable size selection, etc.</li>">
                             </ol>
                         </div>
-                        <!-- <div class="block-content">
-                            <div class="bc-head">
-                                <p data-eng="Key Responsibilities in Electrical Design: Design and Review of Power Systems Components"
-                                   data-kor="전기설계 주요업무: 전력계통 구성 요소 설계 및 검토">전기설계 주요업무: 전력계통 구성 요소 설계 및 검토</p>
-                                   <div 
-                                   data-kor='
-                                   <ol>
-                                       <li><b>Engineering Specification:</b> 발주처의 기본 요구사항 및 적용 기준을 검토</li>
-                                       <li><b>단선도 작성 또는 검토:</b> 단락전류, 전압강하, 보호 협조, 정격, 보호방식, 조류해석, CT 포화 등 전력계통의 전반적인 계통 흐름을 파악</li>
-                                       <li><b>플랜트 부하 리스트 수집 및 특성 파악:</b> 부하율, 역률, 효율 등을 고려하여 전체 전력계통에 대한 공급될 주요 기자재 사양과 수량 선정</li>
-                                       <li><b>플랜트 전기설비 배치계획 수립:</b> 설계 기준에 따라 주요 기자재 배치 및 고려사항 검토, 변전소 및 전기실 Layout 설정, 배전반 등의 배치 계획 수립</li>
-                                       <li><b>Main Cable Route Plan 및 Power Plan (with Cable Schedule):</b> 전기실에서 부하까지 케이블 결로 계획, 포설 방식, 전선단수, 케이블 사이즈 선정 등 포함</li>
-                                    </ol>'
-                                    data-eng='
-                                    <ol>
-                                        
-                                    </ol>'>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                     
                     <!-- 플랜트 계측분야 설계 -->
-                    <div id="instrumentation-design" class="content-block full-width">
-                        <h3 class="block-title"
-        data-eng="Plant Instrumentation Design"
-        data-kor="플랜트 계측분야 설계">플랜트 계측분야 설계</h3>
-                        <div class="block-content">
-                            <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">콘텐츠 영역</p>
+                    <div id="instrumentation-design" class="content-block">
+                        <h3 class="block-title" data-eng="Plant Instrumentation Design" data-kor="플랜트 계측분야 설계">플랜트 계측분야 설계</h3>
+                        <div class="block-content bc2">
+                            <!-- 개요 -->
+                            <section>
+                                <h4>개요</h4>
+                                <p>발전소가 최적의 상태로 안전하게 운전될 수 있도록 제어, 사고 시 신속하게 정상상태로 복귀할 수 있도록 발전소의 각종기기의 상태 및 공정변수에 대한 정보를 수집·분석·지시하고 조작, 감시 및 보호를 위한 계통 및 설비에 대한 설계 업무 수행.</p>
+                            </section>
+                            <!-- 특징 -->
+                            <section>
+                                <h4>특징</h4>
+                                <div>
+                                    <ul>
+                                        <li><b>보호, 제어, 감시계통 설계</b><br>Loop Diagram(LD) 및 Control Logic Diagram(CLD) 설계<br>구매기술규격서 업무</li>
+                                    </ul>
+                                    <ul>
+                                        <li><b>인간공학</b><br>주제어실 및 인간공학 설계<br>MMIS 구매기술규격서 업무</li>
+                                    </ul>
+                                    <ul>
+                                        <li><b>계기 설치 설계</b><br>계측기기 구매업무 및 설치 설계</li>
+                                    </ul>
+                                </div>
+                            </section>
+                            <!-- 주요 계측제어 설계 프로세스 (이미지) -->
+                            <section>
+                                <h4>주요 계측제어 설계 프로세스</h4>
+                                <div class="image-container">
+                                    <a href="./instrumentation-process.png" target="_blank">
+                                        <img src="instrumentation-process.png" alt="주요 계측제어 설계 프로세스">
+                                    </a>
+                                </div>
+                            </section>
+                            <!-- 적용분야 -->
+                            <section>
+                                <h4>적용분야</h4>
+                                <p>원자력발전소, 화력발전소, 복합화력발전소, 수력발전소, 양수발전소</p>
+                            </section>
                         </div>
                     </div>
                     
                     <!-- 전력계통 컨설팅 -->
-                    <div id="power-consulting" class="content-block full-width">
-                        <h3 class="block-title"
-        data-eng="Power System Consulting"
-        data-kor="전력계통 컨설팅">전력계통 컨설팅</h3>
-                        <div class="block-content">
-                            <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">콘텐츠 영역</p>
+                    <div id="power-consulting" class="content-block">
+                        <h3 class="block-title" data-eng="Power System Consulting" data-kor="전력계통 컨설팅">전력계통 컨설팅</h3>
+                        <div class="block-content bc3">
+                            <!-- 전력계통 지도 이미지 영역 -->
+                            <section class="power-map-section">
+                                <div class="power-map-images">
+                                    <div class="power-map-item">
+                                        <div class="power-map-title">기존 전력계통</div>
+                                        <a href="./powergrid-old.jpeg">
+                                            <img src="powergrid-old.jpeg" alt="기존 전력계통">
+                                        </a>
+                                    </div>
+                                    <div class="power-map-item">
+                                        <div class="power-map-title">현재 전력계통</div>
+                                        <a href="./powergrid-current.jpeg">
+                                            <img src="powergrid-current.jpeg" alt="현재 전력계통">
+                                        </a>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- 개요 -->
+                            <section>
+                                <h4>개요</h4>
+                                <p>컨설팅 및 엔지니어링 서비스는 최적의 전력계통 시스템을 구축, 운영할 수 있도록 전력계통 신뢰도 개선, 송전계통 기술 검토, 전력계통 분석 및 진단, 보호시스템 설계 및 정정계산 등 다양한 전력계통 분석기법 및 전력계통 해석도구를 활용한 맞춤형 솔루션을 제공. 화력 및 복합화력 발전소, 석유화학 및 반도체 등 다수의 산업용 플랜트에 대한 기술 검토 및 분석, 진단, 보호시스템 설계 및 정정계산을 수행하여 고객의 안정적인 전력계통 운영과 지속적인 생산에 기여함.</p>
+                            </section>
+                            <!-- 주요 프로세스(플로우) -->
+                            <section class="power-process-section">
+                                <div class="power-process-head">
+                                    <p>플랜트 건설 타당성조사, 플랜트 건설기본계획<br>전력계통 신증설, 계통운영 신뢰도 개선</p>
+                                </div>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <b>1. 전력계통 신뢰도 개선</b>
+                                            ・수전설비 이중화 방안
+                                            <br>・변압기 병렬운전 방안
+                                            <br>・자동절제시스템 구축
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <b>2. 송전계통 기술검토</b>
+                                            ・과부하/전압분석
+                                            <br>・차단기 차단용량 분석
+                                            <br>・과도안정도 분석
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <b>3. 보호시스템 설계 및 정정계산</b>
+                                            ・보호시스템보강 방안
+                                            <br>・보호협조 개선방안
+                                            <br>・보호시스템 설계
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <b>4. 전력계통 분석 및 진단</b>
+                                            ・설비 과부하/전압분석
+                                            <br>・고장전류, 전동기 가동
+                                            <br>・안정도 분석
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <b>5. 아크로플래시 에너지분석</b>
+                                            ・고조파 분석
+                                            <br>・고조파 필터 설계
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                            <!-- 해석툴 영역 -->
+                            <section class="power-tools-section">
+                                <div class="power-tools-list">
+                                    <div class="power-tool-item">
+                                        <div class="power-tool-logo"><img src="etap-logo.jpeg" alt="ETAP"></div>
+                                        <div class="power-tool-desc">ETAP<br>고장계산, 조류계산, 보호협조, 전동기기동, 고조파분석 등</div>
+                                    </div>
+                                    <div class="power-tool-item">
+                                        <div class="power-tool-logo"><img src="pscad-logo.jpeg" alt="PSCAD/EMTDC"></div>
+                                        <div class="power-tool-desc">PSCAD/EMTDC<br>과도해석, 제어기설계, 분산전원 모델링 및 계통연계 등</div>
+                                    </div>
+                                    <div class="power-tool-item">
+                                        <div class="power-tool-logo"><img src="psse-logo.jpeg" alt="PSS/E"></div>
+                                        <div class="power-tool-desc">PSS/E<br>조류계산, 고장계산, 과도해석, 안정도분석 등</div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </div>
                     
                     <!-- CGID -->
                     <div id="cgid" class="content-block full-width">
-                        <h3 class="block-title">CGID</h3>
-                        <div class="block-content">
-                            <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">콘텐츠 영역</p>
+                        <h3 class="block-title" data-eng="CGID" data-kor="CGID">CGID</h3>
+                        <div class="block-content bc4">
+                            <!-- 1. CGID의 의미 -->
+                            <div class="bc-head">
+                                <p data-eng="Meaning of CGID: Commercial Grade Item Dedication (CGID) is a quality assurance procedure required to rationally verify (dedicate) that commercial products manufactured to general industrial standards can perform safety-related functions as Basic Items in nuclear power plants, and are equivalent to items designed and manufactured under nuclear quality assurance programs."
+                                   data-kor="CGID(Commercial Grade Item Dedication)은 일반 산업표준으로 제작된 상용제품(Commercial Product)을 원자력발전소 내 Basic Item으로서 안전관련 기능을 수행하고, 원자력 품질보증 프로그램 하에서 설계 및 제작된 품목과 동등함을 합리적으로 검증(Dedication)하기 위해 필요한 품질보증 절차입니다.">
+                                    CGID(Commercial Grade Item Dedication)은 일반 산업표준으로 제작된 상용제품(Commercial Product)을 원자력발전소 내 Basic Item으로서 안전관련 기능을 수행하고, 원자력 품질보증 프로그램 하에서 설계 및 제작된 품목과 동등함을 합리적으로 검증(Dedication)하기 위해 필요한 품질보증 절차입니다.
+                                </p>
+                            </div>
+                            <ol>
+                                <li>즉, 상용제품을 원자력발전소 내 안전관련 등급의 제품으로 사용하기 위한 품질보증 절차이며, 이는 한수원이 승인한 CGID 유자격업체(327Q)만이 수행할 수 있습니다.</li>
+                                <li>YPP는 다년간 CGID 유자격업체로서 한국수력원자력의 CGID Project를 꾸준히 수행해왔으며, 민간기업의 CGID Project도 꾸준히 수행하여 약 200품목의 제품에 대한 경험과 노하우를 축적하였습니다. 이에 따라 YPP는 높은 신뢰성을 필요로 하는 CGID에 대해 High-Quality Engineering Services를 제공하고 있으며, NAWAH Energy(UAE 발전사) BNPP(Barakah Nuclear Power Plant)의 예비품을 공급할 수 있는 유자격을 취득하는 등 CGID의 확대를 위해 매진하고 있습니다.</li>
+                            </ol>
+                            <!-- 2. Standard Code For CGID -->
+                            <div style="margin-top:32px;"></div>
+                            <h4 class="bc-subtitle">Standard Code For CGID</h4>
+                            <ul>
+                                <li><b>US Standard Code</b><br>
+                                    1) 10CFR50, Appendix B, Criterion VII(Control of Purchased Material, Equipment, and Services)<br>
+                                    2) 10CFR21(REPORTING OF DEFECTS AND NONCOMPLIANCE)<br>
+                                    3) DOE G 414.1.2(Quality Management System Guide)<br>
+                                    4) DOE Order 414.1C (NQA-1 a-2009 Part 1 and Part 2 for implementing EPRI guidance for CGD)<br>
+                                    5) ASME NQA-1a (2009) Subpart 2.14 (CGD process is used when items or services that provide a safety function are not provided by NQA-1 qualified suppliers)<br>
+                                    6) ANSI/ANS-3.2-1994(Procurement and Materials Control)<br>
+                                    <span style="font-size:13px; color:#64748b;">* Additional information: EPRI Guideline NP-5652, “Guidelines for Utilization of Commercial Grade Items in Nuclear Safety Related Applications.”</span>
+                                </li>
+                                <li><b>Korea Standard Code</b><br>
+                                    1) 원자로규칙 제4절 제73조(구매품목 및 용역의 관리)<br>
+                                    2) 원자로규칙 제4절 제83조(시정조치)<br>
+                                    3) 전력산업기술기준의 원자로시설 기술기준 적용에 관한 지침 (안전위원회고시 제2014-19호)<br>
+                                    4) 원자로시설의 품질보증 세부요건에 관한 규정 (안전위원회고시 제2014-23호)<br>
+                                    5) 부적합사항의 보고에 관한 규정 (안전위원회고시 제2014-080호)<br>
+                                    6) KEPIC QAP-2000, 보충요건 7S-1 구매품목 및 용역의 관리, 10. 일반규격품목<br>
+                                    7) KINS/RG-N17.12 안전성관련품목 대체사용을 위한 일반규격품의 품질검증<br>
+                                    <span style="font-size:13px; color:#64748b;">* EPRI NP-5652, “Guideline for the Utilization of CGIs in Nuclear Safety-Related Application“ (1988) 준용</span>
+                                </li>
+                                <li><b>관련 Standard Code</b><br>
+                                    1) 10CFR21 / Reporting of Defects and Noncompliance<br>
+                                    2) 10CFR50, Appendix B / Quality Assurance Criteria for Nuclear Power Plants and Fuel Reprocessing Plants<br>
+                                    3) NRC GL 89-02 / Actions to Improve the Detection of Counterfeit and Fraudulently Marketed Products<br>
+                                    4) NRC RG-1.164 / Dedication of Commercial-Grade Items for Use in Nuclear Power Plants<br>
+                                    5) KINS RG-N17.12 / 안전성관련 품목 대체사용을 위한 일반규격품의 품질검증<br>
+                                    6) EPRI NP-5652 / Guideline for the Utilization of Commercial Grade Items in Nuclear Safety Related Applications<br>
+                                    7) EPRI NP-6406 / Guidelines for the Technical Evaluation of Replacement Items in NPPs<br>
+                                    8) EPRI TR-102260 / Supplemental Guidance for the Application of EPRI Report NP-5652 on the Utilization of Commercial Grade Items<br>
+                                    9) EPRI TR-017218-R1 / Guideline for the Acceptance of Commercial-Grade Items in Nuclear Safety-Related Applications (Revision 1)<br>
+                                    10) EPRI TR-106439 / Guideline on Evaluation and Acceptance of Commercial Grade Digital Equipment for Nuclear Safety-Related Applications<br>
+                                    11) EPRI 3002002982 / Guideline for the Acceptance of Commercial-Grade Items in Nuclear Safety-Related Applications
+                                </li>
+                            </ul>
+                            <!-- CGID 도입배경 (이미지) -->
+                            <div style="margin:32px 0 16px 0;"></div>
+                            <h4 class="bc-subtitle">CGID 도입배경</h4>
+                            <div class="image-container">
+                                <a href="./cgid-bg.jpeg" class="image-placeholder">
+                                    <img src="cgid-bg.jpeg" alt="" srcset="">
+                                </a>
+                            </div>
+                            <!-- 3. YPP CGID 품목 (표) -->
+                            <div style="margin:32px 0 16px 0;"></div>
+                            <h4 class="bc-subtitle">YPP CGID 품목</h4>
+                            <caption style="caption-side:top; font-weight:600; font-size:16px; margin-bottom:8px;">Commercial Item List (Safety Related)</caption>
+                            <div class="table-container">
+                                <table class="cgid-item-table" style="width:100%; border-collapse:collapse; text-align:left;">
+                                    <thead>
+                                        <tr>
+                                            <th style="border:1px solid #222; padding:8px; width:10%;">Type</th>
+                                            <th style="border:1px solid #222; padding:8px; width:30%;">Cat-1 (Min Efforts)</th>
+                                            <th style="border:1px solid #222; padding:8px; width:40%;">Cat-2 (Avg Efforts)</th>
+                                            <th style="border:1px solid #222; padding:8px; width:20%;">Cat-3 (Max Efforts)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th style="border:1px solid #222; padding:8px;">Item</th>
+                                            <td style="border:1px solid #222; padding:8px; white-space:pre-line;">
+                                                FUSE, Diode, Shunt, Variable Resistor (Potentiometer), Fixed Resistor,
+                                                Transistor, Switch, Power and Control Cable, etc
+                                            </td>
+                                            <td style="border:1px solid #222; padding:8px; white-space:pre-line;">
+                                                PT (Potential Transformer), CT (Current Transformer), Ammeter, Voltmeter, Timer,
+                                                Transducer, Noise Filter, Detector / Sensor, Circuit Breaker,
+                                                Electromagnetic Relay (solenoid relay), Fan / Blower, Pressure Switch,
+                                                Temperature Switch, Flow Switch, Pneumatic Relay, Directional Control Valve,
+                                                Surge Arrester / Overvoltage Protection Device, Ultrasonic Sensor (Transmitter), etc
+                                            </td>
+                                            <td style="border:1px solid #222; padding:8px; white-space:pre-line;">
+                                                Digital Protection Relay Assembly, Digital Relay Module,
+                                                Digital Thermometer, Power Supply, Motor, AVR CARD (EDG), etc
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- 4. YPP CGID Track Record -->
+                            <div style="margin:32px 0 16px 0;"></div>
+                            <h4 class="bc-subtitle">YPP CGID Track Record</h4>
+                            <ul>
+                                <li>한국수력원자력, 원자력발전소(새울1발 외 40개소) CGID 수행 (2021~현재)</li>
+                                <li>한화엔진, 원자력발전소(새울1발) EDG 디지털보호계전기 CGID 수행 (2021~현재)</li>
+                                <li>HD현대, 원자력발전소(고리1발) EDG 디지털보호계전기 CGID 수행 (2023~2024)</li>
+                                <li>효성중공업, NAWAH BNPP 고압반 디지털보호계전기 CGID 수행 (2022~2024)</li>
+                                <li>효성중공업, 원자력발전소(새울1발) 고압반 디지털보호계전기 CGID 수행 (2024~현재)</li>
+                                <li>지투파워, 원자력발전소(신한울2발) 고압반 디지털보호계전기 CGID 수행 (2025~현재)</li>
+                            </ul>
                         </div>
                     </div>
                 </div>

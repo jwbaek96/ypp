@@ -118,15 +118,18 @@
         .bc2 ul li br {
             margin-bottom: 6px;
         }
-        
-        .bc2 .image-container img {
+        .image-container{
+            padding: 0 20px;
+            text-align: center;
+        }
+        .image-container img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             transition: transform 0.3s ease;
         }
-        .bc2 .image-container img:hover{transform: scale(1.02);}
+        .image-container img:hover{transform: scale(1.02);}
         
         .bc2 .image-placeholder {
             width: 100%;
@@ -399,12 +402,14 @@
             font-weight: 600;
             font-size: 16px;
         }
-        .bc4 ul {
+        .bc4 > ul,
+        .cgid-engineering-services ul {
             list-style: none;
             margin-bottom: 20px;
         }
         
-        .bc4 ul li {
+        .bc4 > ul li,
+        .cgid-engineering-services ul li {
             counter-increment: item;
             margin-bottom: 10px;
             padding: 20px 25px;
@@ -422,6 +427,26 @@
             padding-bottom: 8px;
             border-bottom: 2px solid #e2e8f0;
             position: relative;
+        }
+        .bc4 .image-container-ul{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .bc4 .image-container ul li{
+            counter-increment: item;
+            margin-bottom: 0;
+            padding: 20px 25px 0 25px;
+            background: none;
+            border-radius: none;
+            position: relative;
+            transition: none;
+            color: black;
+        }
+        .bc4 .image-container img{
+            width: 100%;
+            max-width: 500px;
         }
         /* =============================== */
         
@@ -492,6 +517,70 @@
             }
             .power-process-detail-item {
                 padding: 18px 10px 14px 10px;
+            }
+        }
+        /* =============================== */
+        .cgid-list-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px 32px;
+            margin: 32px 0 24px 0;
+        }
+        .cgid-list-item {
+            display: flex;
+            align-items: flex-start;
+            background: #eef4fa;
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            padding: 28px 24px;
+            gap: 28px;
+        }
+        .cgid-list-text {
+            flex: 1 1 0;
+        }
+        .cgid-list-text h5 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 14px;
+        }
+        .cgid-list-text ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        .cgid-list-text li {
+            font-size: 1rem;
+            color: #334155;
+            margin-bottom: 7px;
+            list-style: disc;
+        }
+        .cgid-list-img {
+            /* height: 100%; */
+            flex: 0 0 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cgid-list-img img {
+            max-width: 140px;
+            max-height: 140px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: #e2e8f0;
+            object-fit: contain;
+        }
+        @media (max-width: 900px) {
+            .cgid-list-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .cgid-list-item {
+                /* flex-direction: column; */
+                align-items: stretch;
+                gap: 16px;
+            }
+            .cgid-list-img {
+                justify-content: flex-start;
             }
         }
         /* =============================== */
@@ -603,12 +692,16 @@
                         <div class="block-content bc2">
                             <!-- 개요 -->
                             <section>
-                                <h4>개요</h4>
-                                <p>발전소가 최적의 상태로 안전하게 운전될 수 있도록 제어, 사고 시 신속하게 정상상태로 복귀할 수 있도록 발전소의 각종기기의 상태 및 공정변수에 대한 정보를 수집·분석·지시하고 조작, 감시 및 보호를 위한 계통 및 설비에 대한 설계 업무 수행.</p>
+                                <h4 data-kor="개요" data-eng="Overview">개요</h4>
+                                <p data-kor="발전소가 최적의 상태로 안전하게 운전될 수 있도록 제어, 사고 시 신속하게 정상상태로 복귀할 수 있도록 발전소의 각종기기의 상태 및 공정변수에 대한 정보를 수집·분석·지시하고 조작, 감시 및 보호를 위한 계통 및 설비에 대한 설계 업무 수행."
+                                data-eng="・Keep optimal status of power plant by effective plant control<br>
+                                ・Quickly back to normal status of power plant during/after plant accident<br>
+                                ・Protection, control, monitoring and MMIS/HFE system design">
+                                >발전소가 최적의 상태로 안전하게 운전될 수 있도록 제어, 사고 시 신속하게 정상상태로 복귀할 수 있도록 발전소의 각종기기의 상태 및 공정변수에 대한 정보를 수집·분석·지시하고 조작, 감시 및 보호를 위한 계통 및 설비에 대한 설계 업무 수행.</p>
                             </section>
                             <!-- 특징 -->
                             <section>
-                                <h4>특징</h4>
+                                <h4 data-kor="특징" data-eng="Features">특징</h4>
                                 <div>
                                     <ul>
                                         <li><b>보호, 제어, 감시계통 설계</b><br>Loop Diagram(LD) 및 Control Logic Diagram(CLD) 설계<br>구매기술규격서 업무</li>
@@ -623,17 +716,21 @@
                             </section>
                             <!-- 주요 계측제어 설계 프로세스 (이미지) -->
                             <section>
-                                <h4>주요 계측제어 설계 프로세스</h4>
+                                <h4 data-eng=" Workflow diagram for I&C Design"
+                                data-kor='주요 계측제어 설계 프로세스'>주요 계측제어 설계 프로세스</h4>
                                 <div class="image-container">
-                                    <a href="./instrumentation-process.png" target="_blank">
-                                        <img src="instrumentation-process.png" alt="주요 계측제어 설계 프로세스">
+                                    <a href="./instrumentation-process.png" target="_blank"
+                                    data-kor='<img src="instrumentation-process-kr.png" alt="주요 계측제어 설계 프로세스">'
+                                    data-eng='<img src="instrumentation-process-en.png" alt="Workflow diagram for I&C Design">'>
+                                        <img src="instrumentation-process-kr.png" alt="주요 계측제어 설계 프로세스">
                                     </a>
                                 </div>
                             </section>
                             <!-- 적용분야 -->
                             <section>
-                                <h4>적용분야</h4>
-                                <p>원자력발전소, 화력발전소, 복합화력발전소, 수력발전소, 양수발전소</p>
+                                <h4 data-eng="Applications" data-kor="적용분야">적용분야</h4>
+                                <p data-eng=" Nuclear power plants, Thermal power plants, Combined-cycle power plants, Hydro power plants, Pumped-storage power plants"
+                                data-kor="원자력발전소, 화력발전소, 복합화력발전소, 수력발전소, 양수발전소">원자력발전소, 화력발전소, 복합화력발전소, 수력발전소, 양수발전소</p>
                             </section>
                         </div>
                     </div>
@@ -646,13 +743,17 @@
                             <section class="power-map-section">
                                 <div class="power-map-images">
                                     <div class="power-map-item">
-                                        <div class="power-map-title">기존 전력계통</div>
+                                        <div class="power-map-title"
+                                        data-kor="기존 전력계통"
+                                        data-eng="Existing Power System">기존 전력계통</div>
                                         <a href="./powergrid-old.jpeg">
                                             <img src="powergrid-old.jpeg" alt="기존 전력계통">
                                         </a>
                                     </div>
                                     <div class="power-map-item">
-                                        <div class="power-map-title">현재 전력계통</div>
+                                        <div class="power-map-title"
+                                        data-kor="현재 전력계통"
+                                        data-eng="Current Power System">현재 전력계통</div>
                                         <a href="./powergrid-current.jpeg">
                                             <img src="powergrid-current.jpeg" alt="현재 전력계통">
                                         </a>
@@ -680,7 +781,7 @@
                                                 <br>・변압기 병렬운전 방안
                                                 <br>・자동절제시스템 구축"
                                             data-eng="<b>1. Power System Reliability Improvement</b>
-                                                <br>&bull; Dual incoming power supply system proposals
+                                                &bull; Dual incoming power supply system proposals
                                                 <br>&bull; Parallel operation of transformers
                                                 <br>&bull; Implementation of automatic load shedding systems">
                                             <b>1. 전력계통 신뢰도 개선</b>
@@ -696,7 +797,7 @@
                                                 <br>・차단기 차단용량 분석
                                                 <br>・과도안정도 분석"
                                             data-eng="<b>2. Transmission System Technical Review</b>
-                                                <br>&bull; Overload and voltage analysis
+                                                &bull; Overload and voltage analysis
                                                 <br>&bull; Circuit breaker interrupting capacity analysis
                                                 <br>&bull; Transient stability analysis">
                                             <b>2. 송전계통 기술검토</b>
@@ -712,7 +813,7 @@
                                                 <br>・보호협조 개선방안
                                                 <br>・보호시스템 설계"
                                             data-eng="<b>3. Protection System Design & Coordination Studies</b>
-                                                <br>&bull; Protection system enhancement solutions
+                                                &bull; Protection system enhancement solutions
                                                 <br>&bull; Coordination improvement proposals
                                                 <br>&bull; Protection system design">
                                             <b>3. 보호시스템 설계 및 정정계산</b>
@@ -728,7 +829,7 @@
                                                 <br>・고장전류, 전동기 가동
                                                 <br>・안정도 분석"
                                             data-eng="<b>4. Power System Analysis and Diagnostics</b>
-                                                <br>&bull; Overload and voltage analysis
+                                                &bull; Overload and voltage analysis
                                                 <br>&bull; Fault current and motor starting studies
                                                 <br>&bull; Stability analysis">
                                             <b>4. 전력계통 분석 및 진단</b>
@@ -743,7 +844,7 @@
                                                 ・고조파 분석
                                                 <br>・고조파 필터 설계"
                                             data-eng="<b>5. Arc Flash Energy Analysis, Harmonic Analysis</b>
-                                                <br>&bull; Harmonic filter design">
+                                                &bull; Harmonic filter design">
                                             <b>5. 아크로플래시 에너지분석</b>
                                             ・고조파 분석
                                             <br>・고조파 필터 설계
@@ -778,16 +879,27 @@
                             <h4 data-eng="Power System Process Details" data-kor="전력계통 프로세스 상세"></h4>
                             <section class="power-process-detail-grid">
                                 <div class="power-process-detail-item">
-                                    <h5>1. 전력계통 신뢰도 개선</h5>
-                                    <p>
+                                    <h5 data-eng="1. Power System Reliability Improvement" data-kor="1. 전력계통 신뢰도 개선">1. 전력계통 신뢰도 개선</h5>
+                                    <p data-kor="한전 2회선 수전계통 구축, 모선절체시스템 구축, 설비 보강, 운영방안 개선 등에 대한 전반적인 컨설팅을 수행하여 공장운영의 신뢰성과 생산성 극대화에 기여하는 서비스"
+                                    data-eng="We offer comprehensive consulting services encompassing the construction of double-circuit incoming systems, bus transfer schemes, equipment reinforcement, and operating strategies. Our services enhance the reliability and productivity of plant operations.">
                                         한전 2회선 수전계통 구축, 모선절체시스템 구축, 설비 보강, 운영방안 개선 등에 대한 전반적인 컨설팅을 수행하여 공장운영의 신뢰성과 생산성 극대화에 기여하는 서비스
                                     </p>
                                     <div class="power-process-detail-img">
                                         <!-- <img src="reliability-improvement.jpg" alt="전력계통 신뢰도 개선"> -->
                                     </div>
                                     <div class="power-process-detail-app">
-                                        <strong>적용분야</strong>
-                                        <ul>
+                                        <strong data-eng="Applicable Areas" data-kor="적용분야">적용분야</strong>
+                                        <ul
+                                            data-kor="<li>1회선 수전계통 보유 수용가</li>
+                                            <li>2회선 수전 희망 수용가</li>
+                                            <li>석유화학, 반도체, 철강 등 산업용 플랜트</li>
+                                            <li>원자력, 화력 및 복합화력 발전소</li>"
+                                            data-eng="
+                                            <li>Consumers with single-circuit incoming systems</li>
+                                            <li>Clients seeking double-circuit incoming systems</li>
+                                            <li>Industrial plants in petrochemical, semiconductor, steel sectors</li>
+                                            <li>Nuclear, thermal, and combined-cycle power plants</li>
+                                            ">
                                             <li>1회선 수전계통 보유 수용가</li>
                                             <li>2회선 수전 희망 수용가</li>
                                             <li>석유화학, 반도체, 철강 등 산업용 플랜트</li>
@@ -796,16 +908,27 @@
                                     </div>
                                 </div>
                                 <div class="power-process-detail-item">
-                                    <h5>2. 송전계통 기술검토</h5>
-                                    <p>
+                                    <h5 data-eng="2. Transmission System Technical Review" data-kor="2. 송전계통 기술검토">2. 송전계통 기술검토</h5>
+                                    <p data-kor="발전기의 계통접속 및 계통구성 변경시 기존 계통에 미치는 영향을 분석하여 한전의 계통운영 기준에 적합한 개선방안을 제공하는 서비스"
+                                    data-eng="When interconnecting new generators or altering system configuration, we analyze the impact on existing networks and provide improvement measures in line with the operational standards of KEPCO (Korea Electric Power Corporation).">
                                         발전기의 계통접속 및 계통구성 변경시 기존 계통에 미치는 영향을 분석하여 한전의 계통운영 기준에 적합한 개선방안을 제공하는 서비스
                                     </p>
                                     <div class="power-process-detail-img">
                                         <!-- <img src="transmission-review.jpg" alt="송전계통 기술검토"> -->
                                     </div>
                                     <div class="power-process-detail-app">
-                                        <strong>적용분야</strong>
-                                        <ul>
+                                        <strong data-eng="Applicable Areas" data-kor="적용분야">적용분야</strong>
+                                        <ul
+                                        data-kor="
+                                        <li>대용량, 신재생 발전기의 계통접속</li>
+                                        <li>신재생 발전단지, 모선분리 및 송전선로 신/증설 영향 평가</li>
+                                        <li>원자력, 화력 및 복합화력 발전소</li>
+                                        "
+                                        data-eng="
+                                        <li>Integration of large-scale or renewable generation assets</li>
+                                        <li>Impact assessment for new or expanded renewable energy complexes, bus sectioning, and transmission line installations</li>
+                                        <li>Nuclear, thermal, and combined-cycle power plants</li>
+                                        ">
                                             <li>대용량, 신재생 발전기의 계통접속</li>
                                             <li>신재생 발전단지, 모선분리 및 송전선로 신/증설 영향 평가</li>
                                             <li>원자력, 화력 및 복합화력 발전소</li>
@@ -813,16 +936,26 @@
                                     </div>
                                 </div>
                                 <div class="power-process-detail-item">
-                                    <h5>3. 보호시스템 설계 및 정정계산</h5>
-                                    <p>
+                                    <h5 data-eng="3. Protection System Design & Coordination Studies" data-kor="3. 보호시스템 설계 및 정정계산">3. 보호시스템 설계 및 정정계산</h5>
+                                    <p data-kor="국내/외 발전소와 산업용 공장에 최적의 보호시스템을 구축하고, 기존 보호시스템의 적정성을 검토하여 개선방안을 제공하는 서비스"
+                                    data-eng="We deliver optimal protection system design for domestic and international power plants and industrial facilities, including assessment and improvement of existing systems’ adequacy.">
                                         국내/외 발전소와 산업용 공장에 최적의 보호시스템을 구축하고, 기존 보호시스템의 적정성을 검토하여 개선방안을 제공하는 서비스
                                     </p>
                                     <div class="power-process-detail-img">
                                         <!-- <img src="protection-system.jpg" alt="보호시스템 설계 및 정정계산"> -->
                                     </div>
                                     <div class="power-process-detail-app">
-                                        <strong>적용분야</strong>
-                                        <ul>
+                                        <strong data-eng="Applicable Areas" data-kor="적용분야">적용분야</strong>
+                                        <ul data-kor="
+                                        <li>한전, 신재생 발전소 계통보호</li>
+                                        <li>송전선로 및 변전소 보호, 발전기, 변압기, 피더 및 전동기 정정계산</li>
+                                        <li>보호시스템 분석 및 보호협조 개선, CT/PT 적정성 검토</li>
+                                        "
+                                        data-eng="
+                                        <li>KEPCO and renewable energy plant system protection</li>
+                                        <li>Protection and relay setting calculations for transmission lines, substations, generators, transformers, feeders, and motors</li>
+                                        <li>Protection system analysis, coordination improvement, CT/PT adequacy assessment</li>
+                                        ">
                                             <li>한전, 신재생 발전소 계통보호</li>
                                             <li>송전선로 및 변전소 보호, 발전기, 변압기, 피더 및 전동기 정정계산</li>
                                             <li>보호시스템 분석 및 보호협조 개선, CT/PT 적정성 검토</li>
@@ -830,16 +963,26 @@
                                     </div>
                                 </div>
                                 <div class="power-process-detail-item">
-                                    <h5>4. 전력계통 분석 및 진단</h5>
-                                    <p>
+                                    <h5 data-eng="4. Power System Analysis and Diagnosis" data-kor="4. 전력계통 분석 및 진단">4. 전력계통 분석 및 진단</h5>
+                                    <p data-kor="산업용 공장 신설과 발전기, 변압기, 전동기 등 신규 전력설비의 도입, 한전 수전 변전소의 변경 등 전력계통의 변경사항 발생시 신규 및 기존 전력설비에 미치는 영향을 분석하고 개선방안을 제공하는 서비스"
+                                    data-eng="We provide impact analysis and improvement proposals when newly establishing industrial plants or introducing new power facilities such as generators, transformers, and motors, or upon changes in KEPCO substations.">
                                         산업용 공장 신설과 발전기, 변압기, 전동기 등 신규 전력설비의 도입, 한전 수전 변전소의 변경 등 전력계통의 변경사항 발생시 신규 및 기존 전력설비에 미치는 영향을 분석하고 개선방안을 제공하는 서비스
                                     </p>
                                     <div class="power-process-detail-img">
                                         <!-- <img src="system-analysis.jpg" alt="전력계통 분석 및 진단"> -->
                                     </div>
                                     <div class="power-process-detail-app">
-                                        <strong>적용분야</strong>
-                                        <ul>
+                                        <strong data-eng="Applicable Areas" data-kor="적용분야">적용분야</strong>
+                                        <ul 
+                                        data-kor="
+                                        <li>발전소 전력계통 분석</li>
+                                        <li>산업용 플랜트 전력계통 분석</li>
+                                        <li>전력설비 신/증설</li>
+                                        "
+                                        data-eng="
+                                        <li>Power system analysis for power plants and industrial facilities</li>
+                                        <li>Analysis for new and expanded power facilities</li>
+                                        ">
                                             <li>발전소 전력계통 분석</li>
                                             <li>산업용 플랜트 전력계통 분석</li>
                                             <li>전력설비 신/증설</li>
@@ -847,16 +990,25 @@
                                     </div>
                                 </div>
                                 <div class="power-process-detail-item">
-                                    <h5>5. 아크플래시 에너지 분석</h5>
-                                    <p>
+                                    <h5 data-eng="5. Arc Flash Energy Analysis" data-kor="5. 아크플래시 에너지 분석">5. 아크플래시 에너지 분석</h5>
+                                    <p data-kor="국내/외 발전소와 산업용 공장에서 Arc Flash로 인한 전기적인 위험으로부터 작업자를 보호하기 위한 것으로 작업 환경 조성 및 작업 절차 수립에 관한 최소한의 기준을 제시하는 서비스"
+                                    data-eng="For power plants and industrial sites, we offer services to protect personnel from electrical hazards due to arc flash incidents. We establish minimum standards for safe work environments and operational procedures.">
                                         국내/외 발전소와 산업용 공장에서 Arc Flash로 인한 전기적인 위험으로부터 작업자를 보호하기 위한 것으로 작업 환경 조성 및 작업 절차 수립에 관한 최소한의 기준을 제시하는 서비스
                                     </p>
                                     <div class="power-process-detail-img">
                                         <!-- <img src="arcflash-analysis.jpg" alt="아크플래시 에너지 분석"> -->
                                     </div>
                                     <div class="power-process-detail-app">
-                                        <strong>적용분야</strong>
-                                        <ul>
+                                        <strong data-eng="Applicable Areas" data-kor="적용분야">적용분야</strong>
+                                        <ul
+                                        data-kor="
+                                        <li>고장전류계산</li>
+                                        <li>보호계전기 정정계산</li>
+                                        <li>아크플래시 에너지 분석</li>
+                                        "
+                                        data-eng="
+                                        <li>Fault current calculation, relay setting calculation, and arc flash energy analysis</li>
+                                        ">
                                             <li>고장전류계산</li>
                                             <li>보호계전기 정정계산</li>
                                             <li>아크플래시 에너지 분석</li>
@@ -869,23 +1021,127 @@
                     </div>
                     
                     <!-- CGID -->
-                    <div id="cgid" class="content-block full-width">
+                    <div id="cgid" class="content-block">
                         <h3 class="block-title" data-eng="CGID" data-kor="CGID">CGID</h3>
                         <div class="block-content bc4">
                             <!-- 1. CGID의 의미 -->
                             <div class="bc-head">
-                                <p data-eng="Meaning of CGID: Commercial Grade Item Dedication (CGID) is a quality assurance procedure required to rationally verify (dedicate) that commercial products manufactured to general industrial standards can perform safety-related functions as Basic Items in nuclear power plants, and are equivalent to items designed and manufactured under nuclear quality assurance programs."
-                                   data-kor="CGID(Commercial Grade Item Dedication)은 일반 산업표준으로 제작된 상용제품(Commercial Product)을 원자력발전소 내 Basic Item으로서 안전관련 기능을 수행하고, 원자력 품질보증 프로그램 하에서 설계 및 제작된 품목과 동등함을 합리적으로 검증(Dedication)하기 위해 필요한 품질보증 절차입니다.">
+                                <p data-eng="Meaning of CGID: Commercial Grade Item Dedication (CGID) is a quality verification process required to reasonably demonstrate that commercial products, manufactured to general industrial standards, are equivalent to items designed and produced under nuclear quality assurance programs when performing safety-related functions as Basic Items within nuclear power plants. Through CGID, it is verified that such commercial products meet the necessary safety and quality requirements for nuclear applications."
+                                   data-kor="CGID(Commercial Grade Item Dedication)은 일반 산업표준으로 제작된 상용제품(Commercial Product)을 원자력발전소 내 Basic Item으로서 안전관련 기능을 수행하고, 원자력 품질보증 프로그램 하에서 설계 및 제작된 품목과 동등함을 합리적으로 검증(Dedication)하기 위해 필요한 품질보증 절차(Process)입니다.">
                                     CGID(Commercial Grade Item Dedication)은 일반 산업표준으로 제작된 상용제품(Commercial Product)을 원자력발전소 내 Basic Item으로서 안전관련 기능을 수행하고, 원자력 품질보증 프로그램 하에서 설계 및 제작된 품목과 동등함을 합리적으로 검증(Dedication)하기 위해 필요한 품질보증 절차입니다.
                                 </p>
                             </div>
-                            <ol>
+                            <div class="image-container">
+                                    <a href="./cgid.png" target="_blank">
+                                        <img src="cgid.png">
+                                    </a>
+                                            <ul
+                                            data-eng="<li>•	Technical evaluation for application of commercial-grade items in nuclear safety-related systems</li>
+                                            <li>• Acceptance testing and quality activities for the qualification of commercial-grade items</li>
+                                            <li>• Equipment qualification (EQ) and maintenance of design basis for nuclear power plant equipment</li>"
+                                            data-kor="<li>•	일반규격품 원전 안전관련계통 적용을 위한 기술 평가</li>
+                                            <li>• 일반규격품 품질검증을 위한 수락시험 및 품질활동</li>
+                                            <li>• 원자력 발전소 기기검증(EQ) 설계유지</li>">
+                                            
+                                        </ul>
+                                </div>
+                            <!-- <ol>
                                 <li>즉, 상용제품을 원자력발전소 내 안전관련 등급의 제품으로 사용하기 위한 품질보증 절차이며, 이는 한수원이 승인한 CGID 유자격업체(327Q)만이 수행할 수 있습니다.</li>
                                 <li>YPP는 다년간 CGID 유자격업체로서 한국수력원자력의 CGID Project를 꾸준히 수행해왔으며, 민간기업의 CGID Project도 꾸준히 수행하여 약 200품목의 제품에 대한 경험과 노하우를 축적하였습니다. 이에 따라 YPP는 높은 신뢰성을 필요로 하는 CGID에 대해 High-Quality Engineering Services를 제공하고 있으며, NAWAH Energy(UAE 발전사) BNPP(Barakah Nuclear Power Plant)의 예비품을 공급할 수 있는 유자격을 취득하는 등 CGID의 확대를 위해 매진하고 있습니다.</li>
-                            </ol>
+                            </ol> -->
+                            <div style="margin-top:64px;"></div>
+                            <section class="cgid-engineering-services">
+                                <h4 class="bc-subtitle">CGID Engineering Services</h4>
+                                <p>YPP의 CGID Engineering Services는 엄격한 국내외 규제 기준을 준수하는 체계적인 품질검증 프로세스로 고객 설비의 안전성과 신뢰성을 보장합니다.</p>
+                                <ul>
+                                    <li><b>원자력발전소 운영·정비 경험</b>을 보유한 전담 엔지니어링 팀이 핵심 기능·성능 검증 수행합니다</li>
+                                    <li><b>핵심 기능·성능 검증 수행</b>반영한 공정 관리로 구매, 기술평가, 계획, 시험, 보고서 발행까지 원스톱 서비스 제공하고 안전등급 품목(Basic Item)과 동등한 품질 확보합니다.</li>
+                                    <li><b>200여 개 품목 이상의 CGID 실적</b>과 해외 원전 프로젝트(BNPP 등) 참여 경험으로 축적된 High-Quality Engineering Services를 제공합니다.</li>
+                                </ul>
+                            </section>
+                            
+                            <section>
+                                <h4 class="bc-subtitle">YPP CGID 대상품목 LIST</h4>
+                                <div class="cgid-list-grid">
+                                    <!-- 디지털보호계전기 -->
+                                    <div class="cgid-list-item">
+                                        <a href="cgid-digital-relay.jpg" class="cgid-list-img">
+                                            <img src="cgid-digital-relay.jpg" alt="디지털보호계전기">
+                                        </a>
+                                        <div class="cgid-list-text">
+                                            <h5 data-eng="Digital Protective Relays" data-kor="디지털보호계전기">디지털보호계전기</h5>
+                                            <ul data-kor="
+                                            <li>설비수명관리를 위한 계전기 유닛 교체</li>
+                                            <li>설비수명관리를 위한 계전기 모듈 교체</li>
+                                            <li>예비품 (전원공급기, CPU, DSP, Digital I/O, Analog I/O) 공급</li>
+                                            "
+                                            data-eng="<li>Replacement of relay units for plant lifecycle management.</li>
+                                            <li>Replacement of relay modules for plant lifecycle management</li>
+                                            <li>Supply of spare parts, including power supply units, CPUs, DSPs, digital I/O modules, and analog I/O modules.</li>
+                                            ">
+                                            <li>Replacement of relay units for plant lifecycle management.</li>
+                                            <li>Replacement of relay modules for plant lifecycle management</li>
+                                            <li>Supply of spare parts, including power supply units, CPUs, DSPs, digital I/O modules, and analog I/O modules.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- 전기 품목 -->
+                                    <div class="cgid-list-item">
+                                        <a href="cgid-electric-items.jpg" class="cgid-list-img">
+                                            <img src="cgid-electric-items.jpg" alt="전기 품목">
+                                        </a>
+                                        <div class="cgid-list-text">
+                                            <h5 data-eng="Electrical Items" data-kor="전기 품목">전기 품목</h5>
+                                            <ul
+                                            data-kor="
+                                            <li>접촉기, 송풍기, 차단기, 분류기, 전동기, 배터리</li>
+                                            <li>계기용 변류기 및 변성기 (CT/PT), 아날로그 계전기, 전원공급기, 퓨즈</li>
+                                            <li>EDG AVR 모듈, 전력변환기, 저항기, 타이머, 스위치, 단자대 등</li>
+                                            "
+                                            data-eng="
+                                            <li>Electrical Items include contactors, blowers, circuit breakers, classifiers, electric motors, batteries</li>
+                                            <li>instrument transformers (CTs/PTs), analog protective relays, power supply units, fuses</li>
+                                            <li>EDG AVR modules, power converters, resistors, timers, switches, and terminal blocks</li>
+                                            <li>A comprehensive range of high-quality components is supplied to meet the rigorous requirements of nuclear power plant applications.</li>
+                                            ">
+                                            <li>Electrical Items include contactors, blowers, circuit breakers, classifiers, electric motors, batteries</li>
+                                            <li>instrument transformers (CTs/PTs), analog protective relays, power supply units, fuses</li>
+                                            <li>EDG AVR modules, power converters, resistors, timers, switches, and terminal blocks</li>
+                                            <li>A comprehensive range of high-quality components is supplied to meet the rigorous requirements of nuclear power plant applications.</li>
+                                            </ul> 
+                                        </div>
+                                    </div>
+                                    <!-- 계측/제어 품목 -->
+                                    <div class="cgid-list-item">
+                                        <a href="cgid-instrument-control.jpg" class="cgid-list-img">
+                                            <img src="cgid-instrument-control.jpg" alt="계측/제어 품목">
+                                        </a>
+                                        <div class="cgid-list-text">
+                                            <h5 data-eng="Instrumentation and Control Items" data-kor="계측/제어 품목">계측/제어 품목</h5>
+                                            <ul
+                                            data-kor="
+                                            <li>제어밸브, 디지털 컨트롤러, 다이오드, 트랜지스터</li>
+                                            <li>압력스위치, 유량스위치, 온도스위치</li>
+                                            <li>제어카드/모듈, 마이크로 스위치 등</li>
+                                            "
+                                            data-eng="
+                                            <li>Control valves, digital controllers, diodes, transistors</li>
+                                            <li>Pressure switches, flow switches, temperature switches</li>
+                                            <li>Control cards/modules, micro switches, etc.</li>
+                                            ">
+                                                <li>Control valves, digital controllers, diodes, transistors</li>
+                                                <li>Pressure switches, flow switches, temperature switches</li>
+                                                <li>Control cards/modules, micro switches, etc.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+
+                            <div style="margin-top:64px;"></div>
                             <!-- 2. Standard Code For CGID -->
-                            <div style="margin-top:32px;"></div>
-                            <h4 class="bc-subtitle">Standard Code For CGID</h4>
+                            <!-- <h4 class="bc-subtitle">Standard Code For CGID</h4>
                             <ul>
                                 <li><b>US Standard Code</b><br>
                                     1) 10CFR50, Appendix B, Criterion VII(Control of Purchased Material, Equipment, and Services)<br>
@@ -919,17 +1175,17 @@
                                     10) EPRI TR-106439 / Guideline on Evaluation and Acceptance of Commercial Grade Digital Equipment for Nuclear Safety-Related Applications<br>
                                     11) EPRI 3002002982 / Guideline for the Acceptance of Commercial-Grade Items in Nuclear Safety-Related Applications
                                 </li>
-                            </ul>
+                            </ul> -->
                             <!-- CGID 도입배경 (이미지) -->
-                            <div style="margin:32px 0 16px 0;"></div>
+                            <!-- <div style="margin:32px 0 16px 0;"></div>
                             <h4 class="bc-subtitle">CGID 도입배경</h4>
                             <div class="image-container">
                                 <a href="./cgid-bg.jpeg" class="image-placeholder">
                                     <img src="cgid-bg.jpeg" alt="" srcset="">
                                 </a>
-                            </div>
+                            </div> -->
                             <!-- 3. YPP CGID 품목 (표) -->
-                            <div style="margin:32px 0 16px 0;"></div>
+                            <!-- <div style="margin:32px 0 16px 0;"></div>
                             <h4 class="bc-subtitle">YPP CGID 품목</h4>
                             <caption style="caption-side:top; font-weight:600; font-size:16px; margin-bottom:8px;">Commercial Item List (Safety Related)</caption>
                             <div class="table-container">
@@ -963,9 +1219,9 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div> -->
                             <!-- 4. YPP CGID Track Record -->
-                            <div style="margin:32px 0 16px 0;"></div>
+                            <!-- <div style="margin:32px 0 16px 0;"></div>
                             <h4 class="bc-subtitle">YPP CGID Track Record</h4>
                             <ul>
                                 <li>한국수력원자력, 원자력발전소(새울1발 외 40개소) CGID 수행 (2021~현재)</li>
@@ -974,7 +1230,7 @@
                                 <li>효성중공업, NAWAH BNPP 고압반 디지털보호계전기 CGID 수행 (2022~2024)</li>
                                 <li>효성중공업, 원자력발전소(새울1발) 고압반 디지털보호계전기 CGID 수행 (2024~현재)</li>
                                 <li>지투파워, 원자력발전소(신한울2발) 고압반 디지털보호계전기 CGID 수행 (2025~현재)</li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                 </div>

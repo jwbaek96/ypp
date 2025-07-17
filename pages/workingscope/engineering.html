@@ -307,18 +307,18 @@
         }
         
         /* 해석툴 섹션 */
-        .power-tools-section {
+        .power-analysis-tools-section {
             border-radius: 16px;
             padding: 40px 0;
         }
         
-        .power-tools-list {
+        .power-analysis-tools-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
         
-        .power-tool-item {
+        .power-analysis-tool-item {
             background: white;
             border-radius: 16px;
             padding: 30px;
@@ -328,13 +328,13 @@
             border: 1px solid #e2e8f0;
         }
         
-        .power-tool-item:hover {
+        .power-analysis-tool-item:hover {
             transform: translateY(-2px);
             /* box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); */
             border-color: #1e40af33;
         }
         
-        .power-tool-logo {
+        .power-analysis-tool-logo {
             /* width: 80px; */
             height: 80px;
             margin: 0 auto 20px;
@@ -348,20 +348,20 @@
             font-size: 14px;
         }
         
-        .power-tool-logo img {
+        .power-analysis-tool-logo img {
             /* width: 60px;
             height: 60px; */
             object-fit: contain;
         }
         
-        .power-tool-desc {
+        .power-analysis-tool-desc {
             font-size: 16px;
             color: #475569;
             font-weight: 500;
             line-height: 1.6;
         }
         
-        .power-tool-desc strong {
+        .power-analysis-tool-desc strong {
             color: #1e293b;
             font-weight: 600;
         }
@@ -422,6 +422,77 @@
             padding-bottom: 8px;
             border-bottom: 2px solid #e2e8f0;
             position: relative;
+        }
+        /* =============================== */
+        
+        .power-process-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin: 40px 0;
+        }
+        .power-process-detail-item {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 28px 24px 20px 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .power-process-detail-item h5 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 14px;
+        }
+        .power-process-detail-item p {
+            font-size: 1rem;
+            color: #475569;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+        .power-process-detail-img {
+            width: 100%;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        .power-process-detail-img img {
+            max-width: 100%;
+            max-height: 180px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            object-fit: cover;
+            background: #e2e8f0;
+        }
+        .power-process-detail-app {
+            margin-top: auto;
+            width: 100%;
+        }
+        .power-process-detail-app strong {
+            display: block;
+            font-size: 1rem;
+            color: #0e77bd;
+            margin-bottom: 7px;
+        }
+        .power-process-detail-app ul {
+            padding-left: 18px;
+            margin: 0;
+        }
+        .power-process-detail-app li {
+            font-size: 0.98rem;
+            color: #334155;
+            margin-bottom: 4px;
+            list-style: disc;
+        }
+        @media (max-width: 768px) {
+            .power-process-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .power-process-detail-item {
+                padding: 18px 10px 14px 10px;
+            }
         }
         /* =============================== */
         @media screen and (max-width: 768px) {
@@ -590,17 +661,28 @@
                             </section>
                             <!-- 개요 -->
                             <section>
-                                <h4>개요</h4>
-                                <p>컨설팅 및 엔지니어링 서비스는 최적의 전력계통 시스템을 구축, 운영할 수 있도록 전력계통 신뢰도 개선, 송전계통 기술 검토, 전력계통 분석 및 진단, 보호시스템 설계 및 정정계산 등 다양한 전력계통 분석기법 및 전력계통 해석도구를 활용한 맞춤형 솔루션을 제공. 화력 및 복합화력 발전소, 석유화학 및 반도체 등 다수의 산업용 플랜트에 대한 기술 검토 및 분석, 진단, 보호시스템 설계 및 정정계산을 수행하여 고객의 안정적인 전력계통 운영과 지속적인 생산에 기여함.</p>
+                                <h4 data-eng="Overview" data-kor="개요">개요</h4>
+                                <p data-kor="컨설팅 및 엔지니어링 서비스는 최적의 전력계통 시스템을 구축, 운영할 수 있도록 전력계통 신뢰도 개선, 송전계통 기술 검토, 전력계통 분석 및 진단, 보호시스템 설계 및 정정계산 등 다양한 전력계통 분석기법 및 전력계통 해석도구를 활용한 맞춤형 솔루션을 제공. 화력 및 복합화력 발전소, 석유화학 및 반도체 등 다수의 산업용 플랜트에 대한 기술 검토 및 분석, 진단, 보호시스템 설계 및 정정계산을 수행하여 고객의 안정적인 전력계통 운영과 지속적인 생산에 기여함."
+                                data-eng="Our consulting and engineering services are designed to support the establishment and operation of optimal power systems. We provide tailored solutions utilizing a diverse array of power system analysis techniques and interpretive tools, delivering improvements in system reliability, transmission network technical reviews, system analysis and diagnostics, as well as protection system design and coordination studies. Our expertise extends to technical reviews, analyses, diagnostics, and protection system designs for thermal and combined-cycle power plants, petrochemical complexes, semiconductors, and various industrial plants. Through these services, we enable stable and continuous operation of our clients’ power systems, ensuring ongoing productivity.<br><br>Feasibility Studies and Master Planning for Plant Construction">
+                                컨설팅 및 엔지니어링 서비스는 최적의 전력계통 시스템을 구축, 운영할 수 있도록 전력계통 신뢰도 개선, 송전계통 기술 검토, 전력계통 분석 및 진단, 보호시스템 설계 및 정정계산 등 다양한 전력계통 분석기법 및 전력계통 해석도구를 활용한 맞춤형 솔루션을 제공. 화력 및 복합화력 발전소, 석유화학 및 반도체 등 다수의 산업용 플랜트에 대한 기술 검토 및 분석, 진단, 보호시스템 설계 및 정정계산을 수행하여 고객의 안정적인 전력계통 운영과 지속적인 생산에 기여함.</p>
                             </section>
                             <!-- 주요 프로세스(플로우) -->
                             <section class="power-process-section">
                                 <div class="power-process-head">
-                                    <p>플랜트 건설 타당성조사, 플랜트 건설기본계획<br>전력계통 신증설, 계통운영 신뢰도 개선</p>
+                                    <p data-eng="Enhancement and Expansion of Power Systems,<br>Reliability Improvement"
+                                        data-kor="플랜트 건설 타당성조사, 플랜트 건설기본계획<br>전력계통 신증설, 계통운영 신뢰도 개선">플랜트 건설 타당성조사, 플랜트 건설기본계획<br>전력계통 신증설, 계통운영 신뢰도 개선</p>
                                 </div>
                                 <div>
                                     <ul>
-                                        <li>
+                                        <li 
+                                            data-kor="<b>1. 전력계통 신뢰도 개선</b>
+                                                ・수전설비 이중화 방안
+                                                <br>・변압기 병렬운전 방안
+                                                <br>・자동절제시스템 구축"
+                                            data-eng="<b>1. Power System Reliability Improvement</b>
+                                                <br>&bull; Dual incoming power supply system proposals
+                                                <br>&bull; Parallel operation of transformers
+                                                <br>&bull; Implementation of automatic load shedding systems">
                                             <b>1. 전력계통 신뢰도 개선</b>
                                             ・수전설비 이중화 방안
                                             <br>・변압기 병렬운전 방안
@@ -608,7 +690,15 @@
                                         </li>
                                     </ul>
                                     <ul>
-                                        <li>
+                                        <li 
+                                            data-kor="<b>2. 송전계통 기술검토</b>
+                                                ・과부하/전압분석
+                                                <br>・차단기 차단용량 분석
+                                                <br>・과도안정도 분석"
+                                            data-eng="<b>2. Transmission System Technical Review</b>
+                                                <br>&bull; Overload and voltage analysis
+                                                <br>&bull; Circuit breaker interrupting capacity analysis
+                                                <br>&bull; Transient stability analysis">
                                             <b>2. 송전계통 기술검토</b>
                                             ・과부하/전압분석
                                             <br>・차단기 차단용량 분석
@@ -616,7 +706,15 @@
                                         </li>
                                     </ul>
                                     <ul>
-                                        <li>
+                                        <li 
+                                            data-kor="<b>3. 보호시스템 설계 및 정정계산</b>
+                                                ・보호시스템보강 방안
+                                                <br>・보호협조 개선방안
+                                                <br>・보호시스템 설계"
+                                            data-eng="<b>3. Protection System Design & Coordination Studies</b>
+                                                <br>&bull; Protection system enhancement solutions
+                                                <br>&bull; Coordination improvement proposals
+                                                <br>&bull; Protection system design">
                                             <b>3. 보호시스템 설계 및 정정계산</b>
                                             ・보호시스템보강 방안
                                             <br>・보호협조 개선방안
@@ -624,7 +722,15 @@
                                         </li>
                                     </ul>
                                     <ul>
-                                        <li>
+                                        <li 
+                                            data-kor="<b>4. 전력계통 분석 및 진단</b>
+                                                ・설비 과부하/전압분석
+                                                <br>・고장전류, 전동기 가동
+                                                <br>・안정도 분석"
+                                            data-eng="<b>4. Power System Analysis and Diagnostics</b>
+                                                <br>&bull; Overload and voltage analysis
+                                                <br>&bull; Fault current and motor starting studies
+                                                <br>&bull; Stability analysis">
                                             <b>4. 전력계통 분석 및 진단</b>
                                             ・설비 과부하/전압분석
                                             <br>・고장전류, 전동기 가동
@@ -632,7 +738,12 @@
                                         </li>
                                     </ul>
                                     <ul>
-                                        <li>
+                                        <li 
+                                            data-kor="<b>5. 아크로플래시 에너지분석</b>
+                                                ・고조파 분석
+                                                <br>・고조파 필터 설계"
+                                            data-eng="<b>5. Arc Flash Energy Analysis, Harmonic Analysis</b>
+                                                <br>&bull; Harmonic filter design">
                                             <b>5. 아크로플래시 에너지분석</b>
                                             ・고조파 분석
                                             <br>・고조파 필터 설계
@@ -641,22 +752,119 @@
                                 </div>
                             </section>
                             <!-- 해석툴 영역 -->
-                            <section class="power-tools-section">
-                                <div class="power-tools-list">
-                                    <div class="power-tool-item">
-                                        <div class="power-tool-logo"><img src="etap-logo.jpeg" alt="ETAP"></div>
-                                        <div class="power-tool-desc">ETAP<br>고장계산, 조류계산, 보호협조, 전동기기동, 고조파분석 등</div>
+                            <section class="power-analysis-tools-section">
+                                <div class="power-analysis-tools-list">
+                                    <div class="power-analysis-tool-item">
+                                        <div class="power-analysis-tool-logo"><img src="etap-logo.jpeg" alt="ETAP"></div>
+                                        <div class="power-analysis-tool-desc"
+                                            data-eng="ETAP<br>Fault calculation, load flow analysis, protection coordination, motor starting, and harmonic analysis"
+                                            data-kor="ETAP<br>고장계산, 조류계산, 보호협조, 전동기기동, 고조파분석 등">ETAP<br>고장계산, 조류계산, 보호협조, 전동기기동, 고조파분석 등</div>
                                     </div>
-                                    <div class="power-tool-item">
-                                        <div class="power-tool-logo"><img src="pscad-logo.jpeg" alt="PSCAD/EMTDC"></div>
-                                        <div class="power-tool-desc">PSCAD/EMTDC<br>과도해석, 제어기설계, 분산전원 모델링 및 계통연계 등</div>
+                                    <div class="power-analysis-tool-item">
+                                        <div class="power-analysis-tool-logo"><img src="pscad-logo.jpeg" alt="PSCAD/EMTDC"></div>
+                                        <div class="power-analysis-tool-desc"
+                                            data-eng="PSCAD/EMTDC<br>Transient analysis, controller design, distributed generation modeling, and grid interconnection studies"
+                                            data-kor="PSCAD/EMTDC<br>과도해석, 제어기설계, 분산전원 모델링 및 계통연계 등">PSCAD/EMTDC<br>과도해석, 제어기설계, 분산전원 모델링 및 계통연계 등</div>
                                     </div>
-                                    <div class="power-tool-item">
-                                        <div class="power-tool-logo"><img src="psse-logo.jpeg" alt="PSS/E"></div>
-                                        <div class="power-tool-desc">PSS/E<br>조류계산, 고장계산, 과도해석, 안정도분석 등</div>
+                                    <div class="power-analysis-tool-item">
+                                        <div class="power-analysis-tool-logo"><img src="psse-logo.jpeg" alt="PSS/E"></div>
+                                        <div class="power-analysis-tool-desc"
+                                            data-eng="PSS/E<br> Load flow, transient analysis, and stability studies"
+                                            data-kor="PSS/E<br>조류계산, 고장계산, 과도해석, 안정도분석 등">PSS/E<br>조류계산, 고장계산, 과도해석, 안정도분석 등</div>
                                     </div>
                                 </div>
                             </section>
+                            <!-- 프로세스 상세 영역 -->
+                            <h4 data-eng="Power System Process Details" data-kor="전력계통 프로세스 상세"></h4>
+                            <section class="power-process-detail-grid">
+                                <div class="power-process-detail-item">
+                                    <h5>1. 전력계통 신뢰도 개선</h5>
+                                    <p>
+                                        한전 2회선 수전계통 구축, 모선절체시스템 구축, 설비 보강, 운영방안 개선 등에 대한 전반적인 컨설팅을 수행하여 공장운영의 신뢰성과 생산성 극대화에 기여하는 서비스
+                                    </p>
+                                    <div class="power-process-detail-img">
+                                        <!-- <img src="reliability-improvement.jpg" alt="전력계통 신뢰도 개선"> -->
+                                    </div>
+                                    <div class="power-process-detail-app">
+                                        <strong>적용분야</strong>
+                                        <ul>
+                                            <li>1회선 수전계통 보유 수용가</li>
+                                            <li>2회선 수전 희망 수용가</li>
+                                            <li>석유화학, 반도체, 철강 등 산업용 플랜트</li>
+                                            <li>원자력, 화력 및 복합화력 발전소</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="power-process-detail-item">
+                                    <h5>2. 송전계통 기술검토</h5>
+                                    <p>
+                                        발전기의 계통접속 및 계통구성 변경시 기존 계통에 미치는 영향을 분석하여 한전의 계통운영 기준에 적합한 개선방안을 제공하는 서비스
+                                    </p>
+                                    <div class="power-process-detail-img">
+                                        <!-- <img src="transmission-review.jpg" alt="송전계통 기술검토"> -->
+                                    </div>
+                                    <div class="power-process-detail-app">
+                                        <strong>적용분야</strong>
+                                        <ul>
+                                            <li>대용량, 신재생 발전기의 계통접속</li>
+                                            <li>신재생 발전단지, 모선분리 및 송전선로 신/증설 영향 평가</li>
+                                            <li>원자력, 화력 및 복합화력 발전소</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="power-process-detail-item">
+                                    <h5>3. 보호시스템 설계 및 정정계산</h5>
+                                    <p>
+                                        국내/외 발전소와 산업용 공장에 최적의 보호시스템을 구축하고, 기존 보호시스템의 적정성을 검토하여 개선방안을 제공하는 서비스
+                                    </p>
+                                    <div class="power-process-detail-img">
+                                        <!-- <img src="protection-system.jpg" alt="보호시스템 설계 및 정정계산"> -->
+                                    </div>
+                                    <div class="power-process-detail-app">
+                                        <strong>적용분야</strong>
+                                        <ul>
+                                            <li>한전, 신재생 발전소 계통보호</li>
+                                            <li>송전선로 및 변전소 보호, 발전기, 변압기, 피더 및 전동기 정정계산</li>
+                                            <li>보호시스템 분석 및 보호협조 개선, CT/PT 적정성 검토</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="power-process-detail-item">
+                                    <h5>4. 전력계통 분석 및 진단</h5>
+                                    <p>
+                                        산업용 공장 신설과 발전기, 변압기, 전동기 등 신규 전력설비의 도입, 한전 수전 변전소의 변경 등 전력계통의 변경사항 발생시 신규 및 기존 전력설비에 미치는 영향을 분석하고 개선방안을 제공하는 서비스
+                                    </p>
+                                    <div class="power-process-detail-img">
+                                        <!-- <img src="system-analysis.jpg" alt="전력계통 분석 및 진단"> -->
+                                    </div>
+                                    <div class="power-process-detail-app">
+                                        <strong>적용분야</strong>
+                                        <ul>
+                                            <li>발전소 전력계통 분석</li>
+                                            <li>산업용 플랜트 전력계통 분석</li>
+                                            <li>전력설비 신/증설</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="power-process-detail-item">
+                                    <h5>5. 아크플래시 에너지 분석</h5>
+                                    <p>
+                                        국내/외 발전소와 산업용 공장에서 Arc Flash로 인한 전기적인 위험으로부터 작업자를 보호하기 위한 것으로 작업 환경 조성 및 작업 절차 수립에 관한 최소한의 기준을 제시하는 서비스
+                                    </p>
+                                    <div class="power-process-detail-img">
+                                        <!-- <img src="arcflash-analysis.jpg" alt="아크플래시 에너지 분석"> -->
+                                    </div>
+                                    <div class="power-process-detail-app">
+                                        <strong>적용분야</strong>
+                                        <ul>
+                                            <li>고장전류계산</li>
+                                            <li>보호계전기 정정계산</li>
+                                            <li>아크플래시 에너지 분석</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </section>
+                            
                         </div>
                     </div>
                     

@@ -28,11 +28,14 @@
     /* 밝은 회색으로 변환 */
 }
 
-.footer-desc {
+.footer-desc,
+.footer ul li a {
     color: rgba(255, 255, 255, 0.8);
     line-height: 1.6;
 }
-
+.footer ul li a:hover {
+    color: var(--primary-blue);
+}
 .footer-title {
     color: var(--white);
     margin-bottom: 1rem;

@@ -137,15 +137,21 @@
                                 <div class="esg-description">
                                     <p
                                     data-eng="<strong>Environment</strong>, <strong>Social</strong>, <strong>Governance</strong> - <br>an acronym combining the first letters of each English word. YPP focuses its management activities on environmental management, social responsibility, and sound and transparent governance to achieve the three core elements of YPP management for sustainability."
-                                    data-kor="<strong>환경</strong>(Environment), <strong>사회</strong>(Social), <strong>지배구조</strong>(Governance)의 영문 첫 글자의 조합된 약자로, <br>YPP의 경영 활동을 환경 경영, 사회적 책임, 건전하고 투명한 지배구조에 초점을 두어 지속가능성(Sustainability)을 달성하기 위한 YPP경영의 3가지 핵심요소">
+                                    data-kor="<strong>환경</strong>(Environment), <strong>사회</strong>(Social), <strong>지배구조</strong>(Governance)의 영문 첫 글자의 조합된 약자로, <br>YPP의 경영 활동을 환경 경영, 사회적 책임, 건전하고 투명한 지배구조에 초점을 두어 지속가능성(Sustainability)을 달성하기 위한<br>YPP경영의 3가지 핵심요소">
                                         <span class="highlight">환경</span>(Environment), <span class="highlight">사회</span>(Social), <span class="highlight">지배구조</span>(Governance)의 영문 첫 글자의 조합된 약자로,<br>
                                         YPP의 경영 활동을 환경 경영, 사회적 책임, 건전하고 투명한 지배구조에 초점을 두어<br>
-                                        지속가능성(Sustainability)을 달성하기 위한 YPP경영의 3가지 핵심요소
+                                        지속가능성(Sustainability)을 달성하기 위한<br>YPP경영의 3가지 핵심요소
                                     </p>
                                 </div>
                                 
-                                <div class="center-esg-img">
-                                    <img src="./esg_img.png" alt="esg-img" class="esg-img">
+                                <div class="center-esg-img"
+                                data-kor='<a href="esg-diagram-kr.JPG" target="_blank">
+                                        <img src="esg-diagram-kr.JPG" alt="esg-img" class="esg-img"></a>'
+                                data-eng="<a href='esg-diagram-en.JPG' target='_blank'>
+                                        <img src='esg-diagram-en.JPG' alt='esg-img' class='esg-img'></a>">
+                                    <a href="esg-diagram-kr.JPG" target="_blank">
+                                        <img src="esg-diagram-kr.JPG" alt="esg-img" class="esg-img">
+                                    </a>
                                 </div>
 
                                 <div class="diagram-container">                                        
@@ -197,7 +203,7 @@
                                                 </div>
                                                 <div class="circle-items">
                                                     <ul
-                                                        data-eng="<li>· Human Rights / Human Rights Protection ·</li>
+                                                        data-eng="<li>· Human Rights/Human Rights Protection ·</li>
                                                         <li>· Labor Practices ·</li>
                                                         <li>· Data Security and Privacy ·</li>
                                                         <li>· Customer Relations ·</li>
@@ -1388,7 +1394,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 768px) {
             .diagram-container{
                 grid-template-columns:1fr;
             }
@@ -1400,6 +1406,15 @@
             padding: 20px;
             text-align: center;
             position: relative;
+        }
+        .esg-circle:first-child{
+            background-color: #77c073;
+        }
+        .esg-circle:nth-child(2){
+            background-color: #f1c436;
+        }
+        .esg-circle:last-child{
+            background-color: #81b8e2;
         }
         .esg-circle h4,.esg-circle p, .circle-items ul li{
             color: #fff;

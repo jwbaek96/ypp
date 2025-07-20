@@ -1,0 +1,280 @@
+        h1.content-header{
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            /* color: #1e3c72; */
+        }
+
+        p.content-subtitle {
+            font-size: .98rem;
+            color: #666;
+            opacity: 0.9;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* .content-section {
+            padding: 80px 0;
+        } */
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1e3c72;
+        }
+
+        .valve-grid {
+            display: block;
+            /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+            /* gap: 40px; */
+            margin-bottom: 40px;
+        }
+
+        .valve-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .valve-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .valve-card h3 {
+            font-size: 1.5rem;
+            /* color: #1e3c72; */
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .valve-card p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .features-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-item h4 {
+            color: #1e3c72;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .vv-cta-section {
+            margin-top: 10px;
+            background: linear-gradient(135deg, #e6ecf0 0%, #dbe0e7 50%, #c3cbd1 100%);
+            padding: 80px 0 60px 0;
+            text-align: center;
+            border-radius: 10px;
+        }
+        
+        /* box-shadow: 0 -12px 32px rgba(120, 150, 130, 0.13), 0 -4px 12px rgba(120, 150, 130, 0.09), 0 -2px 6px rgba(120, 150, 130, 0.07); */
+        .cta-content h2 {
+            /* color: white; */
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .cta-content p {
+            /* color: white; */
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            color: #1e3c72;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: #f0f0f0;
+        }
+        
+        .cta-button:hover {
+            background: white;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: #1e3c72;
+        }
+
+        .gallery-section {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-item {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .valve-image {
+            width: 100%;
+            max-width: 250px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+        }
+
+        .product-info h4 {
+            color: #1e3c72;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .specs-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .spec-item {
+            padding: 20px;
+        }
+
+        .spec-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1e3c72;
+            display: block;
+        }
+
+        .spec-label {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .achievements-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .achievement-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .achievement-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);        
+        }
+
+        .achievement-item h4 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .achievement-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .valve-card {
+                padding: 30px 20px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .content-section,
+            .features-section,
+            .cta-section,
+            .specs-section,
+            .achievements-section {
+                padding: 60px 0;
+            }
+        }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test gallery</title>
+</head>
+<body>
+    테스트
+    <img src="https://drive.google.com/thumbnail?id=1cuMB3Iy589pWfXr3RyrBAYPqUNLMe5xN&sz=w2000" alt="" srcset="">
+    <section class="tab-content-section">
+        <div class="container">
+            <div id="business" class="tab-content">
+                <div class="content-grid">
+                    <div id="business-license" class="content-block">
+                        <div id="license-gallery" class="gallery-wrapper">
+                            <!-- 갤러리 시스템이 여기에 동적으로 생성됩니다 -->
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- 이미지 모달 -->
+    <div id="imageModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1000;">
+        <button id="closeModal" style="position:absolute; top:20px; right:30px; font-size:2em;">&times;</button>
+        <button id="prevBtn" style="position:absolute; top:50%; left:30px; font-size:2em;">&#8249;</button>
+        <img id="modalImage" alt="갤러리 이미지" style="max-width:90vw; max-height:90vh; display:block; margin:auto;">
+        <button id="nextBtn" style="position:absolute; top:50%; right:30px; font-size:2em;">&#8250;</button>
+    </div>
+    <script src="test.js"></script>
+</body>
+</html>

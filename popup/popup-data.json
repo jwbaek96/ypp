@@ -27,58 +27,50 @@
       }
     },
     "downloads": {
-      "title": {
-        "kor": "자료 다운로드",
-        "eng": "Download Materials"
-      },
       "files": [
         {
           "category": {
-            "kor": "PSAC 2025 (9월 ~ 12월) <span style='color:red;'>*7월부터 접수중</span>",
-            "eng": "PSAC 2025 (Sep ~ Dec)  <span style='color:red;'>*Registration open from July</span>"
-          },
-          "items": [
-            {
-              "name": {
-                "kor": "PSAC 교육신청서",
-                "eng": "PSAC Application Form"
+            "kor": "PSAC2025 전력계통 고급기술 교육과정 9.2~12.5 <span style='color:red;'>(접수중)</span>",
+            "eng": "PSAC2025 Power System Advanced Technology Training Course 9.2~12.5 <span style='color:red;'>(Applications Open)</span>",
+            "items": [
+              {
+                "name": {
+                  "kor": "과정개요, 교육일정 및 교육계획",
+                  "eng": "Course Overview, Schedule, and Plan"
+                },
+                "filename": "PSAC-application-2025.pdf"
               },
-              "filename": "PSAC-application-2025.pdf",
-              "size": "PDF"
-            },
-            {
-              "name": {
-                "kor": "PSAC 브로슈어",
-                "eng": "PSAC Brochure"
-              },
-              "filename": "2025_PSAC_brochure.pdf",
-              "size": "PDF"
-            }
-          ]
+              {
+                "name": {
+                  "kor": "교육신청",
+                  "eng": "Apply Now"
+                },
+                "link": "/pages/academy/index.html#psac"
+              }
+            ]
+          }
         },
         {
           "category": {
-            "kor": "Relay School 2025 (3월 ~ 11월)",
-            "eng": "Relay School 2025 (Mar ~ Nov)"
-          },
-          "items": [
-            {
+            "kor": "RelaySchool2025 전력계통 보호기술 교육과정 3~12 <span style='color:red;'>(접수,개강)</span>",
+            "eng": "RelaySchool2025 Power System Protection Technology Training Course 3~12 <span style='color:red;'>(Applications Open/Courses Start)</span>",
+            "items": [
+              {
               "name": {
-                "kor": "Relay School 교육 신청서",
-                "eng": "Relay School Application Form"
+                "kor": "과정개요, 교육일정 및 교육계획",
+                "eng": "Course Overview, Schedule, and Plan"
+                },
+                "filename": "relay-school-application-2025.pdf"
               },
-              "filename": "relay-school-application-2025.pdf",
-              "size": "PDF"
-            },
-            {
-              "name": {
-                "kor": "Relay School 브로슈어",
-                "eng": "Relay School Brochure"
-              },
-              "filename": "2025_Relay_School_brochure_250304.pdf",
-              "size": "PDF"
-            }
-          ]
+              {
+                "name": {
+                  "kor": "교육신청",
+                  "eng": "Apply Now"
+                },
+                "link": "/pages/academy/index.html#relay-school"
+              }
+            ]
+          }
         },
         {
           "category": {
@@ -108,31 +100,15 @@
     },
     "contact": {
       "title": {
-        "kor": "연락처 정보",
-        "eng": "Contact Information"
+        "kor": "문의",
+        "eng": "Contact"
       },
       "general": {
         "label": {
           "kor": "대표번호",
           "eng": "Main Phone"
         },
-        "phone": "02-2104-8700"
-      },
-      "education": {
-        "label": {
-          "kor": "교육 관련 문의",
-          "eng": "Education Inquiry"
-        },
-        "phone_label": {
-          "kor": "전화번호",
-          "eng": "Phone"
-        },
-        "email_label": {
-          "kor": "이메일",
-          "eng": "Email"
-        },
-        "phone": "02-2104-8720, 4683",
-        "email": "yppedu@ypp.co.kr"
+        "phone": "02-2104-8700(내선)"
       }
     },
     "settings": {

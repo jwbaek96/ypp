@@ -322,7 +322,7 @@
 
 /* 릴레이스쿨 폼 */
 /* Relay School 과정 그룹 스타일 */
-.relayschool-course-group {
+.relayschool-course-group { 
     margin-bottom: 30px;
     padding: 20px;
     background: #f8f9fa;
@@ -343,34 +343,27 @@
     font-size: 14px;
 }
 
-.relayschool-course-group .relayschool-course-option {
-    background: white;
-    margin: 10px 0;
-    padding: 15px;
-    border: 2px solid #e9ecef;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.relayschool-course-group .relayschool-course-option:hover {
-    border-color: #1e3c72;
-    background: #f8f9fa;
-}
-
-.relayschool-course-group .relayschool-course-option.selected {
-    border-color: #1e3c72;
-    background: #e8f4f8;
-}
-
-.relayschool-course-group .relayschool-course-option input[type="radio"] {
-    margin-right: 12px;
-    width: auto;
-}
 
 .relayschool-course-group .relayschool-course-schedule {
     font-weight: 500;
     color: #333;
+}
+#rs-apply .psac-checkbox-group {
+    grid-template-columns: 1fr;
+}
+/* 마감된 과정 스타일 */
+.psac-checkbox-disabled {
+    opacity: 0.6;
+}
+
+.psac-checkbox-disabled input[type="checkbox"] {
+    cursor: not-allowed;
+}
+
+.psac-checkbox-disabled .disabled-label {
+    color: #999;
+    cursor: not-allowed;
+    /* text-decoration: line-through; */
 }
 
 @media (max-width: 768px) {

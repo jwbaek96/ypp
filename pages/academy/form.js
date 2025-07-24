@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
    ========================================================================== */
 
 // 웹 앱 URL - 실제 Apps Script 웹 앱 URL로 변경해주세요
-const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwCdoOc7_nFbr5NJHnOFmUvxkTLGBClIim3Ad6tyGlBgRlcUO46tv9nGRNlUcY5a0Mp/exec';
+const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbziQBEOhMvyZy36jWFGQzLb7z1_l9mAdi2UA_z_ZSIngwPjgAgQJfErvz-4SlsCI-wt/exec';
 
 // 공통 변수
 let psacStudentCount = 0;
@@ -81,26 +81,19 @@ const psacCourses = [
 ];
 
 // Relay School 과정별 일정
-const relayCoursesData = {
-    '디지털릴레이 기본반': [
-        '2025년 3월 19일(수) ~ 3월 21일(금)',
-        '2025년 9월 17일(수) ~ 9월 19일(금)'
-    ],
-    '디지털릴레이 고급반': [
-        '2025년 4월 16일(수) ~ 4월 18일(금)',
-        '2025년 10월 22일(수) ~ 10월 24일(금)'
-    ],
-    '고장분석반': [
-        '2025년 5월 21일(수) ~ 5월 23일(금)',
-        '2025년 11월 19일(수) ~ 11월 21일(금)'
-    ],
-    'ECMS운영반': [
-        '2025년 6월 18일(수) ~ 6월 20일(금)'
-    ],
-    '원자력 특성화반': [
-        '2025년 7월 16일(수) ~ 7월 20일(일)'
-    ]
-};
+const relayCoursesData = [
+    '디지털릴레이 기본반 (2025년 9월 17일(수) ~ 9월 19일(금))',
+    '디지털릴레이 고급반 (2025년 10월 22일(수) ~ 10월 24일(금))',
+    '고장분석반 (2025년 11월 19일(수) ~ 11월 21일(금))'
+];
+// Relay School 마감된 과정들
+const relayCoursesDataPassed = [
+    '디지털릴레이 기본반 (2025년 3월 19일(수) ~ 3월 21일(금))',
+    '디지털릴레이 고급반 (2025년 4월 16일(수) ~ 4월 18일(금))',
+    '고장분석반 (2025년 5월 21일(수) ~ 5월 23일(금))',
+    'ECMS운영반 (2025년 6월 18일(수) ~ 6월 20일(금))',
+    '원자력 특성화반    (2025년 7월 16일(수) ~ 7월 20일(일))',
+];
 
 /* ==========================================================================
    공통 유틸리티 함수
@@ -466,6 +459,22 @@ function addRelayschoolStudent() {
     studentDiv.className = 'ac-form-student-section';
     studentDiv.id = `relayschool-student-${relayStudentCount}`;
     
+    // Relay School 과정 체크박스 생성 (선택 가능한 과정)
+    const courseCheckboxes = relayCoursesData.map((course, index) => `
+        <div class="psac-checkbox-item">
+            <input type="checkbox" id="relayschool-course-${relayStudentCount}-${index}" name="relayschool-student-${relayStudentCount}-courses" value="${course}">
+            <label for="relayschool-course-${relayStudentCount}-${index}">${course}</label>
+        </div>
+    `).join('');
+    
+    // Relay School 마감 과정 표시 (선택 불가)
+    const passedCourseItems = relayCoursesDataPassed.map((course, index) => `
+        <div class="psac-checkbox-item psac-checkbox-disabled">
+            <input type="checkbox" id="relayschool-passed-${relayStudentCount}-${index}" disabled>
+            <label for="relayschool-passed-${relayStudentCount}-${index}" class="disabled-label">${course}</label>
+        </div>
+    `).join('');
+    
     studentDiv.innerHTML = `
         <div class="ac-form-student-header">
             <div class="ac-form-student-title">수강자 ${relayStudentCount}</div>
@@ -504,28 +513,25 @@ function addRelayschoolStudent() {
                 <input type="email" id="relayschool-studentEmail-${relayStudentCount}" name="studentEmail-${relayStudentCount}" class="ac-form-input" required>
             </div>
         </div>
-        <div class="ac-form-row">
+        
         <div class="ac-form-group">
-            <label for="relayschool-course-a-${relayStudentCount}" class="ac-form-label ac-form-required">과정 선택</label>
-            <select id="relayschool-course-a-${relayStudentCount}" name="relayschool-course-a-${relayStudentCount}" class="ac-form-input" required
-                onchange="updateRelayCourseBOptions(${relayStudentCount})">
-                <option value="">과정을 선택하세요</option>
-                ${Object.keys(relayCoursesData).map(course =>
-                    `<option value="${course}">${course}</option>`
-                ).join('')}
-            </select>
+            <label class="ac-form-label ac-form-required">선택 과정 (최소 1개 이상 선택)</label>
+            <div class="psac-checkbox-group">
+                ${courseCheckboxes}
+            </div>
         </div>
+        
         <div class="ac-form-group">
-            <label for="relayschool-course-b-${relayStudentCount}" class="ac-form-label ac-form-required">일정 선택</label>
-            <select id="relayschool-course-b-${relayStudentCount}" name="relayschool-course-b-${relayStudentCount}" class="ac-form-input" required>
-                <option value="">일정을 선택하세요</option>
-            </select>
+            <label class="ac-form-label">마감 과정</label>
+            <div class="psac-checkbox-group">
+                ${passedCourseItems}
+            </div>
         </div>
-    </div>
     `;
     
     container.appendChild(studentDiv);
 }
+
 
 // Relay School 수강자 삭제
 function removeRelayschoolStudent(studentId) {
@@ -535,21 +541,6 @@ function removeRelayschoolStudent(studentId) {
     }
 }
 
-// Relay School 과정 선택 처리
-
-function updateRelayCourseBOptions(studentNum) {
-    const courseA = document.getElementById(`relayschool-course-a-${studentNum}`);
-    const courseB = document.getElementById(`relayschool-course-b-${studentNum}`);
-    courseB.innerHTML = '<option value="">일정을 선택하세요</option>';
-    if (courseA && courseB && courseA.value && relayCoursesData[courseA.value]) {
-        relayCoursesData[courseA.value].forEach(schedule => {
-            const option = document.createElement('option');
-            option.value = schedule;
-            option.textContent = schedule;
-            courseB.appendChild(option);
-        });
-    }
-}
 
 // Relay School 폼 데이터 수집
 function collectRelayschoolFormData() {
@@ -558,6 +549,14 @@ function collectRelayschoolFormData() {
     
     studentSections.forEach(section => {
         const studentId = section.id.split('-')[2];
+        const selectedCourses = [];
+        
+        // 선택된 과정 수집
+        const checkboxes = section.querySelectorAll(`input[name="relayschool-student-${studentId}-courses"]:checked`);
+        checkboxes.forEach(checkbox => {
+            selectedCourses.push(checkbox.value);
+        });
+        
         students.push({
             name: document.getElementById(`relayschool-studentName-${studentId}`).value,
             department: document.getElementById(`relayschool-studentDepartment-${studentId}`).value,
@@ -565,8 +564,7 @@ function collectRelayschoolFormData() {
             phone: document.getElementById(`relayschool-studentPhone-${studentId}`).value,
             mobile: document.getElementById(`relayschool-studentMobile-${studentId}`).value,
             email: document.getElementById(`relayschool-studentEmail-${studentId}`).value,
-            course: document.getElementById(`relayschool-course-a-${studentId}`).value,
-            schedule: document.getElementById(`relayschool-course-b-${studentId}`).value
+            selectedCourses: selectedCourses
         });
     });
 
@@ -593,65 +591,47 @@ function collectRelayschoolFormData() {
 
 // Relay School 폼 유효성 검사
 function validateRelayschoolForm(formData) {
+    // 기본 정보 유효성 검사
+    if (!formData.companyInfo.companyName.trim()) {
+        showMessage('회사명을 입력해 주세요.', 'error', 'rs-message');
+        return false;
+    }
+    
+    if (!validateBusinessNumber(formData.companyInfo.businessNumber)) {
+        showMessage('올바른 사업자등록번호를 입력해 주세요. (000-00-00000)', 'error', 'rs-message');
+        return false;
+    }
+    
     // 수강자 정보 유효성 검사
     if (formData.students.length === 0) {
-        alert('수강자 없음');
-        showMessage('최소 1명의 수강자를 등록해 주세요.', 'error');
+        showMessage('최소 1명의 수강자를 등록해 주세요.', 'error', 'rs-message');
         return false;
     }
-
-    // 각 수강자별 과정/일정 선택 확인
+    
     for (let i = 0; i < formData.students.length; i++) {
         const student = formData.students[i];
+        
         if (!student.name.trim()) {
-            alert(`수강자 ${i + 1} 이름 없음`);
-            showMessage(`수강자 ${i + 1}의 이름을 입력해 주세요.`, 'error');
+            showMessage(`수강자 ${i + 1}의 이름을 입력해 주세요.`, 'error', 'rs-message');
             return false;
         }
+        
         if (!validateEmail(student.email)) {
-            alert(`수강자 ${i + 1} 이메일 오류: ${student.email}`);
-            showMessage(`수강자 ${i + 1}의 올바른 이메일을 입력해 주세요.`, 'error');
+            showMessage(`수강자 ${i + 1}의 올바른 이메일을 입력해 주세요.`, 'error', 'rs-message');
             return false;
         }
+        
         if (!validatePhoneNumber(student.mobile)) {
-            alert(`수강자 ${i + 1} 핸드폰 오류: ${student.mobile}`);
-            showMessage(`수강자 ${i + 1}의 올바른 핸드폰 번호를 입력해 주세요.`, 'error');
+            showMessage(`수강자 ${i + 1}의 올바른 핸드폰 번호를 입력해 주세요.`, 'error', 'rs-message');
             return false;
         }
-        if (!student.course) {
-            alert(`수강자 ${i + 1} 과정 미선택`);
-            showMessage(`수강자 ${i + 1}의 과정을 선택해 주세요.`, 'error');
-            return false;
-        }
-        if (!student.schedule) {
-            alert(`수강자 ${i + 1} 일정 미선택`);
-            showMessage(`수강자 ${i + 1}의 일정을 선택해 주세요.`, 'error');
+        
+        if (student.selectedCourses.length === 0) {
+            showMessage(`수강자 ${i + 1}의 과정을 최소 1개 이상 선택해 주세요.`, 'error', 'rs-message');
             return false;
         }
     }
-
-    // 기본 정보 유효성 검사 (PSAC와 동일)
-    if (!formData.companyInfo.companyName.trim()) {
-        alert('회사명을 입력해 주세요.');
-        showMessage('회사명을 입력해 주세요.', 'error');
-        return false;
-    }
-    if (!validateBusinessNumber(formData.companyInfo.businessNumber)) {
-        alert('올바른 사업자등록번호를 입력해 주세요.');
-        showMessage('올바른 사업자등록번호를 입력해 주세요. (000-00-00000)', 'error');
-        return false;
-    }
-    if (!validateEmail(formData.managerInfo.email)) {
-        alert('올바른 담당자 이메일을 입력해 주세요.');
-        showMessage('올바른 담당자 이메일을 입력해 주세요.', 'error');
-        return false;
-    }
-    if (!validatePhoneNumber(formData.managerInfo.mobile)) {
-        alert('올바른 담당자 핸드폰 번호를 입력해 주세요.');
-        showMessage('올바른 담당자 핸드폰 번호를 입력해 주세요.', 'error');
-        return false;
-    }
-
+    
     return true;
 }
 

@@ -41,6 +41,7 @@ const YppPopupModal = {
    */
   createPopup() {
     const popup = this.data.popup;
+    console.log(popup.downloads.files[0]);
     
     // 오버레이 (배경) 생성
     this.elements.overlay = document.createElement('div');
@@ -70,8 +71,36 @@ const YppPopupModal = {
         
         <!-- 자료 다운로드 섹션 -->
         <div class="ypp-popup-downloads">
-          <h3 data-kor='${popup.downloads.title.kor}' data-eng='${popup.downloads.title.eng}'></h3>
-          ${this.createDownloadSection(popup.downloads.files)}
+          <div class="download-category"><h4 data-kor="${popup.downloads.files[0].category.kor}" data-eng="${popup.downloads.files[0].category.eng}"></h4>
+            <ul class="download-list">
+              <li>
+                <a href="/documents/${popup.downloads.files[0].category.items[0].filename}" download="" class="download-link">
+                  <span class="download-name" data-kor="${popup.downloads.files[0].category.items[0].name.kor}" data-eng="${popup.downloads.files[0].category.items[0].name.eng}"></span>
+                </a>
+              </li>
+            
+              <li>
+                <a href="${popup.downloads.files[0].category.items[1].link}" class="download-link">
+                  <span class="download-name" data-kor="${popup.downloads.files[0].category.items[1].name.kor}" data-eng="${popup.downloads.files[0].category.items[1].name.eng}"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="download-category"><h4 data-kor="${popup.downloads.files[1].category.kor}" data-eng="${popup.downloads.files[1].category.eng}"></h4>
+            <ul class="download-list">
+              <li>
+                <a href="/documents/${popup.downloads.files[1].category.items[0].filename}" download="" class="download-link">
+                  <span class="download-name" data-kor="${popup.downloads.files[1].category.items[0].name.kor}" data-eng="${popup.downloads.files[1].category.items[0].name.eng}"></span>
+                </a>
+              </li>
+            
+              <li>
+                <a href="${popup.downloads.files[1].category.items[1].link}" class="download-link">
+                  <span class="download-name" data-kor="${popup.downloads.files[1].category.items[1].name.kor}" data-eng="${popup.downloads.files[1].category.items[1].name.eng}"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
         
         <!-- 연락처 정보 -->
@@ -81,17 +110,6 @@ const YppPopupModal = {
             <div class="contact-item">
               <strong data-kor='${popup.contact.general.label.kor}' data-eng='${popup.contact.general.label.eng}'></strong>
               <a href="tel:${popup.contact.general.phone.replace(/[^0-9]/g, '')}">${popup.contact.general.phone}</a>
-            </div>
-            <div class="contact-item">
-              <strong data-kor='${popup.contact.education.label.kor}' data-eng='${popup.contact.education.label.eng}'></strong>
-              <div>
-                <span data-kor='${popup.contact.education.phone_label.kor}' data-eng='${popup.contact.education.phone_label.eng}'></span>
-                <a href="tel:${popup.contact.education.phone.split(',')[0].trim().replace(/[^0-9]/g, '')}">${popup.contact.education.phone}</a>
-              </div>
-              <div>
-                <span data-kor='${popup.contact.education.email_label.kor}' data-eng='${popup.contact.education.email_label.eng}'></span>
-                <a href="mailto:${popup.contact.education.email}">${popup.contact.education.email}</a>
-              </div>
             </div>
           </div>
         </div>
@@ -116,33 +134,6 @@ const YppPopupModal = {
    * @param {Array} files - 다운로드 파일 데이터 배열
    * @returns {string} 다운로드 섹션 HTML 문자열
    */
-  createDownloadSection(files) {
-    let html = '';
-    
-    // 각 카테고리별로 다운로드 항목 생성
-    files.forEach(category => {
-      html += `<div class="download-category">`;
-      html += `<h4 data-kor="${category.category.kor}" data-eng="${category.category.eng}">${category.category.kor}</h4>`;
-      html += `<ul class="download-list">`;
-      
-      // 각 파일별 다운로드 링크 생성
-      category.items.forEach(item => {
-        html += `
-          <li>
-            <a href="/documents/${item.filename}" download class="download-link">
-              <span class="download-name" data-kor="${item.name.kor}" data-eng="${item.name.eng}">${item.name.kor}</span>
-              <span class="download-size">${item.size}</span>
-            </a>
-          </li>
-        `;
-      });
-      
-      html += `</ul>`;
-      html += `</div>`;
-    });
-    
-    return html;
-  },
 
   /**
    * 이벤트 리스너 등록
@@ -175,9 +166,6 @@ const YppPopupModal = {
    */
   showPopup() {
     this.elements.overlay.style.display = 'flex';
-    
-    // 접근성: 팝업이 열릴 때 포커스 이동
-    this.elements.closeBtn.focus();
     
     // 스크롤 방지
     document.body.style.overflow = 'hidden';

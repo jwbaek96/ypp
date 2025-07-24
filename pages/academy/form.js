@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
    ========================================================================== */
 
 // 웹 앱 URL - 실제 Apps Script 웹 앱 URL로 변경해주세요
-const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbziQBEOhMvyZy36jWFGQzLb7z1_l9mAdi2UA_z_ZSIngwPjgAgQJfErvz-4SlsCI-wt/exec';
+const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyc6-Z8_6IM3Km9cFin02mSwulM9vXlUpZDK2_ulMQFnCH4vGh1bgVk6i6lPHgtRHYE/exec';
 
 // 공통 변수
 let psacStudentCount = 0;

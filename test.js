@@ -1,6 +1,5 @@
 // 구글 스프레드시트 데이터를 가져올 URL
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzQGvamyKJBy-zhoD_Ho-5ulbY7me2azs0FlUyBlMRVguKb3VLZmE3GdNebHk3xN6s_/exec';
-
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxrjTyJiU0gDFDKBUYaWiQwHW-Zn3pTbm4Z9Jft01H19hHEWPhc5EN5wcIWEMWaY7BJ/exec';
 /**
  * 구글 스프레드시트에서 데이터를 가져오는 함수
  * JSONP 방식을 사용해서 외부 API 호출
@@ -38,12 +37,15 @@ let currentImages = [];
  */
 async function init() {
     // 로딩 메시지 표시
-    document.getElementById('license-gallery').innerText = '데이터를 불러오는 중...';
+    const qualificationGallery = document.getElementById('qualification-gallery');
+    const licenseGallery = document.getElementById('license-gallery');
+    
+    if (qualificationGallery) qualificationGallery.innerText = '데이터를 불러오는 중...';
+    if (licenseGallery) licenseGallery.innerText = '데이터를 불러오는 중...';
     
     try {
         // 구글 스프레드시트에서 데이터 가져오기
         const rawData = await fetchGoogleSheetData();
-        console.log('rawData:', rawData); // 데이터 구조 확인용 로그
         
         // statu가 on인 항목들만 필터링 (게시 승인된 항목만)
         galleryData = rawData.filter(item => {
@@ -51,110 +53,60 @@ async function init() {
             const val = String(item.statu).toLowerCase();
             return val === 'on' || val === '1' || val === 'yes';
         });
-        console.log('galleryData:', galleryData); // 데이터 구조 확인용 로그
         
-        // 게시된 데이터가 없으면 메시지 표시
-        if (galleryData.length === 0) {
-            document.getElementById('license-gallery').innerText = '게시된 데이터가 없습니다.';
-            return;
+        // 카테고리별로 데이터 분리
+        const qualificationData = galleryData.filter(item => item.category === '유자격');
+        const licenseData = galleryData.filter(item => item.category === '인허가');
+        
+        // 각 갤러리에 데이터 렌더링
+        if (qualificationGallery) {
+            if (qualificationData.length === 0) {
+                qualificationGallery.innerText = '유자격 데이터가 없습니다.';
+            } else {
+                renderGallery(qualificationData, 'qualification-gallery');
+            }
         }
         
-        // 필터 옵션 설정
-        // setupFilters();
-        // 갤러리 화면에 렌더링
-        renderGallery(galleryData);
+        if (licenseGallery) {
+            if (licenseData.length === 0) {
+                licenseGallery.innerText = '인허가 데이터가 없습니다.';
+            } else {
+                renderGallery(licenseData, 'license-gallery');
+            }
+        }
+        
     } catch (e) {
         // 에러 발생 시 에러 메시지 표시
-        document.getElementById('license-gallery').innerText = '데이터를 불러올 수 없습니다.';
+        if (qualificationGallery) qualificationGallery.innerText = '데이터를 불러올 수 없습니다.';
+        if (licenseGallery) licenseGallery.innerText = '데이터를 불러올 수 없습니다.';
         console.error(e);
     }
 }
 
 /**
- * 필터 옵션들을 설정하는 함수 (카테고리, 연도 드롭다운)
+ * 구글 드라이브 공유 링크를 썸네일 URL로 변환하는 함수
  */
-// function setupFilters() {
-//     const categoryFilter = document.getElementById('categoryFilter');
-//     const yearFilter = document.getElementById('yearFilter');
+function convertGoogleDriveUrl(url) {
+    if (!url) return '';
     
-//     // 카테고리 필터 옵션 생성
-//     // 중복 제거해서 고유한 카테고리만 추출
-//     const categories = [...new Set(galleryData.map(item => item.category))].filter(Boolean);
-//     categories.forEach(category => {
-//         const option = document.createElement('option');
-//         option.value = category;
-//         option.textContent = category;
-//         categoryFilter.appendChild(option);
-//     });
+    // 구글 드라이브 공유 링크 패턴 확인
+    const match = url.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+    if (match) {
+        const fileId = match[1];
+        // 썸네일 URL로 변환 (w1000 크기)
+        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+    }
     
-//     // 연도 필터 옵션 생성
-//     // 날짜에서 연도만 추출하고 중복 제거, 최신순 정렬
-//     const years = [...new Set(galleryData.map(item => {
-//         const date = new Date(item.date);
-//         return date.getFullYear();
-//     }))].filter(year => !isNaN(year));
-//     years.sort((a, b) => b - a); // 내림차순 정렬 (최신년도 먼저)
-    
-//     years.forEach(year => {
-//         const option = document.createElement('option');
-//         option.value = year;
-//         option.textContent = year + '년';
-//         yearFilter.appendChild(option);
-//     });
-    
-//     // 필터 이벤트 리스너 등록
-//     categoryFilter.addEventListener('change', applyFilters);
-//     yearFilter.addEventListener('change', applyFilters);
-//     document.getElementById('searchInput').addEventListener('input', applyFilters);
-// }
-
-/**
- * 필터 조건에 따라 데이터를 필터링하고 갤러리를 다시 렌더링
- */
-// function applyFilters() {
-//     // 현재 선택된 필터 값들 가져오기
-//     const category = document.getElementById('categoryFilter').value;
-//     const year = document.getElementById('yearFilter').value;
-//     const search = document.getElementById('searchInput').value.toLowerCase();
-    
-//     let filtered = galleryData;
-    
-//     // 카테고리 필터 적용
-//     if (category) filtered = filtered.filter(item => item.category === category);
-    
-//     // 연도 필터 적용
-//     if (year) filtered = filtered.filter(item => new Date(item.date).getFullYear().toString() === year);
-    
-//     // 검색어 필터 적용 (제목에서 검색)
-//     if (search) filtered = filtered.filter(item => item.title && item.title.toLowerCase().includes(search));
-    
-//     // 필터링된 결과로 갤러리 다시 렌더링
-//     renderGallery(filtered);
-// }
-
-/**
- * 구글 드라이브 공유 링크를 직접 이미지 URL로 변환하는 함수
- */
-// function convertGoogleDriveUrl(url) {
-//     if (!url) return '';
-    
-//     // 구글 드라이브 공유 링크 패턴 확인
-//     const match = url.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
-//     if (match) {
-//         const fileId = match[1];
-//         // 직접 이미지를 표시할 수 있는 URL로 변환
-//         return `https://drive.google.com/uc?export=view&id=${fileId}`;
-//     }
-    
-//     // 이미 변환된 형태이거나 다른 URL인 경우 그대로 반환
-//     return url;
-// }
+    // 이미 변환된 형태이거나 다른 URL인 경우 그대로 반환
+    return url;
+}
 
 /**
  * 갤러리 그리드에 데이터를 렌더링하는 함수
  */
-function renderGallery(data) {
-    const grid = document.getElementById('license-gallery');
+function renderGallery(data, targetId) {
+    const grid = document.getElementById(targetId);
+    if (!grid) return;
     
     grid.innerHTML = ''; // 기존 내용 초기화
     
@@ -164,8 +116,7 @@ function renderGallery(data) {
         const images = item.images || [];
         
         // 첫 번째 이미지를 대표 이미지로 사용하고 URL 변환
-        // const mainImageUrl = convertGoogleDriveUrl(images[0] || '');
-        const mainImageUrl = images[0] || '';
+        const mainImageUrl = convertGoogleDriveUrl(images[0] || '');
         
         // 갤러리 카드 HTML 생성 (onclick 속성 위치 수정)
         div.innerHTML = `
@@ -193,7 +144,7 @@ window.openModal = function(itemId) {
     if (!item) return;
     
     // 해당 항목의 이미지들을 현재 이미지 배열에 설정하고 URL 변환
-    // currentImages = (item.images || []).map(url => convertGoogleDriveUrl(url));
+    currentImages = (item.images || []).map(url => convertGoogleDriveUrl(url));
     currentImageIndex = 0; // 첫 번째 이미지부터 시작
     
     if (currentImages.length === 0) return;
@@ -235,25 +186,6 @@ function nextImage() {
     }
 }
 
-/**
- * 키보드 입력 처리 함수
- */
-// function handleKeyPress(e) {
-//     if (e.key === 'Escape') closeModal();           // ESC키로 모달 닫기
-//     else if (e.key === 'ArrowLeft') prevImage();    // 왼쪽 화살표로 이전 이미지
-//     else if (e.key === 'ArrowRight') nextImage();   // 오른쪽 화살표로 다음 이미지
-// }
-
-// // 이벤트 리스너 등록
-// document.getElementById('closeModal').onclick = closeModal;     // 닫기 버튼
-// document.getElementById('prevBtn').onclick = prevImage;         // 이전 버튼
-// document.getElementById('nextBtn').onclick = nextImage;         // 다음 버튼
-
-// // 모달 배경 클릭 시 닫기
-// document.getElementById('imageModal').addEventListener('click', function(e) {
-//     if (e.target === this) closeModal(); // 모달 배경을 클릭했을 때만 닫기
-// });
-
 // 이벤트 리스너 등록 (요소 존재 확인)
 document.addEventListener('DOMContentLoaded', function() {
     const closeModalBtn = document.getElementById('closeModal');
@@ -272,9 +204,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
-// 키보드 이벤트 리스너 등록
-// document.addEventListener('keydown', handleKeyPress);
 
 // 페이지 로드 시 초기화 함수 실행
 init();

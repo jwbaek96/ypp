@@ -31,6 +31,10 @@ let galleryData = [];
 let currentImageIndex = 0;
 // 현재 모달에서 보여줄 이미지들의 배열
 let currentImages = [];
+// 페이지네이션 관련 변수들
+let currentQualificationPage = 1;
+let currentLicensePage = 1;
+const itemsPerPage = 12;
 
 /**
  * 페이지 초기화 함수 - 페이지 로드 시 실행
@@ -63,7 +67,7 @@ async function init() {
             if (qualificationData.length === 0) {
                 qualificationGallery.innerText = '유자격 데이터가 없습니다.';
             } else {
-                renderGallery(qualificationData, 'qualification-gallery');
+                renderGalleryWithPagination(qualificationData, 'qualification-gallery');
             }
         }
         
@@ -71,7 +75,7 @@ async function init() {
             if (licenseData.length === 0) {
                 licenseGallery.innerText = '인허가 데이터가 없습니다.';
             } else {
-                renderGallery(licenseData, 'license-gallery');
+                renderGalleryWithPagination(licenseData, 'license-gallery');
             }
         }
         
@@ -102,7 +106,174 @@ function convertGoogleDriveUrl(url) {
 }
 
 /**
- * 갤러리 그리드에 데이터를 렌더링하는 함수
+ * 페이지네이션을 포함한 갤러리 렌더링 함수
+ */
+function renderGalleryWithPagination(data, targetId) {
+    const grid = document.getElementById(targetId);
+    if (!grid) return;
+    
+    // 페이지네이션 HTML 구조 생성
+    if (!grid.querySelector('.gallery-content')) {
+        grid.innerHTML = `
+            <div class="gallery-content"></div>
+            <div class="gallery-pagination" style="display: none;">
+                <button class="pagination-btn prev-btn" data-action="prev">
+                    <span>이전</span>
+                </button>
+                <div class="page-numbers"></div>
+                <button class="pagination-btn next-btn" data-action="next">
+                    <span>다음</span>
+                </button>
+            </div>
+        `;
+        
+        // 페이지네이션 이벤트 리스너 설정
+        setupPaginationEvents(targetId);
+    }
+    
+    // 현재 페이지에 해당하는 데이터 계산
+    const currentPage = targetId === 'qualification-gallery' ? currentQualificationPage : currentLicensePage;
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentItems = data.slice(startIndex, endIndex);
+    
+    // 갤러리 아이템 렌더링
+    const galleryContent = grid.querySelector('.gallery-content');
+    galleryContent.innerHTML = '';
+    
+    currentItems.forEach(item => {
+        const div = document.createElement('div');
+        const images = item.images || [];
+        
+        // 첫 번째 이미지를 대표 이미지로 사용하고 URL 변환
+        const mainImageUrl = convertGoogleDriveUrl(images[0] || '');
+        
+        div.innerHTML = `
+            <img src="${mainImageUrl}" 
+                 alt="${item.titleKR||''}" 
+                 loading="lazy" 
+                 style="width:200px; height:150px; object-fit:cover; cursor:pointer;" 
+                 onclick="openModal('${item.id}')"
+                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuydtOuvuOyngCDsl4bsnYw8L3RleHQ+PC9zdmc+'">
+            <div class="gallery-item-overlay">
+                <div class="gallery-item-title" data-kor="${item.titleKR}" data-eng="${item.titleEN}">${item.titleKR}</div>
+            </div>
+        `;
+        
+        galleryContent.appendChild(div);
+    });
+    
+    // 페이지네이션 업데이트
+    updatePagination(targetId, currentPage, totalPages, data.length);
+}
+
+/**
+ * 페이지네이션 업데이트 함수
+ */
+function updatePagination(targetId, currentPage, totalPages, totalItems) {
+    const grid = document.getElementById(targetId);
+    const pagination = grid.querySelector('.gallery-pagination');
+    const prevBtn = pagination.querySelector('.prev-btn');
+    const nextBtn = pagination.querySelector('.next-btn');
+    const pageNumbers = pagination.querySelector('.page-numbers');
+    
+    // 페이지가 1개보다 많을 때만 페이지네이션 표시
+    if (totalPages > 1) {
+        pagination.style.display = 'flex';
+        
+        // 이전/다음 버튼 상태
+        prevBtn.disabled = currentPage <= 1;
+        nextBtn.disabled = currentPage >= totalPages;
+        
+        // 페이지 번호 생성
+        pageNumbers.innerHTML = '';
+        const maxVisiblePages = 5;
+        let startPage, endPage;
+        
+        if (totalPages <= maxVisiblePages) {
+            startPage = 1;
+            endPage = totalPages;
+        } else {
+            const halfVisible = Math.floor(maxVisiblePages / 2);
+            startPage = Math.max(1, currentPage - halfVisible);
+            endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+        }
+        
+        for (let i = startPage; i <= endPage; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.className = `page-number ${i === currentPage ? 'active' : ''}`;
+            pageBtn.textContent = i;
+            pageBtn.dataset.page = i;
+            pageBtn.dataset.target = targetId;
+            pageNumbers.appendChild(pageBtn);
+        }
+    } else {
+        pagination.style.display = 'none';
+    }
+}
+
+/**
+ * 페이지네이션 이벤트 설정
+ */
+function setupPaginationEvents(targetId) {
+    const grid = document.getElementById(targetId);
+    const pagination = grid.querySelector('.gallery-pagination');
+    
+    pagination.addEventListener('click', (e) => {
+        const action = e.target.dataset.action;
+        const page = e.target.dataset.page;
+        const target = e.target.dataset.target || targetId;
+        
+        if (action === 'prev') {
+            goToPage(target, getCurrentPage(target) - 1);
+        } else if (action === 'next') {
+            goToPage(target, getCurrentPage(target) + 1);
+        } else if (page) {
+            goToPage(target, parseInt(page));
+        }
+    });
+}
+
+/**
+ * 현재 페이지 가져오기
+ */
+function getCurrentPage(targetId) {
+    return targetId === 'qualification-gallery' ? currentQualificationPage : currentLicensePage;
+}
+
+/**
+ * 페이지 이동 함수
+ */
+function goToPage(targetId, page) {
+    const data = targetId === 'qualification-gallery' 
+        ? galleryData.filter(item => item.category === '유자격')
+        : galleryData.filter(item => item.category === '인허가');
+    
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+    
+    if (page < 1 || page > totalPages) return;
+    
+    // 현재 페이지 업데이트
+    if (targetId === 'qualification-gallery') {
+        currentQualificationPage = page;
+    } else {
+        currentLicensePage = page;
+    }
+    
+    // 갤러리 다시 렌더링
+    renderGalleryWithPagination(data, targetId);
+    
+    // 스크롤을 갤러리 상단으로 이동
+    document.getElementById(targetId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/**
+ * 기존 갤러리 그리드에 데이터를 렌더링하는 함수 (백업용)
  */
 function renderGallery(data, targetId) {
     const grid = document.getElementById(targetId);
@@ -151,9 +322,21 @@ window.openModal = function(itemId) {
     
     // 모달에 첫 번째 이미지 표시
     const modalImage = document.getElementById('modalImage');
+    const downloadBtn = document.getElementById('downloadBtn');
+    
     if (modalImage) {
         modalImage.src = currentImages[currentImageIndex];
         document.getElementById('imageModal').style.display = 'flex';
+    }
+    
+    // 다운로드 버튼에 파일 링크 설정
+    if (downloadBtn && item.file) {
+        downloadBtn.onclick = function() {
+            window.open(item.file, '_blank');
+        };
+        downloadBtn.style.display = 'block';
+    } else if (downloadBtn) {
+        downloadBtn.style.display = 'none';
     }
 };
 
@@ -191,11 +374,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeModalBtn = document.getElementById('closeModal');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
     const imageModal = document.getElementById('imageModal');
     
     if (closeModalBtn) closeModalBtn.onclick = closeModal;
     if (prevBtn) prevBtn.onclick = prevImage;
     if (nextBtn) nextBtn.onclick = nextImage;
+    
+    // 다운로드 버튼은 openModal에서 동적으로 설정되므로 여기서는 스타일만 설정
+    if (downloadBtn) {
+        downloadBtn.style.display = 'none'; // 초기에는 숨김
+    }
     
     // 모달 배경 클릭 시 닫기
     if (imageModal) {

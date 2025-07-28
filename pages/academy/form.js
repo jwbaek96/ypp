@@ -371,17 +371,6 @@ function validatePsacForm(formData) {
         showMessage('올바른 사업자등록번호를 입력해 주세요. (000-00-00000)', 'error');
         return false;
     }
-    
-    if (!validateEmail(formData.managerInfo.email)) {
-        showMessage('올바른 담당자 이메일을 입력해 주세요.', 'error');
-        return false;
-    }
-    
-    if (!validatePhoneNumber(formData.managerInfo.mobile)) {
-        showMessage('올바른 담당자 핸드폰 번호를 입력해 주세요.', 'error');
-        return false;
-    }
-    
     // 수강자 정보 유효성 검사
     if (formData.students.length === 0) {
         showMessage('최소 1명의 수강자를 등록해 주세요.', 'error');

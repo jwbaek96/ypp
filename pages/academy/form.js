@@ -364,16 +364,19 @@ function validatePsacForm(formData) {
     // 기본 정보 유효성 검사
     if (!formData.companyInfo.companyName.trim()) {
         showMessage('회사명을 입력해 주세요.', 'error');
+        alert('회사명을 입력해주세요.');
         return false;
     }
     
     if (!validateBusinessNumber(formData.companyInfo.businessNumber)) {
         showMessage('올바른 사업자등록번호를 입력해 주세요. (000-00-00000)', 'error');
+        alert('올바른 사업자등록번호를 입력해주세요. (000-00-00000)');
         return false;
     }
     // 수강자 정보 유효성 검사
     if (formData.students.length === 0) {
         showMessage('최소 1명의 수강자를 등록해 주세요.', 'error');
+        alert('최소 1명의 수강자를 등록해주세요.');
         return false;
     }
     
@@ -382,21 +385,25 @@ function validatePsacForm(formData) {
         
         if (!student.name.trim()) {
             showMessage(`수강자 ${i + 1}의 이름을 입력해 주세요.`, 'error');
+            alert('수강자 이름을 입력해주세요.');
             return false;
         }
         
         if (!validateEmail(student.email)) {
             showMessage(`수강자 ${i + 1}의 올바른 이메일을 입력해 주세요.`, 'error');
+            alert('올바른 이메일을 입력해주세요.');
             return false;
         }
         
         if (!validatePhoneNumber(student.mobile)) {
             showMessage(`수강자 ${i + 1}의 올바른 핸드폰 번호를 입력해 주세요.`, 'error');
+            alert('올바른 핸드폰 번호를 입력해주세요. (010-0000-0000)');
             return false;
         }
         
         if (student.selectedCourses.length === 0) {
             showMessage(`수강자 ${i + 1}의 세부교육을 최소 1개 이상 선택해 주세요.`, 'error');
+            alert('세부교육을 최소 1개 이상 선택해주세요.');
             return false;
         }
     }
@@ -583,17 +590,20 @@ function validateRelayschoolForm(formData) {
     // 기본 정보 유효성 검사
     if (!formData.companyInfo.companyName.trim()) {
         showMessage('회사명을 입력해 주세요.', 'error', 'rs-message');
+        alert('회사명을 입력해주세요.');
         return false;
     }
     
     if (!validateBusinessNumber(formData.companyInfo.businessNumber)) {
-        showMessage('올바른 사업자등록번호를 입력해 주세요. (000-00-00000)', 'error', 'rs-message');
+        showMessage('올바른 사업자등록번호를 입력해주세요. (000-00-00000)', 'error', 'rs-message');
+        alert('올바른 사업자등록번호를 입력해주세요. (000-00-00000)');
         return false;
     }
     
     // 수강자 정보 유효성 검사
     if (formData.students.length === 0) {
-        showMessage('최소 1명의 수강자를 등록해 주세요.', 'error', 'rs-message');
+        showMessage('최소 1명의 수강자를 등록해주세요.', 'error', 'rs-message');
+        alert('최소 1명의 수강자를 등록해주세요.');
         return false;
     }
     
@@ -601,22 +611,26 @@ function validateRelayschoolForm(formData) {
         const student = formData.students[i];
         
         if (!student.name.trim()) {
-            showMessage(`수강자 ${i + 1}의 이름을 입력해 주세요.`, 'error', 'rs-message');
+            showMessage(`수강자 ${i + 1}의 이름을 입력해주세요.`, 'error', 'rs-message');
+            alert('수강자 이름을 입력해주세요.');
             return false;
         }
         
         if (!validateEmail(student.email)) {
-            showMessage(`수강자 ${i + 1}의 올바른 이메일을 입력해 주세요.`, 'error', 'rs-message');
+            showMessage(`수강자 ${i + 1}의 올바른 이메일을 입력해주세요.`, 'error', 'rs-message');
+            alert('올바른 이메일을 입력해주세요.');
             return false;
         }
         
         if (!validatePhoneNumber(student.mobile)) {
-            showMessage(`수강자 ${i + 1}의 올바른 핸드폰 번호를 입력해 주세요.`, 'error', 'rs-message');
+            showMessage(`수강자 ${i + 1}의 올바른 핸드폰 번호를 입력해주세요.`, 'error', 'rs-message');
+            alert('올바른 핸드폰 번호를 입력해주세요. (010-0000-0000)');
             return false;
         }
         
         if (student.selectedCourses.length === 0) {
-            showMessage(`수강자 ${i + 1}의 과정을 최소 1개 이상 선택해 주세요.`, 'error', 'rs-message');
+            showMessage(`수강자 ${i + 1}의 과정을 최소 1개 이상 선택해주세요.`, 'error', 'rs-message');
+            alert('과정을 최소 1개 이상 선택해주세요.');
             return false;
         }
     }
@@ -640,10 +654,10 @@ async function submitRelayschoolForm(e) {
             }
         // alert('2. 데이터 수집 완료');
 
-        if (!validateRelayschoolForm(formData)) {
-            alert('3. 유효성 검사 실패');
-            return;
-        }
+        // if (!validateRelayschoolForm(formData)) {
+        //     alert('3. 유효성 검사 실패');
+        //     return;
+        // }
         // alert('4. 유효성 검사 통과');
 
         await submitFormData(formData);

@@ -302,12 +302,12 @@ class PressPageController {
         container.innerHTML = currentItems.map(item => `
             <article class="press-item">
                 <div class="press-content">
-                    <h3 class="press-title">
-                        <a href="${item.page || '#'}.html" target="" data-kor='${item.titleKR}' data-eng='${item.titleEN}'></a>
-                    </h3>
                     <div class="press-meta">
                         <span class="press-date">${item.date}</span>
                     </div>
+                    <h3 class="press-title">
+                        <a href="${item.page || '#'}.html" target="" data-kor='${item.titleKR}' data-eng='${item.titleEN}'></a>
+                    </h3>
                     <p class="press-summary">${item.summary}</p>
                 </div>
             </article>
@@ -660,10 +660,19 @@ window.initPressPage = initPressPage;
     .press-meta {
         flex-direction: column;
         gap: 0.25rem;
+        font-size: .9rem;
     }
     
     .pagination {
         flex-wrap: wrap;
+    }
+    .press-item{
+        padding: .75rem .25rem;
+        margin-bottom: .5rem;
+    }
+    h3.press-title,h3.press-title a {
+        font-size: 1.05rem;
+        line-height: 1;
     }
 }
 </style>

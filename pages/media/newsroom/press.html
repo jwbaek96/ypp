@@ -74,7 +74,7 @@
                 </div>
                 
                 <!-- Search & Filter -->
-                <div class="search-filter-section">
+                <!-- <div class="search-filter-section">
                     <div class="search-box">
                         <input type="text" placeholder="검색어를 입력하세요" class="search-input">
                         <button class="search-btn">검색</button>
@@ -94,16 +94,16 @@
                             <option value="partnership">협력</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Press Release List -->
                 <div class="press-list">
                     <div class="list-header">
-                        <span class="total-count">총 <strong>0</strong>건</span>
-                        <div class="sort-options">
+                        <span class="total-count"><span data-kor="총 " data-eng="Total "></span><strong>0</strong><span data-kor=" 건" data-eng=" items"></span></span>
+                        <!-- <div class="sort-options">
                             <button class="sort-btn active" data-sort="date">최신순</button>
                             <button class="sort-btn" data-sort="title">제목순</button>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="press-items">
@@ -149,6 +149,18 @@
     <script>
 // ===== 보도자료 데이터 (실제로는 서버에서 가져옴) =====
 const pressData = [
+    {
+        id: 1,
+        titleKR: "한국 기업, 한국에서 그린수소 생산에 최대 31억 달러 투자",
+        titleEN: "Korean company to invest up to $3.1 billion in green hydrogen production in South Korea",
+        date: "2025-07-15",
+        category: "",
+        summary: "",
+        content: "",
+        source: "Forbes Kazakhstan",
+        link: "https://forbes.kz/articles/koreyskaya-kompaniya-investiruet-do-31mlrd-vproizvodstvo-zelyonogo-vodoroda-vrk-a4d28d",
+        page:'1'
+    }
     // 샘플 데이터 - 실제 구현 시 서버 API에서 가져옴
 ];
 
@@ -172,27 +184,27 @@ class PressPageController {
     
     // 이벤트 리스너 설정
     setupEventListeners() {
-        // 검색
-        const searchBtn = document.querySelector('.search-btn');
-        const searchInput = document.querySelector('.search-input');
+        // // 검색
+        // const searchBtn = document.querySelector('.search-btn');
+        // const searchInput = document.querySelector('.search-input');
         
-        searchBtn.addEventListener('click', () => this.handleSearch());
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.handleSearch();
-        });
+        // searchBtn.addEventListener('click', () => this.handleSearch());
+        // searchInput.addEventListener('keypress', (e) => {
+        //     if (e.key === 'Enter') this.handleSearch();
+        // });
         
-        // 필터
-        const yearFilter = document.querySelector('.year-filter');
-        const categoryFilter = document.querySelector('.category-filter');
+        // // 필터
+        // const yearFilter = document.querySelector('.year-filter');
+        // const categoryFilter = document.querySelector('.category-filter');
         
-        yearFilter.addEventListener('change', () => this.handleFilter());
-        categoryFilter.addEventListener('change', () => this.handleFilter());
+        // yearFilter.addEventListener('change', () => this.handleFilter());
+        // categoryFilter.addEventListener('change', () => this.handleFilter());
         
-        // 정렬
-        const sortBtns = document.querySelectorAll('.sort-btn');
-        sortBtns.forEach(btn => {
-            btn.addEventListener('click', () => this.handleSort(btn.dataset.sort));
-        });
+        // // 정렬
+        // const sortBtns = document.querySelectorAll('.sort-btn');
+        // sortBtns.forEach(btn => {
+        //     btn.addEventListener('click', () => this.handleSort(btn.dataset.sort));
+        // });
         
         // 페이지네이션
         const prevBtn = document.querySelector('.page-btn.prev');
@@ -202,63 +214,63 @@ class PressPageController {
         nextBtn.addEventListener('click', () => this.goToPage(this.currentPage + 1));
     }
     
-    // 검색 처리
-    handleSearch() {
-        const keyword = document.querySelector('.search-input').value.trim();
+    // // 검색 처리
+    // handleSearch() {
+    //     const keyword = document.querySelector('.search-input').value.trim();
         
-        if (keyword) {
-            this.filteredData = pressData.filter(item => 
-                item.title.includes(keyword) || 
-                item.content.includes(keyword)
-            );
-        } else {
-            this.filteredData = [...pressData];
-        }
+    //     if (keyword) {
+    //         this.filteredData = pressData.filter(item => 
+    //             item.title.includes(keyword) || 
+    //             item.content.includes(keyword)
+    //         );
+    //     } else {
+    //         this.filteredData = [...pressData];
+    //     }
         
-        this.currentPage = 1;
-        this.applyCurrentFilters();
-        this.renderList();
-        this.updateTotalCount();
-    }
+    //     this.currentPage = 1;
+    //     this.applyCurrentFilters();
+    //     this.renderList();
+    //     this.updateTotalCount();
+    // }
     
-    // 필터 처리
-    handleFilter() {
-        const year = document.querySelector('.year-filter').value;
-        const category = document.querySelector('.category-filter').value;
+    // // 필터 처리
+    // handleFilter() {
+    //     const year = document.querySelector('.year-filter').value;
+    //     const category = document.querySelector('.category-filter').value;
         
-        this.filteredData = pressData.filter(item => {
-            const yearMatch = year === 'all' || item.year === year;
-            const categoryMatch = category === 'all' || item.category === category;
-            return yearMatch && categoryMatch;
-        });
+    //     this.filteredData = pressData.filter(item => {
+    //         const yearMatch = year === 'all' || item.year === year;
+    //         const categoryMatch = category === 'all' || item.category === category;
+    //         return yearMatch && categoryMatch;
+    //     });
         
-        this.currentPage = 1;
-        this.renderList();
-        this.updateTotalCount();
-    }
+    //     this.currentPage = 1;
+    //     this.renderList();
+    //     this.updateTotalCount();
+    // }
     
-    // 정렬 처리
-    handleSort(sortType) {
-        this.currentSort = sortType;
+    // // 정렬 처리
+    // handleSort(sortType) {
+    //     this.currentSort = sortType;
         
-        // 정렬 버튼 상태 업데이트
-        document.querySelectorAll('.sort-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        document.querySelector(`[data-sort="${sortType}"]`).classList.add('active');
+    //     // 정렬 버튼 상태 업데이트
+    //     document.querySelectorAll('.sort-btn').forEach(btn => {
+    //         btn.classList.remove('active');
+    //     });
+    //     document.querySelector(`[data-sort="${sortType}"]`).classList.add('active');
         
-        // 데이터 정렬
-        this.filteredData.sort((a, b) => {
-            if (sortType === 'date') {
-                return new Date(b.date) - new Date(a.date);
-            } else if (sortType === 'title') {
-                return a.title.localeCompare(b.title);
-            }
-            return 0;
-        });
+    //     // 데이터 정렬
+    //     this.filteredData.sort((a, b) => {
+    //         if (sortType === 'date') {
+    //             return new Date(b.date) - new Date(a.date);
+    //         } else if (sortType === 'title') {
+    //             return a.title.localeCompare(b.title);
+    //         }
+    //         return 0;
+    //     });
         
-        this.renderList();
-    }
+    //     this.renderList();
+    // }
     
     // 페이지 이동
     goToPage(page) {
@@ -290,20 +302,19 @@ class PressPageController {
         container.innerHTML = currentItems.map(item => `
             <article class="press-item">
                 <div class="press-content">
-                    <div class="press-meta">
-                        <span class="press-date">${this.formatDate(item.date)}</span>
-                        <span class="press-category">${this.getCategoryName(item.category)}</span>
-                    </div>
                     <h3 class="press-title">
-                        <a href="${item.link || '#'}" target="_blank">${item.title}</a>
+                        <a href="${item.page || '#'}.html" target="_blank" data-kor='${item.titleKR}' data-eng='${item.titleEN}'></a>
                     </h3>
-                    <p class="press-summary">${item.summary}</p>
-                    <div class="press-source">
-                        <span>출처: ${item.source}</span>
+                    <div class="press-meta">
+                        <span class="press-date">${item.date}</span>
                     </div>
+                    <p class="press-summary">${item.summary}</p>
                 </div>
             </article>
         `).join('');
+                    // <div class="press-source">
+                    //     <span>출처: ${item.source}</span>
+                    // </div>
         
         this.updatePagination();
     }
@@ -361,19 +372,19 @@ class PressPageController {
         }
     }
     
-    // 현재 필터 적용
-    applyCurrentFilters() {
-        const year = document.querySelector('.year-filter').value;
-        const category = document.querySelector('.category-filter').value;
+    // // 현재 필터 적용
+    // applyCurrentFilters() {
+    //     const year = document.querySelector('.year-filter').value;
+    //     const category = document.querySelector('.category-filter').value;
         
-        if (year !== 'all' || category !== 'all') {
-            this.filteredData = this.filteredData.filter(item => {
-                const yearMatch = year === 'all' || item.year === year;
-                const categoryMatch = category === 'all' || item.category === category;
-                return yearMatch && categoryMatch;
-            });
-        }
-    }
+    //     if (year !== 'all' || category !== 'all') {
+    //         this.filteredData = this.filteredData.filter(item => {
+    //             const yearMatch = year === 'all' || item.year === year;
+    //             const categoryMatch = category === 'all' || item.category === category;
+    //             return yearMatch && categoryMatch;
+    //         });
+    //     }
+    // }
 }
 
 // ===== 전역 변수 =====
@@ -511,15 +522,15 @@ window.initPressPage = initPressPage;
 
 .press-item {
     padding: 1.5rem;
-    border: 1px solid var(--border-light, #e5e5e5);
-    border-radius: 8px;
+    border-bottom: 1px solid var(--border-light, #e5e5e5);
+    /* border-radius: 8px; */
     margin-bottom: 1rem;
-    transition: box-shadow 0.3s ease;
+    /* transition: box-shadow 0.3s ease; */
 }
 
-.press-item:hover {
+/* .press-item:hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .press-meta {
     display: flex;
@@ -544,7 +555,7 @@ window.initPressPage = initPressPage;
 .press-title a {
     color: var(--text-primary, #333);
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: 600;
     line-height: 1.4;
 }

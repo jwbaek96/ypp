@@ -1,5 +1,9 @@
 /* ==========================================
-   U.S. Military Base Section Styles
+   Enhanced Business Sections Styles
+   ========================================== */
+
+/* ==========================================
+   1. U.S. Military Base Section Styles
    ========================================== */
 
 /* Military Stats Grid */
@@ -584,6 +588,951 @@
 
 .content-block:nth-child(3) {
     animation-delay: 0.4s;
+}
+
+/* ==========================================
+   2. Renewable Energy Section Styles
+   ========================================== */
+
+/* Renewable Energy Stats Grid */
+.renewable-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Target Markets */
+.target-markets {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    border-left: 4px solid #28a745;
+}
+
+.target-markets h4 {
+    color: #28a745;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.markets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.market-item {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.market-item:hover {
+    transform: translateY(-3px);
+}
+
+.market-flag {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.market-name {
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Projects Grid for Renewable */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.project-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.project-card.wind {
+    border-left: 4px solid #17a2b8;
+}
+
+.project-card.solar {
+    border-left: 4px solid #ffc107;
+}
+
+.project-card.hydrogen {
+    border-left: 4px solid #28a745;
+}
+
+.project-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.project-card.wind .project-icon {
+    color: #17a2b8;
+}
+
+.project-card.solar .project-icon {
+    color: #ffc107;
+}
+
+.project-card.hydrogen .project-icon {
+    color: #28a745;
+}
+
+.project-info h5 {
+    color: #343a40;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.project-name {
+    font-weight: 600;
+    color: #495057;
+}
+
+.project-capacity {
+    background: #e9ecef;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #6c757d;
+}
+
+/* Current Status Section */
+.current-status-section {
+    margin-top: 40px;
+}
+
+.status-title {
+    color: #495057;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-subtitle {
+    color: #6c757d;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+.status-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.status-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.status-card:hover {
+    transform: translateY(-3px);
+}
+
+.status-card.primary {
+    border-left: 4px solid #007bff;
+}
+
+.status-card.secondary {
+    border-left: 4px solid #6c757d;
+}
+
+.status-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.status-flag {
+    font-size: 2rem;
+}
+
+.status-icon {
+    font-size: 2rem;
+    color: #6c757d;
+}
+
+.status-header h5 {
+    color: #343a40;
+    margin: 0;
+    flex: 1;
+}
+
+.status-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #495057;
+}
+
+.detail-item i {
+    color: #6c757d;
+    width: 20px;
+}
+
+/* Value Chain */
+.value-chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+}
+
+.chain-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+}
+
+.chain-icon {
+    font-size: 2.5rem;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.chain-content h5 {
+    color: #495057;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.chain-content p {
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.chain-arrow {
+    font-size: 1.5rem;
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Enhanced Value Chain Design */
+.value-chain-intro {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #f8fffe 0%, #e8f7f5 100%);
+    border-radius: 12px;
+    border: 1px solid #d4edda;
+}
+
+.chain-description {
+    font-size: 1.1rem;
+    color: #495057;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 500;
+}
+
+.value-chain-enhanced {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 40px;
+}
+
+.chain-phase {
+    display: flex;
+    align-items: flex-start;
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.chain-phase:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.chain-phase.phase-1 {
+    border-left: 5px solid #007bff;
+}
+
+.chain-phase.phase-2 {
+    border-left: 5px solid #28a745;
+}
+
+.chain-phase.phase-3 {
+    border-left: 5px solid #ffc107;
+}
+
+.chain-phase.phase-4 {
+    border-left: 5px solid #fd7e14;
+}
+
+.chain-phase.phase-5 {
+    border-left: 5px solid #dc3545;
+}
+
+.chain-phase.phase-6 {
+    border-left: 5px solid #6f42c1;
+}
+
+.phase-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.phase-number {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.phase-title {
+    flex: 1;
+}
+
+.phase-title h4 {
+    color: #2c3e50;
+    margin: 0 0 5px 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.phase-subtitle {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.phase-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    width: 100%;
+}
+
+.phase-content .chain-icon {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #495057;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.chain-details {
+    flex: 1;
+}
+
+.chain-details h5 {
+    color: #2c3e50;
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.chain-details p {
+    color: #5a6c7d;
+    line-height: 1.6;
+    margin: 0 0 15px 0;
+}
+
+.detail-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.detail-list li {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.detail-list li::before {
+    content: "✓";
+    color: #28a745;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.chain-connector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    position: relative;
+}
+
+.connector-line {
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(to bottom, #dee2e6 0%, #adb5bd 50%, #dee2e6 100%);
+}
+
+.connector-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #28a745;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+/* Value Proposition */
+.value-proposition {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px;
+    border-radius: 16px;
+    margin-top: 40px;
+}
+
+.proposition-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.proposition-header h4 {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.proposition-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.proposition-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.proposition-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.prop-icon {
+    background: rgba(255, 255, 255, 0.2);
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.prop-content h5 {
+    color: white;
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.prop-content p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* ==========================================
+   3. Green Hydrogen Section Styles
+   ========================================== */
+
+/* Hydrogen Stats Grid */
+.hydrogen-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Technology Process */
+.technology-process {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-radius: 12px;
+    border-left: 4px solid #2196f3;
+}
+
+.technology-process h4 {
+    color: #1976d2;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.process-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+}
+
+.process-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    min-width: 100px;
+}
+
+.step-icon {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+}
+
+.step-name {
+    font-weight: 600;
+    color: #1976d2;
+    font-size: 0.9rem;
+}
+
+.process-arrow {
+    font-size: 1.5rem;
+    color: #1976d2;
+    font-weight: bold;
+}
+
+/* Domestic Projects for Hydrogen */
+.domestic-projects {
+    margin-top: 20px;
+}
+
+.project-location {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
+.location-name {
+    font-weight: 600;
+    color: #495057;
+}
+
+.project-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+}
+
+.project-status.completed {
+    color: #28a745;
+}
+
+.project-status.completed i {
+    color: #28a745;
+}
+
+.total-capacity {
+    margin-top: 15px;
+    padding: 10px;
+    background: #e8f5e8;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* Production Scale */
+.production-scale {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.scale-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.scale-icon {
+    font-size: 2rem;
+}
+
+.scale-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.scale-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #495057;
+}
+
+.scale-unit {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.status-badge.agreement {
+    background: #d4edda;
+    color: #155724;
+}
+
+.next-steps {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #495057;
+    font-style: italic;
+}
+
+/* Advantages Grid */
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.advantage-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.advantage-card:hover {
+    transform: translateY(-5px);
+}
+
+.advantage-icon {
+    font-size: 3rem;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.advantage-card h4 {
+    color: #343a40;
+    margin-bottom: 15px;
+}
+
+.advantage-card p {
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+/* Project Timeline */
+.project-timeline {
+    margin-top: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+}
+
+.timeline-title {
+    color: #495057;
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #dee2e6;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -22px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #dee2e6;
+    background: white;
+}
+
+.timeline-item.completed .timeline-marker {
+    background: #28a745;
+    border-color: #28a745;
+}
+
+.timeline-item.current .timeline-marker {
+    background: #007bff;
+    border-color: #007bff;
+}
+
+.timeline-item.future .timeline-marker {
+    background: #6c757d;
+    border-color: #6c757d;
+}
+
+.timeline-content h5 {
+    color: #343a40;
+    margin-bottom: 8px;
+}
+
+.timeline-content p {
+    color: #6c757d;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .renewable-stats-grid,
+    .hydrogen-stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+    }
+    
+    .value-chain {
+        flex-direction: column;
+    }
+    
+    .chain-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .process-flow {
+        flex-direction: column;
+    }
+    
+    .process-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .advantages-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .production-scale {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Enhanced Value Chain Mobile */
+    .chain-phase {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+    
+    .phase-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    
+    .phase-content {
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .phase-content .chain-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+        align-self: center;
+    }
+    
+    .phase-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .proposition-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .proposition-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .prop-icon {
+        align-self: center;
+    }
+    
+    .value-chain-intro {
+        padding: 20px;
+    }
+    
+    .chain-description {
+        font-size: 1rem;
+    }
+    
+    .value-proposition {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .phase-header {
+        gap: 10px;
+    }
+    
+    .phase-title h4 {
+        font-size: 1.2rem;
+    }
+    
+    .phase-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .chain-details h5 {
+        font-size: 1.1rem;
+    }
+    
+    .chain-details p {
+        font-size: 0.9rem;
+    }
+    
+    .detail-list li {
+        font-size: 0.85rem;
+    }
+    
+    .proposition-header h4 {
+        font-size: 1.3rem;
+    }
+    
+    .prop-content h5 {
+        font-size: 1rem;
+    }
+    
+    .prop-content p {
+        font-size: 0.85rem;
+    }
 }
 
 .content-block:nth-child(4) {

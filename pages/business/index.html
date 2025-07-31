@@ -50,27 +50,18 @@
         }
         /* tab-nav 스크롤화(영문이 너무 김) */
         .tab-nav{
-            flex-wrap: wrap;
+            /* flex-wrap: wrap; */
             /* justify-content:flex-start; */
             /* overflow-x: scroll; */
         }
         .tab-link{
-            font-size: .9rem;
-            padding: 1rem 1.5rem;
+            /* font-size: .9rem;
+            padding: 1rem 1.5rem; */
             /* justify-content:flex-start; */
             /* overflow-x: scroll; */
         }
-        @media (max-width: 768px) {
-            .tab-nav {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-            }
-            .tab-link {
-                flex: 0 0 auto;
-                padding: 0.8rem 1rem;
-            }
-            
-        }
+        
+
     </style>
 </head>
 <body>
@@ -115,10 +106,10 @@
         <section class="tab-navigation">
             <div class="container">
                 <nav class="tab-nav">
-                    <a href="#nuclear-power" class="tab-link" data-tab="nuclear-power"
+                    <a href="#nuclear-power" class="tab-link active" data-tab="nuclear-power"
                         data-eng="Nuclear Power Plant"
                         data-kor="원자력발전소">원자력발전소</a>
-                    <a href="#thermal-power" class="tab-link active" data-tab="thermal-power"
+                    <a href="#thermal-power" class="tab-link" data-tab="thermal-power"
                         data-eng="Thermal Power Plant"
                         data-kor="화력발전소">화력발전소</a>
                     <a href="#renewable-energy" class="tab-link" data-tab="renewable-energy"
@@ -145,7 +136,7 @@
                 </nav>
                 
                 <!-- Section Navigation for 화력발전소 -->
-                <div class="section-nav" id="section-nav-thermal-power">
+                <div class="section-nav" id="section-nav-thermal-power" style="display: none;">
                     <a href="#thermal-overview" class="section-nav-link"
                     data-eng="Overview"
                     data-kor="화력발전소 개요">화력발전소 개요</a>
@@ -161,7 +152,7 @@
                 </div>
                 
                 <!-- Section Navigation for 원자력발전소 -->
-                <div class="section-nav" id="section-nav-nuclear-power" style="display: none;">
+                <div class="section-nav" id="section-nav-nuclear-power">
                     <a href="#nuclear-overview" class="section-nav-link"
                     data-eng="Overview"
                     data-kor="원자력발전소 개요">원자력발전소 개요</a>
@@ -179,17 +170,17 @@
                 <!-- Section Navigation for 신재생에너지 -->
                 <div class="section-nav" id="section-nav-renewable-energy" style="display: none;">
                     <a href="#renewable-solar" class="section-nav-link"
-                       data-eng="Solar Power"
-                       data-kor="태양광">태양광</a>
+                       data-eng="Overview"
+                       data-kor="개요"></a>
                     <a href="#renewable-wind" class="section-nav-link"
-                       data-eng="Wind Power"
-                       data-kor="풍력">풍력</a>
+                       data-eng="Business Capabilities & Competitiveness"
+                       data-kor="사업역량 및 경쟁력">사업역량 및 경쟁력</a>
                     <a href="#renewable-ess" class="section-nav-link"
-                       data-eng="ESS"
-                       data-kor="ESS">ESS</a>
+                       data-eng="Project Status"
+                       data-kor="프로젝트 현황"></a>
                     <a href="#renewable-projects" class="section-nav-link"
-                       data-eng="Major Projects"
-                       data-kor="주요 프로젝트">주요 프로젝트</a>
+                       data-eng="Value Chain Solutions"
+                       data-kor="밸류체인 솔루션"></a>
                 </div>
                 
                 <!-- Section Navigation for 그린수소/암모니아 -->
@@ -294,7 +285,7 @@
         <section class="tab-content-section">
             <div class="container">
                 <!-- 화력발전소 -->
-                <div id="thermal-power" class="tab-content active">
+                <div id="thermal-power" class="tab-content">
                     <div class="content-header">
                         <h2 class="content-title"
                             data-eng="Thermal Power Plant"
@@ -352,7 +343,7 @@
                 </div>
 
                 <!-- 원자력발전소 -->
-                <div id="nuclear-power" class="tab-content">
+                <div id="nuclear-power" class="tab-content active">
                     <div class="content-header">
                         <h2 class="content-title"
                             data-eng="Nuclear Power Plant"
@@ -416,52 +407,601 @@
                             data-eng="Renewable Energy"
                             data-kor="신재생에너지">신재생에너지</h2>
                         <p class="content-subtitle"
-                            data-eng=""
-                            data-kor="Renewable Energy">Renewable Energy</p>
+                            data-eng="Complete Renewable Energy Solutions from Development to O&M"
+                            data-kor="개발부터 운영까지 통합 신재생에너지 솔루션">개발부터 운영까지 통합 신재생에너지 솔루션</p>
                     </div>
                     
                     <div class="content-grid">
                         <div id="renewable-solar" class="content-block full-width">
                             <h3 class="block-title"
-                                data-eng="Solar Power"
-                                data-kor="태양광">태양광</h3>
+                                data-eng="Overview"
+                                data-kor="개요">
+                                <i class="fas fa-solar-panel"></i> 개요
+                            </h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">태양광 콘텐츠 영역</p>
+                                <!-- Stats Overview -->
+                                <div class="renewable-stats-grid">
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <span class="stat-number" 
+                                                data-eng="43"
+                                                data-kor="43">43</span>
+                                            <span class="stat-label"
+                                                data-eng="Years Experience"
+                                                data-kor="년간 경험">년간 경험</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-globe-asia"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <span class="stat-number"
+                                                data-eng="3"
+                                                data-kor="3">3</span>
+                                            <span class="stat-label"
+                                                data-eng="Target Regions"
+                                                data-kor="타겟 지역">타겟 지역</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-wind"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <span class="stat-number"
+                                                data-eng="1,000"
+                                                data-kor="1,000">1,000</span>
+                                            <span class="stat-label"
+                                                data-eng="MW Wind (Kazakhstan)"
+                                                data-kor="MW 풍력(카자흐스탄)">MW 풍력</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-sun"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <span class="stat-number"
+                                                data-eng="600"
+                                                data-kor="600">600</span>
+                                            <span class="stat-label"
+                                                data-eng="MW Solar (Kazakhstan)"
+                                                data-kor="MW 태양광(카자흐스탄)">MW 태양광</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="renewable-description">
+                                    <div class="description-content">
+                                        <p
+                                        data-eng="Our company targets overseas markets (Central Asia, Southeast Asia, Middle East) focusing on renewable energy power plants such as solar, wind, and small hydropower, offering solutions covering the entire value chain from initial development stages, PPA acquisition, investment/financial attraction, equipment procurement, EPC procurement, to O&M."
+                                        data-kor="당사가 집중하고 있는 해외시장(중앙아시아, 동남아, 중동)을 타겟으로 태양광, 풍력, 소수력 등 신재생에너지 발전플랜트를 초기 개발단계에서부터 시작하여 PPA 확보, 투자/금융유치, 기자재조달, EPC 조달, O&M까지 전 벨류체인에 대한 솔루션을 제공합니다.">당사가 집중하고 있는 해외시장(중앙아시아, 동남아, 중동)을 타겟으로 태양광, 풍력, 소수력 등 신재생에너지 발전플랜트를 초기 개발단계에서부터 시작하여 PPA 확보, 투자/금융유치, 기자재조달, EPC 조달, O&M까지 전 벨류체인에 대한 솔루션을 제공합니다.</p>
+                                    </div>
+                                    
+                                    <!-- Target Markets -->
+                                    <div class="target-markets">
+                                        <h4
+                                        data-eng="Target Markets"
+                                        data-kor="타겟 시장">🌍 타겟 시장</h4>
+                                        <div class="markets-grid">
+                                            <div class="market-item">
+                                                <div class="market-flag">🇰🇿</div>
+                                                <div class="market-name"
+                                                    data-eng="Central Asia"
+                                                    data-kor="중앙아시아">중앙아시아</div>
+                                            </div>
+                                            <div class="market-item">
+                                                <div class="market-flag">🌏</div>
+                                                <div class="market-name"
+                                                    data-eng="Southeast Asia"
+                                                    data-kor="동남아시아">동남아시아</div>
+                                            </div>
+                                            <div class="market-item">
+                                                <div class="market-flag">🕌</div>
+                                                <div class="market-name"
+                                                    data-eng="Middle East"
+                                                    data-kor="중동">중동</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <div id="renewable-wind" class="content-block full-width">
                             <h3 class="block-title"
-                                data-eng="Wind Power"
-                                data-kor="풍력">풍력</h3>
+                                data-eng="Business Capabilities & Competitiveness"
+                                data-kor="사업역량 및 경쟁력">
+                                <i class="fas fa-cogs"></i> 사업역량 및 경쟁력
+                            </h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">풍력 콘텐츠 영역</p>
+                                <div class="capabilities-grid">
+                                    <!-- Expertise & Network -->
+                                    <div class="capability-card">
+                                        <div class="capability-header">
+                                            <div class="capability-icon">
+                                                <i class="fas fa-network-wired"></i>
+                                            </div>
+                                            <span
+                                            data-eng="43-Year Industry Expertise"
+                                            data-kor="43년간 축적된 전문성">43년간 축적된 전문성</span>
+                                        </div>
+                                        <div class="capability-content">
+                                            <p
+                                            data-eng="Leveraging 43 years of accumulated experience, technology, equipment sourcing capabilities, and government network in the power market"
+                                            data-kor="발전시장에서 43년간 쌓아온 경험, 기술, 기자재소싱력 및 對 정부 네트워크를 활용">발전시장에서 43년간 쌓아온 경험, 기술, 기자재소싱력 및 對 정부 네트워크를 활용</p>
+                                            <ul>
+                                                <li data-eng="Advanced power generation technology" data-kor="선진 발전 기술력">• 선진 발전 기술력</li>
+                                                <li data-eng="Global equipment sourcing network" data-kor="글로벌 기자재 소싱 네트워크">• 글로벌 기자재 소싱 네트워크</li>
+                                                <li data-eng="Strong government relationships" data-kor="강력한 정부 관계">• 강력한 정부 관계</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Strategic Partnerships -->
+                                    <div class="capability-card">
+                                        <div class="capability-header">
+                                            <div class="capability-icon">
+                                                <i class="fas fa-handshake"></i>
+                                            </div>
+                                            <span
+                                            data-eng="Strategic Equipment Partnerships"
+                                            data-kor="전략적 기자재 파트너십">전략적 기자재 파트너십</span>
+                                        </div>
+                                        <div class="capability-content">
+                                            <p
+                                            data-eng="Strategic partnerships with photovoltaic/wind equipment suppliers based on Kazakhstan Green Hydrogen Complex projects, securing competitive EPC pricing"
+                                            data-kor="카자흐스탄 그린수소 Complex 프로젝트를 기반으로 태양광/풍력 기자재 공급선과 전략적 제휴를 통해 EPC 가격경쟁력 확보">카자흐스탄 그린수소 Complex 프로젝트를 기반으로 태양광/풍력 기자재 공급선과 전략적 제휴를 통해 EPC 가격경쟁력 확보</p>
+                                            <div class="partnership-badges">
+                                                <span class="badge"
+                                                data-eng="1,000MW Wind"
+                                                data-kor="풍력 1,000MW">풍력 1,000MW</span>
+                                                <span class="badge"
+                                                data-eng="600MW Solar"
+                                                data-kor="태양광 600MW">태양광 600MW</span>
+                                                <span class="badge"
+                                                data-eng="Phase 2/3 Planned"
+                                                data-kor="2/3차 계획">2/3차 계획</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Market Access -->
+                                    <div class="capability-card">
+                                        <div class="capability-header">
+                                            <div class="capability-icon">
+                                                <i class="fas fa-globe"></i>
+                                            </div>
+                                            <span
+                                            data-eng="Market Access & Local Partnerships"
+                                            data-kor="시장 접근 및 로컬 파트너십">시장 접근 및 로컬 파트너십</span>
+                                        </div>
+                                        <div class="capability-content">
+                                            <p
+                                            data-eng="Collaborations with key local partners in target markets to directly participate in PPA bidding or provide competitive solutions to local operators"
+                                            data-kor="타겟 시장 내 핵심 로컬파트너와 제휴하여 직접 PPA 입찰에 참여하거나 PPA를 보유한 로컬사업자들을 대상으로 경쟁력 있는 솔루션 제공">타겟 시장 내 핵심 로컬파트너와 제휴하여 직접 PPA 입찰에 참여하거나 PPA를 보유한 로컬사업자들을 대상으로 경쟁력 있는 솔루션 제공</p>
+                                            <ul>
+                                                <li data-eng="Direct PPA bidding participation" data-kor="직접 PPA 입찰 참여">• 직접 PPA 입찰 참여</li>
+                                                <li data-eng="Support for PPA holders" data-kor="PPA 보유자 지원">• PPA 보유자 지원</li>
+                                                <li data-eng="Competitive solution provision" data-kor="경쟁력 있는 솔루션 제공">• 경쟁력 있는 솔루션 제공</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <div id="renewable-ess" class="content-block full-width">
                             <h3 class="block-title"
-                                data-eng="ESS"
-                                data-kor="ESS">ESS</h3>
+                                data-eng="Project Status"
+                                data-kor="프로젝트 현황">
+                                <i class="fas fa-chart-line"></i> 프로젝트 현황
+                            </h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">ESS 콘텐츠 영역</p>
+                                <!-- Achievements Section -->
+                                <div class="achievements-section">
+                                    <h4 class="achievements-title">
+                                        <i class="fas fa-trophy"></i>
+                                        <span
+                                        data-eng="Domestic Achievements"
+                                        data-kor="국내 추진실적">국내 추진실적</span>
+                                    </h4>
+                                    <p class="achievements-subtitle"
+                                    data-eng="Participation in MW-level power plants in the domestic market"
+                                    data-kor="국내시장을 대상으로 MW급 발전단지에 사업 참여">국내시장을 대상으로 MW급 발전단지에 사업 참여</p>
+                                    
+                                    <div class="projects-grid">
+                                        <div class="project-card wind">
+                                            <div class="project-icon">
+                                                <i class="fas fa-wind"></i>
+                                            </div>
+                                            <div class="project-info">
+                                                <h5
+                                                data-eng="Wind Power Projects"
+                                                data-kor="풍력 프로젝트">풍력 프로젝트</h5>
+                                                <div class="project-list">
+                                                    <div class="project-item">
+                                                        <span class="project-name"
+                                                        data-eng="Hwasun"
+                                                        data-kor="화순">화순</span>
+                                                        <span class="project-capacity">4MW</span>
+                                                    </div>
+                                                    <div class="project-item">
+                                                        <span class="project-name"
+                                                        data-eng="Yeongheung"
+                                                        data-kor="영흥">영흥</span>
+                                                        <span class="project-capacity">13MW</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="project-card solar">
+                                            <div class="project-icon">
+                                                <i class="fas fa-sun"></i>
+                                            </div>
+                                            <div class="project-info">
+                                                <h5
+                                                data-eng="Solar Power Projects"
+                                                data-kor="태양광 프로젝트">태양광 프로젝트</h5>
+                                                <div class="project-list">
+                                                    <div class="project-item">
+                                                        <span class="project-name"
+                                                        data-eng="Jeju"
+                                                        data-kor="제주">제주</span>
+                                                        <span class="project-capacity">3MW</span>
+                                                    </div>
+                                                    <div class="project-item">
+                                                        <span class="project-name"
+                                                        data-eng="Shinboryeong"
+                                                        data-kor="신보령">신보령</span>
+                                                        <span class="project-capacity">7MW</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Current Status Section -->
+                                <div class="current-status-section">
+                                    <h4 class="status-title">
+                                        <i class="fas fa-rocket"></i>
+                                        <span
+                                        data-eng="Current Development Status"
+                                        data-kor="현재 추진현황">현재 추진현황</span>
+                                    </h4>
+                                    <p class="status-subtitle"
+                                    data-eng="Business development and preparation centered on overseas target markets, including Kazakhstan"
+                                    data-kor="카자흐스탄을 비롯 해외 타겟 시장 중심의 사업 추진 및 준비 중">카자흐스탄을 비롯 해외 타겟 시장 중심의 사업 추진 및 준비 중</p>
+
+                                    <div class="status-cards">
+                                        <div class="status-card primary">
+                                            <div class="status-header">
+                                                <!-- <div class="status-flag">🇰🇿</div> -->
+                                                <h5
+                                                data-eng="Kazakhstan Project"
+                                                data-kor="카자흐스탄 프로젝트">카자흐스탄 프로젝트</h5>
+                                            </div>
+                                            <div class="status-details">
+                                                <div class="detail-item">
+                                                    <i class="fas fa-wind"></i>
+                                                    <span
+                                                    data-eng="Wind: 1,000MW in progress"
+                                                    data-kor="풍력: 1,000MW 추진 중">풍력: 1,000MW 추진 중</span>
+                                                </div>
+                                                <div class="detail-item">
+                                                    <i class="fas fa-sun"></i>
+                                                    <span
+                                                    data-eng="Solar: 600MW in progress"
+                                                    data-kor="태양광: 600MW 추진 중">태양광: 600MW 추진 중</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="status-card secondary">
+                                            <div class="status-header">
+                                                <div class="status-icon">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                </div>
+                                                <h5
+                                                data-eng="Expansion Projects"
+                                                data-kor="확장 프로젝트">확장 프로젝트</h5>
+                                            </div>
+                                            <div class="status-details">
+                                                <div class="detail-item">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    <span
+                                                    data-eng="Additional Kazakhstan projects in preparation"
+                                                    data-kor="카자흐스탄 내 추가 사업 준비 중">카자흐스탄 내 추가 사업 준비 중</span>
+                                                </div>
+                                                <div class="detail-item">
+                                                    <i class="fas fa-globe"></i>
+                                                    <span
+                                                    data-eng="Neighboring countries projects in preparation"
+                                                    data-kor="인근 국가 사업 준비 중">인근 국가 사업 준비 중</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <div id="renewable-projects" class="content-block full-width">
                             <h3 class="block-title"
-                                data-eng="Major Projects"
-                                data-kor="주요 프로젝트">주요 프로젝트</h3>
+                                data-eng="Value Chain Solutions"
+                                data-kor="밸류체인 솔루션">
+                                <i class="fas fa-link"></i> 밸류체인 솔루션
+                            </h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">주요 프로젝트 콘텐츠 영역</p>
+                                <div class="value-chain-intro">
+                                    <p class="chain-description"
+                                    data-eng="We provide comprehensive solutions covering the entire renewable energy project lifecycle from initial development to long-term operation and maintenance."
+                                    data-kor="초기 개발부터 장기 운영 및 유지보수까지 신재생에너지 프로젝트 전 생애주기를 포괄하는 통합 솔루션을 제공합니다.">초기 개발부터 장기 운영 및 유지보수까지 신재생에너지 프로젝트 전 생애주기를 포괄하는 통합 솔루션을 제공합니다.</p>
+                                </div>
+                                
+                                <div class="value-chain-enhanced">
+                                    <!-- Development Phase -->
+                                    <div class="chain-phase phase-1">
+                                        <div class="phase-header">
+                                            <div class="phase-number">01</div>
+                                            <div class="phase-title">
+                                                <h4
+                                                data-eng="Development"
+                                                data-kor="개발 단계">개발 단계</h4>
+                                                <span class="phase-subtitle"
+                                                data-eng="Project Initiation"
+                                                data-kor="프로젝트 기획">프로젝트 기획</span>
+                                            </div>
+                                        </div>
+                                        <div class="phase-content">
+                                            <div class="chain-details">
+                                                <h5
+                                                data-eng="Initial Development"
+                                                data-kor="초기 개발">초기 개발</h5>
+                                                <p
+                                                data-eng="Site assessment, feasibility studies, regulatory approvals, and environmental impact analysis"
+                                                data-kor="부지 평가, 타당성 조사, 규제 승인, 환경 영향 분석">부지 평가, 타당성 조사, 규제 승인, 환경 영향 분석</p>
+                                                <ul class="detail-list">
+                                                    <li data-eng="Site selection & assessment" data-kor="부지 선정 및 평가">부지 선정 및 평가</li>
+                                                    <li data-eng="Feasibility studies" data-kor="타당성 조사">타당성 조사</li>
+                                                    <li data-eng="Regulatory compliance" data-kor="규제 준수">규제 준수</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="chain-connector">
+                                        <div class="connector-line"></div>
+                                        <div class="connector-dot"></div>
+                                    </div>
+
+                                    <!-- PPA Phase -->
+                                    <div class="chain-phase phase-2">
+                                        <div class="phase-header">
+                                            <div class="phase-number">02</div>
+                                            <div class="phase-title">
+                                                <h4
+                                                data-eng="PPA Acquisition"
+                                                data-kor="PPA 확보">PPA 확보</h4>
+                                                <span class="phase-subtitle"
+                                                data-eng="Contract Securing"
+                                                data-kor="계약 확보">계약 확보</span>
+                                            </div>
+                                        </div>
+                                        <div class="phase-content">
+                                            <div class="chain-details">
+                                                <h5
+                                                data-eng="Power Purchase Agreement"
+                                                data-kor="전력구매계약">전력구매계약</h5>
+                                                <p
+                                                data-eng="Long-term power purchase agreements negotiation and strategic partnership establishment"
+                                                data-kor="장기 전력구매계약 협상 및 전략적 파트너십 구축">장기 전력구매계약 협상 및 전략적 파트너십 구축</p>
+                                                <ul class="detail-list">
+                                                    <li data-eng="Contract negotiation" data-kor="계약 협상">계약 협상</li>
+                                                    <li data-eng="Risk management" data-kor="리스크 관리">리스크 관리</li>
+                                                    <li data-eng="Strategic partnerships" data-kor="전략적 파트너십">전략적 파트너십</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="chain-connector">
+                                        <div class="connector-line"></div>
+                                        <div class="connector-dot"></div>
+                                    </div>
+
+                                    <!-- Financing Phase -->
+                                    <div class="chain-phase phase-3">
+                                        <div class="phase-header">
+                                            <div class="phase-number">03</div>
+                                            <div class="phase-title">
+                                                <h4
+                                                data-eng="Investment & Financing"
+                                                data-kor="투자 및 금융">투자 및 금융</h4>
+                                                <span class="phase-subtitle"
+                                                data-eng="Financial Structuring"
+                                                data-kor="금융 구조화">금융 구조화</span>
+                                            </div>
+                                        </div>
+                                        <div class="phase-content">
+                                            <div class="chain-details">
+                                                <h5
+                                                data-eng="Capital Mobilization"
+                                                data-kor="자본 조달">자본 조달</h5>
+                                                <p
+                                                data-eng="Financial modeling, investor relations, and capital structure optimization"
+                                                data-kor="금융 모델링, 투자자 관계 구축, 자본 구조 최적화">금융 모델링, 투자자 관계 구축, 자본 구조 최적화</p>
+                                                <ul class="detail-list">
+                                                    <li data-eng="Financial modeling" data-kor="금융 모델링">금융 모델링</li>
+                                                    <li data-eng="Investor attraction" data-kor="투자자 유치">투자자 유치</li>
+                                                    <li data-eng="Capital optimization" data-kor="자본 최적화">자본 최적화</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="chain-connector">
+                                        <div class="connector-line"></div>
+                                        <div class="connector-dot"></div>
+                                    </div>
+
+                                    <!-- Procurement Phase -->
+                                    <div class="chain-phase phase-4">
+                                        <div class="phase-header">
+                                            <div class="phase-number">04</div>
+                                            <div class="phase-title">
+                                                <h4
+                                                data-eng="Equipment Procurement"
+                                                data-kor="기자재 조달">기자재 조달</h4>
+                                                <span class="phase-subtitle"
+                                                data-eng="Supply Chain"
+                                                data-kor="공급망 관리">공급망 관리</span>
+                                            </div>
+                                        </div>
+                                        <div class="phase-content">
+                                            <div class="chain-details">
+                                                <h5
+                                                data-eng="Strategic Sourcing"
+                                                data-kor="전략적 소싱">전략적 소싱</h5>
+                                                <p
+                                                data-eng="Global equipment sourcing, vendor management, and quality assurance"
+                                                data-kor="글로벌 기자재 소싱, 공급업체 관리, 품질 보증">글로벌 기자재 소싱, 공급업체 관리, 품질 보증</p>
+                                                <ul class="detail-list">
+                                                    <li data-eng="Global sourcing network" data-kor="글로벌 소싱 네트워크">글로벌 소싱 네트워크</li>
+                                                    <li data-eng="Quality control" data-kor="품질 관리">품질 관리</li>
+                                                    <li data-eng="Cost optimization" data-kor="비용 최적화">비용 최적화</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="chain-connector">
+                                        <div class="connector-line"></div>
+                                        <div class="connector-dot"></div>
+                                    </div>
+
+                                    <!-- EPC Phase -->
+                                    <div class="chain-phase phase-5">
+                                        <div class="phase-header">
+                                            <div class="phase-number">05</div>
+                                            <div class="phase-title">
+                                                <h4
+                                                data-eng="EPC Execution"
+                                                data-kor="EPC 실행">EPC 실행</h4>
+                                                <span class="phase-subtitle"
+                                                data-eng="Construction"
+                                                data-kor="건설 단계">건설 단계</span>
+                                            </div>
+                                        </div>
+                                        <div class="phase-content">
+                                            <div class="chain-details">
+                                                <h5
+                                                data-eng="Project Execution"
+                                                data-kor="프로젝트 실행">프로젝트 실행</h5>
+                                                <p
+                                                data-eng="Engineering design, construction management, and commissioning"
+                                                data-kor="엔지니어링 설계, 건설 관리, 시운전">엔지니어링 설계, 건설 관리, 시운전</p>
+                                                <ul class="detail-list">
+                                                    <li data-eng="Engineering & design" data-kor="엔지니어링 및 설계">엔지니어링 및 설계</li>
+                                                    <li data-eng="Construction management" data-kor="건설 관리">건설 관리</li>
+                                                    <li data-eng="Quality assurance" data-kor="품질 보증">품질 보증</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="chain-connector">
+                                        <div class="connector-line"></div>
+                                        <div class="connector-dot"></div>
+                                    </div>
+
+                                    <!-- O&M Phase -->
+                                    <div class="chain-phase phase-6">
+                                        <div class="phase-header">
+                                            <div class="phase-number">06</div>
+                                            <div class="phase-title">
+                                                <h4
+                                                data-eng="O&M Services"
+                                                data-kor="운영 및 유지보수">운영 및 유지보수</h4>
+                                                <span class="phase-subtitle"
+                                                data-eng="Long-term Operations"
+                                                data-kor="장기 운영">장기 운영</span>
+                                            </div>
+                                        </div>
+                                        <div class="phase-content">
+                                            <div class="chain-details">
+                                                <h5
+                                                data-eng="Operational Excellence"
+                                                data-kor="운영 우수성">운영 우수성</h5>
+                                                <p
+                                                data-eng="Performance monitoring, predictive maintenance, and optimization services"
+                                                data-kor="성능 모니터링, 예측 정비, 최적화 서비스">성능 모니터링, 예측 정비, 최적화 서비스</p>
+                                                <ul class="detail-list">
+                                                    <li data-eng="Performance monitoring" data-kor="성능 모니터링">성능 모니터링</li>
+                                                    <li data-eng="Predictive maintenance" data-kor="예측 정비">예측 정비</li>
+                                                    <li data-eng="Performance optimization" data-kor="성능 최적화">성능 최적화</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Value Proposition -->
+                                <div class="value-proposition">
+                                    <div class="proposition-header">
+                                        <h4
+                                        data-eng="Our Value Proposition"
+                                        data-kor="우리의 가치 제안">우리의 가치 제안</h4>
+                                    </div>
+                                    <div class="proposition-grid">
+                                        <div class="proposition-item">
+                                            <div class="prop-icon">
+                                                <i class="fas fa-handshake"></i>
+                                            </div>
+                                            <div class="prop-content">
+                                                <h5
+                                                data-eng="Single Point of Contact"
+                                                data-kor="원스톱 서비스">원스톱 서비스</h5>
+                                                <p
+                                                data-eng="Complete project lifecycle management through a single, experienced partner"
+                                                data-kor="숙련된 단일 파트너를 통한 완전한 프로젝트 생애주기 관리">숙련된 단일 파트너를 통한 완전한 프로젝트 생애주기 관리</p>
+                                            </div>
+                                        </div>
+                                        <div class="proposition-item">
+                                            <div class="prop-icon">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                            <div class="prop-content">
+                                                <h5
+                                                data-eng="Accelerated Timeline"
+                                                data-kor="신속한 프로젝트 진행">신속한 프로젝트 진행</h5>
+                                                <p
+                                                data-eng="Reduced project delivery time through integrated approach and proven processes"
+                                                data-kor="통합 접근법과 입증된 프로세스를 통한 프로젝트 납기 단축">통합 접근법과 입증된 프로세스를 통한 프로젝트 납기 단축</p>
+                                            </div>
+                                        </div>
+                                        <div class="proposition-item">
+                                            <div class="prop-icon">
+                                                <i class="fas fa-shield-alt"></i>
+                                            </div>
+                                            <div class="prop-content">
+                                                <h5
+                                                data-eng="Risk Mitigation"
+                                                data-kor="리스크 완화">리스크 완화</h5>
+                                                <p
+                                                data-eng="Comprehensive risk management across all project phases and stakeholders"
+                                                data-kor="모든 프로젝트 단계와 이해관계자에 대한 포괄적 리스크 관리">모든 프로젝트 단계와 이해관계자에 대한 포괄적 리스크 관리</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -474,52 +1014,479 @@
                             data-eng="Green Hydrogen & Ammonia"
                             data-kor="그린수소/암모니아">그린수소/암모니아</h2>
                         <p class="content-subtitle"
-                            data-eng=""
-                            data-kor="Green Hydrogen & Ammonia">Green Hydrogen & Ammonia</p>
+                            data-eng="Commercial-Scale Green Hydrogen & Ammonia Plant Development"
+                            data-kor="상업 규모 그린수소 및 그린암모니아 플랜트 개발">상업 규모 그린수소 및 그린암모니아 플랜트 개발</p>
                     </div>
                     
                     <div class="content-grid">
                         <div id="hydrogen-green" class="content-block full-width">
                             <h3 class="block-title"
-                                data-eng="Green Hydrogen"
-                                data-kor="그린수소">그린수소</h3>
+                                data-eng="Overview"
+                                data-kor="개요">
+                                <i class="fas fa-flask"></i> 개요
+                            </h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">그린수소 콘텐츠 영역</p>
+                                <!-- Stats Overview -->
+                                <div class="hydrogen-stats-grid">
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-industry"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <span class="stat-number" 
+                                                data-eng="75,000"
+                                                data-kor="75,000">75,000</span>
+                                            <span class="stat-label"
+                                                data-eng="Tons Green Hydrogen"
+                                                data-kor="톤 그린수소">톤 그린수소</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-atom"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <span class="stat-number"
+                                                data-eng="310,000"
+                                                data-kor="310,000">310,000</span>
+                                            <span class="stat-label"
+                                                data-eng="Tons Green Ammonia"
+                                                data-kor="톤 그린암모니아">톤 그린암모니아</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-calendar-check"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <span class="stat-number"
+                                                data-eng="2025.7"
+                                                data-kor="2025.7">2025.7</span>
+                                            <span class="stat-label"
+                                                data-eng="Government Agreement"
+                                                data-kor="정부 협약 체결">정부 협약 체결</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <span class="stat-number"
+                                                data-eng="4.25"
+                                                data-kor="4.25">4.25</span>
+                                            <span class="stat-label"
+                                                data-eng="MW Domestic Projects"
+                                                data-kor="MW 국내 프로젝트">MW 국내 프로젝트</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="hydrogen-description">
+                                    <div class="description-content">
+                                        <p
+                                        data-eng="Based on domestic small-scale green hydrogen project accomplishments and experience, pursuing commercial-scale green hydrogen and green ammonia plant construction and production projects overseas."
+                                        data-kor="국내의 소규모 그린수소 사업 추진 실적과 경험을 바탕으로 해외에 Commercial 규모의 그린수소 및 그린 암모니아 플랜트 건설 및 생산사업을 추진합니다.">국내의 소규모 그린수소 사업 추진 실적과 경험을 바탕으로 해외에 Commercial 규모의 그린수소 및 그린 암모니아 플랜트 건설 및 생산사업을 추진합니다.</p>
+                                        
+                                        <p
+                                        data-eng="With the Korean clean hydrogen market officially opening in 2024, leveraging long-standing energy business experience and Kazakhstan's excellent renewable energy resources (wind, solar) essential for competitive green hydrogen production, we selected Kazakhstan as our primary project country and have been preparing accordingly."
+                                        data-kor="2024년 한국에 청정수소 시장이 본격적으로 오픈된 것을 계기로 당사가 오랫동안 에너지 사업 경험이 있고, 그린수소 생산 경쟁력에 필수 요소인 신재생 에너지원(바람, 태양)이 우수한 카자흐스탄을 1차 사업 대상 국가로 선정 후 그동안 사업을 준비해왔습니다.">2024년 한국에 청정수소 시장이 본격적으로 오픈된 것을 계기로 당사가 오랫동안 에너지 사업 경험이 있고, 그린수소 생산 경쟁력에 필수 요소인 신재생 에너지원(바람, 태양)이 우수한 카자흐스탄을 1차 사업 대상 국가로 선정 후 그동안 사업을 준비해왔습니다.</p>
+                                    </div>
+                                    
+                                    <!-- Technology Process -->
+                                    <div class="technology-process">
+                                        <h4
+                                        data-eng="Green Hydrogen Production Process"
+                                        data-kor="그린수소 생산 프로세스">⚡ 그린수소 생산 프로세스</h4>
+                                        <div class="process-flow">
+                                            <div class="process-step">
+                                                <div class="step-icon">🌞</div>
+                                                <div class="step-name"
+                                                data-eng="Renewable Energy"
+                                                data-kor="신재생에너지">신재생에너지</div>
+                                            </div>
+                                            <div class="process-arrow">→</div>
+                                            <div class="process-step">
+                                                <div class="step-icon">💧</div>
+                                                <div class="step-name"
+                                                data-eng="Water Electrolysis"
+                                                data-kor="수전해">수전해</div>
+                                            </div>
+                                            <div class="process-arrow">→</div>
+                                            <div class="process-step">
+                                                <div class="step-icon">🟢</div>
+                                                <div class="step-name"
+                                                data-eng="Green Hydrogen"
+                                                data-kor="그린수소">그린수소</div>
+                                            </div>
+                                            <div class="process-arrow">→</div>
+                                            <div class="process-step">
+                                                <div class="step-icon">🔵</div>
+                                                <div class="step-name"
+                                                data-eng="Green Ammonia"
+                                                data-kor="그린암모니아">그린암모니아</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <div id="hydrogen-ammonia" class="content-block full-width">
                             <h3 class="block-title"
-                                data-eng="Ammonia"
-                                data-kor="암모니아">암모니아</h3>
+                                data-eng="Business Capabilities & Competitiveness"
+                                data-kor="사업역량 및 경쟁력">
+                                <i class="fas fa-cogs"></i> 사업역량 및 경쟁력
+                            </h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">암모니아 콘텐츠 영역</p>
+                                <div class="capabilities-grid">
+                                    <!-- Technology Solutions -->
+                                    <div class="capability-card">
+                                        <div class="capability-header">
+                                            <div class="capability-icon">
+                                                <i class="fas fa-microchip"></i>
+                                            </div>
+                                            <span
+                                            data-eng="Comprehensive Technology Solutions"
+                                            data-kor="포괄적 기술 솔루션">포괄적 기술 솔루션</span>
+                                        </div>
+                                        <div class="capability-content">
+                                            <p
+                                            data-eng="Comprehensive technological solutions from water electrolysis systems (AEC/PEM) to power control and operation systems (BOP)"
+                                            data-kor="수전해설비(AEC/PEM)부터 전력제어, 운영시스템(BOP)까지 포괄하는 기술솔루션 역량">수전해설비(AEC/PEM)부터 전력제어, 운영시스템(BOP)까지 포괄하는 기술솔루션 역량</p>
+                                            <ul>
+                                                <li data-eng="AEC/PEM Electrolysis Systems" data-kor="AEC/PEM 수전해 시스템">• AEC/PEM 수전해 시스템</li>
+                                                <li data-eng="Power Control Systems" data-kor="전력 제어 시스템">• 전력 제어 시스템</li>
+                                                <li data-eng="BOP Operation Systems" data-kor="BOP 운영 시스템">• BOP 운영 시스템</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Government Network -->
+                                    <div class="capability-card">
+                                        <div class="capability-header">
+                                            <div class="capability-icon">
+                                                <i class="fas fa-network-wired"></i>
+                                            </div>
+                                            <span
+                                            data-eng="Government Network & Partnerships"
+                                            data-kor="정부 네트워크 및 파트너십">정부 네트워크 및 파트너십</span>
+                                        </div>
+                                        <div class="capability-content">
+                                            <p
+                                            data-eng="Strong government network and partnerships built through energy business efforts, enabling effective government-oriented planning and proposal project execution"
+                                            data-kor="에너지 사업 추진을 바탕으로 쌓아온 대정부 네트워크 및 관련 파트너십을 활용하여 정부향 기획/제안사업의 추진 역량">에너지 사업 추진을 바탕으로 쌓아온 대정부 네트워크 및 관련 파트너십을 활용하여 정부향 기획/제안사업의 추진 역량</p>
+                                            <div class="partnership-badges">
+                                                <span class="badge"
+                                                data-eng="Government Relations"
+                                                data-kor="정부 관계">정부 관계</span>
+                                                <span class="badge"
+                                                data-eng="Strategic Partnerships"
+                                                data-kor="전략적 파트너십">전략적 파트너십</span>
+                                                <span class="badge"
+                                                data-eng="Project Proposals"
+                                                data-kor="사업 제안">사업 제안</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Full Value Chain -->
+                                    <div class="capability-card">
+                                        <div class="capability-header">
+                                            <div class="capability-icon">
+                                                <i class="fas fa-link"></i>
+                                            </div>
+                                            <span
+                                            data-eng="Full Value Chain Management"
+                                            data-kor="전체 밸류체인 관리">전체 밸류체인 관리</span>
+                                        </div>
+                                        <div class="capability-content">
+                                            <p
+                                            data-eng="Expert personnel and experience to manage the entire value chain from feasibility study (F/S), investment/financial attraction, EPC procurement to O&M from the business development stage"
+                                            data-kor="사업개발 단계에서부터 사업성 분석(F/S), 투자/금융 유치, EPC 조달 및 O&M까지 전 밸류체인을 매니지할 수 있는 전문 인력과 경험">사업개발 단계에서부터 사업성 분석(F/S), 투자/금융 유치, EPC 조달 및 O&M까지 전 밸류체인을 매니지할 수 있는 전문 인력과 경험</p>
+                                            <ul>
+                                                <li data-eng="Feasibility Study (F/S)" data-kor="사업성 분석 (F/S)">• 사업성 분석 (F/S)</li>
+                                                <li data-eng="Investment/Financial Attraction" data-kor="투자/금융 유치">• 투자/금융 유치</li>
+                                                <li data-eng="EPC Procurement & O&M" data-kor="EPC 조달 및 O&M">• EPC 조달 및 O&M</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <div id="hydrogen-solutions" class="content-block full-width">
                             <h3 class="block-title"
-                                data-eng="Technical Solutions"
-                                data-kor="기술 솔루션">기술 솔루션</h3>
+                                data-eng="Project Status"
+                                data-kor="프로젝트 현황">
+                                <i class="fas fa-chart-line"></i> 프로젝트 현황
+                            </h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">기술 솔루션 콘텐츠 영역</p>
+                                <!-- Domestic Achievements Section -->
+                                <div class="">
+                                    <h4 class="status-title">
+                                        <i class="fas fa-trophy"></i>
+                                        <span
+                                        data-eng="Domestic Green Hydrogen Achievements"
+                                        data-kor="국내 그린수소 추진실적">국내 그린수소 추진실적</span>
+                                    </h4>
+                                    
+                                    <div class="domestic-projects">
+                                        <div class="project-card hydrogen">
+                                            <div class="project-header">
+                                                <div class="project-icon">
+                                                    <i class="fas fa-flask"></i>
+                                                </div>
+                                                <h5
+                                                data-eng="Completed Projects"
+                                                data-kor="완료 프로젝트">완료 프로젝트</h5>
+                                            </div>
+                                            <div class="project-list">
+                                                <div class="project-item">
+                                                    <div class="project-location">
+                                                        <span class="location-name"
+                                                        data-eng="Saemangeum"
+                                                        data-kor="새만금">새만금</span>
+                                                        <span class="project-capacity">0.5MW</span>
+                                                    </div>
+                                                    <div class="project-status completed">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <span
+                                                        data-eng="Completed"
+                                                        data-kor="완료">완료</span>
+                                                    </div>
+                                                </div>
+                                                <div class="project-item">
+                                                    <div class="project-location">
+                                                        <span class="location-name"
+                                                        data-eng="Ansan"
+                                                        data-kor="안산">안산</span>
+                                                        <span class="project-capacity">1.25MW</span>
+                                                    </div>
+                                                    <div class="project-status completed">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <span
+                                                        data-eng="Completed"
+                                                        data-kor="완료">완료</span>
+                                                    </div>
+                                                </div>
+                                                <div class="project-item">
+                                                    <div class="project-location">
+                                                        <span class="location-name"
+                                                        data-eng="Donghae"
+                                                        data-kor="동해">동해</span>
+                                                        <span class="project-capacity">2.5MW</span>
+                                                    </div>
+                                                    <div class="project-status completed">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <span
+                                                        data-eng="Completed"
+                                                        data-kor="완료">완료</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="total-capacity">
+                                                <span
+                                                data-eng="Total Capacity: 4.25MW"
+                                                data-kor="총 용량: 4.25MW">총 용량: 4.25MW</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Current Status Section -->
+                                <div class="current-status-section">
+                                    <h4 class="status-title">
+                                        <i class="fas fa-rocket"></i>
+                                        <span
+                                        data-eng="Current Development Status"
+                                        data-kor="현재 추진현황">현재 추진현황</span>
+                                    </h4>
+
+                                    <div class="status-cards">
+                                        <!-- Kazakhstan Phase 1 -->
+                                        <div class="status-card primary">
+                                            <div class="status-header">
+                                                <h5
+                                                data-eng="Kazakhstan Phase 1 Project"
+                                                data-kor="카자흐스탄 1차 프로젝트">카자흐스탄 1차 프로젝트</h5>
+                                                <div class="status-badge agreement">
+                                                    <i class="fas fa-handshake"></i>
+                                                    <span
+                                                    data-eng="Government Agreement Signed (July 2025)"
+                                                    data-kor="정부 협약 체결 (2025년 7월)">정부 협약 체결 (2025년 7월)</span>
+                                                </div>
+                                            </div>
+                                            <div class="status-details">
+                                                <div class="production-scale">
+                                                    <div class="scale-item">
+                                                        <div class="scale-icon">
+                                                            <i class="fas fa-flask"></i>
+                                                        </div>
+                                                        <div class="scale-info">
+                                                            <span class="scale-number">75,000</span>
+                                                            <span class="scale-unit"
+                                                            data-eng="Tons Green Hydrogen"
+                                                            data-kor="톤 그린수소">톤 그린수소</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scale-item">
+                                                        <div class="scale-icon">
+                                                            <i class="fas fa-atom"></i>
+                                                        </div>
+                                                        <div class="scale-info">
+                                                            <span class="scale-number">310,000</span>
+                                                            <span class="scale-unit"
+                                                            data-eng="Tons Green Ammonia"
+                                                            data-kor="톤 그린암모니아">톤 그린암모니아</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="next-steps">
+                                                    <i class="fas fa-arrow-right"></i>
+                                                    <span
+                                                    data-eng="Proceeding with subsequent work following agreement"
+                                                    data-kor="협약 체결 후 후속 작업 추진 중">협약 체결 후 후속 작업 추진 중</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Phase 2 Expansion -->
+                                        <div class="status-card secondary">
+                                            <div class="status-header">
+                                                <div class="status-icon">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                </div>
+                                                <h5
+                                                data-eng="Phase 2 Expansion Projects"
+                                                data-kor="2차 확장 프로젝트">2차 확장 프로젝트</h5>
+                                            </div>
+                                            <div class="status-details">
+                                                <div class="detail-item">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    <span
+                                                    data-eng="Kazakhstan Phase 2 project in preparation"
+                                                    data-kor="카자흐스탄 2차 프로젝트 준비 중">카자흐스탄 2차 프로젝트 준비 중</span>
+                                                </div>
+                                                <div class="detail-item">
+                                                    <i class="fas fa-globe"></i>
+                                                    <span
+                                                    data-eng="Neighboring countries projects in preparation"
+                                                    data-kor="카자흐스탄 인근 국가 사업 준비 중">카자흐스탄 인근 국가 사업 준비 중</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <div id="hydrogen-projects" class="content-block full-width">
                             <h3 class="block-title"
-                                data-eng="Projects"
-                                data-kor="프로젝트">프로젝트</h3>
+                                data-eng="Technology & Market Advantages"
+                                data-kor="기술 및 시장 우위">
+                                <i class="fas fa-star"></i> 기술 및 시장 우위
+                            </h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">프로젝트 콘텐츠 영역</p>
+                                <div class="advantages-grid">
+                                    <!-- Market Timing -->
+                                    <div class="advantage-card">
+                                        <div class="advantage-icon">
+                                            <i class="fas fa-calendar-check"></i>
+                                        </div>
+                                        <h4
+                                        data-eng="Market Timing"
+                                        data-kor="시장 타이밍">시장 타이밍</h4>
+                                        <p
+                                        data-eng="Positioned for the Korean clean hydrogen market opening in 2024, with strategic preparation and early market entry advantage"
+                                        data-kor="2024년 한국 청정수소 시장 개방에 대비한 전략적 준비와 선제적 시장 진입 우위">2024년 한국 청정수소 시장 개방에 대비한 전략적 준비와 선제적 시장 진입 우위</p>
+                                    </div>
+
+                                    <!-- Resource Advantage -->
+                                    <div class="advantage-card">
+                                        <div class="advantage-icon">
+                                            <i class="fas fa-leaf"></i>
+                                        </div>
+                                        <h4
+                                        data-eng="Resource Advantage"
+                                        data-kor="자원 우위">자원 우위</h4>
+                                        <p
+                                        data-eng="Kazakhstan's excellent renewable energy resources (wind, solar) provide competitive advantage for green hydrogen production"
+                                        data-kor="카자흐스탄의 우수한 신재생 에너지원(바람, 태양)이 그린수소 생산의 경쟁력 제공">카자흐스탄의 우수한 신재생 에너지원(바람, 태양)이 그린수소 생산의 경쟁력 제공</p>
+                                    </div>
+
+                                    <!-- Experience Base -->
+                                    <div class="advantage-card">
+                                        <div class="advantage-icon">
+                                            <i class="fas fa-history"></i>
+                                        </div>
+                                        <h4
+                                        data-eng="Proven Experience"
+                                        data-kor="입증된 경험">입증된 경험</h4>
+                                        <p
+                                        data-eng="Solid foundation built through domestic small-scale green hydrogen projects and long-standing energy business experience"
+                                        data-kor="국내 소규모 그린수소 프로젝트와 오랜 에너지 사업 경험을 통해 구축된 견고한 기반">국내 소규모 그린수소 프로젝트와 오랜 에너지 사업 경험을 통해 구축된 견고한 기반</p>
+                                    </div>
+
+                                    <!-- Government Relations -->
+                                    <div class="advantage-card">
+                                        <div class="advantage-icon">
+                                            <i class="fas fa-handshake"></i>
+                                        </div>
+                                        <h4
+                                        data-eng="Government Relations"
+                                        data-kor="정부 관계">정부 관계</h4>
+                                        <p
+                                        data-eng="Strong government network and official agreement secured for flagship Kazakhstan project implementation"
+                                        data-kor="강력한 정부 네트워크와 카자흐스탄 주력 프로젝트 추진을 위한 공식 협약 확보">강력한 정부 네트워크와 카자흐스탄 주력 프로젝트 추진을 위한 공식 협약 확보</p>
+                                    </div>
+                                </div>
+
+                                <!-- Timeline -->
+                                <div class="project-timeline">
+                                    <h4 class="timeline-title">
+                                        <i class="fas fa-clock"></i>
+                                        <span
+                                        data-eng="Project Development Timeline"
+                                        data-kor="프로젝트 개발 일정">프로젝트 개발 일정</span>
+                                    </h4>
+                                    <div class="timeline">
+                                        <div class="timeline-item completed">
+                                            <div class="timeline-marker"></div>
+                                            <div class="timeline-content">
+                                                <h5
+                                                data-eng="Phase 1: Domestic Experience Building"
+                                                data-kor="1단계: 국내 경험 축적">1단계: 국내 경험 축적</h5>
+                                                <p
+                                                data-eng="Completed 4.25MW green hydrogen projects in Korea"
+                                                data-kor="국내 4.25MW 그린수소 프로젝트 완료">국내 4.25MW 그린수소 프로젝트 완료</p>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item current">
+                                            <div class="timeline-marker"></div>
+                                            <div class="timeline-content">
+                                                <h5
+                                                data-eng="Phase 2: Kazakhstan Project Launch"
+                                                data-kor="2단계: 카자흐스탄 프로젝트 착수">2단계: 카자흐스탄 프로젝트 착수</h5>
+                                                <p
+                                                data-eng="Government agreement signed (July 2025), project implementation underway"
+                                                data-kor="정부 협약 체결 (2025년 7월), 프로젝트 실행 중">정부 협약 체결 (2025년 7월), 프로젝트 실행 중</p>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item future">
+                                            <div class="timeline-marker"></div>
+                                            <div class="timeline-content">
+                                                <h5
+                                                data-eng="Phase 3: Regional Expansion"
+                                                data-kor="3단계: 지역 확장">3단계: 지역 확장</h5>
+                                                <p
+                                                data-eng="Kazakhstan Phase 2 and neighboring countries expansion"
+                                                data-kor="카자흐스탄 2차 및 인근 국가 확장">카자흐스탄 2차 및 인근 국가 확장</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1619,7 +2586,7 @@ class BusinessPageController {
         if (activeTabContent) {
             activeTabContent.classList.add('active');
         }
-        if(tabId == 'control-valve' || tabId == 'us-military') {
+        if(tabId == 'control-valve' || tabId == 'us-military' || tabId == 'renewable-energy' || tabId == 'green-hydrogen') {
             document.querySelector('.notice-container').style.display = 'none';
         }else {
             document.querySelector('.notice-container').style.display = 'flex';

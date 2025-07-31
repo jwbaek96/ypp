@@ -78,13 +78,14 @@
 
 /* Tab Navigation */
 .tab-nav {
+    background-color: var(--white, #ffffff);
+
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0;
     overflow-x: auto;
-    background-color: var(--white, #ffffff);
-
+    flex-wrap: wrap;
 }
 .section-nav::-webkit-scrollbar,
 .tab-nav::-webkit-scrollbar {
@@ -92,13 +93,16 @@
 }
 
 .tab-link {
-    padding: 1rem 2rem;
     text-decoration: none;
     color: var(--text-secondary, #666);
     border-bottom: 3px solid transparent;
     transition: all 0.3s ease;
     white-space: nowrap;
     font-weight: 500;
+    /* padding: 1rem 2rem; */
+
+    font-size: .92rem;
+    padding: 1rem 1.5rem;
 }
 
 .tab-link:hover {
@@ -255,11 +259,15 @@
         overflow-x: scroll;
     }
     
-    .tab-link {
-        padding: 1rem 1.5rem;
+    .tab-nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
     }
-
-    .section-navigation .section-nav {
+    .tab-link {
+        flex: 0 0 auto;
+        padding: 0.85rem 1rem;
+    }
+        .section-navigation .section-nav {
         gap: 0.5rem;
     }
     

@@ -252,9 +252,8 @@
 
 /* 강사진 스타일 */
 .instructor-section {
-    padding: 24px;
+    padding: 6px 0 0 0;
     background: #f8fafc;
-    border-top: 1px solid #e5e7eb;
 }
 
 .instructor-title {
@@ -927,9 +926,6 @@
     line-height: 1.6;
 }
 
-.info-table tr:last-child td {
-    border-bottom: none;
-}
 
 .date-highlight {
     background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);

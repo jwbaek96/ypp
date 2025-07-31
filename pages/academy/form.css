@@ -192,6 +192,10 @@
     margin-bottom: 10px;
 }
 
+
+#relayschool-form .ac-form-student-section > .ac-form-group:last-child {
+    display: none;
+}
 /* ==========================================================================
    PSAC 전용 스타일 (psac-)
    ========================================================================== */

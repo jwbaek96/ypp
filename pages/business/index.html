@@ -15,6 +15,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/pages/layout.css">
+    <link rel="stylesheet" href="../../css/pages/military-base.css">
     <link rel="stylesheet" href="valve.css">
     
     <!-- 메타 시스템 -->
@@ -114,12 +115,12 @@
         <section class="tab-navigation">
             <div class="container">
                 <nav class="tab-nav">
-                    <a href="#thermal-power" class="tab-link active" data-tab="thermal-power"
-                        data-eng="Thermal Power Plant"
-                        data-kor="화력발전소">화력발전소</a>
                     <a href="#nuclear-power" class="tab-link" data-tab="nuclear-power"
                         data-eng="Nuclear Power Plant"
                         data-kor="원자력발전소">원자력발전소</a>
+                    <a href="#thermal-power" class="tab-link active" data-tab="thermal-power"
+                        data-eng="Thermal Power Plant"
+                        data-kor="화력발전소">화력발전소</a>
                     <a href="#renewable-energy" class="tab-link" data-tab="renewable-energy"
                         data-eng="Renewable Energy"
                         data-kor="신재생에너지">신재생에너지</a>
@@ -274,17 +275,17 @@
                 <!-- Section Navigation for 미군기지 -->
                 <div class="section-nav" id="section-nav-us-military" style="display: none;">
                     <a href="#military-projects" class="section-nav-link"
-                       data-eng="U.S. Military Base Projects"
-                       data-kor="미군기지 프로젝트">미군기지 프로젝트</a>
+                       data-eng="Overview"
+                       data-kor="개요">개요</a>
                     <a href="#military-security" class="section-nav-link"
-                       data-eng="Security System"
-                       data-kor="보안 시스템">보안 시스템</a>
+                       data-eng="Business Capabilities & Competitiveness"
+                       data-kor="사업역량 및 경쟁력">사업역량 및 경쟁력</a>
                     <a href="#military-power" class="section-nav-link"
-                       data-eng="Power Supply"
-                       data-kor="전력 공급">전력 공급</a>
+                       data-eng="Project Highlights"
+                       data-kor="프로젝트 현황">프로젝트 현황</a>
                     <a href="#military-performance" class="section-nav-link"
-                       data-eng="Performance"
-                       data-kor="실적">실적</a>
+                       data-eng="Core Competencies"
+                       data-kor="핵심 역량">핵심 역량</a>
                 </div>
             </div>
         </section>
@@ -876,54 +877,612 @@
                     <div class="content-header">
                         <h2 class="content-title"
                             data-eng="U.S. Military Base"
-                            data-kor="">미군기지</h2>
+                            data-kor="미군기지">미군기지</h2>
                         <p class="content-subtitle"
                             data-eng=""
-                            data-kor="U.S. Military Bass">U.S. Military Bass</p>
+                            data-kor="U.S. Military Base">U.S. Military Base</p>
                     </div>
                     
                     <div class="content-grid">
                         <div id="military-projects" class="content-block full-width">
                             <h3 class="block-title"
-                                data-eng="U.S. Military Base Projects"
-                                data-kor="미군기지 프로젝트">미군기지 프로젝트</h3>
+                                data-eng="Overview"
+                                data-kor="개요">
+                                <i class="fas fa-shield-alt"></i> 개요
+                            </h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">미군기지 프로젝트 콘텐츠 영역</p>
+                                <!-- Stats Overview -->
+                                <div class="military-stats-grid">
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-trophy"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <span class="stat-number" 
+                                                data-eng="80+"
+                                                data-kor="80+">80+</span>
+                                            <span class="stat-label"
+                                                data-eng="Projects Completed"
+                                                data-kor="프로젝트 완료">프로젝트 완료</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <span class="stat-number"
+                                                data-eng="10+"
+                                                data-kor="10+">10+</span>
+                                            <span class="stat-label"
+                                                data-eng="Years of Experience"
+                                                data-kor="년간 경험">년간 경험</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <span class="stat-number"
+                                                data-eng="4+"
+                                                data-kor="4+">4+</span>
+                                            <span class="stat-label"
+                                                data-eng="Major Bases"
+                                                data-kor="주요 기지">주요 기지</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-certificate"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <span class="stat-number"
+                                                data-eng="USACE"
+                                                data-kor="USACE">USACE</span>
+                                            <span class="stat-label"
+                                                data-eng="Compliant"
+                                                data-kor="준수">준수</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="military-description">
+                                    <div class="description-content">
+                                        <p
+                                        data-eng="YPP has established itself as a trusted strategic partner in the field of power and integrated infrastructure for the U.S. Forces Korea (USFK), successfully completing over 80 infrastructure and electrical projects over the past decade."
+                                        data-kor="YPP는 지난 10년간 80건 이상의 주한미군 전력 및 기반시설 프로젝트를 수행하며, 전력 및 통합 인프라 분야에서 미군의 전략적 파트너로 자리매김해 왔습니다.">YPP는 지난 10년간 80건 이상의 주한미군 전력 및 기반시설 프로젝트를 수행하며, 전력 및 통합 인프라 분야에서 미군의 전략적 파트너로 자리매김해 왔습니다.</p>
+                                        
+                                        <p
+                                        data-eng="We have supplied and installed various facilities—such as generators, UPS, ATS, lighting, HVAC, and communication systems—at key military bases including Camp Humphreys, Osan Air Base, Kunsan Air Base, and Camp Henry. All projects were executed in compliance with U.S. Army Corps of Engineers (USACE) standards, highlighting YPP's ability to deliver under the most rigorous specifications."
+                                        data-kor="Camp Humphreys, Osan Air Base, Kunsan Air Base, Camp Henry 등 주요 거점에 발전기, UPS, ATS, 조명, HVAC, 통신 시스템 등 다양한 설비를 공급 및 설치하였으며, 미국 육군 공병단(USACE) 기준을 준수한 시공 경험을 보유하고 있습니다.">Camp Humphreys, Osan Air Base, Kunsan Air Base, Camp Henry 등 주요 거점에 발전기, UPS, ATS, 조명, HVAC, 통신 시스템 등 다양한 설비를 공급 및 설치하였으며, 미국 육군 공병단(USACE) 기준을 준수한 시공 경험을 보유하고 있습니다.</p>
+                                    </div>
+                                    
+                                    <!-- Key Bases Map -->
+                                    <div class="military-bases">
+                                        <h4
+                                        data-eng="Key Military Installations"
+                                        data-kor="주요 군사시설">🏛️ 주요 군사시설</h4>
+                                        <div class="bases-grid">
+                                            <div class="base-item">
+                                                <i class="fas fa-building"></i>
+                                                <span
+                                                data-eng="Camp Humphreys"
+                                                data-kor="캠프 험프리스">캠프 험프리스</span>
+                                            </div>
+                                            <div class="base-item">
+                                                <i class="fas fa-plane"></i>
+                                                <span
+                                                data-eng="Osan Air Base"
+                                                data-kor="오산 공군기지">오산 공군기지</span>
+                                            </div>
+                                            <div class="base-item">
+                                                <i class="fas fa-plane"></i>
+                                                <span
+                                                data-eng="Kunsan Air Base"
+                                                data-kor="군산 공군기지">군산 공군기지</span>
+                                            </div>
+                                            <div class="base-item">
+                                                <i class="fas fa-building"></i>
+                                                <span
+                                                data-eng="Camp Henry"
+                                                data-kor="캠프 헨리">캠프 헨리</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <div id="military-security" class="content-block full-width">
                             <h3 class="block-title"
-                                data-eng="Security System"
-                                data-kor="보안 시스템">보안 시스템</h3>
+                                data-eng="Business Capabilities & Competitiveness"
+                                data-kor="사업역량 및 경쟁력">
+                                <i class="fas fa-cogs"></i> 사업역량 및 경쟁력
+                            </h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">보안 시스템 콘텐츠 영역</p>
+                                <div class="capabilities-grid">
+                                    <!-- Global Technology Integration -->
+                                    <div class="capability-card">
+                                        <div class="capability-header">
+                                            <div class="capability-icon">
+                                                <i class="fas fa-globe"></i>
+                                            </div>
+                                            <span
+                                            data-eng="🌍 Global Technology Integration"
+                                            data-kor="글로벌 기술 연계">🌍 글로벌 기술 연계</span>
+                                        </div>
+                                        <div class="capability-content">
+                                            <div class="feature-list">
+                                                <div class="feature-item">
+                                                    <i class="fas fa-handshake"></i>
+                                                    <span
+                                                    data-eng="Official partner of GE Digital Energy"
+                                                    data-kor="GE Digital Energy 공식 파트너로서 ATS, STS, UPS, MCC, 고전압 스위치기어, 절체스위치 등 고신뢰성 전력설비 공급 역량 보유">GE Digital Energy 공식 파트너</span>
+                                                </div>
+                                                <div class="feature-item">
+                                                    <i class="fas fa-tools"></i>
+                                                    <span
+                                                    data-eng="High-reliability power equipment (ATS, STS, UPS, MCC, switchgear)"
+                                                    data-kor="고신뢰성 전력설비 (ATS, STS, UPS, MCC, 스위치기어)">고신뢰성 전력설비 공급</span>
+                                                </div>
+                                                <div class="feature-item">
+                                                    <i class="fas fa-certificate"></i>
+                                                    <span
+                                                    data-eng="MIL-STD & U.S. federal procurement compliance"
+                                                    data-kor="MIL-STD 및 미국 연방 조달기준 준수">MIL-STD 및 연방기준 준수</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- EPC Readiness -->
+                                    <div class="capability-card">
+                                        <div class="capability-header">
+                                            <div class="capability-icon">
+                                                <i class="fas fa-building"></i>
+                                            </div>
+                                            <span
+                                            data-eng="🏗️ EPC Readiness"
+                                            data-kor="EPC 수행 기반">🏗️ EPC 수행 기반</span>
+                                        </div>
+                                        <div class="capability-content">
+                                            <div class="feature-list">
+                                                <div class="feature-item">
+                                                    <i class="fas fa-users"></i>
+                                                    <span
+                                                    data-eng="Strong partnerships with U.S.-based EPC companies"
+                                                    data-kor="미국 내 EPC사와의 긴밀한 파트너십">미국 EPC사 파트너십</span>
+                                                </div>
+                                                <div class="feature-item">
+                                                    <i class="fas fa-project-diagram"></i>
+                                                    <span
+                                                    data-eng="Systematic framework for design, schedule & site management"
+                                                    data-kor="설계, 공정, 시공관리 체계">체계적 프로젝트 관리</span>
+                                                </div>
+                                                <div class="feature-item">
+                                                    <i class="fas fa-chart-line"></i>
+                                                    <span
+                                                    data-eng="Gradual expansion into full EPC execution"
+                                                    data-kor="EPC 수행 역량 점진적 확장">EPC 역량 확장</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Supply Chain -->
+                                    <div class="capability-card">
+                                        <div class="capability-header">
+                                            <div class="capability-icon">
+                                                <i class="fas fa-shipping-fast"></i>
+                                            </div>
+                                            <span
+                                            data-eng="🔗 Robust Supply Chain"
+                                            data-kor="경쟁력 있는 Supply Chain">🔗 경쟁력 있는 Supply Chain</span>
+                                        </div>
+                                        <div class="capability-content">
+                                            <div class="feature-list">
+                                                <div class="feature-item">
+                                                    <i class="fas fa-flag-usa"></i>
+                                                    <span
+                                                    data-eng="U.S. local branch for flexible procurement"
+                                                    data-kor="미국 현지 지사를 통한 조달 유연성">미국 현지 조달 네트워크</span>
+                                                </div>
+                                                <div class="feature-item">
+                                                    <i class="fas fa-industry"></i>
+                                                    <span
+                                                    data-eng="Multi-sector equipment supply experience"
+                                                    data-kor="전 분야 장비 공급 경험">다분야 장비 공급 실적</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Power & Control Solutions -->
+                                    <div class="capability-card">
+                                        <div class="capability-header">
+                                            <div class="capability-icon">
+                                                <i class="fas fa-bolt"></i>
+                                            </div>
+                                            <span
+                                            data-eng="⚡ Total Power & Control Solutions"
+                                            data-kor="전력·제어 토탈 솔루션 제공">⚡ 전력·제어 토탈 솔루션</span>
+                                        </div>
+                                        <div class="capability-content">
+                                            <div class="feature-list">
+                                                <div class="feature-item">
+                                                    <i class="fas fa-microchip"></i>
+                                                    <span
+                                                    data-eng="ECMS, generator paralleling & digital protective relays"
+                                                    data-kor="ECMS, 발전기 병렬제어, 디지털 보호계전">첨단 제어 시스템</span>
+                                                </div>
+                                                <div class="feature-item">
+                                                    <i class="fas fa-network-wired"></i>
+                                                    <span
+                                                    data-eng="GIS substation upgrades & SCADA systems"
+                                                    data-kor="GIS 변전소 업그레이드 및 SCADA 시스템">변전소 현대화 솔루션</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <div id="military-power" class="content-block full-width">
                             <h3 class="block-title"
-                                data-eng="Power Supply"
-                                data-kor="전력 공급">전력 공급</h3>
+                                data-eng="Project Highlights | YPP has accumulated extensive experience across U.S. military installations over the past 10+ years."
+                                data-kor="프로젝트 현황 | 10년 이상 축적된 주한미군 설비공급 실적">
+                                <i class="fas fa-chart-bar"></i> 프로젝트 현황
+                            </h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">전력 공급 콘텐츠 영역</p>
+                                <!-- Summary Statistics -->
+                                <div class="project-summary">
+                                    <div class="summary-header">
+                                        <h4
+                                        data-eng="📌 Summary of Achievements (2010–Present)"
+                                        data-kor="총괄 실적 (2010~현재)">📌 총괄 실적 (2010~현재)</h4>
+                                        <p class="summary-description"
+                                        data-eng="YPP has accumulated extensive experience across U.S. military installations over the past 10+ years."
+                                        data-kor="10년 이상 축적된 주한미군 설비공급 실적">10년 이상 축적된 주한미군 설비공급 실적</p>
+                                    </div>
+                                    
+                                    <div class="achievement-cards">
+                                        <div class="achievement-card">
+                                            <div class="achievement-info">
+                                                <span class="achievement-number">80+</span>
+                                                <span class="achievement-label"
+                                                data-eng="Projects Completed"
+                                                data-kor="프로젝트 완료">프로젝트 완료</span>
+                                                <span class="achievement-detail"
+                                                data-eng="Across Korea (Pyeongtaek, Osan, Gunsan, Jinhae)"
+                                                data-kor="평택, 오산, 군산, 진해 등 전역">전국 주요 미군시설</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="achievement-card">
+                                            <div class="achievement-info">
+                                                <span class="achievement-number">4+</span>
+                                                <span class="achievement-label"
+                                                data-eng="Major Installations"
+                                                data-kor="주요 시설">주요 시설</span>
+                                                <span class="achievement-detail"
+                                                data-eng="Strategic military bases nationwide"
+                                                data-kor="전략적 군사기지">전략적 군사기지</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="achievement-card">
+                                            <div class="achievement-info">
+                                                <span class="achievement-number">6+</span>
+                                                <span class="achievement-label"
+                                                data-eng="Technical Disciplines"
+                                                data-kor="기술 분야">기술 분야</span>
+                                                <span class="achievement-detail"
+                                                data-eng="Electrical, HVAC, Communications, etc."
+                                                data-kor="전기, HVAC, 통신 등">전기, HVAC, 통신 등</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Major Projects Table -->
+                                <div class="projects-section">
+                                    <h4
+                                    data-eng="📋 Major Projects"
+                                    data-kor="주요 프로젝트">📋 주요 프로젝트</h4>
+                                    
+                                    <div class="project-table-container">
+                                        <div class="project-table">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th
+                                                        data-eng="Project Name"
+                                                        data-kor="프로젝트명">프로젝트명</th>
+                                                        <th
+                                                        data-eng="Discipline"
+                                                        data-kor="공종">공종</th>
+                                                        <th
+                                                        data-eng="Period"
+                                                        data-kor="기간">기간</th>
+                                                        <th
+                                                        data-eng="Status"
+                                                        data-kor="상태">상태</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="project-name">
+                                                            <div class="project-info">
+                                                                <i class="fas fa-lightbulb"></i>
+                                                                <span
+                                                                data-eng="Land Development & Lighting at Camp Humphreys"
+                                                                data-kor="평택 미군기지 부지조성 및 조명설비">평택 미군기지 부지조성 및 조명설비</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="discipline-tag electrical"
+                                                            data-eng="Electrical Works"
+                                                            data-kor="전기">전기</span>
+                                                        </td>
+                                                        <td class="period">2011~2017</td>
+                                                        <td>
+                                                            <span class="status-badge completed"
+                                                            data-eng="Completed"
+                                                            data-kor="완료">완료</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="project-name">
+                                                            <div class="project-info">
+                                                                <i class="fas fa-tools"></i>
+                                                                <span
+                                                                data-eng="US 8th Army Vehicle Maintenance Facility"
+                                                                data-kor="미8군 차량정비시설">미8군 차량정비시설</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="discipline-tag mixed"
+                                                            data-eng="Electrical & Foreign Equipment"
+                                                            data-kor="전기, 외자재">전기, 외자재</span>
+                                                        </td>
+                                                        <td class="period">2013~2016</td>
+                                                        <td>
+                                                            <span class="status-badge completed"
+                                                            data-eng="Completed"
+                                                            data-kor="완료">완료</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="project-name">
+                                                            <div class="project-info">
+                                                                <i class="fas fa-bolt"></i>
+                                                                <span
+                                                                data-eng="KORCOM OPS CENTER Power Facilities"
+                                                                data-kor="KORCOM OPS CENTER 전력설비">KORCOM OPS CENTER 전력설비</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="discipline-tag electrical"
+                                                            data-eng="Electrical Systems"
+                                                            data-kor="전기">전기</span>
+                                                        </td>
+                                                        <td class="period">2016~2020</td>
+                                                        <td>
+                                                            <span class="status-badge completed"
+                                                            data-eng="Completed"
+                                                            data-kor="완료">완료</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="project-name">
+                                                            <div class="project-info">
+                                                                <i class="fas fa-satellite"></i>
+                                                                <span
+                                                                data-eng="Satellite Communication Facilities"
+                                                                data-kor="위성통신시설 구축">위성통신시설 구축</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="discipline-tag mechanical"
+                                                            data-eng="Electrical & Mechanical Systems"
+                                                            data-kor="전기·기계">전기·기계</span>
+                                                        </td>
+                                                        <td class="period"
+                                                        data-eng="2022~Present"
+                                                        data-kor="2022~진행중">2022~진행중</td>
+                                                        <td>
+                                                            <span class="status-badge ongoing"
+                                                            data-eng="Ongoing"
+                                                            data-kor="진행중">진행중</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="project-name">
+                                                            <div class="project-info">
+                                                                <i class="fas fa-utensils"></i>
+                                                                <span
+                                                                data-eng="Expeditionary Dining Facility at Pohang"
+                                                                data-kor="포항 원정대식당 시설">포항 원정대식당 시설</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="discipline-tag integrated"
+                                                            data-eng="Integrated (Electrical/Mechanical/Civil)"
+                                                            data-kor="통합(전기/기계/건축)">통합(전기/기계/건축)</span>
+                                                        </td>
+                                                        <td class="period"
+                                                        data-eng="2023~Present"
+                                                        data-kor="2023~진행중">2023~진행중</td>
+                                                        <td>
+                                                            <span class="status-badge ongoing"
+                                                            data-eng="Ongoing"
+                                                            data-kor="진행중">진행중</span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <div id="military-performance" class="content-block full-width">
                             <h3 class="block-title"
-                                data-eng="Performance"
-                                data-kor="실적">실적</h3>
+                                data-eng="Core Competencies"
+                                data-kor="핵심 역량">
+                                <i class="fas fa-star"></i> 핵심 역량
+                            </h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">실적 콘텐츠 영역</p>
+                                <div class="competencies-intro">
+                                    <p
+                                    data-eng="YPP's core competencies in U.S. military projects demonstrate our commitment to excellence and compliance with the highest standards."
+                                    data-kor="YPP의 미군 프로젝트 핵심 역량은 최고 수준의 품질과 기준 준수에 대한 우리의 의지를 보여줍니다.">YPP의 미군 프로젝트 핵심 역량은 최고 수준의 품질과 기준 준수에 대한 우리의 의지를 보여줍니다.</p>
+                                </div>
+                                
+                                <div class="competency-showcase">
+                                    <div class="competency-item featured">
+                                        <div class="competency-content">
+                                            <h4
+                                            data-eng="USACE Standard Compliance"
+                                            data-kor="USACE 기준 준수">USACE 기준 준수</h4>
+                                            <p
+                                            data-eng="Construction experience compliant with U.S. Army Corps of Engineers standards"
+                                            data-kor="미국 육군 공병단 기준을 준수한 시공 경험">미국 육군 공병단 기준을 준수한 시공 경험</p>
+                                            <div class="competency-highlights">
+                                                <span class="highlight-tag">
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <span
+                                                    data-eng="Certified Compliance"
+                                                    data-kor="인증된 준수">인증된 준수</span>
+                                                </span>
+                                                <span class="highlight-tag">
+                                                    <i class="fas fa-shield-alt"></i>
+                                                    <span
+                                                    data-eng="Military Standards"
+                                                    data-kor="군사 표준">군사 표준</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="competency-item featured">
+                                        <div class="competency-content">
+                                            <h4
+                                            data-eng="Comprehensive Equipment Supply"
+                                            data-kor="종합 설비 공급">종합 설비 공급</h4>
+                                            <p
+                                            data-eng="Comprehensive supply capability from power equipment to HVAC and communication systems"
+                                            data-kor="전력설비부터 HVAC, 통신 시스템까지 종합 공급 역량">전력설비부터 HVAC, 통신 시스템까지 종합 공급 역량</p>
+                                            <div class="competency-highlights">
+                                                <span class="highlight-tag">
+                                                    <i class="fas fa-bolt"></i>
+                                                    <span
+                                                    data-eng="Power Systems"
+                                                    data-kor="전력 시스템">전력 시스템</span>
+                                                </span>
+                                                <span class="highlight-tag">
+                                                    <i class="fas fa-wind"></i>
+                                                    <span
+                                                    data-eng="HVAC Systems"
+                                                    data-kor="HVAC 시스템">HVAC 시스템</span>
+                                                </span>
+                                                <span class="highlight-tag">
+                                                    <i class="fas fa-broadcast-tower"></i>
+                                                    <span
+                                                    data-eng="Communications"
+                                                    data-kor="통신">통신</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="competency-item featured">
+                                        <div class="competency-content">
+                                            <h4
+                                            data-eng="Global Partnership"
+                                            data-kor="글로벌 파트너십">글로벌 파트너십</h4>
+                                            <p
+                                            data-eng="Strategic partnerships with global technology companies and U.S. EPC firms"
+                                            data-kor="글로벌 기술 기업 및 미국 EPC사와의 전략적 파트너십">글로벌 기술 기업 및 미국 EPC사와의 전략적 파트너십</p>
+                                            <div class="competency-highlights">
+                                                <span class="highlight-tag">
+                                                    <i class="fas fa-globe"></i>
+                                                    <span
+                                                    data-eng="Global Network"
+                                                    data-kor="글로벌 네트워크">글로벌 네트워크</span>
+                                                </span>
+                                                <span class="highlight-tag">
+                                                    <i class="fas fa-building"></i>
+                                                    <span
+                                                    data-eng="EPC Partners"
+                                                    data-kor="EPC 파트너">EPC 파트너</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="competency-item featured">
+                                        <div class="competency-content">
+                                            <h4
+                                            data-eng="Proven Track Record"
+                                            data-kor="검증된 실적">검증된 실적</h4>
+                                            <p
+                                            data-eng="Over 80 successful projects across major U.S. military bases"
+                                            data-kor="주요 미군기지 80건 이상의 성공적인 프로젝트 수행">주요 미군기지 80건 이상의 성공적인 프로젝트 수행</p>
+                                            <div class="competency-highlights">
+                                                <span class="highlight-tag">
+                                                    <i class="fas fa-chart-line"></i>
+                                                    <span
+                                                    data-eng="80+ Projects"
+                                                    data-kor="80+ 프로젝트">80+ 프로젝트</span>
+                                                </span>
+                                                <span class="highlight-tag">
+                                                    <i class="fas fa-clock"></i>
+                                                    <span
+                                                    data-eng="10+ Years"
+                                                    data-kor="10+ 년">10+ 년</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Success Metrics -->
+                                <!-- <div class="success-metrics">
+                                    <h4
+                                    data-eng="Success Metrics"
+                                    data-kor="성과 지표">📊 성과 지표</h4>
+                                    <div class="metrics-grid">
+                                        <div class="metric-item">
+                                            <div class="metric-value">100%</div>
+                                            <div class="metric-label"
+                                            data-eng="USACE Compliance Rate"
+                                            data-kor="USACE 기준 준수율">USACE 기준 준수율</div>
+                                        </div>
+                                        <div class="metric-item">
+                                            <div class="metric-value">95%</div>
+                                            <div class="metric-label"
+                                            data-eng="On-Time Delivery"
+                                            data-kor="정시 납기율">정시 납기율</div>
+                                        </div>
+                                        <div class="metric-item">
+                                            <div class="metric-value">4.8/5</div>
+                                            <div class="metric-label"
+                                            data-eng="Client Satisfaction"
+                                            data-kor="고객 만족도">고객 만족도</div>
+                                        </div>
+                                        <div class="metric-item">
+                                            <div class="metric-value">0</div>
+                                            <div class="metric-label"
+                                            data-eng="Safety Incidents"
+                                            data-kor="안전사고">안전사고</div>
+                                        </div>
+                                    </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -1060,7 +1619,7 @@ class BusinessPageController {
         if (activeTabContent) {
             activeTabContent.classList.add('active');
         }
-        if(tabId == 'control-valve') {
+        if(tabId == 'control-valve' || tabId == 'us-military') {
             document.querySelector('.notice-container').style.display = 'none';
         }else {
             document.querySelector('.notice-container').style.display = 'flex';

@@ -751,7 +751,6 @@
 .status-subtitle {
     color: #6c757d;
     margin-bottom: 25px;
-    font-style: italic;
 }
 
 .status-cards {
@@ -1403,6 +1402,17 @@
     line-height: 1.5;
 }
 
+.achievements-section {
+    margin-top: 40px;}
+.achievements-title{
+    color: #495057;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    display: flex
+;
+    align-items: center;
+    gap: 10px;
+}
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .renewable-stats-grid,

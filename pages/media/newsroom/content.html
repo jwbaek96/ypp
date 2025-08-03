@@ -141,15 +141,31 @@
                         </div>
                       </div>
                       
-                      <!-- 동영상 팝업 오버레이 -->
-                      <div id="promo-video-modal" style="display:none;">
-                        <div class="promo-modal-bg"></div>
-                        <div class="promo-modal-content">
-                          <button id="promo-modal-close">닫기</button>
-                          <iframe id="promo-modal-iframe" width="100%" height="480" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                      </div>
+                    <!-- 동영상 팝업 오버레이 -->
+                    <div id="promo-video-modal" style="display:none;">
+                    <div class="promo-modal-bg"></div>
+                    <div class="promo-modal-content">
+                        <button id="promo-modal-close">닫기</button>
+                        <iframe id="promo-modal-iframe" width="100%" height="480" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    </div>
                     
+                    <!-- 브로슈어 -->
+                    <div id="brochure-section" class="content-block section-spy">
+                      <div class="brochure-box">
+                        <h3 class="brochure-title">브로슈어 다운로드</h3>
+                        <div class="brochure-list">
+                          <a href="/documents/ypp-company-profile-2021-kr.pdf" download class="brochure-btn brochure-kr">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span>국문 브로슈어</span>
+                          </a>
+                          <a href="/documents/ypp-company-profile-2021-en.pdf" download class="brochure-btn brochure-en">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span>영문 브로슈어</span>
+                          </a>
+                        </div>
+                        <p class="brochure-desc">브로슈어를 PDF 파일로 다운로드할 수 있습니다.</p>
+                      </div>
                     <!-- 유튜브 자료 -->
                     <a id="youtube-link" class="external-links content-block section-spy" onclick="alert('준비중입니다.')" >
                         <div class="youtube-link-content">
@@ -391,20 +407,17 @@ a.external-links:hover{
     color: white; font-size: 24px;font-weight: 700;
     border: none;
 }
-#external-links{
-    background: linear-gradient(135deg, #66ea70 0%, #4b8da2 125%);
-    box-shadow: 0 -2px 20px rgba(111, 234, 102, 0.4), 0 -6px 20px rgba(75, 162, 142, 0.3), 0 -2px 10px rgba(147, 237, 251, 0.2);
-}
-#youtube-link{
-    background: linear-gradient(135deg, #ff0000 0%, #ff4d00 125%);
-    box-shadow: 0 -2px 20px rgba(255, 0, 0, 0.4), 0 -6px 20px rgba(255, 77, 0, 0.3), 0 -2px 10px rgba(255, 153, 153, 0.2);
-}
-#youtube-link:hover{ cursor: pointer;}
+#external-links{background: linear-gradient(135deg, #66ea70 0%, #4b8da2 125%);}
+#external-links:hover{ box-shadow: 0 -2px 20px rgba(111, 234, 102, 0.4), 0 -6px 20px rgba(75, 162, 142, 0.3), 0 -2px 10px rgba(147, 237, 251, 0.2);}
+
+#youtube-link{background: linear-gradient(135deg, #ff0000 0%, #ff4d00 125%);}
+#youtube-link:hover{ cursor: pointer; box-shadow: 0 -2px 20px rgba(255, 0, 0, 0.4), 0 -6px 20px rgba(255, 77, 0, 0.3), 0 -2px 10px rgba(255, 153, 153, 0.2);}
+
 .external-link-title, .external-link-desc {  color: white; font-size: 24px;font-weight: 700; margin: 0; }
 .external-link-desc{ font-size: .9rem; font-weight: 400; color: #ffffffe0; margin-top: 9px;}
 
 /* =================================== */
-#existing-media{margin-bottom: 52px;}
+#existing-media{margin-bottom: 32px;}
 .promo-media { width: 100%; }
 .promo-main-video { width: 100%; margin-bottom: 32px; }
 .promo-prev-videos { display: flex; gap: 24px; }

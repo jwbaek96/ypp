@@ -601,7 +601,7 @@
                             .clients {
                                 display: flex;
                                 flex-direction: column;
-                                gap: 5px;
+                                gap: 10px;
                             }
                             
                             .client-category {
@@ -614,7 +614,7 @@
                             }
                             
                             .client-category:hover {
-                                transform: translateY(-4px);
+                                transform: translateY(-2px);
                                 box-shadow: 0 4px 16px rgba(0,0,0,0.12);
                             }
                             

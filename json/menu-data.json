@@ -251,7 +251,7 @@
         "ko": "홍보",
         "en": "Media"
       },
-      "url": "/pages/media/newsroom/press.html",
+      "url": "/pages/media/newsroom/content.html",
       "children": {
         "newsroom": {
           "title": {
@@ -260,13 +260,6 @@
           },
           "url": "/pages/media/newsroom/press.html",
           "children": {
-            "press": {
-              "title": {
-                "ko": "보도자료",
-                "en": "Press Release"
-              },
-              "url": "/pages/media/newsroom/press.html"
-            },
             "content": {
               "title": {
                 "ko": "미디어컨텐츠",
@@ -274,6 +267,13 @@
               },
               "url": "/pages/media/newsroom/content.html",
               "sections": ["기존 미디어룸 자료", "유튜브 자료", "나무위키 링크"]
+            },
+            "press": {
+              "title": {
+                "ko": "보도자료",
+                "en": "Press Release"
+              },
+              "url": "/pages/media/newsroom/press.html"
             }
           }
         },

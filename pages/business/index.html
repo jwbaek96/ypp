@@ -17,7 +17,10 @@
     <link rel="stylesheet" href="../../css/pages/layout.css">
     <link rel="stylesheet" href="../../css/pages/military-base.css">
     <link rel="stylesheet" href="valve.css">
-    
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
+
     <!-- 메타 시스템 -->
     <script src="../../js/head-meta.js"></script>
     <style>
@@ -62,6 +65,36 @@
         }
         
 
+/* Nuclear Capabilities List Design */
+.capability-content ul {
+  margin: 12px 0 0 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.capability-content ul li {
+  background: #f2f7fc;
+  border-radius: 8px;
+  padding: 12px 18px;
+  color: #1a3557;
+  font-size: 1em;
+  box-shadow: 0 1px 4px rgba(30,60,90,0.06);
+  position: relative;
+  transition: background 0.2s;
+}
+.capability-content ul li:hover {
+  background: #eaf3fa;
+}
+.capability-content ul li::before {
+  content: '\2022';
+  color: #3a7bd5;
+  font-size: 1.2em;
+  margin-right: 10px;
+  position: relative;
+  top: 1px;
+}
     </style>
 </head>
 <body>
@@ -155,16 +188,14 @@
                 <div class="section-nav" id="section-nav-nuclear-power">
                     <a href="#nuclear-overview" class="section-nav-link"
                     data-eng="Overview"
-                    data-kor="원자력발전소 개요">원자력발전소 개요</a>
+                    data-kor="개요">개요</a>
+                 <a href="#nuclear-capabilities" class="section-nav-link"
+                       data-eng="Business Capabilities & Competitiveness"
+                       data-kor="사업역량 및 경쟁력">사업역량 및 경쟁력</a>
                  <a href="#nuclear-projects" class="section-nav-link"
-                    data-eng="Major Projects"
-                    data-kor="주요 프로젝트">주요 프로젝트</a>
-                 <a href="#nuclear-technology" class="section-nav-link"
-                    data-eng="Technical Capabilities"
-                    data-kor="기술 역량">기술 역량</a>
-                 <a href="#nuclear-performance" class="section-nav-link"
-                    data-eng="Performance"
-                    data-kor="실적">실적</a>
+                       data-eng="Project Status"
+                       data-kor="프로젝트 현황"></a>
+                 <a href="#cgid" class="section-nav-link">CGID</a>
                 </div>
                 
                 <!-- Section Navigation for 신재생에너지 -->
@@ -345,56 +376,237 @@
                 <!-- 원자력발전소 -->
                 <div id="nuclear-power" class="tab-content active">
                     <div class="content-header">
-                        <h2 class="content-title"
-                            data-eng="Nuclear Power Plant"
-                            data-kor="원자력발전소">원자력발전소</h2>
-                        <p class="content-subtitle"
-                            data-eng=""
-                            data-kor="Nuclear Power Plant">Nuclear Power Plant</p>
+                        <h2 class="content-title" data-eng="Nuclear Power Plant" data-kor="원자력발전소"><i class="fas fa-atom"></i> 원자력발전소</h2>
+                        <p class="content-subtitle" data-eng="Reliable and High-Quality Nuclear Power Systems" data-kor="신뢰와 품질로 구축하는 원자력 전력시스템">신뢰와 품질로 구축하는 원자력 전력시스템</p>
                     </div>
-                    
                     <div class="content-grid">
+                        <!-- 개요 -->
                         <div id="nuclear-overview" class="content-block full-width">
-                            <h3 class="block-title"
-                                data-eng="Overview"
-                                data-kor="개요">원자력발전소 개요</h3>
+                            <!-- <h3 class="block-title" data-eng="Overview" data-kor="개요"><i class="fas fa-atom"></i> 개요</h3> -->
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">원자력발전소 개요 콘텐츠 영역</p>
+                                <div class="nuclear-overview-card">
+                                    <div class="nuclear-overview-header">
+                                        <div class="nuclear-overview-icon">
+                                            <i class="fas fa-atom"></i>
+                                        </div>
+                                        <div class="nuclear-overview-title">
+                                            <span data-eng="Nuclear Power Plant Overview" data-kor="원자력발전소 개요">Nuclear Power Plant Overview</span>
+                                        </div>
+                                    </div>
+                                    <div class="nuclear-overview-body">
+                                        <p class="nuclear-overview-desc" data-eng="YPP provides comprehensive life-cycle solutions for domestic and international nuclear power plants, covering engineering, manufacturing, retrofit, maintenance, and quality verification (CGID) across electrical and I&C (Instrumentation & Control) domains. In compliance with stringent international codes and standards, YPP ensures stable operation and enhanced performance of nuclear facilities through consistent technical expertise and quality management systems—from initial design to commissioning, operation & maintenance, and quality assurance." data-kor="YPP는 발전소 전기 및 계측제어(I&C) 분야에서부터 국내외 원자력 발전소의 설계, 제작, 설비개선, 유지관리 및 품질검증(CGID)에 이르는 전 주기 솔루션을 제공합니다. 고도의 신뢰성과 안전성이 요구되는 원자력 산업 환경에 맞추어, 국제 규격(Code & Standard)을 철저히 준수하며, 설계부터 시운전, O&M, 품질보증까지 일관된 기술력과 관리체계를 기반으로 고객 설비의 안정적 운영과 성능 향상에 기여하고 있습니다">
+                                            YPP는 발전소 전기 및 계측제어(I&C) 분야에서부터 국내외 원자력 발전소의 <b>설계, 제작, 설비개선, 유지관리 및 품질검증(CGID)</b>에 이르는 전 주기 솔루션을 제공합니다.<br>
+                                            고도의 신뢰성과 안전성이 요구되는 원자력 산업 환경에 맞추어, 국제 규격(Code & Standard)을 철저히 준수하며, 설계부터 시운전, O&M, 품질보증까지 일관된 기술력과 관리체계를 기반으로 고객 설비의 안정적 운영과 성능 향상에 기여하고 있습니다.
+                                        </p>
+                                        <ul class="nuclear-overview-list">
+                                            <li><i class="fas fa-check-circle"></i> 설계, 제작, 설비개선, 유지관리, 품질검증(CGID) 전 주기 지원</li>
+                                            <li><i class="fas fa-check-circle"></i> 국제 규격(Code & Standard) 철저 준수</li>
+                                            <li><i class="fas fa-check-circle"></i> 전기 및 계측제어(I&C) 분야 전문성</li>
+                                            <li><i class="fas fa-check-circle"></i> 안정적 운영과 성능 향상에 기여</li>
+                                        </ul>
+                                    </div>
+                                    <div class="nuclear-overview-images">
+                                        <div class="nuclear-overview-img">
+                                            <img src="nuclear-plant.png" alt="국내 원자력발전소">
+                                            <p data-eng="Domestic Nuclear Power Plant" data-kor="국내 원자력발전소">국내 원자력발전소</p>
+                                        </div>
+                                        <div class="nuclear-overview-img">
+                                            <img src="akkuyu.jpeg" alt="튀르키예 아큐유 원전">
+                                            <p data-eng="Akkuyu Nuclear Power Plant" data-kor="튀르키예 아큐유 원전">튀르키예 아큐유 원전</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
+                        <!-- 사업역량 및 경쟁력 -->
+                        <div id="nuclear-capabilities" class="content-block full-width">
+                            <h3 class="block-title" data-eng="Capabilities & Competitiveness" data-kor="사업역량 및 경쟁력"><i class="fas fa-cogs"></i> 사업역량 및 경쟁력</h3>
+                            <div class="block-content">
+                                <div class="capabilities-grid">
+                                    <div class="capability-card">
+                                        <div class="capability-header">
+                                            <div class="capability-icon"><i class="fas fa-drafting-compass"></i></div>
+                                            <span data-eng="Scope of Services" data-kor="수행 역무">수행 역무</span>
+                                        </div>
+                                        <div class="capability-content">
+                                            <ul
+                                            data-eng="Design: Electrical and I&C drawings, Human Factor Engineering (HFE), Logic Diagrams, Instrument Loop Diagrams</li>
+                                                <li>Fabrication: Custom equipment such as control panels and sampling systems</li>
+                                                <li>Retrofit: Replacement of outdated I&C devices and digital control modules</li>
+                                                <li>Verification (CGID): Commercial-grade item dedication to meet equivalent performance to safety-class components</li>" 
+                                            data-kor="<li>설계(Design): 전기·계측 제어도면, HFE(Human Factor Engineering), Logic Diagram, Instrument Loop 설계</li>
+                                                <li>제작(Fabrication): 제어반, 시료채취설비(Sampling System) 등 특수설비 제작</li>
+                                                <li>설비개선(Retrofit): 디지털 제어반·모듈 교체, 노후 I&C 장비 개선</li>
+                                                <li>검증(CGID): 원자력 안전등급 품목(Basic Item)과 동등한 성능 확보 위한 품질검증 수행</li>">
+                                                <li>설계(Design): 전기·계측 제어도면, HFE(Human Factor Engineering), Logic Diagram, Instrument Loop 설계</li>
+                                                <li>제작(Fabrication): 제어반, 시료채취설비(Sampling System) 등 특수설비 제작</li>
+                                                <li>설비개선(Retrofit): 디지털 제어반·모듈 교체, 노후 I&C 장비 개선</li>
+                                                <li>검증(CGID): 원자력 안전등급 품목(Basic Item)과 동등한 성능 확보 위한 품질검증 수행</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="capability-card">
+                                        <div class="capability-header">
+                                            <div class="capability-icon"><i class="fas fa-gem"></i></div>
+                                            <span data-eng="Key Strengths" data-kor="핵심 경쟁력">핵심 경쟁력</span>
+                                        </div>
+                                        <div class="capability-content">
+                                            <ul
+                                            data-eng="<li>World's first triple-redundant protective relay (TRIUMP) development and field application</li>
+                                                <li>Generator Monitoring & Diagnostic System (GMDS), industrial-grade UPS solutions</li>
+                                                <li>Certified quality systems: ISO 9001, ISO 14001, ISO 19443, KEPIC</li>
+                                                <li>27 dedicated R&D personnel and proven track record with global EPC contractors</li>
+                                                <li>Provision of proprietary system platforms for KHNP and global nuclear operators</li>" 
+                                            data-kor="<li>세계 최초 3중화 보호계전기(TRIUMP) 개발 및 실증</li>
+                                                <li>발전기 통합 예방진단 시스템(GMDS), 산업용 UPS 보유</li>
+                                                <li>ISO 9001, 14001, ISO 19443, KEPIC 인증 기반 품질 시스템</li>
+                                                <li>27명 전담 R&D 연구인력 및 국내외 EPC사 협업 경험</li>
+                                                <li>한수원 및 글로벌 원전 대상 독자 플랫폼 기반 시스템 제공</li>">
+                                                <li>세계 최초 3중화 보호계전기(TRIUMP) 개발 및 실증</li>
+                                                <li>발전기 통합 예방진단 시스템(GMDS), 산업용 UPS 보유</li>
+                                                <li>ISO 9001, 14001, ISO 19443, KEPIC 인증 기반 품질 시스템</li>
+                                                <li>27명 전담 R&D 연구인력 및 국내외 EPC사 협업 경험</li>
+                                                <li>한수원 및 글로벌 원전 대상 독자 플랫폼 기반 시스템 제공</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 프로젝트 현황 -->
                         <div id="nuclear-projects" class="content-block full-width">
-                            <h3 class="block-title"
-                                data-eng="Major Projects"
-                                data-kor="주요 프로젝트">주요 프로젝트</h3>
+                            <h3 class="block-title" data-eng="Project Portfolio" data-kor="프로젝트 현황"><i class="fas fa-chart-line"></i> 프로젝트 현황</h3>
                             <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">주요 프로젝트 콘텐츠 영역</p>
+                                <div class="project-portfolio">
+                                    <div class="projects-grid">
+                                        <div class="project-card nuclear-domestic">
+                                            <!-- <div class="project-icon"><i class="fas fa-building"></i></div> -->
+                                            <div class="project-info capability-content">
+                                                <h5 data-eng="✅ Major Domestic Projects" data-kor="✅ 국내 주요 프로젝트">✅ 국내 주요 프로젝트</h5>
+                                                <ul 
+                                                data-eng="<li>Supply of electrical, I&C systems for Shin-Hanul Units 3&4, Shin-Kori Units 1–6, Hanbit, Hanul, Kori, Shin-Wolsong, etc.</li>
+                                                    <li>Extensive experience in field control panel upgrades, Q-Class components including power supply units and current transformers</li>
+                                                    <li>O&M services for digital control systems and predictive diagnostic systems</li>" 
+                                                data-kor="<li>신한울 3,4호기, 신고리 1~6호기, 한빛·한울·고리·신월성 등 원전 대상 전기·계측·제어 시스템 납품</li>
+                                                    <li>현장 제어반 개선, 전원공급기, 변류기 등 Q-Class 부품 다수 실적</li>
+                                                    <li>예방진단 시스템 및 디지털 제어반 O&M 수행</li>">
+                                                    <li>신한울 3,4호기, 신고리 1~6호기, 한빛·한울·고리·신월성 등 원전 대상 전기·계측·제어 시스템 납품</li>
+                                                    <li>현장 제어반 개선, 전원공급기, 변류기 등 Q-Class 부품 다수 실적</li>
+                                                    <li>예방진단 시스템 및 디지털 제어반 O&M 수행</li>
+                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="project-card nuclear-overseas">
+                                            <!-- <div class="project-icon"><i class="fas fa-globe"></i></div> -->
+                                            <div class="project-info capability-content">
+                                                <h5 data-eng="✅ Major Overseas Projects" data-kor="✅ 해외 주요 프로젝트">✅ 해외 주요 프로젝트</h5>
+                                                <ul
+                                                data-eng="<li>Türkiye Akkuyu NPP (Units 1–4) and Egypt El-Dabaa NPP (Units 1–4): Supply of Turbine I&C Packages</li>
+                                                    <li>UAE Barakah NPP (BNPP): ECMS and UR Relay systems supply</li>
+                                                    <li>Preparing market entry into new nuclear projects in Canada (CANDU), Czech Republic, and Romania</li>
+                                                    <li>Strengthening cooperation with KHNP, domestic EPCs, and global project developers</li>" 
+                                                data-kor="<li>튀르키예 Akkuyu 원전 1~4호기 및 이집트 El-Dabaa 원전1-4호기 : Turbine I&C Package 공급</li>
+                                                    <li>UAE Barakah(BNPP): ECMS 및 UR Relay 공급</li>
+                                                    <li>CANDU, 체코, 루마니아 등 글로벌 신규 원전 사업 진출 준비</li>
+                                                    <li>한수원 및 국내 EPC사 및 해외 사업자와 협업 확대</li>">
+                                                    <li>튀르키예 Akkuyu 원전 1~4호기 및 이집트 El-Dabaa 원전1-4호기 : Turbine I&C Package 공급</li>
+                                                    <li>UAE Barakah(BNPP): ECMS 및 UR Relay 공급</li>
+                                                    <li>CANDU, 체코, 루마니아 등 글로벌 신규 원전 사업 진출 준비</li>
+                                                    <li>한수원 및 국내 EPC사 및 해외 사업자와 협업 확대</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="project-images">
+                                        <!-- 이미지 제안: 세계 지도 위에 실적 위치 표시, 해외 원전 프로젝트 이미지 -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div id="nuclear-technology" class="content-block full-width">
-                            <h3 class="block-title"
-                                data-eng="Technical Capabilities"
-                                data-kor="기술 역량">기술 역량</h3>
-                            <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">기술 역량 콘텐츠 영역</p>
-                            </div>
-                        </div>
-                        
-                        <div id="nuclear-performance" class="content-block full-width">
-                            <h3 class="block-title"
-                                data-eng="Performance"
-                                data-kor="실적">실적</h3>
-                            <div class="block-content">
-                                <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">실적 콘텐츠 영역</p>
+                        <!-- CGID 섹션 추가 -->
+                        <!-- CGID -->
+                        <div id="cgid" class="content-block">
+                            <h3 class="block-title" data-eng="CGID (Commercial Grade Item Dedication) | Verifying Commercial Items as Safety-Class Components" data-kor="CGID (Commercial Grade Item Dedication) | 안전등급 품목으로 품질을 검증하다">CGID</h3>
+                            <div class="block-content bc4">
+                                <!-- 1. CGID의 의미 -->
+                                <div class="bc-head">
+                                    <p 
+                                    data-eng="CGID is a quality verification process that qualifies commercial-grade products for use as <strong>safety-class (Basic Item)</strong> components in nuclear power plants. YPP ensures the reliability and equivalency of these components by conducting comprehensive evaluations in accordance with domestic and international regulatory requirements—covering process control, quality assessment, testing, and documentation."
+                                    data-kor="CGID는 일반 산업제품(Commercial Product)을 원자력 발전소 내 <strong>안전등급 품목(Basic Item)</strong>으로 사용하기 위해 수행되는 <strong>품질검증 절차</strong>입니다. YPP는 <strong>국내외 규제기관 요건을 모두 반영한 공정 관리와 품질평가, 시험, 문서화</strong>를 통해 기기 신뢰성과 등가성을 보장합니다.">
+                                        CGID는 일반 산업제품(Commercial Product)을 원자력 발전소 내 **안전등급 품목(Basic Item)**으로 사용하기 위해 수행되는 품질검증 절차입니다. YPP는 국내외 규제기관 요건을 모두 반영한 공정 관리와 품질평가, 시험, 문서화를 통해 기기 신뢰성과 등가성을 보장합니다. 
+                                    </p>
+                                </div>
+                                <div class="image-container">
+                                        <a href="./cgid.png" target="_blank">
+                                            <img src="cgid.png">
+                                        </a>
+                                        <ul>
+                                            <li>• 일반규격품 원전 안전관련계통 적용을 위한 기술 평가</li>
+                                            <li>• 일반규격품 품질검증을 위한 수락시험 및 품질활동</li>
+                                            <li>• 원자력 발전소 기기검증(EQ) 설계유지</li>
+                                        </ul>
+                                    </div>
+                                <div style="margin-top:64px;"></div>
+                                <section class="cgid-engineering-services">
+                                    <h4 class="bc-subtitle">CGID Engineering Services</h4>
+                                    <p data-kor="YPP의 CGID Engineering Services는 엄격한 국내외 규제 기준을 준수하는 체계적인 품질검증 프로세스로 고객 설비의 안전성과 신뢰성을 보장합니다."
+                                    data-eng="YPP’s CGID Engineering Services ensure the safety and reliability of client facilities through a comprehensive quality verification process that rigorously complies with both domestic and international regulatory standards.<br>
+                                    >Our dedicated engineering team, equipped with extensive experience in nuclear power plant operation and maintenance, delivers:">YPP의 CGID Engineering Services는 엄격한 국내외 규제 기준을 준수하는 체계적인 품질검증 프로세스로 고객 설비의 안전성과 신뢰성을 보장합니다.</p>
+                                    <ul>
+                                        <li><b>원자력발전소 운영·정비 경험</b>을 보유한 전담 엔지니어링 팀이 핵심 기능·성능 검증 수행합니다</li>
+                                        <li><b>핵심 기능·성능 검증 수행</b>반영한 공정 관리로 구매, 기술평가, 계획, 시험, 보고서 발행까지 원스톱 서비스 제공하고 안전등급 품목(Basic Item)과 동등한 품질 확보합니다.</li>
+                                        <li><b>200여 개 품목 이상의 CGID 실적</b>과 해외 원전 프로젝트(BNPP 등) 참여 경험으로 축적된 High-Quality Engineering Services를 제공합니다.</li>
+                                    </ul>
+                                </section>
+                                <section>
+                                    <h4 class="bc-subtitle" data-kor="CGID 대상품목 LIST" data-eng="CGID Target Items LIST">CGID 대상품목 LIST</h4>
+                                    <div class="cgid-list-grid">
+                                        <!-- 디지털보호계전기 -->
+                                        <div class="cgid-list-item">
+                                            <a href="cgid-digital-relay.jpg" class="cgid-list-img">
+                                                <img src="cgid-digital-relay.jpg" alt="디지털보호계전기">
+                                            </a>
+                                            <div class="cgid-list-text">
+                                                <h5 data-eng="Digital Protective Relays" data-kor="디지털보호계전기">디지털보호계전기</h5>
+                                                <ul>
+                                                <li data-kor="설비수명관리를 위한 계전기 유닛 교체" data-eng="Replacement of relay units for plant lifecycle management.">설비수명관리를 위한 계전기 유닛 교체</li>
+                                                <li data-kor="설비수명관리를 위한 계전기 모듈 교체" data-eng="Replacement of relay modules for plant lifecycle management.">설비수명관리를 위한 계전기 모듈 교체</li>
+                                                <li data-kor="예비품 (전원공급기, CPU, DSP, Digital I/O, Analog I/O) 공급" data-eng="Supply of spare parts, including power supply units, CPUs, DSPs, digital I/O modules, and analog I/O modules.">예비품 (전원공급기, CPU, DSP, Digital I/O, Analog I/O) 공급</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- 전기 품목 -->
+                                        <div class="cgid-list-item">
+                                            <a href="cgid-electric-items.jpg" class="cgid-list-img">
+                                                <img src="cgid-electric-items.jpg" alt="전기 품목">
+                                            </a>
+                                            <div class="cgid-list-text">
+                                                <h5 data-eng="Electrical Items" data-kor="전기 품목">전기 품목</h5>
+                                                <ul>
+                                                <li data-kor="접촉기, 송풍기, 차단기, 분류기, 전동기, 배터리" data-eng="Electrical Items include contactors, blowers, circuit breakers, classifiers, electric motors, batteries">접촉기, 송풍기, 차단기, 분류기, 전동기, 배터리</li>
+                                                <li data-kor="계기용 변류기 및 변성기 (CT/PT), 아날로그 계전기, 전원공급기, 퓨즈" data-eng="Enstrument transformers (CTs/PTs), analog protective relays, power supply units, fuses">계기용 변류기 및 변성기 (CT/PT), 아날로그 계전기, 전원공급기, 퓨즈</li>
+                                                <li data-kor="EDG AVR 모듈, 전력변환기, 저항기, 타이머, 스위치, 단자대 등" data-eng="EDG AVR modules, power converters, resistors, timers, switches, and terminal blocks.">EDG AVR 모듈, 전력변환기, 저항기, 타이머, 스위치, 단자대 등</li>
+                                                <strong data-kor="원자력 발전소의 엄격한 요구 사항을 충족하기 위해 고품질 구성 요소의 포괄적인 범위가 공급됩니다." data-eng="A comprehensive range of high-quality components is supplied to meet the rigorous requirements of nuclear power plant applications.">A comprehensive range of high-quality components is supplied to meet the rigorous requirements of nuclear power plant applications.</strong>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- 계측/제어 품목 -->
+                                        <div class="cgid-list-item">
+                                            <a href="cgid-instrument-control.jpg" class="cgid-list-img">
+                                                <img src="cgid-instrument-control.jpg" alt="계측/제어 품목">
+                                            </a>
+                                            <div class="cgid-list-text">
+                                                <h5 data-eng="Instrumentation and Control Items" data-kor="계측/제어 품목">계측/제어 품목</h5>
+                                                <ul>
+                                                <li data-eng="Control valves, digital controllers, diodes, transistors." data-kor="제어밸브, 디지털 컨트롤러, 다이오드, 트랜지스터">제어밸브, 디지털 컨트롤러, 다이오드, 트랜지스터</li>
+                                                <li data-eng="Pressure switches, flow switches, temperature switches." data-kor="압력스위치, 유량스위치, 온도스위치">압력스위치, 유량스위치, 온도스위치</li>
+                                                <li data-eng="Control cards/modules, micro switches, etc." data-kor="제어카드/모듈, 마이크로 스위치 등">제어카드/모듈, 마이크로 스위치 등</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
                             </div>
                         </div>
                     </div>
@@ -557,17 +769,16 @@
                                             <p
                                             data-eng="Strategic partnerships with photovoltaic/wind equipment suppliers based on Kazakhstan Green Hydrogen Complex projects, securing competitive EPC pricing"
                                             data-kor="카자흐스탄 그린수소 Complex 프로젝트를 기반으로 태양광/풍력 기자재 공급선과 전략적 제휴를 통해 EPC 가격경쟁력 확보">카자흐스탄 그린수소 Complex 프로젝트를 기반으로 태양광/풍력 기자재 공급선과 전략적 제휴를 통해 EPC 가격경쟁력 확보</p>
-                                            <div class="partnership-badges">
-                                                <span class="badge"
-                                                data-eng="1,000MW Wind"
-                                                data-kor="풍력 1,000MW">풍력 1,000MW</span>
-                                                <span class="badge"
-                                                data-eng="600MW Solar"
-                                                data-kor="태양광 600MW">태양광 600MW</span>
-                                                <span class="badge"
-                                                data-eng="Phase 2/3 Planned"
-                                                data-kor="2/3차 계획">2/3차 계획</span>
-                                            </div>
+                                            <ul class="partnership-badges">
+                                                <li>
+                                                    <span class="badge"
+                                                    data-eng="1,000MW Wind"data-kor="풍력 1,000MW">풍력 1,000MW</span>
+                                                    <span class="badge"
+                                                    data-eng="600MW Solar"data-kor="태양광 600MW">태양광 600MW</span>
+                                                    <span class="badge"
+                                                    data-eng="Phase 2/3 Planned"data-kor="2/3차 계획">2/3차 계획</span>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
 
@@ -683,7 +894,7 @@
                                     <div class="status-cards">
                                         <div class="status-card primary">
                                             <div class="status-header">
-                                                <!-- <div class="status-flag">🇰🇿</div> -->
+                                                <div class="status-flag">🇰🇿</div>
                                                 <h5
                                                 data-eng="Kazakhstan Project"
                                                 data-kor="카자흐스탄 프로젝트">카자흐스탄 프로젝트</h5>
@@ -2589,7 +2800,7 @@ class BusinessPageController {
         if (activeTabContent) {
             activeTabContent.classList.add('active');
         }
-        if(tabId == 'control-valve' || tabId == 'us-military' || tabId == 'renewable-energy' || tabId == 'green-hydrogen') {
+        if(tabId == 'control-valve' || tabId == 'us-military' || tabId == 'renewable-energy' || tabId == 'green-hydrogen' || tabId == 'nuclear-power') {
             document.querySelector('.notice-container').style.display = 'none';
         }else {
             document.querySelector('.notice-container').style.display = 'flex';
@@ -2805,3 +3016,126 @@ window.getCurrentSection = getCurrentSection;
     </script>
 </body>
 </html>
+
+<style>
+#cgid section {margin-bottom: 50px;}
+/* 상단 설명 텍스트 */
+.bc-head {margin-bottom: 18px;}
+.bc-head p {
+    padding: 10px 15px; margin: 0; border-bottom: 1px solid #e2e8f0;
+    font-size: 1.2rem;color: #000;
+}
+/* 이미지 및 리스트 영역 */
+.image-container {display: flex; align-items: center; flex-direction: column; gap: 24px; margin-bottom: 24px;}
+.image-container a {display: block;}
+.image-container img {width: 100%; max-width: 500px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);}
+.image-container ul {margin: 0; padding-left: 18px; font-size: 1em; color: #333;}
+
+/* 엔지니어링 서비스 설명 */
+/* .block-content.bc4 {background: #f6f8fa; border-radius: 12px; padding: 32px 24px; margin-bottom: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);} */
+.cgid-engineering-services {margin-bottom: 24px;}
+
+.bc-subtitle {
+    font-size: 20px; font-weight: 600; color: #1a4e8a;
+    position: relative; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;}
+.cgid-engineering-services ul li {
+    position: relative; margin-bottom: 10px; padding: 20px 25px; border-radius: 8px;
+    background: #eef4fa; color: black;
+    counter-increment: item;
+    transition: all 0.3s ease;
+}
+.cgid-engineering-services ul {margin: 0 0 8px 0; font-size: 1em; color: #333; }
+
+/* CGID 품목 리스트 그리드 */
+.cgid-list-grid {display: grid; grid-template-columns: 1fr 1fr; gap: 36px 32px; margin: 32px 0 24px 0;}
+
+@media (max-width: 900px) {
+  .cgid-list-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .cgid-list-img {
+    max-width: 120px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .cgid-list-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .cgid-list-img {
+    max-width: 100px;
+  }
+}
+
+/* 각 품목 카드 */
+.cgid-list-item {
+    display: flex; align-items: flex-start;gap: 28px;
+    padding: 28px 24px; border-radius: 14px;
+    background: #eef4fa52; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* 카드 내 이미지 */
+.cgid-list-img {display: flex; flex: 0 0 140px; align-items: center; justify-content: center;}
+.cgid-list-img img {object-fit: contain; max-width: 140px; max-height: 140px; border-radius: 8px; border: 1px solid #e2e8f0; background: #e2e8f0;}
+
+/* 카드 내 텍스트 */
+.cgid-list-text {flex: 1 1 0;}
+.cgid-list-text h5 {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1a4e8a;
+}
+.cgid-list-text ul {
+  margin: 0 0 8px 0;
+  padding-left: 18px;
+  font-size: 0.98em;
+  color: #333;
+}
+.cgid-list-text li {list-style: disc; font-size: 1rem; color: #334155; margin-bottom: 7px;}
+
+/* 원자력발전소 */
+/* Nuclear Overview Card Styles */
+.nuclear-overview-card {
+    display: flex; flex-direction: column; align-items: flex-start;
+    background: #f7fafd; border-radius: 18px; box-shadow: 0 4px 24px rgba(30, 60, 90, 0.08);
+}
+.nuclear-overview-header {display: flex; align-items: center; margin-bottom: 18px;}
+.nuclear-overview-icon {
+    display: flex; align-items: center; justify-content: center; width: 54px; height: 54px; border-radius: 50%; margin-right: 18px;
+    background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%); box-shadow: 0 2px 8px rgba(30,60,90,0.10);
+    color: #fff; font-size: 2.1em;
+}
+.nuclear-overview-title span {font-size: 1.35em; font-weight: 700; color: #1a3557;}
+.nuclear-overview-body {margin-bottom: 24px;}
+.nuclear-overview-desc {color: #2a3a4a;font-size: 1.08em;line-height: 1.7;margin-bottom: 18px;}
+.nuclear-overview-list {list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 16px;}
+.nuclear-overview-list li {
+    display: flex; align-items: center; gap: 8px;border-radius: 8px; padding: 10px 18px;
+    background: #eaf3fa; box-shadow: 0 1px 4px rgba(30,60,90,0.06); color: #1a3557; font-size: 1em;
+}
+.nuclear-overview-list i {color: #3a7bd5; font-size: 1.1em;}
+.nuclear-overview-images {
+    display: flex; flex-direction: row; gap: 24px; 
+    width: 100%; margin-top: 24px;
+}
+.nuclear-overview-img{
+    /* overflow: hidden;  */
+    border: 10px solid #ffffff00;
+    background: #eaf3fa;box-shadow: 0 2px 12px rgba(30,60,90,0.10);border-radius: 12px;
+    flex: 1 1 0; display: flex; align-items: center; justify-content: center; flex-direction: column;}
+.nuclear-overview-img img{object-fit: cover;width: 100%; border-radius: 12px;  height: 240px;}
+.nuclear-overview-img p{
+    padding: 10px; width: 100%; margin: 0;
+    background: rgba(255, 255, 255, 0); color: #1a3557; font-size: 1em; text-align: center;
+}
+#nuclear-power .project-info.capability-content{padding: 0;
+
+}
+@media (max-width: 900px) {
+    .nuclear-overview-img{margin-top: 15px; width: 100%;}
+    .nuclear-overview-images {flex-direction: column; gap: 12px;}
+}
+
+</style>

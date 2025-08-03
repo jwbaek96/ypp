@@ -18,6 +18,9 @@
     
     <!-- 메타 시스템 -->
     <script src="../../../js/head-meta.js"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Header Container -->
@@ -64,7 +67,7 @@
                     <a href="#existing-media" class="section-nav-link active"
                     data-eng="Existing Media Room"
                     data-kor="미디어룸">미디어룸</a>
-                    <a href="#youtube-content" class="section-nav-link"
+                    <a href="#youtube-link" class="section-nav-link"
                     data-eng="YouTube Content"
                     data-kor="유튜브">유튜브 자료</a>
                     <a href="#external-links" class="section-nav-link"
@@ -79,7 +82,7 @@
             <div class="container">
                 <div class="content-header">
                     <h2 class="content-title"
-                        data-eng="A Global Leading Energy Company with Competitive Edge, YPP Co., Ltd."
+                        data-eng="A Global Leading Energy Company with Competitive Edge<br>YPP Co., Ltd."
                         data-kor="글로벌 경쟁력을 갖춘 초일류 에너지 기업<br>와이피피㈜">글로벌 경쟁력을 갖춘 초일류 에너지 기업, 와이피피㈜</h2>
                     <p class="content-subtitle"
                         data-eng="We are moving towards tomorrow's dream with customer-centered values and continuous technological development."
@@ -88,44 +91,91 @@
                 
                 <div class="content-grid">
                     <!-- 기존 미디어룸 자료 -->
-                    <div id="existing-media" class="">
 
-                    </div>
-                    <!-- 기존 미디어룸 자료 -->
-                    <!-- <div id="existing-media" class="content-block full-width">
-                        <h3 class="block-title"
-                            data-eng="Media Room"
-                            data-kor="미디어룸 ">미디어룸</h3>
-                        <div class="block-content">
-                            <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">콘텐츠 영역</p>
+                    <div id="existing-media" class="promo-media section-spy">
+                        <!-- 메인 홍보 동영상 -->
+                        <div class="promo-main-video">
+                          <div class="promo-video-item">
+                            <img src="  https://drive.google.com/thumbnail?id=1bN8Lh4oGQ02F7LE1Mp8x0XCCNtXfcneM&sz=w1200" alt="메인 홍보 동영상 썸네일" class="promo-thumb-img" />
+                            <div class="promo-overlay">
+                              <div class="promo-title">메인 홍보 동영상</div>
+                              <div class="promo-play-btns">
+                                <button class="promo-play-btn ko" data-video="14DNY52fYfeHn2RZM9vPXYcC-dKXgtWfm">KOR</button>
+                                <button class="promo-play-btn en" data-video="1TDGOahxN-6WjK-wmFDthpFlZERbGpsay">ENG</button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                    </div> -->
+                        <!-- 이전 홍보 동영상 3개 -->
+                        <div class="promo-prev-videos">
+                          <div class="promo-video-item">
+                            <img src="https://drive.google.com/thumbnail?id=1pOLRC0auOhzyQCu7tOAMdjQA52eT7Wsd&sz=w1200" alt="이전 홍보동영상1 썸네일" class="promo-thumb-img" />
+                            <div class="promo-overlay">
+                              <div class="promo-title">2017</div>
+                              <div class="promo-play-btns">
+                                <button class="promo-play-btn ko" data-video="1za3QPOj_DO9pO0dQP90lYKukrViSfXZ3">KOR</button>
+                                <button class="promo-play-btn en" data-video="15_tIf3x-Ub_9lA6H-43f-S4VmFWAJp8H">ENG</button>
+                              </div>
+                            </div>
+                        </div>
+                          <div class="promo-video-item">
+                            <img src="https://drive.google.com/thumbnail?id=1tNUcOglkhL37ATpjbqCU6-97CDSxmpDJ&sz=w1200" alt="이전 홍보동영상2 썸네일" class="promo-thumb-img" />
+                            <div class="promo-overlay">
+                              <div class="promo-title">2011</div>
+                              <div class="promo-play-btns">
+                                <button class="promo-play-btn ko" data-video="17P4zUXhuX4pPAKfH5BFoLklJGoKQUR0e">KOR</button>
+                                <button class="promo-play-btn en" data-video="136SQcBnDKmHX0FHMJKrn2XnmVLP_x-2d">ENG</button>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- <div class="promo-video-item">
+                            <img src="PREV3_THUMB_URL" alt="이전 홍보동영상3 썸네일" class="promo-thumb-img" />
+                            <div class="promo-overlay">
+                              <div class="promo-title">이전 홍보동영상3</div>
+                              <div class="promo-play-btns">
+                                <button class="promo-play-btn ko" data-video="PREV3_VIDEO_ID">KOR</button>
+                                <button class="promo-play-btn en" data-video="PREV3_VIDEO_ID_EN">ENG</button>
+                              </div>
+                            </div>
+                          </div> -->
+                        </div>
+                      </div>
+                      
+                      <!-- 동영상 팝업 오버레이 -->
+                      <div id="promo-video-modal" style="display:none;">
+                        <div class="promo-modal-bg"></div>
+                        <div class="promo-modal-content">
+                          <button id="promo-modal-close">닫기</button>
+                          <iframe id="promo-modal-iframe" width="100%" height="480" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                      </div>
                     
                     <!-- 유튜브 자료 -->
-                    <div id="youtube-content" class="content-block full-width">
-                        <h3 class="block-title"
-                    data-eng="YouTube Content"
-                    data-kor="유튜브 자료">유튜브 자료</h3>
-                        <div class="block-content">
-                            <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">콘텐츠 영역</p>
+                    <a id="youtube-link" class="external-links content-block section-spy" onclick="alert('준비중입니다.')" >
+                        <div class="youtube-link-content">
+                            <p class="external-link-title"
+                                data-eng="Go to YouTube"
+                                data-kor="유튜브 바로가기">유튜브 바로가기</p>
+                            <p class="external-link-desc" data-eng="View YPP Co., Ltd. on YouTube" data-kor="유튜브에서 와이피피㈜ 페이지 보기">유튜브에서 와이피피㈜ 페이지 보기</p>
                         </div>
-                    </div>
+                        <span class="external-link-icon">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </a>
                     
                     <!-- 나무위키 링크 -->
-                    <div id="external-links" class="content-block full-width">
-                        <h3 class="block-title"
-                    data-eng="Namuwiki Link"
-                    data-kor="나무위키 링크">나무위키 링크</h3>
-                        <div class="block-content">
-                            <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">콘텐츠 영역</p>
+                    <a id="external-links" class="external-links content-block section-spy" href="https://namu.wiki/w/%EC%99%80%EC%9D%B4%ED%94%BC%ED%94%BC(%EC%A3%BC)" target="_blank" rel="noopener" >
+                        <div class="namu-link-content">
+                            <p class="external-link-title"
+                                data-eng="Go to Namuwiki"
+                                data-kor="나무위키 바로가기">나무위키 바로가기</p>
+                            <p class="external-link-desc" data-eng="View YPP Co., Ltd. on Namuwiki" data-kor="나무위키에서 와이피피(주) 페이지 보기">나무위키에서 와이피피(주) 페이지 보기</p>
                         </div>
-                    </div>
+                        <span class="namu-link-icon">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </a>
+                    
                 </div>
             </div>
         </section>
@@ -141,7 +191,7 @@
     <script src="../../../js/hamburger.js"></script>
     <script src="../../../js/main-top-padding.js"></script>
     <!-- 페이지준비중 팝업 스크립트 -->
-    <script src="/js/content-preparing.js"></script>
+    <!-- <script src="/js/content-preparing.js"></script> -->
     
     <!-- _________________________________________ -->
     <!-- 스크롤 탑 버튼 -->
@@ -246,7 +296,7 @@ class ContentPageController {
         let ticking = false;
         
         const updateActiveSection = () => {
-            const sections = document.querySelectorAll('.content-block[id]');
+            const sections = document.querySelectorAll('.section-spy[id]');
             const scrollPosition = window.pageYOffset + window.innerHeight / 2;
             
             sections.forEach(section => {
@@ -330,5 +380,98 @@ window.initContentPage = initContentPage;
 window.goToSection = goToSection;
 window.getCurrentSection = getCurrentSection;
     </script>
+
+
+<style>
+a.external-links:hover{
+    text-decoration: none;
+    color: white;}
+.external-links{
+    display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;
+    color: white; font-size: 24px;font-weight: 700;
+    border: none;
+}
+#external-links{
+    background: linear-gradient(135deg, #66ea70 0%, #4b8da2 125%);
+    box-shadow: 0 -2px 20px rgba(111, 234, 102, 0.4), 0 -6px 20px rgba(75, 162, 142, 0.3), 0 -2px 10px rgba(147, 237, 251, 0.2);
+}
+#youtube-link{
+    background: linear-gradient(135deg, #ff0000 0%, #ff4d00 125%);
+    box-shadow: 0 -2px 20px rgba(255, 0, 0, 0.4), 0 -6px 20px rgba(255, 77, 0, 0.3), 0 -2px 10px rgba(255, 153, 153, 0.2);
+}
+#youtube-link:hover{ cursor: pointer;}
+.external-link-title, .external-link-desc {  color: white; font-size: 24px;font-weight: 700; margin: 0; }
+.external-link-desc{ font-size: .9rem; font-weight: 400; color: #ffffffe0; margin-top: 9px;}
+
+/* =================================== */
+#existing-media{margin-bottom: 52px;}
+.promo-media { width: 100%; }
+.promo-main-video { width: 100%; margin-bottom: 32px; }
+.promo-prev-videos { display: flex; gap: 24px; }
+.promo-video-item { 
+    position: relative; width: 100%; max-width: 100%; border-radius: 16px; overflow: hidden; background: #222; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;}
+.promo-video-item:hover {box-shadow: 0 4px 20px rgba(0,0,0,0.5);}
+.promo-video-item:hover .promo-thumb-img { transform: scale(1.05); }
+.promo-thumb-img { width: 100%; height: 520px; object-fit: cover; display: block; transition: transform 0.3s ease}
+.promo-prev-videos .promo-thumb-img { height: 320px; }
+.promo-overlay { 
+    position: absolute; left: 0; bottom: 0; width: 100%; z-index: 2; padding: 24px; 
+    background: rgba(0,0,0,0.5); color: #ffffff; backdrop-filter: blur(8px);
+    display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; }
+.promo-title { font-size: 1.2rem; font-weight: bold;}
+.promo-play-btns { display: flex; gap: 12px; }
+.promo-play-btn {  border: none; border-radius: 0; font-size: 1rem; cursor: pointer; }
+.promo-play-btn.ko { background: rgba(0,0,0,0); color: #ffffff; border-right: 1px solid #fff; padding-right: 12px;}
+.promo-play-btn.en { background: rgba(0,0,0,0); color: #ffffff; }
+.promo-play-btns button:hover{ text-shadow: 0 0 5px rgba(255,255,255,0.8);}
+
+/* 팝업 오버레이 스타일 */
+#promo-video-modal { position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); z-index:9999; display:none; align-items:center; justify-content:center; }
+#promo-video-modal.active { display:flex; }
+.promo-modal-bg { position:absolute; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); }
+.promo-modal-content { position:relative; width: 100%; border-radius:16px; padding:24px; z-index:2;}
+#promo-modal-close { position:fixed; top:16px; right:16px; background:#222; color:#fff; border:none; border-radius:8px; padding:8px 16px; cursor:pointer; }
+#promo-modal-iframe { width:100%; border-radius:8px; background:#000; }
+@media screen and (max-width: 768px) {
+    .promo-prev-videos { flex-direction: column; }
+    .promo-thumb-img { height: 320px; }
+    .promo-prev-videos .promo-thumb-img { height: 180px; }
+    #promo-modal-iframe { height: 320px; }
+}
+</style>
+
+<script>
+function getDriveEmbedUrl(fileId) {
+  return `https://drive.google.com/file/d/${fileId}/preview`;
+}
+
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('promo-play-btn')) {
+    const fileId = e.target.dataset.video;
+    const modal = document.getElementById('promo-video-modal');
+    const iframe = document.getElementById('promo-modal-iframe');
+    iframe.src = getDriveEmbedUrl(fileId);
+    modal.classList.add('active');
+    modal.style.display = 'flex';
+  }
+});
+
+document.getElementById('promo-modal-close').onclick = function() {
+  const modal = document.getElementById('promo-video-modal');
+  const iframe = document.getElementById('promo-modal-iframe');
+  modal.classList.remove('active');
+  modal.style.display = 'none';
+  iframe.src = '';
+};
+
+document.querySelector('.promo-modal-bg').onclick = function() {
+  const modal = document.getElementById('promo-video-modal');
+  const iframe = document.getElementById('promo-modal-iframe');
+  modal.classList.remove('active');
+  modal.style.display = 'none';
+  iframe.src = '';
+};
+</script>
 </body>
 </html>

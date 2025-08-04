@@ -3021,10 +3021,7 @@ window.getCurrentSection = getCurrentSection;
 #cgid section {margin-bottom: 50px;}
 /* 상단 설명 텍스트 */
 .bc-head {margin-bottom: 18px;}
-.bc-head p {
-    padding: 10px 15px; margin: 0; border-bottom: 1px solid #e2e8f0;
-    font-size: 1.2rem;color: #000;
-}
+.bc-head p {padding: 10px 15px; margin: 0; border-bottom: 1px solid #e2e8f0; font-size: 1rem; color: #000;}
 /* 이미지 및 리스트 영역 */
 .image-container {display: flex; align-items: center; flex-direction: column; gap: 24px; margin-bottom: 24px;}
 .image-container a {display: block;}
@@ -3097,9 +3094,10 @@ window.getCurrentSection = getCurrentSection;
 
 /* 원자력발전소 */
 /* Nuclear Overview Card Styles */
+#nuclear-overview{border: none;}
+#nuclear-overview:hover{box-shadow: none;}
 .nuclear-overview-card {
-    display: flex; flex-direction: column; align-items: flex-start;
-    background: #f7fafd; border-radius: 18px; box-shadow: 0 4px 24px rgba(30, 60, 90, 0.08);
+    display: flex; flex-direction: column; align-items: flex-start;border-radius: 18px;
 }
 .nuclear-overview-header {display: flex; align-items: center; margin-bottom: 18px;}
 .nuclear-overview-icon {
@@ -3118,7 +3116,7 @@ window.getCurrentSection = getCurrentSection;
 .nuclear-overview-list i {color: #3a7bd5; font-size: 1.1em;}
 .nuclear-overview-images {
     display: flex; flex-direction: row; gap: 24px; 
-    width: 100%; margin-top: 24px;
+    width: 100%; margin-top: 0px;
 }
 .nuclear-overview-img{
     /* overflow: hidden;  */

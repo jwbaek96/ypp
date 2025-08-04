@@ -23,6 +23,14 @@
           "url": "/pages/company/about.html#business",
           "sections": ["사업소개", "파트너", "인허가", "유자격"]
         },
+        "central-research-institute": {
+          "title": {
+            "ko": "중앙연구소",
+            "en": "Central Research Institute"
+          },
+          "url": "/pages/company/about.html#central-research-institute",
+          "sections": ["연구소 소개", "연구개발", "하드웨어 역량", "소프트웨어 역량"]
+        },
         "culture": {
           "title": {
             "ko": "기업문화",
@@ -46,7 +54,7 @@
         "ko": "사업분야",
         "en": "Business Industry"
       },
-      "url": "/pages/business/index.html",
+      "url": "/pages/business/index.html?tab=nuclear-power",
       "children": {
         "nuclear-power": {
           "title": {

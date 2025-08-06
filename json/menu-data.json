@@ -104,14 +104,6 @@
           "url": "/pages/business/index.html?tab=bess",
           "sections": ["BESS 개요", "시스템 구성", "제어 시스템", "프로젝트"]
         },
-        "data-center": {
-          "title": {
-            "ko": "데이터센터",
-            "en": "Data Center"
-          },
-          "url": "/pages/business/index.html?tab=data-center",
-          "sections": ["데이터센터 전력", "냉각 시스템", "모니터링", "실적"]
-        },
         "control-valve": {
           "title": {
             "ko": "콘트롤밸브",
@@ -127,8 +119,24 @@
           },
           "url": "/pages/business/index.html?tab=us-military",
           "sections": ["미군기지 프로젝트", "보안 시스템", "전력 공급", "실적"]
+        },
+        "data-center": {
+          "title": {
+            "ko": "데이터센터",
+            "en": "Data Center"
+          },
+          "url": "/pages/business/index.html?tab=data-center",
+          "sections": ["데이터센터 전력", "냉각 시스템", "모니터링", "실적"]
+        },
+        "smr":{
+          "title": {
+            "ko": "SMR",
+            "en": "SMR"
+          },
+          "url": "/pages/business/index.html?tab=smr",
+          "sections": ["SMR 개요", "기술 개발", "프로젝트", "미래 전망"]
         }
-      }
+        }
     },
     "workingscope": {
       "title": {

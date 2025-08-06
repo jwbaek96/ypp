@@ -538,9 +538,8 @@
         padding: 20px;
     }
     
-    .stat-number {
-        font-size: 1.8rem;
-    }
+    .stat-number {font-size: 1.4rem;}
+    .stat-label {font-size: 0.8rem;}
     
     .metrics-grid {
         grid-template-columns: 1fr;

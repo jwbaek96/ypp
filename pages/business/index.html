@@ -2689,11 +2689,11 @@
     <!-- 한영 전환 기능 -->
         <script src="/js/lang-switch.js"></script>
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
- <script src="https://kit.fontawesome.com/0470599ade.js" crossorigin="anonymous"></script>
-<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-    <script>
+<script>
 // ===== 사업분야 페이지 컨트롤러 클래스 =====
+
+
 class BusinessPageController {
     constructor() {
         this.currentTab = 'thermal-power';
@@ -2800,6 +2800,7 @@ class BusinessPageController {
         if (activeTabContent) {
             activeTabContent.classList.add('active');
         }
+        // 현재 탭의 페이지 준비중 팝업 표시
         if(tabId == 'control-valve' || tabId == 'us-military' || tabId == 'renewable-energy' || tabId == 'green-hydrogen' || tabId == 'nuclear-power') {
             document.querySelector('.notice-container').style.display = 'none';
         }else {
@@ -3013,7 +3014,8 @@ window.goToTab = goToTab;
 window.goToSection = goToSection;
 window.getCurrentTab = getCurrentTab;
 window.getCurrentSection = getCurrentSection;
-    </script>
+</script>
+
 </body>
 </html>
 

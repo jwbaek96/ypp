@@ -12,7 +12,7 @@
             "ko": "기업현황",
             "en": "About"
           },
-          "url": "/pages/company/about.html#status",
+          "url": "/pages/company/about.html?tab=status",
           "sections": ["소개", "인사말", "연혁", "조직도"]
         },
         "business": {
@@ -20,7 +20,7 @@
             "ko": "주요사업",
             "en": "Main Business"
           },
-          "url": "/pages/company/about.html#business",
+          "url": "/pages/company/about.html?tab=business",
           "sections": ["사업소개", "파트너", "인허가", "유자격"]
         },
         "central-research-institute": {
@@ -28,7 +28,7 @@
             "ko": "중앙연구소",
             "en": "Central Research Institute"
           },
-          "url": "/pages/company/about.html#central-research-institute",
+          "url": "/pages/company/about.html?tab=central-research-institute",
           "sections": ["연구소 소개", "연구개발", "하드웨어 역량", "소프트웨어 역량"]
         },
         "culture": {
@@ -36,7 +36,7 @@
             "ko": "기업문화",
             "en": "Corporate Culture"
           },
-          "url": "/pages/company/about.html#culture",
+          "url": "/pages/company/about.html?tab=culture",
           "sections": ["비전&핵심가치", "조직문화", "사회공헌"]
         },
         "location": {
@@ -133,74 +133,40 @@
     "workingscope": {
       "title": {
         "ko": "업무 및 서비스",
-        "en": "Working Scope"
+        "en": "Services and Offerings"
       },
-      "url": "/pages/workingscope/epc.html",
+      "url": "/pages/workingscope/index.html",
       "children": {
-        "epc": {
+        "development-solution": {
           "title": {
-            "ko": "EPC",
-            "en": "EPC"
+            "ko": "개발 & 솔루션",
+            "en": "Development & Solution Providing"
           },
-          "url": "/pages/workingscope/epc.html",
-          "sections": ["EPC 개요", "설계", "조달", "건설", "주요 실적"]
+          "url": "/pages/workingscope/index.html?tab=development-solution"
         },
-        "engineering": {
+        "engineering-consulting": {
           "title": {
-            "ko": "엔지니어링",
-            "en": "Engineering"
+            "ko": "엔지니어링 & 컨설팅",
+            "en": "Engineering & Consulting"
           },
-          "url": "/pages/workingscope/engineering.html",
-          "sections": ["플랜트 전기분야 설계", "플랜트 계측분야 설계", "전력계통 컨설팅", "CGID"]
+          "url": "/pages/workingscope/index.html?tab=engineering-consulting",
+          "sections": ["엔지니어링", "컨설팅", "Feasibility Services"]
         },
-        "procurement": {
+        "operation-maintenance": {
           "title": {
-            "ko": "장비공급",
-            "en": "Procurement & S/I"
+            "ko": "운영 & 유지보수",
+            "en": "Operation & Maintenance"
           },
-          "url": "/pages/workingscope/procurement.html",
-          "sections": ["전력설비", "계측설비", "제어설비", "공급 실적"]
+          "url": "/pages/workingscope/index.html?tab=operation-maintenance",
+          "sections": ["운영", "유지보수", "기술 지원"]
         },
-        "mro": {
+        "customer-training": {
           "title": {
-            "ko": "MRO",
-            "en": "MRO"
+            "ko": "고객 교육",
+            "en": "Customer Training"
           },
-          "url": "/pages/workingscope/mro.html",
-          "children": {
-            "power-protection": {
-              "title": {
-                "ko": "전력보호 및 안전",
-                "en": "Power Protection & Safety"
-              },
-              "url": "/pages/workingscope/mro.html#power-protection",
-              "sections": ["전력계통 보호시스템", "안전 시스템", "보호계전기", "유지보수"]
-            },
-            "instrumentation": {
-              "title": {
-                "ko": "계측 및 제어",
-                "en": "Instrumentation & Control Systems"
-              },
-              "url": "/pages/workingscope/mro.html#instrumentation",
-              "sections": ["계측 시스템", "제어 시스템", "HVAC 제어", "Aux/Local 제어"]
-            },
-            "preventive-diagnostics": {
-              "title": {
-                "ko": "예방진단",
-                "en": "Preventive Diagnostics"
-              },
-              "url": "/pages/workingscope/mro.html#preventive-diagnostics",
-              "sections": ["설비 진단", "예측 정비", "진단 시스템", "분석 서비스"]
-            },
-            "monitoring-control": {
-              "title": {
-                "ko": "모니터링 & 컨트롤",
-                "en": "Monitoring & Control"
-              },
-              "url": "/pages/workingscope/mro.html#monitoring-control",
-              "sections": ["감시제어시스템", "샘플링 시스템", "진동 모니터링", "디지털 변전소"]
-            }
-          }
+          "url": "/pages/workingscope/index.html?tab=customer-training",
+          "sections": ["교육 프로그램", "교육 자료", "고객 지원"]
         }
       }
     },

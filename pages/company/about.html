@@ -72,10 +72,11 @@
         <section class="tab-navigation">
             <div class="container">
                 <nav class="tab-nav">
-                    <a href="#status" class="tab-link active" data-tab="status" data-eng="Overview" data-kor="기업현황">기업현황</a>
-                    <a href="#business" class="tab-link" data-tab="business" data-eng="Main Business" data-kor="주요사업">주요사업</a>
-                    <a href="#central-research-institute" class="tab-link" data-tab="central-research-institute" data-eng="Central Research Institute" data-kor="중앙연구소">중앙연구소</a>
-                    <a href="#culture" class="tab-link" data-tab="culture" data-eng="Corporate Culture" data-kor="기업문화">기업문화</a>
+                    <a href="?tab=status" class="tab-link active" data-tab="status" data-eng="Overview" data-kor="기업현황">기업현황</a>
+                    <a href="?tab=business" class="tab-link" data-tab="business" data-eng="Main Business" data-kor="주요사업">주요사업</a>
+                    <a href="?tab=central-research-institute" class="tab-link" data-tab="central-research-institute" data-eng="Central Research Institute" data-kor="중앙연구소">중앙연구소</a>
+                    <a href="?tab=culture" class="tab-link" data-tab="culture" data-eng="Corporate Culture" data-kor="기업문화">기업문화</a>
+                    <a href="./location.html" class="tab-link" data-eng="Location" data-kor="오시는 길">오시는 길</a>
                 </nav>
                 
                 <!-- Section Navigation for 기업현황 -->
@@ -1455,7 +1456,7 @@
             init() {
                 this.setupTabNavigation();
                 this.setupSectionNavigation();
-                this.handleUrlHash();
+                this.handleUrlParams();
                 this.attachEvents();
             }
             
@@ -1464,13 +1465,20 @@
                 const tabLinks = document.querySelectorAll('.tab-link');
                 
                 tabLinks.forEach(link => {
+                    // "오시는 길" 링크는 탭 전환 기능에서 제외 (페이지 이동용)
+                    const href = link.getAttribute('href');
+                    if (href && href.includes('location.html')) {
+                        return; // "오시는 길" 링크는 기본 동작 유지 (페이지 이동)
+                    }
+                    
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
                         const tabId = link.getAttribute('data-tab');
                         this.switchTab(tabId);
                         
-                        // URL 해시 업데이트
-                        window.history.pushState(null, null, `#${tabId}`);
+                        // URL 파라미터 업데이트 (페이지 내 탭 클릭 시)
+                        const newUrl = `${window.location.pathname}?tab=${tabId}`;
+                        window.history.pushState(null, null, newUrl);
                     });
                 });
             }
@@ -1494,12 +1502,18 @@
                 });
             }
             
-            // URL 해시 처리
-            handleUrlHash() {
+            // URL 파라미터 처리
+            handleUrlParams() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const tabParam = urlParams.get('tab');
                 const hash = window.location.hash.substring(1);
                 
-                if (hash) {
-                    // 탭 ID인지 섹션 ID인지 확인
+                if (tabParam && this.isTabId(tabParam)) {
+                    // URL 파라미터로 탭 지정 시 (메뉴에서 직접 접근)
+                    this.switchTab(tabParam);
+                    // 스크롤하지 않음 - 최상단 유지
+                } else if (hash) {
+                    // 해시로 접근 시 (페이지 내 네비게이션)
                     if (this.isTabId(hash)) {
                         this.switchTab(hash);
                     } else if (this.isSectionId(hash)) {
@@ -1513,7 +1527,7 @@
                 
                 // 브라우저 뒤로가기/앞으로가기 처리
                 window.addEventListener('popstate', () => {
-                    this.handleUrlHash();
+                    this.handleUrlParams();
                 });
             }
             
@@ -1675,7 +1689,8 @@
             // 외부에서 호출 가능한 메서드들
             goToTab(tabId) {
                 this.switchTab(tabId);
-                window.history.pushState(null, null, `#${tabId}`);
+                const newUrl = `${window.location.pathname}?tab=${tabId}`;
+                window.history.pushState(null, null, newUrl);
             }
             
             goToSection(sectionId) {

@@ -14,7 +14,7 @@ class ESGPageController {
     init() {
         this.setupTabNavigation();
         this.setupSectionNavigation();
-        this.handleUrlHash();
+        this.handleUrlParams();
         this.attachEvents();
     }
     
@@ -28,8 +28,9 @@ class ESGPageController {
                 const tabId = link.getAttribute('data-tab');
                 this.switchTab(tabId);
                 
-                // URL 해시 업데이트
-                window.history.pushState(null, null, `#${tabId}`);
+                // URL 파라미터 업데이트
+                const newUrl = `${window.location.pathname}?tab=${tabId}`;
+                window.history.pushState(null, null, newUrl);
             });
         });
     }
@@ -53,12 +54,17 @@ class ESGPageController {
         });
     }
     
-    // URL 해시 처리
-    handleUrlHash() {
+    // URL 파라미터 처리
+    handleUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get('tab');
         const hash = window.location.hash.substring(1);
         
-        if (hash) {
-            // 탭 ID인지 섹션 ID인지 확인
+        if (tabParam) {
+            // URL 파라미터에 탭이 있는 경우
+            this.switchTab(tabParam);
+        } else if (hash) {
+            // 호환성을 위해 해시가 있는 경우도 처리
             if (this.isTabId(hash)) {
                 this.switchTab(hash);
             } else if (this.isSectionId(hash)) {
@@ -68,11 +74,15 @@ class ESGPageController {
                     this.scrollToSection(hash);
                 }, 100);
             }
+        } else {
+            // 기본 탭으로 설정
+            const defaultTabId = 'esg';
+            this.switchTab(defaultTabId);
         }
         
         // 브라우저 뒤로가기/앞으로가기 처리
         window.addEventListener('popstate', () => {
-            this.handleUrlHash();
+            this.handleUrlParams();
         });
     }
     
@@ -236,7 +246,8 @@ class ESGPageController {
     // 외부에서 호출 가능한 메서드들
     goToTab(tabId) {
         this.switchTab(tabId);
-        window.history.pushState(null, null, `#${tabId}`);
+        const newUrl = `${window.location.pathname}?tab=${tabId}`;
+        window.history.pushState(null, null, newUrl);
     }
     
     goToSection(sectionId) {

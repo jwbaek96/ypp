@@ -81,10 +81,8 @@
         <section class="tab-navigation">
             <div class="container">
                 <nav class="tab-nav">
-                    <a href="#intro" class="tab-link active" data-tab="intro"
-                        data-eng="Introduction"
-                        data-kor="소개">소개</a>
-                        <a href="#relay-school" class="tab-link" data-tab="relay-school">Relay School</a>
+                    <a href="#intro" class="tab-link active" data-tab="intro" data-eng="Introduction" data-kor="소개">소개</a>
+                    <a href="#relay-school" class="tab-link" data-tab="relay-school">Relay School</a>
                     <a href="#psac" class="tab-link" data-tab="psac">PSAC</a>
                 </nav>
 
@@ -1925,7 +1923,7 @@ class AcademyPageController {
     init() {
         this.setupTabNavigation();
         this.setupSectionNavigation();
-        this.handleUrlHash();
+        this.handleUrlParams();
         this.attachEvents();
     }
     
@@ -1941,8 +1939,10 @@ class AcademyPageController {
                 this.switchTab(tabId);
                 this.updateTabActiveState(link);
                 
-                // URL 해시 업데이트
-                window.history.pushState(null, null, `#${tabId}`);
+                // URL 파라미터 업데이트
+                const newUrl = new URL(window.location);
+                newUrl.searchParams.set('tab', tabId);
+                window.history.pushState(null, null, newUrl);
             });
         });
     }
@@ -1966,14 +1966,24 @@ class AcademyPageController {
         });
     }
     
-    // URL 해시 처리
-    handleUrlHash() {
-        const hash = window.location.hash.substring(1);
+    // URL 파라미터 처리
+    handleUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tab = urlParams.get('tab');
         
-        if (hash && this.isValidTab(hash)) {
+        if (tab && this.isValidTab(tab)) {
             setTimeout(() => {
-                this.switchTab(hash);
-                const correspondingLink = document.querySelector(`[data-tab="${hash}"]`);
+                this.switchTab(tab);
+                const correspondingLink = document.querySelector(`[data-tab="${tab}"]`);
+                if (correspondingLink) {
+                    this.updateTabActiveState(correspondingLink);
+                }
+            }, 100);
+        } else {
+            // 기본 탭으로 설정
+            setTimeout(() => {
+                this.switchTab('intro');
+                const correspondingLink = document.querySelector(`[data-tab="intro"]`);
                 if (correspondingLink) {
                     this.updateTabActiveState(correspondingLink);
                 }
@@ -1982,7 +1992,7 @@ class AcademyPageController {
         
         // 브라우저 뒤로가기/앞으로가기 처리
         window.addEventListener('popstate', () => {
-            this.handleUrlHash();
+            this.handleUrlParams();
         });
     }
     
@@ -2149,7 +2159,9 @@ class AcademyPageController {
             if (correspondingLink) {
                 this.updateTabActiveState(correspondingLink);
             }
-            window.history.pushState(null, null, `#${tabId}`);
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set('tab', tabId);
+            window.history.pushState(null, null, newUrl);
         }
     }
     

@@ -218,7 +218,31 @@
       },
       "url": "/pages/academy/index.html",
       "sections": ["소개", "PSAC", "Relay School"],
-      "type": "section-page"
+      "type": "section-page",
+      "children": {
+        "intro": {
+          "title": {
+            "ko": "소개",
+            "en": "Introduction"
+          },
+          "url": "/pages/academy/index.html?tab=intro",
+          "sections": ["아카데미 소개", "교육 목표", "교육 과정"]
+        },
+        "relay-school": {
+          "title": {
+            "ko": "Relay School",
+            "en": "Relay School"
+          },
+          "url": "/pages/academy/index.html?tab=relay-school"
+          },
+          "psac": {
+            "title": {
+              "ko": "PSAC",
+              "en": "PSAC"
+            },
+            "url": "/pages/academy/index.html?tab=psac"
+          }
+        } 
     },
     "media": {
       "title": {

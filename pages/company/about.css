@@ -102,7 +102,7 @@
     @media (max-width: 768px) {
         .intro-logo {max-width: 250px;}
         .company-footer-a{width: 100%;}
-        .company-footer-b{width: 100%;}
+        .company-footer-b{width: 100%; font-size: .85rem;}
         .detail-label{padding-left: 0;}
         .detail-row{padding: 1rem 0;}                
     }

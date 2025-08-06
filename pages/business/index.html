@@ -3290,10 +3290,10 @@ class BusinessPageController {
             activeTabContent.classList.add('active');
         }
         // 현재 탭의 페이지 준비중 팝업 표시
-        if(tabId == 'control-valve' || tabId == 'us-military' || tabId == 'renewable-energy' || tabId == 'green-hydrogen' || tabId == 'nuclear-power' || tabId == 'smr') {
-            document.querySelector('.notice-container').style.display = 'none';
-        }else {
+        if(tabId == 'thermal-power' || tabId == 'substation' || tabId == 'bess' || tabId == 'data-center') {
             document.querySelector('.notice-container').style.display = 'flex';
+        }else {
+            document.querySelector('.notice-container').style.display = 'none';
         }
         
         // 섹션 네비게이션 전환
@@ -3364,7 +3364,7 @@ class BusinessPageController {
     
     // 탭 ID인지 확인
     isTabId(id) {
-        const tabIds = ['thermal-power', 'nuclear-power', 'renewable-energy', 'green-hydrogen', 'substation', 'bess', 'data-center', 'control-valve', 'us-military'];
+        const tabIds = ['thermal-power', 'nuclear-power', 'renewable-energy', 'green-hydrogen', 'substation', 'bess', 'data-center', 'control-valve', 'us-military','smr'];
         return tabIds.includes(id);
     }
     

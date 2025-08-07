@@ -119,17 +119,6 @@
     gap: 16px;
 }
 
-.week-number {
-    background: #1e3a8a;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    min-width: 60px;
-    text-align: center;
-}
-
 
 .week-title {
     font-size: 1.2rem;
@@ -414,11 +403,6 @@
     
     .curriculum-header {
         padding: 12px 16px;
-    }
-    
-    .week-number {
-        padding: 6px 12px;
-        font-size: 0.8rem;
     }
     
     .week-title {
@@ -894,9 +878,7 @@
 }
 
 /* PSAC 교육안내 테이블 */
-.psac-info-table {
-    margin-top: 30px;
-}
+
 
 .info-table {
     width: 100%;

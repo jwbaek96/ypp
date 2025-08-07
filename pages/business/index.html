@@ -2331,79 +2331,6 @@
                             </div>
                         </div>
                     </section>
-                    <!-- Technical Specifications -->
-                    <!-- <section class="specs-section">
-                        <div class="container">
-                            <h2 class="section-title">기술 사양</h2>
-                            <div class="specs-grid">
-                                <div class="spec-item">
-                                    <span class="spec-number">565°C</span>
-                                    <div class="spec-label">최고 운전온도</div>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="spec-number">4500</span>
-                                    <div class="spec-label">ANSI Class 압력등급</div>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="spec-number">78</span>
-                                    <div class="spec-label">제품 라인업</div>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="spec-number">200+</span>
-                                    <div class="spec-label">원전 납품 실적</div>
-                                </div>
-                            </div>
-                        </div>
-                    </section> -->
-                    <!-- Key Features -->
-                    <!-- <section class="features-section">
-                        <div class="container">
-                            <h2 class="section-title">핵심 특징</h2>
-                            <div class="features-grid">
-                                <div class="feature-item">
-                                    <h4>국산 기술력</h4>
-                                    <p>국내 유일하게 전 압력등급을 국산 기술로 공급 가능하며, 설계부터 제작, 현장 설치, 평가까지 전 과정을 독자 수행합니다.</p>
-                                </div>
-                                <div class="feature-item">
-                                    <h4>특허 기술</h4>
-                                    <p>고유의 특허기술을 통해 누설 차단, 캐비테이션 방지, 저소음·저진동 특성이 확보되어 있습니다.</p>
-                                </div>
-                                <div class="feature-item">
-                                    <h4>정밀 제어</h4>
-                                    <p>고차압 조건에서 정밀 제어와 내구성이 요구되는 현장에 최적화된 밸브 솔루션을 제공합니다.</p>
-                                </div>
-                                <div class="feature-item">
-                                    <h4>안전 기능</h4>
-                                    <p>스프링 리턴 방식의 Fail-safe 기능을 통해 전원 또는 공압 상실 시에도 안전한 위치로 전환됩니다.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section> -->
-                    <!-- Achievements -->
-                    <!-- <section class="achievements-section">
-                        <div class="container">
-                            <h2 class="section-title">인증 및 수상</h2>
-                            <div class="achievement-list">
-                                <div class="achievement-item">
-                                    <h4>산업통상자원부 혁신제품</h4>
-                                    <p>정부로부터 혁신적인 기술력과 품질을 인정받아 혁신제품으로 선정되었습니다.</p>
-                                </div>
-                                <div class="achievement-item">
-                                    <h4>중소벤처기업부 성능인증제품</h4>
-                                    <p>우수한 성능과 품질을 검증받아 성능인증제품 및 시범구매제품으로 지정되었습니다.</p>
-                                </div>
-                                <div class="achievement-item">
-                                    <h4>특허청 우수발명품</h4>
-                                    <p>독창적인 기술과 발명으로 특허청으로부터 우수발명품으로 인정받았습니다.</p>
-                                </div>
-                                <div class="achievement-item">
-                                    <h4>글로벌 수출 실적</h4>
-                                    <p>UAE 바라카 원전, 국내 주요 조선사 등 국내외 주요 프로젝트에 성공적으로 납품하였습니다.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section> -->
-                    <!-- Call to Action -->
                     <section class="vv-cta-section">
                         <div class="container">
                             <div class="cta-content">
@@ -3687,14 +3614,17 @@ window.getCurrentSection = getCurrentSection;
 .cgid-brief p { margin: 0; color: #2d3748; font-size: 0.95rem; line-height: 1.6;}
 
 /* Strengths Grid Styles */
-.strengths-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 20px;}
+/* .strengths-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 20px;} */
+.strengths-grid{display: flex; flex-wrap: wrap; gap: 24px; margin-top: 20px; justify-content: center;align-items: center;}
 .strength-card {
+    max-width: 308px;
     display: flex; align-items: flex-start; gap: 16px; padding: 24px; background: white; 
     border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; transition: all 0.3s ease;}
 .strength-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08);}
 .strength-icon {
     display: flex; align-items: center; justify-content: center; width: 48px; height: 48px;
     border-radius: 50%; background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%); color: white; font-size: 1.2em; flex-shrink: 0;}
+/* .strength-card .strength-content{text-align: center;} */
 .strength-content h4 { margin: 0 0 8px 0; font-size: 1.1rem; font-weight: 600; color: #1a365d;}
 .strength-content p { margin: 0; color: #4a5568; font-size: 0.9rem; line-height: 1.5;}
 
@@ -3706,8 +3636,9 @@ window.getCurrentSection = getCurrentSection;
     .accordion-content.active {padding: 12px 16px;}
     .accordion-content ul {padding: 0;}
     .accordion-content-image {width: auto; max-width: 40%; margin-left: 5px;}
-    .strengths-grid { grid-template-columns: 1fr; gap: 16px;}
-    .strength-card {padding: 16px;}
+    /* .strengths-grid { grid-template-columns: 1fr; gap: 16px;} */
+    .strengths-grid {flex-direction: column; align-items: center; gap: 16px;}
+    .strength-card {max-width: 100%; width: 100%; padding: 16px;}
 }
 
 /* SMR 오버뷰 계층형 리스트 디자인 */
@@ -3838,6 +3769,24 @@ window.getCurrentSection = getCurrentSection;
     line-height: 1.7;
     margin-bottom: 18px;
 }
+#smr .capabilities-grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+}
+#smr .capability-card{
+    width: 100%;
+    max-width: calc(50% - 30px);
+}
+#smr .capability-content ul{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#smr .capability-content ul li{
+    flex: 1;
+}
 
 @media (max-width: 900px) {
     .smr-overview-card {padding: 18px 12px;}
@@ -3946,4 +3895,14 @@ window.getCurrentSection = getCurrentSection;
     .cgid-supply-grid { flex-direction: column; gap: 18px; padding: 18px 8px;}
 }
 
+/* 미군기지 */
+.feature-item{position: relative;}
+.feature-item i{position: absolute; bottom: 0; left: 3px; color: #51515117; font-size: 4rem;}
+.capability-card {display: flex; flex-direction: column;}
+
+.capability-content {flex-grow: 1; display: flex; flex-direction: column;}
+.feature-list{height: 100%; display: flex; flex-direction: column; justify-content: space-around;}
+.feature-item {display: flex; align-items: center; justify-content: center; flex: 1; border: 1px solid #00000012;}
+#us-military .content-block{border: none;}
+#us-military .content-block:hover{box-shadow: none;}
 </style>

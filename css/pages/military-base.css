@@ -397,7 +397,6 @@
 .competency-item.featured:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-    border-color: #1e3c72;
 }
 
 .competency-icon-large {

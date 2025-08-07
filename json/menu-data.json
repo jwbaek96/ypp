@@ -5,7 +5,7 @@
         "ko": "회사소개",
         "en": "Company"
       },
-      "url": "/pages/company/about.html",
+      "url": "/pages/company/about.html?tab=status",
       "children": {
         "status": {
           "title": {
@@ -224,7 +224,7 @@
         "ko": "YPP아카데미",
         "en": "YPP Academy"
       },
-      "url": "/pages/academy/index.html",
+      "url": "/pages/academy/index.html?tab=intro",
       "sections": ["소개", "PSAC", "Relay School"],
       "type": "section-page",
       "children": {

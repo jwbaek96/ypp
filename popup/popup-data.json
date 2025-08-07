@@ -45,7 +45,7 @@
                   "kor": "교육신청",
                   "eng": "Apply Now"
                 },
-                "link": "/pages/academy/index.html#psac"
+                "link": "/pages/academy/index.html?tab=psac"
               }
             ]
           }
@@ -67,7 +67,7 @@
                   "kor": "교육신청",
                   "eng": "Apply Now"
                 },
-                "link": "/pages/academy/index.html#relay-school"
+                "link": "/pages/academy/index.html?tab=relay-school"
               }
             ]
           }

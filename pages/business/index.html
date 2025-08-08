@@ -2483,8 +2483,8 @@
                                                 <i class="fas fa-globe"></i>
                                             </div>
                                             <span
-                                            data-eng="🌍 Global Technology Integration"
-                                            data-kor="글로벌 기술 연계">🌍 글로벌 기술 연계</span>
+                                            data-eng="Global Technology Integration"
+                                            data-kor="글로벌 기술 연계">글로벌 기술 연계</span>
                                         </div>
                                         <div class="capability-content">
                                             <div class="feature-list">
@@ -2517,8 +2517,8 @@
                                                 <i class="fas fa-building"></i>
                                             </div>
                                             <span
-                                            data-eng="🏗️ EPC Readiness"
-                                            data-kor="EPC 수행 기반">🏗️ EPC 수행 기반</span>
+                                            data-eng="EPC Readiness"
+                                            data-kor="EPC 수행 기반">EPC 수행 기반</span>
                                         </div>
                                         <div class="capability-content">
                                             <div class="feature-list">
@@ -2551,8 +2551,8 @@
                                                 <i class="fas fa-shipping-fast"></i>
                                             </div>
                                             <span
-                                            data-eng="🔗 Robust Supply Chain"
-                                            data-kor="경쟁력 있는 Supply Chain">🔗 경쟁력 있는 Supply Chain</span>
+                                            data-eng="Robust Supply Chain"
+                                            data-kor="경쟁력 있는 Supply Chain">경쟁력 있는 Supply Chain</span>
                                         </div>
                                         <div class="capability-content">
                                             <div class="feature-list">
@@ -2579,8 +2579,8 @@
                                                 <i class="fas fa-bolt"></i>
                                             </div>
                                             <span
-                                            data-eng="⚡ Total Power & Control Solutions"
-                                            data-kor="전력·제어 토탈 솔루션 제공">⚡ 전력·제어 토탈 솔루션</span>
+                                            data-eng="Total Power & Control Solutions"
+                                            data-kor="전력·제어 토탈 솔루션 제공">전력·제어 토탈 솔루션</span>
                                         </div>
                                         <div class="capability-content">
                                             <div class="feature-list">
@@ -3899,7 +3899,11 @@ window.getCurrentSection = getCurrentSection;
 .feature-item{position: relative;}
 .feature-item i{position: absolute; bottom: 0; left: 3px; color: #51515117; font-size: 4rem;}
 .capability-card {display: flex; flex-direction: column;}
-
+#us-military .capabilities-grid, #us-military .competency-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 18px;
+}
 .capability-content {flex-grow: 1; display: flex; flex-direction: column;}
 .feature-list{height: 100%; display: flex; flex-direction: column; justify-content: space-around;}
 .feature-item {display: flex; align-items: center; justify-content: center; flex: 1; border: 1px solid #00000012;}

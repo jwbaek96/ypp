@@ -688,7 +688,51 @@
                             <a href="business_intro.png" target="_blank" rel="noopener noreferrer">
                                 <img src="business_intro.png" alt="YPP 사업 소개" class="main-business-img">
                             </a>
+                            <div class="business-link-overlay">
+                                <a class="business-link" id="business-link-1" href="/pages/business/index.html?tab=nuclear-power"></a>
+                                <a class="business-link" id="business-link-2" href="/pages/business/index.html?tab=thermal-power"></a>
+                                <a class="business-link" id="business-link-3" href="/pages/business/index.html?tab=renewable-energy"></a>
+                                <a class="business-link" id="business-link-4" href="/pages/business/index.html?tab=green-hydrogen"></a>
+                                <a class="business-link" id="business-link-4-1" href="/pages/business/index.html?tab=green-hydrogen"></a>
+                                <a class="business-link" id="business-link-5" href="/pages/business/index.html?tab=substation"></a>
+                                <a class="business-link" id="business-link-6" href="/pages/business/index.html?tab=bess"></a>
+                                <a class="business-link" id="business-link-8" href="/pages/business/index.html?tab=us-military"></a>
+                                <a class="business-link" id="business-link-9" href="/pages/business/index.html?tab=data-center"></a>
+                                <a class="business-link" id="business-link-10" href="/pages/business/index.html?tab=smr"></a>
+                                <!-- <a class="business-link" id="business-link-7" href="">콘트롤밸브</a> -->
+                            </div>
                         </div>
+                        <style>
+                            .business-main-image {position: relative;}
+                            .business-link-overlay {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                /* border: 1px solid #ccc; */
+                            }
+                            .business-link {
+                                position: absolute;
+                                height: 8%;
+                                width: 15%;
+                                overflow: hidden;
+                                /* background-color: rgba(0, 0, 0, 0.8); */
+                                color: #333;
+                                --w2: 7%;
+                            }
+                            #business-link-1 { bottom: 0%; left: 41%; }/* 원자력 */
+                            #business-link-2 { bottom: 27%; right: 2%; }/* 화력 */
+                            #business-link-3 { top: 26%; left: 4%; }/* 신재생 */
+                            #business-link-4 { top: 34%; right: 9%; }/* 그수소/암모니아 */
+                            #business-link-4-1 { top: 50%; right: 6.5%; }/* 그린수소/암모니아 */
+                            #business-link-5 { top: 15%; right: 13%; }/* 변전소 */
+                            #business-link-6 { top: 46%; left: 7%; width: var(--w2);}/* 에너지저장장치 */
+                            /* #business-link-7 { top: 8%; left: 50%; } */
+                            #business-link-8 { top: 8%; left: 53%; width: var(--w2);}/* 미군기지 */
+                            #business-link-9 { top: 8%; left: 24%; }/* 데이터센터 */
+                            #business-link-10 { top: 5%; left: 42%; width: var(--w2);}/* SMR */
+                        </style>
                         <!-- 사업 소개 텍스트 -->
                         <div class="business-intro-text" style="text-align: center;"
                              data-eng="<p style='text-align: center;'>YPP Co., Ltd. is an energy company with unrivaled technology and solutions.</p> <p style='text-align: center;'> As a domestic leader in the power system field, we provide differentiated, high-quality system engineering and consulting, </p> <p style='text-align: center;'>preventive diagnosis of power facilities, continuous customer training and commissioning support, and a variety of competitive power facility solutions. </p> <p style='text-align: center;'>We offer the best and optimal total system solutions, from single components to enterprise-wide power facility protection systems, tailored to customer needs.</p>"

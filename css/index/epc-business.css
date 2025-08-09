@@ -248,7 +248,10 @@
     .section-title {
         font-size: 1.6rem;
     }
-    
+    .section-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
     .business-categories-container {
         gap: 2rem;
     }

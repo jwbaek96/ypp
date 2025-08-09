@@ -37,7 +37,7 @@
 }
 @media screen and (max-width: 480px) {
     .valve-gallery-box {
-    width: 146px;}
+    width: calc(50% - 25px);}
     
 }
         h1.content-header{

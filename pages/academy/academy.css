@@ -1072,7 +1072,7 @@
 }
 
 .curriculum-checkbox:checked + .curriculum-header {
-    background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+    background: #3880ff;
     color: white;
 }
 .curriculum-checkbox:checked + .curriculum-header .week-title {

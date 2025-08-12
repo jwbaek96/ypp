@@ -312,21 +312,18 @@ class PressPageController {
         }
         
         container.innerHTML = currentItems.map(item => `
-            <article class="press-item">
+            <a href="${item.page || '#'}.html" class="press-item">
                 <div class="press-content">
                     <div class="press-meta">
                         <span class="press-date">${item.date}</span>
                     </div>
                     <h3 class="press-title">
-                        <a href="${item.page || '#'}.html" target="" data-kor='${item.titleKR}' data-eng='${item.titleEN}'></a>
+                        <span data-kor='${item.titleKR}' data-eng='${item.titleEN}'></span>
                     </h3>
                     <p class="press-summary">${item.summary}</p>
                 </div>
-            </article>
+            </a>
         `).join('');
-                    // <div class="press-source">
-                    //     <span>출처: ${item.source}</span>
-                    // </div>
         
         this.updatePagination();
     }
@@ -493,11 +490,9 @@ window.initPressPage = initPressPage;
 /* List Header */
 .list-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border-light, #e5e5e5);
+    padding: 0 0 1rem 1rem;
 }
 
 .total-count {
@@ -528,21 +523,24 @@ window.initPressPage = initPressPage;
 }
 
 /* Press Items */
+.press-list{margin-top: 4.5rem;}
 .press-items {
-    min-height: 400px;
+    min-height: 600px;
 }
 
-.press-item {
+a.press-item {
+    display: block;
     padding: 1.5rem;
-    border-bottom: 1px solid var(--border-light, #e5e5e5);
-    /* border-radius: 8px; */
     margin-bottom: 1rem;
-    /* transition: box-shadow 0.3s ease; */
+    border-radius: 8px;
+    background-color: #f7f7f7;
+    /* background: linear-gradient(319deg, #f9faff 0%, #e2e8f0 100%); */
+    transition: all 0.3s ease;
 }
-
-/* .press-item:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-} */
+.press-item:hover{background: #f1f1f1 }
+.press-item:hover .press-title span{
+    color: var(--primary-blue, #0066cc);
+}
 
 .press-meta {
     display: flex;
@@ -564,7 +562,7 @@ window.initPressPage = initPressPage;
     margin-bottom: 0.75rem;
 }
 
-.press-title a {
+.press-title span {
     color: var(--text-primary, #333);
     text-decoration: none;
     font-size: 1.5rem;
@@ -572,7 +570,7 @@ window.initPressPage = initPressPage;
     line-height: 1.4;
 }
 
-.press-title a:hover {
+.press-title span:hover {
     color: var(--primary-blue, #0066cc);
 }
 
@@ -588,11 +586,7 @@ window.initPressPage = initPressPage;
 }
 
 /* Empty Message */
-.empty-message {
-    text-align: center;
-    padding: 3rem 0;
-    color: var(--text-secondary, #666);
-}
+.empty-message {text-align: center;padding: 3rem 0;color: var(--text-secondary, #666);}
 
 /* Pagination */
 .pagination {
@@ -602,89 +596,26 @@ window.initPressPage = initPressPage;
     gap: 0.5rem;
     margin-top: 2rem;
     padding-top: 2rem;
-    border-top: 1px solid var(--border-light, #e5e5e5);
+    border-top: 1px solid var(--border-light, #c8c8c8);
 }
 
-.page-btn {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--border-light, #e5e5e5);
-    background-color: white;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.9rem;
-}
-
-.page-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.page-btn:not(:disabled):hover {
-    background-color: var(--background-light, #f8f9fa);
-}
-
-.page-numbers {
-    display: flex;
-    gap: 0.25rem;
-}
-
-.page-number {
-    padding: 0.5rem 0.75rem;
-    border: 1px solid var(--border-light, #e5e5e5);
-    background-color: white;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.9rem;
-}
-
-.page-number.active {
-    background-color: var(--primary-blue, #0066cc);
-    color: white;
-    border-color: var(--primary-blue, #0066cc);
-}
-
-.page-number:not(.active):hover {
-    background-color: var(--background-light, #f8f9fa);
-}
+.page-btn {padding: 0.5rem 1rem;border: 1px solid var(--border-light, #e5e5e5);background-color: white;cursor: pointer;border-radius: 4px;font-size: 0.9rem;}
+.page-btn:disabled {opacity: 0.5;cursor: not-allowed;}
+.page-btn:not(:disabled):hover {background-color: var(--background-light, #f8f9fa);}
+.page-numbers {display: flex;gap: 0.25rem;}
+.page-number {cursor: pointer;font-size: 0.9rem;padding: 0.5rem 0.75rem;border: 1px solid var(--border-light, #e5e5e5);background-color: white;border-radius: 4px;}
+.page-number.active {background-color: var(--primary-blue, #0066cc);border-color: var(--primary-blue, #0066cc);color: white;}
+.page-number:not(.active):hover {background-color: var(--background-light, #f8f9fa);}
 
 /* Responsive */
 @media (max-width: 768px) {
-    .search-filter-section {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 1rem;
-    }
-    
-    .search-box {
-        max-width: none;
-    }
-    
-    .filter-box {
-        flex-direction: column;
-    }
-    
-    .list-header {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: stretch;
-    }
-    
-    .press-meta {
-        flex-direction: column;
-        gap: 0.25rem;
-        font-size: .9rem;
-    }
-    
-    .pagination {
-        flex-wrap: wrap;
-    }
-    .press-item{
-        padding: .75rem .25rem;
-        margin-bottom: .5rem;
-    }
-    h3.press-title,h3.press-title a {
-        font-size: 1.05rem;
-        line-height: 1;
-    }
+    .search-filter-section {flex-direction: column;align-items: stretch;gap: 1rem;}
+    .search-box {max-width: none;}
+    .filter-box {flex-direction: column;}
+    .list-header {flex-direction: column;gap: 1rem;align-items: stretch;}
+    .press-meta {flex-direction: column;gap: 0.25rem;font-size: .9rem;}
+    .pagination {flex-wrap: wrap;}
+    .press-item{padding: .75rem .25rem;margin-bottom: .5rem;}
+    h3.press-title,h3.press-title a {font-size: 1.05rem;line-height: 1;}
 }
 </style>

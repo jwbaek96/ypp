@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../../css/pages/layout.css">
     
     <!-- 메타 시스템 -->
-    <script src="../../../js/head-meta.js"></script>
+    <!-- <script src="../../../js/head-meta.js"></script> -->
     
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
@@ -167,7 +167,7 @@
     <script>
 
 // 배포 ID
-const DEPLOYMENT_ID = 'AKfycbx2Ub69YJIMR5qVeGKVmF9CEqxQwPVpT-buAthLVjwwGKhZhGvPFeprx9xsAoVu9n5S';
+const DEPLOYMENT_ID = 'AKfycbwjhJWxaA9U48Rg_WBB1h-viX3y_d9dVKud5nEmDUfS6hn35jiICvvTnAbQ-9XuvkQj';
 
 // 웹 앱 URL
 const GOOGLE_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DEPLOYMENT_ID}/exec`;
@@ -192,11 +192,11 @@ async function loadGalleryDataFromSheets() {
             // 카테고리별로 데이터 분리
             psacGalleryData = result.data.filter(item => 
                 item.category && item.category.toLowerCase() === 'psac'
-            );
+            ).reverse();
             
             relaySchoolGalleryData = result.data.filter(item => 
                 item.category && item.category.toLowerCase() === 'relay school'
-            );
+            ).reverse();
             
             console.log(`📋 PSAC 갤러리: ${psacGalleryData.length}개`);
             console.log(`📋 Relay School 갤러리: ${relaySchoolGalleryData.length}개`);

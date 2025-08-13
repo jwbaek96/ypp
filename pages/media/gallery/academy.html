@@ -74,9 +74,9 @@
 
         <!-- Content Section -->
         <section class="content-section" style="min-height: 500px;">
-            <!-- <div class="container"> -->
-            <div class="container" style="display: none;">
-                <!-- <div class="content-header"> -->
+            <div class="container">
+            <!-- <div class="container" style="display: none;"> -->
+                <div class="content-header">
                     <h2 class="content-title"
                         data-eng="Academy Gallery"
                         data-kor="아카데미갤러리">아카데미갤러리</h2>
@@ -154,7 +154,7 @@
     <script src="../../../js/hamburger.js"></script>
     <script src="../../../js/main-top-padding.js"></script>
     <!-- 페이지준비중 팝업 스크립트 -->
-    <script src="/js/content-preparing.js"></script>
+    <!-- <script src="/js/content-preparing.js"></script> -->
     
     <!-- _________________________________________ -->
     <!-- 스크롤 탑 버튼 -->
@@ -165,339 +165,60 @@
     
     <!-- PSAC Gallery Script -->
     <script>
-        // // PSAC Gallery Data
-        // const psacGalleryData = [
-        //     {
-        //         id: 1,
-        //         titleKR: "2015년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class A in August 2015",
-        //         date: "2015-08-15",
-        //         text: "2015년 8월 아무개반 수료식. 참석자는 누구누구",
-        //         image: ["1.jpg", "2.jpg", "3.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 아무개반 수료식",
-        //         titleEN: "Graduation Ceremony of Class B in August 2016",
-        //         date: "2016-08-15",
-        //         text: "2016년 8월 아무개반 수료식",
-        //         image: ["4.jpg", "5.jpg", "6.jpg"],
-        //         state: "on"
-        //     }
-        // ];
 
-        // // Relay School Gallery Data
-        // const relaySchoolGalleryData = [
-        //     {
-        //         id: 1,
-        //         titleKR: "2015년 8월 릴레이스쿨 1기 수료식",
-        //         titleEN: "Relay School 1st Class Graduation Ceremony in August 2015",
-        //         date: "2015-08-20",
-        //         text: "2015년 8월 릴레이스쿨 1기 수료식. 참석자는 누구누구",
-        //         image: ["relay1.jpg", "relay2.jpg", "relay3.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 2,
-        //         titleKR: "2016년 8월 릴레이스쿨 2기 수료식",
-        //         titleEN: "Relay School 2nd Class Graduation Ceremony in August 2016",
-        //         date: "2016-08-20",
-        //         text: "2016년 8월 릴레이스쿨 2기 수료식",
-        //         image: ["relay4.jpg", "relay5.jpg", "relay6.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 3,
-        //         titleKR: "2017년 8월 릴레이스쿨 3기 수료식",
-        //         titleEN: "Relay School 3rd Class Graduation Ceremony in August 2017",
-        //         date: "2017-08-20",
-        //         text: "2017년 8월 릴레이스쿨 3기 수료식",
-        //         image: ["relay7.jpg", "relay8.jpg", "relay9.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 4,
-        //         titleKR: "2018년 8월 릴레이스쿨 4기 수료식",
-        //         titleEN: "Relay School 4th Class Graduation Ceremony in August 2018",
-        //         date: "2018-08-20",
-        //         text: "2018년 8월 릴레이스쿨 4기 수료식",
-        //         image: ["relay10.jpg", "relay11.jpg", "relay12.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 5,
-        //         titleKR: "2019년 8월 릴레이스쿨 5기 수료식",
-        //         titleEN: "Relay School 5th Class Graduation Ceremony in August 2019",
-        //         date: "2019-08-20",
-        //         text: "2019년 8월 릴레이스쿨 5기 수료식",
-        //         image: ["relay13.jpg", "relay14.jpg", "relay15.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 6,
-        //         titleKR: "2020년 8월 릴레이스쿨 6기 수료식",
-        //         titleEN: "Relay School 6th Class Graduation Ceremony in August 2020",
-        //         date: "2020-08-20",
-        //         text: "2020년 8월 릴레이스쿨 6기 수료식",
-        //         image: ["relay16.jpg", "relay17.jpg", "relay18.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 7,
-        //         titleKR: "2021년 8월 릴레이스쿨 7기 수료식",
-        //         titleEN: "Relay School 7th Class Graduation Ceremony in August 2021",
-        //         date: "2021-08-20",
-        //         text: "2021년 8월 릴레이스쿨 7기 수료식",
-        //         image: ["relay19.jpg", "relay20.jpg", "relay21.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 8,
-        //         titleKR: "2022년 8월 릴레이스쿨 8기 수료식",
-        //         titleEN: "Relay School 8th Class Graduation Ceremony in August 2022",
-        //         date: "2022-08-20",
-        //         text: "2022년 8월 릴레이스쿨 8기 수료식",
-        //         image: ["relay22.jpg", "relay23.jpg", "relay24.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 9,
-        //         titleKR: "2023년 8월 릴레이스쿨 9기 수료식",
-        //         titleEN: "Relay School 9th Class Graduation Ceremony in August 2023",
-        //         date: "2023-08-20",
-        //         text: "2023년 8월 릴레이스쿨 9기 수료식",
-        //         image: ["relay25.jpg", "relay26.jpg", "relay27.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 10,
-        //         titleKR: "2024년 8월 릴레이스쿨 10기 수료식",
-        //         titleEN: "Relay School 10th Class Graduation Ceremony in August 2024",
-        //         date: "2024-08-20",
-        //         text: "2024년 8월 릴레이스쿨 10기 수료식",
-        //         image: ["relay28.jpg", "relay29.jpg", "relay30.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 11,
-        //         titleKR: "2025년 8월 릴레이스쿨 11기 수료식",
-        //         titleEN: "Relay School 11th Class Graduation Ceremony in August 2025",
-        //         date: "2025-08-20",
-        //         text: "2025년 8월 릴레이스쿨 11기 수료식",
-        //         image: ["relay31.jpg", "relay32.jpg", "relay33.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 12,
-        //         titleKR: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         titleEN: "Relay School 12th Class Graduation Ceremony in December 2025",
-        //         date: "2025-12-20",
-        //         text: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         image: ["relay34.jpg", "relay35.jpg", "relay36.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 12,
-        //         titleKR: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         titleEN: "Relay School 12th Class Graduation Ceremony in December 2025",
-        //         date: "2025-12-20",
-        //         text: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         image: ["relay34.jpg", "relay35.jpg", "relay36.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 12,
-        //         titleKR: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         titleEN: "Relay School 12th Class Graduation Ceremony in December 2025",
-        //         date: "2025-12-20",
-        //         text: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         image: ["relay34.jpg", "relay35.jpg", "relay36.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 12,
-        //         titleKR: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         titleEN: "Relay School 12th Class Graduation Ceremony in December 2025",
-        //         date: "2025-12-20",
-        //         text: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         image: ["relay34.jpg", "relay35.jpg", "relay36.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 12,
-        //         titleKR: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         titleEN: "Relay School 12th Class Graduation Ceremony in December 2025",
-        //         date: "2025-12-20",
-        //         text: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         image: ["relay34.jpg", "relay35.jpg", "relay36.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 12,
-        //         titleKR: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         titleEN: "Relay School 12th Class Graduation Ceremony in December 2025",
-        //         date: "2025-12-20",
-        //         text: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         image: ["relay34.jpg", "relay35.jpg", "relay36.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 12,
-        //         titleKR: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         titleEN: "Relay School 12th Class Graduation Ceremony in December 2025",
-        //         date: "2025-12-20",
-        //         text: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         image: ["relay34.jpg", "relay35.jpg", "relay36.jpg"],
-        //         state: "on"
-        //     },
-        //     {
-        //         id: 12,
-        //         titleKR: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         titleEN: "Relay School 12th Class Graduation Ceremony in December 2025",
-        //         date: "2025-12-20",
-        //         text: "2025년 12월 릴레이스쿨 12기 수료식",
-        //         image: ["relay34.jpg", "relay35.jpg", "relay36.jpg"],
-        //         state: "on"
-        //     }
-        // ];
+// 배포 ID
+const DEPLOYMENT_ID = 'AKfycbx2Ub69YJIMR5qVeGKVmF9CEqxQwPVpT-buAthLVjwwGKhZhGvPFeprx9xsAoVu9n5S';
 
-        // Global Modal Manager
+// 웹 앱 URL
+const GOOGLE_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DEPLOYMENT_ID}/exec`;
+
+// 전역 변수 선언
+let psacGalleryData = [];
+let relaySchoolGalleryData = [];
+
+/**
+ * 🌐 Google Sheets에서 갤러리 데이터를 로드하는 함수
+ */
+async function loadGalleryDataFromSheets() {
+    try {
+        console.log('📊 Google Sheets에서 갤러리 데이터 로드 시작...');
+        
+        const response = await fetch(`${GOOGLE_APPS_SCRIPT_URL}?category=all`);
+        const result = await response.json();
+        
+        if (result.success) {
+            console.log(`✅ 총 ${result.data.length}개의 데이터를 성공적으로 로드했습니다.`);
+            
+            // 카테고리별로 데이터 분리
+            psacGalleryData = result.data.filter(item => 
+                item.category && item.category.toLowerCase() === 'psac'
+            );
+            
+            relaySchoolGalleryData = result.data.filter(item => 
+                item.category && item.category.toLowerCase() === 'relay school'
+            );
+            
+            console.log(`📋 PSAC 갤러리: ${psacGalleryData.length}개`);
+            console.log(`📋 Relay School 갤러리: ${relaySchoolGalleryData.length}개`);
+            console.log(psacGalleryData);
+            console.log(relaySchoolGalleryData);
+
+            return true;
+        } else {
+            throw new Error(`API 오류: ${result.error || '알 수 없는 오류'}`);
+        }
+        
+    } catch (error) {
+        console.error('💥 갤러리 데이터 로드 실패:', error);
+        // 오류 발생 시 빈 배열로 초기화
+        psacGalleryData = [];
+        relaySchoolGalleryData = [];
+        return false;
+    }
+}
+
+
+        // Gallery Modal Manager
         class GalleryModalManager {
             constructor() {
                 this.currentController = null;
@@ -676,12 +397,10 @@
                     const galleryItem = document.createElement('div');
                     galleryItem.className = 'gallery-item';
                     
-                    const thumbnailImage = item.image[0];
-                    const imageBasePath = '../../../assets/images/gallery/academy/psac/';
-                    
+                    const thumbnailImage = item.image[0];                    
                     galleryItem.innerHTML = `
                         <div class="gallery-thumbnail" data-id="${item.id}">
-                            <img src="${imageBasePath}${thumbnailImage}" alt="${item.titleKR}" loading="lazy">
+                            <img src="${thumbnailImage}" alt="${item.titleKR}" loading="lazy">
                             <div class="gallery-overlay">
                                 <div class="gallery-info">
                                     <h4 class="gallery-title" data-eng="${item.titleEN}" data-kor="${item.titleKR}">${item.titleKR}</h4>
@@ -932,9 +651,8 @@
 
                 const modalImage = document.getElementById('modal-image');
                 const currentImageSpan = document.getElementById('current-image');
-                const imageBasePath = '../../../assets/images/gallery/academy/psac/';
                 
-                modalImage.src = imageBasePath + this.currentModal.image[this.currentImageIndex];
+                modalImage.src = this.currentModal.image[this.currentImageIndex];
                 modalImage.alt = this.currentModal.titleKR;
                 currentImageSpan.textContent = this.currentImageIndex + 1;
 
@@ -1000,11 +718,10 @@
                     galleryItem.className = 'gallery-item';
                     
                     const thumbnailImage = item.image[0];
-                    const imageBasePath = '../../../assets/images/gallery/academy/relay-school/';
                     
                     galleryItem.innerHTML = `
                         <div class="gallery-thumbnail" data-id="${item.id}">
-                            <img src="${imageBasePath}${thumbnailImage}" alt="${item.titleKR}" loading="lazy">
+                            <img src="${thumbnailImage}" alt="${item.titleKR}" loading="lazy">
                             <div class="gallery-overlay">
                                 <div class="gallery-info">
                                     <h4 class="gallery-title" data-eng="${item.titleEN}" data-kor="${item.titleKR}">${item.titleKR}</h4>
@@ -1256,9 +973,8 @@
 
                 const modalImage = document.getElementById('modal-image');
                 const currentImageSpan = document.getElementById('current-image');
-                const imageBasePath = '../../../assets/images/gallery/academy/relay-school/';
                 
-                modalImage.src = imageBasePath + this.currentModal.image[this.currentImageIndex];
+                modalImage.src = this.currentModal.image[this.currentImageIndex];
                 modalImage.alt = this.currentModal.titleKR;
                 currentImageSpan.textContent = this.currentImageIndex + 1;
 
@@ -1291,15 +1007,30 @@
             }
         }
 
-        // Initialize PSAC Gallery when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            new PSACGalleryController(psacGalleryData, 'psac-gallery');
-            new RelaySchoolGalleryController(relaySchoolGalleryData, 'relay-school-gallery', 12); // 8 items per page to show pagination
-        });
+        
+
+// 기존 DOMContentLoaded 이벤트를 수정
+document.addEventListener('DOMContentLoaded', async function() {
+    // Google Sheets에서 데이터 로드
+    const success = await loadGalleryDataFromSheets();
+    
+    if (success) {
+        // 기존 갤러리 컨트롤러 초기화
+        new PSACGalleryController(psacGalleryData, 'psac-gallery');
+        new RelaySchoolGalleryController(relaySchoolGalleryData, 'relay-school-gallery', 12);
+    } else {
+        console.error('갤러리 데이터 로드 실패로 빈 갤러리를 표시합니다.');
+        // 실패해도 빈 배열로 갤러리 초기화
+        new PSACGalleryController([], 'psac-gallery');
+        new RelaySchoolGalleryController([], 'relay-school-gallery', 12);
+    }
+});
     </script>
     
     <!-- Gallery Styles -->
     <style>
+        .content-block{border: none;}
+        .content-block:hover{box-shadow: none;}
         /* ===========================
            Gallery Components
         =========================== */

@@ -83,6 +83,18 @@
                                 <!-- Gallery Grid will be populated by JavaScript -->
                                 <div class="gallery-grid" id="inside-gallery-grid">
                                     <!-- Gallery items will be dynamically loaded -->
+                                    <div class="gallery-fake-item"></div>
+                                    <div class="gallery-fake-item"></div>
+                                    <div class="gallery-fake-item"></div>
+                                    <div class="gallery-fake-item"></div>
+                                    <div class="gallery-fake-item"></div>
+                                    <div class="gallery-fake-item"></div>
+                                    <div class="gallery-fake-item"></div>
+                                    <div class="gallery-fake-item"></div>
+                                    <div class="gallery-fake-item"></div>
+                                    <div class="gallery-fake-item"></div>
+                                    <div class="gallery-fake-item"></div>
+                                    <div class="gallery-fake-item"></div>
                                 </div>
                                 
                                 <!-- Pagination -->
@@ -526,6 +538,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 .gallery-container {width: 100%;}
 /* Gallery Grid */
 .gallery-grid {display: grid;grid-template-columns: repeat(4, 1fr);gap: 20px;margin-bottom: 40px;}
+/* Gallery Fake Item */
+.gallery-fake-item{aspect-ratio: 4/3;overflow: hidden;background: #f5f5f5; border-radius: 8px;}
 /* Gallery Item */
 .gallery-item {position: relative;cursor: pointer;border-radius: 8px;overflow: hidden;transition: transform 0.3s ease, box-shadow 0.3s ease;}
 .gallery-item:hover {transform: translateY(-5px);box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);}

@@ -174,14 +174,6 @@
     background: white;
 }
 
-.schedule-table tr:last-child td {
-    /* 마지막 행 스타일 유지 */
-}
-
-.schedule-table td:last-child {
-    /* 마지막 열 스타일 유지 */
-}
-
 .schedule-note {
     background: #fffbeb;
 }
@@ -286,11 +278,6 @@
     .psac-intro-title {
         font-size: 2rem;
     }
-    
-    .intro-description {
-        font-size: 1.1rem;
-    }
-    
     .stats-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -308,14 +295,7 @@
     .timeline-item {
         flex-direction: column;
         align-items: flex-start;
-    }
-    
-    .timeline-year {
-        margin-bottom: 15px;
-        margin-right: 0;
-        padding: 2px;
-    }
-    
+    }    
     
     .timeline-content {
         margin-left: 0;
@@ -435,11 +415,10 @@
     margin-bottom: 60px;
     padding: 40px 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 12px;
 }
 
 .intro-content {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 20px;
     text-align: center;
@@ -453,16 +432,9 @@
 }
 
 .intro-description {
-    font-size: 1.2rem;
-    line-height: 1.7;
-    color: #334155;
-    margin-bottom: 16px;
-}
-
-.intro-sub-description {
     font-size: 1rem;
-    line-height: 1.6;
-    color: #64748b;
+    line-height: 1.5;
+    color: #334155;
 }
 
 /* 교육 수료 통계 섹션 */
@@ -618,20 +590,6 @@
     align-items: flex-start;
     margin-bottom: 30px;
     position: relative;
-}
-
-.timeline-year {
-    background: #1e3a8a;
-    color: white;
-    font-weight: 700;
-    font-size: 1.1rem;
-    padding: 8px 20px;
-    border-radius: 25px;
-    min-width: 80px;
-    text-align: center;
-    margin-right: 30px;
-    position: relative;
-    z-index: 1;
 }
 
 .timeline-content {
@@ -953,7 +911,7 @@
     }
     
     .intro-description {
-        font-size: 1.1rem;
+        font-size: .98rem;
     }
     
     .stats-grid {
@@ -1081,4 +1039,406 @@
 
 .curriculum-checkbox:checked + .curriculum-header + .curriculum-content {
     max-height: 1500px;
+}
+
+/* ===== 새로운 섹션 스타일 ===== */
+
+/* 이미지 컨테이너 섹션 */
+.academy-images-section {
+    margin: 40px 0;
+    padding: 40px 0;
+    background: #f8fafc;
+}
+
+.academy-images-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    padding: 0 20px;
+}
+
+.academy-image-item {
+    flex: 0 0 200px;
+    height: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.academy-image-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.academy-image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 이미지 모달 스타일 */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.image-modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.image-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10001;
+    color: #62626200;
+    font-size: 2.5rem;
+    display: flex;
+;
+    /* background: rgb(255 255 255 / 16%); */
+    /* width: 40px; */
+    /* height: 40px; */
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    /* vertical-align: middle; */
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-modal-close:hover {
+    color: #33333300;
+    /* background: rgba(255, 255, 255, 1); */
+    transform: scale(1.1);
+    /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.863); */
+}
+
+/* 네비게이션 버튼 */
+.modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10001;
+}
+
+.modal-nav-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.modal-prev {
+    left: 20px;
+}
+
+.modal-next {
+    right: 20px;
+}
+
+.modal-image {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
+    display: block;
+}
+
+/* YPP 교육의 역사 섹션 */
+.academy-history-section {
+    margin: 60px 0;
+}
+
+.academy-history-section .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.academy-history-section .section-description {
+    font-size: 1.1rem;
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 50px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.history-timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 40px;
+}
+
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+    overflow: hidden;
+}
+
+/* .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 30px;
+    width: 16px;
+    height: 16px;
+    background: #3880ff;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 0 0 2px #3880ff;
+} */
+
+.timeline-content {
+    padding: 25px 30px;
+}
+
+.timeline-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+.timeline-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.timeline-details li {
+    margin-bottom: 12px;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.5;
+    color: #4b5563;
+}
+
+.timeline-details li::before {
+    content: '●';
+    position: absolute;
+    left: 0;
+    color: #3880ff;
+    font-weight: bold;
+}
+
+.timeline-details li strong {
+    color: #1e3a8a;
+    font-weight: 600;
+}
+
+/* YPP 교육의 장점 섹션 */
+.academy-strengths-section {
+    margin: 60px 0;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    padding: 60px 40px;
+}
+
+.academy-strengths-section .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.academy-strengths-section .section-description {
+    font-size: 1.1rem;
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 50px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.strengths-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.strength-item {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+.strength-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.strength-number {
+    height: 1.5rem;
+    aspect-ratio: 1/1;
+    background: linear-gradient(135deg, #3880ff, #1e3a8a);
+    color: white;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-right: .4rem;
+}
+
+.strength-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.strength-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.strength-details li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.5;
+    color: #4b5563;
+}
+
+.strength-details li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #3880ff;
+    font-weight: bold;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    /* 이미지 컨테이너 반응형 */
+    .academy-images-container {
+        gap: 15px;
+        padding: 0 15px;
+    }
+    
+    .academy-image-item {
+        flex: 0 0 150px;
+        height: 120px;
+    }
+
+    /* 역사 섹션 반응형 */
+    .history-timeline {
+        padding-left: 30px;
+    }
+    
+    .timeline-content {
+        padding: 20px;
+    }
+
+    /* 장점 섹션 반응형 */
+    .academy-strengths-section {
+        padding: 40px 20px;
+    }
+    
+    .strengths-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .strength-item {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .academy-images-container {
+        gap: 10px;
+        padding: 0 10px;
+    }
+    
+    .academy-image-item {
+        flex: 0 0 120px;
+        height: 100px;
+    }
+    
+    .timeline-content {
+        padding: 15px;
+    }
+    
+    .strength-item {
+        padding: 20px;
+    }
+    
+    /* 모바일 모달 스타일 */
+    .image-modal-content {
+        max-width: 95%;
+        max-height: 85%;
+    }
+    
+    .modal-image {
+        max-height: 80vh;
+    }
+    
+    .image-modal-close {
+        top: 10px;
+        right: 15px;
+        font-size: 30px;
+        width: 35px;
+        height: 35px;
+    }
+    
+    .modal-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .modal-prev {
+        left: 10px;
+    }
+    
+    .modal-next {
+        right: 10px;
+    }
 }   

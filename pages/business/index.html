@@ -3620,7 +3620,7 @@ class BusinessPageController {
             activeTabContent.classList.add('active');
         }
         // 현재 탭의 페이지 준비중 팝업 표시
-        if(tabId == 'thermal-power') {
+        if(tabId == 'thermal-power' || tabId == 'water-purification') {
             document.querySelector('.notice-container').style.display = 'flex';
         }else {
             document.querySelector('.notice-container').style.display = 'none';

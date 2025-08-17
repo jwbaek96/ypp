@@ -18,6 +18,9 @@
     
     <!-- 메타 시스템 -->
     <script src="../../../js/head-meta.js"></script>
+    
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Header Container -->
@@ -60,29 +63,63 @@
         </section>
 
         <!-- Content Section -->
-        <section class="content-section">
+        <section class="content-section" style="min-height: 500px;">
             <div class="container">
                 <div class="content-header">
                     <h2 class="content-title"
-                        data-eng="Inside"
-                        data-kor="인사이드">인사이드</h2>
+                        data-eng="Inside Gallery"
+                        data-kor="인사이드 갤러리">인사이드 갤러리</h2>
                     <p class="content-subtitle"
                         data-eng="Everyday life and special moments at YPP"
                         data-kor="YPP의 일상과 특별한 순간들">YPP의 일상과 특별한 순간들</p>
                 </div>
                 
-                <div class="gallery-content">
-                    <div class="gallery-grid">
-                        <div class="gallery-placeholder">
-                            <p
-                                data-eng="Content Under Preparation"
-                                data-kor="준비중입니다.">콘텐츠 영역</p>
+                <div class="content-grid">
+                    <!-- Inside Gallery -->
+                    <div id="inside-gallery-section" class="content-block full-width">
+                        <h3 class="block-title" style="display: none;">Inside</h3>
+                        <div class="block-content">
+                            <div id="inside-gallery" class="gallery-container">
+                                <!-- Gallery Grid will be populated by JavaScript -->
+                                <div class="gallery-grid" id="inside-gallery-grid">
+                                    <!-- Gallery items will be dynamically loaded -->
+                                </div>
+                                
+                                <!-- Pagination -->
+                                <div class="pagination-container" id="inside-pagination"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- Image Popup Modal -->
+    <div id="imageModal" class="image-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h3 id="modal-title"></h3>
+                <p id="modal-date"></p>
+            </div>
+            <div class="modal-body">
+                <div class="image-container" id="image-container">
+                    <div class="image-touch-area left-touch" data-direction="prev"></div>
+                    <div class="image-touch-area right-touch" data-direction="next"></div>
+                    <img id="modal-image" src="" alt="">
+                </div>
+                <p id="modal-description"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="nav-btn prev-btn" id="prevImage">&lt;</button>
+                <div class="image-counter">
+                    <span id="current-image">1</span> / <span id="total-images">1</span>
+                </div>
+                <button class="nav-btn next-btn" id="nextImage">&gt;</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer Container -->
     <div id="footer-container"></div>
@@ -93,17 +130,380 @@
     <script src="../../../js/sidebar.js"></script>
     <script src="../../../js/hamburger.js"></script>
     <script src="../../../js/main-top-padding.js"></script>
-    <!-- 페이지준비중 팝업 스크립트 -->
-    <script src="/js/content-preparing.js"></script>
     
     <!-- _________________________________________ -->
     <!-- 스크롤 탑 버튼 -->
     <div id="scrolltotop-container"></div>
     <!-- 최상단 가기 버튼 구현하기 -->
     <script src="/js/scrolltotop.js"></script>
-    <!-- 한영 전환 기능 -->
     <script src="/js/lang-switch.js"></script>
-    <!-- _________________________________________ -->
+    
+    <!-- Inside Gallery Script -->
+    <script>
+
+// 배포 ID
+const DEPLOYMENT_ID = 'AKfycbwjhJWxaA9U48Rg_WBB1h-viX3y_d9dVKud5nEmDUfS6hn35jiICvvTnAbQ-9XuvkQj';
+// 웹 앱 URL
+const GOOGLE_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DEPLOYMENT_ID}/exec`;
+// 전역 변수 선언
+let insideGalleryData = [];
+
+async function loadGalleryDataFromSheets() {
+    try {
+        console.log('📊 Google Sheets에서 갤러리 데이터 로드 시작...');
+        
+        const response = await fetch(`${GOOGLE_APPS_SCRIPT_URL}?category=all`);
+        const result = await response.json();
+        
+        if (result.success) {
+            console.log(`✅ 총 ${result.data.length}개의 데이터를 성공적으로 로드했습니다.`);
+            
+            // inside 카테고리 데이터만 필터링
+            insideGalleryData = result.data.filter(item => 
+                item.category && item.category.toLowerCase() === 'inside'
+            ).reverse();
+            
+            console.log(`📋 Inside 갤러리: ${insideGalleryData.length}개`);
+            console.log(insideGalleryData);
+
+            return true;
+        } else {
+            throw new Error(`API 오류: ${result.error || '알 수 없는 오류'}`);
+        }
+        
+    } catch (error) {
+        console.error('💥 갤러리 데이터 로드 실패:', error);
+        // 오류 발생 시 빈 배열로 초기화
+        insideGalleryData = [];
+        return false;
+    }
+}
+
+// Inside Gallery Controller Class
+class InsideGalleryController {
+    constructor(data, containerId, itemsPerPage = 12) {
+        this.data = data.filter(item => item.state === "on");
+        this.container = document.getElementById(containerId);
+        this.itemsPerPage = itemsPerPage;
+        this.currentPage = 1;
+        this.totalPages = Math.ceil(this.data.length / this.itemsPerPage);
+        this.currentModal = null;
+        this.currentImageIndex = 0;
+        
+        this.init();
+    }
+
+    init() {
+        this.renderGallery();
+        this.renderPagination();
+        this.setupModal();
+    }
+
+    renderGallery() {
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        const endIndex = startIndex + this.itemsPerPage;
+        const currentItems = this.data.slice(startIndex, endIndex);
+
+        const galleryGrid = document.getElementById('inside-gallery-grid');
+        galleryGrid.innerHTML = '';
+
+        currentItems.forEach(item => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            
+            const thumbnailImage = item.image[0];                    
+            galleryItem.innerHTML = `
+                <div class="gallery-thumbnail" data-id="${item.id}">
+                    <img src="${thumbnailImage}" alt="${item.titleKR}" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h4 class="gallery-title" data-eng="${item.titleEN}" data-kor="${item.titleKR}">${item.titleKR}</h4>
+                            <p class="gallery-date">${this.formatDate(item.date)}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            galleryItem.addEventListener('click', () => {
+                this.openModal(item);
+            });
+
+            galleryGrid.appendChild(galleryItem);
+        });
+    }
+
+    renderPagination() {
+        const paginationContainer = document.getElementById('inside-pagination');
+        paginationContainer.innerHTML = '';
+
+        if (this.totalPages <= 1) return;
+
+        const pagination = document.createElement('div');
+        pagination.className = 'pagination';
+
+        // Previous button
+        if (this.currentPage > 1) {
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'pagination-btn';
+            prevBtn.innerHTML = '&lt;';
+            prevBtn.addEventListener('click', () => {
+                this.currentPage--;
+                this.renderGallery();
+                this.renderPagination();
+            });
+            pagination.appendChild(prevBtn);
+        }
+
+        // Page numbers
+        for (let i = 1; i <= this.totalPages; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.className = `pagination-btn ${i === this.currentPage ? 'active' : ''}`;
+            pageBtn.textContent = i;
+            pageBtn.addEventListener('click', () => {
+                this.currentPage = i;
+                this.renderGallery();
+                this.renderPagination();
+            });
+            pagination.appendChild(pageBtn);
+        }
+
+        // Next button
+        if (this.currentPage < this.totalPages) {
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'pagination-btn';
+            nextBtn.innerHTML = '&gt;';
+            nextBtn.addEventListener('click', () => {
+                this.currentPage++;
+                this.renderGallery();
+                this.renderPagination();
+            });
+            pagination.appendChild(nextBtn);
+        }
+
+        paginationContainer.appendChild(pagination);
+    }
+
+    setupModal() {
+        const modal = document.getElementById('imageModal');
+        const closeBtn = document.querySelector('.close-modal');
+        const prevBtn = document.getElementById('prevImage');
+        const nextBtn = document.getElementById('nextImage');
+        const imageContainer = document.getElementById('image-container');
+        const leftTouchArea = document.querySelector('.left-touch');
+        const rightTouchArea = document.querySelector('.right-touch');
+
+        // Touch/Drag variables
+        let startX = 0;
+        let startY = 0;
+        let isDragging = false;
+        let dragThreshold = 50;
+
+        // Close modal
+        closeBtn.addEventListener('click', () => {
+            this.closeModal();
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                this.closeModal();
+            }
+        });
+
+        // Navigation buttons
+        prevBtn.addEventListener('click', () => {
+            this.showPreviousImage();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            this.showNextImage();
+        });
+
+        // Touch area clicks
+        leftTouchArea.addEventListener('click', () => {
+            this.showPreviousImage();
+        });
+
+        rightTouchArea.addEventListener('click', () => {
+            this.showNextImage();
+        });
+
+        // Touch events for mobile
+        imageContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isDragging = true;
+        }, { passive: true });
+
+        imageContainer.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+        }, { passive: false });
+
+        imageContainer.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > dragThreshold) {
+                if (diffX > 0) {
+                    this.showNextImage();
+                } else {
+                    this.showPreviousImage();
+                }
+            }
+            
+            isDragging = false;
+        }, { passive: true });
+
+        // Mouse drag events for desktop
+        imageContainer.addEventListener('mousedown', (e) => {
+            startX = e.clientX;
+            startY = e.clientY;
+            isDragging = true;
+            imageContainer.style.cursor = 'grabbing';
+        });
+
+        imageContainer.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+        });
+
+        imageContainer.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            
+            const endX = e.clientX;
+            const endY = e.clientY;
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > dragThreshold) {
+                if (diffX > 0) {
+                    this.showNextImage();
+                } else {
+                    this.showPreviousImage();
+                }
+            }
+            
+            isDragging = false;
+            imageContainer.style.cursor = 'grab';
+        });
+
+        imageContainer.addEventListener('mouseleave', () => {
+            isDragging = false;
+            imageContainer.style.cursor = 'grab';
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'block') {
+                if (e.key === 'Escape') {
+                    this.closeModal();
+                } else if (e.key === 'ArrowLeft') {
+                    this.showPreviousImage();
+                } else if (e.key === 'ArrowRight') {
+                    this.showNextImage();
+                }
+            }
+        });
+    }
+
+    openModal(item) {
+        this.currentModal = item;
+        this.currentImageIndex = 0;
+        
+        const modal = document.getElementById('imageModal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDate = document.getElementById('modal-date');
+        const modalDescription = document.getElementById('modal-description');
+        const totalImages = document.getElementById('total-images');
+
+        modalTitle.textContent = item.titleKR;
+        modalTitle.setAttribute('data-eng', item.titleEN);
+        modalTitle.setAttribute('data-kor', item.titleKR);
+        modalDate.textContent = this.formatDate(item.date);
+        modalDescription.textContent = item.textKR || item.text || '';
+        totalImages.textContent = item.image.length;
+
+        this.updateModalImage();
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        this.currentModal = null;
+    }
+
+    showPreviousImage() {
+        if (this.currentModal && this.currentImageIndex > 0) {
+            this.currentImageIndex--;
+            this.updateModalImage();
+        }
+    }
+
+    showNextImage() {
+        if (this.currentModal && this.currentImageIndex < this.currentModal.image.length - 1) {
+            this.currentImageIndex++;
+            this.updateModalImage();
+        }
+    }
+
+    updateModalImage() {
+        if (!this.currentModal) return;
+
+        const modalImage = document.getElementById('modal-image');
+        const currentImageSpan = document.getElementById('current-image');
+        
+        modalImage.src = this.currentModal.image[this.currentImageIndex];
+        modalImage.alt = this.currentModal.titleKR;
+        currentImageSpan.textContent = this.currentImageIndex + 1;
+
+        // Update navigation buttons state
+        const prevBtn = document.getElementById('prevImage');
+        const nextBtn = document.getElementById('nextImage');
+        
+        prevBtn.style.display = 'flex';
+        nextBtn.style.display = 'flex';
+        
+        prevBtn.disabled = this.currentImageIndex === 0;
+        nextBtn.disabled = this.currentImageIndex === this.currentModal.image.length - 1;
+        
+        if (this.currentModal.image.length <= 1) {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+        }
+    }
+
+    formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    }
+}
+
+// 기존 DOMContentLoaded 이벤트를 수정
+document.addEventListener('DOMContentLoaded', async function() {
+    // Google Sheets에서 데이터 로드
+    const success = await loadGalleryDataFromSheets();
+    
+    if (success) {
+        // Inside 갤러리 컨트롤러 초기화
+        new InsideGalleryController(insideGalleryData, 'inside-gallery-section');
+    } else {
+        console.error('갤러리 데이터 로드 실패로 빈 갤러리를 표시합니다.');
+        // 실패해도 빈 배열로 갤러리 초기화
+        new InsideGalleryController([], 'inside-gallery-section');
+    }
+});
+</script>
 
 </body>
 </html>

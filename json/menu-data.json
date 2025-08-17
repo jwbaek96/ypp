@@ -298,6 +298,14 @@
               "url": "/pages/media/gallery/academy.html",
               "sections": ["PSAC", "Relay School"]
             },
+            "inside": {
+              "title": {
+                "ko": "인사이드",
+                "en": "Inside"
+              },
+              "url": "/pages/media/gallery/inside.html",
+              "access": "public"
+            },
             "gclp": {
               "title": {
                 "ko": "GCLP",
@@ -309,14 +317,6 @@
                 "homepage": "https://arcengclp.com/home",
                 "namu_wiki": "https://namu.wiki/w/GCLP(gclp)"
               }
-            },
-            "inside": {
-              "title": {
-                "ko": "인사이드",
-                "en": "Inside"
-              },
-              "url": "/pages/media/gallery/inside.html",
-              "access": "public"
             }
           }
         },

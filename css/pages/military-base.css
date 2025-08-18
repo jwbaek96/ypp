@@ -606,7 +606,7 @@
     padding: 25px;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     border-radius: 12px;
-    border-left: 4px solid #28a745;
+    /* border-left: 4px solid #28a745; */
 }
 
 .target-markets h4 {

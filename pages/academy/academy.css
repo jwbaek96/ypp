@@ -1289,14 +1289,20 @@
 }
 
 .strengths-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    display: flex;
+    /* grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); */
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     gap: 30px;
-    max-width: 1000px;
+
+    max-width: 1350px;
     margin: 0 auto;
 }
 
 .strength-item {
+    flex: 0 0 425px;
+    min-height: 190px;
     background: white;
     border-radius: 16px;
     padding: 30px;

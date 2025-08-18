@@ -67,7 +67,7 @@
                 <nav class="section-nav">
                     <a href="#faq" class="section-nav-link active">FAQ</a>
                     <a href="#contact" class="section-nav-link"
-                        data-eng="Contact"
+                        data-eng="Contact Us"
                         data-kor="문의하기">문의하기</a>
                 </nav>
             </div>
@@ -77,7 +77,8 @@
         <section class="content-section">
             <div class="container">
                 <div class="content-header">
-                    <h2 class="content-title" style="padding: 2rem 0; font-family: Georgia, 'Times New Roman', Times, serif;"
+                    <!-- style="padding: 2rem 0; font-family: Georgia, 'Times New Roman', Times, serif;" -->
+                    <h2 class="content-title" 
                         data-eng='"Global Energy EPC & Nuclear Excellence"'
                         data-kor='"Global Energy EPC & Nuclear Excellence"'>Global Energy EPC & Nuclear Excellence</h2>
                     <p class="content-subtitle" style="line-height: 1.9; margin-bottom: 2rem;"
@@ -348,8 +349,9 @@
                     <!-- 문의하기 -->
                     <div id="contact" class="content-block">
                         <h3 class="block-title" style="text-align: center; border: none; margin: 0;">문의하기(Contact Us)</h3>
-                        <iframe class="contact-iframe" data-tally-src="https://tally.so/embed/wMjP4A?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="1280" frameborder="0" marginheight="0" marginwidth="0" title="문의하기"></iframe>
                         <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+                        <iframe class="contact-iframe contact-kr active" data-tally-src="https://tally.so/embed/wMjP4A?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="1280" frameborder="0" marginheight="0" marginwidth="0" title="문의하기"></iframe>
+                        <iframe class="contact-iframe contact-en" data-tally-src="https://tally.so/embed/wko5pr?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="1280" frameborder="0" marginheight="0" marginwidth="0" title="문의하기"></iframe>
                     </div>
                 </div>
             </div>
@@ -376,6 +378,114 @@
     <!-- 한영 전환 기능 -->
     <script src="/js/lang-switch.js"></script>
     <!-- _________________________________________ -->
+
+<script>
+    // ===== 문의하기 폼 언어 전환 기능 =====
+    class ContactFormLanguageSwitcher {
+        constructor() {
+            this.init();
+        }
+        
+        init() {
+            this.setupLanguageSwitching();
+            this.setInitialLanguage();
+            
+            // 언어 변경 이벤트 리스너
+            window.addEventListener('languageChanged', () => {
+                this.switchContactForm();
+            });
+            
+            // localStorage 변경 감지 (다른 탭에서 언어 변경 시)
+            window.addEventListener('storage', (e) => {
+                if (e.key === 'selectedLanguage') {
+                    this.switchContactForm();
+                }
+            });
+        }
+        
+        setupLanguageSwitching() {
+            // 기존 언어 전환 버튼에 이벤트 추가 (있다면)
+            const langButtons = document.querySelectorAll('[data-lang]');
+            langButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    setTimeout(() => this.switchContactForm(), 100);
+                });
+            });
+        }
+        
+        setInitialLanguage() {
+            // 페이지 로드 시 초기 언어 설정
+            setTimeout(() => this.switchContactForm(), 500);
+        }
+        
+        switchContactForm() {
+            const selectedLanguage = localStorage.getItem('selectedLanguage') || 'ko';
+            const koreanForm = document.querySelector('.contact-kr');
+            const englishForm = document.querySelector('.contact-en');
+            
+            if (!koreanForm || !englishForm) return;
+            
+            if (selectedLanguage === 'en') {
+                // 영어 폼 활성화
+                koreanForm.classList.remove('active');
+                englishForm.classList.add('active');
+            } else {
+                // 한국어 폼 활성화 (기본값)
+                englishForm.classList.remove('active');
+                koreanForm.classList.add('active');
+            }
+        }
+        
+        // 수동으로 언어 전환
+        setLanguage(lang) {
+            localStorage.setItem('selectedLanguage', lang);
+            this.switchContactForm();
+        }
+        
+        getCurrentLanguage() {
+            return localStorage.getItem('selectedLanguage') || 'ko';
+        }
+    }
+    
+    // 전역 변수
+    let contactFormSwitcher = null;
+    
+    // 초기화 함수
+    function initContactFormSwitcher() {
+        if (!contactFormSwitcher) {
+            contactFormSwitcher = new ContactFormLanguageSwitcher();
+        }
+        return contactFormSwitcher;
+    }
+    
+    // 전역 함수들
+    function switchContactLanguage(lang) {
+        if (contactFormSwitcher) {
+            contactFormSwitcher.setLanguage(lang);
+        }
+    }
+    
+    function getCurrentContactLanguage() {
+        return contactFormSwitcher ? contactFormSwitcher.getCurrentLanguage() : 'ko';
+    }
+    
+    // 자동 초기화
+    document.addEventListener('DOMContentLoaded', function() {
+        // 컴포넌트 로딩 완료 후 초기화
+        if (document.querySelector('.contact-kr') && document.querySelector('.contact-en')) {
+            initContactFormSwitcher();
+        } else {
+            document.addEventListener('componentsLoaded', () => {
+                setTimeout(initContactFormSwitcher, 300);
+            });
+        }
+    });
+    
+    // 전역 함수 내보내기
+    window.initContactFormSwitcher = initContactFormSwitcher;
+    window.switchContactLanguage = switchContactLanguage;
+    window.getCurrentContactLanguage = getCurrentContactLanguage;
+</script>
 
 <script>
     // support.js - 고객지원 페이지 섹션 네비게이션 기능 (engineering.js 기반)
@@ -654,169 +764,87 @@
 #contact {border: none;}
 #faq:hover,
 #contact:hover {box-shadow: none;}
-/* #faq{border-bottom: 1px solid var(--border-color);} */
 #contact {padding: 0rem 0 0 0;margin: 0;}
-/* .contact-iframe{padding: 1rem; background-color: #d7d7d7; border-radius: 8px; border: 1px solid #ccc;} */
+/* .contact-iframe{padding: 0 5rem;} */
+
+/* ===== Contact Form Language Switching ===== */
+.contact-iframe {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.contact-iframe.active {
+    display: block;
+    opacity: 1;
+}
+
 /* ============================================== */
-    .content-block:hover {box-shadow: none}
-    /* ===== FAQ 아코디언 스타일 ===== */
-    .faq-container {max-width: 100%;}
-    
-    /* FAQ 카테고리 스타일 */
-    .faq-category {
-        margin-bottom: 2.5rem;
-        /* border: 1px solid var(--border-color);
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */
-    }
-    
-    /* .category-title {
-        background: linear-gradient(135deg, var(--primary-blue) 0%, #1e3a8a 100%);
-        color: var(--white);
-        margin: 0;
-        padding: 1rem 1.5rem;
-        font-size: 1.1rem;
-        font-weight: 700;
-        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-    } */
-    
-    .faq-item {
-        border: none;
-        /* border-bottom: 1px solid var(--border-color); */
-        margin-bottom: 0.25rem;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-    
-    .faq-item:last-child {
-        border-bottom: none;
-    }
-    
-    .faq-item:hover {box-shadow: none;}
-    
-    .faq-question {
-        background-color: rgba(0, 102, 204, 0.03);
-        border: 1px solid #0066cc1b;
-        /* border-radius: 8px; */
-        width: 100%;
-        padding: 1.25rem 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color: var(--text-primary);
-        text-align: left;
-        font-size: 1rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-    
-    .faq-question:hover {background-color: rgba(0, 102, 204, 0.03);}
-    .faq-question.active {
-        background-color: var(--primary-blue);
-        color: var(--white);
-        border-color: #2076cc;
-    }
-    
-    .question-text {display: flex;align-items: center;gap: 0.75rem;}
-    .question-icon {
-        display: flex;align-items: center;justify-content: center;flex-shrink: 0;
-        background-color: var(--primary-blue);width: 24px;height: 24px;border-radius: 50%;
-        color: var(--white);font-size: 0.8rem;font-weight: bold;
-    }
-    
-    .faq-question.active .question-icon {background-color: var(--white);color: var(--primary-blue);}
-    .toggle-icon {font-size: 1rem; transition: transform 0.3s ease;color: #0e0e0ea4;}
-    .faq-question.active .toggle-icon {transform: rotate(180deg);color: var(--white);}
-    
-    .faq-answer {
-        background-color: var(--white);
-        padding: 0 1.5rem;
-        max-height: 0;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        /* border-top: 1px solid transparent; */
-        border: 1px solid #0066cc00;
-    }
-    
-    .faq-answer.active {
-        max-height: 500px;
-        padding: 1rem 1.5rem;
-        border: 1px solid #0066cc8f;
-    }
-    
-    .answer-content {display: flex;align-items: flex-start;gap: 0.75rem;}
-    .answer-icon {
-        width: 24px;height: 24px;background-color: var(--dark-gray);border-radius: 50%;margin-top: 2px;
-        display: flex;align-items: center;justify-content: center;flex-shrink: 0;
-        color: var(--white); font-size: 0.8rem;font-weight: bold;
-    }
-    
-    .answer-text {
-        color: #000;
-        line-height: 1.8;
-        font-size: 0.95rem;
-    }
-    
-    .answer-text strong {color: var(--primary-blue);font-weight: 600;}
-    .answer-text a {color: var(--primary-blue);text-decoration: none;font-weight: 500;}
-    .answer-text a:hover {text-decoration: underline;}
-    
-    /* 연락처 강조 */
-    .contact-highlight {
-        background-color: rgba(0, 102, 204, 0.1);
-        padding: 0.5rem 0.75rem;
-        border-radius: 5px;
-        display: inline-block;
-        font-weight: 600;
-        color: var(--primary-blue);
-    }
-    
-    /* FAQ 반응형 */
-    @media (max-width: 768px) {
-        .faq-category {
-            margin-bottom: 2rem;
-            border-radius: 8px;
-        }
-/*         
-        .category-title {
-            padding: 0.875rem 1.25rem;
-            font-size: 1rem;
-        } */
-        
-        .faq-question {
-            padding: 1rem 1.25rem;
-            font-size: 0.9rem;
-        }
-        
-        .question-text {gap: 0.5rem;}
-        .question-icon,
-        .answer-icon {
-            width: 20px;
-            height: 20px;
-            font-size: 0.7rem;
-        }
-        
-        .faq-answer.active {padding: 1.25rem;}
-        .answer-content {gap: 0.5rem;}
-        .answer-text {font-size: 0.9rem;}
-        .contact-highlight {padding: 0.3rem 0.5rem;font-size: 0.9rem;}
-    }
-    
-    @media (max-width: 480px) {
-        .category-title {
-            padding: 0.75rem 1rem;
-            font-size: 0.95rem;
-        }
-        
-        .faq-question {
-            padding: 0.875rem 1rem;
-            font-size: 0.85rem;
-        }
-        
-        .faq-answer.active {padding: 1rem;}
-        .answer-text {font-size: 0.85rem;line-height: 1.6;}
-    }
+.content-block:hover {box-shadow: none}
+/* ===== FAQ 아코디언 스타일 ===== */
+.faq-container {max-width: 100%;}
+
+/* FAQ 카테고리 스타일 */
+.faq-category {margin-bottom: 2.5rem;}
+.faq-item {border: none;margin-bottom: 0.25rem;overflow: hidden;transition: all 0.3s ease;}
+.faq-item:last-child {border-bottom: none;}
+.faq-item:hover {box-shadow: none;}
+.faq-question {
+    background-color: rgba(0, 102, 204, 0.03);
+    border: 1px solid #0066cc1b;
+    width: 100%;padding: 1.25rem 1.5rem;
+    display: flex;align-items: center;justify-content: space-between;
+    color: var(--text-primary);text-align: left;font-size: 1rem;font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.faq-question:hover {background-color: rgba(0, 102, 204, 0.03);}
+.faq-question.active {background-color: var(--primary-blue);color: var(--white);border-color: #2076cc;}
+.question-text {display: flex;align-items: center;gap: 0.75rem;}
+.question-icon {
+    display: flex;align-items: center;justify-content: center;flex-shrink: 0;
+    background-color: var(--primary-blue);width: 24px;height: 24px;border-radius: 50%;
+    color: var(--white);font-size: 0.8rem;font-weight: bold;
+}
+
+.faq-question.active .question-icon {background-color: var(--white);color: var(--primary-blue);}
+.toggle-icon {font-size: 1rem; transition: transform 0.3s ease;color: #0e0e0ea4;}
+.faq-question.active .toggle-icon {transform: rotate(180deg);color: var(--white);}
+.faq-answer {background-color: var(--white);padding: 0 1.5rem;max-height: 0;overflow: hidden;transition: all 0.3s ease;border: 1px solid #0066cc00;}
+.faq-answer.active {max-height: 500px;padding: 1rem 1.5rem;border: 1px solid #0066cc8f;}
+.answer-content {display: flex;align-items: flex-start;gap: 0.75rem;}
+.answer-icon {
+    width: 24px;height: 24px;background-color: var(--dark-gray);border-radius: 50%;margin-top: 2px;
+    display: flex;align-items: center;justify-content: center;flex-shrink: 0;
+    color: var(--white); font-size: 0.8rem;font-weight: bold;
+}
+.answer-text {color: #000;line-height: 1.8;font-size: 0.95rem;}
+.answer-text strong {color: var(--primary-blue);font-weight: 600;}
+.answer-text a {color: var(--primary-blue);text-decoration: none;font-weight: 500;}
+.answer-text a:hover {text-decoration: underline;}
+
+
+/* FAQ 반응형 */
+@media (max-width: 768px) {
+    .content-subtitle{font-size: 1rem;}
+    .faq-category {margin-bottom: 2rem;border-radius: 8px;}
+    .faq-question {padding: 1rem 1.25rem;font-size: 0.9rem;}
+    .question-text {gap: 0.5rem;}
+    .question-icon,
+    .answer-icon {width: 20px;height: 20px;font-size: 0.7rem;}
+    .faq-answer{padding: 0 1.25rem;}
+    .faq-answer.active {padding: 1.25rem;}
+    .answer-content {gap: 0.5rem;}
+    .answer-text {font-size: 0.9rem;}
+}
+
+@media (max-width: 480px) {
+    .category-title {padding: 0.75rem 1rem;font-size: 0.95rem;}
+    .faq-question {padding: 0.875rem 1rem;font-size: 0.85rem;}
+    .faq-answer{padding: 0 1rem;}
+    .faq-answer.active {padding: 1rem;}
+    .answer-text {font-size: 0.85rem;line-height: 1.6;}
+}
 
 </style>

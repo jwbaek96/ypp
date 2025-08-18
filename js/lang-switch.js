@@ -13,14 +13,26 @@ class LanguageSwitch {
         this.applyLanguage(this.currentLang);
         this.updateActiveButton();
         
-        // 언어 버튼 이벤트 리스너 등록
-        const langButtons = document.querySelectorAll('.lang-btn');
-        langButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                const selectedLang = e.target.dataset.lang;
-                this.switchLanguage(selectedLang);
-                console.log('언어 버튼 클릭:', e.target.dataset.lang);
-            });
+        // 이벤트 위임을 사용한 언어 버튼 이벤트 리스너 등록
+        this.setupEventDelegation();
+    }
+
+    // 이벤트 위임으로 동적 요소도 처리
+    setupEventDelegation() {
+        document.body.addEventListener('click', (e) => {
+            // 언어 버튼 클릭 체크
+            if (e.target.matches('.lang-btn, .sidebar-lang-btn') || 
+                e.target.closest('.lang-btn, .sidebar-lang-btn')) {
+                
+                const button = e.target.matches('.lang-btn, .sidebar-lang-btn') ? 
+                              e.target : e.target.closest('.lang-btn, .sidebar-lang-btn');
+                
+                const selectedLang = button.dataset.lang;
+                if (selectedLang) {
+                    this.switchLanguage(selectedLang);
+                    console.log('언어 버튼 클릭:', selectedLang);
+                }
+            }
         });
     }
 
@@ -64,6 +76,12 @@ class LanguageSwitch {
         this.saveLanguage(lang);
         this.applyLanguage(lang);
         this.updateActiveButton();
+        
+        // 언어 변경 이벤트 발생 (다른 컴포넌트들에게 알림)
+        const languageChangeEvent = new CustomEvent('languageChanged', {
+            detail: { language: lang }
+        });
+        window.dispatchEvent(languageChangeEvent);
     }
 
     // 페이지의 모든 텍스트 변경
@@ -94,15 +112,27 @@ class LanguageSwitch {
 
     // 활성화된 버튼 스타일 업데이트
     updateActiveButton() {
-    // 헤더와 사이드바의 모든 언어 버튼 찾기
-    const allLangButtons = document.querySelectorAll('.lang-btn, .sidebar-lang-btn');
-    
-    allLangButtons.forEach(button => {
-        button.classList.remove('active');
-        if (button.dataset.lang === this.currentLang) {
-            button.classList.add('active');
+        // 헤더와 사이드바의 모든 언어 버튼 찾기
+        const allLangButtons = document.querySelectorAll('.lang-btn, .sidebar-lang-btn');
+        
+        allLangButtons.forEach(button => {
+            button.classList.remove('active');
+            if (button.dataset.lang === this.currentLang) {
+                button.classList.add('active');
             }
         });
+        
+        // 동적으로 추가된 버튼들도 처리 (약간의 지연 후)
+        setTimeout(() => {
+            const newButtons = document.querySelectorAll('.lang-btn, .sidebar-lang-btn');
+            newButtons.forEach(button => {
+                if (button.dataset.lang === this.currentLang) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }, 100);
     }
 }
 

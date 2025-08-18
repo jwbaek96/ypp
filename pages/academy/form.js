@@ -494,8 +494,8 @@ function addRelayschoolStudent() {
     
     studentDiv.innerHTML = `
         <div class="ac-form-student-header">
-            <div class="ac-form-student-title">수강자 ${relayStudentCount}</div>
-            ${relayStudentCount > 1 ? `<button type="button" class="ac-form-btn ac-form-btn-danger" onclick="removeRelayschoolStudent(${relayStudentCount})">삭제</button>` : ''}
+            <div class="ac-form-student-title" data-kor="수강자 ${relayStudentCount}" data-eng="Trainee ${relayStudentCount}"></div>
+            ${relayStudentCount > 1 ? `<button type="button" class="ac-form-btn ac-form-btn-danger" onclick="removeRelayschoolStudent(${relayStudentCount})" data-kor="삭제" data-eng="Remove"></button>` : ''}
         </div>
         
         <div class="ac-form-row">

@@ -668,7 +668,7 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.project-card.wind {
+/* .project-card.wind {
     border-left: 4px solid #17a2b8;
 }
 
@@ -678,7 +678,7 @@
 
 .project-card.hydrogen {
     border-left: 4px solid #28a745;
-}
+} */
 
 .project-icon {
     font-size: 3rem;
@@ -769,13 +769,13 @@
     transform: translateY(-3px);
 }
 
-.status-card.primary {
+/* .status-card.primary {
     border-left: 4px solid #007bff;
 }
 
 .status-card.secondary {
     border-left: 4px solid #6c757d;
-}
+} */
 
 .status-header {
     display: flex;
@@ -1345,7 +1345,7 @@
 
 .timeline {
     position: relative;
-    padding-left: 30px;
+    /* padding-left: 30px; */
 }
 
 .timeline::before {

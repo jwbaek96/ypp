@@ -67,18 +67,24 @@ let psacStudentCount = 0;
 let relayStudentCount = 0;
 
 // 세부 교육 과정 리스트 (PSAC)
-const psacCourses = [
-    '1주: 전력계통 해석의 기본 이론',
-    '2주: 전력계통(설비) 보호기술',
-    '3주: 동기발전기 기술',
-    '4주: 무효전력 운영과 전압제어',
-    '5주: 전력설비의 동특성(계통안정도)',
-    '6주: 분산에너지 시스템 기술',
-    '7주: 보호릴레이 정정법과 보호협조기술',
-    '8주: HVDC, MVDC, LVDC 및 FACTS기술',
-    '9주: 에너지 전환기의 전력계통 계획과 운영/에너지 시장과 신사업 모델',
-    '10주: 신재생에너지 계통연계 기술'
-];
+const psacCourses = {
+    1:{kor:"1주: 전력계통 해석의 기본 이론", eng:"Week 1: Basic Theory of Power System Analysis"},
+    2:{kor:"2주: 전력계통(설비) 보호기술", eng:"Week 2: Power System (Facility) Protection Technology"},
+    3:{kor:"3주: 동기발전기 기술", eng:"Week 3: Synchronous Generator Technology"},
+    4:{kor:"4주: 무효전력 운영과 전압제어", eng:"Week 4: Reactive Power Operation and Voltage Control"},
+    5:{kor:"5주: 전력설비의 동특성(계통안정도)", eng:"Week 5: Dynamic Characteristics of Power Facilities (System Stability)"},
+    6:{kor:"6주: 분산에너지 시스템 기술", eng:"Week 6: Distributed Energy System Technology"},
+    7:{kor:"7주: 보호릴레이 정정법과 보호협조기술", eng:"Week 7: Protection Relay Setting and Coordination Technology"},
+    8:{kor:"8주: HVDC, MVDC, LVDC 및 FACTS기술", eng:"Week 8: HVDC, MVDC, LVDC and FACTS Technology"},
+    9:{kor:"9주: 에너지 전환기의 전력계통 계획과 운영/에너지 시장과 신사업 모델", eng:"Week 9: Power System Planning and Operation in Energy Transition / Energy Market and New Business Models"},
+    10:{kor:"10주: 신재생에너지 계통연계 기술", eng:"Week 10: Renewable Energy Grid Connection Technology"}
+};
+
+// 현재 언어 감지 함수
+function getCurrentLanguage() {
+    return localStorage.getItem('language') || 'kor';
+}
+
 
 // Relay School 과정별 일정
 const relayCoursesData = [
@@ -247,54 +253,59 @@ function addPsacStudent() {
     studentDiv.className = 'ac-form-student-section';
     studentDiv.id = `psac-student-${psacStudentCount}`;
     // 
-    const courseCheckboxes = psacCourses.map((course, index) => `
+    const currentLang = getCurrentLanguage();
+    const courseCheckboxes = Object.keys(psacCourses).map((courseKey) => {
+        const course = psacCourses[courseKey];
+        const courseText = course[currentLang];
+        return `
         <div class="psac-checkbox-item">
-            <input type="checkbox" id="psac-course-${psacStudentCount}-${index}" name="psac-student-${psacStudentCount}-courses" value="${course}">
-            <label for="psac-course-${psacStudentCount}-${index}">${course}</label>
+            <input type="checkbox" id="psac-course-${psacStudentCount}-${courseKey}" name="psac-student-${psacStudentCount}-courses" value="${courseText}">
+            <label for="psac-course-${psacStudentCount}-${courseKey}" data-kor="${course.kor}" data-eng="${course.eng}">${courseText}</label>
         </div>
-    `).join('');
+    `;
+    }).join('');
     
     studentDiv.innerHTML = `
         <div class="ac-form-student-header">
-            <div class="ac-form-student-title">수강자 ${psacStudentCount}</div>
-            ${psacStudentCount > 1 ? `<button type="button" class="ac-form-btn ac-form-btn-danger" onclick="removePsacStudent(${psacStudentCount})">삭제</button>` : ''}
+            <div class="ac-form-student-title" data-kor='수강자 ${psacStudentCount}' data-eng='Participant ${psacStudentCount}'></div>
+            ${psacStudentCount > 1 ? `<button type="button" class="ac-form-btn ac-form-btn-danger" onclick="removePsacStudent(${psacStudentCount})" data-kor='삭제' data-eng='Delete'>삭제</button>` : ''}
         </div>
         
         <div class="ac-form-row">
             <div class="ac-form-group">
-                <label for="psac-studentName-${psacStudentCount}" class="ac-form-label ac-form-required">수강자명</label>
+                <label for="psac-studentName-${psacStudentCount}" class="ac-form-label ac-form-required" data-kor='수강자명' data-eng='Name'>수강자명</label>
                 <input type="text" id="psac-studentName-${psacStudentCount}" name="studentName-${psacStudentCount}" class="ac-form-input" required>
             </div>
             <div class="ac-form-group">
-                <label for="psac-studentDepartment-${psacStudentCount}" class="ac-form-label ac-form-required">부서</label>
+                <label for="psac-studentDepartment-${psacStudentCount}" class="ac-form-label ac-form-required" data-kor='부서' data-eng='Department'>부서</label>
                 <input type="text" id="psac-studentDepartment-${psacStudentCount}" name="studentDepartment-${psacStudentCount}" class="ac-form-input" required>
             </div>
         </div>
         
         <div class="ac-form-row">
             <div class="ac-form-group">
-                <label for="psac-studentPosition-${psacStudentCount}" class="ac-form-label ac-form-required">직급</label>
+                <label for="psac-studentPosition-${psacStudentCount}" class="ac-form-label ac-form-required" data-kor='직급' data-eng='Position'>직급</label>
                 <input type="text" id="psac-studentPosition-${psacStudentCount}" name="studentPosition-${psacStudentCount}" class="ac-form-input" required>
             </div>
             <div class="ac-form-group">
-                <label for="psac-studentPhone-${psacStudentCount}" class="ac-form-label">전화번호</label>
+                <label for="psac-studentPhone-${psacStudentCount}" class="ac-form-label" data-kor='전화번호' data-eng='Phone'>전화번호</label>
                 <input type="tel" id="psac-studentPhone-${psacStudentCount}" name="studentPhone-${psacStudentCount}" class="ac-form-input" placeholder="000-0000-0000">
             </div>
         </div>
         
         <div class="ac-form-row">
             <div class="ac-form-group">
-                <label for="psac-studentMobile-${psacStudentCount}" class="ac-form-label ac-form-required">핸드폰</label>
+                <label for="psac-studentMobile-${psacStudentCount}" class="ac-form-label ac-form-required" data-kor='핸드폰' data-eng='Mobile'>핸드폰</label>
                 <input type="tel" id="psac-studentMobile-${psacStudentCount}" name="studentMobile-${psacStudentCount}" class="ac-form-input" placeholder="010-0000-0000" required>
             </div>
             <div class="ac-form-group">
-                <label for="psac-studentEmail-${psacStudentCount}" class="ac-form-label ac-form-required">이메일</label>
+                <label for="psac-studentEmail-${psacStudentCount}" class="ac-form-label ac-form-required" data-kor='이메일' data-eng='E-mail'>이메일</label>
                 <input type="email" id="psac-studentEmail-${psacStudentCount}" name="studentEmail-${psacStudentCount}" class="ac-form-input" required>
             </div>
         </div>
         
         <div class="ac-form-group">
-            <label class="ac-form-label ac-form-required">선택 세부교육 (최소 1개 이상 선택)</label>
+            <label class="ac-form-label ac-form-required" data-kor='선택 세부교육 (최소 1개 이상 선택)' data-eng='Select Detailed Training (At least 1 required)'>선택 세부교육 (최소 1개 이상 선택)</label>
             <div class="psac-checkbox-group">
                 ${courseCheckboxes}
             </div>
@@ -427,7 +438,7 @@ async function submitPsacForm(e) {
         // CORS 우회를 위한 iframe 방식 사용
         await submitFormData(formData);
         
-        showMessage(`PSAC 신청이 완료되었습니다. (수강자 ${formData.students.length}명)`, 'success','psac-message');
+        alert(`신청이 완료되었습니다. (수강자 ${formData.students.length}명) \nYour application has been completed. (Number of participants: ${formData.students.length})`, 'success','psac-message');
         document.getElementById('psac-form').reset();
         // 수강자 목록 초기화
         document.getElementById('psac-students-container').innerHTML = '';
@@ -479,46 +490,46 @@ function addRelayschoolStudent() {
         
         <div class="ac-form-row">
             <div class="ac-form-group">
-                <label for="relayschool-studentName-${relayStudentCount}" class="ac-form-label ac-form-required">수강자명</label>
+                <label for="relayschool-studentName-${relayStudentCount}" class="ac-form-label ac-form-required" data-kor='수강자명' data-eng='Name'>수강자명</label>
                 <input type="text" id="relayschool-studentName-${relayStudentCount}" name="studentName-${relayStudentCount}" class="ac-form-input" required>
             </div>
             <div class="ac-form-group">
-                <label for="relayschool-studentDepartment-${relayStudentCount}" class="ac-form-label ac-form-required">부서</label>
+                <label for="relayschool-studentDepartment-${relayStudentCount}" class="ac-form-label ac-form-required" data-kor='부서' data-eng='Department'>부서</label>
                 <input type="text" id="relayschool-studentDepartment-${relayStudentCount}" name="studentDepartment-${relayStudentCount}" class="ac-form-input" required>
             </div>
         </div>
         
         <div class="ac-form-row">
             <div class="ac-form-group">
-                <label for="relayschool-studentPosition-${relayStudentCount}" class="ac-form-label ac-form-required">직급</label>
+                <label for="relayschool-studentPosition-${relayStudentCount}" class="ac-form-label ac-form-required" data-kor='직급' data-eng='Position'>직급</label>
                 <input type="text" id="relayschool-studentPosition-${relayStudentCount}" name="studentPosition-${relayStudentCount}" class="ac-form-input" required>
             </div>
             <div class="ac-form-group">
-                <label for="relayschool-studentPhone-${relayStudentCount}" class="ac-form-label">전화번호</label>
+                <label for="relayschool-studentPhone-${relayStudentCount}" class="ac-form-label" data-kor='전화번호' data-eng='Phone'>전화번호</label>
                 <input type="tel" id="relayschool-studentPhone-${relayStudentCount}" name="studentPhone-${relayStudentCount}" class="ac-form-input" placeholder="000-0000-0000">
             </div>
         </div>
         
         <div class="ac-form-row">
             <div class="ac-form-group">
-                <label for="relayschool-studentMobile-${relayStudentCount}" class="ac-form-label ac-form-required">핸드폰</label>
+                <label for="relayschool-studentMobile-${relayStudentCount}" class="ac-form-label ac-form-required" data-kor='핸드폰' data-eng='Mobile'>핸드폰</label>
                 <input type="tel" id="relayschool-studentMobile-${relayStudentCount}" name="studentMobile-${relayStudentCount}" class="ac-form-input" placeholder="010-0000-0000" required>
             </div>
             <div class="ac-form-group">
-                <label for="relayschool-studentEmail-${relayStudentCount}" class="ac-form-label ac-form-required">이메일</label>
+                <label for="relayschool-studentEmail-${relayStudentCount}" class="ac-form-label ac-form-required" data-kor='이메일' data-eng='E-mail'>이메일</label>
                 <input type="email" id="relayschool-studentEmail-${relayStudentCount}" name="studentEmail-${relayStudentCount}" class="ac-form-input" required>
             </div>
         </div>
         
         <div class="ac-form-group">
-            <label class="ac-form-label ac-form-required">선택 과정 (최소 1개 이상 선택)</label>
+            <label class="ac-form-label ac-form-required" data-kor='선택 과정 (최소 1개 이상 선택)' data-eng='Selected Courses (At least 1 required)'>선택 과정 (최소 1개 이상 선택)</label>
             <div class="psac-checkbox-group">
                 ${courseCheckboxes}
             </div>
         </div>
         
         <div class="ac-form-group">
-            <label class="ac-form-label">마감 과정</label>
+            <label class="ac-form-label" data-kor='마감 과정' data-eng='Passed Courses'>마감 과정</label>
             <div class="psac-checkbox-group">
                 ${passedCourseItems}
             </div>
@@ -665,12 +676,37 @@ async function submitRelayschoolForm(e) {
 
         showMessage(`Relay School 신청이 완료되었습니다. (수강자 ${formData.students.length}명)`, 'success','rs-message');
         document.getElementById('relayschool-form').reset();
-        document.getElementById('relayschool-students-container').innerHTML = '';
-        relayStudentCount = 0;
+        
+        // 기존 수강자 섹션들 삭제하고 첫 번째 수강자만 다시 추가
+        const container = document.getElementById('relayschool-students-container');
+        container.innerHTML = '';
+        relayschoolStudentCount = 0;
+        addRelayschoolStudent();
+
     } catch (error) {
-        alert('6. 에러 발생: ' + error);
-        showMessage('서버 연결에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
+        showMessage('신청 처리 중 오류가 발생했습니다.', 'error', 'rs-message');
+        console.error('Form submission error:', error);
     } finally {
         toggleLoading(false, 'rs-loading');
     }
 }
+
+// 언어 전환 시 PSAC 체크박스 라벨 업데이트 함수
+function updatePsacCourseLabels() {
+    const currentLang = getCurrentLanguage();
+    
+    // 모든 PSAC 과정 체크박스 라벨 업데이트
+    Object.keys(psacCourses).forEach(courseKey => {
+        const course = psacCourses[courseKey];
+        const labels = document.querySelectorAll(`label[for*="psac-course"][for*="-${courseKey}"]`);
+        
+        labels.forEach(label => {
+            label.textContent = course[currentLang];
+        });
+    });
+}
+
+// 언어 변경 이벤트 리스너 추가
+document.addEventListener('languageChanged', function() {
+    updatePsacCourseLabels();
+});

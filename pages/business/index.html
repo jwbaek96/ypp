@@ -185,18 +185,7 @@
                     <a href="#water-capabilities" class="section-nav-link"
                        data-eng="Advanced New Technology"
                        data-kor="첨단 신기술">첨단 신기술</a>
-                    <a href="#water-" class="section-nav-link"
-                       data-eng="What is Magnetic Field Technology?"
-                       data-kor=""></a>
-                    <a href="#water-" class="section-nav-link"
-                       data-eng="The V-31 Purification System"
-                       data-kor=""></a>
-                    <a href="#water-" class="section-nav-link"
-                       data-eng="V-31 Field Test Results"
-                       data-kor=""></a>
-                    <a href="#water-projects" class="section-nav-link"
-                       data-eng="R&D and Development Status"
-                       data-kor="연구개발 및 개발 현황">연구개발 및 개발 현황</a>
+                    <a href="#water-v31" class="section-nav-link">V-31</a>
                 </div>
                 
                 <!-- Section Navigation for 미군기지 -->
@@ -3077,12 +3066,9 @@
                                 <div class="section-content">
                                     <div class="technology-comparison">
                                         <h4 class="section-subtitle" data-eng="Advanced Technology Comparison" data-kor="기존 기술과의 차별화">기존 기술과의 차별화</h4>
-                                        <div class="partnership-section">
-                                            <p data-eng="Existing wastewater and manure treatment methods rely on sedimentation, filtration, and chemical decomposition. " 
-                                            data-kor="기존의 오 폐수 및 분뇨처리 기술은 침전, 여과 및 화학적 분해 기술을 사용하여 정화를 하는 방법인데 YPP의 정화설비는">
-                                            </p>
-                                            <p data-eng="In contrast, YPP's purification facility, through a technology partnership with the U.S.-based Mechille Corporation, uses organic waste treatment technology based on magnetic fields. This method eliminates the need for multiple processes, requires no maintenance, and achieves purification in a short time." 
-                                            data-kor="미국 Mechille Corporation과 기술 협약을 통해 자기장을 이용한 유기성 폐기물 처리 기술 (Organic waste treatment technology using magnetic field)로 여러 공정을 거치지 않으며, 유지 보수가 필요없이 빠른 시간 내에 정화를 달성하는 설비 시스템입니다.">
+                                        <div class="partnership-section" style="text-align: center;">
+                                            <p data-eng="Existing wastewater and manure treatment methods rely on sedimentation, filtration, and chemical decomposition. In contrast, YPP's purification facility, through a technology partnership with the U.S.-based Mechille Corporation, uses organic waste treatment technology based on magnetic fields. This method eliminates the need for multiple processes, requires no maintenance, and achieves purification in a short time." 
+                                            data-kor="기존의 오 폐수 및 분뇨처리 기술은 침전, 여과 및 화학적 분해 기술을 사용하여 정화를 하는 방법인데 YPP의 정화설비는미국 Mechille Corporation과 기술 협약을 통해 자기장을 이용한 유기성 폐기물 처리 기술 (Organic waste treatment technology using magnetic field)로 여러 공정을 거치지 않으며, 유지 보수가 필요없이 빠른 시간 내에 정화를 달성하는 설비 시스템입니다.">
                                             </p>
                                             <p data-eng="This method eliminates the need for multiple processes, requires no maintenance, and achieves purification in a short time." 
                                             data-kor="">
@@ -3173,8 +3159,10 @@
                         <div class="magnetic-field-tech">
                             <h4 class="section-title" data-eng="Magnetic Field Technology" data-kor="자기장 기술 (Magnetic Field Technology)">자기장 기술 (Magnetic Field Technology)</h4>
                             <div class="tech-explanation">
-                                <p data-eng="A magnetic field can generate energy anywhere, with its intensity varying according to the distribution of minerals and temperature. By creating a magnetic field similar to Earth's, this technology purifies pollutants and waste." 
-                                   data-kor="자기장은 위치와 관계없이 어디서나 활성화된 형태로 에너지를 만들어 내고 광물의 분포와 온도에 따라 에너지의 세기가 달라집니다. 지구 자기장과 유사한 형태를 만들어 오염 물질과 폐기물들을 정화하는 기술입니다.">
+                                <p data-eng="A magnetic field can generate energy anywhere, with its intensity varying according to the distribution of minerals and temperature.
+                                <br>By creating a magnetic field similar to Earth's, this technology purifies pollutants and waste." 
+                                   data-kor="자기장은 위치와 관계없이 어디서나 활성화된 형태로 에너지를 만들어 내고 광물의 분포와 온도에 따라 에너지의 세기가 달라집니다.
+                                   <br>지구 자기장과 유사한 형태를 만들어 오염 물질과 폐기물들을 정화하는 기술입니다.">
                                     자기장은 위치와 관계없이 어디서나 활성화된 형태로 에너지를 만들어 내고 광물의 분부와 온도에 따라 에너지의 세기가 달라집니다. 지구 자기장과 유사한 형태를 만들어 오염 물질과 폐기물들을 정화하는 기술입니다.
                                 </p>
                                 <p data-eng="Naturally occurring magnetic energy is stored and transmitted to the target contaminants, breaking them down. The system forms a Van Allen belt–like structure (comprising the main unit, magnetic field generator, and activated space) around the contaminated material in the tank." 
@@ -3188,7 +3176,7 @@
                             </div>
                         </div>
                         <div id="water-technology">
-                            <h4 class="section-title">V-31</h4>
+                            <h4 class="section-title" id="water-v31">V-31</h4>
                             <div class="section-card">
                                 <div class="section-content">
                                     <!-- V-31 Model -->
@@ -3826,7 +3814,8 @@ window.getCurrentSection = getCurrentSection;
 #substation-overview,
 #bess .content-block,
 #us-military .content-block,
-#data-center .content-block{border: none;}
+#data-center .content-block
+{border: none;}
 
 #nuclear-overview:hover,
 #substation-overview:hover,

@@ -87,19 +87,19 @@ function getCurrentLanguage() {
 
 
 // Relay School 과정별 일정
-const relayCoursesData = [
-    '디지털릴레이 기본반 (2025년 9월 17일(수) ~ 9월 19일(금))',
-    '디지털릴레이 고급반 (2025년 10월 22일(수) ~ 10월 24일(금))',
-    '고장분석반 (2025년 11월 19일(수) ~ 11월 21일(금))'
-];
+const relayCoursesData = {
+    1:{kor: '디지털릴레이 기본반 (2025년 9월 17일(수) ~ 9월 19일(금))', eng: 'Digital Relay Basic Course (September 17-19, 2025)'},
+    2:{kor: '디지털릴레이 고급반 (2025년 10월 22일(수) ~ 10월 24일(금))', eng: 'Digital Relay Advanced Course (October 22-24, 2025)'},
+    3:{kor: '고장분석반 (2025년 11월 19일(수) ~ 11월 21일(금))', eng: 'Fault Analysis Course (November 19-21, 2025)'}
+};
 // Relay School 마감된 과정들
-const relayCoursesDataPassed = [
-    '디지털릴레이 기본반 (2025년 3월 19일(수) ~ 3월 21일(금))',
-    '디지털릴레이 고급반 (2025년 4월 16일(수) ~ 4월 18일(금))',
-    '고장분석반 (2025년 5월 21일(수) ~ 5월 23일(금))',
-    'ECMS운영반 (2025년 6월 18일(수) ~ 6월 20일(금))',
-    '원자력 특성화반    (2025년 7월 16일(수) ~ 7월 20일(일))',
-];
+const relayCoursesDataPassed = {
+    1:{kor: '디지털릴레이 기본반 (2025년 3월 19일(수) ~ 3월 21일(금))', eng: 'Digital Relay Basic Course (March 19-21, 2025)'},
+    2:{kor: '디지털릴레이 고급반 (2025년 4월 16일(수) ~ 4월 18일(금))', eng: 'Digital Relay Advanced Course (April 16-18, 2025)'},
+    3:{kor: '고장분석반 (2025년 5월 21일(수) ~ 5월 23일(금))', eng: 'Fault Analysis Course (May 21-23, 2025)'},
+    4:{kor: 'ECMS운영반 (2025년 6월 18일(수) ~ 6월 20일(금))', eng: 'ECMS Operation Course (June 18-20, 2025)'},
+    5:{kor: '원자력 특성화반 (2025년 7월 16일(수) ~ 7월 20일(일))', eng: 'Nuclear Specialization Course (July 16-20, 2025)'},
+};
 
 /* ==========================================================================
    공통 유틸리티 함수
@@ -466,21 +466,31 @@ function addRelayschoolStudent() {
     studentDiv.className = 'ac-form-student-section';
     studentDiv.id = `relayschool-student-${relayStudentCount}`;
     
+    const currentLang = getCurrentLanguage();
+    
     // Relay School 과정 체크박스 생성 (선택 가능한 과정)
-    const courseCheckboxes = relayCoursesData.map((course, index) => `
+    const courseCheckboxes = Object.keys(relayCoursesData).map((courseKey) => {
+        const course = relayCoursesData[courseKey];
+        const courseText = course[currentLang];
+        return `
         <div class="psac-checkbox-item">
-            <input type="checkbox" id="relayschool-course-${relayStudentCount}-${index}" name="relayschool-student-${relayStudentCount}-courses" value="${course}">
-            <label for="relayschool-course-${relayStudentCount}-${index}">${course}</label>
+            <input type="checkbox" id="relayschool-course-${relayStudentCount}-${courseKey}" name="relayschool-student-${relayStudentCount}-courses" value="${courseText}">
+            <label for="relayschool-course-${relayStudentCount}-${courseKey}" data-kor="${course.kor}" data-eng="${course.eng}">${courseText}</label>
         </div>
-    `).join('');
+    `;
+    }).join('');
     
     // Relay School 마감 과정 표시 (선택 불가)
-    const passedCourseItems = relayCoursesDataPassed.map((course, index) => `
+    const passedCourseItems = Object.keys(relayCoursesDataPassed).map((courseKey) => {
+        const course = relayCoursesDataPassed[courseKey];
+        const courseText = course[currentLang];
+        return `
         <div class="psac-checkbox-item psac-checkbox-disabled">
-            <input type="checkbox" id="relayschool-passed-${relayStudentCount}-${index}" disabled>
-            <label for="relayschool-passed-${relayStudentCount}-${index}" class="disabled-label">${course}</label>
+            <input type="checkbox" id="relayschool-passed-${relayStudentCount}-${courseKey}" disabled>
+            <label for="relayschool-passed-${relayStudentCount}-${courseKey}" class="disabled-label" data-kor="${course.kor}" data-eng="${course.eng}">${courseText}</label>
         </div>
-    `).join('');
+    `;
+    }).join('');
     
     studentDiv.innerHTML = `
         <div class="ac-form-student-header">
@@ -657,24 +667,13 @@ async function submitRelayschoolForm(e) {
 
     try {
         const formData = collectRelayschoolFormData();
-        // console.log(formData);
-        // console.log('students:', formData.students);
-        // console.log('formType:', formData.formType);
             if (formData.students.length > 0) {
                 console.log('첫번째 수강자:', formData.students[0]);
             }
-        // alert('2. 데이터 수집 완료');
-
-        // if (!validateRelayschoolForm(formData)) {
-        //     alert('3. 유효성 검사 실패');
-        //     return;
-        // }
-        // alert('4. 유효성 검사 통과');
 
         await submitFormData(formData);
-        // alert('5. 데이터 전송 완료');
 
-        showMessage(`Relay School 신청이 완료되었습니다. (수강자 ${formData.students.length}명)`, 'success','rs-message');
+        showMessage(`신청이 완료되었습니다. (수강자 ${formData.students.length}명) \nYour application has been completed. (Number of participants: ${formData.students.length})`, 'success','rs-message');
         document.getElementById('relayschool-form').reset();
         
         // 기존 수강자 섹션들 삭제하고 첫 번째 수강자만 다시 추가
@@ -706,7 +705,33 @@ function updatePsacCourseLabels() {
     });
 }
 
+// 언어 전환 시 Relay School 체크박스 라벨 업데이트 함수
+function updateRelayCoursesLabels() {
+    const currentLang = getCurrentLanguage();
+    
+    // 모든 Relay School 과정 체크박스 라벨 업데이트 (선택 가능한 과정)
+    Object.keys(relayCoursesData).forEach(courseKey => {
+        const course = relayCoursesData[courseKey];
+        const labels = document.querySelectorAll(`label[for*="relayschool-course"][for*="-${courseKey}"]`);
+        
+        labels.forEach(label => {
+            label.textContent = course[currentLang];
+        });
+    });
+    
+    // 모든 Relay School 마감 과정 체크박스 라벨 업데이트
+    Object.keys(relayCoursesDataPassed).forEach(courseKey => {
+        const course = relayCoursesDataPassed[courseKey];
+        const labels = document.querySelectorAll(`label[for*="relayschool-passed"][for*="-${courseKey}"]`);
+        
+        labels.forEach(label => {
+            label.textContent = course[currentLang];
+        });
+    });
+}
+
 // 언어 변경 이벤트 리스너 추가
 document.addEventListener('languageChanged', function() {
     updatePsacCourseLabels();
+    updateRelayCoursesLabels();
 });

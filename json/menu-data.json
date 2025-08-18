@@ -112,6 +112,13 @@
           "url": "/pages/business/index.html?tab=control-valve",
           "sections": ["밸브 종류", "제어 시스템", "유지보수", "공급 실적"]
         },
+        "water-purification": {
+          "title": {
+            "ko": "수질환경정화설비",
+            "en": "Water Quality & Environmental Purification"
+          },
+          "url": "/pages/business/index.html?tab=water-purification"
+        },
         "us-military": {
           "title": {
             "ko": "미군기지",

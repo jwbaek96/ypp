@@ -366,8 +366,8 @@
     align-items: center;
 }
 
-/* .value-item,
-.behavior-item{width: 100%; max-width: 120px;} */
+.value-item,
+.behavior-item{min-width: 110px;}
 .value-item,
 .behavior-item,
 .value-item:last-child,

@@ -152,9 +152,7 @@ class GallerySystem {
                             <div class="gallery-popup-date"></div>
                         </div>
                         <div class="gallery-popup-controls">
-                            <button class="popup-btn download-btn" data-action="download" title="다운로드">
-                                ⬇
-                            </button>
+                            <!--<button class="popup-btn download-btn" data-action="download" title="다운로드">⬇</button>-->
                             <button class="popup-btn close-btn" data-action="close" title="닫기">
                                 ✕
                             </button>

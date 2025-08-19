@@ -80,14 +80,15 @@
     margin-bottom: 16px;
     background: white;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); */
     overflow: hidden;
     transition: box-shadow 0.3s ease;
 }
-
+/* 
 .curriculum-week:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .curriculum-toggle {
     display: none;
@@ -101,12 +102,10 @@
     background: #f8fafc;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-bottom: 1px solid #e5e7eb;
+    /* border-bottom: 1px solid #e5e7eb; */
 }
 
-.curriculum-header:hover {
-    background: #f1f5f9;
-}
+.curriculum-header:hover {background: #f1f5f9;}
 
 .curriculum-toggle:checked + .curriculum-header {
     background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);

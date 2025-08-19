@@ -427,6 +427,7 @@
 }
 
 @media (max-width: 425px) {
+  .slide-title{font-size: 1rem;}
   .ypp-popup-content {
     padding: 15px 15px;
   }
@@ -441,13 +442,15 @@
   .education-content {
     padding: 20px 18px;
   }
-  
+  .education-content p,
+  .education-content .greeting{font-size: .9rem;  }
   .detail-item {
     flex-direction: column;
     align-items: flex-start;
     gap: 5px;
     padding: 10px 0;
   }
+  .education-content .main-message{font-size: .98rem;}
   
   .detail-label {
     min-width: auto;
@@ -459,6 +462,9 @@
     margin-left: 0;
     font-size: 0.85rem;
   }
+  .renewal-content{padding: 2px;}
+  .renewal-content .message-main{font-size: 1rem;}
+  .renewal-content .message-sub{font-size: .9rem;}
 }
 /* 접근성 개선 */
 @media (prefers-reduced-motion: reduce) {
@@ -466,40 +472,3 @@
     animation: none; /* 애니메이션 제거 */
   }
 }
-
-/* 다크모드 지원 (사용자 설정에 따라) */
-/* @media (prefers-color-scheme: dark) {
-  .ypp-popup-modal {
-    background: #1f2937;
-    color: #f9fafb;
-  }
-  
-  .ypp-popup-header {
-    border-bottom-color: #374151;
-  }
-  
-  .ypp-popup-title {
-    color: #f9fafb;
-  }
-  
-  .ypp-popup-message {
-    background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
-    color: #f9fafb;
-  }
-  
-  .download-link {
-    background: #374151;
-    border-color: #4b5563;
-    color: #f9fafb;
-  }
-  
-  .download-link:hover {
-    background: #4b5563;
-  }
-  .ypp-popup-contact 
-  .contact-info {
-    background: #374151;
-    border-color: #4b5563;
-    color: #f9fafb;
-  }
-} */

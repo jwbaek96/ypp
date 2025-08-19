@@ -4,8 +4,8 @@
       "id": 1,
       "type": "education",
       "title": {
-        "kor": "AI 디지털라이제이션: YPP의 10년 열쇠」 전사 교육 안내",
-        "eng": "Company-wide Training: \"AI Digitalization: YPP's 10-Year Key\""
+        "kor": "[공지] 「AI 디지털라이제이션: YPP의 10년 열쇠」 전사 교육 안내",
+        "eng": "[Notice] Company-wide Training: \"AI Digitalization: YPP's 10-Year Key\""
       },
       "content": {
         "greeting": {
@@ -13,7 +13,7 @@
           "eng": "To all employees,"
         },
         "main": {
-          "kor": "회사의 AI 활용 및 디지털 혁신 전략을 공유하고자 <br>「AI 디지털라이제이션: YPP의 10년 열쇠」 교육을 아래와 같이 진행합니다.",
+          "kor": "회사의 AI 활용 및 디지털 혁신 전략을 공유하고자 「AI 디지털라이제이션: YPP의 10년 열쇠」 교육을 아래와 같이 진행합니다.",
           "eng": "We are conducting the training \"AI Digitalization: YPP's 10-Year Key\" to share the company's AI utilization and digital innovation strategy as follows."
         },
         "details": [
@@ -49,8 +49,8 @@
           },
           {
             "label": {
-              "kor": "특이사항:",
-              "eng": "Note:"
+              "kor": "특기사항:",
+              "eng": "Special Note:"
             },
             "value": {
               "kor": "백종만 회장님 참석 예정",
@@ -68,8 +68,8 @@
       "id": 2,
       "type": "renewal",
       "title": {
-        "kor": "웹사이트 리뉴얼 및 YPP 아카데미 안내",
-        "eng": "Website Renewal and YPP Academy Announcement"
+        "kor": "안내공지",
+        "eng": "Notice"
       },
       "message": {
         "main": {
@@ -87,14 +87,14 @@
       },
       "downloads": {
         "title": {
-          "kor": "YPP 아카데미",
-          "eng": "YPP ACADEMY"
+          "kor": "자료 다운로드",
+          "eng": "Downloads"
         },
         "categories": [
           {
             "name": {
-              "kor": "PSAC2025 전력계통 고급기술 교육과정 9.2~12.5 (접수중)",
-              "eng": "PSAC2025 Power System Advanced Technology Training Course 9.2~12.5 (Applications Open)"
+              "kor": "PSAC2025 전력계통 고급기술 교육과정 9.2~12.5 <span style='color:red;'>(접수중)</span>",
+              "eng": "PSAC2025 Power System Advanced Technology Training Course 9.2~12.5 <span style='color:red;'>(Applications Open)</span>"
             },
             "items": [
               {
@@ -115,8 +115,8 @@
           },
           {
             "name": {
-              "kor": "RelaySchool2025 전력계통 보호기술 교육과정 3~12 (접수,개강)",
-              "eng": "RelaySchool2025 Power System Protection Technology Training Course 3~12 (Applications Open/Courses Start)"
+              "kor": "RelaySchool2025 전력계통 보호기술 교육과정 3~12 <span style='color:red;'>(접수,개강)</span>",
+              "eng": "RelaySchool2025 Power System Protection Technology Training Course 3~12 <span style='color:red;'>(Applications Open/Courses Start)</span>"
             },
             "items": [
               {
@@ -131,12 +131,19 @@
                   "kor": "교육신청",
                   "eng": "Apply Now"
                 },
-                "link": "/pages/academy/index.html?tab=relay"
+                "link": "/pages/academy/index.html?tab=relay-school"
               }
             ]
           }
         ]
       }
     }
-  ]
+  ],
+  "settings": {
+    "show_on_load": true,
+    "overlay_close": true,
+    "esc_close": true,
+    "auto_slide": false,
+    "slide_duration": 300
+  }
 }

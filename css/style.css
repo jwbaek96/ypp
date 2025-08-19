@@ -15,90 +15,29 @@
 
 
 /* ===== LAYOUT COMPONENTS ===== */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: var(--container-padding);
-}
-.main-content img{
-    max-width: 100%;
-}
+.container {max-width: 1200px;margin: 0 auto;padding: var(--container-padding);}
+.main-content img{max-width: 100%;}
 /* ===== SECTION COMPONENTS ===== */
-.section-title {
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-}
-
-.section-subtitle {
-    color: var(--text-secondary);
-    font-size: 1.125rem;
-    max-width: 600px;
-    margin: 0 auto;
-}
+.section-title {color: var(--text-primary);margin-bottom: 1rem;}
+.section-subtitle {color: var(--text-secondary);font-size: 1.125rem;max-width: 600px;margin: 0 auto;}
 
 /* ===== BUTTONS ===== */
 .btn, .academy-btn, .contact-btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 5px;
-    font-size: var(--font-size-body);
-    font-weight: 600;
-    text-align: center;
+    display: inline-block;padding: 1rem 2rem;
+    border: none;border-radius: 5px;
+    font-size: var(--font-size-body);font-weight: 600;text-align: center;text-decoration: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-decoration: none;
 }
 
-.btn.primary, .contact-btn.primary {
-    background-color: var(--primary-blue);
-    color: var(--white);
-}
-
-.btn.primary:hover, .contact-btn.primary:hover {
-    background-color: var(--primary-red);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px var(--shadow);
-}
-
-.btn.secondary, .contact-btn.secondary {
-    background-color: transparent;
-    color: var(--primary-blue);
-    border: 2px solid var(--primary-blue);
-}
-
-.btn.secondary:hover, .contact-btn.secondary:hover {
-    background-color: var(--primary-blue);
-    color: var(--white);
-}
-
-.btn.accent, .academy-btn {
-    /* background-color: var(--primary-red); */
-    color: var(--white);
-}
-
-.btn.accent:hover, .academy-btn:hover {
-    background: var(--primary-blue);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.342);
-}
-
-.btn-large {
-    padding: 1.25rem 3rem;
-    font-size: 1.125rem;
-    background-color: var(--primary-blue);
-    color: var(--white);
-    border-radius: 5px;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s ease;
-}
-
-.btn-large:hover {
-    background-color: var(--primary-red);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px var(--shadow);
-}
+.btn.primary, .contact-btn.primary {background-color: var(--primary-blue);color: var(--white);}
+.btn.primary:hover, .contact-btn.primary:hover {background-color: var(--primary-red);transform: translateY(-2px);box-shadow: 0 5px 15px var(--shadow);}
+.btn.secondary, .contact-btn.secondary {background-color: transparent;color: var(--primary-blue);border: 2px solid var(--primary-blue);}
+.btn.secondary:hover, .contact-btn.secondary:hover {background-color: var(--primary-blue);color: var(--white);}
+.btn.accent, .academy-btn {color: var(--white);}
+.btn.accent:hover, .academy-btn:hover {background: var(--primary-blue);transform: translateY(-2px);box-shadow: 0 8px 25px rgba(0, 0, 0, 0.342);}
+.btn-large {padding: 1.25rem 3rem;font-size: 1.125rem;background-color: var(--primary-blue);color: var(--white);border-radius: 5px;text-decoration: none;display: inline-block;transition: all 0.3s ease;}
+.btn-large:hover {background-color: var(--primary-red);transform: translateY(-2px);box-shadow: 0 8px 20px var(--shadow);}
 
 
 
@@ -106,74 +45,24 @@
 .company-overview,
 .core-products,
 .ypp-academy,
-.contact-section {
-    padding: var(--section-padding);
-}
-
-.company-overview {
-    background-color: var(--very-light-gray);
-}
-
-.core-products {
-    background-color: var(--very-light-gray);
-}
-
-.ypp-academy {
-    background-color: var(--white);
-}
-
-.contact-section {
-    /* background-color: var(--dark-gray); */
-    color: var(--white);
-}
-
+.contact-section {padding: var(--section-padding);}
+.company-overview {background-color: var(--very-light-gray);}
+.core-products {background-color: var(--very-light-gray);}
+.ypp-academy {background-color: var(--white);}
+.contact-section {color: var(--white);}
 .contact-section .section-title,
-.contact-section .section-subtitle {
-    color: var(--white);
-}
+.contact-section .section-subtitle {color: var(--white);}
 
-/* ===== COMPANY OVERVIEW ===== */
-/* .overview-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.overview-card {
-    background-color: var(--white);
-    padding: var(--card-padding);
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 5px 15px var(--shadow);
-    transition: transform 0.3s ease;
-}
-
-.overview-card:hover {
-    transform: translateY(-5px);
-}
-
-.overview-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.overview-title {
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-}
-
-.overview-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-blue);
-    margin-bottom: 0.5rem;
-}
-
-.overview-desc {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-} */
-
-
-
+/* ===== DIV LINES ===== */
+.div-line-1{align-self: center; background: #000;width: 95%;height: 1px; margin: 1.5rem 0 ;position: relative;}
+.div-line-1::before{
+    content: "◇";
+    position: absolute;
+    left: 0%;
+    transform: translate(-100%,-50%);}
+.div-line-1::after{
+    z-index: 1;
+    content: "◇";
+    position: absolute;
+    right: 0%;
+    transform: translate(100%,-50%);}

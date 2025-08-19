@@ -250,7 +250,8 @@
                         </div>
                         
                         <!-- ESG경영보고서 -->
-                        <div id="esg-report" class="content-block">
+                         <!-- <div class="div-line-1"></div> -->
+                        <div id="esg-report" class="content-block box-style-1">
                             <h3 class="block-title paper-title"
                                 data-eng="YPP ESG Management Charter"
                                 data-kor="YPP ESG경영 강령">YPP ESG경영 강령</h3>
@@ -363,7 +364,7 @@
                     
                     <div class="content-grid">
                         <!-- 환경경영방침 -->
-                        <div id="environment-management" class="content-block paper">
+                        <div id="environment-management" class="content-block paper box-style-1">
                             <h3 class="block-title paper-title"
                                 data-eng="YPP Environmental Management Policy"
                                 data-kor="YPP 환경경영방침">YPP 환경경영방침</h3>
@@ -450,20 +451,15 @@
                         <style>
                         .certifications-grid {
                             display: grid;
-                            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                            grid-template-columns: 1fr 1fr;
                             gap: 30px;
                             max-width: 800px;
-                            margin: 0 auto;
+                            margin: 2rem auto;
                         }
 
                         .certification-item {
                             transition: all 0.3s ease;
                             text-align: center;
-                        }
-
-                        .certification-item:hover {
-                            transform: translateY(-5px);
-                            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
                         }
 
                         .certification-image {
@@ -480,35 +476,21 @@
                         .certification-item:hover .certification-image img {
                             transform: scale(1.02);
                         }
+                        .environment-certifications h3.block-title{
+                            text-align: left;
+                            border-left: 4px solid var(--primary-blue);
+                        }
 
                         /* 모바일 반응형 */
                         @media (max-width: 768px) {
-                            .environment-certifications {
-                                margin-top: 40px;
-                            }
-                            .certifications-grid {
-                                grid-template-columns: 1fr;
-                                gap: 20px;
-                                padding: 0 20px;
-                            }
-                            
-                            .certification-image {
-                                padding: 15px;
-                            }
+                            .environment-certifications {margin-top: 40px;}
+                            .certification-image {padding: 15px;}
                         }
 
                         @media (max-width: 480px) {
-                            .environment-certifications .block-title {
-                                font-size: 1.3rem;
-                            }
-                            
-                            .certifications-grid {
-                                padding: 0 10px;
-                            }
-                            
-                            .certification-image {
-                                padding: 10px;
-                            }
+                            .environment-certifications .block-title {font-size: 1.3rem;}
+                            .certifications-grid {padding: 0 10px;}
+                            .certification-image {padding: 10px;}
                         }
                         </style>
                     </div>
@@ -527,7 +509,7 @@
                     
                     <div class="content-grid">
                         <!-- 인권경영/인권헌장 -->
-                        <div id="social-human" class="content-block paper">
+                        <div id="social-human" class="content-block paper box-style-1">
                             <h3 class="block-title paper-title"
                                 data-eng="YPP Human Rights Charter"
                                 data-kor="YPP 인권 헌장">YPP 인권 헌장</h3>
@@ -585,8 +567,8 @@
                                 </div>
                             </div>
                         </div>
-
-<!-- 사회공헌 -->
+                        
+                        <!-- 사회공헌 -->
                         <div id="social-contribution" class="content-block">
                             <h3 class="block-title"
                                 data-eng="Social Contribution"
@@ -597,7 +579,7 @@
                                         data-eng="YPP is committed to protecting and empowering vulnerable groups through donations and support projects with social welfare facilities, as well as leading the strategic industries of national institutions, contributing to the development of young talents in the electricity/power sector and the development of industry talents." 
                                     data-kor="YPP는 기관 사회복지시설과 현장관람을 통한 기부와 지원사업으로 취약계층에 대한 보호와 자립을 돕고 있으며, 국가기관 전략산업을 선도함으로써 전기/전력분야의 청년 인재양성과 산업체 인재 개발에 기여하고 있습니다.">YPP는 기관 사회복지시설과 현장관람을 통한 기부와 지원사업으로 취약계층에 대한 보호와 자립을 돕고 있으며, 국가기관 전략산업을 선도함으로써 전기/전력분야의 청년 인재양성과 산업체 인재 개발에 기여하고 있습니다.</p>
                                 </div>
-                                <div class="social-contribution-container" style="max-width:900px; margin:0 auto;">
+                                <div class="social-contribution-container box-style-1">
                                     <ul class="contribution-history">
                                         <li>
                                             <span class="contribution-year">2021</span>
@@ -1145,162 +1127,8 @@
                                                 <label for="report-popup-checkbox" class="report-popup-close" tabindex="0" style="cursor:pointer;">&times;</label>
                                             </div>
                                             <iframe data-tally-src="https://tally.so/embed/wv67Kl?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="YPP 부패 및 비윤리 신고"></iframe>
-<script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
-                                            <!-- onsubmit="document.getElementById('report-popup-checkbox').checked=false;alert('신고가 접수되었습니다.');return false;" -->
-                                            <!-- <label for="report-file"data-eng="Attachment"data-kor="첨부파일">첨부파일</label>
-                                                <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
-                                                <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
-                                                <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
-                                                <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp">
-                                                <input type="file" id="report-file" name="report-file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.hwp"> -->
-                                                <!-- 첨부파일 영역을 임시 비활성화 -->
-                                                 
-                                            <!-- <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfi7fge8Qpv5YyKIAi0rZaxaE6pKFyleu6ERUuzUqRNbouS-A/formResponse"
-                                                class="report-popup-form" 
-                                                >
-                                                <label for="report-title"data-eng="Title"data-kor="제목">제목</label>
-                                                <input type="text" id="report-title" name="entry.84505636" required maxlength="100" placeholder="제목을 입력하세요">
-
-                                                <label for="report-content"data-eng="Content"data-kor="내용">내용</label>
-                                                <textarea id="report-content" name="entry.2037109469" rows="6" required placeholder="신고 내용을 입력하세요"></textarea>
-                                                
-                                                <div class="file-upload-area" style="opacity: 0.5; pointer-events: none;">
-                                                <p> 첨부파일 (준비 중)</p>
-                                                <small>현재 첨부파일 기능을 준비 중입니다.</small>
-                                                </div>
-
-                                                <div class="report-popup-actions">
-                                                    <button type="submit" class="report-popup-submit"
-                                                        data-eng="Submit"
-                                                        data-kor="제출">제출</button>
-                                                    <label for="report-popup-checkbox" class="report-popup-cancel" tabindex="0" style="cursor:pointer;"
-                                                        data-eng="Cancel"
-                                                        data-kor="취소">취소</label>
-                                                </div>
-                                            </form> -->
+                                            <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
                                         </div>
-                                        <!-- <div class="report-notice">
-                                            <div class="content-preparing-notice" id="contentPreparingNotice">
-                                                <div class="notice-container">
-                                                    <div class="notice-content">
-                                                        <div class="notice-title" 
-                                                        data-kor="<span class='notice-icon'>⚠</span>신고 제출 기능은 준비 중입니다."
-                                                        data-eng="<span class='notice-icon'>⚠</span> The reporting submission feature is under preparation.">
-                                                        </div>
-                                                        <p class="notice-description" 
-                                                        data-kor="빠른 시일내에 서비스를 제공할 수 있도록 노력하겠습니다. 감사합니다."
-                                                        data-eng="We are working hard to provide this service as soon as possible. Thank you.">
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
-<style>
-/* 컨텐츠 준비 중 알림창 */
-.content-preparing-notice {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 1rem;
-    z-index: 998;
-    animation: contentPreparingSlideUp 0.5s ease-out;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.content-preparing-notice .notice-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-    color: white;
-    padding: 1.5rem 2rem;
-    box-shadow: 
-        0 -12px 40px rgba(102, 126, 234, 0.4),
-        0 -6px 20px rgba(118, 75, 162, 0.3),
-        0 -2px 10px rgba(240, 147, 251, 0.2);
-    backdrop-filter: blur(10px);
-    border-radius:10px;
-}
-
-@keyframes contentPreparingSlideUp {
-    from {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-            
-
-.content-preparing-notice .notice-content {
-    flex: 1;
-}
-
-.content-preparing-notice .notice-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.content-preparing-notice .notice-icon {
-    width: 20px;
-    height: 20px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(240, 147, 251, 0.4));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.content-preparing-notice .notice-description {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    opacity: 0.9;
-    margin: 0;
-    color: #fff;
-}
-
-/* 모바일 반응형 */
-@media (max-width: 768px) {
-    .content-preparing-notice {
-        padding: 1rem 1.5rem;
-    }
-    
-    .content-preparing-notice .notice-title {
-        font-size: 1.1rem;
-    }
-    
-    .content-preparing-notice .notice-description {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .content-preparing-notice {
-        padding: 1rem;
-    }
-    
-    .content-preparing-notice .notice-title {
-        font-size: 1rem;
-    }
-    
-    .content-preparing-notice .notice-description {
-        font-size: 0.85rem;
-    }
-}
-</style>
                                     </div>
                                 </div>
                             </div>
@@ -1334,6 +1162,19 @@
      <script src="esg.js"></script>
 
     <style>
+        .block-title{border-left: none}
+        .content-block{border: none; box-shadow: none;}
+        .content-block:hover{box-shadow: none;}
+        /*  */
+        .box-style-1{
+            background: #f8fbff;
+            border: 1.5px solid #dbeafe;
+            border-radius: 14px;
+            padding: 32px 24px 24px 24px;
+            margin-top: 36px;
+            box-shadow: 0 2px 12px rgba(33,129,255,0.06);
+        }
+        /*  */
         .contribution-year{
             background: #2181ff;
             color: #fff;
@@ -1361,6 +1202,9 @@
             list-style: disc;
         }   
         /* .esg-report  */
+        .charter-signature{margin-top: 4rem;}
+        .signature-date,
+        .signature-name{text-align: center; margin-top: 2rem;}
         .charter-intro p:first-child{
             font-size: 1.1rem;
             margin: 30px 0;

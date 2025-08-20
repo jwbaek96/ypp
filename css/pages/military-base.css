@@ -737,14 +737,6 @@
     margin-top: 40px;
 }
 
-.status-title {
-    color: #495057;
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
 .status-subtitle {
     color: #6c757d;
@@ -1400,16 +1392,15 @@
     line-height: 1.5;
 }
 
-.achievements-section {
-    margin-top: 40px;}
-.achievements-title{
-    color: #495057;
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-    display: flex
-;
-    align-items: center;
-    gap: 10px;
+.achievements-section {margin-top: 40px;}
+
+.achievements-title,
+.status-title{
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0066cc;
+    padding-left: 1rem;
+    border-left: 6px solid #c9e5ff;
 }
 /* Responsive Adjustments */
 @media (max-width: 768px) {

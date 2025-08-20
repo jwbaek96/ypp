@@ -22,7 +22,7 @@
 .ypp-popup-top {display: flex;justify-content: flex-end;align-items: flex-end;padding: 10px 30px;visibility: hidden;}
 .ypp-popup-mid {overflow: hidden; height: 100%;scale: .9;}
 .popup-slides-container{display: flex;flex-direction: row;--popup-gap:30px;gap: var(--popup-gap);}
-.popup-slide {padding: 20px 22px;flex-shrink: 0;position: relative;transition-property: transform;background-color: #fff;border-radius: 1.2rem;position: relative;max-height: 70vh;max-width: calc(50% - var(--popup-gap));}
+.popup-slide {padding: 20px 22px;flex-shrink: 0;position: relative;transition-property: transform;background-color: #fff;border-radius: .9rem;position: relative;max-height: 70vh;max-width: calc(50% - var(--popup-gap));}
 .slide-content {height: 100%;overflow-y: auto;scrollbar-width: thin;scrollbar-color: #9ca3af #f3f4f6;}
 
 @media screen {
@@ -31,6 +31,7 @@
     .ypp-popup-top{visibility: visible; justify-content: space-between;align-items: center;}
     .popup-slides-container{--popup-gap: 5px;}
     .popup-slide {width: 100%;max-width: calc(100% - var(--popup-gap));}
+    .ypp-popup-mid{scale: 1;}
   }
 }
 
@@ -302,7 +303,6 @@
 /* 데스크톱 사이즈 (1024px 이상) */
 @media (min-width: 1024px) {
   .ypp-popup-modal {--max-width-popup-modal: 550px;}
-  .ypp-popup-mid{scale: 1;}
 }
 
 @media (max-width: 425px) {

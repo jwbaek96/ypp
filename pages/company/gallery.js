@@ -533,8 +533,8 @@ class GallerySystem {
         this.popupImage.alt = this.popupTitle.textContent;
         
         // 다운로드 버튼에 현재 이미지 정보 저장
-        this.downloadBtn.dataset.imageUrl = currentImage.url;
-        this.downloadBtn.dataset.fileName = currentImage.fileName;
+        // this.downloadBtn.dataset.imageUrl = currentImage.url;
+        // this.downloadBtn.dataset.fileName = currentImage.fileName;
         
         // 이미지 정보 업데이트
         if (this.currentItemImages.length > 1) {

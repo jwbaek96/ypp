@@ -19,12 +19,12 @@
             --box-color: #d9d9d9;
             --line-color: #ececec;
         }
-        body{background: 
+        body{
+            /* background:  */
             /* linear-gradient(135deg, #eaeeff 0%, #ffffff 100%);min-height: 100dvh; */
-            linear-gradient(135deg, #a0aad6 0%, #7abde2 100%);
+            /* linear-gradient(135deg, #a0aad6 0%, #7abde2 100%); */
             min-height: 100dvh;
         }
-        .clock-widget,
         nav ul li,
         .line{border: 1px solid var(--line-color); border-radius: 10px;}
         p, span{margin-bottom: 0; color: #000;}
@@ -34,14 +34,21 @@
         .nav-container{display: flex; flex-direction: column;padding-top: 2rem;}
         nav{margin-bottom: 24px;}
         nav ul{
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            display: flex;
+            /* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
             gap: var(--gap);
+            flex-direction: row;
+            justify-content: flex-end;
         }
         nav ul li{
-            background-color: #fff; padding: 16px 16px;  
-            /* aspect-ratio: 1/.7; */
-            display: flex; flex-direction: column; justify-content: space-between;
+            /* background-color: aliceblue; */
+            flex: auto;
+            background-color: #f3f5f7;
+            padding: 16px 16px;
+            /* aspect-ratio: 1 / .7; */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -224,13 +231,6 @@
                 </ul>
             </nav>
         </section>
-        <main>
-            <div class="main-header"></div>
-            <div class="main-contents"></div>
-            <div class="modal-content"></div>
-            <div class="modal-add"></div>
-        </main>
-
 </body>
 </html>
 
@@ -385,48 +385,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // 네비게이션 클릭 처리
 function handleNavClick(navType) {
     // 현재 선택된 항목 하이라이트
-    // document.querySelectorAll('[data-nav]').forEach(item => {
-    //     item.classList.remove('active');
-    // });
-    // document.querySelector(`[data-nav="${navType}"]`)?.classList.add('active');
+    document.querySelectorAll('[data-nav]').forEach(item => {
+        item.classList.remove('active');
+    });
+    document.querySelector(`[data-nav="${navType}"]`)?.classList.add('active');
     
-    // 각 섹션별 처리
-    switch(navType) {
-        case 'popups':
-            console.log('팝업 관리 페이지로 이동');
-            break;
-        case 'license':
-            console.log('인허가 갤러리 관리 페이지로 이동');
-            break;
-        case 'qualification':
-            console.log('유자격 갤러리 관리 페이지로 이동');
-            break;
-        case 'inside':
-            console.log('인사이드 갤러리 관리 페이지로 이동');
-            break;
-        case 'academy':
-            console.log('아카데미 갤러리 관리 페이지로 이동');
-            break;
-        case 'news':
-            console.log('보도자료 관리 페이지로 이동');
-            break;
-        case 'psac':
-            console.log('PSAC 신청 관리 페이지로 이동');
-            break;
-        case 'relay-school':
-            console.log('Relay School 신청 관리 페이지로 이동');
-            break;
-        case 'faq':
-            console.log('FAQ 관리 페이지로 이동');
-            break;
-        case 'customer-inquiries':
-            console.log('고객문의 관리 페이지로 이동');
-            break;
-        case 'corruption-report':
-            console.log('부패신고 관리 페이지로 이동');
-            break;
-        default:
-            console.log(`알 수 없는 네비게이션: ${navType}`);
+    // nav-type을 페이지 파라미터로 변환
+    const pageMapping = {
+        'popups': '팝업',
+        'license': '인허가',
+        'qualification': '유자격',
+        'inside': '인사이드',
+        'academy': '아카데미',
+        'news': '보도자료',
+        'psac': 'PSAC',
+        'relay-school': 'RelaySchool',
+        'faq': '자주묻는질문',
+        'customer-inquiries': '고객문의',
+        'corruption-report': '부패및윤리신고'
+    };
+    
+    const pageName = pageMapping[navType];
+    if (pageName) {
+        console.log(`${pageName} 페이지로 이동`);
+        // page.html로 이동하면서 파라미터 전달
+        window.location.href = `page.html?page=${encodeURIComponent(pageName)}`;
+    } else {
+        console.log(`알 수 없는 네비게이션: ${navType}`);
     }
 }
 

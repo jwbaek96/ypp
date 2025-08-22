@@ -24,7 +24,23 @@
         }
         p, span{margin-bottom: 0; color: #000;}
         /* =========== */
+
         .main-container{ max-width: var(--mxw); margin: 0 auto; padding: 20px; box-sizing: border-box;}
+        
+        /* =========== */
+
+        .links{position: fixed;bottom: 25px;left: 25px;}
+        .links a img{
+            width: 2.25rem;
+            box-shadow: 0 1px 5px rgb(0 0 0 / 56%);
+            border-radius: 7px;
+        }
+        .links a:hover img{
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }
+
+        /* =========== */
         /* =========== Clock Styles =========== */
         header{width: 100%;display: flex; justify-content: space-between;padding: 10px 0;}
         .clock-widget {font-size: 1.1rem;}
@@ -33,8 +49,7 @@
             /* border-bottom: 1px solid var(--line-color); */
             padding: 1rem 0 1rem 0;
             width: 100%;
-            display: flex
-        ;
+            display: flex;
             justify-content: space-between;
             flex-direction: column;
             gap: 2rem;
@@ -42,6 +57,8 @@
         .page-title{font-size: 2.5rem;}
         .page-info{display: flex; flex-direction: column; gap: 4px; text-align: right;font-size: .8rem;}
         .page-count{font-size: 1.8rem;}
+        .page-count i{font-size: 1rem; margin-bottom: 1rem;}
+
         /* =========== Data List Styles =========== */
         /* .data-container {margin-top: 2rem;} */
         
@@ -81,6 +98,13 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             max-height: 600px; /* 테이블 최대 높이 설정 */
             overflow-y: auto; /* 세로 스크롤 활성화 */
+        }
+        .data-table-container::-webkit-scrollbar { 
+            width: 4px;
+        }
+        .data-table-container::-webkit-scrollbar-thumb { 
+            background-color: #C6C6C6;
+            border-radius: 3px;
         }
         
         .data-table {
@@ -139,26 +163,29 @@
     </style>
 </head>
 <body>
+    <section class="links">
+        <a href="/"><img src="/assets/images/favicon/apple-icon-76x76.png" alt="" srcset=""></a>
+    </section>
     <div class="main-container">
         <header>
             <a href="/admin/" class="btn-home">
                 <i class="fas fa-home"></i>
             </a>
             <div class="clock-widget">
-                <span class="clock-date" id="clock-date">2025년 11월 16일</span>
+                <span class="clock-date" id="clock-date"></span>
                 <span class="clock-time">
-                    <span id="clock-hours">12</span>:<span id="clock-minutes">00</span><span class="clock-period" id="clock-period">PM</span>
+                    <span id="clock-hours"></span>:<span id="clock-minutes"></span><span class="clock-period" id="clock-period"></span>
                 </span>
             </div>
         </header>
         <main>
             <div class="page-top">
-                <div class="page-title">팝업</div>
+                <div class="page-title"></div>
                 <div class="page-info">
                     <p class="page-count">
                         <i class="fas fa-spinner fa-spin"></i>
                     </p>
-                    <p class="page-location">홈 > 팝업</p>
+                    <p class="page-location">홈 > </p>
                     <p class="page-descripation">페이지 디스크립션</p>
                 </div>
             </div>
@@ -224,7 +251,7 @@
             <div class="modal-content"></div>
             <div class="modal-add"></div>
         </main>
-
+    </div>
 </body>
 </html>
 
@@ -284,12 +311,104 @@ class Clock {
     }
 }
 // ===========================================================================================
+// 날짜/시간 유틸리티 함수들
+// ===========================================================================================
+
+/**
+ * datetime 문자열을 날짜와 시간으로 분리하는 함수
+ * @param {string} datetime - "YYYY-MM-DD HH:mm:ss" 형식의 문자열
+ * @returns {Object} {date: "YYYY-MM-DD", time: "HH:mm:ss", dateOnly: "YYYY-MM-DD", timeOnly: "HH:mm"}
+ */
+function parseDatetime(datetime) {
+    if (!datetime || typeof datetime !== 'string') {
+        return { date: '-', time: '-', dateOnly: '-', timeOnly: '-' };
+    }
+    
+    try {
+        const parts = datetime.split(' ');
+        if (parts.length >= 2) {
+            const datePart = parts[0]; // YYYY-MM-DD
+            const timePart = parts[1]; // HH:mm:ss
+            const timeOnly = timePart.substring(0, 5); // HH:mm만 추출
+            
+            return {
+                date: datePart,
+                time: timePart,
+                dateOnly: datePart,
+                timeOnly: timeOnly
+            };
+        }
+        
+        // 날짜만 있는 경우 (YYYY-MM-DD)
+        if (datetime.includes('-') && !datetime.includes(' ')) {
+            return {
+                date: datetime,
+                time: '-',
+                dateOnly: datetime,
+                timeOnly: '-'
+            };
+        }
+        
+        return { date: datetime, time: '-', dateOnly: datetime, timeOnly: '-' };
+        
+    } catch (error) {
+        console.error('parseDatetime 에러:', error);
+        return { date: datetime, time: '-', dateOnly: datetime, timeOnly: '-' };
+    }
+}
+
+/**
+ * 날짜를 한국어 형식으로 포맷팅
+ * @param {string} dateStr - "YYYY-MM-DD" 형식
+ * @returns {string} "YYYY년 MM월 DD일" 형식
+ */
+function formatKoreanDate(dateStr) {
+    if (!dateStr || dateStr === '-') return '-';
+    
+    try {
+        const parts = dateStr.split('-');
+        if (parts.length === 3) {
+            return `${parts[0]}년 ${parseInt(parts[1])}월 ${parseInt(parts[2])}일`;
+        }
+        return dateStr;
+    } catch (error) {
+        return dateStr;
+    }
+}
+
+/**
+ * 시간을 12시간 형식으로 변환
+ * @param {string} timeStr - "HH:mm:ss" 또는 "HH:mm" 형식
+ * @returns {string} "오전/오후 HH:mm" 형식
+ */
+function formatKoreanTime(timeStr) {
+    if (!timeStr || timeStr === '-') return '-';
+    
+    try {
+        const timeParts = timeStr.split(':');
+        if (timeParts.length >= 2) {
+            let hour = parseInt(timeParts[0]);
+            const minute = timeParts[1];
+            const period = hour >= 12 ? '오후' : '오전';
+            
+            if (hour > 12) hour -= 12;
+            if (hour === 0) hour = 12;
+            
+            return `${period} ${hour}:${minute}`;
+        }
+        return timeStr;
+    } catch (error) {
+        return timeStr;
+    }
+}
+
+// ===========================================================================================
 // ===========================================================================================
 // 페이지 관리 클래스
 class PageManager {
     constructor() {
         // Google Apps Script 웹앱 URL (index.html과 동일)
-        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbz6J9vVnUUpmafGuEP_2_rFr1EZ83s6lMIrOFA6M8YhV8nytlhRUy8iIlvPy8qeqIKC';
+        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxIahDUT9xuPXQht5ousfW4DY6MYQN0Qs5zuz8tCsu5tj2mQliH22GW2gnSKYw3kMo';
         this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
         this.pageConfigs = this.initPageConfigs();
     }
@@ -418,7 +537,7 @@ class PageManager {
     // 페이지별 데이터 카운트 로드
     async loadPageCount(config) {
         try {
-            console.log(`${config.title} 데이터 카운트 로드 중...`);
+            // console.log(`${config.title} 데이터 카운트 로드 중...`);
             
             // 대시보드에서 카운트 정보 가져오기 (index.html과 동일한 URL 형식)
             const url = `${this.appsScriptUrl}?sheet=SHEET_DASHBOARD&action=getData`;
@@ -429,17 +548,17 @@ class PageManager {
                 throw new Error(result.message);
             }
             
-            console.log('=== 디버깅 정보 ===');
-            console.log('config:', config);
-            console.log('config.dataKey:', config.dataKey);
-            console.log('result.data:', result.data);
-            console.log('result.data[config.dataKey]:', result.data[config.dataKey]);
+            // console.log('=== 디버깅 정보 ===');
+            // console.log('config:', config);
+            // console.log('config.dataKey:', config.dataKey);
+            // console.log('result.data:', result.data);
+            // console.log('result.data[config.dataKey]:', result.data[config.dataKey]);
             
             const count = result.data[config.dataKey] || 0;
             document.querySelector('.page-count').textContent = `${count}건`;
             
-            console.log(`${config.title}: ${count}건`);
-            console.log('=== 디버깅 끝 ===');
+            // console.log(`${config.title}: ${count}건`);
+            // console.log('=== 디버깅 끝 ===');
             
         } catch (error) {
             console.error('데이터 카운트 로드 실패:', error);
@@ -461,7 +580,7 @@ class PageManager {
     async loadPageData(config) {
         try {
             this.showLoading(true);
-            console.log(`${config.title} 데이터 로드 중...`);
+            // console.log(`${config.title} 데이터 로드 중...`);
             
             // API에서 실제 데이터 가져오기 (index.html과 동일한 URL 형식)
             const url = `${this.appsScriptUrl}?sheet=${config.apiSheet}&action=getData`;
@@ -478,7 +597,6 @@ class PageManager {
             // 데이터가 있으면 테이블 렌더링, 없으면 빈 상태 표시
             if (data && data.length > 0) {
                 this.renderDataTable(data, config);
-                this.renderDataCards(data, config);
                 this.showEmptyState(false);
             } else {
                 this.showEmptyState(true);
@@ -500,10 +618,14 @@ class PageManager {
         // 테이블 헤더 동적 생성
         thead.innerHTML = this.generateTableHeaderHTML(config);
         
+        // 데이터 그룹핑 적용 (PSAC, RelaySchool에서만)
+        const processedData = this.groupDataByDateAndBusinessNumber(data);
+        console.log('그룹핑 처리된 데이터:', processedData);
+        
         // 테이블 바디 초기화 및 데이터 렌더링
         tbody.innerHTML = '';
         
-        data.forEach((item, index) => {
+        processedData.forEach((item, index) => {
             const row = document.createElement('tr');
             row.innerHTML = this.generateTableRowHTML(item, config);
             
@@ -521,27 +643,7 @@ class PageManager {
         // 체크박스 이벤트 설정
         this.setupCheckboxEvents();
     }
-    
-    // 카드 렌더링 (모바일)
-    renderDataCards(data, config) {
-        const container = document.getElementById('data-cards-container');
-        container.innerHTML = '';
-        
-        data.forEach((item) => {
-            const card = document.createElement('div');
-            card.className = 'data-card';
-            card.innerHTML = this.generateCardHTML(item, config);
-            
-            // 카드 클릭 이벤트
-            card.addEventListener('click', () => {
-                console.log('카드 클릭됨:', item);
-                // 나중에 모달 열기 기능 추가
-            });
-            
-            container.appendChild(card);
-        });
-    }
-    
+
     // 테이블 헤더 HTML 생성
     generateTableHeaderHTML(config) {
         const pageType = new URLSearchParams(window.location.search).get('page');
@@ -572,9 +674,8 @@ class PageManager {
             case 'RelaySchool':
                 return `
                     <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
-                    <th class="col-id">순번</th>
+                    <th class="col-number">순번</th>
                     <th>회사/기관</th>
-                    <th>교육</th>
                     <th>신청과목</th>
                     <th class="col-date">신청일</th>
                     <th class="col-actions">삭제</th>
@@ -627,6 +728,71 @@ class PageManager {
         }
     }
     
+    // 데이터 그룹핑 함수 (날짜와 사업자등록번호로 그룹핑)
+    groupDataByDateAndBusinessNumber(data) {
+        const pageType = new URLSearchParams(window.location.search).get('page');
+        
+        // PSAC, RelaySchool 페이지에서만 그룹핑 적용
+        if (!['PSAC', 'RelaySchool'].includes(pageType)) {
+            return data;
+        }
+        
+        const grouped = {};
+        const result = [];
+        
+        data.forEach(item => {
+            // 날짜 추출 (applicationDate 또는 educationSchedule에서)
+            const datetime = parseDatetime(item.applicationDate || item.educationSchedule);
+            const date = datetime.dateOnly;
+            
+            // 사업자등록번호 추출 (여러 필드명 지원)
+            const businessNumber = item.businessNumber || item.companyRegistrationNumber || item.businessRegistrationNumber || '';
+            
+            // 그룹핑 키 생성 (날짜 + 사업자등록번호)
+            // 사업자등록번호가 없으면 각각 별도 그룹으로 처리 (고유 ID 사용)
+            let groupKey;
+            if (businessNumber && businessNumber.trim() !== '') {
+                groupKey = `${date}_${businessNumber.trim()}`;
+            } else {
+                // 사업자등록번호가 없으면 각 항목을 별도로 처리
+                groupKey = `${date}_${item.number || item.id || Math.random()}`;
+            }
+            
+            if (!grouped[groupKey]) {
+                // 새 그룹 생성
+                grouped[groupKey] = {
+                    ...item, // 첫 번째 아이템의 기본 정보 사용
+                    groupedEducation: [item.detailedEducation || ''], // 교육 내용들을 배열로 저장
+                    groupedItems: [item], // 원본 아이템들 저장
+                    isGrouped: true // 그룹핑된 데이터임을 표시
+                };
+            } else {
+                // 기존 그룹에 추가
+                grouped[groupKey].groupedEducation.push(item.detailedEducation || '');
+                grouped[groupKey].groupedItems.push(item);
+            }
+        });
+        
+        // 그룹핑된 결과를 배열로 변환
+        Object.values(grouped).forEach(group => {
+            result.push(group);
+        });
+        
+        console.log('그룹핑 결과:', {
+            원본데이터개수: data.length,
+            그룹핑후개수: result.length,
+            그룹상세: result.map(item => ({
+                회사: item.companyName,
+                날짜: parseDatetime(item.applicationDate || item.educationSchedule).dateOnly,
+                사업자번호: item.businessNumber || item.companyRegistrationNumber || item.businessRegistrationNumber,
+                교육개수: item.groupedEducation.length,
+                교육내용: item.groupedEducation
+            }))
+        });
+        
+        return result;
+    }
+
     // 테이블 행 HTML 생성
     generateTableRowHTML(item, config) {
         const pageType = new URLSearchParams(window.location.search).get('page');
@@ -659,30 +825,66 @@ class PageManager {
                 
             case 'PSAC':
             case 'RelaySchool':
-                return `
-                    <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
-                    <td>${item.id}</td>
-                    <td>${item.company || item.organization || '-'}</td>
-                    <td>${item. || ''}</td>
-                    <td>${item. || ''}</td>
-                    <td>${item. || ''}</td>
-                    <td>${item.applyDate || item.applicationDate || '-'}</td>
-                    <td>
-                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
-                    </td>
-                `;
+                const datetime = parseDatetime(item.applicationDate || item.educationSchedule);
                 
+                // 그룹핑된 데이터인지 확인
+                if (item.isGrouped && item.groupedEducation && item.groupedEducation.length > 1) {
+                    // 그룹핑된 여러 교육 내용을 <br>로 구분해서 표시
+                    const educationList = item.groupedEducation
+                        .filter(edu => edu && edu.trim()) // 빈 값 제거
+                        .map((edu, index) => `<span style="display: block; padding: 2px 0;">${edu.trim()}</span>`)
+                        .join('');
+                        
+                    return `
+                        <td class="col-checkbox"><input type="checkbox" data-id="${item.number}"></td>
+                        <td>${item.number}</td>
+                        <td>${item.companyName || '-'}</td>
+                        <td style="background-color: #f8f9fa; border-left: 3px solid #007bff; padding-left: 8px;">
+                            <div style="font-weight: 500; color: #495057; margin-bottom: 4px;">
+                                <i class="fas fa-layer-group" style="color: #007bff; margin-right: 4px;"></i>
+                                그룹 (${item.groupedEducation.length}개 과목)
+                            </div>
+                            ${educationList}
+                        </td>
+                        <td>
+                            <div>${datetime.dateOnly}</div>
+                            <small style="color: #666;">${datetime.timeOnly}</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.number}')"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    `;
+                } else {
+                    // 단일 데이터
+                    return `
+                        <td class="col-checkbox"><input type="checkbox" data-id="${item.number}"></td>
+                        <td>${item.number}</td>
+                        <td>${item.companyName || '-'}</td>
+                        <td>${item.detailedEducation || ''}</td>
+                        <td>
+                            <div>${datetime.dateOnly}</div>
+                            <small style="color: #666;">${datetime.timeOnly}</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.number}')"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    `;
+                }
             case '고객문의':
+                const inquiryDatetime = parseDatetime(item.submittedAt);
                 return `
-                    <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
-                    <td>${item.id}</td>
+                    <td class="col-checkbox"><input type="checkbox" data-id="${item.submissionId}"></td>
+                    <td>${item.submissionId}</td>
                     <td>${item.subject || '제목 없음'}</td>
-                    <td>${item.name || '-'}</td>
-                    <td>${item.email || '-'}</td>
-                    <td>${item.inquiryDate || '-'}</td>
-                    <td><span class="status-badge ${item.status === '완료' ? 'status-active' : 'status-pending'}">${item.status || '대기'}</span></td>
+                    <td>${item.nameCompany || '-'}</td>
+                    <td>${item.emailPhone || '-'}</td>
                     <td>
-                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                        <div>${inquiryDatetime.dateOnly}</div>
+                        <small style="color: #666;">${inquiryDatetime.timeOnly}</small>
+                    </td>
+                    <td><span class="status-badge status-pending">접수</span></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.submissionId}')"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 `;
                 
@@ -727,53 +929,6 @@ class PageManager {
         }
     }
     
-    // 카드 HTML 생성
-    generateCardHTML(item, config) {
-        const pageType = new URLSearchParams(window.location.search).get('page');
-        
-        switch(pageType) {
-            case '인허가':
-            case '유자격':
-                return `
-                    <div class="card-header">
-                        <span class="card-title">${item.titleKR || '제목 없음'}</span>
-                        <span class="status-badge ${item.state === 'on' ? 'status-active' : 'status-inactive'}">${item.state === 'on' ? 'ON' : 'OFF'}</span>
-                    </div>
-                    <div class="card-content">
-                        <p><strong>ID:</strong> ${item.id}</p>
-                        <p><strong>날짜:</strong> ${item.date || '-'}</p>
-                        <p><strong>영문 제목:</strong> ${item.titleEN || '-'}</p>
-                    </div>
-                `;
-                
-            case 'PSAC':
-            case 'RelaySchool':
-                return `
-                    <div class="card-header">
-                        <span class="card-title">${item.applicantName || '이름 없음'}</span>
-                        <span class="status-badge status-pending">${item.status || '대기'}</span>
-                    </div>
-                    <div class="card-content">
-                        <p><strong>이메일:</strong> ${item.email || '-'}</p>
-                        <p><strong>회사/기관:</strong> ${item.company || item.organization || '-'}</p>
-                        <p><strong>신청일:</strong> ${item.applyDate || '-'}</p>
-                    </div>
-                `;
-                
-            default:
-                return `
-                    <div class="card-header">
-                        <span class="card-title">${item.title || item.subject || '제목 없음'}</span>
-                        <span class="status-badge status-active">ON</span>
-                    </div>
-                    <div class="card-content">
-                        <p><strong>ID:</strong> ${item.id}</p>
-                        <p><strong>날짜:</strong> ${item.publishDate || item.reportDate || item.date || '-'}</p>
-                    </div>
-                `;
-        }
-    }
-    
     // 체크박스 이벤트 설정
     setupCheckboxEvents() {
         const selectAll = document.getElementById('select-all');
@@ -812,12 +967,10 @@ class PageManager {
     showLoading(show) {
         const loading = document.getElementById('loading-indicator');
         const tableContainer = document.querySelector('.data-table-container');
-        const cardsContainer = document.querySelector('.data-cards');
         
         if (show) {
             loading.style.display = 'block';
             tableContainer.style.display = 'none';
-            cardsContainer.style.display = 'none';
         } else {
             loading.style.display = 'none';
             tableContainer.style.display = 'block';

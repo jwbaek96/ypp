@@ -17,40 +17,47 @@
             --mxw: 900px;
             --gap: 16px;
             --box-color: #d9d9d9;
-            --line-color: #ececec;
         }
-        body{
-            /* background:  */
-            /* linear-gradient(135deg, #eaeeff 0%, #ffffff 100%);min-height: 100dvh; */
-            /* linear-gradient(135deg, #a0aad6 0%, #7abde2 100%); */
-            min-height: 100dvh;
-        }
-        nav ul li,
-        .line{border: 1px solid var(--line-color); border-radius: 10px;}
-        p, span{margin-bottom: 0; color: #000;}
+        body{min-height: 100dvh;}
         /* =========== */
+        
+        nav ul li,
+        p, span{margin-bottom: 0; color: #000;}
+
+        /* =========== */
+        .links{position: fixed;bottom: 25px;left: 25px;}
+        .links a img{
+            width: 2.25rem;
+            box-shadow: 0 1px 5px rgb(0 0 0 / 56%);
+            border-radius: 7px;}
+        .links a:hover img{
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }
+
+        /* =========== */
+
         .main-container{ max-width: var(--mxw); margin: 0 auto; padding: 20px; box-sizing: border-box;}
+
         /* =========== */
         .nav-container{display: flex; flex-direction: column;padding-top: 2rem;}
         nav{margin-bottom: 24px;}
         nav ul{
             display: flex;
-            /* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
             gap: var(--gap);
             flex-direction: row;
             justify-content: flex-end;
         }
         nav ul li{
-            /* background-color: aliceblue; */
             flex: auto;
             background-color: #f3f5f7;
             padding: 16px 16px;
-            /* aspect-ratio: 1 / .7; */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
             transition: all 0.3s ease;
+            border-radius: 12px;
         }
         nav ul li:hover{background-color: var(--box-color);}
         @keyframes dots {
@@ -231,6 +238,9 @@
                 </ul>
             </nav>
         </section>
+        <section class="links">
+            <a href="/"><img src="/assets/images/favicon/apple-icon-76x76.png" alt="" srcset=""></a>
+        </section>
 </body>
 </html>
 
@@ -238,7 +248,7 @@
 // 앱스크립트 웹앱 URL (배포 후 실제 URL로 변경 필요)
 
 // Google Apps Script 웹앱 URL (배포 후 받은 URL)
-const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbz6J9vVnUUpmafGuEP_2_rFr1EZ83s6lMIrOFA6M8YhV8nytlhRUy8iIlvPy8qeqIKC';
+const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxIahDUT9xuPXQht5ousfW4DY6MYQN0Qs5zuz8tCsu5tj2mQliH22GW2gnSKYw3kMo';
 const DASHBOARD_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DASHBOARD_APPS_SCRIPT_ID}/exec`;
 
 // 대시보드 데이터 로드 및 표시

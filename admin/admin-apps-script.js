@@ -1,7 +1,7 @@
 // Google Apps Script - YPP Admin System
 // 개선된 버전
 
-const SPREADSHEET_ID = '1YOUR_SPREADSHEET_ID_HERE'; // 구글시트 ID를 여기에 입력
+const SPREADSHEET_ID = '1BZ6IzcMFtZhgUuTThvkAf7sU6wVUOwFmpPkCUadFmX0'; // 구글시트 ID를 여기에 입력
 const SHEET_DASHBOARD = 'DASHBOARD'; // 시트 이름
 const SHEET_GAL_A = '갤러리 인허가'; // 시트 이름
 const SHEET_GAL_B = '갤러리 유자격'; // 시트 이름
@@ -239,7 +239,7 @@ function getSheetSpecificData(sheet, sheetName) {
         // 시트별 특별 처리
         if (sheetName === SHEET_GAL_F) { // 갤러리 아카데미 특별 처리
           if (key === 'date') {
-            value = formatDate(value);
+            value = formatDate(value, 'datetime');
           } else if (key === 'category') {
             value = (value || '').toString().toLowerCase();
           } else if (key === 'state') {
@@ -248,14 +248,16 @@ function getSheetSpecificData(sheet, sheetName) {
             value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
           }
         } else if (sheetName === SHEET_GAL_C) { // 갤러리 인사이드 특별 처리
-          if (key === 'state') {
+          if (key === 'date') {
+            value = formatDate(value, 'datetime');
+          } else if (key === 'state') {
             value = (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
           } else if (key === 'image') {
             value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
           }
         } else if (sheetName === SHEET_GAL_B) { // 갤러리 유자격 특별 처리
           if (key === 'date') {
-            value = formatDate(value);
+            value = formatDate(value, 'datetime');
           } else if (key === 'image') {
             value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
           } else if (key === 'state') {
@@ -263,11 +265,31 @@ function getSheetSpecificData(sheet, sheetName) {
           }
         } else if (sheetName === SHEET_GAL_A) { // 갤러리 인허가 특별 처리 (유자격과 동일)
           if (key === 'date') {
-            value = formatDate(value);
+            value = formatDate(value, 'datetime');
           } else if (key === 'image') {
             value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
           } else if (key === 'state') {
             value = (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
+          }
+        } else if (sheetName === SHEET_APPLY_R) { // 릴레이스쿨 신청 특별 처리
+          if (key === 'applicationDate') {
+            value = formatDate(value, 'datetime');
+          }
+        } else if (sheetName === SHEET_APPLY_P) { // PSAC 신청 특별 처리
+          if (key === 'educationSchedule') {
+            value = formatDate(value, 'datetime');
+          }
+        } else if (sheetName === SHEET_HELP_KR || sheetName === SHEET_HELP_EN) { // 문의 특별 처리
+          if (key === 'submittedAt') {
+            value = formatDate(value, 'datetime');
+          }
+        } else if (sheetName === SHEET_BOARD_NEWS) { // 보도자료 특별 처리
+          if (key === 'publishDate') {
+            value = formatDate(value, 'datetime');
+          }
+        } else if (sheetName === SHEET_REPORT) { // 신고 특별 처리
+          if (key === 'reportDate') {
+            value = formatDate(value, 'datetime');
           }
         }
         
@@ -361,55 +383,84 @@ function getCustomHeaders(sheetName) {
     },
     
     [SHEET_APPLY_P]: { // 신청 PSAC
-      id: 0,
-      applicantName: 1,
-      email: 2,
-      phone: 3,
-      company: 4,
-      position: 5,
-      applyDate: 6,
-      courseType: 7,
-      status: 8,
-      notes: 9
+      number: 0,              // 번호
+      courseName: 1,          // 과정명
+      educationSchedule: 2,   // 교육일정
+      companyName: 3,         // 회사명
+      ceoName: 4,             // 대표자명
+      businessNumber: 5,      // 사업자등록번호
+      businessType: 6,        // 종목업태
+      companyAddress: 7,      // 주소
+      educationManager: 8,    // 교육담당자
+      managerDepartment: 9,   // 담당자부서
+      managerPosition: 10,    // 담당자직급
+      managerPhone: 11,       // 담당자전화
+      managerMobile: 12,      // 담당자핸드폰
+      managerEmail: 13,       // 담당자이메일
+      studentName: 14,        // 수강자명
+      studentDepartment: 15,  // 수강자부서
+      studentPosition: 16,    // 수강자직급
+      studentPhone: 17,       // 수강자전화
+      studentMobile: 18,      // 수강자핸드폰
+      studentEmail: 19,       // 수강자이메일
+      detailedEducation: 20,  // 선택세부교육
+      confirmation: 21,       // 확인
+      remarks: 22            // 비고
     },
     
     [SHEET_APPLY_R]: { // 신청 RelaySchool
-      id: 0,
-      applicantName: 1,
-      email: 2,
-      phone: 3,
-      organization: 4,
-      experience: 5,
-      applyDate: 6,
-      preferredDate: 7,
-      status: 8,
-      specialRequests: 9
+      number: 0,              // 순번 (A)
+      applicationDate: 1,     // 신청일시 (B)
+      companyName: 2,         // 회사명 (C)
+      ceoName: 3,             // 대표자 (D)
+      businessNumber: 4,      // 사업자등록번호 (E)
+      businessType: 5,        // 종목업태 (F)
+      companyAddress: 6,      // 주소 (G)
+      educationManager: 7,    // 교육담당자 (H)
+      managerDepartment: 8,   // 담당부서 (I)
+      managerPosition: 9,     // 담당자직급 (J)
+      managerPhone: 10,       // 담당자전화 (K)
+      managerMobile: 11,      // 담당자핸드폰 (L)
+      managerEmail: 12,       // 담당자이메일 (M)
+      studentName: 13,        // 수강자명 (N)
+      studentDepartment: 14,  // 수강자부서 (O)
+      studentPosition: 15,    // 수강자직급 (P)
+      studentPhone: 16,       // 수강자전화 (Q)
+      studentMobile: 17,      // 수강자핸드폰 (R)
+      studentEmail: 18,       // 수강자이메일 (S)
+      detailedEducation: 19,  // 선택세부교육 (T)
+      confirmation: 20,       // 확인 (U)
+      remarks: 21            // 비고 (V)
     },
-    
+
     [SHEET_HELP_KR]: { // 문의 KOR
-      id: 0,
-      name: 1,
-      email: 2,
-      phone: 3,
-      subject: 4,
-      message: 5,
-      inquiryDate: 6,
-      category: 7,
-      status: 8,
-      response: 9
+      submissionId: 0,        // Submission ID
+      respondentId: 1,        // Respondent ID  
+      submittedAt: 2,         // Submitted at
+      inquiryType: 3,         // 문의 유형
+      nameCompany: 4,         // 성함/회사명
+      emailPhone: 5,          // 이메일/전화번호
+      subject: 6,             // 제목
+      content: 7,             // 문의 내용
+      attachment: 8,          // 파일 첨부 (도면, 제안서, 사양서 등)
+      privacyConsent: 9,      // 개인정보 수집·이용 동의
+      confirmation: 10,        // 확인
+      remarks: 11              // 비고
     },
     
-    [SHEET_HELP_EN]: { // 문의 ENG
-      id: 0,
-      name: 1,
-      email: 2,
-      phone: 3,
-      subject: 4,
-      message: 5,
-      inquiryDate: 6,
-      category: 7,
-      status: 8,
-      response: 9
+    [SHEET_HELP_EN]: { // 문의 ENG (영한 동일 구조)
+      submissionId: 0,        // Submission ID
+      respondentId: 1,        // Respondent ID
+      submittedAt: 2,         // Submitted at
+      inquiryType: 3,         // 문의 유형
+      nameCompany: 4,         // 성함/회사명
+      emailPhone: 5,          // 이메일/전화번호
+      subject: 6,             // 제목
+      content: 7,             // 문의 내용
+      attachment: 8,          // 파일 첨부 (도면, 제안서, 사양서 등)
+      privacyConsent: 9,      // 개인정보 수집·이용 동의
+      confirmation: 10,        // 확인
+      remarks: 11              // 비고
     },
     
     [SHEET_REPORT]: { // 신고
@@ -565,11 +616,12 @@ function addData(sheetName, data) {
 }
 
 /**
- * 날짜 포맷팅 함수 (갤러리 아카데미용)
+ * 날짜 포맷팅 함수 (다양한 날짜 형식 지원)
  * @param {Date|string} dateValue - 날짜 값
+ * @param {string} format - 출력 형식 ('date' | 'datetime' | 'time')
  * @returns {string} 포맷된 날짜 문자열
  */
-function formatDate(dateValue) {
+function formatDate(dateValue, format = 'date') {
   try {
     if (!dateValue) return '';
     
@@ -585,7 +637,18 @@ function formatDate(dateValue) {
       return dateValue.toString(); // 원본 값 반환
     }
     
-    return date.toISOString().split('T')[0]; // YYYY-MM-DD 형식
+    // 한국 시간대로 조정
+    const koreanDate = new Date(date.getTime() + (9 * 60 * 60 * 1000)); // UTC+9
+    
+    switch (format) {
+      case 'datetime':
+        return koreanDate.toISOString().replace('T', ' ').substring(0, 19); // YYYY-MM-DD HH:mm:ss
+      case 'time':
+        return koreanDate.toISOString().substring(11, 19); // HH:mm:ss
+      case 'date':
+      default:
+        return koreanDate.toISOString().substring(0, 10); // YYYY-MM-DD
+    }
     
   } catch (error) {
     console.error('formatDate 에러:', error);

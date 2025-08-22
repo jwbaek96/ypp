@@ -123,6 +123,7 @@
             </div>
         </header>
         <section class="nav-container">
+            <!-- 팝업 -->
             <nav class="">
                 <div class="nav-title">팝업</div>
                 <ul>
@@ -135,6 +136,52 @@
                     </li>
                 </ul>
             </nav>
+            <!-- 아카데미 -->
+            <nav class="">
+                <div class="nav-title">아카데미</div>
+                <ul>
+                    <li data-nav="psac">
+                        <div class="nav-name">PSAC</div>
+                        <div class="nav-info">
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
+                            <p class="nav-text"></p>
+                        </div>
+                    </li>
+                    <li data-nav="relay-school">
+                        <div class="nav-name">Relay School</div>
+                        <div class="nav-info">
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
+                            <p class="nav-text"></p>
+                        </div>
+                    </li>
+                    <li data-nav="curriculum">
+                        <div class="nav-name">커리큘럼</div>
+                        <div class="nav-info">
+                            <p class="nav-text"></p>
+                        </div>
+                    </li>
+                    <li data-nav="course-registration">
+                        <div class="nav-name">수강신청</div>
+                        <div class="nav-info">
+                            <p class="nav-text"></p>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <!-- 게시판 -->
+            <nav class="">
+                <div class="nav-title">게시판</div>
+                <ul>
+                    <li data-nav="news">
+                        <div class="nav-name">보도자료</div>
+                        <div class="nav-info">
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
+                            <p class="nav-text"></p>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <!-- 갤러리 -->
             <nav class="">
                 <div class="nav-title">갤러리</div>
                 <ul>
@@ -168,49 +215,7 @@
                     </li>
                 </ul>
             </nav>
-            <nav class="">
-                <div class="nav-title">게시판</div>
-                <ul>
-                    <li data-nav="news">
-                        <div class="nav-name">보도자료</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-            <nav class="">
-                <div class="nav-title">아카데미</div>
-                <ul>
-                    <li data-nav="psac">
-                        <div class="nav-name">PSAC</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                    <li data-nav="relay-school">
-                        <div class="nav-name">Relay School</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                    <li data-nav="curriculum">
-                        <div class="nav-name">커리큘럼</div>
-                        <div class="nav-info">
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                    <li data-nav="course-registration">
-                        <div class="nav-name">수강신청</div>
-                        <div class="nav-info">
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
+            <!-- 고객센터 -->
             <nav class="">
                 <div class="nav-title">고객센터</div>
                 <ul>
@@ -239,7 +244,7 @@
             </nav>
         </section>
         <section class="links">
-            <a href="/"><img src="/assets/images/favicon/apple-icon-76x76.png" alt="" srcset=""></a>
+            <a href="/" target="_blank"><img src="/assets/images/favicon/apple-icon-76x76.png" alt="" srcset=""></a>
         </section>
 </body>
 </html>
@@ -248,7 +253,7 @@
 // 앱스크립트 웹앱 URL (배포 후 실제 URL로 변경 필요)
 
 // Google Apps Script 웹앱 URL (배포 후 받은 URL)
-const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxIahDUT9xuPXQht5ousfW4DY6MYQN0Qs5zuz8tCsu5tj2mQliH22GW2gnSKYw3kMo';
+const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbx9Eep2rpGs6kDurpw8cs93A-RZjMoa99GggIuf9Q4tDmDB8ZScSJf7FAqjmJGwpmlz';
 const DASHBOARD_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DASHBOARD_APPS_SCRIPT_ID}/exec`;
 
 // 대시보드 데이터 로드 및 표시

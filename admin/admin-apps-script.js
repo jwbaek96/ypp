@@ -1,18 +1,146 @@
 // Google Apps Script - YPP Admin System
 // 개선된 버전
 
-const SPREADSHEET_ID = '1BZ6IzcMFtZhgUuTThvkAf7sU6wVUOwFmpPkCUadFmX0'; // 구글시트 ID를 여기에 입력
-const SHEET_DASHBOARD = 'DASHBOARD'; // 시트 이름
-const SHEET_GAL_A = '갤러리 인허가'; // 시트 이름
-const SHEET_GAL_B = '갤러리 유자격'; // 시트 이름
-const SHEET_GAL_C = '갤러리 인사이드'; // 시트 이름
-const SHEET_GAL_F = '갤러리 아카데미'; // 시트 이름
-const SHEET_BOARD_NEWS = '게시판 보도자료'; // 시트 이름
-const SHEET_APPLY_P = '신청 PSAC'; // 시트 이름
-const SHEET_APPLY_R = '신청 RelaySchool'; // 시트 이름
-const SHEET_HELP_KR = '문의 KOR'; // 시트 이름
-const SHEET_HELP_EN = '문의 ENG'; // 시트 이름
-const SHEET_REPORT = '신고'; // 시트 이름
+const SPREADSHEET_ID = '1BZ6IzcMFtZhgUuTThvkAf7sU6wVUOwFmpPkCUadFmX0'; // 대시보드 구글시트 ID
+const SHEET_DASHBOARD = 'DASHBOARD'; // 대시보드 시트 이름
+
+// 오리지널 시트 정보 (수정/삭제 가능한 원본 시트들)
+const ORIGINAL_SHEETS = {
+  SHEET_GAL_A: {
+    id: '1TSX0ds3gxKp-GENREmnckvuTI3RpwhuLZq6ZJbrVJuA',
+    name: '시트1' // 기본 시트명 (필요시 수정)
+  },
+  SHEET_GAL_B: {
+    id: '17hLRXv-zXuo-xsIhsN7Qks4nVwaRuW6_uVkkTNI72e8',
+    name: '시트1'
+  },
+  SHEET_GAL_C: {
+    id: '1883SgdNBFGLDyGXs5zITslHQPV-Oa90ilt9eG7af70c',
+    name: '시트1'
+  },
+  SHEET_GAL_F: {
+    id: '1gY5o_fHrXxAShXdSzqhyZBdLskbsAEwIdihci0UeU8c',
+    name: '시트1'
+  },
+  SHEET_BOARD_NEWS: {
+    id: '1ZEtN7--25jDh_fY4l_KLNs18mNJx3vmQEsgunvD69jo',
+    name: '시트1'
+  },
+  SHEET_APPLY_P: {
+    id: '1QAhkg8kpYjVsfXxrgR07dr4t5pRKtLEyg2vc8WeOet4',
+    name: 'PSAC 신청'
+  },
+  SHEET_APPLY_R: {
+    id: '1QAhkg8kpYjVsfXxrgR07dr4t5pRKtLEyg2vc8WeOet4',
+    name: 'Relay School 신청'
+  },
+  SHEET_HELP_KR: {
+    id: '1PCIS1sJyR2HMniaIC-Ga4NIpFGv1xSKYbo1rqXXaMq8',
+    name: '시트1'
+  },
+  SHEET_HELP_EN: {
+    id: '1CgXONK55xzAx_WV3-T1b1IawNgJsE94tbLMebZUekDA',
+    name: '시트1'
+  },
+  SHEET_REPORT: {
+    id: '1mLh1yywTgwZ_NNaIic-46pPP8VfVR5FG5CeOG1XhiAU',
+    name: '시트1'
+  }
+};
+
+// IMPORTRANGE용 시트 정보 (읽기 전용)
+const SHEET_GAL_A = '갤러리 인허가'; // 대시보드 시트의 IMPORTRANGE 시트명
+const SHEET_GAL_B = '갤러리 유자격';
+const SHEET_GAL_C = '갤러리 인사이드';
+const SHEET_GAL_F = '갤러리 아카데미';
+const SHEET_BOARD_NEWS = '게시판 보도자료';
+const SHEET_APPLY_P = '신청 PSAC';
+const SHEET_APPLY_R = '신청 RelaySchool';
+const SHEET_HELP_KR = '문의 KOR';
+const SHEET_HELP_EN = '문의 ENG';
+const SHEET_REPORT = '신고';
+
+/**
+ * HTTP POST 요청 처리 함수 (삭제 등)
+ * @param {Object} e - 이벤트 객체
+ */
+function doPost(e) {
+  try {
+    // CORS 헤더 설정
+    const response = {
+      success: false,
+      message: '',
+      data: null,
+      timestamp: new Date().toISOString()
+    };
+
+    // 매개변수 안전성 검사
+    if (!e) {
+      response.message = 'POST 요청 데이터가 없습니다.';
+      return ContentService.createTextOutput(JSON.stringify(response))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // POST 데이터 파싱
+    let requestData = {};
+    if (e.postData && e.postData.contents) {
+      requestData = JSON.parse(e.postData.contents);
+    }
+    
+    // 안전한 파라미터 접근
+    const action = requestData.action || (e.parameter && e.parameter.action) || '';
+    const sheetType = requestData.sheet || (e.parameter && e.parameter.sheet) || '';
+    const itemId = requestData.id || (e.parameter && e.parameter.id) || '';
+    
+    // 액션별 처리
+    switch (action) {
+      case 'delete':
+        if (!sheetType || !itemId) {
+          response.message = '시트 타입과 항목 ID가 필요합니다.';
+          break;
+        }
+        
+        const deleteResult = deleteItem(sheetType, itemId);
+        response.success = deleteResult.success;
+        response.message = deleteResult.message;
+        response.data = deleteResult.data;
+        break;
+        
+      case 'batchDelete':
+        const ids = requestData.ids || [];
+        if (!sheetType || !Array.isArray(ids) || ids.length === 0) {
+          response.message = '시트 타입과 삭제할 항목 ID 목록이 필요합니다.';
+          break;
+        }
+        
+        const batchResult = batchDeleteItems(sheetType, ids);
+        response.success = batchResult.success;
+        response.message = batchResult.message;
+        response.data = batchResult.data;
+        break;
+        
+      default:
+        response.message = `지원하지 않는 액션입니다: ${action}`;
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify(response))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    console.error('doPost 에러:', error);
+    const errorResponse = {
+      success: false,
+      message: `서버 오류: ${error.message}`,
+      data: null,
+      timestamp: new Date().toISOString()
+    };
+    
+    return ContentService
+      .createTextOutput(JSON.stringify(errorResponse))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
 
 /**
  * HTTP GET 요청 처리 메인 함수
@@ -28,14 +156,57 @@ function doGet(e) {
       timestamp: new Date().toISOString()
     };
 
+    // 매개변수 안전성 검사 (테스트 실행 시 e가 undefined일 수 있음)
+    if (!e || !e.parameter) {
+      response.message = 'URL 파라미터가 없습니다. 웹앱으로 호출해주세요.';
+      return ContentService.createTextOutput(JSON.stringify(response))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     // 요청 파라미터 확인
     const sheetType = e.parameter.sheet || '';
     const action = e.parameter.action || 'getData';
-    
-    console.log(`요청받은 시트: ${sheetType}, 액션: ${action}`);
+    const itemId = e.parameter.id || '';
 
-    // 시트 타입에 따른 분기 처리
-    switch (sheetType) {
+    // 액션별 처리
+    if (action === 'delete') {
+      // 삭제 액션 처리
+      if (!sheetType || !itemId) {
+        response.message = '시트 타입과 항목 ID가 필요합니다.';
+        response.success = false;
+      } else {
+        const deleteResult = deleteItem(sheetType, itemId);
+        response.success = deleteResult.success;
+        response.message = deleteResult.message;
+        response.data = deleteResult.data;
+      }
+    } else if (action === 'batchDelete') {
+      // 배치 삭제 액션 처리
+      const idsParam = e.parameter.ids || '';
+      if (!sheetType || !idsParam) {
+        response.message = '시트 타입과 삭제할 항목 ID 목록이 필요합니다.';
+        response.success = false;
+      } else {
+        try {
+          const ids = JSON.parse(idsParam);
+          if (!Array.isArray(ids) || ids.length === 0) {
+            response.message = '삭제할 항목 ID 목록이 올바르지 않습니다.';
+            response.success = false;
+          } else {
+            const batchResult = batchDeleteItems(sheetType, ids);
+            response.success = batchResult.success;
+            response.message = batchResult.message;
+            response.data = batchResult.data;
+          }
+        } catch (error) {
+          response.message = 'ID 목록 파싱 오류: ' + error.message;
+          response.success = false;
+        }
+      }
+    } else {
+      // 기존 데이터 조회 액션들
+      // 시트 타입에 따른 분기 처리
+      switch (sheetType) {
       case 'SHEET_DASHBOARD':
         response.data = getData(SHEET_DASHBOARD);
         response.message = '대시보드 데이터 조회 성공';
@@ -111,6 +282,7 @@ function doGet(e) {
       default:
         response.message = `지원하지 않는 시트 타입입니다: ${sheetType}`;
         response.success = false;
+      }
     }
 
     return ContentService
@@ -139,8 +311,6 @@ function doGet(e) {
  */
 function getData(sheetName) {
   try {
-    console.log(`데이터 조회 시작: ${sheetName}`);
-    
     const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(sheetName);
     if (!sheet) {throw new Error(`시트를 찾을 수 없습니다: ${sheetName}`);}
     
@@ -276,7 +446,7 @@ function getSheetSpecificData(sheet, sheetName) {
             value = formatDate(value, 'datetime');
           }
         } else if (sheetName === SHEET_APPLY_P) { // PSAC 신청 특별 처리
-          if (key === 'educationSchedule') {
+          if (key === 'applicationDate') {
             value = formatDate(value, 'datetime');
           }
         } else if (sheetName === SHEET_HELP_KR || sheetName === SHEET_HELP_EN) { // 문의 특별 처리
@@ -384,28 +554,29 @@ function getCustomHeaders(sheetName) {
     
     [SHEET_APPLY_P]: { // 신청 PSAC
       number: 0,              // 번호
-      courseName: 1,          // 과정명
-      educationSchedule: 2,   // 교육일정
-      companyName: 3,         // 회사명
-      ceoName: 4,             // 대표자명
-      businessNumber: 5,      // 사업자등록번호
-      businessType: 6,        // 종목업태
-      companyAddress: 7,      // 주소
-      educationManager: 8,    // 교육담당자
-      managerDepartment: 9,   // 담당자부서
-      managerPosition: 10,    // 담당자직급
-      managerPhone: 11,       // 담당자전화
-      managerMobile: 12,      // 담당자핸드폰
-      managerEmail: 13,       // 담당자이메일
-      studentName: 14,        // 수강자명
-      studentDepartment: 15,  // 수강자부서
-      studentPosition: 16,    // 수강자직급
-      studentPhone: 17,       // 수강자전화
-      studentMobile: 18,      // 수강자핸드폰
-      studentEmail: 19,       // 수강자이메일
-      detailedEducation: 20,  // 선택세부교육
-      confirmation: 21,       // 확인
-      remarks: 22            // 비고
+      applicationDate: 1,     // 신청일시
+      courseName: 2,          // 과정명
+      educationSchedule: 3,   // 교육일정
+      companyName: 4,         // 회사명
+      ceoName: 5,             // 대표자명
+      businessNumber: 6,      // 사업자등록번호
+      businessType: 7,        // 종목업태
+      companyAddress: 8,      // 주소
+      educationManager: 9,    // 교육담당자
+      managerDepartment: 10,   // 담당자부서
+      managerPosition: 11,    // 담당자직급
+      managerPhone: 12,       // 담당자전화
+      managerMobile: 13,      // 담당자핸드폰
+      managerEmail: 14,       // 담당자이메일
+      studentName: 15,        // 수강자명
+      studentDepartment: 16,  // 수강자부서
+      studentPosition: 17,    // 수강자직급
+      studentPhone: 18,       // 수강자전화
+      studentMobile: 19,      // 수강자핸드폰
+      studentEmail: 20,       // 수강자이메일
+      detailedEducation: 21,  // 선택세부교육
+      confirmation: 22,       // 확인
+      remarks: 23              // 비고
     },
     
     [SHEET_APPLY_R]: { // 신청 RelaySchool
@@ -675,5 +846,134 @@ function testGetData() {
     
   } catch (error) {
     console.error('테스트 에러:', error);
+  }
+}
+
+/**
+ * 단일 항목 삭제 함수 (오리지널 시트에서 삭제)
+ * @param {string} sheetType - 시트 타입 (SHEET_APPLY_P, SHEET_APPLY_R 등)
+ * @param {string} itemId - 삭제할 항목의 ID
+ * @returns {Object} 삭제 결과
+ */
+function deleteItem(sheetType, itemId) {
+  try {
+    console.log(`삭제 요청: ${sheetType}, ID: ${itemId}`);
+    
+    // 오리지널 시트 정보 가져오기
+    const originalSheet = ORIGINAL_SHEETS[sheetType];
+    if (!originalSheet) {
+      return { success: false, message: `지원하지 않는 시트 타입입니다: ${sheetType}` };
+    }
+    
+    if (!originalSheet.id) {
+      return { success: false, message: `시트 ID가 설정되지 않았습니다: ${sheetType}` };
+    }
+    
+    // 오리지널 스프레드시트 열기
+    const spreadsheet = SpreadsheetApp.openById(originalSheet.id);
+    const sheet = spreadsheet.getSheetByName(originalSheet.name);
+    
+    if (!sheet) {
+      return { success: false, message: `시트를 찾을 수 없습니다: ${originalSheet.name}` };
+    }
+    
+    const dataRange = sheet.getDataRange();
+    const data = dataRange.getValues();
+    
+    console.log(`데이터 검색 중... 총 ${data.length}행`);
+    
+    // 헤더 제외하고 데이터 검색
+    for (let i = 1; i < data.length; i++) {
+      const rowData = data[i];
+      
+      // 첫 번째 컬럼(ID/번호)과 일치하는 행 찾기
+      if (rowData[0] && rowData[0].toString() === itemId.toString()) {
+        // 해당 행 삭제 (Excel 행 번호는 1부터 시작)
+        sheet.deleteRow(i + 1);
+        
+        console.log(`삭제 완료: ${originalSheet.name}, ID: ${itemId}, 행: ${i + 1}`);
+        return { 
+          success: true, 
+          message: '항목이 성공적으로 삭제되었습니다.',
+          data: { deletedId: itemId, deletedRow: i + 1, sheetName: originalSheet.name }
+        };
+      }
+    }
+    
+    return { success: false, message: '해당 항목을 찾을 수 없습니다.' };
+    
+  } catch (error) {
+    console.error('deleteItem 에러:', error);
+    return { success: false, message: `삭제 중 오류가 발생했습니다: ${error.message}` };
+  }
+}
+
+/**
+ * 다중 항목 삭제 함수 (오리지널 시트에서 삭제)
+ * @param {string} sheetType - 시트 타입
+ * @param {Array} itemIds - 삭제할 항목 ID 목록
+ * @returns {Object} 삭제 결과
+ */
+function batchDeleteItems(sheetType, itemIds) {
+  try {
+    console.log(`배치 삭제 요청: ${sheetType}, IDs: ${itemIds.join(', ')}`);
+    
+    // 오리지널 시트 정보 가져오기
+    const originalSheet = ORIGINAL_SHEETS[sheetType];
+    if (!originalSheet) {
+      return { success: false, message: `지원하지 않는 시트 타입입니다: ${sheetType}` };
+    }
+    
+    if (!originalSheet.id) {
+      return { success: false, message: `시트 ID가 설정되지 않았습니다: ${sheetType}` };
+    }
+    
+    // 오리지널 스프레드시트 열기
+    const spreadsheet = SpreadsheetApp.openById(originalSheet.id);
+    const sheet = spreadsheet.getSheetByName(originalSheet.name);
+    
+    if (!sheet) {
+      return { success: false, message: `시트를 찾을 수 없습니다: ${originalSheet.name}` };
+    }
+    
+    const dataRange = sheet.getDataRange();
+    const data = dataRange.getValues();
+    
+    const rowsToDelete = [];
+    const deletedIds = [];
+    
+    // 삭제할 행 번호 찾기
+    for (let i = 1; i < data.length; i++) {
+      const rowData = data[i];
+      const rowId = rowData[0] ? rowData[0].toString() : '';
+      
+      if (itemIds.includes(rowId)) {
+        rowsToDelete.push(i + 1); // Excel 행 번호 (1부터 시작)
+        deletedIds.push(rowId);
+      }
+    }
+    
+    if (rowsToDelete.length === 0) {
+      return { success: false, message: '삭제할 항목을 찾을 수 없습니다.' };
+    }
+    
+    // 행 번호를 역순으로 정렬해서 뒤에서부터 삭제 (인덱스 변경 방지)
+    rowsToDelete.sort((a, b) => b - a);
+    
+    // 행 삭제 실행
+    rowsToDelete.forEach(rowNum => {
+      sheet.deleteRow(rowNum);
+    });
+    
+    console.log(`배치 삭제 완료: ${originalSheet.name}, 삭제된 ID: ${deletedIds.join(', ')}`);
+    return { 
+      success: true, 
+      message: `${deletedIds.length}개 항목이 성공적으로 삭제되었습니다.`,
+      data: { deletedIds: deletedIds, deletedCount: deletedIds.length, sheetName: originalSheet.name }
+    };
+    
+  } catch (error) {
+    console.error('batchDeleteItems 에러:', error);
+    return { success: false, message: `배치 삭제 중 오류가 발생했습니다: ${error.message}` };
   }
 }

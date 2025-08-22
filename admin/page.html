@@ -573,10 +573,9 @@ class PageManager {
                 return `
                     <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
                     <th class="col-id">순번</th>
-                    <th>신청자명</th>
-                    <th>이메일</th>
                     <th>회사/기관</th>
-                    <th>연락처</th>
+                    <th>교육</th>
+                    <th>신청과목</th>
                     <th class="col-date">신청일</th>
                     <th class="col-actions">삭제</th>
                 `;
@@ -663,10 +662,10 @@ class PageManager {
                 return `
                     <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
                     <td>${item.id}</td>
-                    <td>${item.applicantName || '이름 없음'}</td>
-                    <td>${item.email || '-'}</td>
                     <td>${item.company || item.organization || '-'}</td>
-                    <td>${item.phone || '-'}</td>
+                    <td>${item. || ''}</td>
+                    <td>${item. || ''}</td>
+                    <td>${item. || ''}</td>
                     <td>${item.applyDate || item.applicationDate || '-'}</td>
                     <td>
                         <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>

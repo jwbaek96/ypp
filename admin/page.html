@@ -14,59 +14,213 @@
     <!-- Style -->
     <style>
         :root{
-            --mxw: 900px;
+            --mxw: 1200px;
             --gap: 16px;
             --box-color: #d9d9d9;
             --line-color: #ececec;
         }
         body{
-            /* background:  */
-            /* linear-gradient(135deg, #eaeeff 0%, #ffffff 100%);min-height: 100dvh; */
-            /* linear-gradient(135deg, #a0aad6 0%, #7abde2 100%); */
             min-height: 100dvh;
         }
         p, span{margin-bottom: 0; color: #000;}
         /* =========== */
         .main-container{ max-width: var(--mxw); margin: 0 auto; padding: 20px; box-sizing: border-box;}
         /* =========== Clock Styles =========== */
-        header{width: 100%;}
-        .header-clock {display: flex;margin-bottom: 20px;padding: 10px 0;}
+        header{width: 100%;display: flex; justify-content: space-between;padding: 10px 0;}
         .clock-widget {font-size: 1.1rem;}
         /* =========== */
         .page-top{
-            border-bottom: 1px solid var(--line-color);
-            padding: 1rem 0;
+            /* border-bottom: 1px solid var(--line-color); */
+            padding: 1rem 0 1rem 0;
             width: 100%;
-            display: flex;
+            display: flex
+        ;
             justify-content: space-between;
+            flex-direction: column;
+            gap: 2rem;
         }
         .page-title{font-size: 2.5rem;}
         .page-info{display: flex; flex-direction: column; gap: 4px; text-align: right;font-size: .8rem;}
         .page-count{font-size: 1.8rem;}
+        /* =========== Data List Styles =========== */
+        /* .data-container {margin-top: 2rem;} */
+        
+        .data-toolbar {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .toolbar-left {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            margin: 0 0.125rem;
+        }
+
+        
+        /* =========== Table Styles =========== */
+        .data-table-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-height: 600px; /* 테이블 최대 높이 설정 */
+            overflow-y: auto; /* 세로 스크롤 활성화 */
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10; /* 헤더가 위에 오도록 설정 */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 헤더 하단에 그림자 추가 */
+        }
+        
+        .data-table tbody tr:hover {
+            background: #f8f9fa;
+            cursor: pointer;
+        }
+        
+        .data-table .col-checkbox { width: 40px; }
+        .data-table .col-id { width: 80px; }
+        .data-table .col-number { width: 80px; }
+        .data-table .col-status,
+        .data-table .col-actions,
+        .data-table .col-date { width: auto; text-align: center;}
+        .data-table .col-checkbox { text-align: center;}
+
+        /* =========== Status Styles =========== */
+        .status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* .status-active { background: #d4edda; color: #155724; }
+        .status-inactive { background: #f8d7da; color: #721c24; }
+        .status-pending { background: #fff3cd; color: #856404; } */
+        
+        /* =========== Responsive =========== */
+        @media (max-width: 768px) {
+            .toolbar-left { flex-direction: column; gap: 0.5rem; }
+        }
+        
+        @media (min-width: 769px) {
+        }
     </style>
 </head>
 <body>
     <div class="main-container">
         <header>
-            <div class="header-clock">
-                <div class="clock-widget">
-                    <span class="clock-date" id="clock-date">2025년 11월 16일</span>
-                    <span class="clock-time">
-                        <span id="clock-hours">12</span>:<span id="clock-minutes">00</span><span class="clock-period" id="clock-period">PM</span>
-                    </span>
-                </div>
+            <a href="/admin/" class="btn-home">
+                <i class="fas fa-home"></i>
+            </a>
+            <div class="clock-widget">
+                <span class="clock-date" id="clock-date">2025년 11월 16일</span>
+                <span class="clock-time">
+                    <span id="clock-hours">12</span>:<span id="clock-minutes">00</span><span class="clock-period" id="clock-period">PM</span>
+                </span>
             </div>
         </header>
         <main>
             <div class="page-top">
                 <div class="page-title">팝업</div>
                 <div class="page-info">
-                    <p class="page-descripation">페이지 디스크립션</p>
+                    <p class="page-count">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </p>
                     <p class="page-location">홈 > 팝업</p>
-                    <p class="page-count">2건</p>
+                    <p class="page-descripation">페이지 디스크립션</p>
                 </div>
             </div>
-            <div class="page-mid"></div>
+            <div class="page-mid">
+                <!-- 데이터 관리 컨테이너 -->
+                <div class="data-container">
+
+                    <!-- 툴바 -->
+                    <div class="data-toolbar">
+                        <div class="toolbar-left">
+                            <button class="btn btn-primary" id="btn-add">
+                                <i class="fas fa-plus"></i> 새로 추가
+                            </button>
+                            <button class="btn btn-danger" id="btn-delete-selected" disabled>
+                                <i class="fas fa-trash"></i> 선택 삭제
+                            </button>
+                        </div>
+
+                    </div>
+                    
+                    <!-- 테이블 (데스크톱) -->
+                    <div class="data-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <!-- <th class="col-checkbox">
+                                        <input type="checkbox" id="select-all">
+                                    </th>
+                                    <th class="col-id">ID</th>
+                                    <th>제목</th>
+                                    <th class="col-date">날짜</th>
+                                    <th class="col-status">상태</th>
+                                    <th class="col-actions">액션</th> -->
+                                </tr>
+                            </thead>
+                            <tbody id="data-table-body">
+                                <!-- 동적 생성 -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- 카드 (모바일) -->
+                    <div class="data-cards" id="data-cards-container">
+                        <!-- 동적 생성 -->
+                    </div>
+                    
+                    
+                    <!-- 로딩 표시 -->
+                    <div id="loading-indicator" style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-spinner fa-spin"></i> 데이터를 불러오는 중...
+                    </div>
+
+                    <!-- 빈 상태 표시 -->
+                    <div id="empty-state" style="display: none; text-align: center; padding: 3rem; color: #666;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                        <p>등록된 데이터가 없습니다.</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('btn-add').click()">
+                            첫 번째 항목 추가하기
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div class="modal-content"></div>
             <div class="modal-add"></div>
         </main>
@@ -129,11 +283,14 @@ class Clock {
         document.getElementById('clock-date').textContent = `${year}년 ${month}월 ${date}일`;
     }
 }
-
+// ===========================================================================================
+// ===========================================================================================
 // 페이지 관리 클래스
 class PageManager {
     constructor() {
-        this.appsScriptUrl = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
+        // Google Apps Script 웹앱 URL (index.html과 동일)
+        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbz6J9vVnUUpmafGuEP_2_rFr1EZ83s6lMIrOFA6M8YhV8nytlhRUy8iIlvPy8qeqIKC';
+        this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
         this.pageConfigs = this.initPageConfigs();
     }
     
@@ -243,6 +400,9 @@ class PageManager {
         
         // 데이터 카운트 로드
         await this.loadPageCount(config);
+        
+        // 실제 데이터 로드 및 테이블 렌더링
+        await this.loadPageData(config);
     }
     
     // 페이지 정보 업데이트
@@ -260,18 +420,26 @@ class PageManager {
         try {
             console.log(`${config.title} 데이터 카운트 로드 중...`);
             
-            // 대시보드에서 카운트 정보 가져오기
-            const response = await fetch(`${this.appsScriptUrl}?sheet=SHEET_DASHBOARD`);
+            // 대시보드에서 카운트 정보 가져오기 (index.html과 동일한 URL 형식)
+            const url = `${this.appsScriptUrl}?sheet=SHEET_DASHBOARD&action=getData`;
+            const response = await fetch(url);
             const result = await response.json();
             
             if (!result.success) {
                 throw new Error(result.message);
             }
             
+            console.log('=== 디버깅 정보 ===');
+            console.log('config:', config);
+            console.log('config.dataKey:', config.dataKey);
+            console.log('result.data:', result.data);
+            console.log('result.data[config.dataKey]:', result.data[config.dataKey]);
+            
             const count = result.data[config.dataKey] || 0;
             document.querySelector('.page-count').textContent = `${count}건`;
             
             console.log(`${config.title}: ${count}건`);
+            console.log('=== 디버깅 끝 ===');
             
         } catch (error) {
             console.error('데이터 카운트 로드 실패:', error);
@@ -287,6 +455,398 @@ class PageManager {
         document.querySelector('.page-count').textContent = '0건';
         
         console.error('PageManager 오류:', message);
+    }
+    
+    // 페이지 데이터 로드
+    async loadPageData(config) {
+        try {
+            this.showLoading(true);
+            console.log(`${config.title} 데이터 로드 중...`);
+            
+            // API에서 실제 데이터 가져오기 (index.html과 동일한 URL 형식)
+            const url = `${this.appsScriptUrl}?sheet=${config.apiSheet}&action=getData`;
+            const response = await fetch(url);
+            const result = await response.json();
+            
+            if (!result.success) {
+                throw new Error(result.message);
+            }
+            
+            const data = result.data;
+            console.log(`${config.title} 데이터:`, data);
+            
+            // 데이터가 있으면 테이블 렌더링, 없으면 빈 상태 표시
+            if (data && data.length > 0) {
+                this.renderDataTable(data, config);
+                this.renderDataCards(data, config);
+                this.showEmptyState(false);
+            } else {
+                this.showEmptyState(true);
+            }
+            
+        } catch (error) {
+            console.error('데이터 로드 실패:', error);
+            this.showError(`데이터 로드 실패: ${error.message}`);
+        } finally {
+            this.showLoading(false);
+        }
+    }
+    
+    // 테이블 렌더링 (데스크톱)
+    renderDataTable(data, config) {
+        const tbody = document.getElementById('data-table-body');
+        const thead = document.querySelector('.data-table thead tr');
+        
+        // 테이블 헤더 동적 생성
+        thead.innerHTML = this.generateTableHeaderHTML(config);
+        
+        // 테이블 바디 초기화 및 데이터 렌더링
+        tbody.innerHTML = '';
+        
+        data.forEach((item, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = this.generateTableRowHTML(item, config);
+            
+            // 행 클릭 이벤트 (모달 열기 준비)
+            row.addEventListener('click', (e) => {
+                if (!e.target.matches('button, input[type="checkbox"]')) {
+                    console.log('행 클릭됨:', item);
+                    // 나중에 모달 열기 기능 추가
+                }
+            });
+            
+            tbody.appendChild(row);
+        });
+        
+        // 체크박스 이벤트 설정
+        this.setupCheckboxEvents();
+    }
+    
+    // 카드 렌더링 (모바일)
+    renderDataCards(data, config) {
+        const container = document.getElementById('data-cards-container');
+        container.innerHTML = '';
+        
+        data.forEach((item) => {
+            const card = document.createElement('div');
+            card.className = 'data-card';
+            card.innerHTML = this.generateCardHTML(item, config);
+            
+            // 카드 클릭 이벤트
+            card.addEventListener('click', () => {
+                console.log('카드 클릭됨:', item);
+                // 나중에 모달 열기 기능 추가
+            });
+            
+            container.appendChild(card);
+        });
+    }
+    
+    // 테이블 헤더 HTML 생성
+    generateTableHeaderHTML(config) {
+        const pageType = new URLSearchParams(window.location.search).get('page');
+        
+        // 페이지 타입별로 다른 헤더 구조
+        switch(pageType) {
+            case '인허가':
+            case '유자격':
+                return `
+                    <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
+                    <th>제목</th>
+                    <th class="col-date">등록일</th>
+                    <th class="col-status">상태</th>
+                    <th class="col-actions">삭제</th>
+                `;
+            
+            case '인사이드':
+            case '아카데미':
+                return `
+                    <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
+                    <th>제목</th>
+                    <th class="col-date">날짜</th>
+                    <th class="col-status">상태</th>
+                    <th class="col-actions">삭제</th>
+                `;
+                
+            case 'PSAC':
+            case 'RelaySchool':
+                return `
+                    <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
+                    <th class="col-id">순번</th>
+                    <th>신청자명</th>
+                    <th>이메일</th>
+                    <th>회사/기관</th>
+                    <th>연락처</th>
+                    <th class="col-date">신청일</th>
+                    <th class="col-actions">삭제</th>
+                `;
+                
+            case '고객문의':
+                return `
+                    <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
+                    <th class="col-id">ID</th>
+                    <th>제목</th>
+                    <th>문의자</th>
+                    <th>이메일</th>
+                    <th class="col-date">문의일</th>
+                    <th class="col-status">처리상태</th>
+                    <th class="col-actions">삭제</th>
+                `;
+                
+            case '보도자료':
+                return `
+                    <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
+                    <th class="col-id">ID</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th class="col-date">발행일</th>
+                    <th class="col-status">상태</th>
+                    <th class="col-actions">삭제</th>
+                `;
+                
+            case '부패및윤리신고':
+                return `
+                    <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
+                    <th class="col-id">ID</th>
+                    <th>제목</th>
+                    <th>신고자</th>
+                    <th class="col-date">신고일</th>
+                    <th class="col-status">처리상태</th>
+                    <th class="col-actions">삭제</th>
+                `;
+                
+            default: // 팝업, 자주묻는질문 등
+                return `
+                    <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
+                    <th class="col-id">ID</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th class="col-date">등록일</th>
+                    <th class="col-status">상태</th>
+                    <th class="col-actions">삭제</th>
+                `;
+        }
+    }
+    
+    // 테이블 행 HTML 생성
+    generateTableRowHTML(item, config) {
+        const pageType = new URLSearchParams(window.location.search).get('page');
+        
+        // 페이지 타입별로 다른 컬럼 구조
+        switch(pageType) {
+            case '인허가':
+            case '유자격':
+                return `
+                    <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
+                    <td>${item.titleKR || '제목 없음'}</td>
+                    <td class="col-date">${item.date || '-'}</td>
+                    <td class="col-status"><span class="status-badge ${item.state === 'on' ? 'status-active' : 'status-inactive'}">${item.state === 'on' ? 'ON' : 'OFF'}</span></td>
+                    <td class="col-actions">
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                `;
+            
+            case '인사이드':
+            case '아카데미':
+                return `
+                    <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
+                    <td>${item.titleKR || '제목 없음'}</td>
+                    <td class="col-date">${item.date || ''}</td>
+                    <td class="col-status"><span class="status-badge ${item.state === 'on' ? 'status-active' : 'status-inactive'}">${item.state === 'on' ? 'ON' : 'OFF'}</span></td>
+                    <td class="col-actions">
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                `;
+                
+            case 'PSAC':
+            case 'RelaySchool':
+                return `
+                    <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
+                    <td>${item.id}</td>
+                    <td>${item.applicantName || '이름 없음'}</td>
+                    <td>${item.email || '-'}</td>
+                    <td>${item.company || item.organization || '-'}</td>
+                    <td>${item.phone || '-'}</td>
+                    <td>${item.applyDate || item.applicationDate || '-'}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                `;
+                
+            case '고객문의':
+                return `
+                    <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
+                    <td>${item.id}</td>
+                    <td>${item.subject || '제목 없음'}</td>
+                    <td>${item.name || '-'}</td>
+                    <td>${item.email || '-'}</td>
+                    <td>${item.inquiryDate || '-'}</td>
+                    <td><span class="status-badge ${item.status === '완료' ? 'status-active' : 'status-pending'}">${item.status || '대기'}</span></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                `;
+                
+            case '보도자료':
+                return `
+                    <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
+                    <td>${item.id}</td>
+                    <td>${item.title || '제목 없음'}</td>
+                    <td>${item.content ? (item.content.length > 30 ? item.content.substring(0, 30) + '...' : item.content) : '내용 없음'}</td>
+                    <td>${item.publishDate || '-'}</td>
+                    <td><span class="status-badge status-active">게시중</span></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                `;
+                
+            case '부패및윤리신고':
+                return `
+                    <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
+                    <td>${item.id}</td>
+                    <td>${item.subject || '제목 없음'}</td>
+                    <td>${item.reporterName || '익명'}</td>
+                    <td>${item.reportDate || '-'}</td>
+                    <td><span class="status-badge ${item.status === '완료' ? 'status-active' : 'status-pending'}">${item.status || '접수'}</span></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                `;
+                
+            default: // 팝업, 자주묻는질문 등
+                return `
+                    <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
+                    <td>${item.id}</td>
+                    <td>${item.title || item.subject || '제목 없음'}</td>
+                    <td>${item.content ? (item.content.length > 30 ? item.content.substring(0, 30) + '...' : item.content) : '내용 없음'}</td>
+                    <td class="col-date">${item.date || item.createdDate || '-'}</td>
+                    <td><span class="status-badge status-active">활성</span></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                `;
+        }
+    }
+    
+    // 카드 HTML 생성
+    generateCardHTML(item, config) {
+        const pageType = new URLSearchParams(window.location.search).get('page');
+        
+        switch(pageType) {
+            case '인허가':
+            case '유자격':
+                return `
+                    <div class="card-header">
+                        <span class="card-title">${item.titleKR || '제목 없음'}</span>
+                        <span class="status-badge ${item.state === 'on' ? 'status-active' : 'status-inactive'}">${item.state === 'on' ? 'ON' : 'OFF'}</span>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>ID:</strong> ${item.id}</p>
+                        <p><strong>날짜:</strong> ${item.date || '-'}</p>
+                        <p><strong>영문 제목:</strong> ${item.titleEN || '-'}</p>
+                    </div>
+                `;
+                
+            case 'PSAC':
+            case 'RelaySchool':
+                return `
+                    <div class="card-header">
+                        <span class="card-title">${item.applicantName || '이름 없음'}</span>
+                        <span class="status-badge status-pending">${item.status || '대기'}</span>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>이메일:</strong> ${item.email || '-'}</p>
+                        <p><strong>회사/기관:</strong> ${item.company || item.organization || '-'}</p>
+                        <p><strong>신청일:</strong> ${item.applyDate || '-'}</p>
+                    </div>
+                `;
+                
+            default:
+                return `
+                    <div class="card-header">
+                        <span class="card-title">${item.title || item.subject || '제목 없음'}</span>
+                        <span class="status-badge status-active">ON</span>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>ID:</strong> ${item.id}</p>
+                        <p><strong>날짜:</strong> ${item.publishDate || item.reportDate || item.date || '-'}</p>
+                    </div>
+                `;
+        }
+    }
+    
+    // 체크박스 이벤트 설정
+    setupCheckboxEvents() {
+        const selectAll = document.getElementById('select-all');
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+        const deleteBtn = document.getElementById('btn-delete-selected');
+        
+        // 전체 선택 체크박스
+        selectAll.addEventListener('change', (e) => {
+            checkboxes.forEach(cb => cb.checked = e.target.checked);
+            this.updateDeleteButton();
+        });
+        
+        // 개별 체크박스
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                this.updateDeleteButton();
+            });
+        });
+    }
+    
+    // 삭제 버튼 상태 업데이트
+    updateDeleteButton() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]:checked');
+        const deleteBtn = document.getElementById('btn-delete-selected');
+        
+        if (checkboxes.length > 0) {
+            deleteBtn.disabled = false;
+            deleteBtn.textContent = `선택 삭제 (${checkboxes.length})`;
+        } else {
+            deleteBtn.disabled = true;
+            deleteBtn.textContent = '선택 삭제';
+        }
+    }
+    
+    // 로딩 상태 표시
+    showLoading(show) {
+        const loading = document.getElementById('loading-indicator');
+        const tableContainer = document.querySelector('.data-table-container');
+        const cardsContainer = document.querySelector('.data-cards');
+        
+        if (show) {
+            loading.style.display = 'block';
+            tableContainer.style.display = 'none';
+            cardsContainer.style.display = 'none';
+        } else {
+            loading.style.display = 'none';
+            tableContainer.style.display = 'block';
+        }
+    }
+    
+    // 빈 상태 표시
+    showEmptyState(show) {
+        const emptyState = document.getElementById('empty-state');
+        const tableContainer = document.querySelector('.data-table-container');
+        const cardsContainer = document.querySelector('.data-cards');
+        
+        if (show) {
+            emptyState.style.display = 'block';
+            tableContainer.style.display = 'none';
+            cardsContainer.style.display = 'none';
+        } else {
+            emptyState.style.display = 'none';
+        }
+    }
+}
+
+// 전역 함수들 (버튼 onclick에서 사용)
+function deleteItem(id) {
+    console.log(`삭제 요청: ${id}`);
+    if (confirm(`ID ${id} 항목을 삭제하시겠습니까?`)) {
+        // 나중에 실제 삭제 API 호출
+        alert(`ID ${id} 항목이 삭제되었습니다. (API 연동 추후 구현)`);
     }
 }
 

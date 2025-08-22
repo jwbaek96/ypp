@@ -165,18 +165,18 @@ function getData(sheetName) {
  */
 function getDashboardData(sheet) {
   try {
-    // 특정 셀들을 지정해서 데이터 가져오기
+    // 특정 셀들을 지정해서 데이터 가져오기 (3행에서 실제 숫자 데이터)
     const dashboardData = {
-        galA: sheet.getRange('B2').getValue() || 0,    // 갤러리 인허가
-        galB: sheet.getRange('C2').getValue() || 0,    // 갤러리 유자격  
-        galC: sheet.getRange('D2').getValue() || 0,    // 갤러리 인사이드
-        galD: sheet.getRange('E2').getValue() || 0,    // 갤러리 아카데미
-        boardNews: sheet.getRange('F2').getValue() || 0,     // 게시판 보도자료
-        applyPSAC: sheet.getRange('G2').getValue() || 0,     // 신청 PSAC
-        applyRelay: sheet.getRange('H2').getValue() || 0,    // 신청 RelaySchool
-        helpKR: sheet.getRange('I2').getValue() || 0,        // 문의 KOR
-        helpEN: sheet.getRange('J2').getValue() || 0,        // 문의 ENG
-        report: sheet.getRange('K2').getValue() || 0         // 신고
+        galA: sheet.getRange('B3').getValue() || 0,    // 갤러리 인허가
+        galB: sheet.getRange('C3').getValue() || 0,    // 갤러리 유자격  
+        galC: sheet.getRange('D3').getValue() || 0,    // 갤러리 인사이드
+        galD: sheet.getRange('E3').getValue() || 0,    // 갤러리 아카데미
+        boardNews: sheet.getRange('F3').getValue() || 0,     // 게시판 보도자료
+        applyPSAC: sheet.getRange('G3').getValue() || 0,     // 신청 PSAC
+        applyRelay: sheet.getRange('H3').getValue() || 0,    // 신청 RelaySchool
+        helpKR: sheet.getRange('I3').getValue() || 0,        // 문의 KOR
+        helpEN: sheet.getRange('J3').getValue() || 0,        // 문의 ENG
+        report: sheet.getRange('K3').getValue() || 0         // 신고
       // 추가 통계 데이터
     //   monthlyStats: {
     //     currentMonth: sheet.getRange('D2').getValue() || 0,

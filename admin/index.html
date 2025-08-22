@@ -53,12 +53,6 @@
             transition: all 0.3s ease;
         }
         nav ul li:hover{background-color: var(--box-color);}
-        /* nav ul li.active{background-color: #007acc; color: white;}
-        nav ul li.active p, nav ul li.active span{color: white;} */
-        nav ul li.loading .nav-count::after{
-            content: '...';
-            animation: dots 1s infinite;
-        }
         @keyframes dots {
             0%, 20% { content: '...'; }
             40% { content: ''; }
@@ -97,6 +91,12 @@
         .nav-name{font-size: 1.25rem; font-weight: 400;margin-bottom: 1rem;}
         .nav-info{text-align: right;}
         .nav-count{font-size: 1.25rem;}
+        .nav-count .fa-spinner {
+            /* background: -webkit-linear-gradient(#fff, #ff0000, #ffffff); */
+            background: #00000066;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
         /* =========== */
         @media screen and (max-width: 500px) {
             nav ul{grid-template-columns: 1fr 1fr;}
@@ -122,8 +122,8 @@
                     <li data-nav="popups">
                         <div class="nav-name">팝업</div>
                         <div class="nav-info">
-                            <p class="nav-count">2건</p>
-                            <p class="nav-text">홈 - 팝업</p>
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
+                            <p class="nav-text"></p>
                         </div>
                     </li>
                 </ul>
@@ -134,28 +134,28 @@
                     <li data-nav="license">
                         <div class="nav-name">인허가</div>
                         <div class="nav-info">
-                            <p class="nav-count"></p>
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
                             <p class="nav-text"></p>
                         </div>
                     </li>
                     <li data-nav="qualification">
                         <div class="nav-name">유자격</div>
                         <div class="nav-info">
-                            <p class="nav-count"></p>
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
                             <p class="nav-text"></p>
                         </div>
                     </li>
                     <li data-nav="inside">
                         <div class="nav-name">인사이드</div>
                         <div class="nav-info">
-                            <p class="nav-count"></p>
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
                             <p class="nav-text"></p>
                         </div>
                     </li>
                     <li data-nav="academy">
                         <div class="nav-name">아카데미</div>
                         <div class="nav-info">
-                            <p class="nav-count"></p>
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
                             <p class="nav-text"></p>
                         </div>
                     </li>
@@ -167,7 +167,7 @@
                     <li data-nav="news">
                         <div class="nav-name">보도자료</div>
                         <div class="nav-info">
-                            <p class="nav-count"></p>
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
                             <p class="nav-text"></p>
                         </div>
                     </li>
@@ -179,14 +179,14 @@
                     <li data-nav="psac">
                         <div class="nav-name">PSAC</div>
                         <div class="nav-info">
-                            <p class="nav-count"></p>
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
                             <p class="nav-text"></p>
                         </div>
                     </li>
                     <li data-nav="relay-school">
                         <div class="nav-name">Relay School</div>
                         <div class="nav-info">
-                            <p class="nav-count"></p>
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
                             <p class="nav-text"></p>
                         </div>
                     </li>
@@ -210,21 +210,21 @@
                     <li data-nav="faq">
                         <div class="nav-name">자주 묻는 질문</div>
                         <div class="nav-info">
-                            <p class="nav-count"></p>
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
                             <p class="nav-text"></p>
                         </div>
                     </li>
                     <li data-nav="customer-inquiries">
                         <div class="nav-name">고객문의</div>
                         <div class="nav-info">
-                            <p class="nav-count"></p>
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
                             <p class="nav-text"></p>
                         </div>
                     </li>
                     <li data-nav="corruption-report">
                         <div class="nav-name">부패 및 윤리 신고</div>
                         <div class="nav-info">
-                            <p class="nav-count"></p>
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
                             <p class="nav-text"></p>
                         </div>
                     </li>

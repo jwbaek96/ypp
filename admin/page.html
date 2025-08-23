@@ -15,6 +15,7 @@
     <style>
         :root{
             --mxw: 1440px;
+            --mxh: 100dvh;
             --gap: 16px;
             --box-color: #d9d9d9;
             --line-color: #ececec;
@@ -22,10 +23,11 @@
         body{
             min-height: 100dvh;
         }
-        p, span{margin-bottom: 0; color: #000;}
+        a, p, span{margin-bottom: 0; color: #000;}
+        a:hover{color: #007bff;}
         /* =========== */
 
-        .main-container{ max-width: var(--mxw); margin: 0 auto; padding: 20px; box-sizing: border-box;}
+        .main-container{ max-width: var(--mxw); max-height: var(--mxh); margin: 0 auto; padding: 20px; box-sizing: border-box;}
         
         /* =========== */
 
@@ -89,6 +91,11 @@
             font-size: 0.8rem;
             margin: 0 0.125rem;
         }
+        .btn-sm:hover {
+            background-color: #e2e6ea;
+            /* border-color: #d3d9db; */
+        }
+        /* .btn-danger:hover{scale: 1.01;} */
 
         
         /* =========== Table Styles =========== */
@@ -114,12 +121,7 @@
         }
         
         .data-table th,
-        .data-table td {
-            padding: 12px 8px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-            font-size: .9rem;
-        }
+        .data-table td {padding: 12px 8px;text-align: left;border-bottom: 1px solid #eee;font-size: .9rem;}
         
         .data-table th {
             background: #f8f9fa;
@@ -137,36 +139,18 @@
         
         .data-table .col-checkbox { width: 40px; }
         .data-table .col-id { width: 80px; }
-        .data-table .col-number { width: 80px; }
+        .data-table .col-number ,
+        /* { width: 80px; } */
         .data-table .col-status,
         .data-table .col-actions,
         .data-table .col-date { width: auto; text-align: center;}
         .data-table .col-checkbox { text-align: center;}
 
         /* =========== 그룹핑 스타일 =========== */
-        .grouped-cell {
-            border-left: 3px solid #007bff;
-            padding-left: 12px !important;
-        }
-        
-        .group-header {
-            font-weight: 500;
-            color: #495057;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .group-icon {
-            color: #007bff;
-        }
-        
-        .group-item {
-            display: block;
-            padding: 2px 0;
-            color: #6c757d;
-        }
+        .grouped-cell {border-left: 3px solid #007bff;padding-left: 12px !important;}
+        .group-header {font-weight: 500;color: #495057;margin-bottom: 4px;display: flex;align-items: center;gap: 4px;}
+        .group-icon {color: #007bff;}
+        .group-item {display: block;padding: 2px 0;color: #6c757d;}
 
         /* =========== Modal Styles =========== */
         .modal {
@@ -177,29 +161,38 @@
             top: 0;
             width: 100%;
             height: 100%;
+            max-height: 100dvh;
             background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
         }
         
         .modal-content {
+            width: 800px;
+            max-width: 90%;
+            height: 95vh;
+            max-height: 95vh;
             background-color: #fefefe;
-            margin: 15% auto;
+            margin: 2.5vh auto;
             padding: 0;
             border: none;
             border-radius: 8px;
-            width: 500px;
-            max-width: 90%;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-header,
+        .modal-footer{
+            flex-shrink: 0;
         }
         
         .modal-header {
-            padding: 20px 20px 0;
+            padding: 20px 20px 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
         }
         
         .modal-title {
@@ -227,47 +220,86 @@
         }
         
         .modal-body {
-            padding: 0 20px;
-            max-height: 400px;
+            padding: 20px;
+            flex: 1;
             overflow-y: auto;
+            min-height: 0;
         }
         
         .modal-footer {
-            padding: 20px;
+            padding: 15px 20px 20px 20px;
             border-top: 1px solid #eee;
             display: flex;
             gap: 10px;
-            justify-content: flex-end;
+            justify-content: space-between;
+            flex-direction: row-reverse;
         }
         
-        .group-delete-list {
+        /* =========== 그룹 선택 모달 스타일 =========== */
+        .group-select-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
         
-        .group-delete-item {
-            padding: 10px;
+        .group-select-item {
+            padding: 15px;
             border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 8px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            background: #fff;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .group-select-item:hover {
+            background: #f8f9fa;
+            border-color: #007bff;
+        }
+        
+        .group-select-checkbox {
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        .group-select-item-main {
+            flex: 1;
+            cursor: pointer;
+        }
+        
+        .group-select-item-actions {
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: #f9f9f9;
+            gap: 8px;
         }
         
-        .group-delete-item:hover {
-            background: #f0f0f0;
+        .group-select-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
         }
         
-        .group-delete-item input[type="checkbox"] {
-            margin: 0;
+        .group-select-item-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
         }
         
-        .group-delete-item-content {
-            flex: 1;
-            font-size: 0.9rem;
+        .group-select-item-id,
+        .group-select-item-education {
+            color: #495057;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        .group-select-item-education p{margin: 0 0 0.25rem}
+        
+        .group-select-item-content {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.4;
         }
         
         .select-all-wrapper {
@@ -291,9 +323,113 @@
             border: 1px solid #f3f5f7;
         }
         
-        .btn-secondary:hover {
+        /* .btn-secondary:hover {
             background-color: #e2e6ea;
             border-color: #d3d9db;
+        } */
+
+        /* =========== Edit Modal Styles =========== */
+        .edit-form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .edit-form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        
+        .edit-form-group input,
+        .edit-form-group select,
+        .edit-form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+        
+        .edit-form-group input:focus,
+        .edit-form-group select:focus,
+        .edit-form-group textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+        }
+        
+        .edit-form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .edit-form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .edit-form-row .edit-form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .edit-form-readonly {
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+        
+        .edit-form-section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #495057;
+            margin: 1.5rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .edit-form-section-title:first-child {
+            margin-top: 0;
+        }
+        
+        /* =========== Education Checkbox Styles =========== */
+        .education-checkbox-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #f9f9f9;
+        }
+        
+        .education-checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .education-checkbox-item input[type="checkbox"] {
+            margin: 0;
+            width: auto;
+        }
+        
+        .education-checkbox-item label {
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .education-checkbox-item:hover {
+            background: #f0f0f0;
+            border-radius: 4px;
+            padding: 0.25rem;
+            margin: -0.25rem;
         }
 
         /* =========== Status Styles =========== */
@@ -307,6 +443,152 @@
         /* .status-active { background: #d4edda; color: #155724; }
         .status-inactive { background: #f8d7da; color: #721c24; }
         .status-pending { background: #fff3cd; color: #856404; } */
+        
+        /* =========== Gallery Modal Styles =========== */
+        .gallery-image-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .gallery-image-section {
+            flex: 1;
+        }
+        
+        .gallery-image-section h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .gallery-image-preview {
+            width: 100%;
+            min-height: 200px;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            margin-bottom: 0.5rem;
+            padding: 15px;
+            gap: 10px;
+        }
+        
+        .gallery-image-preview img {
+            max-width: 150px;
+            max-height: 150px;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .gallery-image-preview img:hover {
+            transform: scale(1.05);
+        }
+        
+        .gallery-image-preview.empty {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .gallery-image-links {
+            background: #f8f9fa;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #6c757d;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+        
+        .gallery-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .gallery-toggle {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .gallery-toggle.active {
+            background: #007bff;
+        }
+        
+        .gallery-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-toggle.active::after {
+            transform: translateX(26px);
+        }
+        
+        /* 보도자료 토글 스타일 (갤러리 토글과 동일) */
+        .press-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .press-toggle {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .press-toggle.active {
+            background: #007bff;
+        }
+        
+        .press-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        
+        .press-toggle.active::after {
+            transform: translateX(26px);
+        }
+        
+        .gallery-readonly-notice {
+            background: #fff3cd;
+            color: #856404;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #ffc107;
+        }
         
         /* =========== Responsive =========== */
         @media (max-width: 768px) {
@@ -401,33 +683,75 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-content"></div>
-            <div class="modal-add"></div>
         </main>
     </div>
 
-    <!-- 그룹 삭제 모달 -->
-    <div id="groupDeleteModal" class="modal">
-        <div class="modal-content">
+    <!-- 그룹 수정 선택 모달 -->
+    <div id="groupEditSelectModal" class="modal">
+        <div class="modal-content" style="width: 700px; max-width: 95%;">
             <div class="modal-header">
-                <h2 class="modal-title">그룹 항목 선택 삭제</h2>
-                <button class="modal-close" onclick="closeGroupDeleteModal()">
+                <h2 class="modal-title">항목 선택</h2>
+                <button class="modal-close" onclick="closeGroupEditSelectModal()">
                     <i class="fa-solid fa-times"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="select-all-wrapper">
-                    <label>
-                        <input type="checkbox" id="selectAllGroupItems"> 전체 선택
+                <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                    <p style="margin: 0; color: #666;">수정하려는 신청서를 선택하거나 삭제할 항목을 관리하세요.</p>
+                    <label style="display: flex; align-items: center; cursor: pointer; font-size: 0.9rem;">
+                        <input type="checkbox" id="groupSelectAll" onclick="toggleGroupSelectAll()" style="margin-right: 5px;">
+                        전체 선택
                     </label>
                 </div>
-                <ul id="groupDeleteList" class="group-delete-list">
+                <ul id="groupEditSelectList" class="group-select-list">
                     <!-- 그룹 아이템들이 동적으로 추가됩니다 -->
                 </ul>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeGroupDeleteModal()">취소</button>
-                <button class="btn btn-danger" onclick="deleteSelectedGroupItems()">선택 삭제</button>
+                <button class="btn btn-danger" onclick="deleteSelectedGroupItems()" style="margin-right: auto;">선택 삭제</button>
+                <button class="btn btn-secondary" onclick="closeGroupEditSelectModal()">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 수정 모달 -->
+    <div id="editModal" class="modal">
+        <div class="modal-content" style="width: 800px; max-width: 95%;">
+            <div class="modal-header">
+                <h2 class="modal-title" id="editModalTitle">항목 수정</h2>
+                <button class="modal-close" onclick="closeEditModal()">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <!-- 폼 필드들이 동적으로 생성됩니다 -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeEditModal()">취소</button>
+                <button class="btn btn-primary" onclick="saveEditedItem()">수정하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 갤러리 수정 모달 -->
+    <div id="galleryEditModal" class="modal">
+        <div class="modal-content" style="width: 900px; max-width: 95%;">
+            <div class="modal-header">
+                <h2 class="modal-title" id="galleryEditModalTitle">갤러리 항목 수정</h2>
+                <button class="modal-close" onclick="closeGalleryEditModal()">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="galleryEditForm">
+                    <!-- 갤러리 폼 필드들이 동적으로 생성됩니다 -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeGalleryEditModal()">취소</button>
+                <button class="btn btn-primary" onclick="saveGalleryEditedItem()">수정하기</button>
             </div>
         </div>
     </div>
@@ -536,11 +860,6 @@ function parseDatetime(datetime) {
     }
 }
 
-/**
- * 날짜를 한국어 형식으로 포맷팅
- * @param {string} dateStr - "YYYY-MM-DD" 형식
- * @returns {string} "YYYY년 MM월 DD일" 형식
- */
 function formatKoreanDate(dateStr) {
     if (!dateStr || dateStr === '-') return '-';
     
@@ -554,12 +873,8 @@ function formatKoreanDate(dateStr) {
         return dateStr;
     }
 }
+// ===========================================================================================
 
-/**
- * 시간을 12시간 형식으로 변환
- * @param {string} timeStr - "HH:mm:ss" 또는 "HH:mm" 형식
- * @returns {string} "오전/오후 HH:mm" 형식
- */
 function formatKoreanTime(timeStr) {
     if (!timeStr || timeStr === '-') return '-';
     
@@ -582,12 +897,11 @@ function formatKoreanTime(timeStr) {
 }
 
 // ===========================================================================================
-// ===========================================================================================
 // 페이지 관리 클래스
 class PageManager {
     constructor() {
         // Google Apps Script 웹앱 URL (index.html과 동일)
-        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbx9Eep2rpGs6kDurpw8cs93A-RZjMoa99GggIuf9Q4tDmDB8ZScSJf7FAqjmJGwpmlz';
+        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbyChhUXLJHVjVBjUQ-K4gYpAWRJO85wvTbcvspGX0CQyNYIRG6Yxw3n-R5bsgqhvVBk';
         this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
         this.pageConfigs = this.initPageConfigs();
         this.isDescending = true; // 기본값: 최신순 (내림차순)
@@ -602,41 +916,47 @@ class PageManager {
                 title: '팝업',
                 description: '홈페이지 팝업 관리',
                 location: '홈 > 팝업',
+                link: '/',
                 apiSheet: 'SHEET_DASHBOARD', // 임시
-                dataKey: 'popup'
+                dataKey: 'popup',
             },
             '인허가': {
                 title: '갤러리 인허가',
                 description: '인허가 관련 갤러리 이미지 관리',
-                location: '갤러리 > 인허가',
+                location: '회사소개 > 기업현황 > 인허가',
+                link: '/pages/company/business.html',
                 apiSheet: 'SHEET_GAL_A',
                 dataKey: 'galA'
             },
             '유자격': {
                 title: '갤러리 유자격',
                 description: '유자격 관련 갤러리 이미지 관리',
-                location: '갤러리 > 유자격',
+                location: '회사소개 > 기업현황 > 유자격',
+                link: '/pages/company/business.html',
                 apiSheet: 'SHEET_GAL_B',
                 dataKey: 'galB'
             },
             '인사이드': {
                 title: '갤러리 인사이드',
                 description: '인사이드 관련 갤러리 컨텐츠 관리',
-                location: '갤러리 > 인사이드',
+                location: '홍보 > 갤러리 > 인사이드',
+                link: '/pages/media/gallery/inside.html',
                 apiSheet: 'SHEET_GAL_C',
                 dataKey: 'galC'
             },
             '아카데미': {
                 title: '갤러리 아카데미',
                 description: '아카데미 관련 갤러리 컨텐츠 관리',
-                location: '갤러리 > 아카데미',
+                location: '홍보 > 갤러리 > 아카데미 갤러리',
+                link: '/pages/media/gallery/academy.html',
                 apiSheet: 'SHEET_GAL_F',
                 dataKey: 'galD'
             },
             '보도자료': {
                 title: '보도자료',
                 description: '언론 보도자료 및 뉴스 관리',
-                location: '게시판 > 보도자료',
+                location: '홍보 > 게시판 > 보도자료',
+                link: '/pages/media/newsroom/press.html',
                 apiSheet: 'SHEET_BOARD_NEWS',
                 dataKey: 'boardNews'
             },
@@ -644,6 +964,7 @@ class PageManager {
                 title: 'PSAC 신청',
                 description: 'PSAC 교육과정 신청서 관리',
                 location: '아카데미 > PSAC',
+                link: '/pages/academy/index.html?tab=psac',
                 apiSheet: 'SHEET_APPLY_P',
                 dataKey: 'applyPSAC'
             },
@@ -651,27 +972,31 @@ class PageManager {
                 title: 'Relay School 신청',
                 description: 'Relay School 교육과정 신청서 관리',
                 location: '아카데미 > Relay School',
+                link: '/pages/academy/index.html?tab=relay-school',
                 apiSheet: 'SHEET_APPLY_R',
                 dataKey: 'applyRelay'
             },
             '자주묻는질문': {
                 title: '자주 묻는 질문',
                 description: 'FAQ 관리',
-                location: '고객센터 > 자주 묻는 질문',
+                location: '고객센터 > FAQ',
+                link: '/pages/support/index.html',
                 apiSheet: 'SHEET_DASHBOARD', // 임시
                 dataKey: 'faq'
             },
             '고객문의': {
                 title: '고객문의',
                 description: '고객 문의사항 관리',
-                location: '고객센터 > 고객문의',
+                location: '고객센터 > 문의하기',
+                link: '/pages/support/index.html#contact',
                 apiSheet: 'SHEET_HELP_KR',
                 dataKey: 'helpKR'
             },
             '부패및윤리신고': {
                 title: '부패 및 윤리 신고',
                 description: '부패신고 및 윤리위반 신고 관리',
-                location: '고객센터 > 부패 및 윤리 신고',
+                location: 'ESG > 지배구조 > 부패 및 윤리 신고',
+                link: '/pages/esg/esg.html#governance-report',
                 apiSheet: 'SHEET_REPORT',
                 dataKey: 'report'
             }
@@ -714,7 +1039,14 @@ class PageManager {
     updatePageInfo(config) {
         document.querySelector('.page-title').textContent = config.title;
         document.querySelector('.page-descripation').textContent = config.description;
-        document.querySelector('.page-location').textContent = config.location;
+        
+        // 페이지 위치에 링크 적용
+        const locationElement = document.querySelector('.page-location');
+        if (config.link) {
+            locationElement.innerHTML = `<a href="${config.link}" target="_blank">${config.location}</a>`;
+        } else {
+            locationElement.textContent = config.location;
+        }
         
         // 페이지 타이틀도 업데이트
         document.title = `YPP Admin - ${config.title}`;
@@ -779,6 +1111,15 @@ class PageManager {
             
             const data = result.data;
             
+            // 🟡 디버깅: 로드된 데이터 확인
+            console.group('🔍 [DEBUG] 페이지 데이터 로드됨');
+            console.log('📊 데이터 개수:', data ? data.length : 0);
+            console.log('📦 첫 번째 데이터:', data && data.length > 0 ? data[0] : 'no data');
+            if (data && data.length > 0) {
+                console.log('🔑 첫 번째 데이터 키들:', Object.keys(data[0]));
+            }
+            console.groupEnd();
+            
             // 현재 데이터와 설정 저장
             this.currentData = data;
             this.currentConfig = config;
@@ -829,10 +1170,28 @@ class PageManager {
             
             row.innerHTML = this.generateTableRowHTML(item, config);
             
-            // 행 클릭 이벤트 (모달 열기 준비)
+            // 행 클릭 이벤트 (모달 열기)
             row.addEventListener('click', (e) => {
-                if (!e.target.matches('button, input[type="checkbox"]')) {
-                    // 나중에 모달 열기 기능 추가
+                // 🟡 디버깅: 행 클릭 이벤트
+                console.log('👆 [DEBUG] 행 클릭됨, item:', item);
+                
+                // 클릭된 요소가 버튼이거나 버튼의 자식 요소인지 확인
+                const clickedElement = e.target;
+                const isButton = clickedElement.matches('button') || clickedElement.closest('button');
+                const isCheckbox = clickedElement.matches('input[type="checkbox"]');
+                const isIcon = clickedElement.matches('i') || clickedElement.closest('i');
+                
+                console.log('🎯 [DEBUG] 클릭된 요소:', clickedElement.tagName);
+                console.log('🔘 [DEBUG] 버튼 여부:', isButton);
+                console.log('☑️ [DEBUG] 체크박스 여부:', isCheckbox);
+                console.log('🎨 [DEBUG] 아이콘 여부:', isIcon);
+                
+                // 버튼, 체크박스, 아이콘이 아닌 경우에만 모달 열기
+                if (!isButton && !isCheckbox && !isIcon) {
+                    console.log('✅ [DEBUG] 모달 열기 조건 만족, openEditModal 호출');
+                    this.openEditModal(item, config);
+                } else {
+                    console.log('❌ [DEBUG] 모달 열기 조건 불만족, 이벤트 무시');
                 }
             });
             
@@ -895,10 +1254,9 @@ class PageManager {
             case '보도자료':
                 return `
                     <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
-                    <th class="col-id">ID</th>
+                    <th class="col-number">순번</th>
                     <th>제목</th>
-                    <th>내용</th>
-                    <th class="col-date">발행일</th>
+                    <th class="col-date">등록일</th>
                     <th class="col-status">상태</th>
                     <th class="col-actions">삭제</th>
                 `;
@@ -1007,8 +1365,8 @@ class PageManager {
                     
                 case '보도자료':
                     // 발행일 기준으로 정렬
-                    dateA = new Date(a.publishDate || '1970-01-01');
-                    dateB = new Date(b.publishDate || '1970-01-01');
+                    dateA = new Date(a.submittedAt || '1970-01-01');
+                    dateB = new Date(b.submittedAt || '1970-01-01');
                     break;
                     
                 case '인허가':
@@ -1128,7 +1486,7 @@ class PageManager {
                     <td class="col-date">${item.date || '-'}</td>
                     <td class="col-status"><span class="status-badge ${item.state === 'on' ? 'status-active' : 'status-inactive'}">${item.state === 'on' ? 'ON' : 'OFF'}</span></td>
                     <td class="col-actions">
-                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}', event)"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 `;
             
@@ -1140,29 +1498,23 @@ class PageManager {
                     <td class="col-date">${item.date || ''}</td>
                     <td class="col-status"><span class="status-badge ${item.state === 'on' ? 'status-active' : 'status-inactive'}">${item.state === 'on' ? 'ON' : 'OFF'}</span></td>
                     <td class="col-actions">
-                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}', event)"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 `;
                 
             case 'PSAC':
             case 'RelaySchool':
                 const datetime = parseDatetime(item.applicationDate);
-                
-                // 디버깅용 로그 추가
-                // if (pageType === 'PSAC') {
-                //     console.log('PSAC 디버깅:', {
-                //         원본데이터: item,
-                //         applicationDate: item.applicationDate,
-                //         파싱결과: datetime
-                //     });
-                // }
-                
                 // 그룹핑된 데이터인지 확인
                 if (item.isGrouped && item.groupedEducation && item.groupedEducation.length > 1) {
                     // 그룹핑된 여러 교육 내용을 표시
                     const educationList = item.groupedEducation
                         .filter(edu => edu && edu.trim()) // 빈 값 제거
-                        .map((edu, index) => `<span class="group-item">${edu.trim()}</span>`)
+                        .map((edu, index) => {
+                            // 각 교육과정 항목에서 세미콜론을 <br>로 변환
+                            const formattedEdu = edu.trim().replace(/;\s*/g, '<br>');
+                            return `<span class="group-item">${formattedEdu}</span>`;
+                        })
                         .join('');
                         
                     return `
@@ -1180,24 +1532,28 @@ class PageManager {
                             <div>${datetime.dateOnly}</div>
                             ${datetime.timeOnly !== '-' ? `<small style="color: #666;">${datetime.timeOnly}</small>` : ''}
                         </td>
-                        <td>
-                            <button class="btn btn-danger btn-sm" onclick="showGroupDeleteModal('${item.number}')"><i class="fa-solid fa-trash-can"></i></button>
+                        <td class="col-actions">
+                            <!-- 그룹 항목은 행 클릭으로 관리 -->
                         </td>
                     `;
                 } else {
                     // 단일 데이터
                     const educationWithName = item.studentName ? `(${item.studentName}) ${item.detailedEducation || ''}` : item.detailedEducation || '';
+                    
+                    // 세미콜론으로 구분된 교육과정을 <br>로 변환
+                    const formattedEducation = educationWithName.replace(/;\s*/g, '<br>');
+                    
                     return `
                         <td class="col-checkbox"><input type="checkbox" data-id="${item.number}"></td>
                         <td>${item.number}</td>
                         <td>${item.companyName || '-'}</td>
-                        <td>${educationWithName}</td>
+                        <td>${formattedEducation}</td>
                         <td class="col-date">
                             <div>${datetime.dateOnly}</div>
-                            ${datetime.timeOnly !== '-' ? `<small style="color: #666;">${datetime.timeOnly}</small>` : ''}
+                            ${datetime.timeOnly !== '-' ? `<small>${datetime.timeOnly}</small>` : ''}
                         </td>
-                        <td>
-                            <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.number}')"><i class="fa-solid fa-trash-can"></i></button>
+                        <td class="col-actions">
+                            <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.number}', event)"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     `;
                 }
@@ -1215,20 +1571,23 @@ class PageManager {
                     </td>
                     <td><span class="status-badge status-pending">접수</span></td>
                     <td>
-                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.submissionId}')"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.submissionId}', event)"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 `;
                 
             case '보도자료':
+                const pressDatetime = parseDatetime(item.submittedAt);
                 return `
                     <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
-                    <td>${item.id}</td>
-                    <td>${item.title || '제목 없음'}</td>
-                    <td>${item.content ? (item.content.length > 30 ? item.content.substring(0, 30) + '...' : item.content) : '내용 없음'}</td>
-                    <td>${item.publishDate || '-'}</td>
-                    <td><span class="status-badge status-active">게시중</span></td>
-                    <td>
-                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                    <td class="col-number">${item.number}</td>
+                    <td>${item.titleKR || '제목 없음'}<br><span style="color: #4747477a; margin-top: 4px;">${item.titleEN || ''}</span></td>
+                    <td class="col-date">
+                        <div>${pressDatetime.dateOnly}</div>
+                        ${pressDatetime.timeOnly !== '-' ? `<small>${pressDatetime.timeOnly}</small>` : ''}
+                    </td>
+                    <td><span class="status-badge ${item.state === 'on' ? 'status-active' : 'status-inactive'}">${item.state === 'on' ? 'ON' : 'OFF'}</span></td>
+                    <td class="col-actions">
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}', event)"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 `;
                 
@@ -1241,7 +1600,7 @@ class PageManager {
                     <td>${item.reportDate || '-'}</td>
                     <td><span class="status-badge ${item.status === '완료' ? 'status-active' : 'status-pending'}">${item.status || '접수'}</span></td>
                     <td>
-                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}', event)"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 `;
                 
@@ -1254,7 +1613,7 @@ class PageManager {
                     <td class="col-date">${item.date || item.createdDate || '-'}</td>
                     <td><span class="status-badge status-active">활성</span></td>
                     <td>
-                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}', event)"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 `;
         }
@@ -1320,10 +1679,624 @@ class PageManager {
             emptyState.style.display = 'none';
         }
     }
+    
+    // 수정 모달 열기
+    openEditModal(item, config) {
+        const pageType = new URLSearchParams(window.location.search).get('page');
+
+    }
+    
+    // PSAC/RelaySchool 수정 모달 열기
+    openPSACEditModal(item, config, pageType) {
+        // 그룹핑된 아이템인지 확인
+        if (item.isGrouped && item.groupedItems && item.groupedItems.length > 1) {
+            // 그룹인 경우: 먼저 그룹 선택 모달을 열어서 수정할 항목을 선택하게 함
+            this.showGroupEditSelectModal(item, config, pageType);
+        } else if (item.isGrouped && item.groupedItems && item.groupedItems.length === 1) {
+            // 그룹이지만 항목이 하나인 경우: 바로 수정 모달 열기
+            const targetItem = item.groupedItems[0];
+            this.openDirectEditModal(targetItem, config, pageType);
+        } else {
+            // 단일 항목인 경우: 바로 수정 모달 열기
+            this.openDirectEditModal(item, config, pageType);
+        }
+    }
+    
+    // 그룹 선택 모달 열기
+    showGroupEditSelectModal(groupItem, config, pageType) {
+        const modal = document.getElementById('groupEditSelectModal');
+        const list = document.getElementById('groupEditSelectList');
+        
+        // 리스트 초기화
+        list.innerHTML = '';
+        
+        // 그룹 데이터를 모달에 저장 (삭제 함수에서 사용)
+        this.currentGroupData = groupItem;
+        this.currentGroupConfig = config;
+        this.currentGroupPageType = pageType;
+        
+        // 그룹 항목들을 리스트로 표시
+        groupItem.groupedItems.forEach((item, index) => {
+            const educationText = item.detailedEducation || '';
+            // 세미콜론을 <br>로 변환
+            const formattedEducation = educationText.replace(/;\s*/g, '<br>');
+            
+            const listItem = document.createElement('li');
+            listItem.className = 'group-select-item';
+            listItem.innerHTML = `
+                <input type="checkbox" class="group-select-checkbox" data-item-id="${item.number || item.id}" onclick="event.stopPropagation()">
+                <div class="group-select-item-main">
+                    <div class="group-select-item-header">
+                        <span class="group-select-item-title">${item.studentName || '수강자명 없음'}</span>
+                        </div>
+                        <div class="group-select-item-content">
+                            <span class="group-select-item-id">신청번호: ${item.number || item.id}</span>
+                        </div>
+                        <div class="group-select-item-education">
+                            <p><strong>[신청과목]</strong></p>${formattedEducation}
+                        </div>
+                    </div>
+                </div>
+                <div class="group-select-item-actions">
+                    <button class="btn btn-danger btn-sm" onclick="event.stopPropagation(); deleteIndividualGroupItem('${item.number || item.id}');">삭제</button>
+                </div>
+            `;
+            
+            // 메인 영역 클릭 이벤트 추가 (수정 모달 열기)
+            const mainDiv = listItem.querySelector('.group-select-item-main');
+            mainDiv.addEventListener('click', () => {
+                this.closeGroupEditSelectModal();
+                this.openDirectEditModal(item, config, pageType);
+            });
+            
+            list.appendChild(listItem);
+        });
+        
+        // 전체 선택 체크박스 초기화
+        document.getElementById('groupSelectAll').checked = false;
+        
+        // 모달 표시
+        modal.style.display = 'flex';
+    }
+    
+    // 그룹 선택 모달 닫기
+    closeGroupEditSelectModal() {
+        const modal = document.getElementById('groupEditSelectModal');
+        modal.style.display = 'none';
+    }
+    
+    // 갤러리 수정 모달 열기
+    openGalleryEditModal(item, config, pageType) {
+        
+        const modal = document.getElementById('galleryEditModal');
+        const title = document.getElementById('galleryEditModalTitle');
+        const form = document.getElementById('galleryEditForm');
+
+        
+        // 모달 제목 설정
+        title.textContent = `${pageType} 갤러리 수정`;
+        
+        // 폼 내용 생성
+        const formHTML = this.generateGalleryEditForm(item, pageType);
+
+        form.innerHTML = formHTML;
+        
+        // 현재 편집 중인 아이템 저장
+        window.currentGalleryEditItem = item;
+        window.currentGalleryEditConfig = config;
+        window.currentGalleryPageType = pageType;
+        
+        // 토글 버튼 이벤트 설정
+        this.setupGalleryToggle();
+        
+        // 모달 표시
+        modal.style.display = 'flex';
+    }
+    
+    // 보도자료 수정 모달 열기
+    openPressEditModal(item, config, pageType) {
+
+        const modal = document.getElementById('editModal');
+        const title = document.getElementById('editModalTitle');
+        const form = document.getElementById('editForm');
+        
+        if (!modal || !title || !form) {
+            console.error('❌ 모달 요소를 찾을 수 없음');
+            console.groupEnd();
+            return;
+        }
+        
+        // 모달 제목 설정
+        title.textContent = `${pageType} 수정`;
+        
+        // 폼 내용 생성
+        const formHTML = this.generatePressEditForm(item, pageType);
+        
+        form.innerHTML = formHTML;
+        
+        // 현재 편집 중인 아이템 저장
+        window.currentPressEditItem = item;
+        window.currentPressEditConfig = config;
+        window.currentPressPageType = pageType;
+        
+        // 토글 버튼 이벤트 설정
+        this.setupPressToggle();
+        
+        // 모달 표시
+        modal.style.display = 'flex';
+        console.groupEnd();
+    }
+    
+    // 직접 수정 모달 열기 (기존 로직)
+    openDirectEditModal(targetItem, config, pageType) {
+        const modal = document.getElementById('editModal');
+        const title = document.getElementById('editModalTitle');
+        const form = document.getElementById('editForm');
+        
+        // 모달 제목 설정
+        title.textContent = `${pageType} 신청서 수정`;
+        
+        // 폼 내용 생성
+        form.innerHTML = this.generatePSACEditForm(targetItem, pageType);
+        
+        // 현재 편집 중인 아이템 저장
+        window.currentEditItem = targetItem;
+        window.currentEditConfig = config;
+        
+        // 모달 표시
+        modal.style.display = 'flex';
+    }
+    
+    // PSAC/RelaySchool 수정 폼 생성
+    generatePSACEditForm(item, pageType) {
+        return `
+            <div class="edit-form-section-title">신청 정보</div>
+            
+            <div class="edit-form-group">
+                <label>신청번호</label>
+                <input type="text" name="number" value="${item.number || ''}" class="edit-form-readonly" readonly>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>신청일시</label>
+                <input type="text" name="applicationDate" value="${item.applicationDate || ''}" class="edit-form-readonly" readonly>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>과정명</label>
+                <input type="text" name="courseName" value="${item.courseName || ''}" class="edit-form-readonly" readonly>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>교육일정</label>
+                <textarea name="educationSchedule" readonly class="edit-form-readonly">${item.educationSchedule || ''}</textarea>
+            </div>
+
+            <div class="edit-form-section-title">회사 정보</div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>회사명</label>
+                    <input type="text" name="companyName" value="${item.companyName || ''}" >
+                </div>
+                <div class="edit-form-group">
+                    <label>대표자명</label>
+                    <input type="text" name="ceoName" value="${item.ceoName || ''}" >
+                </div>
+            </div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>사업자등록번호</label>
+                    <input type="text" name="businessNumber" value="${item.businessNumber || ''}" >
+                </div>
+                <div class="edit-form-group">
+                    <label>종목업태</label>
+                    <input type="text" name="businessType" value="${item.businessType || ''}">
+                </div>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>주소</label>
+                <textarea name="companyAddress" >${item.companyAddress || ''}</textarea>
+            </div>
+
+            <div class="edit-form-section-title">교육 담당자 정보</div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>교육담당자</label>
+                    <input type="text" name="educationManager" value="${item.educationManager || ''}" >
+                </div>
+                <div class="edit-form-group">
+                    <label>담당자 부서</label>
+                    <input type="text" name="managerDepartment" value="${item.managerDepartment || ''}">
+                </div>
+            </div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>담당자 직급</label>
+                    <input type="text" name="managerPosition" value="${item.managerPosition || ''}">
+                </div>
+                <div class="edit-form-group">
+                    <label>담당자 전화</label>
+                    <input type="tel" name="managerPhone" value="${item.managerPhone || ''}">
+                </div>
+            </div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>담당자 핸드폰</label>
+                    <input type="tel" name="managerMobile" value="${item.managerMobile || ''}">
+                </div>
+                <div class="edit-form-group">
+                    <label>담당자 이메일</label>
+                    <input type="email" name="managerEmail" value="${item.managerEmail || ''}" >
+                </div>
+            </div>
+
+            <div class="edit-form-section-title">수강자 정보</div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>수강자명</label>
+                    <input type="text" name="studentName" value="${item.studentName || ''}" >
+                </div>
+                <div class="edit-form-group">
+                    <label>수강자 부서</label>
+                    <input type="text" name="studentDepartment" value="${item.studentDepartment || ''}">
+                </div>
+            </div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>수강자 직급</label>
+                    <input type="text" name="studentPosition" value="${item.studentPosition || ''}">
+                </div>
+                <div class="edit-form-group">
+                    <label>수강자 전화</label>
+                    <input type="tel" name="studentPhone" value="${item.studentPhone || ''}">
+                </div>
+            </div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>수강자 핸드폰</label>
+                    <input type="tel" name="studentMobile" value="${item.studentMobile || ''}">
+                </div>
+                <div class="edit-form-group">
+                    <label>수강자 이메일</label>
+                    <input type="email" name="studentEmail" value="${item.studentEmail || ''}" >
+                </div>
+            </div>
+
+            <div class="edit-form-section-title">교육 과정</div>
+            
+            <div class="edit-form-group">
+                <label>선택세부교육 *</label>
+                <div class="education-checkbox-container">
+                    ${this.generateEducationCheckboxes(pageType, item)}
+                </div>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>비고</label>
+                <textarea name="remarks">${item.remarks || ''}</textarea>
+            </div>
+        `;
+    }
+    
+    // 교육과정 체크박스 생성
+    generateEducationCheckboxes(pageType, item) {
+        const currentEducation = item.detailedEducation || '';
+        
+        // 더 안전한 구분자 처리 - 쉼표+공백 또는 세미콜론으로 구분
+        let selectedCourses = [];
+        if (currentEducation) {
+            // 먼저 세미콜론으로 구분 시도 (더 안전한 구분자)
+            if (currentEducation.includes(';')) {
+                selectedCourses = currentEducation.split(';').map(course => course.trim()).filter(course => course);
+            } else {
+                // 쉼표로 구분하되, 연속된 쉼표+공백 패턴을 찾아서 구분
+                // 예: "과정1, 과정2" (구분자) vs "HVDC, MVDC" (과정명 내부)
+                const parts = currentEducation.split(/,\s*(?=\d+주:)/); // 숫자+주: 패턴 앞의 쉼표+공백으로 구분
+                if (parts.length > 1) {
+                    selectedCourses = parts.map(course => course.trim()).filter(course => course);
+                } else {
+                    // 단일 과정인 경우
+                    selectedCourses = [currentEducation.trim()];
+                }
+            }
+        }
+        
+        // 디버깅을 위한 콘솔 로그
+        console.log('신청자 이름:', item.applicantName || item.studentName || '이름 없음');
+        console.log('신청과목들:', {
+            원본데이터: currentEducation,
+            파싱된배열: selectedCourses,
+            배열길이: selectedCourses.length
+        });
+        
+        if (pageType === 'PSAC') {
+            const psacCourses = [
+                '1주: 전력계통 해석의 기본 이론',
+                '2주: 전력계통(설비) 보호기술',
+                '3주: 동기발전기 기술',
+                '4주: 무효전력 운영과 전압제어',
+                '5주: 전력설비의 동특성(계통안정도)',
+                '6주: 분산에너지 시스템 기술',
+                '7주: 보호릴레이 정정법과 보호협조기술',
+                '8주: HVDC, MVDC, LVDC 및 FACTS기술',
+                '9주: 에너지 전환기의 전력계통 계획과 운영/에너지 시장과 신사업 모델',
+                '10주: 신재생에너지 계통연계 기술'
+            ];
+            
+            console.log('PSAC 체크박스 생성 중...');
+            return psacCourses.map((course, index) => {
+                const isChecked = selectedCourses.includes(course);
+                const checkedAttr = isChecked ? 'checked="checked"' : '';
+                console.log(`${course}: ${isChecked ? '체크됨' : '체크안됨'}`);
+                return `
+                    <div class="education-checkbox-item">
+                        <input type="checkbox" id="psac_week_${index + 1}" name="detailedEducation" value="${course}" ${checkedAttr}>
+                        <label for="psac_week_${index + 1}">${course}</label>
+                    </div>
+                `;
+            }).join('');
+            
+        } else if (pageType === 'RelaySchool') {
+            const relayCourses = [
+                // 현재 진행 중인 과정들
+                '디지털릴레이 기본반 (2025년 9월 17일(수) ~ 9월 19일(금))',
+                '디지털릴레이 고급반 (2025년 10월 22일(수) ~ 10월 24일(금))',
+                '고장분석반 (2025년 11월 19일(수) ~ 11월 21일(금))',
+                // 마감된 과정들
+                '디지털릴레이 기본반 (2025년 3월 19일(수) ~ 3월 21일(금))',
+                '디지털릴레이 고급반 (2025년 4월 16일(수) ~ 4월 18일(금))',
+                '고장분석반 (2025년 5월 21일(수) ~ 5월 23일(금))',
+                'ECMS운영반 (2025년 6월 18일(수) ~ 6월 20일(금))',
+                '원자력 특성화반 (2025년 7월 16일(수) ~ 7월 20일(일))'
+            ];
+            
+            console.log('RelaySchool 체크박스 생성 중...');
+            return relayCourses.map((course, index) => {
+                const isChecked = selectedCourses.includes(course);
+                const checkedAttr = isChecked ? 'checked="checked"' : '';
+                console.log(`${course}: ${isChecked ? '체크됨' : '체크안됨'}`);
+                return `
+                    <div class="education-checkbox-item">
+                        <input type="checkbox" id="relay_course_${index + 1}" name="detailedEducation" value="${course}" ${checkedAttr}>
+                        <label for="relay_course_${index + 1}">${course}</label>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        return `<textarea name="detailedEducation" required>${currentEducation}</textarea>`;
+    }
+    
+    // 갤러리 수정 폼 생성
+    generateGalleryEditForm(item, pageType) {
+        // 🟡 디버깅: 폼 생성 시작
+        console.group('🔍 [DEBUG] generateGalleryEditForm 호출됨');
+        console.log('📋 pageType:', pageType);
+        console.log('📦 item 데이터:', item);
+        
+        const isContentType = (pageType === '인사이드' || pageType === '아카데미');
+        console.log('📝 컨텐츠 타입 여부:', isContentType);
+        
+        // 이미지 슬라이드와 링크 처리 - 실제 데이터 구조에 맞게 수정
+        const imageArray = item.image || [];
+        console.log('🖼️ 이미지 배열:', imageArray);
+        console.log('🔢 이미지 개수:', imageArray.length);
+        
+        // 모든 이미지들을 HTML로 생성
+        let allImagesHTML = '';
+        if (imageArray && imageArray.length > 0) {
+            allImagesHTML = imageArray.map((imgUrl, index) => {
+                return `<img src="${imgUrl}" alt="이미지 ${index + 1}" style="max-width: 100%; max-height:350px; margin: 5px; border-radius: 4px; object-fit: contain;">`;
+            }).join('');
+        } else {
+            allImagesHTML = '<span style="color: #6c757d;">이미지가 없습니다</span>';
+        }
+        
+        // 현재 활성화 상태 - 실제 데이터 구조에 맞게 수정
+        const isActive = item.active === true || item.active === 'true' || item.active === 'ON' || item.state === 'on';
+        console.log('✅ 활성화 상태:', isActive);
+        
+        // 제목 필드 값들 확인 - 실제 데이터 구조에 맞게 수정
+        const titleKor = item.titleKor || item.titleKR || item.title || '';
+        const titleEng = item.titleEng || item.titleEN || item.titleEnglish || '';
+        console.log('🏷️ 한글 제목:', titleKor);
+        console.log('🏷️ 영어 제목:', titleEng);
+        
+        // 내용 필드 값들 확인 (컨텐츠 타입인 경우만)
+        if (isContentType) {
+            const contentKor = item.contentKor || item.contentKR || item.content || '';
+            const contentEng = item.contentEng || item.contentEN || item.contentEnglish || '';
+            console.log('📝 한글 내용:', contentKor);
+            console.log('📝 영어 내용:', contentEng);
+        }
+        
+        const formHTML = `
+            <div class="gallery-readonly-notice">
+                <i class="fas fa-info-circle"></i>
+                이미지들은 수정할 수 없습니다. 제목, 내용${isContentType ? ', 상세 내용' : ''} 및 활성화 상태만 수정 가능합니다.
+            </div>
+            
+            <div class="gallery-image-container">
+                <div class="gallery-image-section" style="flex: 1;">
+                    <h4>모든 이미지들 (${imageArray.length}개)</h4>
+                    <div class="gallery-image-preview" style="height: auto; max-height: 500px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; padding: 15px;">
+                        ${allImagesHTML}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>한글 제목</label>
+                    <input type="text" name="titleKor" value="${titleKor}" required>
+                </div>
+                <div class="edit-form-group">
+                    <label>영어 제목</label>
+                    <input type="text" name="titleEng" value="${titleEng}" required>
+                </div>
+            </div>
+            
+            ${isContentType ? `
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>한글 내용</label>
+                    <textarea name="contentKor" rows="4">${item.contentKor || item.contentKR || item.content || ''}</textarea>
+                </div>
+                <div class="edit-form-group">
+                    <label>영문 내용</label>
+                    <textarea name="contentEng" rows="4">${item.contentEng || item.contentEN || item.contentEnglish || ''}</textarea>
+                </div>
+            </div>
+            ` : ''}
+            
+            <div class="gallery-toggle-container">
+                <label>활성화 상태:</label>
+                <div class="gallery-toggle ${isActive ? 'active' : ''}" id="galleryActiveToggle">
+                    <input type="hidden" name="active" value="${isActive ? 'true' : 'false'}">
+                </div>
+                <span id="toggleLabel">${isActive ? 'ON' : 'OFF'}</span>
+            </div>
+        `;
+        
+        console.log('✅ 폼 HTML 생성 완료, 길이:', formHTML.length);
+        console.groupEnd();
+        
+        return formHTML;
+    }
+    
+    // 보도자료 수정 폼 생성
+    generatePressEditForm(item, pageType) {
+        console.group('🔍 [DEBUG] generatePressEditForm 호출됨');
+        console.log('📋 pageType:', pageType);
+        console.log('📦 item 데이터:', item);
+        
+        // 이미지 처리
+        const imageArray = item.image || [];
+        console.log('🖼️ 이미지 배열:', imageArray);
+        
+        let allImagesHTML = '';
+        if (imageArray && imageArray.length > 0) {
+            allImagesHTML = imageArray.map((imgUrl, index) => {
+                return `<img src="${imgUrl}" alt="이미지 ${index + 1}" style="max-width: 100%; max-height:350px; margin: 5px; border-radius: 4px; object-fit: contain;">`;
+            }).join('');
+        } else {
+            allImagesHTML = '<span style="color: #6c757d;">이미지가 없습니다</span>';
+        }
+        
+        // 현재 활성화 상태
+        const isActive = item.active === true || item.active === 'true' || item.active === 'ON' || item.state === 'on';
+        console.log('✅ 활성화 상태:', isActive);
+        
+        // 제목 필드 값들
+        const titleKor = item.titleKor || item.titleKR || item.title || '';
+        const titleEng = item.titleEng || item.titleEN || item.titleEnglish || '';
+        console.log('🏷️ 한글 제목:', titleKor);
+        console.log('🏷️ 영문 제목:', titleEng);
+        
+        // 내용 필드 값들
+        const contentKor = item.contentKor || item.contentKR || item.content || '';
+        const contentEng = item.contentEng || item.contentEN || item.contentEnglish || '';
+        console.log('📄 한글 내용:', contentKor.substring(0, 50) + '...');
+        console.log('📄 영문 내용:', contentEng.substring(0, 50) + '...');
+        
+        const formHTML = `
+            <div class="edit-form-section-title">보도자료 정보</div>
+            
+            <div class="edit-form-group">
+                <label>제목 (한글):</label>
+                <input type="text" name="titleKR" value="${titleKor}" required>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>제목 (영문):</label>
+                <input type="text" name="titleEN" value="${titleEng}">
+            </div>
+            
+            <div class="edit-form-group">
+                <label>내용 (한글):</label>
+                <textarea name="contentKR" rows="8" required>${contentKor}</textarea>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>내용 (영문):</label>
+                <textarea name="contentEN" rows="8">${contentEng}</textarea>
+            </div>
+            
+            <div class="edit-form-section-title">이미지</div>
+            <div class="edit-form-group">
+                <label>현재 이미지:</label>
+                <div class="press-image-preview" style="display: flex; flex-wrap: wrap; gap: 10px; max-height: 400px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 4px;">
+                    ${allImagesHTML}
+                </div>
+                <input type="hidden" name="image" value='${JSON.stringify(imageArray)}'>
+                <small style="color: #6c757d; font-size: 0.8em;">이미지 수정은 구글 시트에서 직접 해주세요.</small>
+            </div>
+            
+            <div class="edit-form-section-title">상태</div>
+            <div class="press-toggle-container">
+                <label>활성화 상태:</label>
+                <div class="press-toggle ${isActive ? 'active' : ''}" id="pressActiveToggle">
+                    <input type="hidden" name="active" value="${isActive ? 'true' : 'false'}">
+                </div>
+                <span id="pressToggleLabel">${isActive ? 'ON' : 'OFF'}</span>
+            </div>
+        `;
+        
+        console.log('✅ 보도자료 폼 HTML 생성 완료, 길이:', formHTML.length);
+        console.groupEnd();
+        
+        return formHTML;
+    }
+    
+    // 갤러리 토글 버튼 설정
+    setupGalleryToggle() {
+        const toggle = document.getElementById('galleryActiveToggle');
+        const hiddenInput = toggle.querySelector('input[name="active"]');
+        const label = document.getElementById('toggleLabel');
+        
+        if (toggle) {
+            toggle.addEventListener('click', () => {
+                toggle.classList.toggle('active');
+                const isActive = toggle.classList.contains('active');
+                hiddenInput.value = isActive ? 'true' : 'false';
+                label.textContent = isActive ? 'ON' : 'OFF';
+            });
+        }
+    }
+    
+    // 보도자료 토글 버튼 설정
+    setupPressToggle() {
+        const toggle = document.getElementById('pressActiveToggle');
+        const hiddenInput = toggle.querySelector('input[name="active"]');
+        const label = document.getElementById('pressToggleLabel');
+        
+        if (toggle) {
+            toggle.addEventListener('click', () => {
+                toggle.classList.toggle('active');
+                const isActive = toggle.classList.contains('active');
+                hiddenInput.value = isActive ? 'true' : 'false';
+                label.textContent = isActive ? 'ON' : 'OFF';
+            });
+        }
+    }
 }
 
 // 전역 함수들 (버튼 onclick에서 사용)
-async function deleteItem(id) {
+async function deleteItem(id, event) {
+    // 이벤트 전파 방지
+    if (event) {
+        event.stopPropagation();
+    }
+    
     if (!confirm('정말로 이 항목을 삭제하시겠습니까?')) {
         return; // 사용자가 취소를 선택한 경우
     }
@@ -1365,164 +2338,378 @@ async function deleteItem(id) {
     }
 }
 
-// 그룹 삭제 모달 관련 변수
-let currentGroupData = null;
+// 모달 외부 클릭 시 닫기
+window.addEventListener('click', function(event) {
+    const editModal = document.getElementById('editModal');
+    if (event.target === editModal) {
+        closeEditModal();
+    }
+    
+    const groupEditSelectModal = document.getElementById('groupEditSelectModal');
+    if (event.target === groupEditSelectModal) {
+        closeGroupEditSelectModal();
+    }
+    
+    const galleryEditModal = document.getElementById('galleryEditModal');
+    if (event.target === galleryEditModal) {
+        closeGalleryEditModal();
+    }
+});
 
-// 그룹 삭제 모달 열기
-function showGroupDeleteModal(representativeId) {
-    const pageManager = window.pageManagerInstance;
-    if (!pageManager) {
-        alert('오류: 페이지 매니저를 찾을 수 없습니다.');
+// 그룹 수정 선택 모달 관련 전역 함수
+function closeGroupEditSelectModal() {
+    document.getElementById('groupEditSelectModal').style.display = 'none';
+}
+
+// 수정 모달 관련 전역 함수들
+function closeEditModal() {
+    document.getElementById('editModal').style.display = 'none';
+    window.currentEditItem = null;
+    window.currentEditConfig = null;
+}
+
+// 수정된 항목 저장
+async function saveEditedItem() {
+    // 보도자료 편집인지 확인
+    if (window.currentPressEditItem) {
+        return savePressEditedItem();
+    }
+    
+    const form = document.getElementById('editForm');
+    const formData = new FormData(form);
+    
+    // 폼 유효성 검사
+    if (!form.checkValidity()) {
+        form.reportValidity();
         return;
     }
     
-    // 현재 페이지의 모든 데이터에서 해당 그룹 찾기
-    const processedData = pageManager.currentProcessedData || [];
+    // 폼 데이터를 객체로 변환
+    const updatedData = {};
     
-    const targetGroup = processedData.find(group => {
-        // 타입 변환을 통한 안전한 비교
-        const groupNumber = String(group.number);
-        const targetId = String(representativeId);
-        
-        const matchByNumber = groupNumber === targetId;
-        const matchByGroupedItems = group.groupedItems && group.groupedItems.some(item => {
-            const itemId = String(item.number || item.id);
-            return itemId === targetId;
-        });
-        
-        return matchByNumber || matchByGroupedItems;
-    });
-    
-    if (!targetGroup || !targetGroup.groupedItems) {
-        alert('오류: 그룹 정보를 찾을 수 없습니다.');
-        return;
+    // 체크박스 항목들 (선택세부교육) 처리
+    const educationCheckboxes = form.querySelectorAll('input[name="detailedEducation"]:checked');
+    if (educationCheckboxes.length > 0) {
+        // 세미콜론으로 구분하여 저장
+        updatedData.detailedEducation = Array.from(educationCheckboxes).map(cb => cb.value).join('; ');
+    } else {
+        // 체크박스가 아닌 경우 (다른 페이지 타입)
+        const educationTextarea = form.querySelector('textarea[name="detailedEducation"]');
+        if (educationTextarea) {
+            updatedData.detailedEducation = educationTextarea.value;
+        }
     }
     
-    currentGroupData = targetGroup;
-    
-    // 모달 리스트 생성
-    const groupDeleteList = document.getElementById('groupDeleteList');
-    groupDeleteList.innerHTML = '';
-    
-    targetGroup.groupedItems.forEach((item, index) => {
-        const educationText = item.studentName ? 
-            `(${item.studentName}) ${item.detailedEducation || ''}` : 
-            item.detailedEducation || '';
-            
-        const listItem = document.createElement('li');
-        listItem.className = 'group-delete-item';
-        listItem.innerHTML = `
-            <input type="checkbox" id="groupItem_${index}" data-id="${item.number || item.id}" data-index="${index}">
-            <label for="groupItem_${index}" class="group-delete-item-content">
-                ${educationText}
-                <small style="color: #666; display: block; margin-top: 2px;">
-                    신청번호: ${item.number || item.id} | 회사: ${item.companyName || '-'}
-                </small>
-            </label>
-        `;
-        
-        groupDeleteList.appendChild(listItem);
-    });
-    
-    // 전체 선택 체크박스 이벤트 설정
-    setupSelectAllEvent();
-    
-    // 모달 표시
-    document.getElementById('groupDeleteModal').style.display = 'block';
-}
-
-// 그룹 삭제 모달 닫기
-function closeGroupDeleteModal() {
-    document.getElementById('groupDeleteModal').style.display = 'none';
-    currentGroupData = null;
-    
-    // 체크박스 초기화
-    const checkboxes = document.querySelectorAll('#groupDeleteList input[type="checkbox"]');
-    checkboxes.forEach(checkbox => checkbox.checked = false);
-    document.getElementById('selectAllGroupItems').checked = false;
-}
-
-// 전체 선택 체크박스 이벤트 설정
-function setupSelectAllEvent() {
-    const selectAllCheckbox = document.getElementById('selectAllGroupItems');
-    const itemCheckboxes = document.querySelectorAll('#groupDeleteList input[type="checkbox"]');
-    
-    selectAllCheckbox.addEventListener('change', function() {
-        itemCheckboxes.forEach(checkbox => {
-            checkbox.checked = this.checked;
-        });
-    });
-    
-    // 개별 체크박스 이벤트
-    itemCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            const checkedCount = document.querySelectorAll('#groupDeleteList input[type="checkbox"]:checked').length;
-            const totalCount = itemCheckboxes.length;
-            
-            selectAllCheckbox.checked = checkedCount === totalCount;
-            selectAllCheckbox.indeterminate = checkedCount > 0 && checkedCount < totalCount;
-        });
-    });
-}
-
-// 선택된 그룹 항목들 삭제
-async function deleteSelectedGroupItems() {
-    const checkedBoxes = document.querySelectorAll('#groupDeleteList input[type="checkbox"]:checked');
-    
-    if (checkedBoxes.length === 0) {
-        alert('삭제할 항목을 선택해주세요.');
-        return;
+    // 나머지 폼 데이터 처리
+    for (let [key, value] of formData.entries()) {
+        if (key !== 'detailedEducation') { // 이미 처리한 detailedEducation 제외
+            updatedData[key] = value;
+        }
     }
     
-    if (!confirm(`선택한 ${checkedBoxes.length}개 항목을 삭제하시겠습니까?\n⚠️ 이 작업은 되돌릴 수 없습니다.`)) {
+    // 원본 아이템의 읽기 전용 필드들 유지
+    const originalItem = window.currentEditItem;
+    // updatedData.number = "=ROW()-1";
+    updatedData.applicationDate = originalItem.applicationDate;
+    updatedData.courseName = originalItem.courseName;
+    updatedData.educationSchedule = originalItem.educationSchedule;
+    
+    if (!confirm('수정사항을 저장하시겠습니까?')) {
         return;
     }
     
     try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const pageParam = urlParams.get('page');
+        const config = window.currentEditConfig;
         const pageManager = window.pageManagerInstance;
         
-        if (!pageManager || !pageManager.pageConfigs[pageParam]) {
-            alert('오류: 페이지 설정을 찾을 수 없습니다.');
+        if (!config || !pageManager) {
+            alert('오류: 설정 정보를 찾을 수 없습니다.');
             return;
         }
         
-        const config = pageManager.pageConfigs[pageParam];
-        const appsScriptUrl = pageManager.appsScriptUrl;
+        // 수정 API 호출 (GET 방식으로 변경 - CORS 문제 해결)
+        const updateUrl = `${pageManager.appsScriptUrl}?action=update&sheet=${config.apiSheet}&id=${encodeURIComponent(originalItem.number)}&data=${encodeURIComponent(JSON.stringify(updatedData))}`;
         
-        // 선택된 아이템들의 ID 수집
-        const idsToDelete = Array.from(checkedBoxes).map(checkbox => checkbox.dataset.id);
+        // 디버깅을 위한 로그
+        console.log('=== 수정 요청 디버깅 ===');
+        console.log('시트:', config.apiSheet);
+        console.log('ID:', originalItem.number);
+        console.log('수정할 데이터:', updatedData);
+        console.log('요청 URL:', updateUrl);
+        console.log('========================');
         
-        // 배치 삭제 요청
-        const batchDeleteUrl = `${appsScriptUrl}?action=batchDelete&sheet=${config.apiSheet}&ids=${encodeURIComponent(JSON.stringify(idsToDelete))}`;
-        
-        const response = await fetch(batchDeleteUrl, {
+        const response = await fetch(updateUrl, {
             method: 'GET'
         });
         
         const result = await response.json();
         
         if (result.success) {
-            alert(`${idsToDelete.length}개 항목이 삭제되었습니다.`);
-            closeGroupDeleteModal();
+            alert('수정이 완료되었습니다.');
+            closeEditModal();
             location.reload();
         } else {
-            alert(`오류: 삭제에 실패했습니다. (${result.message})`);
+            alert(`오류: 수정에 실패했습니다. (${result.message})`);
         }
         
     } catch (error) {
-        console.error('선택 삭제 오류:', error);
-        alert('오류: 삭제에 실패했습니다.');
+        console.error('수정 오류:', error);
+        alert('오류: 수정에 실패했습니다.');
     }
 }
 
-// 모달 외부 클릭 시 닫기
-window.addEventListener('click', function(event) {
-    const modal = document.getElementById('groupDeleteModal');
-    if (event.target === modal) {
-        closeGroupDeleteModal();
+// 전체 선택/해제 기능
+function toggleGroupSelectAll() {
+    const selectAllCheckbox = document.getElementById('groupSelectAll');
+    const itemCheckboxes = document.querySelectorAll('.group-select-checkbox');
+    
+    itemCheckboxes.forEach(checkbox => {
+        checkbox.checked = selectAllCheckbox.checked;
+    });
+}
+
+// 선택된 그룹 항목들 삭제
+async function deleteSelectedGroupItems() {
+    const selectedCheckboxes = document.querySelectorAll('.group-select-checkbox:checked');
+    
+    if (selectedCheckboxes.length === 0) {
+        alert('삭제할 항목을 선택해주세요.');
+        return;
     }
-});
+    
+    const selectedIds = Array.from(selectedCheckboxes).map(cb => cb.dataset.itemId);
+    const confirmMessage = `선택된 ${selectedIds.length}개 항목을 삭제하시겠습니까?`;
+    
+    if (!confirm(confirmMessage)) {
+        return;
+    }
+    
+    try {
+        const currentManager = window.adminManager;
+        const config = currentManager.currentGroupConfig;
+        
+        for (const itemId of selectedIds) {
+            const deleteUrl = `${pageManager.appsScriptUrl}?action=delete&sheet=${config.apiSheet}&id=${encodeURIComponent(itemId)}`;
+            const response = await fetch(deleteUrl, { method: 'GET' });
+            const result = await response.json();
+            
+            if (!result.success) {
+                console.error(`Failed to delete item ${itemId}:`, result.message);
+            }
+        }
+        
+        alert(`${selectedIds.length}개 항목이 삭제되었습니다.`);
+        closeGroupEditSelectModal();
+        location.reload();
+        
+    } catch (error) {
+        console.error('삭제 오류:', error);
+        alert('삭제 중 오류가 발생했습니다.');
+    }
+}
+
+// 개별 그룹 항목 삭제
+async function deleteIndividualGroupItem(itemId) {
+    if (!confirm('이 항목을 삭제하시겠습니까?')) {
+        return;
+    }
+    
+    try {
+        const currentManager = window.adminManager;
+        const config = currentManager.currentGroupConfig;
+        
+        const deleteUrl = `${pageManager.appsScriptUrl}?action=delete&sheet=${config.apiSheet}&id=${encodeURIComponent(itemId)}`;
+        const response = await fetch(deleteUrl, { method: 'GET' });
+        const result = await response.json();
+        
+        if (result.success) {
+            alert('항목이 삭제되었습니다.');
+            closeGroupEditSelectModal();
+            location.reload();
+        } else {
+            alert(`삭제 실패: ${result.message}`);
+        }
+        
+    } catch (error) {
+        console.error('삭제 오류:', error);
+        alert('삭제 중 오류가 발생했습니다.');
+    }
+}
+
+// 갤러리 모달 관련 전역 함수들
+function closeGalleryEditModal() {
+    document.getElementById('galleryEditModal').style.display = 'none';
+    window.currentGalleryEditItem = null;
+    window.currentGalleryEditConfig = null;
+    window.currentGalleryPageType = null;
+}
+
+// 갤러리 수정된 항목 저장
+async function saveGalleryEditedItem() {
+    const form = document.getElementById('galleryEditForm');
+    const formData = new FormData(form);
+    
+    // 폼 유효성 검사
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    
+    // 폼 데이터를 객체로 변환
+    const updatedData = {};
+    for (let [key, value] of formData.entries()) {
+        updatedData[key] = value;
+    }
+    
+    // 원본 아이템의 읽기 전용 필드들 유지
+    const originalItem = window.currentGalleryEditItem;
+    
+    // 🟡 디버깅: 수정할 데이터 확인
+    console.log('📝 [DEBUG] 폼에서 가져온 데이터:', updatedData);
+    console.log('📦 [DEBUG] 원본 아이템:', originalItem);
+    
+    // 실제 필드명에 맞게 데이터 매핑
+    const finalData = {
+        id: originalItem.id,
+        date: originalItem.date,
+        titleKR: updatedData.titleKor || originalItem.titleKR,
+        titleEN: updatedData.titleEng || originalItem.titleEN,
+        image: originalItem.image, // 이미지 배열 유지
+        state: updatedData.active === 'true' ? 'on' : 'off'
+    };
+    
+    // 컨텐츠 타입인 경우 내용 필드 추가
+    const pageType = window.currentGalleryPageType;
+    if (pageType === '인사이드' || pageType === '아카데미') {
+        finalData.contentKR = updatedData.contentKor || '';
+        finalData.contentEN = updatedData.contentEng || '';
+    }
+    
+    console.log('✅ [DEBUG] 최종 전송 데이터:', finalData);
+    
+    if (!confirm('수정사항을 저장하시겠습니까?')) {
+        return;
+    }
+    
+    try {
+        const config = window.currentGalleryEditConfig;
+        if (!config) {
+            alert('오류: 설정 정보를 찾을 수 없습니다.');
+            return;
+        }
+        
+        // 수정 API 호출 - GET 방식 (기존 방식)
+        const updateUrl = `${window.pageManagerInstance.appsScriptUrl}?action=update&sheet=${config.apiSheet}&id=${encodeURIComponent(originalItem.id)}&data=${encodeURIComponent(JSON.stringify(finalData))}`;
+        
+        // 디버깅을 위한 로그
+        console.log('=== 갤러리 수정 요청 디버깅 ===');
+        console.log('시트:', config.apiSheet);
+        console.log('ID:', originalItem.id);
+        console.log('수정할 데이터:', finalData);
+        console.log('요청 URL:', updateUrl);
+        console.log('==========================');
+        
+        const response = await fetch(updateUrl, {
+            method: 'GET'
+        });
+        console.log('시트:', config.apiSheet);
+        console.log('ID:', originalItem.id);
+        console.log('수정할 데이터:', finalData);
+        console.log('요청 방식: POST');
+        console.log('==========================');
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            alert('수정이 완료되었습니다.');
+            closeGalleryEditModal();
+            location.reload();
+        } else {
+            alert(`오류: 수정에 실패했습니다. (${result.message})`);
+        }
+        
+    } catch (error) {
+        console.error('갤러리 수정 오류:', error);
+        alert('오류: 수정에 실패했습니다.');
+    }
+}
+
+// 보도자료 수정된 항목 저장
+async function savePressEditedItem() {
+    const form = document.getElementById('editForm');
+    const formData = new FormData(form);
+    
+    // 폼 유효성 검사
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    
+    // 폼 데이터를 객체로 변환
+    const updatedData = {};
+    for (let [key, value] of formData.entries()) {
+        updatedData[key] = value;
+    }
+    
+    console.log('🔍 보도자료 수정 데이터:', updatedData);
+    
+    // 이미지 데이터 처리 (JSON 문자열을 배열로 변환)
+    if (updatedData.image) {
+        try {
+            updatedData.image = JSON.parse(updatedData.image);
+        } catch (e) {
+            console.log('이미지 데이터 파싱 실패, 문자열로 유지');
+        }
+    }
+    
+    // 활성화 상태를 문자열로 변환 (on/off)
+    updatedData.state = updatedData.active === 'true' ? 'on' : 'off';
+    delete updatedData.active; // active 필드 제거
+    
+    const originalItem = window.currentPressEditItem;
+    const config = window.currentPressEditConfig;
+    
+    if (!confirm('수정사항을 저장하시겠습니까?')) {
+        return;
+    }
+    
+    try {
+        const pageManager = window.pageManagerInstance;
+        
+        if (!config || !pageManager) {
+            alert('오류: 설정 정보를 찾을 수 없습니다.');
+            return;
+        }
+        
+        // 수정 API 호출 (GET 방식)
+        const updateUrl = `${pageManager.appsScriptUrl}?action=update&sheet=${config.apiSheet}&id=${encodeURIComponent(originalItem.id)}&data=${encodeURIComponent(JSON.stringify(updatedData))}`;
+        
+        // 디버깅을 위한 로그
+        console.log('=== 보도자료 수정 요청 디버깅 ===');
+        console.log('시트:', config.apiSheet);
+        console.log('ID:', originalItem.id);
+        console.log('수정할 데이터:', updatedData);
+        console.log('요청 URL:', updateUrl);
+        console.log('============================');
+        
+        const response = await fetch(updateUrl, {
+            method: 'GET'
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            alert('수정이 완료되었습니다.');
+            closeEditModal();
+            location.reload();
+        } else {
+            alert(`오류: 수정에 실패했습니다. (${result.message})`);
+        }
+        
+    } catch (error) {
+        console.error('보도자료 수정 오류:', error);
+        alert('오류: 수정에 실패했습니다.');
+    }
+}
 
 </script>

@@ -180,6 +180,29 @@ function doGet(e) {
         response.message = deleteResult.message;
         response.data = deleteResult.data;
       }
+    } else if (action === 'update') {
+      // 수정 액션 처리
+      if (!sheetType || !itemId) {
+        response.message = '시트 타입과 항목 ID가 필요합니다.';
+        response.success = false;
+      } else {
+        const dataParam = e.parameter.data || '';
+        if (!dataParam) {
+          response.message = '수정할 데이터가 필요합니다.';
+          response.success = false;
+        } else {
+          try {
+            const updateData = JSON.parse(decodeURIComponent(dataParam));
+            const updateResult = updateItem(sheetType, itemId, updateData);
+            response.success = updateResult.success;
+            response.message = updateResult.message;
+            response.data = updateResult.data;
+          } catch (error) {
+            response.message = '데이터 파싱 오류: ' + error.message;
+            response.success = false;
+          }
+        }
+      }
     } else if (action === 'batchDelete') {
       // 배치 삭제 액션 처리
       const idsParam = e.parameter.ids || '';
@@ -429,7 +452,16 @@ function getSheetSpecificData(sheet, sheetName) {
           if (key === 'date') {
             value = formatDate(value, 'datetime');
           } else if (key === 'image') {
-            value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
+            // JSON 문자열로 저장된 배열을 파싱하거나, 줄바꿈으로 구분된 문자열을 배열로 변환
+            if (typeof value === 'string' && value.trim().startsWith('[')) {
+              try {
+                value = JSON.parse(value);
+              } catch (e) {
+                value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
+              }
+            } else {
+              value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
+            }
           } else if (key === 'state') {
             value = (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
           }
@@ -437,7 +469,50 @@ function getSheetSpecificData(sheet, sheetName) {
           if (key === 'date') {
             value = formatDate(value, 'datetime');
           } else if (key === 'image') {
-            value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
+            // JSON 문자열로 저장된 배열을 파싱하거나, 줄바꿈으로 구분된 문자열을 배열로 변환
+            if (typeof value === 'string' && value.trim().startsWith('[')) {
+              try {
+                value = JSON.parse(value);
+              } catch (e) {
+                value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
+              }
+            } else {
+              value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
+            }
+          } else if (key === 'state') {
+            value = (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
+          }
+        } else if (sheetName === SHEET_GAL_C) { // 갤러리 인사이드 특별 처리
+          if (key === 'date') {
+            value = formatDate(value, 'datetime');
+          } else if (key === 'image') {
+            // JSON 문자열로 저장된 배열을 파싱하거나, 줄바꿈으로 구분된 문자열을 배열로 변환
+            if (typeof value === 'string' && value.trim().startsWith('[')) {
+              try {
+                value = JSON.parse(value);
+              } catch (e) {
+                value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
+              }
+            } else {
+              value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
+            }
+          } else if (key === 'state') {
+            value = (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
+          }
+        } else if (sheetName === SHEET_GAL_F) { // 갤러리 아카데미 특별 처리
+          if (key === 'date') {
+            value = formatDate(value, 'datetime');
+          } else if (key === 'image') {
+            // JSON 문자열로 저장된 배열을 파싱하거나, 줄바꿈으로 구분된 문자열을 배열로 변환
+            if (typeof value === 'string' && value.trim().startsWith('[')) {
+              try {
+                value = JSON.parse(value);
+              } catch (e) {
+                value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
+              }
+            } else {
+              value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
+            }
           } else if (key === 'state') {
             value = (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
           }
@@ -454,11 +529,11 @@ function getSheetSpecificData(sheet, sheetName) {
             value = formatDate(value, 'datetime');
           }
         } else if (sheetName === SHEET_BOARD_NEWS) { // 보도자료 특별 처리
-          if (key === 'publishDate') {
+          if (key === 'submittedAt') {
             value = formatDate(value, 'datetime');
           }
         } else if (sheetName === SHEET_REPORT) { // 신고 특별 처리
-          if (key === 'reportDate') {
+          if (key === 'submittedAt') {
             value = formatDate(value, 'datetime');
           }
         }
@@ -541,15 +616,16 @@ function getCustomHeaders(sheetName) {
     },
     
     [SHEET_BOARD_NEWS]: { // 게시판 보도자료
-      id: 0,
-      title: 1,
-      content: 2,
-      publishDate: 3,
-      author: 4,
-      category: 5,
-      viewCount: 6,
-      isHighlight: 7,
-      attachmentUrl: 8
+      id: 0,              // Submission ID
+      respondentId: 1,     // Respondent ID
+      submittedAt: 2,      // Submitted at
+      number: 3,           // 순번
+      state: 4,            // 상태
+      titleKR: 5,          // 제목(한글)
+      titleEN: 6,          // 제목(영문)
+      image: 7,            // 이미지 업로드
+      contentKR: 8,        // 내용(한글)
+      contentEN: 9         // 내용(영문)
     },
     
     [SHEET_APPLY_P]: { // 신청 PSAC
@@ -975,5 +1051,179 @@ function batchDeleteItems(sheetType, itemIds) {
   } catch (error) {
     console.error('batchDeleteItems 에러:', error);
     return { success: false, message: `배치 삭제 중 오류가 발생했습니다: ${error.message}` };
+  }
+}
+
+/**
+ * 항목 수정 함수
+ * @param {string} sheetType - 시트 타입 (예: 'SHEET_APPLY_P')
+ * @param {string} itemId - 수정할 항목의 ID
+ * @param {Object} updateData - 수정할 데이터 객체
+ * @returns {Object} - 성공/실패 정보
+ */
+function updateItem(sheetType, itemId, updateData) {
+  try {
+    console.log(`항목 수정 시도: 시트=${sheetType}, ID=${itemId}`);
+    
+    // 오리지널 시트 정보 가져오기
+    const originalSheet = ORIGINAL_SHEETS[sheetType];
+    if (!originalSheet) {
+      return { success: false, message: `지원하지 않는 시트 타입입니다: ${sheetType}` };
+    }
+    
+    if (!originalSheet.id) {
+      return { success: false, message: `시트 ID가 설정되지 않았습니다: ${sheetType}` };
+    }
+    
+    // 오리지널 스프레드시트 열기
+    const spreadsheet = SpreadsheetApp.openById(originalSheet.id);
+    const sheet = spreadsheet.getSheetByName(originalSheet.name);
+    
+    if (!sheet) {
+      return { success: false, message: `시트를 찾을 수 없습니다: ${originalSheet.name}` };
+    }
+    
+    const dataRange = sheet.getDataRange();
+    const data = dataRange.getValues();
+    const headers = data[0]; // 첫 번째 행은 헤더
+    
+    // ID로 해당 행 찾기 (첫 번째 컬럼이 ID라고 가정)
+    let targetRowIndex = -1;
+    for (let i = 1; i < data.length; i++) {
+      const rowId = data[i][0] ? data[i][0].toString() : '';
+      if (rowId === itemId.toString()) {
+        targetRowIndex = i;
+        break;
+      }
+    }
+    
+    if (targetRowIndex === -1) {
+      return { success: false, message: `ID ${itemId}를 가진 항목을 찾을 수 없습니다.` };
+    }
+    
+    // 기존 행 데이터 복사
+    const updateRow = [...data[targetRowIndex]];
+    
+    // updateData의 각 필드를 해당하는 컬럼에 업데이트
+    Object.keys(updateData).forEach(key => {
+      let columnIndex = -1;
+      
+      // PSAC 시트의 컬럼 인덱스 매핑
+      if (sheetType === 'SHEET_APPLY_P') {
+        const fieldIndexMappings = {
+          // 0: 순번 (건드리지 않음)
+          // 1: 신청일시 (건드리지 않음)
+          // 2: 과정명 (건드리지 않음)
+          // 3: 교육일정 (건드리지 않음)
+          'companyName': 4,          // 회사명
+          'ceoName': 5,              // 대표자
+          'businessNumber': 6,       // 사업자등록번호
+          'businessType': 7,         // 종목업태
+          'companyAddress': 8,       // 주소
+          'educationManager': 9,     // 교육담당자
+          'managerDepartment': 10,   // 담당부서
+          'managerPosition': 11,     // 담당자직급
+          'managerPhone': 12,        // 담당자전화
+          'managerMobile': 13,       // 담당자핸드폰
+          'managerEmail': 14,        // 담당자이메일
+          'studentName': 15,         // 수강자명
+          'studentDepartment': 16,   // 수강자부서
+          'studentPosition': 17,     // 수강자직급
+          'studentPhone': 18,        // 수강자전화
+          'studentMobile': 19,       // 수강자핸드폰
+          'studentEmail': 20,        // 수강자이메일
+          'detailedEducation': 21,   // 선택세부교육
+          // 22: 확인 (건드리지 않음)
+          'remarks': 23              // 비고
+        };
+        
+        columnIndex = fieldIndexMappings[key];
+      }
+      // 갤러리 시트들의 컬럼 인덱스 매핑 추가
+      else if (['SHEET_GAL_A', 'SHEET_GAL_B', 'SHEET_GAL_C', 'SHEET_GAL_F'].includes(sheetType)) {
+        const galleryFieldMappings = {
+          'id': 0,        // ID (첫 번째 컬럼)
+          'date': 2,      // 날짜
+          'titleKR': 3,   // 한글 제목
+          'titleEN': 4,   // 영어 제목
+          'image': 5,     // 이미지 배열
+          'state': 6      // 상태 (on/off)
+        };
+        
+        // 인사이드/아카데미 갤러리인 경우 내용 필드 추가
+        if (['SHEET_GAL_C', 'SHEET_GAL_F'].includes(sheetType)) {
+          galleryFieldMappings['contentKR'] = 6; // 한글 내용
+          galleryFieldMappings['contentEN'] = 7; // 영어 내용
+        }
+        
+        columnIndex = galleryFieldMappings[key];
+        console.log(`갤러리 필드 매핑: ${key} -> 컬럼 ${columnIndex}`);
+      }
+      // 보도자료 시트의 컬럼 인덱스 매핑 추가
+      else if (sheetType === 'SHEET_BOARD_NEWS') {
+        const pressFieldMappings = {
+          'id': 0,         // Submission ID (1번째 컬럼)
+          'respondentId': 1, // Respondent ID (2번째 컬럼)
+          'submittedAt': 2, // Submitted at (3번째 컬럼)
+          'number': 3,     // 순번 (4번째 컬럼)
+          'state': 4,      // 상태 (5번째 컬럼) 
+          'titleKR': 5,    // 제목(한글) (6번째 컬럼)
+          'titleEN': 6,    // 제목(영문) (7번째 컬럼)
+          'image': 7,      // 이미지 업로드 (8번째 컬럼)
+          'contentKR': 8,  // 내용(한글) (9번째 컬럼)
+          'contentEN': 9   // 내용(영문) (10번째 컬럼)
+        };
+        
+        columnIndex = pressFieldMappings[key];
+        console.log(`보도자료 필드 매핑: ${key} -> 컬럼 ${columnIndex}`);
+      }
+      
+      // 다른 시트 타입들은 기존 방식 사용 (헤더 매칭)
+      if (columnIndex === undefined && !['SHEET_APPLY_P', 'SHEET_GAL_A', 'SHEET_GAL_B', 'SHEET_GAL_C', 'SHEET_GAL_F', 'SHEET_BOARD_NEWS'].includes(sheetType)) {
+        const normalizeString = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const normalizedKey = normalizeString(key);
+        
+        // 정확한 매칭 시도
+        for (let j = 0; j < headers.length; j++) {
+          const normalizedHeader = normalizeString(headers[j]);
+          if (normalizedHeader === normalizedKey || 
+              normalizedHeader.includes(normalizedKey) || 
+              normalizedKey.includes(normalizedHeader)) {
+            columnIndex = j;
+            break;
+          }
+        }
+      }
+      
+      // 컬럼을 찾았으면 데이터 업데이트
+      if (columnIndex !== undefined && columnIndex !== -1) {
+        let valueToUpdate = updateData[key];
+        
+        // 이미지 배열인 경우 JSON 문자열로 변환
+        if (key === 'image' && Array.isArray(valueToUpdate)) {
+          valueToUpdate = JSON.stringify(valueToUpdate);
+        }
+        
+        updateRow[columnIndex] = valueToUpdate;
+        console.log(`필드 업데이트: ${key} -> 컬럼 ${columnIndex} (${headers[columnIndex]}) = ${valueToUpdate}`);
+      } else {
+        console.log(`컬럼을 찾을 수 없음: ${key}`);
+      }
+    });
+    
+    // 시트에 업데이트된 행 쓰기
+    const range = sheet.getRange(targetRowIndex + 1, 1, 1, updateRow.length);
+    range.setValues([updateRow]);
+    
+    console.log(`항목 수정 완료: ${originalSheet.name}, ID: ${itemId}`);
+    return { 
+      success: true, 
+      message: '수정이 완료되었습니다.',
+      data: { updatedId: itemId, sheetName: originalSheet.name }
+    };
+    
+  } catch (error) {
+    console.error('updateItem 에러:', error);
+    return { success: false, message: `수정 중 오류가 발생했습니다: ${error.message}` };
   }
 }

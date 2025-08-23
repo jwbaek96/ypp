@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.getElementById('license-gallery')) {
             window.galleryInstances.licenseGallery = initGallery(
                 'license-gallery',
-                './data/licenses.json',
+                'SHEET_GAL_A', // Google Sheets에서 인허가 데이터
                 12 // 페이지당 12개 아이템
             );
         }
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.getElementById('qualification-gallery')) {
             window.galleryInstances.qualificationGallery = initGallery(
                 'qualification-gallery',
-                './data/qualifications.json',
+                'SHEET_GAL_B', // Google Sheets에서 유자격 데이터
                 12 // 페이지당 12개 아이템
             );
         }
@@ -95,9 +95,9 @@ window.getGalleryStatus = getGalleryStatus;
 // ===== 갤러리 시스템 JavaScript =====
 
 class GallerySystem {
-    constructor(containerId, jsonUrl, itemsPerPage = 12) {
+    constructor(containerId, sheetType, itemsPerPage = 12) {
         this.container = document.getElementById(containerId);
-        this.jsonUrl = jsonUrl;
+        this.sheetType = sheetType; // 'SHEET_GAL_A', 'SHEET_GAL_B' 등
         this.itemsPerPage = itemsPerPage;
         this.currentPage = 1;
         this.totalPages = 1;
@@ -105,6 +105,11 @@ class GallerySystem {
         this.filteredData = []; // 검색 결과 데이터
         this.currentItems = [];
         this.searchKeyword = '';
+        
+        // Apps Script 설정
+        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbwpIMqmuoDP3qTTm3bIgExc30IVBCNrdupkDX5VxgeZUxAZXRB2DJePGAUBsohX4Egc';
+        this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
+        
         this.init();
     }
 
@@ -213,12 +218,24 @@ class GallerySystem {
     // 갤러리 데이터 로드
     async loadGalleryData() {
         try {
-            const response = await fetch(this.jsonUrl);
+            // Apps Script에서 데이터 가져오기
+            const url = `${this.appsScriptUrl}?sheet=${this.sheetType}&action=getData`;
+            console.log('갤러리 데이터 요청:', url);
+            
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
-            this.galleryData = await response.json();
+            const result = await response.json();
+            console.log('갤러리 API 응답:', result);
+            
+            if (!result.success) {
+                throw new Error(result.message || 'API 요청 실패');
+            }
+            
+            // Apps Script에서 받은 데이터를 갤러리 형식에 맞게 변환
+            this.galleryData = this.transformDataForGallery(result.data);
             
             if (!Array.isArray(this.galleryData) || this.galleryData.length === 0) {
                 this.showEmptyState();
@@ -235,6 +252,57 @@ class GallerySystem {
         } catch (error) {
             console.error('갤러리 데이터 로드 실패:', error);
             this.showErrorState();
+        }
+    }
+    
+    // Apps Script 데이터를 갤러리 형식에 맞게 변환
+    transformDataForGallery(apiData) {
+        if (!Array.isArray(apiData)) {
+            console.error('API 데이터가 배열이 아닙니다:', apiData);
+            return [];
+        }
+        
+        return apiData.map(item => {
+            // 이미지 배열 처리
+            let images = [];
+            if (item.image && Array.isArray(item.image) && item.image.length > 0) {
+                images = item.image.map((url, index) => ({
+                    url: url,
+                    fileName: `${item.titleKR || item.titleEN || 'image'}_${index + 1}`
+                }));
+            }
+            
+            // 갤러리 형식으로 변환
+            return {
+                id: item.id,
+                title: item.titleKR || item.titleEN || '', // 한글 제목 우선
+                title_eng: item.titleEN || item.titleKR || '', // 영문 제목
+                titleEng: item.titleEN || item.titleKR || '', // 영문 제목 (호환성)
+                date: this.formatDate(item.date),
+                image: images.length > 0 ? images[0].url : '', // 첫 번째 이미지 (하위 호환성)
+                images: images, // 전체 이미지 배열
+                state: item.state || 'off',
+                originalData: item // 원본 데이터 보존
+            };
+        }).filter(item => item.state === 'on'); // 활성화된 항목만 표시
+    }
+    
+    // 날짜 포맷팅
+    formatDate(dateString) {
+        if (!dateString) return '';
+        
+        try {
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return dateString;
+            
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            
+            return `${year}-${month}-${day}`;
+        } catch (error) {
+            console.error('날짜 포맷팅 오류:', error);
+            return dateString;
         }
     }
     
@@ -761,8 +829,8 @@ class GallerySystem {
 }
 
 // ===== 갤러리 초기화 함수 =====
-function initGallery(containerId, jsonUrl, itemsPerPage = 12) {
-    return new GallerySystem(containerId, jsonUrl, itemsPerPage);
+function initGallery(containerId, sheetType, itemsPerPage = 12) {
+    return new GallerySystem(containerId, sheetType, itemsPerPage);
 }
 
 // ===== 전역 변수로 갤러리 인스턴스 저장 =====

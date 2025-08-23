@@ -652,14 +652,6 @@
                         <table class="data-table">
                             <thead>
                                 <tr>
-                                    <!-- <th class="col-checkbox">
-                                        <input type="checkbox" id="select-all">
-                                    </th>
-                                    <th class="col-id">ID</th>
-                                    <th>제목</th>
-                                    <th class="col-date">날짜</th>
-                                    <th class="col-status">상태</th>
-                                    <th class="col-actions">액션</th> -->
                                 </tr>
                             </thead>
                             <tbody id="data-table-body">
@@ -926,7 +918,8 @@ class PageManager {
                 location: '회사소개 > 기업현황 > 인허가',
                 link: '/pages/company/business.html',
                 apiSheet: 'SHEET_GAL_A',
-                dataKey: 'galA'
+                dataKey: 'galA',
+                createlink: 'https://tally.so/r/31e5NQ'
             },
             '유자격': {
                 title: '갤러리 유자격',
@@ -934,7 +927,8 @@ class PageManager {
                 location: '회사소개 > 기업현황 > 유자격',
                 link: '/pages/company/business.html',
                 apiSheet: 'SHEET_GAL_B',
-                dataKey: 'galB'
+                dataKey: 'galB',
+                createlink: 'https://tally.so/r/m6l5WP'
             },
             '인사이드': {
                 title: '갤러리 인사이드',
@@ -942,7 +936,8 @@ class PageManager {
                 location: '홍보 > 갤러리 > 인사이드',
                 link: '/pages/media/gallery/inside.html',
                 apiSheet: 'SHEET_GAL_C',
-                dataKey: 'galC'
+                dataKey: 'galC',
+                createlink: 'https://tally.so/r/n09LMN'
             },
             '아카데미': {
                 title: '갤러리 아카데미',
@@ -950,7 +945,8 @@ class PageManager {
                 location: '홍보 > 갤러리 > 아카데미 갤러리',
                 link: '/pages/media/gallery/academy.html',
                 apiSheet: 'SHEET_GAL_F',
-                dataKey: 'galD'
+                dataKey: 'galD',
+                createlink: 'https://tally.so/r/wojrpX'
             },
             '보도자료': {
                 title: '보도자료',
@@ -958,7 +954,8 @@ class PageManager {
                 location: '홍보 > 게시판 > 보도자료',
                 link: '/pages/media/newsroom/press.html',
                 apiSheet: 'SHEET_BOARD_NEWS',
-                dataKey: 'boardNews'
+                dataKey: 'boardNews',
+                createlink: 'https://tally.so/r/3qr11G'
             },
             'PSAC': {
                 title: 'PSAC 신청',
@@ -982,7 +979,8 @@ class PageManager {
                 location: '고객센터 > FAQ',
                 link: '/pages/support/index.html',
                 apiSheet: 'SHEET_DASHBOARD', // 임시
-                dataKey: 'faq'
+                dataKey: 'faq',
+                createlink: ''
             },
             '고객문의': {
                 title: '고객문의',
@@ -1033,6 +1031,9 @@ class PageManager {
         
         // 삭제 버튼 이벤트 설정
         this.setupDeleteButtons();
+        
+        // 새로 추가 버튼 이벤트 설정
+        this.setupAddButton();
     }
     
     // 페이지 정보 업데이트
@@ -1425,6 +1426,23 @@ class PageManager {
         
         deleteSelectedBtn.addEventListener('click', async () => {
             await this.deleteSelectedItems();
+        });
+    }
+    
+    // 새로 추가 버튼 이벤트 설정
+    setupAddButton() {
+        const addBtn = document.getElementById('btn-add');
+        
+        if (!addBtn) return;
+        
+        addBtn.addEventListener('click', () => {
+            // createlink가 존재하면 새창으로 링크 열기
+            if (this.currentConfig && this.currentConfig.createlink) {
+                window.open(this.currentConfig.createlink, '_blank');
+            } else {
+                // createlink가 없으면 기본 동작 (필요시 다른 모달이나 기능 추가)
+                alert('새로 추가 기능은 제작중에 있습니다. \n급한 사항은 관리자에게 문의바랍니다. \n jwbaek@gmail.com 혹은 010-3432-4396');
+            }
         });
     }
     

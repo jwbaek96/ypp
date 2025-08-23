@@ -167,6 +167,14 @@
           "url": "/pages/workingscope/index.html?tab=engineering-consulting",
           "sections": ["엔지니어링", "컨설팅", "Feasibility Services"]
         },
+        "system-supply": {
+          "title": {
+            "ko": "System Supply",
+            "en": "System Supply"
+          },
+          "url": "/pages/workingscope/index.html?tab=system-supply",
+          "sections": ["엔지니어링", "컨설팅", "Feasibility Services"]
+        },
         "operation-maintenance": {
           "title": {
             "ko": "운영 & 유지보수",

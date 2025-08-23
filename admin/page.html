@@ -1017,6 +1017,9 @@ class PageManager {
             return;
         }
         
+        // 새로 추가 버튼 이벤트 설정 (가장 먼저)
+        this.setupAddButton();
+        
         // 페이지 정보 업데이트
         this.updatePageInfo(config);
         
@@ -1031,9 +1034,6 @@ class PageManager {
         
         // 삭제 버튼 이벤트 설정
         this.setupDeleteButtons();
-        
-        // 새로 추가 버튼 이벤트 설정
-        this.setupAddButton();
     }
     
     // 페이지 정보 업데이트

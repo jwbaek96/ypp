@@ -18,6 +18,9 @@
     
     <!-- 메타 시스템 -->
     <script src="../../../js/head-meta.js"></script>
+        
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Header Container -->
@@ -46,17 +49,13 @@
         <section class="breadcrumb-section">
             <div class="container">
                 <nav class="breadcrumb">
-                    <a href="/"data-eng="Home"
-               data-kor="홈">>홈</a>
+                    <a href="/"data-eng="Home"data-kor="홈">>홈</a>
                     <span class="breadcrumb-separator">></span>
-                    <span data-eng="Media"
-               data-kor="홍보">홍보</span>
+                    <span data-eng="Media"data-kor="홍보">홍보</span>
                     <span class="breadcrumb-separator">></span>
-                    <span data-eng="Media Room"
-               data-kor="미디어룸">미디어룸</span>
+                    <span data-eng="Media Room"data-kor="미디어룸">미디어룸</span>
                     <span class="breadcrumb-separator">></span>
-                    <span class="breadcrumb-current"data-eng="News"
-                  data-kor="보도자료">보도자료</span>
+                    <a href="./press.html" class="breadcrumb-current"data-eng="News"data-kor="보도자료">보도자료</a>
                 </nav>
             </div>
         </section>
@@ -64,25 +63,27 @@
         <!-- Content Section -->
         <section class="content-section">
             <div class="container">
-                <div class="content-header">
+                <!-- <div class="content-header">
                     <h2 class="content-title"
                         data-eng="News"
                         data-kor="보도자료">보도자료</h2>
                     <p class="content-subtitle"
                         data-eng="Introducing YPP's major activities and achievements through the media"
                         data-kor="YPP의 주요 활동과 성과를 언론을 통해 소개합니다">YPP의 주요 활동과 성과를 언론을 통해 소개합니다</p>
-                </div>
+                </div> -->
 
-                <!-- Press Release List -->
-                <div class="press-list">
+                <!-- Press Release List Section -->
+                <div id="press-list-section" class="press-list">
                     <div class="list-header">
                         <span class="total-count"><span data-kor="총 " data-eng="Total "></span><strong>0</strong><span data-kor=" 건" data-eng=" items"></span></span>
                     </div>
 
                     <div class="press-items">
                         <!-- 보도자료 항목들이 여기에 동적으로 추가됩니다 -->
-                        <div class="empty-message">
-                            <p>등록된 보도자료가 없습니다.</p>
+                        <div class="loading-message">
+                            <p>
+                                <i class="fas fa-spinner fa-spin"></i> 데이터를 불러오는 중...
+                            </p>
                         </div>
                     </div>
 
@@ -93,6 +94,33 @@
                             <button class="page-number active">1</button>
                         </div>
                         <button class="page-btn next" disabled>다음</button>
+                    </div>
+                </div>
+
+                <!-- Press Article Detail Section -->
+                <div id="press-detail-section" class="press-article-detail hidden">
+                    <div class="article-header">
+                        <button class="back-to-list" onclick="pressPageController.goBackToList()">
+                            <i class="fas fa-arrow-left"></i><span data-kor="목록으로 돌아가기" data-eng="Back to list">목록으로 돌아가기</span>
+                        </button>
+                    </div>
+                    
+                    <article class="press-article">
+                        <h1 class="article-title"></h1>
+                        <div class="article-meta">
+                            <span class="article-date"></span>
+                        </div>
+                        <div class="article-images"></div>
+                        <div class="article-content"></div>
+                    </article>
+                    
+                    <div class="article-navigation">
+                        <button class="nav-btn prev-article" onclick="pressPageController.navigateArticle(-1)">
+                            <span>이전 기사</span>
+                        </button>
+                        <button class="nav-btn next-article" onclick="pressPageController.navigateArticle(1)">
+                            <span>다음 기사</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -120,217 +148,321 @@
     <script src="/js/lang-switch.js"></script>
 
     <script>
-// ===== 보도자료 데이터 (실제로는 서버에서 가져옴) =====
-const pressData = [
-    {
-        id: 1,
-        titleKR: "한국 기업, 한국에서 그린수소 생산에 최대 31억 달러 투자",
-        titleEN: "Korean company to invest up to $3.1 billion in green hydrogen production in South Korea",
-        date: "2025-07-15",
-        category: "",
-        summary: "",
-        content: "",
-        source: "Forbes Kazakhstan",
-        link: "https://forbes.kz/articles/koreyskaya-kompaniya-investiruet-do-31mlrd-vproizvodstvo-zelyonogo-vodoroda-vrk-a4d28d",
-        page:'1'
-    },
-    {
-        id: 2,
-        titleKR: "YPP, 이집트 엘다바 원전 터빈계통 계측·전기설비 9,673,633달러 규모 계약 체결",
-        titleEN: "YPP Signs $9,673,633 Contract for Turbine System Instrumentation and Electrical Equipment at Egypt’s El-Dabaa Nuclear Power Plant",
-        date: "2025-08-13",
-        category: "",
-        summary: "",
-        content: "",
-        source: "",
-        link: "",
-        page:'2'
-    }
-    // 샘플 데이터 - 실제 구현 시 서버 API에서 가져옴
-];
 
 // ===== 보도자료 페이지 컨트롤러 클래스 =====
 class PressPageController {
     constructor() {
+        this.pressManager = new PressManager();
         this.currentPage = 1;
-        this.itemsPerPage = 10;
-        this.filteredData = [...pressData];
-        this.currentSort = 'date';
+        this.itemsPerPage = 20;
+        this.allArticles = [];
+        this.currentArticles = [];
+        this.currentArticleId = null;
+        
+        // DOM 요소들
+        this.listSection = document.getElementById('press-list-section');
+        this.detailSection = document.getElementById('press-detail-section');
         
         this.init();
     }
     
-    // 초기화
-    init() {
-        this.setupEventListeners();
-        this.renderList();
-        this.updateTotalCount();
+    async init() {
+        // URL 파라미터 확인
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get('id');
+        
+        try {
+            // 모든 기사 데이터 로드
+            await this.loadAllArticles();
+            
+            if (articleId) {
+                // 상세보기 모드
+                await this.showArticleDetail(articleId);
+            } else {
+                // 리스트 모드
+                this.showArticleList();
+            }
+            
+        } catch (error) {
+            console.error('페이지 초기화 실패:', error);
+            this.showError('데이터를 불러오는데 실패했습니다.');
+        }
     }
     
-    // 이벤트 리스너 설정
-    setupEventListeners() {
-        // // 검색
-        // const searchBtn = document.querySelector('.search-btn');
-        // const searchInput = document.querySelector('.search-input');
-        
-        // searchBtn.addEventListener('click', () => this.handleSearch());
-        // searchInput.addEventListener('keypress', (e) => {
-        //     if (e.key === 'Enter') this.handleSearch();
-        // });
-        
-        // // 필터
-        // const yearFilter = document.querySelector('.year-filter');
-        // const categoryFilter = document.querySelector('.category-filter');
-        
-        // yearFilter.addEventListener('change', () => this.handleFilter());
-        // categoryFilter.addEventListener('change', () => this.handleFilter());
-        
-        // // 정렬
-        // const sortBtns = document.querySelectorAll('.sort-btn');
-        // sortBtns.forEach(btn => {
-        //     btn.addEventListener('click', () => this.handleSort(btn.dataset.sort));
-        // });
-        
-        // 페이지네이션
-        const prevBtn = document.querySelector('.page-btn.prev');
-        const nextBtn = document.querySelector('.page-btn.next');
-        
-        prevBtn.addEventListener('click', () => this.goToPage(this.currentPage - 1));
-        nextBtn.addEventListener('click', () => this.goToPage(this.currentPage + 1));
+    async loadAllArticles() {
+        try {
+            this.allArticles = await this.pressManager.loadArticleList();
+            console.log('전체 기사 로드 완료:', this.allArticles.length, '개');
+        } catch (error) {
+            console.error('기사 목록 로드 실패:', error);
+            throw error;
+        }
     }
     
-    // // 검색 처리
-    // handleSearch() {
-    //     const keyword = document.querySelector('.search-input').value.trim();
+    // 리스트 모드 표시
+    showArticleList() {
+        this.hideAllSections();
+        this.listSection.classList.remove('hidden');
         
-    //     if (keyword) {
-    //         this.filteredData = pressData.filter(item => 
-    //             item.title.includes(keyword) || 
-    //             item.content.includes(keyword)
-    //         );
-    //     } else {
-    //         this.filteredData = [...pressData];
-    //     }
+        // URL 업데이트 (id 파라미터 제거)
+        const newUrl = window.location.pathname;
+        if (window.location.search) {
+            history.pushState({}, '', newUrl);
+        }
         
-    //     this.currentPage = 1;
-    //     this.applyCurrentFilters();
-    //     this.renderList();
-    //     this.updateTotalCount();
-    // }
-    
-    // // 필터 처리
-    // handleFilter() {
-    //     const year = document.querySelector('.year-filter').value;
-    //     const category = document.querySelector('.category-filter').value;
+        // 페이지 메타 업데이트
+        this.updatePageMeta('보도자료', 'YPP의 최신 소식과 언론 보도 자료');
         
-    //     this.filteredData = pressData.filter(item => {
-    //         const yearMatch = year === 'all' || item.year === year;
-    //         const categoryMatch = category === 'all' || item.category === category;
-    //         return yearMatch && categoryMatch;
-    //     });
-        
-    //     this.currentPage = 1;
-    //     this.renderList();
-    //     this.updateTotalCount();
-    // }
-    
-    // // 정렬 처리
-    // handleSort(sortType) {
-    //     this.currentSort = sortType;
-        
-    //     // 정렬 버튼 상태 업데이트
-    //     document.querySelectorAll('.sort-btn').forEach(btn => {
-    //         btn.classList.remove('active');
-    //     });
-    //     document.querySelector(`[data-sort="${sortType}"]`).classList.add('active');
-        
-    //     // 데이터 정렬
-    //     this.filteredData.sort((a, b) => {
-    //         if (sortType === 'date') {
-    //             return new Date(b.date) - new Date(a.date);
-    //         } else if (sortType === 'title') {
-    //             return a.title.localeCompare(b.title);
-    //         }
-    //         return 0;
-    //     });
-        
-    //     this.renderList();
-    // }
-    
-    // 페이지 이동
-    goToPage(page) {
-        const totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
-        
-        if (page < 1 || page > totalPages) return;
-        
-        this.currentPage = page;
-        this.renderList();
-        this.updatePagination();
+        this.renderArticleList();
+        this.setupListEventListeners();
     }
     
-    // 리스트 렌더링
-    renderList() {
+    // 상세보기 모드 표시
+    async showArticleDetail(articleId) {
+        try {
+            this.currentArticleId = articleId;
+            
+            // 기사 데이터 로드
+            const article = await this.pressManager.loadArticleDetail(articleId);
+            
+            this.hideAllSections();
+            this.detailSection.classList.remove('hidden');
+            
+            // URL 업데이트
+            const newUrl = `${window.location.pathname}?id=${articleId}`;
+            if (window.location.href !== window.location.origin + newUrl) {
+                history.pushState({ articleId }, '', newUrl);
+            }
+            
+            // 페이지 메타 업데이트
+            this.updatePageMeta(
+                article.titleKR || '보도자료',
+                (article.contentKR || '').substring(0, 150)
+            );
+            
+            // 기사 내용 렌더링
+            this.renderArticleDetail(article);
+            
+        } catch (error) {
+            console.error('기사 상세보기 실패:', error);
+            this.showError('기사를 불러오는데 실패했습니다.');
+            this.showArticleList(); // 에러 시 리스트로 돌아감
+        }
+    }
+    
+    // 로딩 메시지 표시
+    showLoadingMessage() {
+        // 모든 섹션 숨기기
+        this.hideAllSections();
+        
+        // 리스트 섹션을 잠시 보이게 하고 로딩 메시지만 표시
+        this.listSection.classList.remove('hidden');
         const container = document.querySelector('.press-items');
-        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-        const endIndex = startIndex + this.itemsPerPage;
-        const currentItems = this.filteredData.slice(startIndex, endIndex);
+        container.innerHTML = `
+            <div class="loading-message">
+                <p>
+                    <i class="fas fa-spinner fa-spin"></i> 기사를 불러오는 중...
+                </p>
+            </div>
+        `;
+    }
+    
+    // 기사 목록 렌더링
+    renderArticleList() {
+        const container = document.querySelector('.press-items');
+        const totalCount = this.allArticles.length;
         
-        if (currentItems.length === 0) {
+        // 총 개수 업데이트
+        document.querySelector('.total-count strong').textContent = totalCount;
+        
+        if (totalCount === 0) {
             container.innerHTML = `
                 <div class="empty-message">
-                    <p>조건에 맞는 보도자료가 없습니다.</p>
+                    <p>등록된 보도자료가 없습니다.</p>
                 </div>
             `;
             return;
         }
         
-        container.innerHTML = currentItems.map(item => `
-            <a href="${item.page || '#'}.html" class="press-item">
-                <div class="press-content">
-                    <div class="press-meta">
-                        <span class="press-date">${item.date}</span>
-                    </div>
-                    <h3 class="press-title">
-                        <span data-kor='${item.titleKR}' data-eng='${item.titleEN}'></span>
-                    </h3>
-                    <p class="press-summary">${item.summary}</p>
-                </div>
-            </a>
-        `).join('');
+        // 현재 페이지의 기사들
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        const endIndex = startIndex + this.itemsPerPage;
+        this.currentArticles = this.allArticles.slice(startIndex, endIndex);
         
+        // 리스트 HTML 생성
+        container.innerHTML = this.currentArticles.map(article => {
+            const date = this.formatDate(article.submittedAt || article.date);
+            const summaryKR = (article.contentKR || '').substring(0, 150) + '...';
+            const summaryEN = (article.contentEN || '').substring(0, 150) + '...';
+            
+            return `
+                <div class="press-item" onclick="pressPageController.viewArticle('${article.id || article.number}')">
+                    <div class="press-content">
+                        <div class="press-meta">
+                            <span class="press-date">${date}</span>
+                        </div>
+                        <h3 class="press-title">
+                            <span data-kor='${article.titleKR || ''}' data-eng='${article.titleEN || ''}'>${article.titleKR || article.titleEN || '제목 없음'}</span>
+                        </h3>
+                        <p class="press-summary" data-kor='${summaryKR}' data-eng='${summaryEN}'>${summaryKR}</p>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        // 페이지네이션 업데이트
         this.updatePagination();
+    }
+    
+    // 기사 상세 내용 렌더링
+    renderArticleDetail(article) {
+        const detailSection = this.detailSection;
+        
+        // 날짜 포맷팅
+        const date = this.formatDate(article.submittedAt || article.date);
+        
+        // 메타 정보 업데이트
+        detailSection.querySelector('.article-date').textContent = date;
+        
+        // 제목 업데이트
+        const titleElement = detailSection.querySelector('.article-title');
+        titleElement.textContent = article.titleKR || article.titleEN || '제목 없음';
+        titleElement.setAttribute('data-kor', article.titleKR || '');
+        titleElement.setAttribute('data-eng', article.titleEN || '');
+        
+        // 내용 업데이트
+        const contentElement = detailSection.querySelector('.article-content');
+        const content = article.contentKR || article.contentEN || '내용이 없습니다.';
+        contentElement.innerHTML = this.formatContent(content);
+        
+        // 이미지 업데이트
+        this.renderArticleImages(article.image || []);
+        
+        // 이전/다음 기사 네비게이션 업데이트
+        this.updateArticleNavigation();
+    }
+    
+    // 기사 이미지 렌더링
+    renderArticleImages(images) {
+        const imagesContainer = this.detailSection.querySelector('.article-images');
+        
+        if (!images || images.length === 0) {
+            imagesContainer.innerHTML = '';
+            return;
+        }
+        
+        const imageArray = Array.isArray(images) ? images : 
+                          (typeof images === 'string' ? images.split('\n').filter(url => url.trim()) : []);
+        
+        imagesContainer.innerHTML = imageArray.map(imageUrl => `
+            <div class="article-image">
+                <img src="${imageUrl}" alt="기사 이미지" loading="lazy">
+            </div>
+        `).join('');
+    }
+    
+    // 내용 포맷팅 (줄바꿈 처리)
+    formatContent(content) {
+        return content
+            .replace(/\n/g, '<br>')
+            .replace(/\r/g, '');
     }
     
     // 날짜 포맷팅
     formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('ko-KR', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-        }).replace(/\./g, '.').replace(/\s/g, '');
+        if (!dateString) return '-';
+        
+        try {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ko-KR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+        } catch (error) {
+            return dateString;
+        }
     }
     
-    // 카테고리 이름 변환
-    getCategoryName(category) {
-        const categories = {
-            'business': '사업',
-            'technology': '기술',
-            'award': '수상',
-            'partnership': '협력'
-        };
-        return categories[category] || '기타';
+    // 기사 보기 (클릭 이벤트)
+    viewArticle(articleId) {
+        // 로딩 상태 표시
+        this.showLoadingMessage();
+        this.showArticleDetail(articleId);
     }
     
-    // 총 개수 업데이트
-    updateTotalCount() {
-        const countElement = document.querySelector('.total-count strong');
-        countElement.textContent = this.filteredData.length;
+    // 목록으로 돌아가기
+    goBackToList() {
+        this.showArticleList();
+    }
+    
+    // 이전/다음 기사 네비게이션
+    navigateArticle(direction) {
+        const currentIndex = this.allArticles.findIndex(article => 
+            (article.id || article.number) == this.currentArticleId
+        );
+        
+        if (currentIndex === -1) return;
+        
+        const newIndex = currentIndex + direction;
+        if (newIndex < 0 || newIndex >= this.allArticles.length) return;
+        
+        const newArticle = this.allArticles[newIndex];
+        this.showArticleDetail(newArticle.id || newArticle.number);
+    }
+    
+    // 이전/다음 기사 네비게이션 버튼 업데이트
+    updateArticleNavigation() {
+        const currentIndex = this.allArticles.findIndex(article => 
+            (article.id || article.number) == this.currentArticleId
+        );
+        
+        const prevBtn = this.detailSection.querySelector('.prev-article');
+        const nextBtn = this.detailSection.querySelector('.next-article');
+        
+        // 이전 기사 버튼
+        if (currentIndex <= 0) {
+            prevBtn.disabled = true;
+            prevBtn.innerHTML = '<span>이전 기사가 없습니다</span>';
+        } else {
+            prevBtn.disabled = false;
+            const prevArticle = this.allArticles[currentIndex - 1];
+            prevBtn.innerHTML = `<span>이전: ${(prevArticle.titleKR || prevArticle.titleEN || '').substring(0, 30)}...</span>`;
+        }
+        
+        // 다음 기사 버튼
+        if (currentIndex >= this.allArticles.length - 1) {
+            nextBtn.disabled = true;
+            nextBtn.innerHTML = '<span>다음 기사가 없습니다</span>';
+        } else {
+            nextBtn.disabled = false;
+            const nextArticle = this.allArticles[currentIndex + 1];
+            nextBtn.innerHTML = `<span>다음: ${(nextArticle.titleKR || nextArticle.titleEN || '').substring(0, 30)}...</span>`;
+        }
+    }
+    
+    // 페이지네이션 설정
+    setupListEventListeners() {
+        const prevBtn = document.querySelector('.page-btn.prev');
+        const nextBtn = document.querySelector('.page-btn.next');
+        
+        prevBtn.onclick = () => this.goToPage(this.currentPage - 1);
+        nextBtn.onclick = () => this.goToPage(this.currentPage + 1);
+    }
+    
+    // 페이지 이동
+    goToPage(page) {
+        const totalPages = Math.ceil(this.allArticles.length / this.itemsPerPage);
+        
+        if (page < 1 || page > totalPages) return;
+        
+        this.currentPage = page;
+        this.renderArticleList();
     }
     
     // 페이지네이션 업데이트
     updatePagination() {
-        const totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
+        const totalPages = Math.ceil(this.allArticles.length / this.itemsPerPage);
         
         // 이전/다음 버튼 상태
         const prevBtn = document.querySelector('.page-btn.prev');
@@ -349,30 +481,113 @@ class PressPageController {
             const pageBtn = document.createElement('button');
             pageBtn.className = `page-number ${i === this.currentPage ? 'active' : ''}`;
             pageBtn.textContent = i;
-            pageBtn.addEventListener('click', () => this.goToPage(i));
+            pageBtn.onclick = () => this.goToPage(i);
             pageNumbers.appendChild(pageBtn);
         }
     }
     
-    // // 현재 필터 적용
-    // applyCurrentFilters() {
-    //     const year = document.querySelector('.year-filter').value;
-    //     const category = document.querySelector('.category-filter').value;
+    // 모든 섹션 숨기기
+    hideAllSections() {
+        this.listSection.classList.add('hidden');
+        this.detailSection.classList.add('hidden');
+    }
+    
+    // 페이지 메타 정보 업데이트 (SEO)
+    updatePageMeta(title, description) {
+        document.title = `${title} - YPP`;
         
-    //     if (year !== 'all' || category !== 'all') {
-    //         this.filteredData = this.filteredData.filter(item => {
-    //             const yearMatch = year === 'all' || item.year === year;
-    //             const categoryMatch = category === 'all' || item.category === category;
-    //             return yearMatch && categoryMatch;
-    //         });
-    //     }
-    // }
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+            metaDesc.content = description;
+        }
+    }
+    
+    // 에러 표시
+    showError(message) {
+        const container = document.querySelector('.press-items');
+        container.innerHTML = `
+            <div class="error-message">
+                <p>${message}</p>
+                <button onclick="location.reload()" class="retry-btn">다시 시도</button>
+            </div>
+        `;
+    }
 }
 
-// ===== 전역 변수 =====
+// ===== 구글 시트 API 연동 보도자료 시스템 =====
+
+class PressManager {
+    constructor() {
+        // 관리자 페이지와 동일한 Apps Script URL
+        this.appsScriptUrl = 'https://script.google.com/macros/s/AKfycbzys_Wtyki3iTakXqwDL4VJkBP-oUC482jUiWyZuzNzglmVfar1_EUC_ym91NMIrrFH/exec';
+        this.itemsPerPage = 20; // 20개씩 제한
+    }
+
+    // 보도자료 목록 가져오기
+    async loadArticleList() {
+        try {
+            const url = `${this.appsScriptUrl}?sheet=SHEET_BOARD_NEWS&action=getData`;
+            console.log('보도자료 데이터 요청:', url);
+            
+            const response = await fetch(url);
+            const result = await response.json();
+            
+            console.log('보도자료 API 응답:', result);
+            
+            if (!result.success) {
+                throw new Error(result.message || '데이터 로딩 실패');
+            }
+
+            // 활성화된 기사만 필터링하고 날짜순 정렬
+            const articles = (result.data || [])
+                .filter(item => item.state === 'on')
+                .sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+            
+            console.log('필터링된 보도자료:', articles.length, '개');
+            
+            return articles;
+            
+        } catch (error) {
+            console.error('보도자료 목록 로드 실패:', error);
+            throw error;
+        }
+    }
+
+    // 단일 기사 상세 정보 가져오기
+    async loadArticleDetail(articleId) {
+        try {
+            const articles = await this.loadArticleList();
+            const article = articles.find(item => 
+                item.id == articleId || 
+                item.number == articleId ||
+                item.submissionId == articleId
+            );
+            
+            if (!article) {
+                throw new Error('기사를 찾을 수 없습니다.');
+            }
+            
+            console.log('기사 상세 정보:', article);
+            return article;
+            
+        } catch (error) {
+            console.error('기사 상세 정보 로드 실패:', error);
+            throw error;
+        }
+    }
+}
+
+// 브라우저 뒤로가기 지원
+window.addEventListener('popstate', (event) => {
+    if (window.pressPageController) {
+        window.pressPageController.init();
+    }
+});
+
+// 전역 변수
 let pressPageController = null;
 
-// ===== 초기화 함수 =====
+// 초기화 함수
 function initPressPage() {
     if (!pressPageController) {
         pressPageController = new PressPageController();
@@ -380,20 +595,31 @@ function initPressPage() {
     return pressPageController;
 }
 
-// ===== 자동 초기화 =====
+// 자동 초기화
 document.addEventListener('DOMContentLoaded', function() {
     // 컴포넌트 로딩 완료 후 초기화
     if (document.querySelector('.press-list')) {
         initPressPage();
     } else {
-        document.addEventListener('componentsLoaded', () => {
-            setTimeout(initPressPage, 200);
-        });
+        // 컴포넌트 로딩 대기
+        const checkComponents = setInterval(() => {
+            if (document.querySelector('.press-list')) {
+                clearInterval(checkComponents);
+                initPressPage();
+            }
+        }, 100);
     }
 });
 
-// ===== 전역 함수 내보내기 =====
+// 전역 함수 내보내기
 window.initPressPage = initPressPage;
+window.pressPageController = null;
+
+// pressPageController 전역 접근을 위한 설정
+Object.defineProperty(window, 'pressPageController', {
+    get: function() { return pressPageController; },
+    set: function(value) { pressPageController = value; }
+});
     </script>
 </body>
 </html>
@@ -401,177 +627,82 @@ window.initPressPage = initPressPage;
 <style>
 /* ===== PRESS PAGE SPECIFIC STYLES ===== */
 
+/* Loading Message */
+.loading-message {padding: 8rem 0; display: flex;align-items: center;justify-content: center;text-align: center;}
+.loading-message p {font-size: 1.1rem;color: var(--text-secondary, #666);margin: 0;}
+.loading-message i {margin-right: 0.5rem;color: var(--primary-blue, #0066cc);}
+
+/* Hidden State */
+.hidden { display: none !important; }
+
 /* Content Section */
-.content-section {
-    padding: 3rem 0;
-    background-color: var(--white, #ffffff);
-}
+/* .press-list {padding: 2rem 0;} */
 
-/* Search & Filter Section */
-.search-filter-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    gap: 2rem;
-}
+/* Press Detail Section */
+.press-detail-section {padding: 2rem 0;max-width: 800px;margin: 0 auto;}
 
-.search-box {
-    display: flex;
-    gap: 0.5rem;
-    flex: 1;
-    max-width: 400px;
-}
+.article-header,
+.list-header {display: flex;justify-content: flex-end;align-items: center;padding: 0 .5rem 1rem 0;border-bottom: 1px solid #eee;}
+.article-header{justify-content: flex-start; border-bottom: none ;}
+.back-to-list {border: none;background: none;cursor: pointer;font-size: 1rem;transition: all 0.3s ease;color: #000000;padding-left: .1rem;}
+.back-to-list span{padding-left: .5rem;}
+.back-to-list:hover{transform: translateX(-4px);color: var(--primary-blue, #0066cc);}
 
-.search-input {
-    flex: 1;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--border-light, #e5e5e5);
-    border-radius: 4px;
-    font-size: 1rem;
-}
+.article-meta {display: flex;align-items: center;gap: 1rem;margin-bottom: 2rem;font-size: 0.9rem;color: var(--text-secondary, #666);}
+.article-title {font-size: 2rem;font-weight: 700;line-height: 1.3;color: var(--text-primary, #333);margin: 0 0 1rem 0;border-left: var(--primary-blue, #0066cc) 5px solid;padding-left: 1rem;}
 
-.search-btn {
-    padding: 0.75rem 1.5rem;
-    background-color: var(--primary-blue, #0066cc);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
+.article-date {color: var(--primary-blue, #0066cc);font-weight: 500;font-size: 0.95rem;}
+.article-content {margin-top: 2rem;margin-bottom: 2rem;line-height: 1.8;font-size: 1.1rem;color: var(--text-primary, #333);}
+.article-images {margin: 0 0 2rem 0;}
+.article-image {margin-bottom: 1rem;}
+.article-image img {width: 100%;height: auto;border-radius: 8px;box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
+.article-navigation {display: flex;justify-content: space-between;align-items: center;margin-top: 3rem;padding: 2rem 0;border-top: 1px solid var(--border-light, #e5e5e5);gap: 1rem;}
 
-.search-btn:hover {
-    background-color: var(--primary-red, #cc0033);
-}
 
-.filter-box {
-    display: flex;
-    gap: 1rem;
-}
-
-.year-filter,
-.category-filter {
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--border-light, #e5e5e5);
-    border-radius: 4px;
-    background-color: white;
-    cursor: pointer;
-}
-
+.article-nav-buttons {display: flex;gap: 1rem;flex: 1;justify-content: flex-end;}
+.nav-btn {background: white;border: 1px solid var(--border-light, #e5e5e5);padding: 0.75rem 1rem;border-radius: 6px;cursor: pointer;font-size: 0.9rem;transition: all 0.3s ease;max-width: 200px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.nav-btn:hover:not(:disabled) {background: var(--background-light, #f8f9fa);border-color: var(--primary-blue, #0066cc);}
+.nav-btn:disabled {opacity: 0.5;cursor: not-allowed;}
+.nav-btn span {display: block;color: var(--text-secondary, #666);}
+/* Error and Retry Styles */
+.error-message, .empty-message {text-align: center;padding: 3rem 2rem;color: var(--text-secondary, #666);}
+.retry-btn {background: var(--primary-blue, #0066cc);color: white;border: none;padding: 0.75rem 1.5rem;border-radius: 6px;cursor: pointer;font-size: 1rem;margin-top: 1rem;transition: background-color 0.3s ease;}
+.retry-btn:hover {background: var(--primary-dark, #004499);}
 /* List Header */
-.list-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 0 1rem 1rem;
-}
-
-.total-count {
-    color: var(--text-secondary, #666);
-    font-size: 0.9rem;
-}
-
-.sort-options {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.sort-btn {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--border-light, #e5e5e5);
-    background-color: white;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-}
-
-.sort-btn.active,
-.sort-btn:hover {
-    background-color: var(--primary-blue, #0066cc);
-    color: white;
-    border-color: var(--primary-blue, #0066cc);
-}
-
+.content-section {padding: 3rem 0;background-color: var(--white, #ffffff);}
+/* Search & Filter Section */
+.search-filter-section {display: flex;justify-content: space-between;align-items: center;margin-bottom: 2rem;gap: 2rem;}
+.search-box {display: flex;gap: 0.5rem;flex: 1;max-width: 400px;}
+.search-input {flex: 1;padding: 0.75rem 1rem;border: 1px solid var(--border-light, #e5e5e5);border-radius: 4px;font-size: 1rem;}
+.search-btn {padding: 0.75rem 1.5rem;background-color: var(--primary-blue, #0066cc);color: white;border: none;border-radius: 4px;cursor: pointer;font-weight: 500;transition: background-color 0.3s ease;}
+.search-btn:hover {background-color: var(--primary-red, #cc0033);}
+.filter-box {display: flex;gap: 1rem;}
+.year-filter, .category-filter {padding: 0.75rem 1rem;border: 1px solid var(--border-light, #e5e5e5);border-radius: 4px;background-color: white;cursor: pointer;}
+/* List Header */
+.total-count {color: var(--text-secondary, #666);font-size: 0.9rem;}
+.sort-options {display: flex;gap: 0.5rem;}
+.sort-btn {padding: 0.5rem 1rem;border: 1px solid var(--border-light, #e5e5e5);background-color: white;cursor: pointer;border-radius: 4px;font-size: 0.9rem;transition: all 0.3s ease;}
+.sort-btn.active, .sort-btn:hover {background-color: var(--primary-blue, #0066cc);color: white;border-color: var(--primary-blue, #0066cc);}
 /* Press Items */
-.press-list{margin-top: 4.5rem;}
-.press-items {
-    min-height: 600px;
-}
-
-a.press-item {
-    display: block;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    background-color: #f7f7f7;
-    /* background: linear-gradient(319deg, #f9faff 0%, #e2e8f0 100%); */
-    transition: all 0.3s ease;
-}
-.press-item:hover{background: #f1f1f1 }
-.press-item:hover .press-title span{
-    color: var(--primary-blue, #0066cc);
-}
-
-.press-meta {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.85rem;
-}
-
-.press-date {
-    color: var(--text-secondary, #666);
-}
-
-.press-category {
-    color: var(--primary-blue, #0066cc);
-    font-weight: 500;
-}
-
-.press-title {
-    margin-bottom: 0.75rem;
-}
-
-.press-title span {
-    color: var(--text-primary, #333);
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1.4;
-}
-
-.press-title span:hover {
-    color: var(--primary-blue, #0066cc);
-}
-
-.press-summary {
-    color: var(--text-secondary, #666);
-    line-height: 1.5;
-    margin-bottom: 0.75rem;
-}
-
-.press-source {
-    font-size: 0.85rem;
-    color: var(--text-light, #999);
-}
+/* .press-list{margin-top: 4.5rem;} */
+.press-items {min-height: 500px; padding: 1rem 0;}
+.press-item {display: block;padding: 1.5rem;margin-bottom: 1rem;border-radius: 8px;transition: all 0.3s ease;cursor: pointer;}
+.press-item:hover{background: #ececec }
+.press-item:hover .press-title span{color: var(--primary-blue, #0066cc);}
+.press-meta {display: flex;gap: 1rem;margin-bottom: 0.5rem;font-size: 0.85rem;}
+.press-date {color: var(--text-secondary, #666);}
+.press-category {color: var(--primary-blue, #0066cc);font-weight: 500;}
+.press-title {margin-bottom: 0.5rem;}
+.press-title span {color: var(--text-primary, #333);text-decoration: none;font-size: 1.4rem;font-weight: 600;}
+.press-title span:hover {color: var(--primary-blue, #0066cc);}
+.press-summary {color: var(--text-secondary, #666);line-height: 1.5;margin-bottom: 0.75rem;font-size: .88rem;}
+.press-source {font-size: 0.85rem;color: var(--text-light, #999);}
 
 /* Empty Message */
 .empty-message {text-align: center;padding: 3rem 0;color: var(--text-secondary, #666);}
 
 /* Pagination */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-light, #c8c8c8);
-}
-
+.pagination {display: flex;justify-content: center;align-items: center;gap: 0.5rem;margin-top: 2rem;padding-top: 2rem;border-top: 1px solid var(--border-light, #eee);}
 .page-btn {padding: 0.5rem 1rem;border: 1px solid var(--border-light, #e5e5e5);background-color: white;cursor: pointer;border-radius: 4px;font-size: 0.9rem;}
 .page-btn:disabled {opacity: 0.5;cursor: not-allowed;}
 .page-btn:not(:disabled):hover {background-color: var(--background-light, #f8f9fa);}
@@ -590,5 +721,14 @@ a.press-item {
     .pagination {flex-wrap: wrap;}
     .press-item{padding: .75rem .25rem;margin-bottom: .5rem;}
     h3.press-title,h3.press-title a {font-size: 1.05rem;line-height: 1;}
+    
+    /* Article Detail Mobile Styles */
+    .press-detail-section {padding: 1rem 0;}
+    .article-title {font-size: 1.5rem;}
+    .article-content {font-size: 1rem;line-height: 1.6;}
+    .article-navigation {flex-direction: column;gap: 1rem;align-items: stretch;}
+    .article-nav-buttons {flex-direction: column;justify-content: stretch;}
+    .nav-btn {max-width: none;text-align: center;}
+    .back-to-list {width: 100%;text-align: center;}
 }
 </style>

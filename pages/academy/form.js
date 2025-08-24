@@ -439,11 +439,9 @@ async function submitPsacForm(e) {
         await submitFormData(formData);
         
         alert(`신청이 완료되었습니다. (수강자 ${formData.students.length}명) \nYour application has been completed. (Number of participants: ${formData.students.length})`, 'success','psac-message');
-        document.getElementById('psac-form').reset();
-        // 수강자 목록 초기화
-        document.getElementById('psac-students-container').innerHTML = '';
-        psacStudentCount = 0;
-        // addPsacStudent();
+        
+        // alert 확인 후 페이지 리로드
+        location.reload();
         
     } catch (error) {
         console.error('Error:', error);
@@ -673,14 +671,10 @@ async function submitRelayschoolForm(e) {
 
         await submitFormData(formData);
 
-        showMessage(`신청이 완료되었습니다. (수강자 ${formData.students.length}명) \nYour application has been completed. (Number of participants: ${formData.students.length})`, 'success','rs-message');
-        document.getElementById('relayschool-form').reset();
+        alert(`신청이 완료되었습니다. (수강자 ${formData.students.length}명) \nYour application has been completed. (Number of participants: ${formData.students.length})`, 'success','rs-message');
         
-        // 기존 수강자 섹션들 삭제하고 첫 번째 수강자만 다시 추가
-        const container = document.getElementById('relayschool-students-container');
-        container.innerHTML = '';
-        relayschoolStudentCount = 0;
-        addRelayschoolStudent();
+        // alert 확인 후 페이지 리로드
+        location.reload();
 
     } catch (error) {
         showMessage('신청 처리 중 오류가 발생했습니다.', 'error', 'rs-message');

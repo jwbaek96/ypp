@@ -408,12 +408,22 @@ function getSheetSpecificData(sheet, sheetName) {
     const customHeaders = getCustomHeaders(sheetName);
     const dataStartRow = getDataStartRow(sheetName); // 데이터 시작 행
     
-    // 실제 데이터 범위 가져오기
-    const dataRange = sheet.getRange(dataStartRow, 1, lastRow - dataStartRow + 1, lastCol);
+    // 필요한 최소 컬럼 수 확인 (lockStatus 컬럼 포함)
+    const requiredColumns = Math.max(lastCol, Math.max(...Object.values(customHeaders)) + 1);
+    
+    // 실제 데이터 범위 가져오기 (필요한 컬럼 수만큼)
+    const dataRange = sheet.getRange(dataStartRow, 1, lastRow - dataStartRow + 1, requiredColumns);
     const dataValues = dataRange.getValues();
     const sheetData = [];
 
-    console.log(`${sheetName}: 데이터 시작행 ${dataStartRow}, ${dataValues.length}개 행`);
+    console.log(`${sheetName}: 데이터 시작행 ${dataStartRow}, ${dataValues.length}개 행, 마지막 컬럼 ${lastCol}, 필요 컬럼 ${requiredColumns}`);
+    
+    // Relay School의 경우 lockStatus 컬럼 존재 여부 확인
+    if (sheetName === SHEET_APPLY_R && dataValues.length > 0) {
+      const firstRow = dataValues[0];
+      console.log(`릴레이스쿨 첫 번째 행 길이: ${firstRow.length}, lockStatus 컬럼(22) 값: '${firstRow[22]}'`);
+      console.log(`첫 번째 행 전체:`, firstRow);
+    }
 
     // 데이터 매핑
     dataValues.forEach((row, index) => {
@@ -519,10 +529,16 @@ function getSheetSpecificData(sheet, sheetName) {
         } else if (sheetName === SHEET_APPLY_R) { // 릴레이스쿨 신청 특별 처리
           if (key === 'applicationDate') {
             value = formatDate(value, 'datetime');
+          } else if (key === 'lockStatus') {
+            // lockStatus 디버깅 로그 추가
+            console.log(`릴레이스쿨 lockStatus 디버깅: 행${index + dataStartRow}, 원본값='${value}', 타입=${typeof value}`);
           }
         } else if (sheetName === SHEET_APPLY_P) { // PSAC 신청 특별 처리
           if (key === 'applicationDate') {
             value = formatDate(value, 'datetime');
+          } else if (key === 'lockStatus') {
+            // lockStatus 디버깅 로그 추가
+            console.log(`PSAC lockStatus 디버깅: 행${index + dataStartRow}, 원본값='${value}', 타입=${typeof value}`);
           }
         } else if (sheetName === SHEET_HELP_KR || sheetName === SHEET_HELP_EN) { // 문의 특별 처리
           if (key === 'submittedAt') {
@@ -652,7 +668,8 @@ function getCustomHeaders(sheetName) {
       studentEmail: 20,       // 수강자이메일
       detailedEducation: 21,  // 선택세부교육
       confirmation: 22,       // 확인
-      remarks: 23              // 비고
+      remarks: 23,            // 비고
+      lockStatus: 24          // 잠금상태 (true/false)
     },
     
     [SHEET_APPLY_R]: { // 신청 RelaySchool
@@ -677,7 +694,8 @@ function getCustomHeaders(sheetName) {
       studentEmail: 18,       // 수강자이메일 (S)
       detailedEducation: 19,  // 선택세부교육 (T)
       confirmation: 20,       // 확인 (U)
-      remarks: 21            // 비고 (V)
+      remarks: 21,            // 비고 (V)
+      lockStatus: 22          // 잠금상태 (W)
     },
 
     [SHEET_HELP_KR]: { // 문의 KOR
@@ -1134,7 +1152,38 @@ function updateItem(sheetType, itemId, updateData) {
           'studentEmail': 20,        // 수강자이메일
           'detailedEducation': 21,   // 선택세부교육
           // 22: 확인 (건드리지 않음)
-          'remarks': 23              // 비고
+          'remarks': 23,             // 비고
+          'lockStatus': 24           // 잠금상태
+        };
+        
+        columnIndex = fieldIndexMappings[key];
+      }
+      // Relay School 시트의 컬럼 인덱스 매핑
+      else if (sheetType === 'SHEET_APPLY_R') {
+        const fieldIndexMappings = {
+          // 0: 순번 (건드리지 않음)
+          // 1: 신청일시 (건드리지 않음)
+          'companyName': 2,          // 회사명
+          'ceoName': 3,              // 대표자
+          'businessNumber': 4,       // 사업자등록번호
+          'businessType': 5,         // 종목업태
+          'companyAddress': 6,       // 주소
+          'educationManager': 7,     // 교육담당자
+          'managerDepartment': 8,    // 담당부서
+          'managerPosition': 9,      // 담당자직급
+          'managerPhone': 10,        // 담당자전화
+          'managerMobile': 11,       // 담당자핸드폰
+          'managerEmail': 12,        // 담당자이메일
+          'studentName': 13,         // 수강자명
+          'studentDepartment': 14,   // 수강자부서
+          'studentPosition': 15,     // 수강자직급
+          'studentPhone': 16,        // 수강자전화
+          'studentMobile': 17,       // 수강자핸드폰
+          'studentEmail': 18,        // 수강자이메일
+          'detailedEducation': 19,   // 선택세부교육
+          // 20: 확인 (건드리지 않음)
+          'remarks': 21,             // 비고
+          'lockStatus': 22           // 잠금상태
         };
         
         columnIndex = fieldIndexMappings[key];
@@ -1190,7 +1239,7 @@ function updateItem(sheetType, itemId, updateData) {
       }
       
       // 다른 시트 타입들은 기존 방식 사용 (헤더 매칭)
-      if (columnIndex === undefined && !['SHEET_APPLY_P', 'SHEET_GAL_A', 'SHEET_GAL_B', 'SHEET_GAL_C', 'SHEET_GAL_F', 'SHEET_BOARD_NEWS'].includes(sheetType)) {
+      if (columnIndex === undefined && !['SHEET_APPLY_P', 'SHEET_APPLY_R', 'SHEET_GAL_A', 'SHEET_GAL_B', 'SHEET_GAL_C', 'SHEET_GAL_F', 'SHEET_BOARD_NEWS'].includes(sheetType)) {
         const normalizeString = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
         const normalizedKey = normalizeString(key);
         

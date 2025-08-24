@@ -267,7 +267,7 @@
         },
         "apply": {
           "title": {
-            "ko": "교육 신청",
+            "ko": "교육신청",
             "en": "Apply"
           },
           "url": "/pages/academy/index.html?tab=apply"

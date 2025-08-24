@@ -3215,19 +3215,30 @@ class CourseApplicationManager {
                     
                     <div class="ac-form-row">
                         <div class="ac-form-group">
-                            <label for="psac-managerName" class="ac-form-label" data-kor="교육담당자" data-eng="Education Officer">교육담당자</label>
+                            <label for="psac-managerName" class="ac-form-label" data-kor="담당자 성함" data-eng="Person in Charge Name">담당자 성함</label>
                             <input type="text" id="psac-managerName" name="psac-managerName" class="ac-form-input">
                         </div>
                         <div class="ac-form-group">
-                            <label for="psac-managerDepartment" class="ac-form-label" data-kor="담당부서" data-eng="Department">담당부서</label>
+                            <label for="psac-managerDepartment" class="ac-form-label" data-kor="부서" data-eng="Department">부서</label>
                             <input type="text" id="psac-managerDepartment" name="psac-managerDepartment" class="ac-form-input">
+                        </div>
+                    </div>
+
+                    <div class="ac-form-row">
+                        <div class="ac-form-group">
+                            <label for="psac-managerPosition" class="ac-form-label" data-kor="직급" data-eng="Position">직급</label>
+                            <input type="text" id="psac-managerPosition" name="psac-managerPosition" class="ac-form-input">
+                        </div>
+                        <div class="ac-form-group">
+                            <label for="psac-managerPhone" class="ac-form-label" data-kor="전화" data-eng="Phone">전화</label>
+                            <input type="tel" id="psac-managerPhone" name="psac-managerPhone" class="ac-form-input">
                         </div>
                     </div>
                     
                     <div class="ac-form-row">
                         <div class="ac-form-group">
                             <label for="psac-managerMobile" class="ac-form-label" data-kor="연락처" data-eng="Phone">연락처</label>
-                            <input type="tel" id="psac-managerMobile" name="psac-managerMobile" class="ac-form-input" placeholder="010-0000-0000">
+                            <input type="tel" id="psac-managerMobile" name="psac-managerMobile" class="ac-form-input" placeholder="">
                         </div>
                         <div class="ac-form-group">
                             <label for="psac-managerEmail" class="ac-form-label" data-kor="이메일" data-eng="E-mail">이메일</label>
@@ -3315,19 +3326,30 @@ class CourseApplicationManager {
                     
                     <div class="ac-form-row">
                         <div class="ac-form-group">
-                            <label for="relayschool-managerName" class="ac-form-label" data-kor="교육담당자" data-eng="Education Officer">교육담당자</label>
+                            <label for="relayschool-managerName" class="ac-form-label" data-kor="담당자 성함" data-eng="Person in Charge Name">담당자 성함</label>
                             <input type="text" id="relayschool-managerName" name="relayschool-managerName" class="ac-form-input">
                         </div>
                         <div class="ac-form-group">
-                            <label for="relayschool-managerDepartment" class="ac-form-label" data-kor="담당부서" data-eng="Department">담당부서</label>
+                            <label for="relayschool-managerDepartment" class="ac-form-label" data-kor="부서" data-eng="Department">부서</label>
                             <input type="text" id="relayschool-managerDepartment" name="relayschool-managerDepartment" class="ac-form-input">
+                        </div>
+                    </div>
+
+                    <div class="ac-form-row">
+                        <div class="ac-form-group">
+                            <label for="relayschool-managerPosition" class="ac-form-label" data-kor="직급" data-eng="Position">직급</label>
+                            <input type="text" id="relayschool-managerPosition" name="relayschool-managerPosition" class="ac-form-input">
+                        </div>
+                        <div class="ac-form-group">
+                            <label for="relayschool-managerPhone" class="ac-form-label" data-kor="전화" data-eng="Phone">전화</label>
+                            <input type="tel" id="relayschool-managerPhone" name="relayschool-managerPhone" class="ac-form-input">
                         </div>
                     </div>
                     
                     <div class="ac-form-row">
                         <div class="ac-form-group">
                             <label for="relayschool-managerMobile" class="ac-form-label" data-kor="연락처" data-eng="Phone">연락처</label>
-                            <input type="tel" id="relayschool-managerMobile" name="relayschool-managerMobile" class="ac-form-input" placeholder="010-0000-0000">
+                            <input type="tel" id="relayschool-managerMobile" name="relayschool-managerMobile" class="ac-form-input" placeholder="">
                         </div>
                         <div class="ac-form-group">
                             <label for="relayschool-managerEmail" class="ac-form-label" data-kor="이메일" data-eng="Email">이메일</label>
@@ -3335,7 +3357,7 @@ class CourseApplicationManager {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- 수강자 정보 -->
                 <div class="ac-form-section">
                     <h2 class="ac-form-section-title" data-kor="수강자 정보" data-eng="Participant Information">수강자 정보</h2>
@@ -3393,8 +3415,8 @@ class CourseApplicationManager {
         resultsList.style.display = 'none';
         
         try {
-            // Google Apps Script API 호출
-            const APPS_SCRIPT_ID = 'AKfycbyChhUXLJHVjVBjUQ-K4gYpAWRJO85wvTbcvspGX0CQyNYIRG6Yxw3n-R5bsgqhvVBk';
+            // Google Apps Script API 호출 (어드민 페이지와 동일한 ID 사용)
+            const APPS_SCRIPT_ID = 'AKfycbye3yDhu02ftky51LcYHEjcFr1zk71hCpgVlw152tdAbLSoCX2PpM8vesS-tSIgg51T';
             const apiUrl = `https://script.google.com/macros/s/${APPS_SCRIPT_ID}/exec`;
             
             // PSAC 데이터 검색
@@ -3426,6 +3448,19 @@ class CourseApplicationManager {
             loadingIndicator.style.display = 'none';
             resultsList.style.display = 'block';
             
+            // 디버깅용 로그 추가
+            console.log('=== 신청서 검색 결과 디버깅 ===');
+            console.log('매칭된 신청서 수:', matchedApplications.length);
+            matchedApplications.forEach((app, index) => {
+                console.log(`신청서 ${index + 1}:`, {
+                    type: app.type,
+                    studentName: app.studentName,
+                    lockStatus: app.lockStatus,
+                    lockStatusType: typeof app.lockStatus
+                });
+            });
+            console.log('==========================');
+            
             this.displaySearchResults(matchedApplications);
             
         } catch (error) {
@@ -3445,14 +3480,32 @@ class CourseApplicationManager {
         if (applications.length === 0) {
             resultsList.innerHTML = '<p style="padding: 12dvh 2rem; margin: 0; text-align: center; color: #6b7280;">일치하는 신청서가 없습니다.</p>';
         } else {
-            resultsList.innerHTML = applications.map(app => `
-                <div class="result-item" onclick="showEditModal(${JSON.stringify(app).replace(/"/g, '&quot;')}, '${app.type}')">
-                    <div class="result-header">
-                        <h4 class="result-title">${app.type} - ${app.studentName}</h4>
-                        <span class="result-date">${app.applicationDate || app.submittedAt || ''}</span>
+            resultsList.innerHTML = applications.map(app => {
+                // 더 강력한 잠금 상태 확인 로직
+                const lockStatusValue = app.lockStatus;
+                const isLocked = lockStatusValue === true || 
+                               lockStatusValue === 'true' || 
+                               lockStatusValue === 'TRUE' || 
+                               lockStatusValue === 1 || 
+                               lockStatusValue === '1';
+                               
+                const lockText = isLocked ? ' (수정 불가)' : '';
+                
+                console.log(`신청서 ${app.studentName} 잠금 상태:`, {
+                    원본값: lockStatusValue,
+                    타입: typeof lockStatusValue,
+                    잠금여부: isLocked
+                });
+                
+                return `
+                    <div class="result-item" onclick="showEditModal(${JSON.stringify(app).replace(/"/g, '&quot;')}, '${app.type}')">
+                        <div class="result-header">
+                            <h4 class="result-title">${app.type} - ${app.studentName}${lockText}</h4>
+                            <span class="result-date">${app.applicationDate || app.submittedAt || ''}</span>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
         
                     // <div class="result-details">
@@ -3466,6 +3519,21 @@ class CourseApplicationManager {
 
 // 수정 모달 표시 (어드민 페이지와 동일한 폼 사용)
 function showEditModal(item, pageType) {
+    // 더 강력한 잠금 상태 확인 로직
+    const lockStatusValue = item.lockStatus;
+    const isLocked = lockStatusValue === true || 
+                   lockStatusValue === 'true' || 
+                   lockStatusValue === 'TRUE' || 
+                   lockStatusValue === 1 || 
+                   lockStatusValue === '1';
+    
+    console.log('수정 모달 - 잠금 상태 확인:', {
+        원본값: lockStatusValue,
+        타입: typeof lockStatusValue,
+        잠금여부: isLocked,
+        학생명: item.studentName
+    });
+    
     const modal = document.getElementById('edit-application-modal');
     const formContainer = document.getElementById('edit-form-container');
     
@@ -3473,9 +3541,48 @@ function showEditModal(item, pageType) {
     const formHTML = generateEditForm(item, pageType);
     formContainer.innerHTML = formHTML;
     
+    // 잠금된 경우 모든 입력 필드를 읽기 전용으로 설정
+    if (isLocked) {
+        // 모든 input, textarea, select 요소를 읽기 전용으로 설정
+        setTimeout(() => {
+            const inputs = modal.querySelectorAll('input:not([readonly]), textarea:not([readonly]), select');
+            inputs.forEach(input => {
+                input.readOnly = true;
+                input.disabled = true;
+                input.style.backgroundColor = '#f3f4f6';
+                input.style.color = '#6b7280';
+                input.style.cursor = 'not-allowed';
+            });
+            
+            // 체크박스들도 비활성화
+            const checkboxes = modal.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.disabled = true;
+                checkbox.style.cursor = 'not-allowed';
+            });
+            
+            // 저장 버튼 숨기기
+            const saveButton = modal.querySelector('.btn-save');
+            if (saveButton) {
+                saveButton.style.display = 'none';
+            }
+            
+            // 잠금 상태 메시지 표시
+            const lockMessage = document.createElement('div');
+            lockMessage.innerHTML = `
+                <div style="background-color: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 12px; border-radius: 6px; margin-bottom: 20px; text-align: center;">
+                    <i class="fas fa-lock" style="margin-right: 8px;"></i>
+                    이 신청서는 현재 수정이 제한된 상태입니다. 내용 확인만 가능합니다.
+                </div>
+            `;
+            formContainer.insertBefore(lockMessage, formContainer.firstChild);
+        }, 100);
+    }
+    
     // 현재 편집 중인 아이템 저장
     window.currentEditItem = item;
     window.currentEditType = pageType;
+    window.currentEditLocked = isLocked; // 잠금 상태도 저장
         
     modal.style.display = 'flex';
 }
@@ -3539,11 +3646,11 @@ function generateEditForm(item, pageType) {
             <textarea name="companyAddress" >${item.companyAddress || ''}</textarea>
         </div>
 
-        <div class="edit-form-section-title">교육 담당자 정보</div>
+        <div class="edit-form-section-title">담당자 정보</div>
         
         <div class="edit-form-row">
             <div class="edit-form-group">
-                <label>교육담당자</label>
+                <label>담당자 성함</label>
                 <input type="text" name="educationManager" value="${item.educationManager || ''}" >
             </div>
             <div class="edit-form-group">
@@ -3627,10 +3734,17 @@ function closeEditModal() {
     document.getElementById('edit-application-modal').style.display = 'none';
     window.currentEditItem = null;
     window.currentEditType = null;
+    window.currentEditLocked = null;
 }
 
 // 신청서 저장
 async function saveApplication() {
+    // 잠금 상태 확인
+    if (window.currentEditLocked) {
+        alert('이 신청서는 수정이 제한된 상태입니다.');
+        return;
+    }
+    
     const formContainer = document.getElementById('edit-form-container');
     const saveButton = document.querySelector('.btn-save');
     

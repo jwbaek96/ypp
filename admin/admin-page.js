@@ -875,13 +875,19 @@ class PageManager {
                 const datetime = parseDatetime(item.applicationDate);
                 // 그룹핑된 데이터인지 확인
                 if (item.isGrouped && item.groupedEducation && item.groupedEducation.length > 1) {
-                    // 그룹핑된 여러 교육 내용을 표시
+                    // 그룹핑된 여러 교육 내용을 표시 - 각 항목별로 잠금 상태 확인
                     const educationList = item.groupedEducation
                         .filter(edu => edu && edu.trim()) // 빈 값 제거
                         .map((edu, index) => {
                             // 각 교육과정 항목에서 세미콜론을 <br>로 변환
                             const formattedEdu = edu.trim().replace(/;\s*/g, '<br>');
-                            return `<span class="group-item">${formattedEdu}</span>`;
+                            
+                            // 해당 인덱스의 원본 아이템에서 잠금 상태 확인
+                            const originalItem = item.groupedItems[index];
+                            const isLocked = originalItem && (originalItem.lockStatus === true || originalItem.lockStatus === 'true');
+                            const lockIcon = isLocked ? ' <i class="fas fa-lock" style="color: #000;"></i>' : '';
+                            
+                            return `<span class="group-item" style="color: ${isLocked ? '#777' : '#000'};">${formattedEdu}${lockIcon}</span>`;
                         })
                         .join('');
                         
@@ -893,9 +899,8 @@ class PageManager {
                             <div class="group-header">
                                 <i class="fas fa-layer-group group-icon"></i>
                                 그룹 (${item.groupedEducation.length}명)
-                                ${item.lockStatus === true || item.lockStatus === 'true' ? '<i class="fas fa-lock" style="margin-left: 8px; color: #000;"></i>' : ''}
                             </div>
-                            <div style="color: ${item.lockStatus === true || item.lockStatus === 'true' ? '#777' : '#000'};">
+                            <div>
                                 ${educationList}
                             </div>
                         </td>

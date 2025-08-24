@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
    ========================================================================== */
 
 // 웹 앱 URL - 실제 Apps Script 웹 앱 URL로 변경해주세요
-const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyc6-Z8_6IM3Km9cFin02mSwulM9vXlUpZDK2_ulMQFnCH4vGh1bgVk6i6lPHgtRHYE/exec';
+const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyHhQzzGXZGkxenE8g7-0Y9-wfxPFSsSax0WSHW1_7DWbwyoxOM75-FKCeVLakazJdo/exec';
 
 // 공통 변수
 let psacStudentCount = 0;
@@ -345,7 +345,7 @@ function collectPsacFormData() {
             phone: document.getElementById(`psac-studentPhone-${studentId}`)?.value || '',
             mobile: document.getElementById(`psac-studentMobile-${studentId}`)?.value || '',
             email: document.getElementById(`psac-studentEmail-${studentId}`)?.value || '',
-            selectedCourses: selectedCourses
+            selectedCourses: selectedCourses // 원래대로 배열로 전송
         });
     });
     
@@ -579,7 +579,7 @@ function collectRelayschoolFormData() {
             phone: document.getElementById(`relayschool-studentPhone-${studentId}`)?.value || '',
             mobile: document.getElementById(`relayschool-studentMobile-${studentId}`)?.value || '',
             email: document.getElementById(`relayschool-studentEmail-${studentId}`)?.value || '',
-            selectedCourses: selectedCourses
+            selectedCourses: selectedCourses // 원래대로 배열로 전송
         });
     });
 

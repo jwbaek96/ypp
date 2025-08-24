@@ -72,30 +72,11 @@
         }
         
         .toolbar-left,
-        .toolbar-right {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-        
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        
-        .btn-sm {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.8rem;
-            margin: 0 0.125rem;
-        }
-        .btn-sm:hover {
-            background-color: #e2e6ea;
-            /* border-color: #d3d9db; */
-        }
-        /* .btn-danger:hover{scale: 1.01;} */
+        .toolbar-right {display: flex;gap: 1rem;align-items: center;}
+        .toolbar-left{gap: .2rem;}
+        .btn {padding: 0.5rem 1rem;border: none;border-radius: 6px;cursor: pointer;font-size: 0.9rem;}
+        .btn-sm {padding: 0.25rem 0.5rem;font-size: 0.8rem;margin: 0 0.125rem;}
+        .btn-sm:hover {background-color: #e2e6ea;}
 
         
         /* =========== Table Styles =========== */
@@ -140,10 +121,14 @@
         .data-table .col-checkbox { width: 40px; }
         .data-table .col-id { width: 80px; }
         .data-table .col-number ,
-        /* { width: 80px; } */
+        .data-table .col-category,
         .data-table .col-status,
         .data-table .col-actions,
         .data-table .col-date { width: auto; text-align: center;}
+        .data-table .col-date,
+        .data-table .col-category{max-width: 60px;}
+        .data-table .col-status,
+        .data-table .col-actions{max-width: 25px;}
         .data-table .col-checkbox { text-align: center;}
 
         /* =========== 그룹핑 스타일 =========== */
@@ -466,14 +451,14 @@
             border: 2px dashed #ddd;
             border-radius: 8px;
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
-            justify-content: center;
             background: #f8f9fa;
             margin-bottom: 0.5rem;
             padding: 15px;
             gap: 10px;
+            overflow: auto;
         }
+        .gallery-image-preview::-webkit-scrollbar{height: 4px;}
         
         .gallery-image-preview img {
             max-width: 150px;
@@ -636,6 +621,9 @@
                             <button class="btn btn-secondary btn-sm" id="btn-sort-toggle" title="정렬 순서 변경">
                                 <i class="fas fa-sort-amount-down" id="sort-icon"></i> 최신순
                             </button>
+                            <button class="btn btn-secondary btn-sm" id="btn-category-filter" title="카테고리 필터" style="display: none;">
+                                모두보기
+                            </button>
                         </div>
                         <div class="toolbar-right">
                             <button class="btn btn-primary" id="btn-add">
@@ -758,6 +746,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageManager = new PageManager(); // 페이지 매니저 생성
     window.pageManagerInstance = pageManager; // 전역 변수로 저장
     pageManager.init(); // 페이지 초기화
+    
+    // ESC 키로 모달 닫기 기능 추가
+    setupModalKeyboardEvents();
 });
 
 // 시계 클래스
@@ -893,12 +884,13 @@ function formatKoreanTime(timeStr) {
 class PageManager {
     constructor() {
         // Google Apps Script 웹앱 URL (index.html과 동일)
-        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbyChhUXLJHVjVBjUQ-K4gYpAWRJO85wvTbcvspGX0CQyNYIRG6Yxw3n-R5bsgqhvVBk';
+        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbyahG97VAhBxWLDJJpZ8XoC4OgKccWejdl76DQkZ6WQblk-fiT_m59xwRwSFV7dsrVs';
         this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
         this.pageConfigs = this.initPageConfigs();
         this.isDescending = true; // 기본값: 최신순 (내림차순)
         this.currentData = null; // 현재 로드된 데이터 저장
         this.currentConfig = null; // 현재 설정 저장
+        this.currentCategoryFilter = 'all'; // 카테고리 필터 상태 (all, psac, relay)
     }
     
     // 페이지별 설정 데이터 초기화
@@ -1035,6 +1027,9 @@ class PageManager {
         // 정렬 토글 버튼 이벤트 설정
         this.setupSortToggle();
         
+        // 카테고리 필터 버튼 설정
+        this.setupCategoryFilter();
+        
         // 삭제 버튼 이벤트 설정
         this.setupDeleteButtons();
     }
@@ -1155,6 +1150,9 @@ class PageManager {
         // 데이터 그룹핑 적용 (PSAC, RelaySchool에서만)
         let processedData = this.groupDataByDateAndBusinessNumber(data);
         
+        // 카테고리 필터 적용 (아카데미 페이지에서만)
+        processedData = this.filterDataByCategory(processedData);
+        
         // 데이터 정렬 적용
         processedData = this.sortData(processedData);
         
@@ -1226,6 +1224,7 @@ class PageManager {
             case '아카데미':
                 return `
                     <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
+                    <th class="col-category">카테고리</th>
                     <th>제목</th>
                     <th class="col-date">날짜</th>
                     <th class="col-status">상태</th>
@@ -1460,6 +1459,74 @@ class PageManager {
         });
     }
     
+    // 카테고리 필터 버튼 설정
+    setupCategoryFilter() {
+        const pageType = new URLSearchParams(window.location.search).get('page');
+        const filterBtn = document.getElementById('btn-category-filter');
+        
+        // 아카데미 페이지에서만 표시
+        if (pageType === '아카데미') {
+            filterBtn.style.display = 'inline-block';
+            
+            filterBtn.addEventListener('click', () => {
+                this.toggleCategoryFilter();
+            });
+        }
+    }
+    
+    // 카테고리 필터 토글
+    toggleCategoryFilter() {
+        const filterBtn = document.getElementById('btn-category-filter');
+        const filterIcon = document.getElementById('filter-icon');
+        
+        // 필터 상태 순환: all -> psac -> relay -> all
+        switch(this.currentCategoryFilter) {
+            case 'all':
+                this.currentCategoryFilter = 'psac';
+                filterBtn.innerHTML = 'PSAC';
+                break;
+            case 'psac':
+                this.currentCategoryFilter = 'relay';
+                filterBtn.innerHTML = 'Relay School';
+                break;
+            case 'relay':
+                this.currentCategoryFilter = 'all';
+                filterBtn.innerHTML = '모두보기';
+                break;
+        }
+        
+        // 데이터 다시 렌더링
+        if (this.currentData && this.currentConfig) {
+            this.renderDataTable(this.currentData, this.currentConfig);
+        }
+    }
+    
+    // 카테고리별 데이터 필터링
+    filterDataByCategory(data) {
+        const pageType = new URLSearchParams(window.location.search).get('page');
+        
+        // 아카데미 페이지가 아니거나 "모두보기"인 경우 원본 데이터 반환
+        if (pageType !== '아카데미' || this.currentCategoryFilter === 'all') {
+            return data;
+        }
+        
+        // 카테고리에 따라 데이터 필터링
+        return data.filter(item => {
+            if (!item.category) return false;
+            
+            const category = item.category.toLowerCase();
+            
+            switch(this.currentCategoryFilter) {
+                case 'psac':
+                    return category === 'psac';
+                case 'relay':
+                    return category === 'relay' || category === 'relay school';
+                default:
+                    return true;
+            }
+        });
+    }
+    
     // 선택된 항목들 삭제
     async deleteSelectedItems() {
         const checkedBoxes = document.querySelectorAll('input[type="checkbox"][data-id]:checked');
@@ -1535,6 +1602,7 @@ class PageManager {
             case '아카데미':
                 return `
                     <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
+                    <td class="col-category">${item.category || ''}</td>
                     <td>${item.titleKR || '제목 없음'}</td>
                     <td class="col-date">${item.date || ''}</td>
                     <td class="col-status"><span class="status-badge ${item.state === 'on' ? 'status-active' : 'status-inactive'}">${item.state === 'on' ? 'ON' : 'OFF'}</span></td>
@@ -2236,13 +2304,13 @@ class PageManager {
         const formHTML = `
             <div class="gallery-readonly-notice">
                 <i class="fas fa-info-circle"></i>
-                이미지들은 수정할 수 없습니다. 제목, 내용${isContentType ? ', 상세 내용' : ''} 및 활성화 상태만 수정 가능합니다.
+                이미지들은 수정할 수 없습니다. 신규 등록을 통해 추가해주시기 바랍니다. (제목, 내용${isContentType ? ', 상세 내용' : ''} 및 활성화 상태만 수정 가능합니다.)
             </div>
             
             <div class="gallery-image-container">
                 <div class="gallery-image-section" style="flex: 1;">
                     <h4>모든 이미지들 (${imageArray.length}개)</h4>
-                    <div class="gallery-image-preview" style="height: auto; max-height: 500px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; padding: 15px;">
+                    <div class="gallery-image-preview" style="height: auto; max-height: 500px;">
                         ${allImagesHTML}
                     </div>
                 </div>
@@ -2258,6 +2326,18 @@ class PageManager {
                     <input type="text" name="titleEng" value="${titleEng}" required>
                 </div>
             </div>
+            
+            ${pageType === '아카데미' ? `
+            <div class="edit-form-row">
+                <div class="edit-form-group" style="width: 100%;">
+                    <label>카테고리</label>
+                    <select name="category" required>
+                        <option value="psac" ${(item.category || '').toLowerCase() === 'psac' ? 'selected' : ''}>PSAC</option>
+                        <option value="relay" ${(item.category || '').toLowerCase() === 'relay' ? 'selected' : ''}>Relay School</option>
+                    </select>
+                </div>
+            </div>
+            ` : ''}
             
             ${isContentType ? `
             <div class="edit-form-row">
@@ -2687,6 +2767,7 @@ async function saveGalleryEditedItem() {
     
     // 원본 아이템의 읽기 전용 필드들 유지
     const originalItem = window.currentGalleryEditItem;
+    const pageType = window.currentGalleryPageType;
     
     // 🟡 디버깅: 수정할 데이터 확인
     console.log('📝 [DEBUG] 폼에서 가져온 데이터:', updatedData);
@@ -2702,8 +2783,12 @@ async function saveGalleryEditedItem() {
         state: updatedData.active === 'true' ? 'on' : 'off'
     };
     
+    // 아카데미인 경우 카테고리 필드 추가
+    if (pageType === '아카데미') {
+        finalData.category = updatedData.category || originalItem.category;
+    }
+    
     // 컨텐츠 타입인 경우 내용 필드 추가
-    const pageType = window.currentGalleryPageType;
     if (pageType === '인사이드' || pageType === '아카데미') {
         finalData.contentKR = updatedData.contentKor || '';
         finalData.contentEN = updatedData.contentEng || '';
@@ -2834,6 +2919,31 @@ async function savePressEditedItem() {
         console.error('보도자료 수정 오류:', error);
         alert('오류: 수정에 실패했습니다.');
     }
+}
+
+// ESC 키로 모달 닫기 기능 설정
+function setupModalKeyboardEvents() {
+    document.addEventListener('keydown', (event) => {
+        // ESC 키가 눌렸을 때
+        if (event.key === 'Escape') {
+            // 현재 열려있는 모달 찾기
+            const groupModal = document.getElementById('groupEditSelectModal');
+            const editModal = document.getElementById('editModal');
+            const galleryModal = document.getElementById('galleryEditModal');
+            
+            // 열려있는 모달을 순서대로 확인하여 닫기
+            if (groupModal && groupModal.style.display === 'flex') {
+                closeGroupEditSelectModal();
+                event.preventDefault();
+            } else if (editModal && editModal.style.display === 'flex') {
+                closeEditModal();
+                event.preventDefault();
+            } else if (galleryModal && galleryModal.style.display === 'flex') {
+                closeGalleryEditModal();
+                event.preventDefault();
+            }
+        }
+    });
 }
 
 </script>

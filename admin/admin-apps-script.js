@@ -1146,14 +1146,25 @@ function updateItem(sheetType, itemId, updateData) {
           'date': 2,      // 날짜
           'titleKR': 3,   // 한글 제목
           'titleEN': 4,   // 영어 제목
-          'image': 5,     // 이미지 배열
           'state': 6      // 상태 (on/off)
         };
         
-        // 인사이드/아카데미 갤러리인 경우 내용 필드 추가
-        if (['SHEET_GAL_C', 'SHEET_GAL_F'].includes(sheetType)) {
-          galleryFieldMappings['contentKR'] = 6; // 한글 내용
-          galleryFieldMappings['contentEN'] = 7; // 영어 내용
+        // 갤러리 아카데미인 경우 카테고리 필드 추가
+        if (sheetType === 'SHEET_GAL_F') {
+          galleryFieldMappings['category'] = 5;  // 카테고리 (PSAC/Relay School)
+          galleryFieldMappings['contentKR'] = 7; // 한글 내용
+          galleryFieldMappings['contentEN'] = 8; // 영어 내용
+          galleryFieldMappings['image'] = 9;     // 이미지 배열
+        }
+        // 인사이드 갤러리인 경우 내용 필드 추가  
+        else if (sheetType === 'SHEET_GAL_C') {
+          galleryFieldMappings['contentKR'] = 7; // 한글 내용
+          galleryFieldMappings['contentEN'] = 8; // 영어 내용
+          galleryFieldMappings['image'] = 9;     // 이미지 배열
+        }
+        // 인허가, 유자격 갤러리인 경우
+        else {
+          galleryFieldMappings['image'] = 5;     // 이미지 배열
         }
         
         columnIndex = galleryFieldMappings[key];

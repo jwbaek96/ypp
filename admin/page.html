@@ -963,7 +963,8 @@ class PageManager {
                 location: '아카데미 > PSAC',
                 link: '/pages/academy/index.html?tab=psac',
                 apiSheet: 'SHEET_APPLY_P',
-                dataKey: 'applyPSAC'
+                dataKey: 'applyPSAC',
+                createlink: '/pages/academy/index.html?tab=apply'
             },
             'RelaySchool': {
                 title: 'Relay School 신청',
@@ -971,7 +972,8 @@ class PageManager {
                 location: '아카데미 > Relay School',
                 link: '/pages/academy/index.html?tab=relay-school',
                 apiSheet: 'SHEET_APPLY_R',
-                dataKey: 'applyRelay'
+                dataKey: 'applyRelay',
+                createlink: '/pages/academy/index.html?tab=apply'
             },
             '자주묻는질문': {
                 title: '자주 묻는 질문',
@@ -1017,17 +1019,18 @@ class PageManager {
             return;
         }
         
-        // 새로 추가 버튼 이벤트 설정 (가장 먼저)
-        this.setupAddButton();
-        
         // 페이지 정보 업데이트
         this.updatePageInfo(config);
         
         // 데이터 카운트 로드
         await this.loadPageCount(config);
         
+        
         // 실제 데이터 로드 및 테이블 렌더링
         await this.loadPageData(config);
+        
+        // 새로 추가 버튼 이벤트 설정
+        this.setupAddButton();
         
         // 정렬 토글 버튼 이벤트 설정
         this.setupSortToggle();
@@ -1422,11 +1425,22 @@ class PageManager {
     setupDeleteButtons() {
         const deleteSelectedBtn = document.getElementById('btn-delete-selected');
         
-        if (!deleteSelectedBtn) return;
+        if (!deleteSelectedBtn) {
+            console.warn('선택 삭제 버튼을 찾을 수 없습니다.');
+            return;
+        }
         
-        deleteSelectedBtn.addEventListener('click', async () => {
+        // 기존 이벤트 리스너 제거 후 새로 추가
+        deleteSelectedBtn.replaceWith(deleteSelectedBtn.cloneNode(true));
+        const newDeleteBtn = document.getElementById('btn-delete-selected');
+        
+        newDeleteBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            console.log('선택 삭제 버튼 클릭됨');
             await this.deleteSelectedItems();
         });
+        
+        console.log('선택 삭제 버튼 이벤트 설정 완료');
     }
     
     // 새로 추가 버튼 이벤트 설정
@@ -1461,28 +1475,37 @@ class PageManager {
         }
         
         try {
-            // 배치 삭제 API 호출
-            const response = await fetch(this.appsScriptUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    action: 'batchDelete',
-                    sheet: this.currentConfig.apiSheet,
-                    ids: ids
-                })
-            });
+            // 개별 삭제 방식으로 변경 (CORS 오류 해결)
+            let successCount = 0;
+            let failCount = 0;
             
-            const result = await response.json();
-            
-            if (result.success) {
-                // 성공: 페이지 새로고침
-                location.reload();
-            } else {
-                // 실패: 오류 메시지 표시
-                alert(`오류: 삭제에 실패했습니다. (${result.message})`);
+            for (const id of ids) {
+                try {
+                    const deleteUrl = `${this.appsScriptUrl}?action=delete&sheet=${this.currentConfig.apiSheet}&id=${encodeURIComponent(id)}`;
+                    const response = await fetch(deleteUrl, { method: 'GET' });
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        successCount++;
+                    } else {
+                        failCount++;
+                        console.error(`항목 ${id} 삭제 실패:`, result.message);
+                    }
+                } catch (itemError) {
+                    failCount++;
+                    console.error(`항목 ${id} 삭제 오류:`, itemError);
+                }
             }
+            
+            // 결과 메시지 표시
+            if (failCount === 0) {
+                alert(`${successCount}개 항목이 성공적으로 삭제되었습니다.`);
+            } else {
+                alert(`${successCount}개 항목이 삭제되었습니다.\n${failCount}개 항목 삭제에 실패했습니다.`);
+            }
+            
+            // 페이지 새로고침
+            location.reload();
             
         } catch (error) {
             console.error('선택 삭제 오류:', error);
@@ -1640,21 +1663,53 @@ class PageManager {
     // 체크박스 이벤트 설정
     setupCheckboxEvents() {
         const selectAll = document.getElementById('select-all');
-        const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
         const deleteBtn = document.getElementById('btn-delete-selected');
         
-        // 전체 선택 체크박스
-        selectAll.addEventListener('change', (e) => {
-            checkboxes.forEach(cb => cb.checked = e.target.checked);
-            this.updateDeleteButton();
-        });
-        
-        // 개별 체크박스
-        checkboxes.forEach(cb => {
-            cb.addEventListener('change', () => {
+        // 전체 선택 체크박스 (기존 이벤트 제거 후 추가)
+        if (selectAll) {
+            selectAll.replaceWith(selectAll.cloneNode(true)); // 기존 이벤트 리스너 제거
+            const newSelectAll = document.getElementById('select-all');
+            
+            newSelectAll.addEventListener('change', (e) => {
+                const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+                checkboxes.forEach(cb => cb.checked = e.target.checked);
                 this.updateDeleteButton();
             });
-        });
+        }
+        
+        // 개별 체크박스 - 이벤트 위임 사용
+        const tableBody = document.getElementById('data-table-body');
+        if (tableBody) {
+            // 기존 이벤트 리스너 제거
+            tableBody.removeEventListener('change', this.handleCheckboxChange);
+            
+            // 새 이벤트 리스너 추가 (이벤트 위임)
+            this.handleCheckboxChange = (e) => {
+                if (e.target.matches('input[type="checkbox"][data-id]')) {
+                    this.updateDeleteButton();
+                    
+                    // 전체 선택 체크박스 상태 업데이트
+                    const allCheckboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+                    const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"][data-id]:checked');
+                    const selectAllBox = document.getElementById('select-all');
+                    
+                    if (selectAllBox) {
+                        if (checkedCheckboxes.length === 0) {
+                            selectAllBox.checked = false;
+                            selectAllBox.indeterminate = false;
+                        } else if (checkedCheckboxes.length === allCheckboxes.length) {
+                            selectAllBox.checked = true;
+                            selectAllBox.indeterminate = false;
+                        } else {
+                            selectAllBox.checked = false;
+                            selectAllBox.indeterminate = true;
+                        }
+                    }
+                }
+            };
+            
+            tableBody.addEventListener('change', this.handleCheckboxChange);
+        }
     }
     
     // 삭제 버튼 상태 업데이트
@@ -1662,13 +1717,23 @@ class PageManager {
         const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]:checked');
         const deleteBtn = document.getElementById('btn-delete-selected');
         
+        if (!deleteBtn) {
+            console.warn('삭제 버튼을 찾을 수 없습니다.');
+            return;
+        }
+        
         if (checkboxes.length > 0) {
             deleteBtn.disabled = false;
-            deleteBtn.textContent = `선택 삭제 (${checkboxes.length})`;
+            deleteBtn.innerHTML = `<i class="fas fa-trash"></i> 선택 삭제 (${checkboxes.length})`;
         } else {
             deleteBtn.disabled = true;
-            deleteBtn.textContent = '선택 삭제';
+            deleteBtn.innerHTML = `<i class="fas fa-trash"></i> 선택 삭제`;
         }
+        
+        console.log('삭제 버튼 상태 업데이트:', {
+            체크된항목수: checkboxes.length,
+            버튼비활성화: deleteBtn.disabled
+        });
     }
     
     // 로딩 상태 표시
@@ -1701,7 +1766,38 @@ class PageManager {
     // 수정 모달 열기
     openEditModal(item, config) {
         const pageType = new URLSearchParams(window.location.search).get('page');
-
+        
+        console.log('🔧 [DEBUG] openEditModal 호출됨, pageType:', pageType);
+        
+        // 페이지 타입에 따라 적절한 모달 열기
+        switch(pageType) {
+            case 'PSAC':
+            case 'RelaySchool':
+                this.openPSACEditModal(item, config, pageType);
+                break;
+                
+            case '인허가':
+            case '유자격':
+            case '인사이드':
+            case '아카데미':
+                this.openGalleryEditModal(item, config, pageType);
+                break;
+                
+            case '보도자료':
+                this.openPressEditModal(item, config, pageType);
+                break;
+                
+            case '고객문의':
+            case '부패및윤리신고':
+                // 문의 모달 (필요시 추가)
+                alert('해당 항목의 수정 기능은 준비 중입니다.');
+                break;
+                
+            default:
+                // 기본 모달 (필요시 추가)
+                alert('해당 페이지의 수정 기능은 준비 중입니다.');
+                break;
+        }
     }
     
     // PSAC/RelaySchool 수정 모달 열기
@@ -2503,8 +2599,13 @@ async function deleteSelectedGroupItems() {
     }
     
     try {
-        const currentManager = window.adminManager;
-        const config = currentManager.currentGroupConfig;
+        const pageManager = window.pageManagerInstance;
+        const config = pageManager.currentConfig;
+        
+        if (!config) {
+            alert('설정 정보를 찾을 수 없습니다.');
+            return;
+        }
         
         for (const itemId of selectedIds) {
             const deleteUrl = `${pageManager.appsScriptUrl}?action=delete&sheet=${config.apiSheet}&id=${encodeURIComponent(itemId)}`;
@@ -2533,8 +2634,13 @@ async function deleteIndividualGroupItem(itemId) {
     }
     
     try {
-        const currentManager = window.adminManager;
-        const config = currentManager.currentGroupConfig;
+        const pageManager = window.pageManagerInstance;
+        const config = pageManager.currentConfig;
+        
+        if (!config) {
+            alert('설정 정보를 찾을 수 없습니다.');
+            return;
+        }
         
         const deleteUrl = `${pageManager.appsScriptUrl}?action=delete&sheet=${config.apiSheet}&id=${encodeURIComponent(itemId)}`;
         const response = await fetch(deleteUrl, { method: 'GET' });

@@ -67,12 +67,14 @@
                     <a href="#intro" class="tab-link active" data-tab="intro" data-eng="Introduction" data-kor="소개">소개</a>
                     <a href="#relay-school" class="tab-link" data-tab="relay-school">Relay School</a>
                     <a href="#psac" class="tab-link" data-tab="psac">PSAC</a>
+                    <a href="#apply" class="tab-link" data-tab="apply" data-eng="Course Application" data-kor="교육신청">교육신청</a>
+                    <a href="#check" class="tab-link" data-tab="check" data-eng="Check Application" data-kor="신청조회">신청조회</a>
                 </nav>
 
                 <!-- Section Navigation for PSAC -->
                 <div class="section-nav" id="section-nav-psac" style="display: none;">
                     <a href="#psac-overview" class="section-nav-link"
-                        data-eng="Course Overview"
+                        data-eng="Overview"
                         data-kor="과정 개요">과정 개요</a>
                     <a href="#psac-info" class="section-nav-link"
                         data-eng="Course Information"
@@ -80,9 +82,9 @@
                     <a href="#psac-curriculum" class="section-nav-link"
                         data-eng="Curriculum"
                         data-kor="교육 과정">교육 과정</a>
-                    <a href="#psac-apply" class="section-nav-link"
+                    <!-- <a href="#psac-apply" class="section-nav-link"
                         data-eng="Apply for Training"
-                        data-kor="교육 신청">교육 신청</a>
+                        data-kor="교육 신청">교육 신청</a> -->
                     </div>
                     
                     <!-- Section Navigation for Relay School -->
@@ -96,9 +98,9 @@
                         <a href="#rs-curriculum" class="section-nav-link"
                             data-eng="Curriculum"
                             data-kor="교육 과정">교육 과정</a>
-                        <a href="#rs-apply" class="section-nav-link"
+                        <!-- <a href="#rs-apply" class="section-nav-link"
                             data-eng="Apply for Training"
-                            data-kor="교육 신청">교육 신청</a>
+                            data-kor="교육 신청">교육 신청</a> -->
             </div>
         </section>
 
@@ -510,7 +512,7 @@
                                                     </div>
                                                     <div class="contact-item">
                                                         <div class="contact-label">개인:</div>
-                                                        <div class="contact-value">홈페이지 접속(www.ypp.co.kr) → PSAC → 교육신청</div>
+                                                        <div class="contact-value">홈페이지 접속(www.ypp.co.kr) → YPP 아카데미 → 교육신청</div>
                                                     </div>
                                                     <div class="contact-item">
                                                         <div class="contact-label">단체:</div>
@@ -531,7 +533,7 @@
                                                     </div>
                                                     <div class="contact-item">
                                                         <div class="contact-label">Individual:</div>
-                                                        <div class="contact-value">Visit the website (www.ypp.co.kr) → PSAC → Education Application</div>
+                                                        <div class="contact-value">Visit the website (www.ypp.co.kr) → YPP Academy → Course Application</div>
                                                     </div>
                                                     <div class="contact-item">
                                                         <div class="contact-label">Group:</div>
@@ -1564,116 +1566,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- 교육 신청 -->
-                        <div id="psac-apply" class="ac-form-container content-block">
-                            <h3 class="block-title"data-eng="Apply for Training"data-kor="교육 신청">교육 신청</h3>
-                                <!-- <p>Power System Advanced Course 전력계통 전문 과정 신청서</p> -->
-                            <div class="ac-form-content">
-                                <form id="psac-form">                                    
-                                    <!-- 신청업체 정보 -->
-                                    <div class="ac-form-section">
-                                        <h2 class="ac-form-section-title" data-kor="신청업체 정보" data-eng="Applicant Company Information">신청업체 정보</h2>
-
-                                        <div class="ac-form-row">
-                                            <div class="ac-form-group">
-                                                <label for="psac-companyName" class="ac-form-label ac-form-required" data-kor="회사명" data-eng="Company Name">회사명</label>
-                                                <input type="text" id="psac-companyName" name="psac-companyName" class="ac-form-input" required>
-                                            </div>
-                                            <div class="ac-form-group">
-                                                <label for="psac-representative" class="ac-form-label ac-form-required" data-kor="대표자" data-eng="Representative">대표자</label>
-                                                <input type="text" id="psac-representative" name="psac-representative" class="ac-form-input" required>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="ac-form-row">
-                                            <div class="ac-form-group">
-                                                <label for="psac-businessNumber" class="ac-form-label ac-form-required" data-kor="사업자등록번호" data-eng="Business Registration Number">사업자등록번호</label>
-                                                <input type="text" id="psac-businessNumber" name="psac-businessNumber" class="ac-form-input" placeholder="000-00-00000" required>
-                                            </div>
-                                            <div class="ac-form-group">
-                                                <label for="psac-businessType" class="ac-form-label" data-kor="종목/업태" data-eng="Business Type">종목/업태</label>
-                                                <input type="text" id="psac-businessType" name="psac-businessType" class="ac-form-input">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="ac-form-group">
-                                            <label for="psac-address" class="ac-form-label ac-form-required" data-kor="주소" data-eng="Address">주소</label>
-                                            <textarea id="psac-address" name="psac-address" class="ac-form-textarea" required></textarea>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- 담당자 정보 -->
-                                    <div class="ac-form-section">
-                                        <h2 class="ac-form-section-title" data-kor='담당자 정보
-                                            <span class="schedule-note-text" style="color: red; font-weight: normal;">( ☞ 기업의 교육담당자가 단체 및 개인을 대신하여 신청할 경우 / 기업의 개인이 신청할 때 교육담당자가 교육비 결제 등의 행정업무를 대신할 경우)</span>'
-                                            data-eng='Person in Charge Information
-                                            <span class="schedule-note-text" style="color: red; font-weight: normal;">( ☞ Special courses are conducted after consultation with education consumers on curriculum, schedule, and tuition fees (detailed annual training schedules are separately disclosed at the beginning of each year)</span>'>
-                                        </h2>
-                                        
-                                        <div class="ac-form-row">
-                                            <div class="ac-form-group">
-                                                <label for="psac-managerName" class="ac-form-label" data-kor="교육담당자" data-eng="Education Officer">교육담당자</label>
-                                                <input type="text" id="psac-managerName" name="psac-managerName" class="ac-form-input" >
-                                            </div>
-                                            <div class="ac-form-group">
-                                                <label for="psac-managerDepartment" class="ac-form-label" data-kor="담당부서" data-eng="Department">담당부서</label>
-                                                <input type="text" id="psac-managerDepartment" name="psac-managerDepartment" class="ac-form-input">
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- <div class="ac-form-row">
-                                            <div class="ac-form-group">
-                                                <label for="psac-managerPosition" class="ac-form-label" data-kor="직급" data-eng="Position">직급</label>
-                                                <input type="text" id="psac-managerPosition" name="managerPosition" class="ac-form-input">
-                                            </div>
-                                            <div class="ac-form-group">
-                                                <label for="psac-managerPhone" class="ac-form-label" data-kor="전화번호" data-eng="Phone Number">전화번호</label>
-                                                <input type="tel" id="psac-managerPhone" name="psac-managerPhone" class="ac-form-input" placeholder="000-0000-0000">
-                                            </div>
-                                        </div> -->
-                                        
-                                        <div class="ac-form-row">
-                                            <div class="ac-form-group">
-                                                <label for="psac-managerMobile" class="ac-form-label" data-kor="연락처" data-eng="Phone"></label>
-                                                <input type="tel" id="psac-managerMobile" name="psac-managerMobile" class="ac-form-input" placeholder="010-0000-0000" >
-                                            </div>
-                                            <div class="ac-form-group">
-                                                <label for="psac-managerEmail" class="ac-form-label" data-kor="이메일" data-eng="E-mail">이메일</label>
-                                                <input type="email" id="psac-managerEmail" name="psac-managerEmail" class="ac-form-input" >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- 수강자 정보 -->
-                                    <div class="ac-form-section">
-                                        <h2 class="ac-form-section-title" data-kor="수강자 정보" data-eng="Student Information">수강자 정보</h2>
-                                        <p style="margin-bottom: 20px; color: #666; font-size: 14px;" data-kor="각 수강자별로 원하는 세부교육을 개별 선택할 수 있습니다." data-eng="Each participant can individually select desired detailed courses.">
-                                            각 수강자별로 원하는 세부교육을 개별 선택할 수 있습니다.
-                                        </p>
-                                        
-                                        <button type="button" class="ac-form-btn ac-form-btn-secondary ac-form-add-btn" onclick="addPsacStudent()" data-kor="+ 수강자 추가" data-eng="+ Add Participant">
-                                            + 수강자 추가
-                                        </button>
-                                        
-                                        <div id="psac-students-container">
-                                            <!-- 수강자 정보가 동적으로 추가됩니다 -->
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- 메시지 및 로딩 -->
-                                    <div class="ac-form-message" id="psac-message"></div>
-                                    <div class="ac-form-loading" id="psac-loading">
-                                        <p data-kor="신청서를 제출하는 중입니다..." data-eng="Submitting application...">신청서를 제출하는 중입니다...</p>
-                                    </div>
-                                    
-                                    <!-- 제출 버튼 -->
-                                    <button type="submit" class="ac-form-btn ac-form-btn-success" data-kor="교육신청 접수" data-eng="Submit Application">
-                                        교육신청 접수
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -1938,8 +1830,8 @@
                                             data-eng="Application"
                                             data-kor="신청방법">신청방법</td>
                                             <td class="info-value"
-                                            data-eng="Website: www.ypp.co.kr → YPP Academy → Relay School → Application<br>Email: yppedu@ypp.co.kr"
-                                            data-kor="홈페이지: www.ypp.co.kr → YPP 아카데미 → Relay School → 교육신청<br>이메일: yppedu@ypp.co.kr">홈페이지: www.ypp.co.kr → YPP 아카데미 → Relay School → 교육신청<br>이메일: yppedu@ypp.co.kr</td>
+                                            data-eng="Website: www.ypp.co.kr → YPP Academy → Application → Relay School <br>Email: yppedu@ypp.co.kr"
+                                            data-kor="홈페이지: www.ypp.co.kr → YPP 아카데미 → 교육신청 → Relay School <br>이메일: yppedu@ypp.co.kr">홈페이지: www.ypp.co.kr → YPP 아카데미 → Relay School → 교육신청<br>이메일: yppedu@ypp.co.kr</td>
                                         </tr>
                                         <tr>
                                             <td class="info-label"
@@ -2535,112 +2427,112 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- 교육 신청 -->
-                        <div id="rs-apply" class="ac-form-container content-block">
-                            <h3 class="block-title" data-eng="Apply for Training" data-kor="교육 신청">교육 신청</h3>
-                            
-                            <div class="ac-form-content">
-                                <form id="relayschool-form">
-                                    <!-- 신청업체 정보 -->
-                                    <div class="ac-form-section">
-                                        <h2 class="ac-form-section-title" data-kor="신청업체 정보" data-eng="Applicant Company Information">신청업체 정보</h2>
+                    </div>
+                </div>
 
-                                        <div class="ac-form-row">
-                                            <div class="ac-form-group">
-                                                <label for="relayschool-companyName" class="ac-form-label ac-form-required" data-kor="회사명" data-eng="Company Name">회사명</label>
-                                                <input type="text" id="relayschool-companyName" name="relayschool-companyName" class="ac-form-input" required>
-                                            </div>
-                                            <div class="ac-form-group">
-                                                <label for="relayschool-representative" class="ac-form-label ac-form-required" data-kor="대표자" data-eng="Representative">대표자</label>
-                                                <input type="text" id="relayschool-representative" name="relayschool-representative" class="ac-form-input" required>
-                                            </div>
+                <!-- 교육신청 탭 콘텐츠 -->
+                <div id="apply" class="tab-content">
+                    <div class="apply-section">
+                        <div class="container">
+                            <!-- 교육 선택 -->
+                            <div class="course-selection">
+                                <h3 data-kor="교육과정 선택" data-eng="Select Course">교육과정 선택</h3>
+                                <div class="course-options">
+                                    <div class="course-option">
+                                        <input type="radio" id="course-relay" name="course-type" value="relay">
+                                        <label for="course-relay">
+                                            <h4>Relay School</h4>
+                                            <p data-kor="보호릴레이 전문 교육과정" data-eng="Professional Protection Relay Course">보호릴레이 전문 교육과정</p>
+                                        </label>
+                                    </div>
+                                    <div class="course-option">
+                                        <input type="radio" id="course-psac" name="course-type" value="psac">
+                                        <label for="course-psac">
+                                            <h4>PSAC (Power System Analysis Course)</h4>
+                                            <p data-kor="전력계통 해석 전문 교육과정" data-eng="Professional Power System Analysis Course">전력계통 해석 전문 교육과정</p>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 선택된 교육과정 폼 -->
+                            <div id="selected-course-form" class="selected-course-form" style="display: none;">
+                                <!-- PSAC 폼 -->
+                                <div id="psac-apply-form" class="course-apply-form" style="display: none;">
+                                    <h3 data-kor="PSAC 교육 신청" data-eng="PSAC Application"></h3>
+                                    <div id="psac-form-container"></div>
+                                </div>
+                                
+                                <!-- Relay School 폼 -->
+                                <div id="relay-apply-form" class="course-apply-form" style="display: none;">
+                                    <h3 data-kor="Relay School 교육 신청" data-eng="Relay School Application"></h3>
+                                    <div id="relay-form-container"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 신청확인 탭 콘텐츠 -->
+                <div id="check" class="tab-content">
+                    <div class="check-section">
+                        <div class="container">
+                            <!-- <h2 data-kor="신청 확인 및 수정" data-eng="Application Check & Edit">신청 확인 및 수정</h2> -->
+                            
+                            <!-- 검색 폼 -->
+                            <div class="check-search">
+                                <h3 data-kor="신청 정보 검색" data-eng="Search Application">신청 정보 검색</h3>
+                                <form id="application-search-form" class="search-form">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="search-business-number" data-kor="사업자등록번호" data-eng="Business Registration Number">사업자등록번호</label>
+                                            <input type="text" id="search-business-number" name="businessNumber" placeholder="000-00-00000" required>
                                         </div>
-                                        
-                                        <div class="ac-form-row">
-                                            <div class="ac-form-group">
-                                                <label for="relayschool-businessNumber" class="ac-form-label ac-form-required" data-kor="사업자등록번호" data-eng="Business Registration Number">사업자등록번호</label>
-                                                <input type="text" id="relayschool-businessNumber" name="relayschool-businessNumber" class="ac-form-input" placeholder="000-00-00000" required>
-                                            </div>
-                                            <div class="ac-form-group">
-                                                <label for="relayschool-businessType" class="ac-form-label" data-kor="종목/업태" data-eng="Business Type">종목/업태</label>
-                                                <input type="text" id="relayschool-businessType" name="relayschool-businessType" class="ac-form-input">
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="search-student-name" data-kor="수강자명" data-eng="Student Name">수강자명</label>
+                                            <input type="text" id="search-student-name" name="studentName" required>
                                         </div>
-                                        
-                                        <div class="ac-form-group">
-                                            <label for="relayschool-address" class="ac-form-label ac-form-required" data-kor="주소" data-eng="Address">주소</label>
-                                            <textarea id="relayschool-address" name="relayschool-address" class="ac-form-textarea" required></textarea>
+                                        <div class="form-group">
+                                            <label for="search-student-phone" data-kor="수강자 연락처" data-eng="Student Mobile">수강자 핸드폰번호</label>
+                                            <input type="tel" id="search-student-phone" name="studentPhone" placeholder="010-0000-0000" required>
                                         </div>
                                     </div>
-                                    
-                                    <!-- 담당자 정보 -->
-                                    <div class="ac-form-section">
-                                        <h2 class="ac-form-section-title" data-kor='담당자 정보
-                                            <span class="schedule-note-text" style="color: red; font-weight: normal;">( ☞ 기업의 교육담당자가 단체 및 개인을 대신하여 신청할 경우 / 기업의 개인이 신청할 때 교육담당자가 교육비 결제 등의 행정업무를 대신할 경우)</span>'
-                                            data-eng='Person in Charge Information
-                                            <span class="schedule-note-text" style="color: red; font-weight: normal;">( ☞ Special courses are conducted after consultation with education consumers on curriculum, schedule, and tuition fees (detailed annual training schedules are separately disclosed at the beginning of each year)</span>'>
-                                        </h2>
-                                        <div class="ac-form-row">
-                                            <div class="ac-form-group">
-                                                <label for="relayschool-managerName" class="ac-form-label" data-kor="교육담당자" data-eng="Education Officer">교육담당자</label>
-                                                <input type="text" id="relayschool-managerName" name="relayschool-managerName" class="ac-form-input" >
-                                            </div>
-                                            <div class="ac-form-group">
-                                                <label for="relayschool-managerDepartment" class="ac-form-label" data-kor="담당부서" data-eng="Department">담당부서</label>
-                                                <input type="text" id="relayschool-managerDepartment" name="relayschool-managerDepartment" class="ac-form-input">
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- <div class="ac-form-row">
-                                            <div class="ac-form-group">
-                                                <label for="relayschool-managerPosition" class="ac-form-label" data-kor="직급" data-eng="Position">직급</label>
-                                                <input type="text" id="relayschool-managerPosition" name="relayschool-managerPosition" class="ac-form-input">
-                                            </div>
-                                            <div class="ac-form-group">
-                                                <label for="relayschool-managerPhone" class="ac-form-label" data-kor="전화번호" data-eng="Phone Number">전화번호</label>
-                                                <input type="tel" id="relayschool-managerPhone" name="relayschool-managerPhone" class="ac-form-input" placeholder="000-0000-0000">
-                                            </div>
-                                        </div> -->
-                                        
-                                        <div class="ac-form-row">
-                                            <div class="ac-form-group">
-                                                <label for="relayschool-managerMobile" class="ac-form-label" data-kor="연락처" data-eng="Phone">연락처</label>
-                                                <input type="tel" id="relayschool-managerMobile" name="relayschool-managerMobile" class="ac-form-input" placeholder="010-0000-0000" >
-                                            </div>
-                                            <div class="ac-form-group">
-                                                <label for="relayschool-managerEmail" class="ac-form-label" data-kor="이메일" data-eng="Email">이메일</label>
-                                                <input type="email" id="relayschool-managerEmail" name="relayschool-managerEmail" class="ac-form-input" >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- 수강자 정보 -->
-                                    <div class="ac-form-section">
-                                        <h2 class="ac-form-section-title" data-kor="수강자 정보" data-eng="Participant Information">수강자 정보</h2>
-                                        <p style="margin-bottom: 20px; color: #666; font-size: 14px;" data-kor="수강자별로 원하는 교육 과정과 일정을 선택해 주세요." data-eng="Please select the desired training course and schedule for each participant.">
-                                            수강자별로 원하는 교육 과정과 일정을 선택해 주세요.
-                                        </p>
-                                        
-                                        <button type="button" class="ac-form-btn ac-form-btn-secondary ac-form-add-btn" onclick="addRelayschoolStudent()" data-kor="+ 수강자 추가" data-eng="+ Add Participant">
-                                            + 수강자 추가
-                                        </button>
-                                        
-                                        <div id="relayschool-students-container">
-                                            <!-- 수강자 정보가 동적으로 추가됩니다 -->
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- 메시지 및 로딩 -->
-                                    <div class="ac-form-message" id="rs-message"></div>
-                                    <div class="ac-form-loading" id="rs-loading">
-                                        <p data-kor="신청서를 제출하는 중입니다..." data-eng="Submitting application...">신청서를 제출하는 중입니다...</p>
-                                    </div>
-                                    
-                                    <!-- 제출 버튼 -->
-                                    <button type="submit" class="ac-form-btn ac-form-btn-success">
-                                        <span data-kor="교육신청 접수" data-eng="Submit Application"></span>
-                                    </button>
+                                    <button type="submit" class="search-btn" data-kor="신청 정보 조회" data-eng="Search Application">신청 정보 조회</button>
                                 </form>
+                            </div>
+                            
+                            <!-- 검색 결과 -->
+                            <div id="search-results" class="search-results" style="display: none;">
+                                <h3 data-kor="검색 결과" data-eng="Search Results">검색 결과</h3>
+                                
+                                <!-- 로딩 표시 -->
+                                <div id="loading-indicator" style="display: none; text-align: center; padding: 10dvh 2rem; color: #4a90e2;">
+                                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                                    <div style="font-size: 1.1rem; font-weight: 500;">조회중입니다...</div>
+                                </div>
+                                
+                                <div id="search-results-list" class="results-list">
+                                    <!-- 검색 결과가 여기에 표시됩니다 -->
+                                </div>
+                            </div>
+                            
+                            <!-- 수정 폼 모달 -->
+                            <div id="edit-application-modal" class="edit-modal" style="display: none;">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 id="edit-modal-title" data-kor="신청서 수정" data-eng="Edit Application">신청서 수정</h3>
+                                        <button class="modal-close" onclick="closeEditModal()">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="edit-form-container">
+                                            <!-- 수정 폼이 여기에 표시됩니다 -->
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn-cancel" onclick="closeEditModal()" data-kor="취소" data-eng="Cancel">취소</button>
+                                        <button type="button" class="btn-save" onclick="saveApplication()" data-kor="저장" data-eng="Save">저장</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2707,6 +2599,9 @@ class AcademyPageController {
                 const newUrl = new URL(window.location);
                 newUrl.searchParams.set('tab', tabId);
                 window.history.pushState(null, null, newUrl);
+                
+                // 페이지 맨 위로 스크롤
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
     }
@@ -2762,7 +2657,7 @@ class AcademyPageController {
     
     // 유효한 탭인지 확인
     isValidTab(tabId) {
-        const validTabs = ['intro', 'psac', 'relay-school'];
+        const validTabs = ['intro', 'psac', 'relay-school', 'apply', 'check'];
         return validTabs.includes(tabId);
     }
     
@@ -2869,6 +2764,37 @@ class AcademyPageController {
         
         // 키보드 네비게이션 (옵션)
         this.setupKeyboardNavigation();
+    }
+    
+    // 키보드 네비게이션 설정
+    setupKeyboardNavigation() {
+        // 키보드 단축키로 탭 이동 (옵션)
+        document.addEventListener('keydown', (e) => {
+            if (e.altKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        this.switchTab('intro');
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        this.switchTab('psac');
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        this.switchTab('relay-school');
+                        break;
+                    case '4':
+                        e.preventDefault();
+                        this.switchTab('apply');
+                        break;
+                    case '5':
+                        e.preventDefault();
+                        this.switchTab('check');
+                        break;
+                }
+            }
+        });
     }
     
     // 스크롤 스파이 (현재 보이는 섹션 자동 감지)
@@ -3132,11 +3058,731 @@ document.addEventListener('DOMContentLoaded', function() {
 </body>
 </html>
 
+<script>
+// 교육신청 탭 기능
+class CourseApplicationManager {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.setupCourseSelection();
+        this.setupApplicationSearch();
+    }
+    
+    // 교육과정 선택 기능
+    setupCourseSelection() {
+        const courseOptions = document.querySelectorAll('input[name="course-type"]');
+        const selectedForm = document.getElementById('selected-course-form');
+        const psacForm = document.getElementById('psac-apply-form');
+        const relayForm = document.getElementById('relay-apply-form');
+        
+        courseOptions.forEach(option => {
+            option.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    selectedForm.style.display = 'block';
+                    
+                    if (e.target.value === 'psac') {
+                        psacForm.style.display = 'block';
+                        relayForm.style.display = 'none';
+                        this.loadPsacForm();
+                    } else if (e.target.value === 'relay') {
+                        psacForm.style.display = 'none';
+                        relayForm.style.display = 'block';
+                        this.loadRelayForm();
+                    }
+                }
+            });
+        });
+    }
+    
+    // PSAC 폼 로드
+    loadPsacForm() {
+        const container = document.getElementById('psac-form-container');
+        // PSAC 폼 HTML을 새로 생성
+        const formHtml = this.generatePsacFormHtml();
+        container.innerHTML = formHtml;
+        
+        // form.js의 초기화 로직 재실행
+        setTimeout(() => {
+            // 첫 번째 수강자 자동 추가
+            addPsacStudent();
+            
+            // 제출 이벤트 핸들러 연결 (form.js에서 처리)
+            const form = document.getElementById('psac-form');
+            if (form && typeof submitPsacForm === 'function') {
+                form.addEventListener('submit', submitPsacForm);
+            }
+            
+            // 포맷팅 함수들 적용
+            const businessInput = document.getElementById('psac-businessNumber');
+            if (businessInput && typeof formatBusinessNumber === 'function') {
+                businessInput.addEventListener('input', function(e) {
+                    e.target.value = formatBusinessNumber(e.target.value);
+                });
+            }
+            
+            const phoneInput = document.getElementById('psac-managerMobile');
+            if (phoneInput && typeof formatPhoneNumber === 'function') {
+                phoneInput.addEventListener('input', function(e) {
+                    e.target.value = formatPhoneNumber(e.target.value);
+                });
+            }
+        }, 100);
+    }
+    
+    // Relay School 폼 로드
+    loadRelayForm() {
+        const container = document.getElementById('relay-form-container');
+        // Relay School 폼 HTML을 새로 생성
+        const formHtml = this.generateRelayFormHtml();
+        container.innerHTML = formHtml;
+        
+        // form.js의 초기화 로직 재실행
+        setTimeout(() => {
+            // 첫 번째 수강자 자동 추가
+            addRelayschoolStudent();
+            
+            // 제출 이벤트 핸들러 연결 (form.js에서 처리)
+            const form = document.getElementById('relayschool-form');
+            if (form && typeof submitRelayschoolForm === 'function') {
+                form.addEventListener('submit', submitRelayschoolForm);
+            }
+            
+            // 포맷팅 함수들 적용
+            const businessInput = document.getElementById('relayschool-businessNumber');
+            if (businessInput && typeof formatBusinessNumber === 'function') {
+                businessInput.addEventListener('input', function(e) {
+                    e.target.value = formatBusinessNumber(e.target.value);
+                });
+            }
+            
+            const phoneInput = document.getElementById('relayschool-managerMobile');
+            if (phoneInput && typeof formatPhoneNumber === 'function') {
+                phoneInput.addEventListener('input', function(e) {
+                    e.target.value = formatPhoneNumber(e.target.value);
+                });
+            }
+        }, 100);
+    }
+    
+    // PSAC 폼 HTML 생성
+    generatePsacFormHtml() {
+        return `
+            <form id="psac-form">
+                <!-- 신청업체 정보 -->
+                <div class="ac-form-section">
+                    <h2 class="ac-form-section-title" data-kor="신청업체 정보" data-eng="Applicant Company Information">신청업체 정보</h2>
+                    
+                    <div class="ac-form-row">
+                        <div class="ac-form-group">
+                            <label for="psac-companyName" class="ac-form-label ac-form-required" data-kor="회사명" data-eng="Company Name">회사명</label>
+                            <input type="text" id="psac-companyName" name="psac-companyName" class="ac-form-input" required>
+                        </div>
+                        <div class="ac-form-group">
+                            <label for="psac-representative" class="ac-form-label ac-form-required" data-kor="대표자" data-eng="Representative">대표자</label>
+                            <input type="text" id="psac-representative" name="psac-representative" class="ac-form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="ac-form-row">
+                        <div class="ac-form-group">
+                            <label for="psac-businessNumber" class="ac-form-label ac-form-required" data-kor="사업자등록번호" data-eng="Business Registration Number">사업자등록번호</label>
+                            <input type="text" id="psac-businessNumber" name="psac-businessNumber" class="ac-form-input" placeholder="000-00-00000" required>
+                        </div>
+                        <div class="ac-form-group">
+                            <label for="psac-businessType" class="ac-form-label" data-kor="종목/업태" data-eng="Business Type">종목/업태</label>
+                            <input type="text" id="psac-businessType" name="psac-businessType" class="ac-form-input">
+                        </div>
+                    </div>
+                    
+                    <div class="ac-form-group">
+                        <label for="psac-address" class="ac-form-label ac-form-required" data-kor="주소" data-eng="Address">주소</label>
+                        <textarea id="psac-address" name="psac-address" class="ac-form-textarea" required></textarea>
+                    </div>
+                </div>
+                
+                <!-- 담당자 정보 -->
+                <div class="ac-form-section">
+                    <h2 class="ac-form-section-title" 
+                        data-kor='담당자 정보<br>
+                        <span class="schedule-note-text" style="color: #e21700; font-weight: normal;">
+                            ( ☞ 기업의 교육담당자가 단체 및 개인을 대신하여 신청할 경우 / 기업의 개인이 신청할 때 교육담당자가 교육비 결제 등의 행정업무를 대신할 경우)</span>'
+                        data-eng='Person in Charge Information<br>
+                        <span class="schedule-note-text" style="color: #e21700; font-weight: normal;">
+                            ( ☞ When a corporate training officer applies on behalf of groups and individuals / When an individual in a company applies and the training officer handles administrative tasks such as tuition payment)</span>'>
+                    </h2>
+                    
+                    <div class="ac-form-row">
+                        <div class="ac-form-group">
+                            <label for="psac-managerName" class="ac-form-label" data-kor="교육담당자" data-eng="Education Officer">교육담당자</label>
+                            <input type="text" id="psac-managerName" name="psac-managerName" class="ac-form-input">
+                        </div>
+                        <div class="ac-form-group">
+                            <label for="psac-managerDepartment" class="ac-form-label" data-kor="담당부서" data-eng="Department">담당부서</label>
+                            <input type="text" id="psac-managerDepartment" name="psac-managerDepartment" class="ac-form-input">
+                        </div>
+                    </div>
+                    
+                    <div class="ac-form-row">
+                        <div class="ac-form-group">
+                            <label for="psac-managerMobile" class="ac-form-label" data-kor="연락처" data-eng="Phone">연락처</label>
+                            <input type="tel" id="psac-managerMobile" name="psac-managerMobile" class="ac-form-input" placeholder="010-0000-0000">
+                        </div>
+                        <div class="ac-form-group">
+                            <label for="psac-managerEmail" class="ac-form-label" data-kor="이메일" data-eng="E-mail">이메일</label>
+                            <input type="email" id="psac-managerEmail" name="psac-managerEmail" class="ac-form-input">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 수강자 정보 -->
+                <div class="ac-form-section">
+                    <h2 class="ac-form-section-title" data-kor="수강자 정보" data-eng="Student Information">수강자 정보</h2>
+                    <p style="margin-bottom: 20px; color: #666; font-size: 14px;" data-kor="각 수강자별로 원하는 세부교육을 개별 선택할 수 있습니다." data-eng="Each participant can individually select desired detailed courses.">
+                        각 수강자별로 원하는 세부교육을 개별 선택할 수 있습니다.
+                    </p>
+                            
+                    <div id="psac-students-container">
+                        <!-- 수강자 정보가 동적으로 추가됩니다 -->
+                    </div>
+                </div>
+                <div style="width: 100%; display: flex; justify-content: flex-end;">
+                    <button type="button" class="ac-form-btn ac-form-btn-secondary ac-form-add-btn" onclick="addPsacStudent()" data-kor="+ 수강자 추가" data-eng="+ Add Participant"></button>
+                </div>
+                
+                <!-- 메시지 및 로딩 -->
+                <div class="ac-form-message" id="psac-message"></div>
+                <div class="ac-form-loading" id="psac-loading">
+                    <p data-kor="신청서를 제출하는 중입니다..." data-eng="Submitting application...">신청서를 제출하는 중입니다...</p>
+                </div>
+                
+                <!-- 제출 버튼 -->
+                <button type="submit" class="ac-form-btn ac-form-btn-success">
+                    <span style="margin-left: 5px;" data-kor="제출하기" data-eng="Submit">제출하기</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        `;
+    }
+    
+    // Relay School 폼 HTML 생성
+    generateRelayFormHtml() {
+        return `
+            <form id="relayschool-form">
+                <!-- 신청업체 정보 -->
+                <div class="ac-form-section">
+                    <h2 class="ac-form-section-title" data-kor="신청업체 정보" data-eng="Applicant Company Information">신청업체 정보</h2>
+                    
+                    <div class="ac-form-row">
+                        <div class="ac-form-group">
+                            <label for="relayschool-companyName" class="ac-form-label ac-form-required" data-kor="회사명" data-eng="Company Name">회사명</label>
+                            <input type="text" id="relayschool-companyName" name="relayschool-companyName" class="ac-form-input" required>
+                        </div>
+                        <div class="ac-form-group">
+                            <label for="relayschool-representative" class="ac-form-label ac-form-required" data-kor="대표자" data-eng="Representative">대표자</label>
+                            <input type="text" id="relayschool-representative" name="relayschool-representative" class="ac-form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="ac-form-row">
+                        <div class="ac-form-group">
+                            <label for="relayschool-businessNumber" class="ac-form-label ac-form-required" data-kor="사업자등록번호" data-eng="Business Registration Number">사업자등록번호</label>
+                            <input type="text" id="relayschool-businessNumber" name="relayschool-businessNumber" class="ac-form-input" placeholder="000-00-00000" required>
+                        </div>
+                        <div class="ac-form-group">
+                            <label for="relayschool-businessType" class="ac-form-label" data-kor="종목/업태" data-eng="Business Type">종목/업태</label>
+                            <input type="text" id="relayschool-businessType" name="relayschool-businessType" class="ac-form-input">
+                        </div>
+                    </div>
+                    
+                    <div class="ac-form-group">
+                        <label for="relayschool-address" class="ac-form-label ac-form-required" data-kor="주소" data-eng="Address">주소</label>
+                        <textarea id="relayschool-address" name="relayschool-address" class="ac-form-textarea" required></textarea>
+                    </div>
+                </div>
+                
+                <!-- 담당자 정보 -->
+                <div class="ac-form-section">
+                    <h2 class="ac-form-section-title" 
+                        data-kor='담당자 정보<br>
+                        <span class="schedule-note-text" style="color: #e21700; font-weight: normal;">
+                            ( ☞ 기업의 교육담당자가 단체 및 개인을 대신하여 신청할 경우 / 기업의 개인이 신청할 때 교육담당자가 교육비 결제 등의 행정업무를 대신할 경우)</span>'
+                        data-eng='Person in Charge Information<br>
+                        <span class="schedule-note-text" style="color: #e21700; font-weight: normal;">
+                            ( ☞ When a corporate training officer applies on behalf of groups and individuals / When an individual in a company applies and the training officer handles administrative tasks such as tuition payment)</span>'>
+                    </h2>
+                    
+                    <div class="ac-form-row">
+                        <div class="ac-form-group">
+                            <label for="relayschool-managerName" class="ac-form-label" data-kor="교육담당자" data-eng="Education Officer">교육담당자</label>
+                            <input type="text" id="relayschool-managerName" name="relayschool-managerName" class="ac-form-input">
+                        </div>
+                        <div class="ac-form-group">
+                            <label for="relayschool-managerDepartment" class="ac-form-label" data-kor="담당부서" data-eng="Department">담당부서</label>
+                            <input type="text" id="relayschool-managerDepartment" name="relayschool-managerDepartment" class="ac-form-input">
+                        </div>
+                    </div>
+                    
+                    <div class="ac-form-row">
+                        <div class="ac-form-group">
+                            <label for="relayschool-managerMobile" class="ac-form-label" data-kor="연락처" data-eng="Phone">연락처</label>
+                            <input type="tel" id="relayschool-managerMobile" name="relayschool-managerMobile" class="ac-form-input" placeholder="010-0000-0000">
+                        </div>
+                        <div class="ac-form-group">
+                            <label for="relayschool-managerEmail" class="ac-form-label" data-kor="이메일" data-eng="Email">이메일</label>
+                            <input type="email" id="relayschool-managerEmail" name="relayschool-managerEmail" class="ac-form-input">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 수강자 정보 -->
+                <div class="ac-form-section">
+                    <h2 class="ac-form-section-title" data-kor="수강자 정보" data-eng="Participant Information">수강자 정보</h2>
+                    <p style="margin-bottom: 20px; color: #666; font-size: 14px;" data-kor="수강자별로 원하는 교육 과정과 일정을 선택해 주세요." data-eng="Please select the desired training course and schedule for each participant.">
+                        수강자별로 원하는 교육 과정과 일정을 선택해 주세요.
+                    </p>
+
+                    <div id="relayschool-students-container">
+                        <!-- 수강자 정보가 동적으로 추가됩니다 -->
+                    </div>
+                </div>
+                <div style="width: 100%; display: flex; justify-content: center;">
+                    <button type="button" class="ac-form-btn ac-form-btn-secondary ac-form-add-btn" onclick="addRelayschoolStudent()" data-kor="+ 수강자 추가" data-eng="+ Add Participant"></button>
+                </div>
+                
+                <!-- 메시지 및 로딩 -->
+                <div class="ac-form-message" id="rs-message"></div>
+                <div class="ac-form-loading" id="rs-loading">
+                    <p data-kor="신청서를 제출하는 중입니다..." data-eng="Submitting application...">신청서를 제출하는 중입니다...</p>
+                </div>
+                
+                <!-- 제출 버튼 -->
+                <button type="submit" class="ac-form-btn ac-form-btn-success">
+                    <span style="margin-left: 5px;" data-kor="제출하기" data-eng="Submit">제출하기</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        `;
+    }
+    
+    // 신청 정보 검색 기능
+    setupApplicationSearch() {
+        const searchForm = document.getElementById('application-search-form');
+        if (searchForm) {
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.searchApplication();
+            });
+        }
+    }
+    
+    // 신청서 검색
+    async searchApplication() {
+        const businessNumber = document.getElementById('search-business-number').value;
+        const studentName = document.getElementById('search-student-name').value;
+        const studentPhone = document.getElementById('search-student-phone').value;
+        
+        // 로딩 표시 시작
+        const resultsContainer = document.getElementById('search-results');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const resultsList = document.getElementById('search-results-list');
+        
+        resultsContainer.style.display = 'block';
+        loadingIndicator.style.display = 'block';
+        resultsList.style.display = 'none';
+        
+        try {
+            // Google Apps Script API 호출
+            const APPS_SCRIPT_ID = 'AKfycbyChhUXLJHVjVBjUQ-K4gYpAWRJO85wvTbcvspGX0CQyNYIRG6Yxw3n-R5bsgqhvVBk';
+            const apiUrl = `https://script.google.com/macros/s/${APPS_SCRIPT_ID}/exec`;
+            
+            // PSAC 데이터 검색
+            const psacUrl = `${apiUrl}?sheet=SHEET_APPLY_P&action=getData`;
+            const psacResponse = await fetch(psacUrl);
+            const psacResult = await psacResponse.json();
+            
+            // Relay School 데이터 검색
+            const relayUrl = `${apiUrl}?sheet=SHEET_APPLY_R&action=getData`;
+            const relayResponse = await fetch(relayUrl);
+            const relayResult = await relayResponse.json();
+            
+            const allApplications = [
+                ...(psacResult.success ? psacResult.data.map(item => ({ ...item, type: 'PSAC' })) : []),
+                ...(relayResult.success ? relayResult.data.map(item => ({ ...item, type: 'RelaySchool' })) : [])
+            ];
+            
+            // 검색 조건에 맞는 데이터 필터링
+            const matchedApplications = allApplications.filter(app => {
+                const businessMatch = app.businessNumber === businessNumber || app.businessRegistrationNumber === businessNumber;
+                const nameMatch = app.studentName === studentName;
+                // 핸드폰 번호는 mobile 필드와 매칭 (form.js에서 mobile로 저장함)
+                const phoneMatch = app.studentMobile === studentPhone || app.mobile === studentPhone || app.studentPhone === studentPhone;
+                
+                return businessMatch && nameMatch && phoneMatch;
+            });
+            
+            // 로딩 표시 종료
+            loadingIndicator.style.display = 'none';
+            resultsList.style.display = 'block';
+            
+            this.displaySearchResults(matchedApplications);
+            
+        } catch (error) {
+            console.error('검색 오류:', error);
+            // 로딩 표시 종료
+            loadingIndicator.style.display = 'none';
+            resultsList.style.display = 'block';
+            alert('검색 중 오류가 발생했습니다.');
+        }
+    }
+    
+    // 검색 결과 표시
+    displaySearchResults(applications) {
+        const resultsContainer = document.getElementById('search-results');
+        const resultsList = document.getElementById('search-results-list');
+        
+        if (applications.length === 0) {
+            resultsList.innerHTML = '<p style="padding: 12dvh 2rem; margin: 0; text-align: center; color: #6b7280;">일치하는 신청서가 없습니다.</p>';
+        } else {
+            resultsList.innerHTML = applications.map(app => `
+                <div class="result-item" onclick="showEditModal(${JSON.stringify(app).replace(/"/g, '&quot;')}, '${app.type}')">
+                    <div class="result-header">
+                        <h4 class="result-title">${app.type} - ${app.studentName}</h4>
+                        <span class="result-date">${app.applicationDate || app.submittedAt || ''}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+                    // <div class="result-details">
+                    //     <p>회사: ${app.companyName}</p>
+                    //     <p>과정: ${app.detailedEducation || app.courseName || ''}</p>
+                    //     <p>연락처: ${app.studentPhone || app.studentMobile || ''}</p>
+                    // </div>
+        resultsContainer.style.display = 'block';
+    }
+}
+
+// 수정 모달 표시 (어드민 페이지와 동일한 폼 사용)
+function showEditModal(item, pageType) {
+    const modal = document.getElementById('edit-application-modal');
+    const formContainer = document.getElementById('edit-form-container');
+    
+    // 어드민 페이지의 generatePSACEditForm과 동일한 로직 사용
+    const formHTML = generateEditForm(item, pageType);
+    formContainer.innerHTML = formHTML;
+    
+    // 현재 편집 중인 아이템 저장
+    window.currentEditItem = item;
+    window.currentEditType = pageType;
+        
+    modal.style.display = 'flex';
+}
+
+// 수정 폼 생성 (어드민 페이지와 동일)
+function generateEditForm(item, pageType) {
+    let formHTML = `
+        <div class="edit-form-section-title">신청 정보</div>
+        
+        <div class="edit-form-group">
+            <label>신청번호</label>
+            <input type="text" name="number" value="${item.number || ''}" class="edit-form-readonly" readonly>
+        </div>
+        
+        <div class="edit-form-group">
+            <label>신청일시</label>
+            <input type="text" name="applicationDate" value="${item.applicationDate || ''}" class="edit-form-readonly" readonly>
+        </div>`;
+        
+    // PSAC에만 과정명과 교육일정 표시
+    if (pageType === 'PSAC') {
+        formHTML += `
+        <div class="edit-form-group">
+            <label>과정명</label>
+            <input type="text" name="courseName" value="${item.courseName || ''}" class="edit-form-readonly" readonly>
+        </div>
+        
+        <div class="edit-form-group">
+            <label>교육일정</label>
+            <textarea name="educationSchedule" readonly class="edit-form-readonly">${item.educationSchedule || ''}</textarea>
+        </div>`;
+    }
+    
+    formHTML += `
+        <div class="edit-form-section-title">회사 정보</div>
+        
+        <div class="edit-form-row">
+            <div class="edit-form-group">
+                <label>회사명</label>
+                <input type="text" name="companyName" value="${item.companyName || ''}" >
+            </div>
+            <div class="edit-form-group">
+                <label>대표자명</label>
+                <input type="text" name="ceoName" value="${item.ceoName || ''}" >
+            </div>
+        </div>
+        
+        <div class="edit-form-row">
+            <div class="edit-form-group">
+                <label>사업자등록번호</label>
+                <input type="text" name="businessNumber" value="${item.businessNumber || ''}" >
+            </div>
+            <div class="edit-form-group">
+                <label>종목업태</label>
+                <input type="text" name="businessType" value="${item.businessType || ''}">
+            </div>
+        </div>
+        
+        <div class="edit-form-group">
+            <label>주소</label>
+            <textarea name="companyAddress" >${item.companyAddress || ''}</textarea>
+        </div>
+
+        <div class="edit-form-section-title">교육 담당자 정보</div>
+        
+        <div class="edit-form-row">
+            <div class="edit-form-group">
+                <label>교육담당자</label>
+                <input type="text" name="educationManager" value="${item.educationManager || ''}" >
+            </div>
+            <div class="edit-form-group">
+                <label>담당자 부서</label>
+                <input type="text" name="managerDepartment" value="${item.managerDepartment || ''}">
+            </div>
+        </div>
+        
+        <div class="edit-form-row">
+            <div class="edit-form-group">
+                <label>담당자 직급</label>
+                <input type="text" name="managerPosition" value="${item.managerPosition || ''}">
+            </div>
+            <div class="edit-form-group">
+                <label>담당자 전화</label>
+                <input type="tel" name="managerPhone" value="${item.managerPhone || ''}">
+            </div>
+        </div>
+        
+        <div class="edit-form-row">
+            <div class="edit-form-group">
+                <label>담당자 핸드폰</label>
+                <input type="tel" name="managerMobile" value="${item.managerMobile || ''}">
+            </div>
+            <div class="edit-form-group">
+                <label>담당자 이메일</label>
+                <input type="email" name="managerEmail" value="${item.managerEmail || ''}" >
+            </div>
+        </div>
+
+        <div class="edit-form-section-title">수강자 정보</div>
+        
+        <div class="edit-form-row">
+            <div class="edit-form-group">
+                <label>수강자명</label>
+                <input type="text" name="studentName" value="${item.studentName || ''}" >
+            </div>
+            <div class="edit-form-group">
+                <label>수강자 부서</label>
+                <input type="text" name="studentDepartment" value="${item.studentDepartment || ''}">
+            </div>
+        </div>
+        
+        <div class="edit-form-row">
+            <div class="edit-form-group">
+                <label>수강자 직급</label>
+                <input type="text" name="studentPosition" value="${item.studentPosition || ''}">
+            </div>
+            <div class="edit-form-group">
+                <label>수강자 전화</label>
+                <input type="tel" name="studentPhone" value="${item.studentPhone || ''}">
+            </div>
+        </div>
+        
+        <div class="edit-form-row">
+            <div class="edit-form-group">
+                <label>수강자 핸드폰</label>
+                <input type="tel" name="studentMobile" value="${item.studentMobile || ''}">
+            </div>
+            <div class="edit-form-group">
+                <label>수강자 이메일</label>
+                <input type="email" name="studentEmail" value="${item.studentEmail || ''}" >
+            </div>
+        </div>
+
+        <div class="edit-form-section-title">교육 과정</div>
+        
+        <div class="edit-form-group">
+            <label>선택세부교육 *</label>
+            <div class="education-checkbox-container">
+                ${generateEducationCheckboxes(pageType, item)}
+            </div>
+        </div>
+    `;
+    
+    return formHTML;
+}
+
+// 모달 닫기
+function closeEditModal() {
+    document.getElementById('edit-application-modal').style.display = 'none';
+    window.currentEditItem = null;
+    window.currentEditType = null;
+}
+
+// 신청서 저장
+async function saveApplication() {
+    const formContainer = document.getElementById('edit-form-container');
+    const saveButton = document.querySelector('.btn-save');
+    
+    // 저장 버튼을 로딩 상태로 변경
+    const originalText = saveButton.innerHTML;
+    saveButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 저장중...';
+    saveButton.disabled = true;
+    
+    // 폼 데이터 수집
+    const updatedData = {};
+    
+    // 체크박스 항목들 (선택세부교육) 처리
+    const educationCheckboxes = formContainer.querySelectorAll('input[name="detailedEducation"]:checked');
+    if (educationCheckboxes.length > 0) {
+        // 세미콜론으로 구분하여 저장
+        updatedData.detailedEducation = Array.from(educationCheckboxes).map(cb => cb.value).join('; ');
+    } else {
+        // 체크박스가 아닌 경우 (다른 페이지 타입)
+        const educationTextarea = formContainer.querySelector('textarea[name="detailedEducation"]');
+        if (educationTextarea) {
+            updatedData.detailedEducation = educationTextarea.value;
+        }
+    }
+    
+    // 나머지 폼 데이터 처리
+    const inputs = formContainer.querySelectorAll('input:not([type="checkbox"]), textarea');
+    inputs.forEach(input => {
+        if (!input.readOnly && input.name !== 'detailedEducation') { // 이미 처리한 detailedEducation 제외
+            updatedData[input.name] = input.value;
+        }
+    });
+    
+    try {
+        const APPS_SCRIPT_ID = 'AKfycbyChhUXLJHVjVBjUQ-K4gYpAWRJO85wvTbcvspGX0CQyNYIRG6Yxw3n-R5bsgqhvVBk';
+        const apiUrl = `https://script.google.com/macros/s/${APPS_SCRIPT_ID}/exec`;
+        const sheetName = window.currentEditType === 'PSAC' ? 'SHEET_APPLY_P' : 'SHEET_APPLY_R';
+        const itemId = window.currentEditItem.id || window.currentEditItem.number;
+        
+        const updateUrl = `${apiUrl}?action=update&sheet=${sheetName}&id=${encodeURIComponent(itemId)}&data=${encodeURIComponent(JSON.stringify(updatedData))}`;
+        
+        const response = await fetch(updateUrl, { method: 'GET' });
+        const result = await response.json();
+        
+        if (result.success) {
+            alert('수정이 완료되었습니다.');
+            closeEditModal();
+            // alert 확인 후 페이지 새로고침
+            setTimeout(() => {
+                location.reload();
+            }, 100);
+        } else {
+            alert(`수정에 실패했습니다: ${result.message}`);
+            // 버튼 상태 복원
+            saveButton.innerHTML = originalText;
+            saveButton.disabled = false;
+        }
+        
+    } catch (error) {
+        console.error('저장 오류:', error);
+        alert('저장 중 오류가 발생했습니다.');
+        // 버튼 상태 복원
+        saveButton.innerHTML = originalText;
+        saveButton.disabled = false;
+    }
+}
+
+// 교육과정 체크박스 생성
+function generateEducationCheckboxes(pageType, item) {
+    const currentEducation = item.detailedEducation || '';
+    
+    // 더 안전한 구분자 처리 - 쉼표+공백 또는 세미콜론으로 구분
+    let selectedCourses = [];
+    if (currentEducation) {
+        // 먼저 세미콜론으로 구분 시도 (더 안전한 구분자)
+        if (currentEducation.includes(';')) {
+            selectedCourses = currentEducation.split(';').map(course => course.trim()).filter(course => course);
+        } else {
+            // 쉼표로 구분하되, 연속된 쉼표+공백 패턴을 찾아서 구분
+            // 예: "과정1, 과정2" (구분자) vs "HVDC, MVDC" (과정명 내부)
+            const parts = currentEducation.split(/,\s*(?=\d+주:)/); // 숫자+주: 패턴 앞의 쉼표+공백으로 구분
+            if (parts.length > 1) {
+                selectedCourses = parts.map(course => course.trim()).filter(course => course);
+            } else {
+                // 단일 과정인 경우
+                selectedCourses = [currentEducation.trim()];
+            }
+        }
+    }
+    
+    if (pageType === 'PSAC') {
+        const psacCourses = [
+            '1주: 전력계통 해석의 기본 이론',
+            '2주: 전력계통(설비) 보호기술',
+            '3주: 동기발전기 기술',
+            '4주: 무효전력 운영과 전압제어',
+            '5주: 전력설비의 동특성(계통안정도)',
+            '6주: 분산에너지 시스템 기술',
+            '7주: 보호릴레이 정정법과 보호협조기술',
+            '8주: HVDC, MVDC, LVDC 및 FACTS기술',
+            '9주: 에너지 전환기의 전력계통 계획과 운영/에너지 시장과 신사업 모델',
+            '10주: 신재생에너지 계통연계 기술'
+        ];
+        
+        return psacCourses.map((course, index) => {
+            const isChecked = selectedCourses.includes(course);
+            const checkedAttr = isChecked ? 'checked="checked"' : '';
+            return `
+                <div class="education-checkbox-item">
+                    <input type="checkbox" id="psac_week_${index + 1}" name="detailedEducation" value="${course}" ${checkedAttr}>
+                    <label for="psac_week_${index + 1}">${course}</label>
+                </div>
+            `;
+        }).join('');
+        
+    } else if (pageType === 'RelaySchool') {
+        const relayCourses = [
+            // 현재 진행 중인 과정들
+            '디지털릴레이 기본반 (2025년 9월 17일(수) ~ 9월 19일(금))',
+            '디지털릴레이 고급반 (2025년 10월 22일(수) ~ 10월 24일(금))',
+            '고장분석반 (2025년 11월 19일(수) ~ 11월 21일(금))',
+            // 마감된 과정들
+            '디지털릴레이 기본반 (2025년 3월 19일(수) ~ 3월 21일(금))',
+            '디지털릴레이 고급반 (2025년 4월 16일(수) ~ 4월 18일(금))',
+            '고장분석반 (2025년 5월 21일(수) ~ 5월 23일(금))',
+            'ECMS운영반 (2025년 6월 18일(수) ~ 6월 20일(금))',
+            '원자력 특성화반 (2025년 7월 16일(수) ~ 7월 20일(일))'
+        ];
+        
+        return relayCourses.map((course, index) => {
+            const isChecked = selectedCourses.includes(course);
+            const checkedAttr = isChecked ? 'checked="checked"' : '';
+            return `
+                <div class="education-checkbox-item">
+                    <input type="checkbox" id="relay_course_${index + 1}" name="detailedEducation" value="${course}" ${checkedAttr}>
+                    <label for="relay_course_${index + 1}">${course}</label>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    return `<textarea name="detailedEducation" required>${currentEducation}</textarea>`;
+}
+
+// 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', () => {
+    const courseManager = new CourseApplicationManager();
+});
+</script>
+
 <style>
 /* Academy Page Styles */
-.tab-content-section .container{
-    max-width: none; padding: 0;
-}
+.tab-content-section .container{max-width: none; padding: 0;min-height: 40dvh;}
 #psac, #relay-school{max-width: 1200px; margin: 0 auto;}
 /* intro */
 #intro .section-title{border-bottom: none;}
@@ -3389,195 +4035,53 @@ document.addEventListener('DOMContentLoaded', function() {
     background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
 }
 #psac .curriculum-intro p{color: white; font-weight: 700;}
-.week-detail-container {
-    background: #ffffff;
-    border-radius: 8px;
-    padding:0 0 15px 0;
-}
+.week-detail-container {background: #ffffff;border-radius: 8px;padding:0 0 15px 0;}
 
-.section-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1e40af;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #e5e7eb;
-}
+.section-title {font-size: 1.1rem;font-weight: 700;color: #1e40af;margin-bottom: 1rem;padding-bottom: 0.5rem;border-bottom: 2px solid #e5e7eb;}
 
 /* 시간표 테이블 스타일 - 심플 버전 */
-.daily-schedule-container {
-    margin-bottom: 2rem;
-    overflow-x: auto;
-}
+.daily-schedule-container {margin-bottom: 2rem;overflow-x: auto;}
 #psac .daily-schedule-table th,
-#psac .daily-schedule-table td {
-    /* padding: 0.75rem 0.5rem; */
-    text-align: center;
-    vertical-align: middle;
-    border: 1px solid #e5e7eb;
-}
-.daily-schedule-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #ffffff;
-    border-radius: 8px;
-    border-left: 1px solid #e5e7eb;
-    border-bottom: 1px solid #e5e7eb;
-    border-right: 1px solid #e5e7eb;
-    border-top: none;
-    /* overflow: hidden; */
-    font-size: 0.85rem;
-    color: #000;
-}
-
-.daily-schedule-table thead th {
-    background: #f1f1f1;
-    font-weight: 600;
-    padding: 0.75rem 0.5rem;
-    text-align: center;
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-    font-size: 0.8rem;
-    line-height: 1.2;
-}
-
-.time-header {
-    width: 10%;
-    background: #1e40af;
-}
-
-.period-header {
-    width: 12.8%;
-    background: #f1f1f1;
-}
-
-.day-row {
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.day-cell {
-    background: #f8fafc;
-    font-weight: 600;
-    text-align: center;
-    vertical-align: middle;
-    padding: 0.75rem 0.5rem;
-    border-right: 1px solid #e5e7eb;
-    font-size: 0.85rem;
-    line-height: 1.2;
-}
-
-.opening-cell {
-    background: #ffffff;
-    color: #b21717;
-    /* font-weight: 600; */
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.9rem;
-}
-
-.class-cell {
-    background: #ffffff;
-    color: #374151;
-    font-weight: 500;
-    text-align: center;
-    padding: 0.75rem 0.5rem;
-    line-height: 1.3;
-    font-size: 0.75rem;
-    vertical-align: middle;
-}
-
-.daily-schedule-table .instructor-cell {
-    background: #fff;
-    color: #7083a8;
-    text-align: center;
-    padding: 0.25rem;
-}
+#psac .daily-schedule-table td {text-align: center;vertical-align: middle;border: 1px solid #e5e7eb;}
+.daily-schedule-table {width: 100%;border-collapse: collapse;background: #ffffff;border-radius: 8px;border-left: 1px solid #e5e7eb;border-bottom: 1px solid #e5e7eb;border-right: 1px solid #e5e7eb;border-top: none;font-size: 0.85rem;color: #000;}
+.daily-schedule-table thead th {background: #f1f1f1;font-weight: 600;padding: 0.75rem 0.5rem;text-align: center;border-right: 1px solid rgba(255, 255, 255, 0.2);font-size: 0.8rem;line-height: 1.2;}
+.time-header {width: 10%;background: #1e40af;}
+.period-header {width: 12.8%;background: #f1f1f1;}
+.day-row {border-bottom: 1px solid #e5e7eb;}
+.day-cell {background: #f8fafc;font-weight: 600;text-align: center;vertical-align: middle;padding: 0.75rem 0.5rem;border-right: 1px solid #e5e7eb;font-size: 0.85rem;line-height: 1.2;}
+.opening-cell {background: #ffffff;color: #b21717;text-align: center;padding: 1rem;font-size: 0.9rem;}
+.class-cell {background: #ffffff;color: #374151;font-weight: 500;text-align: center;padding: 0.75rem 0.5rem;line-height: 1.3;font-size: 0.75rem;vertical-align: middle;}
+.daily-schedule-table .instructor-cell {background: #fff;color: #7083a8;text-align: center;padding: 0.25rem;}
 
 .empty-cell {background: #f6f6f6;}
 
 /* 강사진 리스트 스타일 */
 
 .psac-instructor-section {border-radius: 8px;background: #f8f9fa;padding: 0.5rem; margin: 1rem .5rem .5rem;}
-
-.psac-instructor-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
-    padding: 0rem 0.5rem;
-    gap: 0.5rem;
-}
-
+.psac-instructor-section ul {list-style: none;padding: 0;margin: 0;display: grid;padding: 0rem 0.5rem;gap: 0.5rem;}
 .psac-instructor-section li {font-size: 0.9rem;line-height: 1.4;}
 .course-info-section li strong,
-.psac-instructor-section li strong {
-    color: #1e40af;
-    font-weight: 600;
-}
+.psac-instructor-section li strong {color: #1e40af;font-weight: 600;}
 
 /* 반응형 스타일 */
 @media (max-width: 768px) {
-
-    
-    .daily-schedule-table {
-        font-size: 0.75rem;
-    }
-    
-    .daily-schedule-table thead th {
-        padding: 0.5rem 0.3rem;
-        font-size: 0.7rem;
-    }
-    
-    .day-cell {
-        font-size: 0.75rem;
-        padding: 0.5rem 0.3rem;
-    }
-    
+    .daily-schedule-table {font-size: 0.75rem;}
+    .daily-schedule-table thead th {padding: 0.5rem 0.3rem;font-size: 0.7rem;}
+    .day-cell {font-size: 0.75rem;padding: 0.5rem 0.3rem;}
     .class-cell,
-    .daily-schedule-table .instructor-cell {
-        padding: 0.5rem 0.3rem;
-        font-size: 0.7rem;
-    }
-    
-    .psac-instructor-section ul {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-    }
-    
-    .psac-instructor-section li {
-        font-size: 0.85rem;
-    }
+    .daily-schedule-table .instructor-cell {padding: 0.5rem 0.3rem;font-size: 0.7rem;}
+    .psac-instructor-section ul {grid-template-columns: 1fr;gap: 0.5rem;}
+    .psac-instructor-section li {font-size: 0.85rem;}
 }
 
 @media (max-width: 480px) {
-    .daily-schedule-table {
-        font-size: 0.65rem;
-    }
-    
-    .daily-schedule-table thead th {
-        padding: 0.4rem 0.2rem;
-        font-size: 0.6rem;
-    }
-    
-    .day-cell {
-        font-size: 0.65rem;
-        padding: 0.4rem 0.2rem;
-    }
-    
-    .class-cell,
-    .daily-schedule-table .instructor-cell {
-        padding: 0.4rem 0.2rem;
-        font-size: 0.6rem;
-    }
-    
-    .opening-cell {
-        font-size: 0.7rem;
-        padding: 0.75rem 0.5rem;
-    }
-    
-    .psac-instructor-section  li {
-        font-size: 0.8rem;
-    }
+    .daily-schedule-table {font-size: 0.65rem;}
+    .daily-schedule-table thead th {padding: 0.4rem 0.2rem;font-size: 0.6rem;}
+    .day-cell {font-size: 0.65rem;padding: 0.4rem 0.2rem;}
+    .class-cel
+    .daily-schedule-table .instructor-cell {padding: 0.4rem 0.2rem;font-size: 0.6rem;}
+    .opening-cell {font-size: 0.7rem;padding: 0.75rem 0.5rem;}
+    .psac-instructor-section  li {font-size: 0.8rem;}
 }
 
 /* 릴레이스쿨 */
@@ -3585,9 +4089,7 @@ document.addEventListener('DOMContentLoaded', function() {
 #rs-curriculum td{border: 1px solid #e5e7eb;}
 
 /* 릴레이스쿨 기본 정보 테이블 스타일 */
-.rs-basic-info-section {
-    margin-bottom: 2rem;
-}
+.rs-basic-info-section {margin-bottom: 2rem;}
 
 .rs-basic-info {
     width: 100%;
@@ -3866,4 +4368,339 @@ document.addEventListener('DOMContentLoaded', function() {
         padding: 1rem;
     }
 }
+
+/* 교육신청 탭 스타일 */
+.course-selection {
+    margin-bottom: 2rem;
+}
+
+.course-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+@media screen and (max-width: 480px) {
+    .course-options {
+        grid-template-columns: 1fr;
+    }
+}
+.course-option {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.course-option:hover {
+    background: #e5e7eb;
+}
+
+.course-option input[type="radio"] {
+    display: none;
+}
+
+.course-option input[type="radio"]:checked + label {
+    color: #1e40af;
+}
+
+.course-option:has(input:checked) {
+    border-color: #3b82f6;
+    background: #3b82f6;
+}
+.course-option input[type="radio"]:checked + label h4,
+.course-option input[type="radio"]:checked + label p{color: #fff;}
+
+.course-option label {
+    cursor: pointer;
+    display: block;
+    margin: 0;
+}
+
+.course-option h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.course-option p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.selected-course-form {
+    margin-top: 2rem;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 2rem;
+}
+
+/* 신청확인 탭 스타일 */
+.check-search {
+    margin-bottom: 2rem;
+}
+
+.search-form {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.search-btn {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.search-btn:hover {
+    background: #2563eb;
+}
+
+.search-results {
+    margin-top: 2rem;
+}
+
+.results-list {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.result-item {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.result-item:hover {
+    background: #f8fafc;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-title {
+    font-weight: 600;
+    color: #1e40af;
+    margin: 0;
+}
+
+.result-date {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.result-details {
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* 수정 모달 스타일 */
+.edit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #6b7280;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.btn-cancel, .btn-save {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-cancel {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.btn-save {
+    background: #3b82f6;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background: #e5e7eb;
+}
+
+.btn-save:hover {
+    background: #2563eb;
+}
+
+/* 수정 폼 스타일 */
+.edit-form-section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e40af;
+    margin: 1.5rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.edit-form-section-title:first-child {
+    margin-top: 0;
+}
+
+.edit-form-group {
+    margin-bottom: 1rem;
+}
+
+.edit-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.edit-form-group input,
+.edit-form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.edit-form-readonly {
+    background: #f9fafb !important;
+    color: #6b7280 !important;
+    cursor: not-allowed;
+}
+
+/* Education Checkbox Styles */
+.education-checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f9f9f9;
+}
+
+.education-checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.education-checkbox-item input[type="checkbox"] {
+    margin: 0;
+    width: auto;
+}
+
+.education-checkbox-item label {
+    margin: 0;
+    font-weight: normal;
+    cursor: pointer;
+    flex: 1;
+}
+
+.education-checkbox-item:hover {
+    background: #f0f0f0;
+    border-radius: 4px;
+    padding: 0.25rem;
+    margin: -0.25rem;
+}
+
+.edit-form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+/*  */
+.apply-section,
+.check-section{max-width: 1000px; margin: auto; padding: 0 1rem;}
 </style>

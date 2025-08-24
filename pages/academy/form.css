@@ -4,58 +4,23 @@
    공통 스타일 (ac-form-)
    ========================================================================== */
 
-.ac-form-content {
-    background: white;
-    padding: 15px 5px;
-    /* border-radius: 0 0 10px 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1); */
-}
+.ac-form-content {background: white;padding: 15px 5px;}
 
-.ac-form-section {
-    /* margin-bottom: 40px; */
-    padding-bottom: 30px;
-    /* border-bottom: 1px solid #eee; */
-}
+.ac-form-section {}
 
-.ac-form-section:last-child {
-    border-bottom: none;
-}
+.ac-form-section:last-child {border-bottom: none;}
 
-.ac-form-section-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #1e3c72;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #1e3c72;
-}
+.ac-form-section-title {font-size: 18px;font-weight: bold;color: #1e3c72;margin-bottom: 20px;padding-bottom: 10px;border-bottom: 2px solid #1e3c72;}
 
-.ac-form-group {
-    margin-bottom: 20px;
-}
+.ac-form-group {margin-bottom: 20px;}
 
-.ac-form-row {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-}
+.ac-form-row {display: flex;gap: 15px;margin-bottom: 20px;}
 
-.ac-form-row .ac-form-group {
-    flex: 1;
-    margin-bottom: 0;
-}
+.ac-form-row .ac-form-group {flex: 1;margin-bottom: 0;}
 
-.ac-form-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: #555;
-}
+.ac-form-label {display: block;margin-bottom: 5px;font-weight: 500;color: #555;}
 
-.ac-form-required::after {
-    content: " *";
-    color: #e74c3c;
-}
+.ac-form-required::after {content: " *";color: #db4e3e;}
 
 .ac-form-input,
 .ac-form-textarea,
@@ -84,7 +49,7 @@
 .ac-form-btn {
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 14px;
     transition: all 0.3s;
@@ -112,29 +77,36 @@
 }
 
 .ac-form-btn-danger {
-    background: #dc3545;
-    color: white;
+    background: #eeeded;
+    color: rgb(0, 0, 0);
+    padding: 10px 12px;
 }
 
 .ac-form-btn-danger:hover {
-    background: #c82333;
+    background: #d6d6d6;
 }
 
 .ac-form-btn-success {
-    background: #28a745;
+    background: #000000;
     color: white;
     font-size: 16px;
-    padding: 15px 30px;
-    width: 100%;
-    margin-top: 30px;
+    padding: 8px 15px;
 }
 
 .ac-form-btn-success:hover {
-    background: #218838;
+    background: #3a3a3a;
 }
 
 .ac-form-add-btn {
-    margin-bottom: 20px;
+    margin: calc(2rem - 20px) 0 2.5rem 0;
+    width: 100%;
+    background-color: transparent;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.ac-form-add-btn:hover{
+    background-color: #f0f0f0;
 }
 
 .ac-form-loading {
@@ -403,12 +375,6 @@
     
     .psac-checkbox-group {
         grid-template-columns: 1fr;
-    }
-    
-    .ac-form-student-header {
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-start;
     }
     
     .relayschool-course-option {

@@ -257,15 +257,29 @@
             "en": "Relay School"
           },
           "url": "/pages/academy/index.html?tab=relay-school"
+        },
+        "psac": {
+          "title": {
+            "ko": "PSAC",
+            "en": "PSAC"
           },
-          "psac": {
-            "title": {
-              "ko": "PSAC",
-              "en": "PSAC"
-            },
-            "url": "/pages/academy/index.html?tab=psac"
-          }
-        } 
+          "url": "/pages/academy/index.html?tab=psac"
+        },
+        "apply": {
+          "title": {
+            "ko": "교육 신청",
+            "en": "Apply"
+          },
+          "url": "/pages/academy/index.html?tab=apply"
+        },
+        "application-check": {
+          "title": {
+            "ko": "신청조회",
+            "en": "Check Application"
+          },
+          "url": "/pages/academy/index.html?tab=check"
+        }
+      }
     },
     "media": {
       "title": {

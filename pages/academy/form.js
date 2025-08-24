@@ -268,7 +268,7 @@ function addPsacStudent() {
     studentDiv.innerHTML = `
         <div class="ac-form-student-header">
             <div class="ac-form-student-title" data-kor='수강자 ${psacStudentCount}' data-eng='Participant ${psacStudentCount}'></div>
-            ${psacStudentCount > 1 ? `<button type="button" class="ac-form-btn ac-form-btn-danger" onclick="removePsacStudent(${psacStudentCount})" data-kor='삭제' data-eng='Delete'>삭제</button>` : ''}
+            ${psacStudentCount > 1 ? `<button type="button" class="ac-form-btn ac-form-btn-danger" onclick="removePsacStudent(${psacStudentCount})"><i class="fas fa-trash"></i></button>` : ''}
         </div>
         
         <div class="ac-form-row">
@@ -339,12 +339,12 @@ function collectPsacFormData() {
         });
         
         students.push({
-            name: document.getElementById(`psac-studentName-${studentId}`).value,
-            department: document.getElementById(`psac-studentDepartment-${studentId}`).value,
-            position: document.getElementById(`psac-studentPosition-${studentId}`).value,
-            phone: document.getElementById(`psac-studentPhone-${studentId}`).value,
-            mobile: document.getElementById(`psac-studentMobile-${studentId}`).value,
-            email: document.getElementById(`psac-studentEmail-${studentId}`).value,
+            name: document.getElementById(`psac-studentName-${studentId}`)?.value || '',
+            department: document.getElementById(`psac-studentDepartment-${studentId}`)?.value || '',
+            position: document.getElementById(`psac-studentPosition-${studentId}`)?.value || '',
+            phone: document.getElementById(`psac-studentPhone-${studentId}`)?.value || '',
+            mobile: document.getElementById(`psac-studentMobile-${studentId}`)?.value || '',
+            email: document.getElementById(`psac-studentEmail-${studentId}`)?.value || '',
             selectedCourses: selectedCourses
         });
     });
@@ -352,19 +352,19 @@ function collectPsacFormData() {
     return {
         formType: 'psac',
         companyInfo: {
-            companyName: document.getElementById('psac-companyName').value,
-            representative: document.getElementById('psac-representative').value,
-            businessNumber: document.getElementById('psac-businessNumber').value,
-            businessType: document.getElementById('psac-businessType').value,
-            address: document.getElementById('psac-address').value
+            companyName: document.getElementById('psac-companyName')?.value || '',
+            representative: document.getElementById('psac-representative')?.value || '',
+            businessNumber: document.getElementById('psac-businessNumber')?.value || '',
+            businessType: document.getElementById('psac-businessType')?.value || '',
+            address: document.getElementById('psac-address')?.value || ''
         },
         managerInfo: {
-            name: document.getElementById('psac-managerName').value,
-            department: document.getElementById('psac-managerDepartment').value,
-            position: document.getElementById('psac-managerPosition').value,
-            phone: document.getElementById('psac-managerPhone').value,
-            mobile: document.getElementById('psac-managerMobile').value,
-            email: document.getElementById('psac-managerEmail').value
+            name: document.getElementById('psac-managerName')?.value || '',
+            department: document.getElementById('psac-managerDepartment')?.value || '',
+            position: document.getElementById('psac-managerPosition')?.value || '',
+            phone: document.getElementById('psac-managerPhone')?.value || '',
+            mobile: document.getElementById('psac-managerMobile')?.value || '',
+            email: document.getElementById('psac-managerEmail')?.value || ''
         },
         students: students
     };
@@ -495,7 +495,7 @@ function addRelayschoolStudent() {
     studentDiv.innerHTML = `
         <div class="ac-form-student-header">
             <div class="ac-form-student-title" data-kor="수강자 ${relayStudentCount}" data-eng="Trainee ${relayStudentCount}"></div>
-            ${relayStudentCount > 1 ? `<button type="button" class="ac-form-btn ac-form-btn-danger" onclick="removeRelayschoolStudent(${relayStudentCount})" data-kor="삭제" data-eng="Remove"></button>` : ''}
+            ${relayStudentCount > 1 ? `<button type="button" class="ac-form-btn ac-form-btn-danger" onclick="removeRelayschoolStudent(${relayStudentCount})"><i class="fas fa-trash"></i></button>` : ''}
         </div>
         
         <div class="ac-form-row">
@@ -575,12 +575,12 @@ function collectRelayschoolFormData() {
         });
         
         students.push({
-            name: document.getElementById(`relayschool-studentName-${studentId}`).value,
-            department: document.getElementById(`relayschool-studentDepartment-${studentId}`).value,
-            position: document.getElementById(`relayschool-studentPosition-${studentId}`).value,
-            phone: document.getElementById(`relayschool-studentPhone-${studentId}`).value,
-            mobile: document.getElementById(`relayschool-studentMobile-${studentId}`).value,
-            email: document.getElementById(`relayschool-studentEmail-${studentId}`).value,
+            name: document.getElementById(`relayschool-studentName-${studentId}`)?.value || '',
+            department: document.getElementById(`relayschool-studentDepartment-${studentId}`)?.value || '',
+            position: document.getElementById(`relayschool-studentPosition-${studentId}`)?.value || '',
+            phone: document.getElementById(`relayschool-studentPhone-${studentId}`)?.value || '',
+            mobile: document.getElementById(`relayschool-studentMobile-${studentId}`)?.value || '',
+            email: document.getElementById(`relayschool-studentEmail-${studentId}`)?.value || '',
             selectedCourses: selectedCourses
         });
     });
@@ -588,19 +588,19 @@ function collectRelayschoolFormData() {
     return {
         formType: 'relay',
         companyInfo: {
-            companyName: document.getElementById('relayschool-companyName').value,
-            representative: document.getElementById('relayschool-representative').value,
-            businessNumber: document.getElementById('relayschool-businessNumber').value,
-            businessType: document.getElementById('relayschool-businessType').value,
-            address: document.getElementById('relayschool-address').value
+            companyName: document.getElementById('relayschool-companyName')?.value || '',
+            representative: document.getElementById('relayschool-representative')?.value || '',
+            businessNumber: document.getElementById('relayschool-businessNumber')?.value || '',
+            businessType: document.getElementById('relayschool-businessType')?.value || '',
+            address: document.getElementById('relayschool-address')?.value || ''
         },
         managerInfo: {
-            name: document.getElementById('relayschool-managerName').value,
-            department: document.getElementById('relayschool-managerDepartment').value,
-            position: document.getElementById('relayschool-managerPosition').value,
-            phone: document.getElementById('relayschool-managerPhone').value,
-            mobile: document.getElementById('relayschool-managerMobile').value,
-            email: document.getElementById('relayschool-managerEmail').value
+            name: document.getElementById('relayschool-managerName')?.value || '',
+            department: document.getElementById('relayschool-managerDepartment')?.value || '',
+            position: document.getElementById('relayschool-managerPosition')?.value || '',
+            phone: document.getElementById('relayschool-managerPhone')?.value || '',
+            mobile: document.getElementById('relayschool-managerMobile')?.value || '',
+            email: document.getElementById('relayschool-managerEmail')?.value || ''
         },
         students: students
     };

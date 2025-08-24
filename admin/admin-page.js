@@ -289,8 +289,276 @@ class PageManager {
         // 카테고리 필터 버튼 설정
         this.setupCategoryFilter();
         
+        // 교육과정 버튼 설정 (PSAC, RelaySchool 페이지에서만 표시)
+        this.setupCurriculumButton(pageParam);
+        
         // 삭제 버튼 이벤트 설정
         this.setupDeleteButtons();
+    }
+    
+    // 교육과정 관리 버튼 설정
+    setupCurriculumButton(pageType) {
+        const curriculumBtn = document.getElementById('btn-curriculum');
+        
+        // PSAC 또는 RelaySchool 페이지에서만 버튼 표시
+        if (['PSAC', 'RelaySchool'].includes(pageType)) {
+            curriculumBtn.style.display = 'block';
+            
+            // 버튼 클릭 이벤트
+            curriculumBtn.addEventListener('click', () => {
+                alert('준비중입니다.')
+                // this.showCurriculumModal(pageType);
+            });
+        } else {
+            curriculumBtn.style.display = 'none';
+        }
+    }
+    
+    // 교육과정 관리 모달 표시
+    showCurriculumModal(pageType) {
+        const title = pageType === 'PSAC' ? 'PSAC 교육과정 관리' : 'Relay School 교육과정 관리';
+        
+        // 모달 요소 생성
+        const modal = document.getElementById('curriculum-modal') || this.createCurriculumModal();
+        
+        // 모달 제목 설정
+        modal.querySelector('.modal-title').textContent = title;
+        
+        // 페이지 타입에 따라 데이터 로드 및 표시
+        this.loadCurriculumData(pageType);
+        
+        // 모달 표시
+        modal.classList.add('show');
+        document.body.classList.add('modal-open');
+    }
+    
+    // 교육과정 관리 모달 생성
+    createCurriculumModal() {
+        // 이미 존재하면 반환
+        if (document.getElementById('curriculum-modal')) {
+            return document.getElementById('curriculum-modal');
+        }
+        
+        // 모달 HTML 생성
+        const modalHtml = `
+            <div id="curriculum-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">교육과정 관리</h2>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="curriculum-container">
+                            <div class="curriculum-list">
+                                <h3>교육과정 목록</h3>
+                                <div id="curriculum-items"></div>
+                                <button id="add-curriculum" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-plus"></i> 과정 추가
+                                </button>
+                            </div>
+                            <div class="curriculum-form">
+                                <h3>과정 정보</h3>
+                                <div id="curriculum-form">
+                                    <div class="form-group">
+                                        <label for="curriculum-name">과정명</label>
+                                        <input type="text" id="curriculum-name" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="curriculum-description">설명</label>
+                                        <textarea id="curriculum-description" class="form-control" rows="3"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="curriculum-date">일정</label>
+                                        <input type="text" id="curriculum-date" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="curriculum-price">금액</label>
+                                        <input type="text" id="curriculum-price" class="form-control">
+                                    </div>
+                                    <div class="form-actions">
+                                        <button id="save-curriculum" class="btn btn-primary">저장</button>
+                                        <button id="cancel-curriculum" class="btn btn-secondary">취소</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // DOM에 추가
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        
+        // 닫기 이벤트 설정
+        const modal = document.getElementById('curriculum-modal');
+        const closeBtn = modal.querySelector('.close');
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+            document.body.classList.remove('modal-open');
+        });
+        
+        // 모달 외부 클릭으로 닫기
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+            }
+        });
+        
+        // 과정 추가 버튼 이벤트
+        const addCurriculumBtn = document.getElementById('add-curriculum');
+        addCurriculumBtn.addEventListener('click', () => {
+            this.resetCurriculumForm();
+            document.getElementById('curriculum-name').focus();
+        });
+        
+        // 저장 버튼 이벤트
+        const saveCurriculumBtn = document.getElementById('save-curriculum');
+        saveCurriculumBtn.addEventListener('click', () => {
+            this.saveCurriculumData();
+        });
+        
+        // 취소 버튼 이벤트
+        const cancelCurriculumBtn = document.getElementById('cancel-curriculum');
+        cancelCurriculumBtn.addEventListener('click', () => {
+            this.resetCurriculumForm();
+        });
+        
+        return modal;
+    }
+    
+    // 교육과정 데이터 로드
+    loadCurriculumData(pageType) {
+        // TODO: 실제 데이터 로드 구현
+        console.log(`Loading curriculum data for ${pageType}...`);
+        
+        // 테스트 데이터 표시
+        const dummyData = [
+            { id: 1, name: '과정 1', description: '설명 1', date: '2024-03-01 ~ 2024-03-31', price: '300,000원' },
+            { id: 2, name: '과정 2', description: '설명 2', date: '2024-04-01 ~ 2024-04-30', price: '500,000원' }
+        ];
+        
+        this.displayCurriculumList(dummyData);
+    }
+    
+    // 교육과정 목록 표시
+    displayCurriculumList(data) {
+        const container = document.getElementById('curriculum-items');
+        container.innerHTML = '';
+        
+        if (!data || data.length === 0) {
+            container.innerHTML = '<p>등록된 교육과정이 없습니다.</p>';
+            return;
+        }
+        
+        const listHtml = data.map(item => `
+            <div class="curriculum-item" data-id="${item.id}">
+                <div class="curriculum-item-header">
+                    <span class="curriculum-item-name">${item.name}</span>
+                    <div class="curriculum-item-actions">
+                        <button class="btn-edit" title="수정"><i class="fas fa-edit"></i></button>
+                        <button class="btn-delete" title="삭제"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+                <div class="curriculum-item-details">
+                    <p>${item.description}</p>
+                    <p><small>${item.date} | ${item.price}</small></p>
+                </div>
+            </div>
+        `).join('');
+        
+        container.innerHTML = listHtml;
+        
+        // 수정/삭제 버튼 이벤트 설정
+        container.querySelectorAll('.btn-edit').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const itemId = parseInt(e.target.closest('.curriculum-item').dataset.id);
+                this.editCurriculumItem(itemId);
+            });
+        });
+        
+        container.querySelectorAll('.btn-delete').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const itemId = parseInt(e.target.closest('.curriculum-item').dataset.id);
+                this.deleteCurriculumItem(itemId);
+            });
+        });
+    }
+    
+    // 교육과정 항목 수정
+    editCurriculumItem(itemId) {
+        // TODO: 실제 데이터 로드 및 폼 채우기 구현
+        console.log(`Editing curriculum item ${itemId}...`);
+        
+        // 테스트 데이터
+        const dummyItem = { 
+            id: itemId, 
+            name: `과정 ${itemId}`, 
+            description: `설명 ${itemId}`, 
+            date: '2024-03-01 ~ 2024-03-31', 
+            price: '300,000원' 
+        };
+        
+        document.getElementById('curriculum-name').value = dummyItem.name;
+        document.getElementById('curriculum-description').value = dummyItem.description;
+        document.getElementById('curriculum-date').value = dummyItem.date;
+        document.getElementById('curriculum-price').value = dummyItem.price;
+        
+        // 폼에 아이디 데이터 추가
+        document.getElementById('curriculum-form').dataset.editId = itemId;
+    }
+    
+    // 교육과정 항목 삭제
+    deleteCurriculumItem(itemId) {
+        if (confirm('이 교육과정을 삭제하시겠습니까?')) {
+            // TODO: 실제 삭제 구현
+            console.log(`Deleting curriculum item ${itemId}...`);
+            
+            // UI에서 해당 항목 제거
+            const item = document.querySelector(`.curriculum-item[data-id="${itemId}"]`);
+            if (item) {
+                item.remove();
+            }
+        }
+    }
+    
+    // 교육과정 폼 초기화
+    resetCurriculumForm() {
+        document.getElementById('curriculum-name').value = '';
+        document.getElementById('curriculum-description').value = '';
+        document.getElementById('curriculum-date').value = '';
+        document.getElementById('curriculum-price').value = '';
+        
+        // 수정 모드 해제
+        delete document.getElementById('curriculum-form').dataset.editId;
+    }
+    
+    // 교육과정 데이터 저장
+    saveCurriculumData() {
+        const name = document.getElementById('curriculum-name').value.trim();
+        const description = document.getElementById('curriculum-description').value.trim();
+        const date = document.getElementById('curriculum-date').value.trim();
+        const price = document.getElementById('curriculum-price').value.trim();
+        
+        if (!name) {
+            alert('과정명을 입력해주세요.');
+            return;
+        }
+        
+        // 수정 모드 확인
+        const editId = document.getElementById('curriculum-form').dataset.editId;
+        
+        // TODO: 실제 저장 구현
+        if (editId) {
+            console.log(`Updating curriculum item ${editId}...`, { name, description, date, price });
+        } else {
+            console.log('Adding new curriculum...', { name, description, date, price });
+        }
+        
+        // 폼 초기화 및 목록 새로고침
+        this.resetCurriculumForm();
+        this.loadCurriculumData();
     }
     
     // 페이지 정보 업데이트

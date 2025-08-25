@@ -141,6 +141,22 @@ function formatKoreanTime(timeStr) {
 // ===========================================================================================
 // 페이지 관리 클래스
 class PageManager {
+    formatDate(dateString) {
+        // ISO 날짜 형태인지 먼저 확인 (T나 Z가 포함되어 있으면 ISO 형태)
+        if (typeof dateString === 'string' && (dateString.includes('T') || dateString.includes('Z'))) {
+            try {
+                const date = new Date(dateString);
+                if (!isNaN(date.getTime())) {
+                    return date.toISOString().split('T')[0]; // YYYY-MM-DD 형태로 변환
+                }
+            } catch (error) {
+                return dateString;
+            }
+        }
+        
+        // 그 외의 경우는 모두 텍스트로 간주하여 그대로 반환
+        return dateString;
+    }
     constructor() {
         // Google Apps Script 웹앱 URL (index.html과 동일)
         this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbye3yDhu02ftky51LcYHEjcFr1zk71hCpgVlw152tdAbLSoCX2PpM8vesS-tSIgg51T';
@@ -183,7 +199,7 @@ class PageManager {
             },
             '인사이드': {
                 title: '갤러리 인사이드',
-                description: '인사이드 관련 갤러리 컨텐츠 관리',
+                description: '인사이드 관련 갤러리 컨텐츠 관리 *수정중입니다. 데이터 신규 등록과 삭제만 가능합니다.',
                 location: '홍보 > 갤러리 > 인사이드',
                 link: '/pages/media/gallery/inside.html',
                 apiSheet: 'SHEET_GAL_C',
@@ -201,7 +217,7 @@ class PageManager {
             },
             '보도자료': {
                 title: '보도자료',
-                description: '언론 보도자료 및 뉴스 관리',
+                description: '언론 보도자료 및 뉴스 관리 *수정중입니다. 데이터 신규 등록과 삭제만 가능합니다.',
                 location: '홍보 > 게시판 > 보도자료',
                 link: '/pages/media/newsroom/press.html',
                 apiSheet: 'SHEET_BOARD_NEWS',
@@ -1133,10 +1149,13 @@ class PageManager {
                 `;
             
             case '인사이드':
+                const formattedDate = this.formatDate(item.date);
+                console.log(item.date); // 디버깅 출력
+                console.log('Formatted Date:', formattedDate); // 디버깅 출력
                 return `
                     <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
                     <td>${item.titleKR || '제목 없음'}<br><span style="color: #4747477a; margin-top: 4px;">${item.titleEN || ''}</span></td>
-                    <td class="col-date">${item.date || ''}</td>
+                    <td class="col-date">${formattedDate}</td>
                     <td class="col-status"><span class="status-badge ${item.state === 'on' ? 'status-active' : 'status-inactive'}">${item.state === 'on' ? 'ON' : 'OFF'}</span></td>
                     <td class="col-actions">
                         <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}', event)"><i class="fa-solid fa-trash-can"></i></button>

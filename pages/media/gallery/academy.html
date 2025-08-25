@@ -535,11 +535,11 @@ class PSACGalleryController {
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h4 class="gallery-title" data-eng="${item.titleEN}" data-kor="${item.titleKR}">${item.titleKR}</h4>
-                            <p class="gallery-date">${this.formatDate(item.date)}</p>
                         </div>
                     </div>
                 </div>
-            `;
+                `;
+                            // <p class="gallery-date">${this.formatDate(item.date)}</p>
 
             galleryItem.addEventListener('click', () => {
                 this.openModal(item);
@@ -855,11 +855,11 @@ class RelaySchoolGalleryController {
                             <div class="gallery-overlay">
                                 <div class="gallery-info">
                                     <h4 class="gallery-title" data-eng="${item.titleEN}" data-kor="${item.titleKR}">${item.titleKR}</h4>
-                                    <p class="gallery-date">${this.formatDate(item.date)}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                                    </div>
+                                    </div>
+                                    </div>
+                                    `;
+                                    // <p class="gallery-date">${this.formatDate(item.date)}</p>
 
                     galleryItem.addEventListener('click', () => {
                         this.openModal(item);

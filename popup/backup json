@@ -68,13 +68,27 @@
       "id": 2,
       "type": "renewal",
       "title": {
-        "kor": "YPP 아카데미 안내",
+        "kor": "아카데미 안내",
         "eng": "YPP Academy Announcement"
+      },
+      "message": {
+        "main": {
+          "kor": "웹사이트가 리뉴얼 중입니다.",
+          "eng": "Website is under renewal."
+        },
+        "sub": {
+          "kor": "일부 페이지와 서비스가 제한되고 있으며, 빠른 시일내에 모든 서비스를 제공할 수 있도록 노력하겠습니다.",
+          "eng": "Some pages and services are currently limited, and we are working hard to provide all services as soon as possible."
+        },
+        "thanks": {
+          "kor": "감사합니다.",
+          "eng": "Thank you."
+        }
       },
       "downloads": {
         "title": {
-          "kor": "<br>",
-          "eng": "<br>"
+          "kor": "YPP 아카데미",
+          "eng": "YPP ACADEMY"
         },
         "categories": [
           {
@@ -88,13 +102,6 @@
                   "kor": "과정개요, 교육일정 및 교육계획",
                   "eng": "Course Overview, Schedule, and Plan"
                 },
-                "link": "/pages/academy/index.html?tab=psac"
-              },
-              {
-                "name": {
-                  "kor": "PSAC 2025 교육안내 브로슈어",
-                  "eng": "PSAC 2025 Brochure"
-                },
                 "filename": "2025_PSAC_brochure.pdf"
               },
               {
@@ -102,7 +109,7 @@
                   "kor": "교육신청",
                   "eng": "Apply Now"
                 },
-                "link": "/pages/academy/index.html?tab=apply"
+                "link": "/pages/academy/index.html?tab=psac"
               }
             ]
           },
@@ -117,13 +124,6 @@
                   "kor": "과정개요, 교육일정 및 교육계획",
                   "eng": "Course Overview, Schedule, and Plan"
                 },
-                "link": "/pages/academy/index.html?tab=relay"
-              },
-              {
-                "name": {
-                  "kor": "RelaySchool 2025 교육계획 안내 브로슈어",
-                  "eng": "RelaySchool 2025 Brochure"
-                },
                 "filename": "2025_Relay_School_brochure_250304.pdf"
               },
               {
@@ -131,7 +131,7 @@
                   "kor": "교육신청",
                   "eng": "Apply Now"
                 },
-                "link": "/pages/academy/index.html?tab=apply"
+                "link": "/pages/academy/index.html?tab=relay"
               }
             ]
           }

@@ -177,7 +177,7 @@ const YppPopupSlider = {
         <ul class="download-list">
           ${category.items.map(item => `
             <li>
-              <a href="${item.filename ?  `/documents/${item.filename}` : item.link}" 
+              <a href="${item.filename ? `/documents/${item.filename}` : item.link}" 
                  class="download-link" ${item.filename ? 'download=""' : ''}>
                 <span class="download-name" data-kor="${item.name.kor}" data-eng="${item.name.eng}">${item.name.kor}</span>
               </a>
@@ -191,6 +191,14 @@ const YppPopupSlider = {
       <div class="popup-slide ${index === 0 ? 'active' : ''}" data-slide="${index}">
         <div class="slide-content">
           <h2 class="slide-title" data-kor="${popup.title.kor}" data-eng="${popup.title.eng}">${popup.title.kor}</h2>
+          
+          <div class="renewal-content">
+            <div class="renewal-message">
+              <p class="message-main" data-kor="${popup.message.main.kor}" data-eng="${popup.message.main.eng}">${popup.message.main.kor}</p>
+              <p class="message-sub" data-kor="${popup.message.sub.kor}" data-eng="${popup.message.sub.eng}">${popup.message.sub.kor}</p>
+              <p class="message-thanks" data-kor="${popup.message.thanks.kor}" data-eng="${popup.message.thanks.eng}">${popup.message.thanks.kor}</p>
+            </div>
+            
             <div class="downloads-section">
               <h3 class="downloads-title" data-kor="${popup.downloads.title.kor}" data-eng="${popup.downloads.title.eng}">${popup.downloads.title.kor}</h3>
               ${downloadsHtml}

@@ -847,7 +847,7 @@
 }
 
 .info-table th {
-    background:  #e7e7e7;
+    background:  #dadada;
     color: rgb(5, 5, 5);
     font-weight: 500;
     padding: 18px 20px;
@@ -856,6 +856,7 @@
     font-size: 1rem;
     border-bottom: 1px solid #ffffff;
 }
+.rs-schedule-table th.course-name{background-color: #e7e7e7;}
 
 .info-table td {
     padding: 18px 20px;

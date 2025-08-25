@@ -92,17 +92,17 @@
               },
               {
                 "name": {
-                  "kor": "PSAC 2025 교육안내 브로슈어",
-                  "eng": "PSAC 2025 Brochure"
-                },
-                "filename": "2025_PSAC_brochure.pdf"
-              },
-              {
-                "name": {
                   "kor": "교육신청",
                   "eng": "Apply Now"
                 },
                 "link": "/pages/academy/index.html?tab=apply"
+              },
+              {
+                "name": {
+                  "kor": "PSAC 2025 교육안내 브로슈어",
+                  "eng": "PSAC 2025 Brochure"
+                },
+                "filename": "2025_PSAC_brochure.pdf"
               }
             ]
           },
@@ -121,17 +121,17 @@
               },
               {
                 "name": {
-                  "kor": "RelaySchool 2025 교육계획 안내 브로슈어",
-                  "eng": "RelaySchool 2025 Brochure"
-                },
-                "filename": "2025_Relay_School_brochure_250304.pdf"
-              },
-              {
-                "name": {
                   "kor": "교육신청",
                   "eng": "Apply Now"
                 },
                 "link": "/pages/academy/index.html?tab=apply"
+              },
+              {
+                "name": {
+                  "kor": "RelaySchool 2025 교육계획 안내 브로슈어",
+                  "eng": "RelaySchool 2025 Brochure"
+                },
+                "filename": "2025_Relay_School_brochure_250304.pdf"
               }
             ]
           }

@@ -747,7 +747,7 @@ class PSACGalleryController {
         modalTitle.textContent = item.titleKR;
         modalTitle.setAttribute('data-eng', item.titleEN);
         modalTitle.setAttribute('data-kor', item.titleKR);
-        modalDate.textContent = this.formatDate(item.date);
+        // modalDate.textContent = this.formatDate(item.date);
         modalDescription.textContent = item.text;
         totalImages.textContent = item.image.length;
 
@@ -806,14 +806,14 @@ class PSACGalleryController {
         }
     }
 
-    formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('ko-KR', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-    }
+    // formatDate(dateString) {
+    //     const date = new Date(dateString);
+    //     return date.toLocaleDateString('ko-KR', {
+    //         year: 'numeric',
+    //         month: 'long',
+    //         day: 'numeric'
+    //     });
+    // }
 }
 // Relay School Gallery Controller Class
 class RelaySchoolGalleryController {
@@ -1068,7 +1068,7 @@ class RelaySchoolGalleryController {
                 modalTitle.textContent = item.titleKR;
                 modalTitle.setAttribute('data-eng', item.titleEN);
                 modalTitle.setAttribute('data-kor', item.titleKR);
-                modalDate.textContent = this.formatDate(item.date);
+                // modalDate.textContent = this.formatDate(item.date);
                 modalDescription.textContent = item.text;
                 totalImages.textContent = item.image.length;
 
@@ -1127,14 +1127,14 @@ class RelaySchoolGalleryController {
                 }
             }
 
-            formatDate(dateString) {
-                const date = new Date(dateString);
-                return date.toLocaleDateString('ko-KR', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-            }
+            // formatDate(dateString) {
+            //     const date = new Date(dateString);
+            //     return date.toLocaleDateString('ko-KR', {
+            //         year: 'numeric',
+            //         month: 'long',
+            //         day: 'numeric'
+            //     });
+            // }
         }
 
 // 기존 DOMContentLoaded 이벤트를 수정

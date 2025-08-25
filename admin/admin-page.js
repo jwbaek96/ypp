@@ -747,20 +747,21 @@ class PageManager {
                     <th class="col-actions">삭제</th>
                 `;
             
-            case '아카데미':
-                return `
-                    <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
-                    <th class="col-category">카테고리</th>
-                    <th>제목</th>
-                    <th class="col-date">날짜</th>
-                    <th class="col-status">상태</th>
-                    <th class="col-actions">삭제</th>
-                `;
             case '인사이드':
                 return `
                     <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
                     <th>제목</th>
                     <th class="col-date">날짜</th>
+                    <th class="col-status">상태</th>
+                    <th class="col-actions">삭제</th>
+                `;
+
+            case '아카데미':
+                return `
+                    <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
+                    <th class="col-category">카테고리</th>
+                    <th>제목</th>
+                    <th class="col-date">등록일시</th>
                     <th class="col-status">상태</th>
                     <th class="col-actions">삭제</th>
                 `;
@@ -912,9 +913,6 @@ class PageManager {
                     // 등록일/날짜 기준으로 정렬
                     dateA = new Date(a.date || '1970-01-01');
                     dateB = new Date(b.date || '1970-01-01');
-                    break;
-                case '아카데미':
-                    // 등록일/날짜 기준으로 정렬
                     break;
                     
                 default:

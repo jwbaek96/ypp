@@ -220,7 +220,7 @@ class InsideGalleryController {
         currentItems.forEach(item => {
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
-            
+            const formatDate = this.formatDate(item.date);
             const thumbnailImage = item.image[0];                    
             galleryItem.innerHTML = `
                 <div class="gallery-thumbnail" data-id="${item.id}">
@@ -228,7 +228,7 @@ class InsideGalleryController {
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h4 class="gallery-title" data-eng="${item.titleEN}" data-kor="${item.titleKR}">${item.titleKR}</h4>
-                            <p class="gallery-date">${item.date}</p>
+                            <p class="gallery-date">${formatDate}</p>
                         </div>
                     </div>
                 </div>
@@ -433,7 +433,7 @@ class InsideGalleryController {
         modalTitle.textContent = item.titleKR;
         modalTitle.setAttribute('data-eng', item.titleEN);
         modalTitle.setAttribute('data-kor', item.titleKR);
-        modalDate.textContent = item.date;
+        modalDate.textContent = this.formatDate(item.date);
         modalDescription.textContent = item.textKR || item.text || '';
         totalImages.textContent = item.image.length;
 
@@ -490,12 +490,20 @@ class InsideGalleryController {
     }
 
     formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('ko-KR', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+        // ISO 날짜 형태인지 먼저 확인 (T나 Z가 포함되어 있으면 ISO 형태)
+        if (typeof dateString === 'string' && (dateString.includes('T') || dateString.includes('Z'))) {
+            try {
+                const date = new Date(dateString);
+                if (!isNaN(date.getTime())) {
+                    return date.toISOString().split('T')[0]; // YYYY-MM-DD 형태로 변환
+                }
+            } catch (error) {
+                return dateString;
+            }
+        }
+        
+        // 그 외의 경우는 모두 텍스트로 간주하여 그대로 반환
+        return dateString;
     }
 }
 

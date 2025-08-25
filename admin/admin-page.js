@@ -747,11 +747,18 @@ class PageManager {
                     <th class="col-actions">삭제</th>
                 `;
             
-            case '인사이드':
             case '아카데미':
                 return `
                     <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
                     <th class="col-category">카테고리</th>
+                    <th>제목</th>
+                    <th class="col-date">날짜</th>
+                    <th class="col-status">상태</th>
+                    <th class="col-actions">삭제</th>
+                `;
+            case '인사이드':
+                return `
+                    <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
                     <th>제목</th>
                     <th class="col-date">날짜</th>
                     <th class="col-status">상태</th>
@@ -901,11 +908,13 @@ class PageManager {
                     
                 case '인허가':
                 case '유자격':
-                case '인사이드':
                 case '아카데미':
                     // 등록일/날짜 기준으로 정렬
                     dateA = new Date(a.date || '1970-01-01');
                     dateB = new Date(b.date || '1970-01-01');
+                    break;
+                case '아카데미':
+                    // 등록일/날짜 기준으로 정렬
                     break;
                     
                 default:
@@ -1126,11 +1135,20 @@ class PageManager {
                 `;
             
             case '인사이드':
+                return `
+                    <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
+                    <td>${item.titleKR || '제목 없음'}<br><span style="color: #4747477a; margin-top: 4px;">${item.titleEN || ''}</span></td>
+                    <td class="col-date">${item.date || ''}</td>
+                    <td class="col-status"><span class="status-badge ${item.state === 'on' ? 'status-active' : 'status-inactive'}">${item.state === 'on' ? 'ON' : 'OFF'}</span></td>
+                    <td class="col-actions">
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}', event)"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                `;
             case '아카데미':
                 return `
                     <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
                     <td class="col-category">${item.category || ''}</td>
-                    <td>${item.titleKR || '제목 없음'}</td>
+                    <td>${item.titleKR || '제목 없음'}<br><span style="color: #4747477a; margin-top: 4px;">${item.titleEN || ''}</span></td>
                     <td class="col-date">${item.date || ''}</td>
                     <td class="col-status"><span class="status-badge ${item.state === 'on' ? 'status-active' : 'status-inactive'}">${item.state === 'on' ? 'ON' : 'OFF'}</span></td>
                     <td class="col-actions">

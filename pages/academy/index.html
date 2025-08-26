@@ -3147,10 +3147,12 @@ class CourseApplicationManager {
                     if (e.target.value === 'psac') {
                         psacForm.style.display = 'block';
                         relayForm.style.display = 'none';
+                        relaySpecialForm.style.display = 'none';
                         this.loadPsacForm();
                     } else if (e.target.value === 'relay') {
                         psacForm.style.display = 'none';
                         relayForm.style.display = 'block';
+                        relaySpecialForm.style.display = 'none';
                         this.loadRelayForm();
                     } else {
                         // 특별과정 선택 시

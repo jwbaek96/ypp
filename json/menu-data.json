@@ -52,7 +52,7 @@
     "business": {
       "title": {
         "ko": "사업분야",
-        "en": "Business Industry"
+        "en": "Business Area"
       },
       "url": "/pages/business/index.html?tab=nuclear-power",
       "children": {

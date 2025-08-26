@@ -306,7 +306,7 @@
 .client-category:hover {transform: translateY(-2px);box-shadow: 0 4px 16px rgba(0,0,0,0.12);}
 .client-category-title {background: #e9e7e778 ; color: #000000; font-size: 1rem; font-weight: 500; text-align: center; padding: 1rem; margin: 0; border-bottom: 1px solid #e9ecef;}
 .client-image-container {padding: 1rem;text-align: center;background: #fff;}
-.client-image { object-fit: contain; width: 100%; height: auto; max-height: 200px; border-radius: 8px;}
+.client-image { object-fit: contain; width: 100%; height: auto; border-radius: 8px;}
 
 /* 모바일 반응형 */
 @media (max-width: 768px) {

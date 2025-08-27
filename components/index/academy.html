@@ -4,7 +4,7 @@
         <!-- Section Header -->
         <div class="index-section-header">
             <div class="index-section-title">
-                <span data-eng="YPP Academy" data-kor="YPP 아카데미"></span>
+                <a href="/pages/academy/index.html" data-eng="YPP Academy" data-kor="YPP 아카데미"></a>
                 <p class="index-section-description"
                 data-kor="전력계통 보호 전문가 양성을 위한 체계적인 교육 프로그램 실무중심의 교육서비스 제공, 디지털 보호계전기에 정통한 계통보호 전문가 양성 시대가 원하는 전문가, 와이피피㈜와 함께 하세요."
                 data-eng="At YPP Corporation, we empower you to become a power system protection expert through our systematic and practical training programs. <br>Our focus is on nurturing grid protection specialists who are deeply knowledgeable in digital protective relays, ensuring you're precisely the expert the modern era needs. <br>Unlock your potential with us.">
@@ -118,17 +118,17 @@
         <!-- Academy Action -->
         <div class="academy-action">
             <!-- <button onclick="openAcademyPopup()" class="academy-btn" data-eng="Apply for Training" data-kor="교육 신청하기">교육 신청하기</button> -->
-            <div class="academy-contact">
+            <!-- Academy link -->
+             <div class="academy-link">
+                <a href="/pages/academy/index.html"
+                data-kor="YPP 아카데미 더 알아보기"
+                data-eng="Go to YPP Academy">YPP 아카데미 더 알아보기</a>
+             </div>
+            <div class="academy-contact" style="margin-top: 2rem;">
                 <p data-eng="Inquire About Training : +82-2-2104-8720, 4683 | yppedu@ypp.co.kr"
                 data-kor="교육 문의: +82-2-2104-8720, 4683 | yppedu@ypp.co.kr">교육 문의: +82-2-2104-8720, 4683 | yppedu@ypp.co.kr</p>
             </div>
         </div>
-        <!-- Academy link -->
-         <div class="academy-link">
-            <a href="/pages/academy/index.html"
-            data-kor="YPP 아카데미 더 알아보기"
-            data-eng="Go to YPP Academy">YPP 아카데미 더 알아보기</a>
-         </div>
     </div>
 </section>
 
@@ -262,7 +262,7 @@
 .academy-action {
     text-align: center;
     padding: 2rem;
-    background-color: var(--background-light, #f8f9fa);
+    /* background-color: var(--background-light, #f8f9fa); */
     border-radius: 8px;
 }
 
@@ -292,7 +292,6 @@
 }
 .academy-link{
     text-align: center;
-    padding: 1.5rem 0.5rem 0;
     width: 100%;
     transition: transform 0.2s ease;
 }

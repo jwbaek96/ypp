@@ -257,11 +257,17 @@ document.addEventListener('DOMContentLoaded', () => {
 <style>
     .index-section-header{text-align: left;}
     .index-section-title{font-size: 2.5rem;font-weight: 700;margin-bottom: 2.5rem;text-transform: uppercase;}
+    .index-section-title:hover{color: #007bff;transition: color 0.3s ease;}
     .index-section-description{font-size: 0.95rem;font-weight: normal;line-height: 1.5;margin: 1rem 0;text-transform:initial;}
     .index-section-subtitle{font-size: 1.5rem;font-weight: 600;padding: .2rem 1rem;border-left: 7px solid #007bff;vertical-align: middle;margin-bottom: 1.5rem;}
+
 
     #keypartners .container,
     #contact .container,
     #academy .container,
     .epc-business-areas .container {max-width: 1200px;margin: 0 auto;padding: 0 1rem;}
+    @media screen and (max-width: 480px) {
+        .index-section-title{font-size: 1.75rem;}
+        .index-section-subtitle{font-size: 1rem;}
+    }
 </style>

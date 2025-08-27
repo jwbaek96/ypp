@@ -58,16 +58,16 @@
       "children": {
         "nuclear-power": {
           "title": {
-            "ko": "원자력발전소",
-            "en": "Nuclear Power Plant"
+            "ko": "원자력",
+            "en": "Nuclear Power"
           },
           "url": "/pages/business/index.html?tab=nuclear-power",
           "sections": ["원자력발전소 개요", "주요 프로젝트", "기술 역량", "실적"]
         },
         "thermal-power": {
           "title": {
-            "ko": "화력발전소",
-            "en": "Thermal Power Plant"
+            "ko": "복합 화력",
+            "en": "Thermal Power"
           },
           "url": "/pages/business/index.html?tab=thermal-power",
           "sections": ["화력발전소 개요", "주요 프로젝트", "기술 역량", "실적"]

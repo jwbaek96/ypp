@@ -27,10 +27,16 @@ const SECTION_CONFIG = [
         priority: 5
     },
     {
+        name: 'keypartners',
+        containerId: 'keypartners-container',
+        filePath: './components/index/keypartners.html',
+        priority: 6
+    },
+    {
         name: 'contact',
         containerId: 'contact-container',
         filePath: './components/index/contact.html',
-        priority: 6
+        priority: 7
     }
 ];
 

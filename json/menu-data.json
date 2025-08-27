@@ -66,7 +66,7 @@
         },
         "thermal-power": {
           "title": {
-            "ko": "복합 화력",
+            "ko": "복합화력",
             "en": "Thermal Power"
           },
           "url": "/pages/business/index.html?tab=thermal-power",

@@ -34,6 +34,10 @@ const ORIGINAL_SHEETS = {
     id: '1QAhkg8kpYjVsfXxrgR07dr4t5pRKtLEyg2vc8WeOet4',
     name: 'Relay School 신청'
   },
+  SHEET_APPLY_RS: {
+    id: '1Py8yKWngNV8iRW4lBWzcQ1qiENaPL3QjJGuhvYbnmQg',
+    name: '시트1'
+  },
   SHEET_HELP_KR: {
     id: '1PCIS1sJyR2HMniaIC-Ga4NIpFGv1xSKYbo1rqXXaMq8',
     name: '시트1'
@@ -56,6 +60,7 @@ const SHEET_GAL_F = '갤러리 아카데미';
 const SHEET_BOARD_NEWS = '게시판 보도자료';
 const SHEET_APPLY_P = '신청 PSAC';
 const SHEET_APPLY_R = '신청 RelaySchool';
+const SHEET_APPLY_RS = '신청 RelaySchool Special';
 const SHEET_HELP_KR = '문의 KOR';
 const SHEET_HELP_EN = '문의 ENG';
 const SHEET_REPORT = '신고';
@@ -170,18 +175,35 @@ function doGet(e) {
 
     // 액션별 처리
     if (action === 'downloadCSV') {
-      const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(sheetName);
-      const data = sheet.getDataRange().getValues();
-      
-      // CSV 형식으로 변환
-      const csv = data.map(row => 
-        row.map(cell => `"${String(cell).replace(/"/g, '""')}"`)
-          .join(',')
-      ).join('\n');
-      
-      return ContentService
-        .createTextOutput(csv)
-        .setMimeType(ContentService.MimeType.CSV);
+      try {
+        // 시트 타입에 따른 시트명 매핑
+        const sheetName = getSheetNameByType(sheetType);
+        if (!sheetName) {
+          response.message = `지원하지 않는 시트 타입입니다: ${sheetType}`;
+          response.success = false;
+        } else {
+          const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(sheetName);
+          if (!sheet) {
+            response.message = `시트를 찾을 수 없습니다: ${sheetName}`;
+            response.success = false;
+          } else {
+            const data = sheet.getDataRange().getValues();
+            
+            // CSV 형식으로 변환
+            const csv = data.map(row => 
+              row.map(cell => `"${String(cell).replace(/"/g, '""')}"`)
+                .join(',')
+            ).join('\n');
+            
+            return ContentService
+              .createTextOutput(csv)
+              .setMimeType(ContentService.MimeType.CSV);
+          }
+        }
+      } catch (error) {
+        response.message = `CSV 다운로드 오류: ${error.message}`;
+        response.success = false;
+      }
     } else if (action === 'delete') {
       // 삭제 액션 처리
       if (!sheetType || !itemId) {
@@ -291,6 +313,12 @@ function doGet(e) {
         response.success = true;
         break;
         
+      case 'SHEET_APPLY_RS':
+        response.data = getData(SHEET_APPLY_RS);
+        response.message = 'RelaySchool Special 신청 데이터 조회 성공';
+        response.success = true;
+        break;
+        
       case 'SHEET_HELP_KR':
         response.data = getData(SHEET_HELP_KR);
         response.message = '한국어 문의 데이터 조회 성공';
@@ -380,9 +408,10 @@ function getDashboardData(sheet) {
         boardNews: sheet.getRange('F3').getValue() || 0,     // 게시판 보도자료
         applyPSAC: sheet.getRange('G3').getValue() || 0,     // 신청 PSAC
         applyRelay: sheet.getRange('H3').getValue() || 0,    // 신청 RelaySchool
-        helpKR: sheet.getRange('I3').getValue() || 0,        // 문의 KOR
-        helpEN: sheet.getRange('J3').getValue() || 0,        // 문의 ENG
-        report: sheet.getRange('K3').getValue() || 0         // 신고
+        applyRelaySpecial: sheet.getRange('I3').getValue() || 0,    // 신청 RelaySchool Special
+        helpKR: sheet.getRange('J3').getValue() || 0,        // 문의 KOR
+        helpEN: sheet.getRange('K3').getValue() || 0,        // 문의 ENG
+        report: sheet.getRange('L3').getValue() || 0         // 신고
       // 추가 통계 데이터
     //   monthlyStats: {
     //     currentMonth: sheet.getRange('D2').getValue() || 0,
@@ -442,119 +471,8 @@ function getSheetSpecificData(sheet, sheetName) {
         const colIndex = customHeaders[key];
         let value = row[colIndex] || '';
         
-        // 시트별 특별 처리
-        if (sheetName === SHEET_GAL_F) { // 갤러리 아카데미 특별 처리
-          if (key === 'date') {
-            value = formatDate(value, 'datetime');
-          } else if (key === 'category') {
-            value = (value || '').toString().toLowerCase();
-          } else if (key === 'state') {
-            value = (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
-          } else if (key === 'image') {
-            value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
-          }
-        } else if (sheetName === SHEET_GAL_C) { // 갤러리 인사이드 특별 처리
-          if (key === 'date') {
-            value = formatDate(value, 'datetime');
-          } else if (key === 'state') {
-            value = (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
-          } else if (key === 'image') {
-            value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
-          }
-        } else if (sheetName === SHEET_GAL_B) { // 갤러리 유자격 특별 처리
-          if (key === 'date') {
-            value = formatDate(value, 'datetime');
-          } else if (key === 'image') {
-            // JSON 문자열로 저장된 배열을 파싱하거나, 줄바꿈으로 구분된 문자열을 배열로 변환
-            if (typeof value === 'string' && value.trim().startsWith('[')) {
-              try {
-                value = JSON.parse(value);
-              } catch (e) {
-                value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
-              }
-            } else {
-              value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
-            }
-          } else if (key === 'state') {
-            value = (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
-          }
-        } else if (sheetName === SHEET_GAL_A) { // 갤러리 인허가 특별 처리 (유자격과 동일)
-          if (key === 'date') {
-            value = formatDate(value, 'datetime');
-          } else if (key === 'image') {
-            // JSON 문자열로 저장된 배열을 파싱하거나, 줄바꿈으로 구분된 문자열을 배열로 변환
-            if (typeof value === 'string' && value.trim().startsWith('[')) {
-              try {
-                value = JSON.parse(value);
-              } catch (e) {
-                value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
-              }
-            } else {
-              value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
-            }
-          } else if (key === 'state') {
-            value = (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
-          }
-        } else if (sheetName === SHEET_GAL_C) { // 갤러리 인사이드 특별 처리
-          if (key === 'date') {
-            value = formatDate(value, 'datetime');
-          } else if (key === 'image') {
-            // JSON 문자열로 저장된 배열을 파싱하거나, 줄바꿈으로 구분된 문자열을 배열로 변환
-            if (typeof value === 'string' && value.trim().startsWith('[')) {
-              try {
-                value = JSON.parse(value);
-              } catch (e) {
-                value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
-              }
-            } else {
-              value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
-            }
-          } else if (key === 'state') {
-            value = (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
-          }
-        } else if (sheetName === SHEET_GAL_F) { // 갤러리 아카데미 특별 처리
-          if (key === 'date') {
-            value = formatDate(value, 'datetime');
-          } else if (key === 'image') {
-            // JSON 문자열로 저장된 배열을 파싱하거나, 줄바꿈으로 구분된 문자열을 배열로 변환
-            if (typeof value === 'string' && value.trim().startsWith('[')) {
-              try {
-                value = JSON.parse(value);
-              } catch (e) {
-                value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
-              }
-            } else {
-              value = value ? value.split('\n').filter(url => url.trim() !== '') : [];
-            }
-          } else if (key === 'state') {
-            value = (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
-          }
-        } else if (sheetName === SHEET_APPLY_R) { // 릴레이스쿨 신청 특별 처리
-          if (key === 'applicationDate') {
-            value = formatDate(value, 'datetime');
-          }
-        } else if (sheetName === SHEET_APPLY_P) { // PSAC 신청 특별 처리
-          if (key === 'applicationDate') {
-            value = formatDate(value, 'datetime');
-          }
-        } else if (sheetName === SHEET_HELP_KR || sheetName === SHEET_HELP_EN) { // 문의 특별 처리
-          if (key === 'submittedAt') {
-            value = formatDate(value, 'datetime');
-          }
-        } else if (sheetName === SHEET_BOARD_NEWS) { // 보도자료 특별 처리
-          if (key === 'submittedAt') {
-            value = formatDate(value, 'datetime');
-          }
-        } else if (sheetName === SHEET_REPORT) { // 신고 특별 처리
-          if (key === 'submittedAt') {
-            value = formatDate(value, 'datetime');
-          }
-        }
-        
-        // 일반적인 날짜 타입 처리 (다른 시트용)
-        if (value instanceof Date && key !== 'date') {
-          value = value.toISOString().split('T')[0];
-        }
+        // 공통 처리 함수 호출
+        value = processFieldValue(value, key, sheetName);
         
         // 빈 값 처리
         if (value === undefined || value === null) {
@@ -695,6 +613,28 @@ function getCustomHeaders(sheetName) {
       lockStatus: 22          // 잠금상태 (W)
     },
 
+    [SHEET_APPLY_RS]: { // 신청 RelaySchool Special
+      submissionId: 0,        // Submission ID
+      respondentId: 1,        // Respondent ID  
+      submittedAt: 2,         // Submitted at
+      companyName: 3,
+      ceoName: 4,
+      businessNumber: 5,
+      businessType: 6,
+      companyAddress: 7,      //주소
+      managerName: 8,    //담당자명
+      managerDepartment: 9,   //담당부서
+      managerPhone: 10,       //연락처
+      managerEmail: 11,       //이메일
+      courseContents: 12,     //교육내용
+      courseDuration: 13,     //교육기간
+      traineeLevel: 14,       //교육 대상자 수준
+      traineeCount: 15,       //교육 대상자 인원
+      confirmation: 16,       //확인
+      remarks: 17,             //비고
+      number: 18               //번호
+    },
+
     [SHEET_HELP_KR]: { // 문의 KOR
       submissionId: 0,        // Submission ID
       respondentId: 1,        // Respondent ID  
@@ -755,6 +695,7 @@ function getDataStartRow(sheetName) {
     [SHEET_BOARD_NEWS]: 2,   // 2행부터 데이터 시작
     [SHEET_APPLY_P]: 2,      // 2행부터 데이터 시작
     [SHEET_APPLY_R]: 2,      // 2행부터 데이터 시작
+    [SHEET_APPLY_RS]: 2,      // 2행부터 데이터 시작
     [SHEET_HELP_KR]: 2,      // 2행부터 데이터 시작
     [SHEET_HELP_EN]: 2,      // 2행부터 데이터 시작
     [SHEET_REPORT]: 2        // 2행부터 데이터 시작
@@ -784,6 +725,7 @@ function getAllStats() {
       applications: {
         psac: getSheetStats(SHEET_APPLY_P),
         relaySchool: getSheetStats(SHEET_APPLY_R),
+        relaySchoolSpecial: getSheetStats(SHEET_APPLY_RS),
         total: 0
       },
       inquiries: {
@@ -799,7 +741,7 @@ function getAllStats() {
     stats.galleries.total = stats.galleries.permit.count + stats.galleries.qualified.count + 
                            stats.galleries.inside.count + stats.galleries.academy.count;
     
-    stats.applications.total = stats.applications.psac.count + stats.applications.relaySchool.count;
+    stats.applications.total = stats.applications.psac.count + stats.applications.relaySchool.count + stats.applications.relaySchoolSpecial.count;
     stats.inquiries.total = stats.inquiries.korean.count + stats.inquiries.english.count;
     
     return stats;
@@ -875,6 +817,124 @@ function addData(sheetName, data) {
     console.error(`addData 에러 (${sheetName}):`, error);
     throw error;
   }
+}
+
+/**
+ * 필드 값 처리 공통 함수 (중복 코드 제거)
+ * @param {any} value - 처리할 값
+ * @param {string} key - 필드 키
+ * @param {string} sheetName - 시트 이름
+ * @returns {any} 처리된 값
+ */
+function processFieldValue(value, key, sheetName) {
+  // 갤러리 시트들 공통 처리
+  const gallerySheets = [SHEET_GAL_A, SHEET_GAL_B, SHEET_GAL_C, SHEET_GAL_F];
+  if (gallerySheets.includes(sheetName)) {
+    return processGalleryField(value, key, sheetName);
+  }
+  
+  // 신청 시트들 공통 처리
+  if ([SHEET_APPLY_P, SHEET_APPLY_R].includes(sheetName)) {
+    if (key === 'applicationDate') {
+      return formatDate(value, 'datetime');
+    }
+  }
+  
+  // RelaySchool Special 신청 시트 처리
+  if (sheetName === SHEET_APPLY_RS) {
+    if (key === 'submittedAt') {
+      return formatDate(value, 'datetime');
+    }
+  }
+  
+  // 문의 시트들 공통 처리
+  if ([SHEET_HELP_KR, SHEET_HELP_EN].includes(sheetName)) {
+    if (key === 'submittedAt') {
+      return formatDate(value, 'datetime');
+    }
+  }
+  
+  // 보도자료 시트 처리
+  if (sheetName === SHEET_BOARD_NEWS) {
+    if (key === 'submittedAt') {
+      return formatDate(value, 'datetime');
+    }
+  }
+  
+  // 신고 시트 처리
+  if (sheetName === SHEET_REPORT) {
+    if (key === 'submittedAt') {
+      return formatDate(value, 'datetime');
+    }
+  }
+  
+  // 일반적인 날짜 타입 처리
+  if (value instanceof Date && key !== 'date') {
+    return value.toISOString().split('T')[0];
+  }
+  
+  return value;
+}
+
+/**
+ * 갤러리 시트 필드 처리 함수
+ * @param {any} value - 처리할 값
+ * @param {string} key - 필드 키
+ * @param {string} sheetName - 시트 이름
+ * @returns {any} 처리된 값
+ */
+function processGalleryField(value, key, sheetName) {
+  switch (key) {
+    case 'date':
+      return formatDate(value, 'datetime');
+      
+    case 'category':
+      // 아카데미 갤러리만 카테고리 처리
+      if (sheetName === SHEET_GAL_F) {
+        return (value || '').toString().toLowerCase();
+      }
+      return value;
+      
+    case 'state':
+      return (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
+      
+    case 'image':
+      return parseImageField(value);
+      
+    default:
+      return value;
+  }
+}
+
+/**
+ * 이미지 필드 파싱 함수
+ * @param {any} value - 이미지 데이터
+ * @returns {Array} 이미지 URL 배열
+ */
+function parseImageField(value) {
+  if (!value) return [];
+  
+  // JSON 문자열로 저장된 배열 파싱 시도
+  if (typeof value === 'string' && value.trim().startsWith('[')) {
+    try {
+      return JSON.parse(value);
+    } catch (e) {
+      // JSON 파싱 실패 시 줄바꿈으로 분리
+      return value.split('\n').filter(url => url.trim() !== '');
+    }
+  }
+  
+  // 줄바꿈으로 구분된 문자열을 배열로 변환
+  if (typeof value === 'string') {
+    return value.split('\n').filter(url => url.trim() !== '');
+  }
+  
+  // 이미 배열인 경우
+  if (Array.isArray(value)) {
+    return value;
+  }
+  
+  return [];
 }
 
 /**
@@ -1102,10 +1162,12 @@ function updateItem(sheetType, itemId, updateData) {
     const data = dataRange.getValues();
     const headers = data[0]; // 첫 번째 행은 헤더
     
-    // ID로 해당 행 찾기 (첫 번째 컬럼이 ID라고 가정)
+    // ID로 해당 행 찾기
     let targetRowIndex = -1;
+    let idColumnIndex = 0; // 기본값: 첫 번째 컬럼 (대부분의 시트가 A열을 ID로 사용)
+    
     for (let i = 1; i < data.length; i++) {
-      const rowId = data[i][0] ? data[i][0].toString() : '';
+      const rowId = data[i][idColumnIndex] ? data[i][idColumnIndex].toString() : '';
       if (rowId === itemId.toString()) {
         targetRowIndex = i;
         break;
@@ -1185,6 +1247,31 @@ function updateItem(sheetType, itemId, updateData) {
         
         columnIndex = fieldIndexMappings[key];
       }
+      else if (sheetType === 'SHEET_APPLY_RS') {
+        const fieldIndexMappings = {
+          // 0: Submission ID (건드리지 않음)
+          // 1: Respondent ID (건드리지 않음)
+          // 2: Submitted at (건드리지 않음)
+          'companyName': 3,
+          'ceoName': 4,
+          'businessNumber': 5,
+          'businessType': 6,
+          'companyAddress': 7,      //주소
+          'managerName': 8,         //담당자명
+          'managerDepartment': 9,   //담당부서
+          'managerPhone': 10,       //연락처
+          'managerEmail': 11,       //이메일
+          'courseContents': 12,     //교육내용
+          'courseDuration': 13,     //교육기간
+          'traineeLevel': 14,       //교육 대상자 수준
+          'traineeCount': 15,       //교육 대상자 인원
+          'confirmation': 16,       //확인
+          'remarks': 17,             //비고
+          'number': 18               //순번
+        };
+        
+        columnIndex = fieldIndexMappings[key];
+      }
       // 갤러리 시트들의 컬럼 인덱스 매핑 추가
       else if (['SHEET_GAL_A', 'SHEET_GAL_B', 'SHEET_GAL_C', 'SHEET_GAL_F'].includes(sheetType)) {
         const galleryFieldMappings = {
@@ -1236,7 +1323,7 @@ function updateItem(sheetType, itemId, updateData) {
       }
       
       // 다른 시트 타입들은 기존 방식 사용 (헤더 매칭)
-      if (columnIndex === undefined && !['SHEET_APPLY_P', 'SHEET_APPLY_R', 'SHEET_GAL_A', 'SHEET_GAL_B', 'SHEET_GAL_C', 'SHEET_GAL_F', 'SHEET_BOARD_NEWS'].includes(sheetType)) {
+      if (columnIndex === undefined && !['SHEET_APPLY_P', 'SHEET_APPLY_R', 'SHEET_APPLY_RS', 'SHEET_GAL_A', 'SHEET_GAL_B', 'SHEET_GAL_C', 'SHEET_GAL_F', 'SHEET_BOARD_NEWS'].includes(sheetType)) {
         const normalizeString = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
         const normalizedKey = normalizeString(key);
         
@@ -1283,4 +1370,28 @@ function updateItem(sheetType, itemId, updateData) {
     console.error('updateItem 에러:', error);
     return { success: false, message: `수정 중 오류가 발생했습니다: ${error.message}` };
   }
+}
+
+/**
+ * 시트 타입에 따른 시트명 매핑 함수
+ * @param {string} sheetType - 시트 타입
+ * @returns {string|null} 시트명 또는 null
+ */
+function getSheetNameByType(sheetType) {
+  const sheetMapping = {
+    'SHEET_DASHBOARD': SHEET_DASHBOARD,
+    'SHEET_GAL_A': SHEET_GAL_A,
+    'SHEET_GAL_B': SHEET_GAL_B,
+    'SHEET_GAL_C': SHEET_GAL_C,
+    'SHEET_GAL_F': SHEET_GAL_F,
+    'SHEET_BOARD_NEWS': SHEET_BOARD_NEWS,
+    'SHEET_APPLY_P': SHEET_APPLY_P,
+    'SHEET_APPLY_R': SHEET_APPLY_R,
+    'SHEET_APPLY_RS': SHEET_APPLY_RS,
+    'SHEET_HELP_KR': SHEET_HELP_KR,
+    'SHEET_HELP_EN': SHEET_HELP_EN,
+    'SHEET_REPORT': SHEET_REPORT
+  };
+  
+  return sheetMapping[sheetType] || null;
 }

@@ -107,6 +107,7 @@
         /* =========== */
         @media screen and (max-width: 500px) {
             nav ul{grid-template-columns: 1fr 1fr;}
+            .nav-container>nav>ul {flex-direction: column;}
         }
     </style>
 </head>
@@ -151,6 +152,13 @@
                     </li>
                     <li data-nav="relay-school">
                         <div class="nav-name">Relay School</div>
+                        <div class="nav-info">
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
+                            <p class="nav-text"></p>
+                        </div>
+                    </li>
+                    <li data-nav="relay-school-special">
+                        <div class="nav-name">Relay School Special</div>
                         <div class="nav-info">
                             <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
                             <p class="nav-text"></p>

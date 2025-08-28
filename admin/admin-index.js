@@ -1,7 +1,7 @@
 // 앱스크립트 웹앱 URL (배포 후 실제 URL로 변경 필요)
 
 // Google Apps Script 웹앱 URL (배포 후 받은 URL)
-const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbye3yDhu02ftky51LcYHEjcFr1zk71hCpgVlw152tdAbLSoCX2PpM8vesS-tSIgg51T';
+const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbyw7jwrWG5vrjeZxogBrl3HUsBiZmbr_HrR9K_jni0OmHk7neQWBFUCgd6kzZcqmA3C';
 const DASHBOARD_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DASHBOARD_APPS_SCRIPT_ID}/exec`;
 
 // 대시보드 데이터 로드 및 표시
@@ -28,7 +28,7 @@ async function loadDashboardData() {
         // 에러 시 기본값 표시
         const defaultData = {
             galA: 0, galB: 0, galC: 0, galD: 0,
-            boardNews: 0, applyPSAC: 0, applyRelay: 0,
+            boardNews: 0, applyPSAC: 0, applyRelay: 0, applyRelaySpecial: 0,
             helpKR: 0, helpEN: 0, report: 0
         };
         updateNavCounts(defaultData);
@@ -46,6 +46,7 @@ function updateNavCounts(data) {
         'news': data.boardNews,        // 보도자료
         'psac': data.applyPSAC,        // PSAC
         'relay-school': data.applyRelay, // Relay School
+        'relay-school-special': data.applyRelaySpecial, // Relay School Special
         'customer-inquiries': data.helpKR + data.helpEN, // 고객문의 (한+영)
         'corruption-report': data.report  // 부패신고
     };
@@ -163,6 +164,7 @@ function handleNavClick(navType) {
         'news': '보도자료',
         'psac': 'PSAC',
         'relay-school': 'RelaySchool',
+        'relay-school-special': 'RelaySchoolSpecial',
         'faq': '자주묻는질문',
         'customer-inquiries': '고객문의',
         'corruption-report': '부패및윤리신고'

@@ -159,7 +159,7 @@ class PageManager {
     }
     constructor() {
         // Google Apps Script 웹앱 URL (index.html과 동일)
-        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbwOnWK-6XQk79PKegYhK9um0NcUUGds3kV4OlUt37m3_MHr_99cdL_n5aFnSDhtejA_';
+        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxSS2Lj0faviVS_PZUUmZnLUwvFurUNeeg1ZCLSrwv3_K2G5IG__JDvg_CTuFUNo0Hf';
         this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
         this.pageConfigs = this.initPageConfigs();
         this.isDescending = true; // 기본값: 최신순 (내림차순)
@@ -242,6 +242,15 @@ class PageManager {
                 dataKey: 'applyRelay',
                 createlink: '/pages/academy/index.html?tab=apply'
             },
+            'RelaySchoolSpecial': {
+                title: 'Relay School Special 신청',
+                description: 'Relay School Special 교육과정 신청서 관리',
+                location: '아카데미 > Relay School Special',
+                link: '/pages/academy/index.html?tab=relay-school',
+                apiSheet: 'SHEET_APPLY_RS',
+                dataKey: 'applyRelaySpecial',
+                createlink: '/pages/academy/index.html?tab=apply'
+            },
             '자주묻는질문': {
                 title: '자주 묻는 질문',
                 description: 'FAQ 관리',
@@ -319,8 +328,8 @@ class PageManager {
     setupCurriculumButton(pageType) {
         const curriculumBtn = document.getElementById('btn-curriculum');
         
-        // PSAC 또는 RelaySchool 페이지에서만 버튼 표시
-        if (['PSAC', 'RelaySchool'].includes(pageType)) {
+        // PSAC, RelaySchool, RelaySchoolSpecial 페이지에서만 버튼 표시
+        if (['PSAC', 'RelaySchool', 'RelaySchoolSpecial'].includes(pageType)) {
             curriculumBtn.style.display = 'block';
             
             // 버튼 클릭 이벤트
@@ -335,7 +344,12 @@ class PageManager {
     
     // 교육과정 관리 모달 표시
     showCurriculumModal(pageType) {
-        const title = pageType === 'PSAC' ? 'PSAC 교육과정 관리' : 'Relay School 교육과정 관리';
+        const titles = {
+            'PSAC': 'PSAC 교육과정 관리',
+            'RelaySchool': 'Relay School 교육과정 관리',
+            'RelaySchoolSpecial': 'Relay School Special 교육과정 관리'
+        };
+        const title = titles[pageType] || '교육과정 관리';
         
         // 모달 요소 생성
         const modal = document.getElementById('curriculum-modal') || this.createCurriculumModal();
@@ -787,6 +801,17 @@ class PageManager {
                     <th class="col-date">신청일시</th>
                     <th class="col-actions">삭제</th>
                 `;
+            
+            case 'RelaySchoolSpecial':
+                return `
+                    <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
+                    <th class="col-number">순번</th>
+                    <th>회사명</th>
+                    <th>담당자명</th>
+                    <th>교육내용</th>
+                    <th class="col-date">신청일시</th>
+                    <th class="col-actions">삭제</th>
+                `;
                 
             case '고객문의':
                 return `
@@ -838,8 +863,8 @@ class PageManager {
     groupDataByDateAndBusinessNumber(data) {
         const pageType = new URLSearchParams(window.location.search).get('page');
         
-        // PSAC, RelaySchool 페이지에서만 그룹핑 적용
-        if (!['PSAC', 'RelaySchool'].includes(pageType)) {
+        // PSAC, RelaySchool, RelaySchoolSpecial 페이지에서만 그룹핑 적용
+        if (!['PSAC', 'RelaySchool', 'RelaySchoolSpecial'].includes(pageType)) {
             return data;
         }
         
@@ -917,7 +942,13 @@ class PageManager {
                     dateA = new Date(a.submittedAt || '1970-01-01');
                     dateB = new Date(b.submittedAt || '1970-01-01');
                     break;
-                    
+
+                case 'RelaySchoolSpecial':
+                    // RelaySchoolSpecial의 경우 특별한 정렬 기준 적용
+                    dateA = new Date(a.specialDate || '1970-01-01');
+                    dateB = new Date(b.specialDate || '1970-01-01');
+                    break;
+
                 case '인허가':
                 case '유자격':
                 case '아카데미':
@@ -1167,7 +1198,22 @@ class PageManager {
                         <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}', event)"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 `;
-                
+            case 'RelaySchoolSpecial':
+                const rsDatetime = parseDatetime(item.submittedAt);
+                return `
+                    <td class="col-checkbox"><input type="checkbox" data-id="${item.submissionId}"></td>
+                    <td class="col-number">${item.number || '-'}</td>
+                    <td>${item.companyName || ''}</td>
+                    <td>${item.managerName || ''}</td>
+                    <td>${item.courseContents || ''}</td>
+                    <td class="col-date">
+                        <div>${rsDatetime.dateOnly}</div>
+                        ${rsDatetime.timeOnly !== '-' ? `<small style="color: #666;">${rsDatetime.timeOnly}</small>` : ''}
+                    </td>
+                    <td class="col-actions">
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.submissionId}', event)"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                `;
             case 'PSAC':
             case 'RelaySchool':
                 const datetime = parseDatetime(item.applicationDate);
@@ -1191,7 +1237,7 @@ class PageManager {
                         
                     return `
                         <td class="col-checkbox"><input type="checkbox" data-id="${item.number}"></td>
-                        <td>${item.number}</td>
+                        <td class="col-number">${item.number}</td>
                         <td>${item.companyName || '-'}</td>
                         <td class="grouped-cell">
                             <div class="group-header">
@@ -1219,7 +1265,7 @@ class PageManager {
                     
                     return `
                         <td class="col-checkbox"><input type="checkbox" data-id="${item.number}"></td>
-                        <td>${item.number}</td>
+                        <td class="col-number">${item.number}</td>
                         <td>${item.companyName || '-'}</td>
                         <td style="color: ${item.lockStatus === true || item.lockStatus === 'true' ? '#777' : '#000'};">
                             ${formattedEducation}
@@ -1409,6 +1455,7 @@ class PageManager {
         switch(pageType) {
             case 'PSAC':
             case 'RelaySchool':
+            case 'RelaySchoolSpecial':
                 this.openPSACEditModal(item, config, pageType);
                 break;
                 
@@ -1600,8 +1647,12 @@ class PageManager {
         modal.style.display = 'flex';
     }
     
-    // PSAC/RelaySchool 수정 폼 생성
+    // PSAC/RelaySchool/RelaySchoolSpecial 수정 폼 생성
     generatePSACEditForm(item, pageType) {
+        if (pageType === 'RelaySchoolSpecial') {
+            return this.generateRelaySchoolSpecialEditForm(item);
+        }
+        
         return `
             <div class="edit-form-section-title">신청 정보</div>
             
@@ -1844,6 +1895,111 @@ class PageManager {
         }
         
         return `<textarea name="detailedEducation" required>${currentEducation}</textarea>`;
+    }
+    
+    // RelaySchoolSpecial 수정 폼 생성
+    generateRelaySchoolSpecialEditForm(item) {
+        return `
+            <div class="edit-form-section-title">신청 정보</div>
+            
+            <div class="edit-form-group">
+                <label>신청번호</label>
+                <input type="text" name="number" value="${item.number || ''}" class="edit-form-readonly" readonly>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>신청일시</label>
+                <input type="text" name="submittedAt" value="${item.submittedAt || ''}" class="edit-form-readonly" readonly>
+            </div>
+
+            <div class="edit-form-section-title">회사 정보</div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>회사명</label>
+                    <input type="text" name="companyName" value="${item.companyName || ''}" >
+                </div>
+                <div class="edit-form-group">
+                    <label>대표자명</label>
+                    <input type="text" name="ceoName" value="${item.ceoName || ''}" >
+                </div>
+            </div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>사업자등록번호</label>
+                    <input type="text" name="businessNumber" value="${item.businessNumber || ''}" >
+                </div>
+                <div class="edit-form-group">
+                    <label>종목업태</label>
+                    <input type="text" name="businessType" value="${item.businessType || ''}">
+                </div>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>회사 주소</label>
+                <textarea name="companyAddress">${item.companyAddress || ''}</textarea>
+            </div>
+
+            <div class="edit-form-section-title">담당자 정보</div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>담당자명</label>
+                    <input type="text" name="managerName" value="${item.managerName || ''}" >
+                </div>
+                <div class="edit-form-group">
+                    <label>담당자 부서</label>
+                    <input type="text" name="managerDepartment" value="${item.managerDepartment || ''}">
+                </div>
+            </div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>담당자 연락처</label>
+                    <input type="tel" name="managerPhone" value="${item.managerPhone || ''}">
+                </div>
+                <div class="edit-form-group">
+                    <label>담당자 이메일</label>
+                    <input type="email" name="managerEmail" value="${item.managerEmail || ''}" >
+                </div>
+            </div>
+
+            <div class="edit-form-section-title">교육 내용</div>
+            
+            <div class="edit-form-group">
+                <label>교육 내용</label>
+                <textarea name="courseContents">${item.courseContents || ''}</textarea>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>교육 기간</label>
+                <input type="text" name="courseDuration" value="${item.courseDuration || ''}" >
+            </div>
+            
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label>교육 대상자 수준</label>
+                    <input type="text" name="traineeLevel" value="${item.traineeLevel || ''}">
+                </div>
+                <div class="edit-form-group">
+                    <label>교육 대상자 인원</label>
+                    <input type="number" name="traineeCount" value="${item.traineeCount || ''}">
+                </div>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>답변 상태</label>
+                <div class="confirmation-checkbox-container" style="margin-top: 0.5rem;">
+                    <input type="checkbox" name="confirmation" value="확인됨" style="width: auto;" ${(item.confirmation === true || item.confirmation === 'true' || item.confirmation === '확인됨' || item.confirmation === 'Y' || item.confirmation === 'yes') ? 'checked' : ''}>
+                </div>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>비고</label>
+                <textarea name="remarks">${item.remarks || ''}</textarea>
+            </div>
+        `;
     }
     
     // 갤러리 수정 폼 생성
@@ -2207,10 +2363,18 @@ async function saveEditedItem() {
     
     // 원본 아이템의 읽기 전용 필드들 유지
     const originalItem = window.currentEditItem;
-    // updatedData.number = "=ROW()-1";
-    updatedData.applicationDate = originalItem.applicationDate;
-    updatedData.courseName = originalItem.courseName;
-    updatedData.educationSchedule = originalItem.educationSchedule;
+    const pageType = new URLSearchParams(window.location.search).get('page');
+    
+    if (pageType === 'RelaySchoolSpecial') {
+        // RelaySchoolSpecial의 읽기 전용 필드들
+        updatedData.submittedAt = originalItem.submittedAt;
+        updatedData.number = originalItem.number;
+    } else {
+        // PSAC/RelaySchool의 읽기 전용 필드들
+        updatedData.applicationDate = originalItem.applicationDate;
+        updatedData.courseName = originalItem.courseName;
+        updatedData.educationSchedule = originalItem.educationSchedule;
+    }
     
     if (!confirm('수정사항을 저장하시겠습니까?')) {
         return;
@@ -2226,12 +2390,24 @@ async function saveEditedItem() {
         }
         
         // 수정 API 호출 (GET 방식으로 변경 - CORS 문제 해결)
-        const updateUrl = `${pageManager.appsScriptUrl}?action=update&sheet=${config.apiSheet}&id=${encodeURIComponent(originalItem.number)}&data=${encodeURIComponent(JSON.stringify(updatedData))}`;
+        const pageType = new URLSearchParams(window.location.search).get('page');
+        let itemId;
+        
+        // RelaySchoolSpecial의 경우 ID 필드 처리
+        if (pageType === 'RelaySchoolSpecial') {
+            itemId = originalItem.submissionId || originalItem.id || originalItem.number;
+        } else {
+            itemId = originalItem.number;
+        }
+        
+        const updateUrl = `${pageManager.appsScriptUrl}?action=update&sheet=${config.apiSheet}&id=${encodeURIComponent(itemId)}&data=${encodeURIComponent(JSON.stringify(updatedData))}`;
         
         // 디버깅을 위한 로그
         console.log('=== 수정 요청 디버깅 ===');
+        console.log('페이지 타입:', pageType);
         console.log('시트:', config.apiSheet);
-        console.log('ID:', originalItem.number);
+        console.log('ID:', itemId);
+        console.log('원본 아이템:', originalItem);
         console.log('수정할 데이터:', updatedData);
         console.log('요청 URL:', updateUrl);
         console.log('========================');
@@ -2578,33 +2754,30 @@ PageManager.prototype.downloadSheetFromAppsScript = async function() {
             throw new Error('페이지 정보를 찾을 수 없습니다.');
         }
 
-        // 기존 getData 액션을 사용해서 데이터 가져오기
-        const dataUrl = `${this.appsScriptUrl}?sheet=${currentConfig.apiSheet}&action=getData`;
+        // Apps Script에서 CSV 다운로드 (이제 오류 수정됨)
+        const downloadUrl = `${this.appsScriptUrl}?sheet=${currentConfig.apiSheet}&action=downloadCSV`;
         
-        console.log('데이터 요청:', dataUrl);
+        console.log('CSV 다운로드 요청:', downloadUrl);
         
-        // fetch로 데이터 받기
-        const response = await fetch(dataUrl);
+        // fetch로 CSV 데이터 받기
+        const response = await fetch(downloadUrl);
         
         if (!response.ok) {
             throw new Error(`서버 응답 오류: ${response.status}`);
         }
 
-        // JSON 응답 받기
-        const result = await response.json();
+        // CSV 데이터를 텍스트로 받기
+        const csvText = await response.text();
         
-        if (!result.success) {
-            throw new Error(result.message || 'Apps Script 오류');
+        // 응답이 JSON 에러인지 확인
+        try {
+            const jsonResponse = JSON.parse(csvText);
+            if (jsonResponse.success === false) {
+                throw new Error(jsonResponse.message || 'Apps Script 오류');
+            }
+        } catch (e) {
+            // JSON이 아니면 정상적인 CSV 데이터로 간주
         }
-
-        // 데이터를 CSV로 변환
-        const data = result.data;
-        if (!data || data.length === 0) {
-            throw new Error('다운로드할 데이터가 없습니다.');
-        }
-
-        // CSV 변환 함수 사용 (기존 테이블 데이터를 사용)
-        const csvText = this.convertDataToCSV(data, currentConfig);
 
         // UTF-8 BOM 추가하여 CSV 파일 생성 (한글 깨짐 방지)
         const BOM = '\uFEFF';

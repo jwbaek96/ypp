@@ -31,126 +31,53 @@
         
         /* =========== */
 
-        .links{position: fixed;bottom: 25px;left: 25px;}
-        .links a img{
+        .links{position: fixed;bottom: 25px;left: 25px; display: flex; gap: .5rem;}
+        .links a img, 
+        .links div{
             width: 2.25rem;
+            aspect-ratio: 1/1;
             box-shadow: 0 1px 5px rgb(0 0 0 / 56%);
             border-radius: 7px;
         }
-        .links a:hover img{
+        .links a:hover img,
+        .links div:hover {
             transform: scale(1.05);
             transition: all 0.3s ease;
         }
-
-        /* =========== Modal Styles =========== */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            overflow: auto;
-        }
-        
-        .modal.show {
+        #btn-excel-download{
+            background-color: #028529;
+            color: #fff;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
-        .modal-content {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 80%;
-            max-width: 900px;
-            max-height: 80%;
-            overflow-y: auto;
-            animation: modalOpen 0.3s;
-        }
+
+        /* =========== Modal Styles =========== */
+        .modal {display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.5);z-index: 1000;overflow: auto;}
+        .modal.show {display: flex;align-items: center;justify-content: center;}
+        .modal-content {background-color: #fff;border-radius: 8px;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);width: 80%;max-width: 900px;max-height: 80%;overflow-y: auto;animation: modalOpen 0.3s;}
         
         @keyframes modalOpen {
             from {opacity: 0; transform: scale(0.95);}
             to {opacity: 1; transform: scale(1);}
         }
         
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            border-bottom: 1px solid #e9e9e9;
-        }
-        
-        .modal-title {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-        
-        .close {
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: #777;
-            background: none;
-            border: none;
-            line-height: 1;
-        }
-        
-        .modal-body {
-            padding: 20px;
-        }
+        .modal-header {display: flex;justify-content: space-between;align-items: center;padding: 15px 20px;border-bottom: 1px solid #e9e9e9;}
+        .modal-title {margin: 0;font-size: 1.5rem;}
+        .close {font-size: 1.8rem;cursor: pointer;color: #777;background: none;border: none;line-height: 1;}
+        .modal-body {padding: 20px;}
         
         /* Curriculum modal specific styles */
-        .curriculum-container {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .curriculum-list {
-            flex: 1;
-            border-right: 1px solid #e9e9e9;
-            padding-right: 20px;
-        }
-        
-        .curriculum-form {
-            flex: 2;
-        }
-        
-        .curriculum-item {
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #e9e9e9;
-            background: #f9f9f9;
-        }
-        
-        .curriculum-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        
-        .curriculum-item-name {
-            font-weight: bold;
-        }
-        
-        .curriculum-item-details p {
-            margin: 0 0 5px 0;
-        }
-        
-        .curriculum-item-actions button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            margin-left: 8px;
-            color: #666;
-        }
-        
+        .curriculum-container {display: flex;gap: 20px;}
+        .curriculum-list {flex: 1;border-right: 1px solid #e9e9e9;padding-right: 20px;}
+        .curriculum-form {flex: 2;}
+        .curriculum-item {margin-bottom: 15px;padding: 10px;border-radius: 5px;border: 1px solid #e9e9e9;background: #f9f9f9;}
+        .curriculum-item-header {display: flex;justify-content: space-between;align-items: center;margin-bottom: 8px;}
+        .curriculum-item-name {font-weight: bold;}
+        .curriculum-item-details p {margin: 0 0 5px 0;}
+        .curriculum-item-actions button {background: none;border: none;cursor: pointer;font-size: 14px;margin-left: 8px;color: #666;}
         .curriculum-item-actions .btn-edit:hover { color: #007bff; }
         .curriculum-item-actions .btn-delete:hover { color: #dc3545; }
         
@@ -767,6 +694,9 @@
 <body>
     <section class="links">
         <a href="/" target="_blank"><img src="/assets/images/favicon/apple-icon-76x76.png" alt="" srcset=""></a>
+        <div id="btn-excel-download" title="엑셀 다운로드">
+            <i class="fas fa-file-excel"></i> 
+        </div>
     </section>
     <div class="main-container">
         <header>

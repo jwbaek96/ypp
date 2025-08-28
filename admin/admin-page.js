@@ -159,7 +159,7 @@ class PageManager {
     }
     constructor() {
         // Google Apps Script 웹앱 URL (index.html과 동일)
-        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbye3yDhu02ftky51LcYHEjcFr1zk71hCpgVlw152tdAbLSoCX2PpM8vesS-tSIgg51T';
+        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbwOnWK-6XQk79PKegYhK9um0NcUUGds3kV4OlUt37m3_MHr_99cdL_n5aFnSDhtejA_';
         this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
         this.pageConfigs = this.initPageConfigs();
         this.isDescending = true; // 기본값: 최신순 (내림차순)
@@ -307,6 +307,9 @@ class PageManager {
         
         // 교육과정 버튼 설정 (PSAC, RelaySchool 페이지에서만 표시)
         this.setupCurriculumButton(pageParam);
+        
+        // 엑셀 다운로드 버튼 설정
+        this.setupExcelDownloadButton();
         
         // 삭제 버튼 이벤트 설정
         this.setupDeleteButtons();
@@ -597,7 +600,6 @@ class PageManager {
     // 페이지별 데이터 카운트 로드
     async loadPageCount(config) {
         try {
-            // console.log(`${config.title} 데이터 카운트 로드 중...`);
             
             // 대시보드에서 카운트 정보 가져오기 (index.html과 동일한 URL 형식)
             const url = `${this.appsScriptUrl}?sheet=SHEET_DASHBOARD&action=getData`;
@@ -608,17 +610,10 @@ class PageManager {
                 throw new Error(result.message);
             }
             
-            // console.log('=== 디버깅 정보 ===');
-            // console.log('config:', config);
-            // console.log('config.dataKey:', config.dataKey);
-            // console.log('result.data:', result.data);
-            // console.log('result.data[config.dataKey]:', result.data[config.dataKey]);
             
             const count = result.data[config.dataKey] || 0;
             document.querySelector('.page-count').textContent = `${count}건`;
             
-            // console.log(`${config.title}: ${count}건`);
-            // console.log('=== 디버깅 끝 ===');
             
         } catch (error) {
             console.error('데이터 카운트 로드 실패:', error);
@@ -2557,4 +2552,165 @@ function setupModalKeyboardEvents() {
             }
         }
     });
+}
+
+// 페이지 매니저 클래스에 추가할 메서드들
+PageManager.prototype.setupExcelDownloadButton = function() {
+    const excelBtn = document.getElementById('btn-excel-download');
+    if (excelBtn) {
+        excelBtn.addEventListener('click', () => {
+            this.downloadSheetFromAppsScript();
+        });
+    }
+}
+
+PageManager.prototype.downloadSheetFromAppsScript = async function() {
+    try {
+        // 로딩 표시
+        const excelBtn = document.getElementById('btn-excel-download');
+        const originalContent = excelBtn.innerHTML;
+        excelBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        excelBtn.disabled = true;
+
+        // 현재 페이지의 시트 정보 가져오기
+        const currentConfig = this.currentConfig;
+        if (!currentConfig) {
+            throw new Error('페이지 정보를 찾을 수 없습니다.');
+        }
+
+        // 기존 getData 액션을 사용해서 데이터 가져오기
+        const dataUrl = `${this.appsScriptUrl}?sheet=${currentConfig.apiSheet}&action=getData`;
+        
+        console.log('데이터 요청:', dataUrl);
+        
+        // fetch로 데이터 받기
+        const response = await fetch(dataUrl);
+        
+        if (!response.ok) {
+            throw new Error(`서버 응답 오류: ${response.status}`);
+        }
+
+        // JSON 응답 받기
+        const result = await response.json();
+        
+        if (!result.success) {
+            throw new Error(result.message || 'Apps Script 오류');
+        }
+
+        // 데이터를 CSV로 변환
+        const data = result.data;
+        if (!data || data.length === 0) {
+            throw new Error('다운로드할 데이터가 없습니다.');
+        }
+
+        // CSV 변환 함수 사용 (기존 테이블 데이터를 사용)
+        const csvText = this.convertDataToCSV(data, currentConfig);
+
+        // UTF-8 BOM 추가하여 CSV 파일 생성 (한글 깨짐 방지)
+        const BOM = '\uFEFF';
+        const csvWithBOM = BOM + csvText;
+        const blob = new Blob([csvWithBOM], { type: 'text/csv;charset=utf-8' });
+        
+        // 파일명 생성 (현재 날짜 + 페이지명)
+        const today = this.getTodayString();
+        const pageName = currentConfig.title;
+        const filename = `${pageName}_${today}.csv`;
+        
+        // 다운로드 실행
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        
+        console.log(`CSV 다운로드 완료: ${filename}`);
+
+        // 버튼 원상복구
+        excelBtn.innerHTML = originalContent;
+        excelBtn.disabled = false;
+
+    } catch (error) {
+        console.error('시트 다운로드 오류:', error);
+        alert(`시트 다운로드 중 오류가 발생했습니다: ${error.message}`);
+        
+        // 버튼 원상복구
+        const excelBtn = document.getElementById('btn-excel-download');
+        excelBtn.innerHTML = '<i class="fas fa-file-excel"></i>';
+        excelBtn.disabled = false;
+    }
+}
+
+PageManager.prototype.getTodayString = function() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}${month}${day}`;
+}
+
+PageManager.prototype.convertDataToCSV = function(data, config) {
+    if (!data || data.length === 0) {
+        return '';
+    }
+
+    // 테이블 헤더 생성 (config의 columns 사용)
+    const headers = [];
+    if (config.columns) {
+        config.columns.forEach(col => {
+            if (col.key !== 'actions' && col.key !== 'checkbox') {
+                headers.push(col.title);
+            }
+        });
+    } else {
+        // config.columns가 없으면 첫 번째 데이터 객체의 키를 사용
+        const firstItem = data[0];
+        Object.keys(firstItem).forEach(key => {
+            if (key !== 'actions' && key !== 'checkbox') {
+                headers.push(key);
+            }
+        });
+    }
+
+    // CSV 변환
+    const csvRows = [];
+    
+    // 헤더 추가
+    csvRows.push(headers.map(header => `"${String(header).replace(/"/g, '""')}"`).join(','));
+    
+    // 데이터 행 추가
+    data.forEach(item => {
+        const row = [];
+        
+        if (config.columns) {
+            config.columns.forEach(col => {
+                if (col.key !== 'actions' && col.key !== 'checkbox') {
+                    let value = item[col.key] || '';
+                    
+                    // 날짜 형식 처리
+                    if (col.key.includes('date') || col.key.includes('time')) {
+                        const parsed = parseDatetime(value);
+                        value = parsed.dateOnly || value;
+                    }
+                    
+                    // 문자열로 변환하고 따옴표 이스케이프
+                    value = String(value).replace(/"/g, '""');
+                    row.push(`"${value}"`);
+                }
+            });
+        } else {
+            Object.keys(item).forEach(key => {
+                if (key !== 'actions' && key !== 'checkbox') {
+                    let value = String(item[key] || '').replace(/"/g, '""');
+                    row.push(`"${value}"`);
+                }
+            });
+        }
+        
+        csvRows.push(row.join(','));
+    });
+    
+    return csvRows.join('\n');
 }

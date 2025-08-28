@@ -1,0 +1,24 @@
+{
+    "type" : "psac",
+    "data" : {
+        "year" : "2023",
+        "table-info" : "",
+        "table-schedule" : ""
+    },
+    "courses" : [
+        {
+            "name" : "Course 1",
+            "data" : {
+                "table-schedule" : "",
+                "instructors" : ""
+            }
+        },
+        {
+            "name" : "Course 2",
+            "data" : {
+                "table-schedule" : "",
+                "instructors" : ""
+            }
+        }
+    ]
+}

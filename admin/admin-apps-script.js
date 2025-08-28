@@ -169,7 +169,20 @@ function doGet(e) {
     const itemId = e.parameter.id || '';
 
     // 액션별 처리
-    if (action === 'delete') {
+    if (action === 'downloadCSV') {
+      const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(sheetName);
+      const data = sheet.getDataRange().getValues();
+      
+      // CSV 형식으로 변환
+      const csv = data.map(row => 
+        row.map(cell => `"${String(cell).replace(/"/g, '""')}"`)
+          .join(',')
+      ).join('\n');
+      
+      return ContentService
+        .createTextOutput(csv)
+        .setMimeType(ContentService.MimeType.CSV);
+    } else if (action === 'delete') {
       // 삭제 액션 처리
       if (!sheetType || !itemId) {
         response.message = '시트 타입과 항목 ID가 필요합니다.';
@@ -408,22 +421,12 @@ function getSheetSpecificData(sheet, sheetName) {
     const customHeaders = getCustomHeaders(sheetName);
     const dataStartRow = getDataStartRow(sheetName); // 데이터 시작 행
     
-    // 필요한 최소 컬럼 수 확인 (lockStatus 컬럼 포함)
-    const requiredColumns = Math.max(lastCol, Math.max(...Object.values(customHeaders)) + 1);
-    
-    // 실제 데이터 범위 가져오기 (필요한 컬럼 수만큼)
-    const dataRange = sheet.getRange(dataStartRow, 1, lastRow - dataStartRow + 1, requiredColumns);
+    // 실제 데이터 범위 가져오기
+    const dataRange = sheet.getRange(dataStartRow, 1, lastRow - dataStartRow + 1, lastCol);
     const dataValues = dataRange.getValues();
     const sheetData = [];
 
-    console.log(`${sheetName}: 데이터 시작행 ${dataStartRow}, ${dataValues.length}개 행, 마지막 컬럼 ${lastCol}, 필요 컬럼 ${requiredColumns}`);
-    
-    // Relay School의 경우 lockStatus 컬럼 존재 여부 확인
-    if (sheetName === SHEET_APPLY_R && dataValues.length > 0) {
-      const firstRow = dataValues[0];
-      console.log(`릴레이스쿨 첫 번째 행 길이: ${firstRow.length}, lockStatus 컬럼(22) 값: '${firstRow[22]}'`);
-      console.log(`첫 번째 행 전체:`, firstRow);
-    }
+    console.log(`${sheetName}: 데이터 시작행 ${dataStartRow}, ${dataValues.length}개 행`);
 
     // 데이터 매핑
     dataValues.forEach((row, index) => {
@@ -529,16 +532,10 @@ function getSheetSpecificData(sheet, sheetName) {
         } else if (sheetName === SHEET_APPLY_R) { // 릴레이스쿨 신청 특별 처리
           if (key === 'applicationDate') {
             value = formatDate(value, 'datetime');
-          } else if (key === 'lockStatus') {
-            // lockStatus 디버깅 로그 추가
-            console.log(`릴레이스쿨 lockStatus 디버깅: 행${index + dataStartRow}, 원본값='${value}', 타입=${typeof value}`);
           }
         } else if (sheetName === SHEET_APPLY_P) { // PSAC 신청 특별 처리
           if (key === 'applicationDate') {
             value = formatDate(value, 'datetime');
-          } else if (key === 'lockStatus') {
-            // lockStatus 디버깅 로그 추가
-            console.log(`PSAC lockStatus 디버깅: 행${index + dataStartRow}, 원본값='${value}', 타입=${typeof value}`);
           }
         } else if (sheetName === SHEET_HELP_KR || sheetName === SHEET_HELP_EN) { // 문의 특별 처리
           if (key === 'submittedAt') {

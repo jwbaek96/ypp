@@ -80,6 +80,14 @@ const psacCourses = {
     10:{kor:"10주: 신재생에너지 계통연계 기술", eng:"Week 10: Renewable Energy Grid Connection Technology"}
 };
 
+// PSAC 마감된 과정들 (정원 초과)
+const psacCoursesClosed = {
+    5: {
+        kor: "해당 항목은 정원 초과로 접수 마감되었습니다.",
+        eng: "This course is closed due to exceeding capacity."
+    }
+};
+
 // 현재 언어 감지 함수
 function getCurrentLanguage() {
     return localStorage.getItem('language') || 'kor';
@@ -257,10 +265,20 @@ function addPsacStudent() {
     const courseCheckboxes = Object.keys(psacCourses).map((courseKey) => {
         const course = psacCourses[courseKey];
         const courseText = course[currentLang];
+        const isClosed = psacCoursesClosed.hasOwnProperty(courseKey);
+        const closedTooltip = isClosed ? psacCoursesClosed[courseKey][currentLang] : '';
+        
         return `
-        <div class="psac-checkbox-item">
-            <input type="checkbox" id="psac-course-${psacStudentCount}-${courseKey}" name="psac-student-${psacStudentCount}-courses" value="${courseText}">
-            <label for="psac-course-${psacStudentCount}-${courseKey}" data-kor="${course.kor}" data-eng="${course.eng}">${courseText}</label>
+        <div class="psac-checkbox-item ${isClosed ? 'psac-checkbox-disabled' : ''}">
+            <input type="checkbox" 
+                   id="psac-course-${psacStudentCount}-${courseKey}" 
+                   name="psac-student-${psacStudentCount}-courses" 
+                   value="${courseText}"
+                   ${isClosed ? 'disabled' : ''}>
+            <label for="psac-course-${psacStudentCount}-${courseKey}" 
+                   data-kor="${course.kor}" 
+                   data-eng="${course.eng}"
+                   ${isClosed ? `class="disabled-label" title="${closedTooltip}"` : ''}>${courseText}</label>
         </div>
     `;
     }).join('');
@@ -695,6 +713,12 @@ function updatePsacCourseLabels() {
         
         labels.forEach(label => {
             label.textContent = course[currentLang];
+            
+            // 마감된 과정의 경우 툴팁도 업데이트
+            if (psacCoursesClosed.hasOwnProperty(courseKey)) {
+                const closedTooltip = psacCoursesClosed[courseKey][currentLang];
+                label.setAttribute('title', closedTooltip);
+            }
         });
     });
 }

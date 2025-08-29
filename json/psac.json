@@ -1,23 +1,33 @@
 {
     "type" : "psac",
     "data" : {
-        "year" : "2023",
-        "table-info" : "",
+        "year" : "2025",
+        "off" : "false",
+        "info" : {
+            "목적" : "전력계통 전문 인력 양성",
+            "주관" : "YPP 아카데미",
+            "장소" : "YPP 아카데미 교육센터",
+            "기간" : "2025년 7월 1일~각 교육 시작 2주전",
+            "대상" : "전력계통 관련 종사자",
+            "교육비" : "문의 요망"
+        },
         "table-schedule" : ""
     },
     "courses" : [
         {
-            "name" : "Course 1",
+            "name" : "1주차 : 전력계통 해석의 기본 이론",
+            "off" : "false",
             "data" : {
                 "table-schedule" : "",
-                "instructors" : ""
+                "강사" : ""
             }
         },
         {
-            "name" : "Course 2",
+            "name" : "2주차 : 전력계통(설비) 보호기술",
+            "courses-off" : "false",
             "data" : {
                 "table-schedule" : "",
-                "instructors" : ""
+                "강사" : ""
             }
         }
     ]

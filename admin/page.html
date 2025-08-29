@@ -81,65 +81,24 @@
         .curriculum-item-actions .btn-edit:hover { color: #007bff; }
         .curriculum-item-actions .btn-delete:hover { color: #dc3545; }
         
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        
-        .form-actions {
-            display: flex;
-            justify-content: flex-start;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        #curriculum-items {
-            max-height: 300px;
-            overflow-y: auto;
-            margin-bottom: 15px;
-        }
+        .form-group {margin-bottom: 15px;}
+        .form-group label {display: block;margin-bottom: 5px;font-weight: bold;}
+        .form-control {width: 100%;padding: 8px;border: 1px solid #ddd;border-radius: 4px;font-size: 14px;}
+        .form-actions {display: flex;justify-content: flex-start;gap: 10px;margin-top: 20px;}
+        #curriculum-items {max-height: 300px;overflow-y: auto;margin-bottom: 15px;}
 
         /* =========== Clock Styles =========== */
         header{width: 100%;display: flex; justify-content: space-between;padding: 10px 0;}
         .clock-widget {font-size: 1.1rem;}
         /* =========== */
-        .page-top{
-            /* border-bottom: 1px solid var(--line-color); */
-            padding: 1rem 0 1rem 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            flex-direction: column;
-            gap: 2rem;
-        }
+        .page-top{padding: 1rem 0 1rem 0;width: 100%;display: flex;justify-content: space-between;flex-direction: column;gap: 2rem;}
         .page-title{font-size: 2.5rem;}
         .page-info{display: flex; flex-direction: column; gap: 4px; text-align: right;font-size: .8rem;}
         .page-count{font-size: 1.8rem;}
         .page-count i{font-size: 1rem; margin-bottom: 1rem;}
 
         /* =========== Data List Styles =========== */
-        /* .data-container {margin-top: 2rem;} */
-        
-        .data-toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        
+        .data-toolbar {display: flex;justify-content: space-between;align-items: center;margin-bottom: 1.5rem;}
         .toolbar-left,
         .toolbar-right {display: flex;gap: 1rem;align-items: center;}
         .toolbar-left{gap: .2rem;}
@@ -195,9 +154,9 @@
         .data-table .col-actions,
         .data-table .col-date { width: auto; text-align: center;}
         .data-table .col-date,
-        .data-table .col-category{max-width: 60px;}
+        /* .data-table .col-category{max-width: 60px;}
         .data-table .col-status,
-        .data-table .col-actions{max-width: 25px;}
+        .data-table .col-actions{max-width: 25px;} */
         .data-table .col-checkbox { text-align: center;}
 
         /* =========== 그룹핑 스타일 =========== */
@@ -735,7 +694,7 @@
                                 모두보기
                             </button>
                             <select class="btn btn-secondary btn-sm" id="course-filter-select" title="과목 필터" style="display: inline-block; margin-left: 8px;padding: 6px 12px; background-color: rgb(243 245 247); cursor: pointer; width: auto;">
-                                <option value="all">전체 과목</option>
+                                <option value="all">전체</option>
                             </select>
                         </div>
                         <div class="toolbar-right">

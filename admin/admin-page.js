@@ -1145,7 +1145,7 @@ class PageManager {
         if (!courseFilterSelect) return;
         
         // 기본 옵션들
-        let options = '<option value="all">전체 과목</option>';
+        let options = '<option value="all">전체</option>';
         
         if (pageType === 'PSAC') {
             // PSAC 과정 옵션들

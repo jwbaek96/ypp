@@ -48,15 +48,15 @@
 .company-details {background: #fff;border-radius: 8px;overflow: hidden;}
 .detail-row {display: flex;padding: 1rem 1.5rem;border-bottom: 1px solid #f1f3f4;}
 .detail-row:last-child {border-bottom: none;}
-.detail-label {font-weight: 600;color: #333;padding: 0 1.5rem;flex-shrink: 0;}
-.detail-value {color: #666;line-height: 1.5;text-align: left;}
+.detail-label {font-weight: 600;color: #333;padding: 0 1.5rem;flex-shrink: 0;min-width: 120px; text-align: right;}
+.detail-value {color: #666;line-height: 1.5;text-align: left; padding-left: 1rem;}
 
 /* 모바일 반응형 */
 @media (max-width: 768px) {
     .intro-logo {max-width: 250px;}
     .company-footer-a{width: 100%;}
     .company-footer-b{width: 100%; font-size: .85rem;}
-    .detail-label{padding-left: 0;}
+    .detail-label{padding: 0;min-width: 70px;}
     .detail-row{padding: 1rem 0;}                
 }
 @media (max-width: 425px) {

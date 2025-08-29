@@ -141,6 +141,19 @@ function formatKoreanTime(timeStr) {
 // ===========================================================================================
 // 페이지 관리 클래스
 class PageManager {
+    // 실제 개별 아이템 개수 계산 (그룹핑된 아이템 내부 개수 포함)
+    calculateActualItemCount(data) {
+        let count = 0;
+        if (!Array.isArray(data)) return 0;
+        data.forEach(item => {
+            if (item.isGrouped && Array.isArray(item.groupedItems)) {
+                count += item.groupedItems.length;
+            } else {
+                count += 1;
+            }
+        });
+        return count;
+    }
     formatDate(dateString) {
         // ISO 날짜 형태인지 먼저 확인 (T나 Z가 포함되어 있으면 ISO 형태)
         if (typeof dateString === 'string' && (dateString.includes('T') || dateString.includes('Z'))) {
@@ -166,6 +179,7 @@ class PageManager {
         this.currentData = null; // 현재 로드된 데이터 저장
         this.currentConfig = null; // 현재 설정 저장
         this.currentCategoryFilter = 'all'; // 카테고리 필터 상태 (all, psac, relay)
+        this.currentCourseFilter = 'all'; // 과목 필터 상태 (all, 또는 특정 과목명)
     }
     
     // 페이지별 설정 데이터 초기화
@@ -313,6 +327,9 @@ class PageManager {
         
         // 카테고리 필터 버튼 설정
         this.setupCategoryFilter();
+        
+        // 과목 필터 설정 (PSAC, RelaySchool 페이지에서만 표시)
+        this.setupCourseFilter(pageParam);
         
         // 교육과정 버튼 설정 (PSAC, RelaySchool 페이지에서만 표시)
         this.setupCurriculumButton(pageParam);
@@ -696,17 +713,22 @@ class PageManager {
         const tbody = document.getElementById('data-table-body');
         const thead = document.querySelector('.data-table thead tr');
         
-        // 테이블 헤더 동적 생성
-        thead.innerHTML = this.generateTableHeaderHTML(config);
-        
         // 데이터 그룹핑 적용 (PSAC, RelaySchool에서만)
         let processedData = this.groupDataByDateAndBusinessNumber(data);
         
         // 카테고리 필터 적용 (아카데미 페이지에서만)
         processedData = this.filterDataByCategory(processedData);
         
+        // 과목 필터 적용 (PSAC, RelaySchool 페이지에서만)
+        processedData = this.filterDataByCourse(processedData);
+        
         // 데이터 정렬 적용
         processedData = this.sortData(processedData);
+        
+    // 실제 개별 아이템 개수 계산 (그룹핑된 아이템 내부 개수 포함)
+    const actualItemCount = this.calculateActualItemCount(processedData);
+    // 테이블 헤더 동적 생성 (실제 개별 아이템 개수 포함)
+    thead.innerHTML = this.generateTableHeaderHTML(config, actualItemCount);
         
         // 현재 처리된 데이터 저장 (모달에서 사용)
         this.currentProcessedData = processedData;
@@ -757,8 +779,20 @@ class PageManager {
     }
 
     // 테이블 헤더 HTML 생성
-    generateTableHeaderHTML(config) {
+    generateTableHeaderHTML(config, filteredCount = null) {
         const pageType = new URLSearchParams(window.location.search).get('page');
+        
+        // 과목 필터가 적용된 경우 개수 표시용 텍스트 생성
+        const getSubjectHeaderText = () => {
+            if (['PSAC', 'RelaySchool'].includes(pageType) && this.currentCourseFilter !== 'all' && filteredCount !== null) {
+                console.log(`헤더 업데이트: 신청과목(${filteredCount}) - 필터: ${this.currentCourseFilter}`);
+                return `신청과목(${filteredCount})`;
+            } else if (pageType === 'RelaySchoolSpecial' && this.currentCourseFilter !== 'all' && filteredCount !== null) {
+                console.log(`헤더 업데이트: 교육내용(${filteredCount}) - 필터: ${this.currentCourseFilter}`);
+                return `교육내용(${filteredCount})`;
+            }
+            return pageType === 'RelaySchoolSpecial' ? '교육내용' : '신청과목';
+        };
         
         // 페이지 타입별로 다른 헤더 구조
         switch(pageType) {
@@ -797,7 +831,7 @@ class PageManager {
                     <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
                     <th class="col-number">순번</th>
                     <th>회사/기관</th>
-                    <th>신청과목</th>
+                    <th>${getSubjectHeaderText()}</th>
                     <th class="col-date">신청일시</th>
                     <th class="col-actions">삭제</th>
                 `;
@@ -808,7 +842,7 @@ class PageManager {
                     <th class="col-number">순번</th>
                     <th>회사명</th>
                     <th>담당자명</th>
-                    <th>교육내용</th>
+                    <th>${getSubjectHeaderText()}</th>
                     <th class="col-date">신청일시</th>
                     <th class="col-actions">삭제</th>
                 `;
@@ -1075,6 +1109,88 @@ class PageManager {
         if (this.currentData && this.currentConfig) {
             this.renderDataTable(this.currentData, this.currentConfig);
         }
+    }
+    
+    // 과목 필터 설정 (PSAC, RelaySchool에서만 표시)
+    setupCourseFilter(pageType) {
+        const courseFilterSelect = document.getElementById('course-filter-select');
+        
+        // PSAC, RelaySchool, RelaySchoolSpecial 페이지에서만 표시
+        if (['PSAC', 'RelaySchool', 'RelaySchoolSpecial'].includes(pageType)) {
+            if (courseFilterSelect) {
+                courseFilterSelect.style.display = 'inline-block';
+                
+                // 과목 옵션 초기화 및 생성
+                this.populateCourseFilterOptions(pageType);
+                
+                courseFilterSelect.addEventListener('change', (e) => {
+                    this.currentCourseFilter = e.target.value;
+                    
+                    // 데이터 다시 렌더링
+                    if (this.currentData && this.currentConfig) {
+                        this.renderDataTable(this.currentData, this.currentConfig);
+                    }
+                });
+            }
+        } else {
+            if (courseFilterSelect) {
+                courseFilterSelect.style.display = 'none';
+            }
+        }
+    }
+    
+    // 과목 필터 옵션 생성
+    populateCourseFilterOptions(pageType) {
+        const courseFilterSelect = document.getElementById('course-filter-select');
+        if (!courseFilterSelect) return;
+        
+        // 기본 옵션들
+        let options = '<option value="all">전체 과목</option>';
+        
+        if (pageType === 'PSAC') {
+            // PSAC 과정 옵션들
+            options += `
+                <option value="1주">1주</option>
+                <option value="2주">2주</option>
+                <option value="3주">3주</option>
+                <option value="4주">4주</option>
+                <option value="5주">5주</option>
+                <option value="6주">6주</option>
+                <option value="7주">7주</option>
+                <option value="8주">8주</option>
+                <option value="9주">9주</option>
+                <option value="10주">10주</option>
+            `;
+        } else if (pageType === 'RelaySchool' || pageType === 'RelaySchoolSpecial') {
+            // RelaySchool 과정 옵션들
+            options += `
+                <option value="디지털릴레이 기본반">디지털릴레이 기본반</option>
+                <option value="디지털릴레이 고급반">디지털릴레이 고급반</option>
+                <option value="고장분석반">고장분석반</option>
+                <option value="ECMS운영반">ECMS운영반</option>
+                <option value="원자력 특성화반">원자력 특성화반</option>
+            `;
+        }
+        
+        courseFilterSelect.innerHTML = options;
+    }
+    
+    // 과목별 데이터 필터링
+    filterDataByCourse(data) {
+        const pageType = new URLSearchParams(window.location.search).get('page');
+        
+        // PSAC, RelaySchool 페이지가 아니거나 "전체 과목"인 경우 원본 데이터 반환
+        if (!['PSAC', 'RelaySchool', 'RelaySchoolSpecial'].includes(pageType) || this.currentCourseFilter === 'all') {
+            return data;
+        }
+        
+        // 선택된 과목과 일치하는 데이터만 필터링
+        return data.filter(item => {
+            const detailedEducation = item.detailedEducation || item.courseContents || '';
+            
+            // 선택된 과목 텍스트가 신청과목 필드에 포함되어 있는지 확인
+            return detailedEducation.includes(this.currentCourseFilter);
+        });
     }
     
     // 카테고리별 데이터 필터링

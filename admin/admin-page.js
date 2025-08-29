@@ -345,8 +345,8 @@ class PageManager {
     setupCurriculumButton(pageType) {
         const curriculumBtn = document.getElementById('btn-curriculum');
         
-        // PSAC, RelaySchool, RelaySchoolSpecial 페이지에서만 버튼 표시
-        if (['PSAC', 'RelaySchool', 'RelaySchoolSpecial'].includes(pageType)) {
+        // PSAC, RelaySchool 페이지에서만 버튼 표시
+        if (['PSAC', 'RelaySchool'].includes(pageType)) {
             curriculumBtn.style.display = 'block';
             
             // 버튼 클릭 이벤트
@@ -364,7 +364,7 @@ class PageManager {
         const titles = {
             'PSAC': 'PSAC 교육과정 관리',
             'RelaySchool': 'Relay School 교육과정 관리',
-            'RelaySchoolSpecial': 'Relay School Special 교육과정 관리'
+            // 'RelaySchoolSpecial': 'Relay School Special 교육과정 관리'
         };
         const title = titles[pageType] || '교육과정 관리';
         
@@ -1115,8 +1115,8 @@ class PageManager {
     setupCourseFilter(pageType) {
         const courseFilterSelect = document.getElementById('course-filter-select');
         
-        // PSAC, RelaySchool, RelaySchoolSpecial 페이지에서만 표시
-        if (['PSAC', 'RelaySchool', 'RelaySchoolSpecial'].includes(pageType)) {
+        // PSAC, RelaySchool 페이지에서만 표시
+        if (['PSAC', 'RelaySchool'].includes(pageType)) {
             if (courseFilterSelect) {
                 courseFilterSelect.style.display = 'inline-block';
                 
@@ -1180,7 +1180,7 @@ class PageManager {
         const pageType = new URLSearchParams(window.location.search).get('page');
         
         // PSAC, RelaySchool 페이지가 아니거나 "전체 과목"인 경우 원본 데이터 반환
-        if (!['PSAC', 'RelaySchool', 'RelaySchoolSpecial'].includes(pageType) || this.currentCourseFilter === 'all') {
+        if (!['PSAC', 'RelaySchool'].includes(pageType) || this.currentCourseFilter === 'all') {
             return data;
         }
         
@@ -1573,7 +1573,7 @@ class PageManager {
         const tableContainer = document.querySelector('.data-table-container');
         
         if (show) {
-            emptyState.style.display = 'block';
+            emptyState.style.display = 'flex';
             tableContainer.style.display = 'none';
         } else {
             emptyState.style.display = 'none';

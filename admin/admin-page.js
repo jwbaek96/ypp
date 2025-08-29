@@ -1161,8 +1161,8 @@ class PageManager {
                 <option value="9주">9주</option>
                 <option value="10주">10주</option>
             `;
-        } else if (pageType === 'RelaySchool' || pageType === 'RelaySchoolSpecial') {
-            // RelaySchool 과정 옵션들
+        } else if (pageType === 'RelaySchool') {
+            // RelaySchool 과정 옵션들 (RelaySchoolSpecial은 제외)
             options += `
                 <option value="디지털릴레이 기본반">디지털릴레이 기본반</option>
                 <option value="디지털릴레이 고급반">디지털릴레이 고급반</option>
@@ -1184,13 +1184,32 @@ class PageManager {
             return data;
         }
         
-        // 선택된 과목과 일치하는 데이터만 필터링
-        return data.filter(item => {
-            const detailedEducation = item.detailedEducation || item.courseContents || '';
-            
-            // 선택된 과목 텍스트가 신청과목 필드에 포함되어 있는지 확인
-            return detailedEducation.includes(this.currentCourseFilter);
+        // 필터링이 적용된 경우 그룹을 해제하고 개별 항목들만 필터링하여 반환
+        const filteredItems = [];
+        
+        data.forEach(item => {
+            if (item.isGrouped && Array.isArray(item.groupedItems)) {
+                // 그룹로우인 경우 개별 아이템들을 분해하여 필터링
+                item.groupedItems.forEach(subItem => {
+                    const detailedEducation = subItem.detailedEducation || subItem.courseContents || '';
+                    if (detailedEducation.includes(this.currentCourseFilter)) {
+                        // 그룹 해제된 개별 아이템으로 추가
+                        filteredItems.push({
+                            ...subItem,
+                            isGrouped: false // 그룹 해제 표시
+                        });
+                    }
+                });
+            } else {
+                // 단일 아이템인 경우
+                const detailedEducation = item.detailedEducation || item.courseContents || '';
+                if (detailedEducation.includes(this.currentCourseFilter)) {
+                    filteredItems.push(item);
+                }
+            }
         });
+        
+        return filteredItems;
     }
     
     // 카테고리별 데이터 필터링

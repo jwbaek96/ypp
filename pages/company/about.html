@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../../css/pages/layout.css">
     <link rel="stylesheet" href="./about.css">
     <link rel="stylesheet" href="./gallery.css">
+    <link rel="stylesheet" href="./business-slider.css">
     
     <!-- 메타 시스템 -->
     <script src="../../js/head-meta.js"></script>
@@ -698,16 +699,9 @@
                         <p class="content-subtitle"
                            data-eng="Introducing YPP's core business areas and capabilities"
                            data-kor="YPP의 핵심 사업 영역과 역량을 소개합니다">YPP의 핵심 사업 영역과 역량을 소개합니다</p>
-                                                           
-                        </div>
-                        <div class="content-grid">
-                        <!-- 사업소개 -->
-                        <!-- <div id="business-intro" class="content-block">
-                            <h3 class="block-title" data-eng="Business Introduction" data-kor="사업 소개">사업 소개</h3>
-                            <div class="block-content">
-                            </div>
-                        </div> -->
-                        
+                    </div>
+                    <div class="content-grid">
+                      
                         <!-- 메인 비즈니스 이미지 -->
                         <div id="business-intro" class="business-main-image content-block" style="padding: 0;margin: 0;border: none;" >
                             <a href="business_intro.png" target="_blank" rel="noopener noreferrer">
@@ -727,37 +721,55 @@
                                 <!-- <a class="business-link" id="business-link-7" href="">콘트롤밸브</a> -->
                             </div>
                         </div>
-                        <style>
-                            .business-main-image {position: relative;}
-                            .business-link-overlay {
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 100%;
-                                /* border: 1px solid #ccc; */
-                            }
-                            .business-link {
-                                position: absolute;
-                                height: 8%;
-                                width: 15%;
-                                overflow: hidden;
-                                /* background-color: rgba(0, 0, 0, 0.8); */
-                                color: #333;
-                                --w2: 7%;
-                            }
-                            #business-link-1 { bottom: 0%; left: 41%; }/* 원자력 */
-                            #business-link-2 { bottom: 27%; right: 2%; }/* 화력 */
-                            #business-link-3 { top: 26%; left: 4%; }/* 신재생 */
-                            #business-link-4 { top: 34%; right: 9%; }/* 그수소/암모니아 */
-                            #business-link-4-1 { top: 50%; right: 6.5%; }/* 그린수소/암모니아 */
-                            #business-link-5 { top: 15%; right: 13%; }/* 변전소 */
-                            #business-link-6 { top: 46%; left: 7%; width: var(--w2);}/* 에너지저장장치 */
-                            /* #business-link-7 { top: 8%; left: 50%; } */
-                            #business-link-8 { top: 8%; left: 53%; width: var(--w2);}/* 미군기지 */
-                            #business-link-9 { top: 8%; left: 24%; }/* 데이터센터 */
-                            #business-link-10 { top: 5%; left: 42%; width: var(--w2);}/* SMR */
-                        </style>
+                        <!-- 메인 비즈니스 이미지 슬라이더 -->
+                        <div id="business-image-slider">
+                            <div class="slider-container">
+                                <div class="slider-wrapper">
+                                    <div class="carousel-3d">
+                                        <div class="carousel-item" 
+                                             data-link="/pages/business/index.html?tab=nuclear-power"
+                                             data-title-kor="원자력 발전"
+                                             data-title-eng="Nuclear Power"
+                                             data-desc-kor="안전하고 신뢰할 수 있는<br>원자력 발전 시스템을 제공합니다."
+                                             data-desc-eng="Providing safe and reliable<br>nuclear power generation systems.">
+                                            <img src="./imgs/원자력발전소-bgx.png" alt="원자력발전소">
+                                        </div>
+                                        <div class="carousel-item" 
+                                             data-link="/pages/business/index.html?tab=renewable-energy"
+                                             data-title-kor="신재생 에너지"
+                                             data-title-eng="Renewable Energy"
+                                             data-desc-kor="지속 가능한 미래를 위한<br>신재생 에너지 솔루션을 제공합니다."
+                                             data-desc-eng="Providing renewable energy solutions<br>for a sustainable future.">
+                                            <img src="./imgs/신재생에너지-bgx.png" alt="신재생에너지">
+                                        </div>
+                                        <div class="carousel-item" 
+                                             data-link="/pages/business/index.html?tab=substation"
+                                             data-title-kor="변전소 시스템"
+                                             data-title-eng="Substation Systems"
+                                             data-desc-kor="효율적이고 안정적인<br>변전소 시스템을 구축합니다."
+                                             data-desc-eng="Building efficient and stable<br>substation systems.">
+                                            <img src="./imgs/변전소-bgx.png" alt="변전소">
+                                        </div>
+                                        <div class="carousel-item" 
+                                             data-link="/pages/business/index.html?tab=bess"
+                                             data-title-kor="에너지 저장 시스템"
+                                             data-title-eng="Battery Energy Storage System"
+                                             data-desc-kor="첨단 기술 기반의<br>에너지 저장 솔루션을 제공합니다."
+                                             data-desc-eng="Providing advanced technology-based<br>energy storage solutions.">
+                                            <img src="./imgs/BESS-bgx.png" alt="BESS">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slider-controls">
+                                    <button class="prev-btn" id="prevBtn">‹</button>
+                                    <h3 class="slider-title" data-eng="Our Business Areas" data-kor="우리의 사업 분야">우리의 사업 분야</h3>
+                                    <button class="next-btn" id="nextBtn">›</button>
+                                </div>
+                                <div class="slider-subtitle" id="dynamic-subtitle">
+                                    
+                                </div>
+                            </div>
+                        </div>
                         <!-- 사업 소개 텍스트 -->
                         <div class="business-intro-text" style="text-align: center;"
                              data-eng="<p style='text-align: center;'>YPP Corporation is an energy company with unrivaled technology and solutions.</p> <p style='text-align: center;'> As a domestic leader in the power system field, we provide differentiated, high-quality system engineering and consulting, </p> <p style='text-align: center;'>preventive diagnosis of power facilities, continuous customer training and commissioning support, and a variety of competitive power facility solutions. </p> <p style='text-align: center;'>We offer the best and optimal total system solutions, from single components to enterprise-wide power facility protection systems, tailored to customer needs.</p>"
@@ -1730,5 +1742,40 @@
         window.getCurrentSection = getCurrentSection;
     </script>
     
+    <!-- 3D 회전 슬라이더 JavaScript -->
+    <script src="./business-slider.js"></script>
+    
 </body>
 </html>
+
+<style>
+    .business-main-image {position: relative;}
+    .business-link-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* border: 1px solid #ccc; */
+    }
+    .business-link {
+        position: absolute;
+        height: 8%;
+        width: 15%;
+        overflow: hidden;
+        /* background-color: rgba(0, 0, 0, 0.8); */
+        color: #333;
+        --w2: 7%;
+    }
+    #business-link-1 { bottom: 0%; left: 41%; }/* 원자력 */
+    #business-link-2 { bottom: 27%; right: 2%; }/* 화력 */
+    #business-link-3 { top: 26%; left: 4%; }/* 신재생 */
+    #business-link-4 { top: 34%; right: 9%; }/* 그수소/암모니아 */
+    #business-link-4-1 { top: 50%; right: 6.5%; }/* 그린수소/암모니아 */
+    #business-link-5 { top: 15%; right: 13%; }/* 변전소 */
+    #business-link-6 { top: 46%; left: 7%; width: var(--w2);}/* 에너지저장장치 */
+    /* #business-link-7 { top: 8%; left: 50%; } */
+    #business-link-8 { top: 8%; left: 53%; width: var(--w2);}/* 미군기지 */
+    #business-link-9 { top: 8%; left: 24%; }/* 데이터센터 */
+    #business-link-10 { top: 5%; left: 42%; width: var(--w2);}/* SMR */
+</style>

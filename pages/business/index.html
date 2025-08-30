@@ -3601,7 +3601,7 @@
                     </div>
                     <div class="content-grid">
                         <!-- SMR Overview -->
-                        <div id="smr-overview">
+                        <div id="smr-overview" class="content-block">
                             <div class="smr-overview-card">
                                 <div class="smr-overview-body">
                                     <ul class="smr-overview-mainlist">
@@ -4108,6 +4108,7 @@ window.getCurrentSection = getCurrentSection;
 .capability-content ul li:hover {background: #eaf3fa;}
 .capability-content ul li::before {content: '\2022';color: #3a7bd5;font-size: 1.2em;margin-right: 10px;position: relative;top: 1px;}
 /* content box 스타일 제거 */
+#smr-overview,
 #nuclear-overview,
 #substation-overview,
 #bess .content-block,
@@ -4115,6 +4116,7 @@ window.getCurrentSection = getCurrentSection;
 #data-center .content-block,
 .content-block
 {border: none;}
+#smr-overview,
 .content-block:hover,
 #nuclear-overview:hover,
 #substation-overview:hover,
@@ -4293,6 +4295,7 @@ window.getCurrentSection = getCurrentSection;
 }
 
 /* SMR 오버뷰 계층형 리스트 디자인 */
+#smr-overview{padding: 0;margin: 0;}
 .smr-overview-mainlist {list-style: none;padding: 0;margin: 0;display: flex;flex-direction: column;gap: 28px;}
 .smr-overview-mainlist > li {display: flex;align-items: flex-start;gap: 18px;border-radius: 12px;padding: 18px 22px;position: relative;}
 .smr-main-bullet {

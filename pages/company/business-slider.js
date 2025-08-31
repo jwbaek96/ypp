@@ -28,11 +28,20 @@ items.forEach((item, i) => {
     const carouselItem = document.createElement('a');
     carouselItem.className = 'carousel-item';
     carouselItem.href = item.href;
-    carouselItem.setAttribute('data-kor', item.titleKR);
-    carouselItem.setAttribute('data-eng', item.titleEN);
-    carouselItem.setAttribute('data-desc', item.desc);
     carouselItem.innerHTML = `<img src="${item.imgSrc}" alt="${item.titleKR}">`;
     carousel.appendChild(carouselItem);
+    
+    // 각 아이템에 맞는 slider-title 생성
+    const sliderTitle = document.createElement('h2');
+    sliderTitle.className = 'slider-title';
+    sliderTitle.id = `slider-title-${i}`;
+    sliderTitle.setAttribute('data-kor', item.titleKR);
+    sliderTitle.setAttribute('data-eng', item.titleEN);
+    sliderTitle.style.display = 'none'; // 기본적으로 숨김
+    sliderTitle.textContent = item.titleKR; // 기본 한국어
+    
+    // titleElement의 부모에 추가
+    titleElement.parentNode.appendChild(sliderTitle);
 });
 
 // 초기 배치 (DOM 렌더링 완료 후)
@@ -68,8 +77,8 @@ function updateCarousel() {
         
         // Z축 거리에 따른 스케일/블러/투명도 조정 (Z값이 클수록 크고 선명하게)
         const normalizedZ = (z + radius) / (2 * radius); // 0~1 범위로 정규화
-        const scale = 0.25 + (normalizedZ * 0.85); // 0.4~1.2 범위로 확장
-        const blurAmount = Math.max(0, (1 - normalizedZ) * 4.5); // 블러도 더 강하게
+        const scale = 0.25 + (normalizedZ * 1.1); // 0.4~1.2 범위로 확장
+        const blurAmount = Math.max(0, (1 - normalizedZ) * 15.5); // 블러도 더 강하게
         const opacity = 0.3 + (normalizedZ * 0.7); // 0.3~1.0 범위
         
         // console.log(`Item ${i}: normalizedZ=${normalizedZ.toFixed(2)}, scale=${scale.toFixed(2)}`);
@@ -91,15 +100,23 @@ function updateCarousel() {
 
 // 텍스트 업데이트 함수
 function updateText() {
-    const carouselItems = document.querySelectorAll('.carousel-item');
-    const activeItem = carouselItems[currentIndex];
+    // 모든 개별 slider-title 숨기기
+    document.querySelectorAll('.slider-title').forEach(title => {
+        if (title.id.startsWith('slider-title-')) {
+            title.style.display = 'none';
+        }
+    });
     
-    // 현재 언어 감지 (html lang 속성 기준)
-    const currentLang = document.documentElement.lang === 'en' ? 'en' : 'kr';
+    // 현재 활성 아이템의 slider-title만 보이기
+    const activeTitle = document.getElementById(`slider-title-${currentIndex}`);
+    if (activeTitle) {
+        activeTitle.style.display = 'block';
+    }
     
-    // 어트리뷰트에서 해당 언어의 타이틀 가져오기
-    const title = activeItem.getAttribute(`data-title-${currentLang}`);
-    titleElement.textContent = title;
+    // 기존 slider-title 숨기기 (혹시 있다면)
+    if (titleElement && titleElement.id === 'slider-title') {
+        titleElement.style.display = 'none';
+    }
 }
 // descriptionElement.textContent = currentItem.desc;
 
@@ -146,11 +163,6 @@ function startAutoSlide() {
         updateCarousel();
     }, 4000);
 }
-
-// 초기 로드 후 3초 뒤에 자동 슬라이드 시작
-// setTimeout(() => {
-//     startAutoSlide();
-// }, 0);
 
 // 마우스 호버 시 자동 슬라이드 정지
 carousel.addEventListener('mouseenter', () => {

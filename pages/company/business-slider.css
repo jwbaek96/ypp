@@ -1,13 +1,13 @@
 
     /* ============================================== */
-    
+    #business-image-slider{margin-top: 1.5rem;}
     .carousel-container {perspective: 1200px;width: 100%;height: 300px;position: relative;}
     .carousel {position: relative;width: 100%;height: 100%;transform-style: preserve-3d;}
     .carousel-item {
         position: absolute;
         width: auto;
         height: 200px;
-        left: 50%;
+        left: 52.25%;
         top: 50%;
         margin-left: -125px;
         margin-top: -100px;
@@ -31,20 +31,23 @@
     .controls {position: absolute;top: 50%;width: 100%;display: flex;justify-content: space-between;padding: 0 20px;transform: translateY(-50%);z-index: 20;}
     .control-btn {background: rgba(255,255,255,0.9);border: none;width: 50px;height: 50px;border-radius: 50%;cursor: pointer;font-size: 20px;transition: all 0.3s ease;box-shadow: 0 4px 15px rgba(0,0,0,0.2);display: flex;align-items: center;justify-content: center;}
     .control-btn:hover {background: white;transform: scale(1.1);}
-    .carousel-text-section {text-align: center;padding: 30px;width: 100%;margin-top: 4.5rem;}
+    .carousel-text-section {text-align: center;padding: 30px;width: 100%;margin-top: 5.5rem;}
     .slider-title {font-size: 2rem;font-weight: bold;margin-bottom: 15px;color: #333;transition: all 0.5s ease;}
     /* .slider-description {font-size: 1.1rem;color: #666;line-height: 1.6;transition: all 0.5s ease;} */
     @media (max-width: 768px) {
+        #business-image-slider{margin-top: -1rem;}
         .carousel-container {height: 250px;}
-        .carousel-item {width: auto;height: 120px;margin-left: -60px;margin-top: -60px;}
+        .carousel-item {width: auto;height: 120px;margin-left: -70px;margin-top: -60px;}
         .control-btn {width: 40px;height: 40px;font-size: 16px;}
-        .carousel-text-section {padding: 20px;}
-        .slider-title {font-size: 1.5rem;}
+        .carousel-text-section {margin-top: .5rem;}
+        .slider-title {font-size: 1.75rem;}
     }
     
     @media (max-width: 480px) {
+        #business-image-slider{margin-top: -4rem;}
         .carousel-container {height: 200px;}
-        .carousel-item {width: 100px;height: 100px;margin-left: -50px;margin-top: -50px;}
+        .carousel-item {width: 100px;height: 100px;margin-left: -60px;margin-top: -50px;}
         .control-btn {width: 35px;height: 35px;font-size: 14px;}
-        .slider-title {font-size: 1.3rem;}
+        .carousel-text-section {margin-top: -1.5rem;}
+        .slider-title {font-size: 1.5rem;}
     }

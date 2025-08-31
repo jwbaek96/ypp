@@ -1,15 +1,15 @@
 const items = [
-    { href: '#link1', imgSrc: './imgs/원자력발전소-bgx.png', titleKR: '원자력', titleEN:'Nuclear Power', desc: '원자력 설명' },
-    { href: '#link6', imgSrc: './imgs/화력-bgx.png', titleKR: '복합화력', titleEN:'Combined Heat and Power', desc: '복합화력 설명' },
-    { href: '#link2', imgSrc: './imgs/신재생에너지-bgx.png', titleKR: '신재생', titleEN:'Renewable Energy', desc: '신재생 설명' },
-    { href: '#link8', imgSrc: './imgs/green-bgx.png', titleKR: '그린수소/암모니아', titleEN:'Green Hydrogen & Ammonia', desc: '그린수소/암모니아 설명' },
-    { href: '#link3', imgSrc: './imgs/변전소-bgx.png', titleKR: '변전소', titleEN:'Substation', desc: '변전소 설명' },
-    { href: '#link4', imgSrc: './imgs/bess-bgx.png', titleKR: 'BESS', titleEN:'BESS', desc: 'BESS 설명' },
-    { href: '#link5', imgSrc: './imgs/컨트롤밸브-bgx.png', titleKR: '컨트롤 밸브', titleEN:'Control Valve', desc: '컨트롤 밸브 설명' },
-    { href: '#link11', imgSrc: './imgs/water-bgx.png', titleKR: '수질환경정화설비', titleEN:'Water Quality & Environmental Purification', desc: '수질환경정화설비 설명' },
-    { href: '#link9', imgSrc: './imgs/usbase-bgx.png', titleKR: '미군기지', titleEN:'U.S. Military Base', desc: '미군기지 설명' },
-    { href: '#link10', imgSrc: './imgs/data-bgx.png', titleKR: '데이터센터', titleEN:'Data Center', desc: '데이터센터 설명' },
-    { href: '#link7', imgSrc: './imgs/smr-bgx.png', titleKR: 'SMR', titleEN:'SMR', desc: 'SMR 설명' },
+    { href: '/pages/business/index.html?tab=nuclear-power', imgSrc: './imgs/원자력발전소-bgx.png', titleKR: '원자력', titleEN:'Nuclear Power', desc: '원자력 설명' },
+    { href: '/pages/business/index.html?tab=thermal-power', imgSrc: './imgs/화력-bgx.png', titleKR: '복합화력', titleEN:'Thermal Power', desc: '복합화력 설명' },
+    { href: '/pages/business/index.html?tab=renewable-energy', imgSrc: './imgs/신재생에너지-bgx.png', titleKR: '신재생에너지', titleEN:'Renewable Energy', desc: '신재생 설명' },
+    { href: '/pages/business/index.html?tab=green-hydrogen', imgSrc: './imgs/green-bgx.png', titleKR: '그린수소/암모니아', titleEN:'Green Hydrogen & Ammonia', desc: '그린수소/암모니아 설명' },
+    { href: '/pages/business/index.html?tab=substation', imgSrc: './imgs/변전소-bgx.png', titleKR: '변전소', titleEN:'Substation', desc: '변전소 설명' },
+    { href: '/pages/business/index.html?tab=bess', imgSrc: './imgs/bess-bgx.png', titleKR: '에너지저장장치', titleEN:'BESS', desc: 'BESS 설명' },
+    { href: '/pages/business/index.html?tab=control-valve', imgSrc: './imgs/컨트롤밸브-bgx.png', titleKR: '컨트롤 밸브', titleEN:'Control Valve', desc: '컨트롤 밸브 설명' },
+    { href: '/pages/business/index.html?tab=water-purification', imgSrc: './imgs/water-bgx.png', titleKR: '수질환경정화설비', titleEN:'Water Quality & Environmental Purification', desc: '수질환경정화설비 설명' },
+    { href: '/pages/business/index.html?tab=us-military', imgSrc: './imgs/usbase-bgx.png', titleKR: '미군기지', titleEN:'U.S. Military Base', desc: '미군기지 설명' },
+    { href: '/pages/business/index.html?tab=data-center', imgSrc: './imgs/data-bgx.png', titleKR: '데이터센터', titleEN:'Data Center', desc: '데이터센터 설명' },
+    { href: '/pages/business/index.html?tab=smr', imgSrc: './imgs/smr-bgx.png', titleKR: 'SMR', titleEN:'SMR', desc: 'SMR 설명' },
 ];
 
 let currentRotation = 0;
@@ -53,7 +53,7 @@ function updateCarousel() {
         const z = Math.cos(angle * Math.PI / 180) * radius;
         
         // 디버깅 출력
-        console.log(`Item ${i}: angle=${angle.toFixed(1)}°, z=${z.toFixed(1)}`);
+        // console.log(`Item ${i}: angle=${angle.toFixed(1)}°, z=${z.toFixed(1)}`);
         
         // 가장 큰 Z값을 가진 아이템 찾기
         if (z > maxZ) {
@@ -70,7 +70,7 @@ function updateCarousel() {
         const blurAmount = Math.max(0, (1 - normalizedZ) * 4); // 블러도 더 강하게
         const opacity = 0.3 + (normalizedZ * 0.7); // 0.3~1.0 범위
         
-        console.log(`Item ${i}: normalizedZ=${normalizedZ.toFixed(2)}, scale=${scale.toFixed(2)}`);
+        // console.log(`Item ${i}: normalizedZ=${normalizedZ.toFixed(2)}, scale=${scale.toFixed(2)}`);
         
         item.style.transform = `translateX(${x}px) translateZ(${z}px) scale(${scale})`;
         item.style.filter = `blur(${blurAmount}px)`;
@@ -81,7 +81,7 @@ function updateCarousel() {
     carouselItems[activeItemIndex].classList.add('active');
     currentIndex = activeItemIndex;
     
-    console.log(`Active item: ${activeItemIndex}, maxZ: ${maxZ.toFixed(1)}`);
+    // console.log(`Active item: ${activeItemIndex}, maxZ: ${maxZ.toFixed(1)}`);
     
     // 텍스트 업데이트
     updateText();

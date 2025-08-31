@@ -31,7 +31,7 @@
     .controls {position: absolute;top: 50%;width: 100%;display: flex;justify-content: space-between;padding: 0 20px;transform: translateY(-50%);z-index: 20;}
     .control-btn {background: rgba(255,255,255,0.9);border: none;width: 50px;height: 50px;border-radius: 50%;cursor: pointer;font-size: 20px;transition: all 0.3s ease;box-shadow: 0 4px 15px rgba(0,0,0,0.2);display: flex;align-items: center;justify-content: center;}
     .control-btn:hover {background: white;transform: scale(1.1);}
-    .carousel-text-section {text-align: center;padding: 30px;width: 100%;margin-top: 4rem;}
+    .carousel-text-section {text-align: center;padding: 30px;width: 100%;margin-top: 4.5rem;}
     .slider-title {font-size: 2rem;font-weight: bold;margin-bottom: 15px;color: #333;transition: all 0.5s ease;}
     /* .slider-description {font-size: 1.1rem;color: #666;line-height: 1.6;transition: all 0.5s ease;} */
     @media (max-width: 768px) {

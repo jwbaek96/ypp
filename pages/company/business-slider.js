@@ -153,4 +153,86 @@ carousel.addEventListener('mouseleave', () => {
     }, 4000);
 });
 
-console.log('3D 캐러셀 초기화 완료');
+// 드래그 및 터치 슬라이드 기능
+let isDragging = false;
+let startX = 0;
+let currentX = 0;
+let dragThreshold = 50; // 최소 드래그 거리
+
+// 마우스 드래그 이벤트
+carousel.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    carousel.style.cursor = 'grabbing';
+    clearInterval(autoSlide); // 드래그 중 자동 슬라이드 정지
+    e.preventDefault();
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    currentX = e.clientX;
+    e.preventDefault();
+});
+
+document.addEventListener('mouseup', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    carousel.style.cursor = 'grab';
+    
+    const deltaX = currentX - startX;
+    
+    if (Math.abs(deltaX) > dragThreshold) {
+        if (deltaX > 0) {
+            // 오른쪽으로 드래그 - 이전
+            currentRotation += angleStep;
+        } else {
+            // 왼쪽으로 드래그 - 다음
+            currentRotation -= angleStep;
+        }
+        updateCarousel();
+    }
+    
+    // 자동 슬라이드 재시작
+    autoSlide = setInterval(() => {
+        currentRotation -= angleStep;
+        updateCarousel();
+    }, 4000);
+});
+
+// 터치 이벤트
+carousel.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    clearInterval(autoSlide); // 터치 중 자동 슬라이드 정지
+    e.preventDefault();
+});
+
+carousel.addEventListener('touchmove', (e) => {
+    currentX = e.touches[0].clientX;
+    e.preventDefault();
+});
+
+carousel.addEventListener('touchend', (e) => {
+    const deltaX = currentX - startX;
+    
+    if (Math.abs(deltaX) > dragThreshold) {
+        if (deltaX > 0) {
+            // 오른쪽으로 스와이프 - 이전
+            currentRotation += angleStep;
+        } else {
+            // 왼쪽으로 스와이프 - 다음
+            currentRotation -= angleStep;
+        }
+        updateCarousel();
+    }
+    
+    // 자동 슬라이드 재시작
+    autoSlide = setInterval(() => {
+        currentRotation -= angleStep;
+        updateCarousel();
+    }, 4000);
+});
+
+// 마우스 커서 스타일
+carousel.style.cursor = 'grab';
+
+console.log('3D 캐러셀 초기화 완료 (드래그/터치 지원)');

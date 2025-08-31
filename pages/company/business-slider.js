@@ -28,8 +28,8 @@ items.forEach((item, i) => {
     const carouselItem = document.createElement('a');
     carouselItem.className = 'carousel-item';
     carouselItem.href = item.href;
-    carouselItem.setAttribute('data-title-kr', item.titleKR);
-    carouselItem.setAttribute('data-title-en', item.titleEN);
+    carouselItem.setAttribute('data-kor', item.titleKR);
+    carouselItem.setAttribute('data-eng', item.titleEN);
     carouselItem.setAttribute('data-desc', item.desc);
     carouselItem.innerHTML = `<img src="${item.imgSrc}" alt="${item.titleKR}">`;
     carousel.appendChild(carouselItem);

@@ -30,21 +30,8 @@
         align-items: center;
         gap: 40px;
     }
-
-    .carousel-container {
-        perspective: 1200px;
-        width: 100%;
-        height: 300px;
-        position: relative;
-    }
-
-    .carousel {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        transform-style: preserve-3d;
-    }
-
+    .carousel-container {perspective: 1200px;width: 100%;height: 300px;position: relative;}
+    .carousel {position: relative;width: 100%;height: 100%;transform-style: preserve-3d;}
     .carousel-item {
         position: absolute;
         width: 200px;
@@ -59,16 +46,8 @@
         cursor: pointer;
         opacity: 0.7;
         filter: blur(1px);
-        transform-origin: center center;
-    }
-
-    .carousel-item.active {
-        opacity: 1;
-        filter: blur(0px);
-        /* transform: scale(1.1) !important; */
-        z-index: 10;
-    }
-
+        transform-origin: center center;}
+    .carousel-item.active {opacity: 1;filter: blur(0px);z-index: 10;}
     .carousel-item img {
         width: 100%;
         height: 100%;
@@ -78,83 +57,25 @@
         user-select: none;
     }
 
-    .controls {
-        position: absolute;
-        top: 50%;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 20px;
-        transform: translateY(-50%);
-        z-index: 20;
-    }
-
-    .control-btn {
-        background: rgba(255,255,255,0.9);
-        border: none;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 20px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+    .controls {position: absolute;top: 50%;width: 100%;display: flex;justify-content: space-between;padding: 0 20px;transform: translateY(-50%);z-index: 20;}
+    .control-btn {background: rgba(255,255,255,0.9);border: none;width: 50px;height: 50px;border-radius: 50%;cursor: pointer;font-size: 20px;transition: all 0.3s ease;box-shadow: 0 4px 15px rgba(0,0,0,0.2);display: flex;align-items: center;justify-content: center;}
     .control-btn:hover {background: white;transform: scale(1.1);}
     .text-section {text-align: center;padding: 30px;width: 100%;}
     .slider-title {font-size: 2rem;font-weight: bold;margin-bottom: 15px;color: #333;transition: all 0.5s ease;}
     /* .slider-description {font-size: 1.1rem;color: #666;line-height: 1.6;transition: all 0.5s ease;} */
     @media (max-width: 768px) {
-        .carousel-container {
-            height: 250px;
-        }
-        
-        .carousel-item {
-            width: 120px;
-            height: 120px;
-            margin-left: -60px;
-            margin-top: -60px;
-        }
-        
-        .control-btn {
-            width: 40px;
-            height: 40px;
-            font-size: 16px;
-        }
-        
-        .text-section {
-            padding: 20px;
-        }
-        
-        .slider-title {
-            font-size: 1.5rem;
-        }
+        .carousel-container {height: 250px;}
+        .carousel-item {width: 120px;height: 120px;margin-left: -60px;margin-top: -60px;}
+        .control-btn {width: 40px;height: 40px;font-size: 16px;}
+        .text-section {padding: 20px;}
+        .slider-title {font-size: 1.5rem;}
     }
     
     @media (max-width: 480px) {
-        .carousel-container {
-            height: 200px;
-        }
-        
-        .carousel-item {
-            width: 100px;
-            height: 100px;
-            margin-left: -50px;
-            margin-top: -50px;
-        }
-        
-        .control-btn {
-            width: 35px;
-            height: 35px;
-            font-size: 14px;
-        }
-        
-        .slider-title {
-            font-size: 1.3rem;
-        }
+        .carousel-container {height: 200px;}
+        .carousel-item {width: 100px;height: 100px;margin-left: -50px;margin-top: -50px;}
+        .control-btn {width: 35px;height: 35px;font-size: 14px;}
+        .slider-title {font-size: 1.3rem;}
     }
 </style>
 </head>
@@ -181,14 +102,14 @@ const items = [
     { href: '#link1', imgSrc: './imgs/원자력발전소-bgx.png', titleKR: '원자력', titleEN:'Nuclear Power', desc: '원자력 설명' },
     { href: '#link6', imgSrc: './imgs/화력-bgx.png', titleKR: '복합화력', titleEN:'Combined Heat and Power', desc: '복합화력 설명' },
     { href: '#link2', imgSrc: './imgs/신재생에너지-bgx.png', titleKR: '신재생', titleEN:'Renewable Energy', desc: '신재생 설명' },
+    { href: '#link8', imgSrc: './imgs/green-bgx.png', titleKR: '그린수소/암모니아', titleEN:'Green Hydrogen & Ammonia', desc: '그린수소/암모니아 설명' },
     { href: '#link3', imgSrc: './imgs/변전소-bgx.png', titleKR: '변전소', titleEN:'Substation', desc: '변전소 설명' },
-    { href: '#link4', imgSrc: './imgs/BESS-bgx.png', titleKR: 'BESS', titleEN:'BESS', desc: 'BESS 설명' },
+    { href: '#link4', imgSrc: './imgs/bess-bgx.png', titleKR: 'BESS', titleEN:'BESS', desc: 'BESS 설명' },
     { href: '#link5', imgSrc: './imgs/컨트롤밸브-bgx.png', titleKR: '컨트롤 밸브', titleEN:'Control Valve', desc: '컨트롤 밸브 설명' },
+    { href: '#link11', imgSrc: './imgs/water-bgx.png', titleKR: '수질환경정화설비', titleEN:'Water Quality & Environmental Purification', desc: '수질환경정화설비 설명' },
+    { href: '#link9', imgSrc: './imgs/usbase-bgx.png', titleKR: '미군기지', titleEN:'U.S. Military Base', desc: '미군기지 설명' },
+    { href: '#link10', imgSrc: './imgs/data-bgx.png', titleKR: '데이터센터', titleEN:'Data Center', desc: '데이터센터 설명' },
     { href: '#link7', imgSrc: './imgs/smr-bgx.png', titleKR: 'SMR', titleEN:'SMR', desc: 'SMR 설명' },
-    { href: '#link8', imgSrc: './imgs/BESS-bgx.png', titleKR: 'BESS5', titleEN:'BESS5', desc: 'BESS5 설명' },
-    { href: '#link9', imgSrc: './imgs/BESS-bgx.png', titleKR: 'BESS6', titleEN:'BESS6', desc: 'BESS6 설명' },
-    { href: '#link10', imgSrc: './imgs/BESS-bgx.png', titleKR: 'BESS7', titleEN:'BESS7', desc: 'BESS7 설명' },
-    { href: '#link11', imgSrc: './imgs/BESS-bgx.png', titleKR: 'BESS8', titleEN:'BESS8', desc: 'BESS8 설명' }
 ];
 
 let currentRotation = 0;

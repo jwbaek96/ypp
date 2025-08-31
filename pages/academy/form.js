@@ -69,8 +69,8 @@ let relayStudentCount = 0;
 // 세부 교육 과정 리스트 (PSAC)
 const psacCourses = {
     1:{kor:"1주: 전력계통 해석의 기본 이론", eng:"Week 1: Basic Theory of Power System Analysis", tooltipKR: "", tooltipEN: ""},
-    2:{kor:"2주: 전력계통(설비) 보호기술", eng:"Week 2: Power System (Facility) Protection Technology", tooltipKR: "<br><span style='color:blue'>(*almost full)</span>", tooltipEN: "<br><span style='color:blue'>(*)</span>"},
-    3:{kor:"3주: 동기발전기 기술", eng:"Week 3: Synchronous Generator Technology", tooltipKR: "<br><span style='color:blue'>(*almost full)</span>", tooltipEN: "<br><span style='color:blue'>(*)</span>"},
+    2:{kor:"2주: 전력계통(설비) 보호기술", eng:"Week 2: Power System (Facility) Protection Technology", tooltipKR: "<br><span style='color:blue'>(*마감임박)</span>", tooltipEN: "<br><span style='color:blue'>(*almost full)</span>"},
+    3:{kor:"3주: 동기발전기 기술", eng:"Week 3: Synchronous Generator Technology", tooltipKR: "<br><span style='color:blue'>(*마감임박)</span>", tooltipEN: "<br><span style='color:blue'>(*almost full)</span>"},
     4:{kor:"4주: 무효전력 운영과 전압제어", eng:"Week 4: Reactive Power Operation and Voltage Control", tooltipKR: "", tooltipEN: ""},
     5:{kor:"5주: 전력설비의 동특성(계통안정도)", eng:"Week 5: Dynamic Characteristics of Power Facilities (System Stability)", tooltipKR: "<br><span style='color:red'>(*마감)</span>", tooltipEN: "<br><span style='color:red'>(*closed)</span>"},
     6:{kor:"6주: 분산에너지 시스템 기술", eng:"Week 6: Distributed Energy System Technology", tooltipKR: "", tooltipEN: ""},
@@ -280,8 +280,8 @@ function addPsacStudent() {
                    value="${courseText}"
                    ${isClosed ? 'disabled' : ''}>
             <label for="psac-course-${psacStudentCount}-${courseKey}" 
-                   data-kor="${course.kor} ${course.tooltip}" 
-                   data-eng="${course.eng}"
+                   data-kor="${course.kor} ${course.tooltipKR}" 
+                   data-eng="${course.eng} ${course.tooltipEN}"
                    ${titleTooltip ? `title="${titleTooltip}"` : ''}>${courseText}</label>
         </div>
     `;

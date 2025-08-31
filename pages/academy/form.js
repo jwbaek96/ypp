@@ -68,22 +68,18 @@ let relayStudentCount = 0;
 
 // 세부 교육 과정 리스트 (PSAC)
 const psacCourses = {
-    1:{kor:"1주: 전력계통 해석의 기본 이론", eng:"Week 1: Basic Theory of Power System Analysis"},
-    2:{kor:"2주: 전력계통(설비) 보호기술", eng:"Week 2: Power System (Facility) Protection Technology"},
-    3:{kor:"3주: 동기발전기 기술", eng:"Week 3: Synchronous Generator Technology"},
-    4:{kor:"4주: 무효전력 운영과 전압제어", eng:"Week 4: Reactive Power Operation and Voltage Control"},
-    5:{kor:"5주: 전력설비의 동특성(계통안정도)", eng:"Week 5: Dynamic Characteristics of Power Facilities (System Stability)"},
-    6:{kor:"6주: 분산에너지 시스템 기술", eng:"Week 6: Distributed Energy System Technology"},
-    7:{kor:"7주: 보호릴레이 정정법과 보호협조기술", eng:"Week 7: Protection Relay Setting and Coordination Technology"},
-    8:{kor:"8주: HVDC, MVDC, LVDC 및 FACTS기술", eng:"Week 8: HVDC, MVDC, LVDC and FACTS Technology"},
-    9:{kor:"9주: 에너지 전환기의 전력계통 계획과 운영/에너지 시장과 신사업 모델", eng:"Week 9: Power System Planning and Operation in Energy Transition / Energy Market and New Business Models"},
-    10:{kor:"10주: 신재생에너지 계통연계 기술", eng:"Week 10: Renewable Energy Grid Connection Technology"}
+    1:{kor:"1주: 전력계통 해석의 기본 이론", eng:"Week 1: Basic Theory of Power System Analysis", tooltip: ""},
+    2:{kor:"2주: 전력계통(설비) 보호기술", eng:"Week 2: Power System (Facility) Protection Technology", tooltip: "마감임박"},
+    3:{kor:"3주: 동기발전기 기술", eng:"Week 3: Synchronous Generator Technology", tooltip: ""},
+    4:{kor:"4주: 무효전력 운영과 전압제어", eng:"Week 4: Reactive Power Operation and Voltage Control", tooltip: ""},
+    5:{kor:"5주: 전력설비의 동특성(계통안정도)", eng:"Week 5: Dynamic Characteristics of Power Facilities (System Stability)", tooltip: ""},
+    6:{kor:"6주: 분산에너지 시스템 기술", eng:"Week 6: Distributed Energy System Technology", tooltip: ""},
+    7:{kor:"7주: 보호릴레이 정정법과 보호협조기술", eng:"Week 7: Protection Relay Setting and Coordination Technology", tooltip: ""},
+    8:{kor:"8주: HVDC, MVDC, LVDC 및 FACTS기술", eng:"Week 8: HVDC, MVDC, LVDC and FACTS Technology", tooltip: ""},
+    9:{kor:"9주: 에너지 전환기의 전력계통 계획과 운영/에너지 시장과 신사업 모델", eng:"Week 9: Power System Planning and Operation in Energy Transition / Energy Market and New Business Models", tooltip: "에너지 전환기 전력계통 계획"},
+    10:{kor:"10주: 신재생에너지 계통연계 기술", eng:"Week 10: Renewable Energy Grid Connection Technology", tooltip: ""}
 };
 
-// PSAC 과정별 툴팁 설정 (열린 교육도 포함)
-const psacCoursesTooltip = {
-    2: {tooltip: "마감 임박"},
-};
 // PSAC 마감된 과정들 (정원 초과)
 const psacCoursesClosed = {
     // 2: {tooltip: "해당 항목은 정원 초과로 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"},
@@ -269,8 +265,15 @@ function addPsacStudent() {
         const courseText = course[currentLang];
         const isClosed = psacCoursesClosed.hasOwnProperty(courseKey);
         const closedTooltip = isClosed ? psacCoursesClosed[courseKey].tooltip : '';
-        // 모든 과정에 툴팁 적용 (닫힌 과정은 closedTooltip 우선, 열린 과정은 일반 툴팁)
-        const tooltip = isClosed ? closedTooltip : (psacCoursesTooltip[courseKey] ? psacCoursesTooltip[courseKey].tooltip : '');
+        
+        // 코스 자체의 툴팁 가져오기
+        const courseTooltip = course.tooltip || '';
+        
+        // 화면에 표시될 텍스트 (마감임박인 경우 텍스트에 추가)
+        const displayText = courseTooltip === "마감임박" ? `${courseText} (${courseTooltip})` : courseText;
+        
+        // title 속성용 툴팁 (닫힌 과정은 closedTooltip, 아니면 courseTooltip)
+        const titleTooltip = isClosed ? closedTooltip : courseTooltip;
 
         return `
         <div class="psac-checkbox-item ${isClosed ? 'psac-checkbox-disabled' : ''}">
@@ -280,9 +283,9 @@ function addPsacStudent() {
                    value="${courseText}"
                    ${isClosed ? 'disabled' : ''}>
             <label for="psac-course-${psacStudentCount}-${courseKey}" 
-                   data-kor="${course.kor}" 
+                   data-kor="${displayText}" 
                    data-eng="${course.eng}"
-                   ${isClosed ? `class="disabled-label" title="${closedTooltip}"` : (tooltip ? `title="${tooltip}"` : '')}>${courseText}</label>
+                   ${titleTooltip ? `title="${titleTooltip}"` : ''}>${displayText}</label>
         </div>
     `;
     }).join('');

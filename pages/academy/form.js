@@ -80,11 +80,14 @@ const psacCourses = {
     10:{kor:"10주: 신재생에너지 계통연계 기술", eng:"Week 10: Renewable Energy Grid Connection Technology"}
 };
 
+// PSAC 과정별 툴팁 설정 (열린 교육도 포함)
+const psacCoursesTooltip = {
+    2: {tooltip: "마감 임박"},
+};
 // PSAC 마감된 과정들 (정원 초과)
 const psacCoursesClosed = {
-    5: {
-        tooltip: "해당 항목은 정원 초과로 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"
-    }
+    // 2: {tooltip: "해당 항목은 정원 초과로 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"},
+    5: {tooltip: "해당 항목은 정원 초과로 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"}
 };
 
 // 현재 언어 감지 함수
@@ -266,7 +269,9 @@ function addPsacStudent() {
         const courseText = course[currentLang];
         const isClosed = psacCoursesClosed.hasOwnProperty(courseKey);
         const closedTooltip = isClosed ? psacCoursesClosed[courseKey].tooltip : '';
-        
+        // 모든 과정에 툴팁 적용 (닫힌 과정은 closedTooltip 우선, 열린 과정은 일반 툴팁)
+        const tooltip = isClosed ? closedTooltip : (psacCoursesTooltip[courseKey] ? psacCoursesTooltip[courseKey].tooltip : '');
+
         return `
         <div class="psac-checkbox-item ${isClosed ? 'psac-checkbox-disabled' : ''}">
             <input type="checkbox" 
@@ -277,7 +282,7 @@ function addPsacStudent() {
             <label for="psac-course-${psacStudentCount}-${courseKey}" 
                    data-kor="${course.kor}" 
                    data-eng="${course.eng}"
-                   ${isClosed ? `class="disabled-label" title="${closedTooltip}"` : ''}>${courseText}</label>
+                   ${isClosed ? `class="disabled-label" title="${closedTooltip}"` : (tooltip ? `title="${tooltip}"` : '')}>${courseText}</label>
         </div>
     `;
     }).join('');

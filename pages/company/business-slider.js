@@ -35,8 +35,10 @@ items.forEach((item, i) => {
     carousel.appendChild(carouselItem);
 });
 
-// 초기 배치
-updateCarousel();
+// 초기 배치 (DOM 렌더링 완료 후)
+requestAnimationFrame(() => {
+    updateCarousel();
+});
 
 // 회전 및 업데이트 함수
 function updateCarousel() {
@@ -66,8 +68,8 @@ function updateCarousel() {
         
         // Z축 거리에 따른 스케일/블러/투명도 조정 (Z값이 클수록 크고 선명하게)
         const normalizedZ = (z + radius) / (2 * radius); // 0~1 범위로 정규화
-        const scale = 0.4 + (normalizedZ * 0.8); // 0.4~1.2 범위로 확장
-        const blurAmount = Math.max(0, (1 - normalizedZ) * 4); // 블러도 더 강하게
+        const scale = 0.25 + (normalizedZ * 0.85); // 0.4~1.2 범위로 확장
+        const blurAmount = Math.max(0, (1 - normalizedZ) * 4.5); // 블러도 더 강하게
         const opacity = 0.3 + (normalizedZ * 0.7); // 0.3~1.0 범위
         
         // console.log(`Item ${i}: normalizedZ=${normalizedZ.toFixed(2)}, scale=${scale.toFixed(2)}`);
@@ -135,11 +137,20 @@ carousel.addEventListener('wheel', (e) => {
     updateCarousel();
 });
 
-// 자동 슬라이드
-let autoSlide = setInterval(() => {
-    currentRotation -= angleStep;
-    updateCarousel();
-}, 4000);
+// 자동 슬라이드 (초기 로드 후 3초 지연)
+let autoSlide;
+
+function startAutoSlide() {
+    autoSlide = setInterval(() => {
+        currentRotation -= angleStep;
+        updateCarousel();
+    }, 4000);
+}
+
+// 초기 로드 후 3초 뒤에 자동 슬라이드 시작
+// setTimeout(() => {
+//     startAutoSlide();
+// }, 0);
 
 // 마우스 호버 시 자동 슬라이드 정지
 carousel.addEventListener('mouseenter', () => {
@@ -147,10 +158,7 @@ carousel.addEventListener('mouseenter', () => {
 });
 
 carousel.addEventListener('mouseleave', () => {
-    autoSlide = setInterval(() => {
-        currentRotation -= angleStep;
-        updateCarousel();
-    }, 4000);
+    startAutoSlide();
 });
 
 // 드래그 및 터치 슬라이드 기능
@@ -193,10 +201,7 @@ document.addEventListener('mouseup', (e) => {
     }
     
     // 자동 슬라이드 재시작
-    autoSlide = setInterval(() => {
-        currentRotation -= angleStep;
-        updateCarousel();
-    }, 4000);
+    startAutoSlide();
 });
 
 // 터치 이벤트
@@ -226,13 +231,10 @@ carousel.addEventListener('touchend', (e) => {
     }
     
     // 자동 슬라이드 재시작
-    autoSlide = setInterval(() => {
-        currentRotation -= angleStep;
-        updateCarousel();
-    }, 4000);
+    startAutoSlide();
 });
 
 // 마우스 커서 스타일
 carousel.style.cursor = 'grab';
 
-console.log('3D 캐러셀 초기화 완료 (드래그/터치 지원)');
+// console.log('3D 캐러셀 초기화 완료 (드래그/터치 지원)');

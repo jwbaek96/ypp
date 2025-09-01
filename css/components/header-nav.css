@@ -177,28 +177,12 @@
 
 /* 작은 데스크톱 */
 @media (max-width: 900px) {
-    
-    .menu-link {
-        padding: 0 0.8rem;
-        font-size: 0.9rem;
-    }
-    
-    .sub-menu {
-        min-width: 180px;
-    }
-    .desktop-nav {
-        display: none;
-    }
-    .desktop-nav .sub-menu {
-        display: none !important; /* 모바일에서 완전 숨김 */
-    }
-    .desktop-nav {
-        display: none;
-    }
-    
-    .hamburger-btn {
-        display: flex;
-    }
+    .menu-link {padding: 0 0.8rem;font-size: 0.9rem;}
+    .sub-menu {min-width: 180px;}
+    .language-switch,
+    .desktop-nav {display: none;}
+    .desktop-nav .sub-menu {display: none !important;}
+    .hamburger-btn {display: flex;}
 }
 
 /* 모바일에서는 숨김 */
@@ -206,14 +190,8 @@
 }
 
 /* ===== ACCESSIBILITY ===== */
-.menu-item:focus-within .sub-menu {
-    max-height: 500px;
-    opacity: 1;
-}
-
-.menu-link:focus {
-    z-index: 1001;
-}
+.menu-item:focus-within .sub-menu {max-height: 500px;opacity: 1;}
+.menu-link:focus {z-index: 1001;}
 
 /* ===== SMOOTH ANIMATION ===== */
 .sub-menu .menu-item {

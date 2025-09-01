@@ -160,6 +160,7 @@
 .tab-content-section {
     padding: 3rem 0;
     background-color: var(--white, #ffffff);
+    overflow-x: hidden;
 }
 
 .tab-content {

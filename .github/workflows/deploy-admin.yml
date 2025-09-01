@@ -1,0 +1,68 @@
+# GitHub Actions로 Apps Script 자동 배포
+name: Deploy Apps Script Admin System
+
+on:
+  push:
+    branches: [ main ]
+    paths: 
+      - 'admin/**'
+  workflow_dispatch: # 수동 실행 가능
+
+env:
+  # Apps Script 관련 환경 변수들
+  APPS_SCRIPT_ID: ${{ secrets.APPS_SCRIPT_ID }}
+  GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install clasp (Google Apps Script CLI)
+      run: npm install -g @google/clasp
+      
+    - name: Setup Google Service Account
+      run: |
+        echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT }}' > ./service-account.json
+        export GOOGLE_APPLICATION_CREDENTIALS=./service-account.json
+        
+    - name: Login to Google Apps Script
+      run: clasp login --creds ./service-account.json
+      
+    - name: Create .clasp.json
+      run: |
+        echo '{
+          "scriptId": "${{ secrets.APPS_SCRIPT_ID }}",
+          "rootDir": "./admin"
+        }' > .clasp.json
+        
+    - name: Push to Apps Script
+      run: |
+        cd admin
+        clasp push --force
+        
+    - name: Deploy to Web App
+      run: |
+        cd admin
+        clasp deploy --description "Auto deployment from GitHub Actions $(date)"
+        
+    - name: Cleanup
+      run: rm -f ./service-account.json
+
+# GitHub Secrets에 설정해야 할 값들:
+# 1. APPS_SCRIPT_ID: Apps Script 프로젝트 ID
+# 2. GOOGLE_SERVICE_ACCOUNT: Google Cloud Service Account JSON (전체 내용)
+#
+# Service Account 설정 방법:
+# 1. Google Cloud Console → IAM 및 관리 → 서비스 계정
+# 2. 새 서비스 계정 생성
+# 3. Apps Script API 권한 부여
+# 4. JSON 키 생성 후 GitHub Secrets에 저장

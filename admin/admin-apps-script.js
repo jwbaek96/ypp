@@ -1,5 +1,4 @@
 // Google Apps Script - YPP Admin System
-// 개선된 버전
 
 const SPREADSHEET_ID = '1BZ6IzcMFtZhgUuTThvkAf7sU6wVUOwFmpPkCUadFmX0'; // 대시보드 구글시트 ID
 const SHEET_DASHBOARD = 'DASHBOARD'; // 대시보드 시트 이름
@@ -261,8 +260,8 @@ function doGet(e) {
           response.success = false;
         }
       }
-    } else {
-      // 기존 데이터 조회 액션들
+    } else if (action === 'getData' || action === undefined || action === '') {
+      // 기존 데이터 조회 액션들 (기본 액션)
       // 시트 타입에 따른 분기 처리
       switch (sheetType) {
       case 'SHEET_DASHBOARD':

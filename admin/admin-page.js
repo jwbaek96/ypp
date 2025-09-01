@@ -173,6 +173,7 @@ class PageManager {
     constructor() {
         // Google Apps Script 웹앱 URL (index.html과 동일)
         this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxSS2Lj0faviVS_PZUUmZnLUwvFurUNeeg1ZCLSrwv3_K2G5IG__JDvg_CTuFUNo0Hf';
+        // this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxpCCjRsLr1A2Yv8UUQMbcsTyqRi1Jt_pPDERgwFUSUyQv83P8ex8G03u8dNaJQfhRV';
         this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
         this.pageConfigs = this.initPageConfigs();
         this.isDescending = true; // 기본값: 최신순 (내림차순)

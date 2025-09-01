@@ -1,8 +1,46 @@
-// 앱스크립트 웹앱 URL (배포 후 실제 URL로 변경 필요)
-
 // Google Apps Script 웹앱 URL (배포 후 받은 URL)
 const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbyw7jwrWG5vrjeZxogBrl3HUsBiZmbr_HrR9K_jni0OmHk7neQWBFUCgd6kzZcqmA3C';
+// const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxpCCjRsLr1A2Yv8UUQMbcsTyqRi1Jt_pPDERgwFUSUyQv83P8ex8G03u8dNaJQfhRV';
 const DASHBOARD_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DASHBOARD_APPS_SCRIPT_ID}/exec`;
+
+// 인증된 요청을 위한 헬퍼 함수
+async function makeAuthenticatedRequest(url, options = {}) {
+    const session = adminAuth.getSession();
+    if (!session || !session.token) {
+        adminAuth.redirectToLogin();
+        return null;
+    }
+    
+    // sessionToken을 URL 매개변수 또는 POST 데이터에 추가
+    if (options.method === 'POST') {
+        const body = options.body || new URLSearchParams();
+        if (body instanceof URLSearchParams) {
+            body.set('sessionToken', session.token);
+        }
+        options.body = body;
+    } else {
+        // GET 요청인 경우 URL에 추가
+        const separator = url.includes('?') ? '&' : '?';
+        url += `${separator}sessionToken=${encodeURIComponent(session.token)}`;
+    }
+    
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        
+        // 인증 오류 확인
+        if (result.code === 'AUTH_REQUIRED') {
+            adminAuth.clearSession();
+            adminAuth.redirectToLogin();
+            return null;
+        }
+        
+        return result;
+    } catch (error) {
+        console.error('인증된 요청 오류:', error);
+        return null;
+    }
+}
 
 // 대시보드 데이터 로드 및 표시
 async function loadDashboardData() {

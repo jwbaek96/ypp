@@ -1,3 +1,16 @@
+,
+          {
+            "label": {
+              "kor": "유튜브 생중계:",
+              "eng": "YouTube Live:"
+            },
+            "value": {
+              "kor": "<a href='#' target='_blank' style='color: #007bff; text-decoration: underline;'>바로가기</a>",
+              "eng": "<a href='#' target='_blank' style='color: #007bff; text-decoration: underline;'>Watch Live</a>"
+            }
+          }
+          
+
 {
   "popups": [
     {

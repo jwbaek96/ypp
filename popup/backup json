@@ -1,12 +1,12 @@
 ,
           {
             "label": {
-              "kor": "유튜브 생중계:",
-              "eng": "YouTube Live:"
+              "kor": "자세한 정보 및 유튜브 생중계:",
+              "eng": "Detailed Information & YouTube Live:"
             },
             "value": {
-              "kor": "<a href='#' target='_blank' style='color: #007bff; text-decoration: underline;'>바로가기</a>",
-              "eng": "<a href='#' target='_blank' style='color: #007bff; text-decoration: underline;'>Watch Live</a>"
+              "kor": "<a href='https://www.k-innoshow.com/Opening' target='_blank' style='color: #007bff; text-decoration: underline;'>바로가기</a>",
+              "eng": "<a href='https://www.k-innoshow.com/Opening' target='_blank' style='color: #007bff; text-decoration: underline;'>Watch Live</a>"
             }
           }
           

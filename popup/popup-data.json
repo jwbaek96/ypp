@@ -36,11 +36,21 @@
               "kor": "제주 부영호텔 & 리조트 우정홀",
               "eng": "Jeju Booyoung Hotel & Resort Friendship Hall"
             }
+          },
+          {
+            "label": {
+              "kor": "행사 정보 및 유튜브 생중계:",
+              "eng": "Information & YouTube Live:"
+            },
+            "value": {
+              "kor": "<a href='https://www.k-innoshow.com/Opening' target='_blank' style='color: #007bff; text-decoration: underline;'>바로가기</a>",
+              "eng": "<a href='https://www.k-innoshow.com/Opening' target='_blank' style='color: #007bff; text-decoration: underline;'>Watch Live</a>"
+            }
           }
         ],
         "closing": {
-          "kor": "이번 수상은 회장님의 혁신적 경영철학이 국가적으로 인정받은 성과이자,<br>우리 YPP 임직원 모두의 자랑입니다.<br><br>앞으로도 끊임없는 혁신과 성장으로 보답하겠습니다. 💙",
-          "eng": "This award represents national recognition of our Chairman's innovative management philosophy<br>and is a source of pride for all YPP employees.<br><br>We will continue to repay this honor with endless innovation and growth. 💙"
+          "kor": "이번 수상은 회장님의 혁신적 경영철학이 국가적으로 인정받은 성과이자,<br>우리 YPP 임직원 모두의 자랑입니다.<br><br>앞으로도 끊임없는 혁신과 성장으로 보답하겠습니다.",
+          "eng": "This award represents national recognition of our Chairman's innovative management philosophy<br>and is a source of pride for all YPP employees.<br><br>We will continue to repay this honor with endless innovation and growth."
         }
       }
     },

@@ -1047,6 +1047,13 @@ class PageManager {
             return;
         }
         
+        // 고객문의 페이지에서는 선택삭제 버튼 숨기기
+        const pageType = new URLSearchParams(window.location.search).get('page');
+        if (pageType === '고객문의(KOR)' || pageType === '고객문의(ENG)') {
+            deleteSelectedBtn.style.display = 'none';
+            return;
+        }
+        
         // 기존 이벤트 리스너 제거 후 새로 추가
         deleteSelectedBtn.replaceWith(deleteSelectedBtn.cloneNode(true));
         const newDeleteBtn = document.getElementById('btn-delete-selected');
@@ -1065,6 +1072,13 @@ class PageManager {
         const addBtn = document.getElementById('btn-add');
         
         if (!addBtn) return;
+        
+        // 고객문의 페이지에서는 새로추가 버튼 숨기기
+        const pageType = new URLSearchParams(window.location.search).get('page');
+        if (pageType === '고객문의(KOR)' || pageType === '고객문의(ENG)') {
+            addBtn.style.display = 'none';
+            return;
+        }
         
         addBtn.addEventListener('click', () => {
             // createlink가 존재하면 새창으로 링크 열기
@@ -1483,6 +1497,12 @@ class PageManager {
     
     // 체크박스 이벤트 설정
     setupCheckboxEvents() {
+        // 고객문의 페이지에서는 체크박스 기능 비활성화
+        const pageType = new URLSearchParams(window.location.search).get('page');
+        if (pageType === '고객문의(KOR)' || pageType === '고객문의(ENG)') {
+            return;
+        }
+        
         const selectAll = document.getElementById('select-all');
         const deleteBtn = document.getElementById('btn-delete-selected');
         

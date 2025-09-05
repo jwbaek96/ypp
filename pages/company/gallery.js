@@ -209,10 +209,83 @@ class GallerySystem {
         this.currentImageIndex = 0;
         this.currentItemImages = [];
         
+        // 이미지 프리로딩을 위한 캐시
+        this.imageCache = new Map();
+        this.preloadingImages = new Set();
+        
         // 검색 관련 요소들
         this.searchInput = this.container.querySelector('.gallery-search-input');
         this.searchBtn = this.container.querySelector('.gallery-search-btn');
         // this.searchResetBtn = this.container.querySelector('.gallery-search-reset-btn');
+    }
+    
+    // 이미지 프리로딩 함수
+    preloadImage(url) {
+        return new Promise((resolve, reject) => {
+            // 이미 캐시에 있거나 로딩 중이면 스킵
+            if (this.imageCache.has(url) || this.preloadingImages.has(url)) {
+                resolve(this.imageCache.get(url));
+                return;
+            }
+            
+            this.preloadingImages.add(url);
+            const img = new Image();
+            
+            img.onload = () => {
+                this.imageCache.set(url, img);
+                this.preloadingImages.delete(url);
+                resolve(img);
+            };
+            
+            img.onerror = () => {
+                this.preloadingImages.delete(url);
+                reject(new Error(`Failed to load image: ${url}`));
+            };
+            
+            img.src = url;
+        });
+    }
+    
+    // 다중 이미지 프리로딩
+    async preloadImages(imageUrls) {
+        const preloadPromises = imageUrls.map(url => 
+            this.preloadImage(url).catch(error => {
+                console.warn('이미지 프리로딩 실패:', error);
+                return null;
+            })
+        );
+        
+        try {
+            await Promise.allSettled(preloadPromises);
+            console.log(`✅ ${imageUrls.length}개 이미지 프리로딩 완료`);
+        } catch (error) {
+            console.error('이미지 프리로딩 중 오류:', error);
+        }
+    }
+    
+    // 현재 페이지 썸네일들 프리로딩
+    async preloadCurrentPageThumbnails() {
+        const thumbnailUrls = [];
+        
+        this.currentItems.forEach(item => {
+            // 썸네일 URL 수집
+            const thumbnail = item.images ? item.images[0].url : item.image;
+            if (thumbnail) {
+                thumbnailUrls.push(thumbnail);
+            }
+            
+            // 해당 아이템의 모든 이미지도 백그라운드에서 미리 로드 (지연 로딩)
+            if (item.images && item.images.length > 1) {
+                const allImageUrls = item.images.map(img => img.url);
+                setTimeout(() => {
+                    this.preloadImages(allImageUrls);
+                }, 1000); // 1초 후에 백그라운드로 로드
+            }
+        });
+        
+        if (thumbnailUrls.length > 0) {
+            this.preloadImages(thumbnailUrls);
+        }
     }
     
     // 갤러리 데이터 로드
@@ -384,6 +457,9 @@ class GallerySystem {
 
         this.galleryContent.innerHTML = '';
         this.galleryContent.appendChild(galleryGrid);
+        
+        // 🚀 현재 페이지의 썸네일들 미리 로드 (백그라운드)
+        this.preloadCurrentPageThumbnails();
 
         // 페이지네이션 표시
         if (this.totalPages > 1) {
@@ -512,6 +588,10 @@ class GallerySystem {
             this.currentItemImages = item.images;
             this.currentImageIndex = 0;
             this.setupMultipleImages();
+            
+            // 🚀 모든 이미지 프리로딩 (백그라운드에서)
+            const imageUrls = item.images.map(img => img.url);
+            this.preloadImages(imageUrls);
         } else {
             this.currentItemImages = [{
                 url: item.image,
@@ -592,12 +672,23 @@ class GallerySystem {
         // this.downloadAllBtn.style.display = 'none';
     }
     
-    // 팝업 이미지 업데이트
+    // 팝업 이미지 업데이트 (성능 개선)
     updatePopupImage() {
         const currentImage = this.currentItemImages[this.currentImageIndex];
         if (!currentImage) return;
         
-        this.popupImage.src = currentImage.url;
+        // 🚀 캐시된 이미지가 있으면 즉시 사용, 없으면 기본 로딩
+        const cachedImage = this.imageCache.get(currentImage.url);
+        if (cachedImage) {
+            // 캐시된 이미지 즉시 표시
+            this.popupImage.src = cachedImage.src;
+            console.log('✅ 캐시된 이미지 사용:', currentImage.url);
+        } else {
+            // 캐시에 없으면 일반 로딩
+            this.popupImage.src = currentImage.url;
+            console.log('⏳ 이미지 로딩 중:', currentImage.url);
+        }
+        
         this.popupImage.alt = this.popupTitle.textContent;
         
         // 다운로드 버튼에 현재 이미지 정보 저장

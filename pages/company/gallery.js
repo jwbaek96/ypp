@@ -157,26 +157,45 @@ class GallerySystem {
                             <div class="gallery-popup-date"></div>
                         </div>
                         <div class="gallery-popup-controls">
-                            <!--<button class="popup-btn download-btn" data-action="download" title="다운로드">⬇</button>-->
                             <button class="popup-btn close-btn" data-action="close" title="닫기">
                                 ✕
                             </button>
                         </div>
                     </div>
                     <div class="gallery-popup-image-container">
-                        <button class="image-nav-btn prev-image-btn" data-action="prev-image" style="display: none;">
-                            ◀
-                        </button>
                         <div class="popup-image-wrapper">
                             <img class="gallery-popup-image" src="" alt="">
                         </div>
-                        <button class="image-nav-btn next-image-btn" data-action="next-image" style="display: none;">
-                            ▶
-                        </button>
                     </div>
-                    <div class="popup-image-info" style="display: none;">
-                        <div class="image-counter">
+                    <div class="popup-image-info" style="display: none; justify-content: space-between; align-items: center; padding: 8px 20px; background: rgba(0,0,0,0.1); border-top: 1px solid #eee;">
+                        <div class="image-counter" style="font-size: 14px; color: #666;">
                             <span class="current-image">1</span> / <span class="total-images">1</span>
+                        </div>
+                        <div class="popup-image-nav" style="display: flex; gap: 8px; padding: 5;">
+                            <button class="popup-nav-btn prev-image-btn" data-action="prev-image" title="이전 이미지" style="
+                                padding: 4px 6px; 
+                                background: #fff; 
+                                border: 1px solid #ddd; 
+                                border-radius: 4px; 
+                                cursor: pointer; 
+                                font-size: 14px; 
+                                color: #333;
+                                transition: all 0.2s ease;
+                            " onmouseover="this.style.background='#f5f5f5'; this.style.borderColor='#999';" onmouseout="this.style.background='#fff'; this.style.borderColor='#ddd';">
+                                ◀
+                            </button>
+                            <button class="popup-nav-btn next-image-btn" data-action="next-image" title="다음 이미지" style="
+                                padding: 4px 6px; 
+                                background: #fff; 
+                                border: 1px solid #ddd; 
+                                border-radius: 4px; 
+                                cursor: pointer; 
+                                font-size: 14px; 
+                                color: #333;
+                                transition: all 0.2s ease;
+                            " onmouseover="this.style.background='#f5f5f5'; this.style.borderColor='#999';" onmouseout="this.style.background='#fff'; this.style.borderColor='#ddd';">
+                                ▶
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -654,22 +673,14 @@ class GallerySystem {
     
     // 다중 이미지 설정
     setupMultipleImages() {
-        this.prevImageBtn.style.display = 'block';
-        this.nextImageBtn.style.display = 'block';
-        this.popupImageInfo.style.display = 'block';
-        // 전체 다운로드 버튼 없음
-        // this.downloadAllBtn.style.display = 'block';
+        this.popupImageInfo.style.display = 'flex'; // flex로 표시
         this.totalImagesSpan.textContent = this.currentItemImages.length;
         this.updateImageNavigation();
     }
     
     // 단일 이미지 설정
     setupSingleImage() {
-        this.prevImageBtn.style.display = 'none';
-        this.nextImageBtn.style.display = 'none';
-        this.popupImageInfo.style.display = 'none';
-        // 전체 다운로드 버튼 없음
-        // this.downloadAllBtn.style.display = 'none';
+        this.popupImageInfo.style.display = 'none'; // 숨김
     }
     
     // 팝업 이미지 업데이트 (성능 개선)
@@ -704,8 +715,25 @@ class GallerySystem {
     
     // 이미지 네비게이션 업데이트
     updateImageNavigation() {
+        // 이전 버튼 상태
         this.prevImageBtn.disabled = this.currentImageIndex <= 0;
+        if (this.prevImageBtn.disabled) {
+            this.prevImageBtn.style.opacity = '0.5';
+            this.prevImageBtn.style.cursor = 'not-allowed';
+        } else {
+            this.prevImageBtn.style.opacity = '1';
+            this.prevImageBtn.style.cursor = 'pointer';
+        }
+        
+        // 다음 버튼 상태
         this.nextImageBtn.disabled = this.currentImageIndex >= this.currentItemImages.length - 1;
+        if (this.nextImageBtn.disabled) {
+            this.nextImageBtn.style.opacity = '0.5';
+            this.nextImageBtn.style.cursor = 'not-allowed';
+        } else {
+            this.nextImageBtn.style.opacity = '1';
+            this.nextImageBtn.style.cursor = 'pointer';
+        }
     }
     
     // 이전 이미지로 이동

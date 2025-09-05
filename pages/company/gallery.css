@@ -277,7 +277,7 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    height: 75vh; /* 고정된 높이 설정 */
+    height: 72.5vh; /* 고정된 높이 설정 */
     overflow: hidden;
 }
 

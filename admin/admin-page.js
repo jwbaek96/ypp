@@ -172,7 +172,7 @@ class PageManager {
     }
     constructor() {
         // Google Apps Script 웹앱 URL (index.html과 동일)
-        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxSS2Lj0faviVS_PZUUmZnLUwvFurUNeeg1ZCLSrwv3_K2G5IG__JDvg_CTuFUNo0Hf';
+        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbyDDYwafRb1JJQWx9v8QZapCoqlyDJ9bDnDMvkdG9dyjNT8_PkcHjk2XXRGw_H4t1KB';
         // this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxpCCjRsLr1A2Yv8UUQMbcsTyqRi1Jt_pPDERgwFUSUyQv83P8ex8G03u8dNaJQfhRV';
         this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
         this.pageConfigs = this.initPageConfigs();
@@ -204,7 +204,7 @@ class PageManager {
                 createlink: 'https://tally.so/r/31e5NQ'
             },
             '유자격': {
-                title: '갤러리 유자격',
+                title: '갤러리 유자격/수상',
                 description: '유자격 관련 갤러리 이미지 관리',
                 location: '회사소개 > 기업현황 > 유자격',
                 link: '/pages/company/business.html',
@@ -275,13 +275,21 @@ class PageManager {
                 dataKey: 'faq',
                 createlink: ''
             },
-            '고객문의': {
-                title: '고객문의',
-                description: '고객 문의사항 관리',
+            '고객문의(KOR)': {
+                title: '고객문의(한국어)',
+                description: '한국어 고객 문의사항 관리',
                 location: '고객센터 > 문의하기',
                 link: '/pages/support/index.html#contact',
                 apiSheet: 'SHEET_HELP_KR',
                 dataKey: 'helpKR'
+            },
+            '고객문의(ENG)': {
+                title: '고객문의(영어)',
+                description: '영어 고객 문의사항 관리',
+                location: '고객센터 > 문의하기',
+                link: '/pages/support/index.html#contact',
+                apiSheet: 'SHEET_HELP_EN',
+                dataKey: 'helpEN'
             },
             '부패및윤리신고': {
                 title: '부패 및 윤리 신고',
@@ -848,16 +856,14 @@ class PageManager {
                     <th class="col-actions">삭제</th>
                 `;
                 
-            case '고객문의':
+            case '고객문의(KOR)':
+            case '고객문의(ENG)':
                 return `
-                    <th class="col-checkbox"><input type="checkbox" id="select-all"></th>
-                    <th class="col-id">ID</th>
+                    <th>문의유형</th>
                     <th>제목</th>
                     <th>문의자</th>
-                    <th>이메일</th>
-                    <th class="col-date">문의일</th>
-                    <th class="col-status">처리상태</th>
-                    <th class="col-actions">삭제</th>
+                    <th>이메일/연락처</th>
+                    <th>문의일</th>
                 `;
                 
             case '보도자료':
@@ -966,7 +972,8 @@ class PageManager {
                     dateB = new Date(b.applicationDate || '1970-01-01');
                     break;
                     
-                case '고객문의':
+                case '고객문의(KOR)':
+                case '고객문의(ENG)':
                     // 문의일 기준으로 정렬
                     dateA = new Date(a.submittedAt || '1970-01-01');
                     dateB = new Date(b.submittedAt || '1970-01-01');
@@ -1416,21 +1423,17 @@ class PageManager {
                         </td>
                     `;
                 }
-            case '고객문의':
+            case '고객문의(KOR)':
+            case '고객문의(ENG)':
                 const inquiryDatetime = parseDatetime(item.submittedAt);
                 return `
-                    <td class="col-checkbox"><input type="checkbox" data-id="${item.submissionId}"></td>
-                    <td>${item.submissionId}</td>
-                    <td>${item.subject || '제목 없음'}</td>
+                    <td>${item.inquiryType || '-'}</td>
+                    <td>${item.subject || '-'}</td>
                     <td>${item.nameCompany || '-'}</td>
                     <td>${item.emailPhone || '-'}</td>
                     <td>
                         <div>${inquiryDatetime.dateOnly}</div>
                         <small style="color: #666;">${inquiryDatetime.timeOnly}</small>
-                    </td>
-                    <td><span class="status-badge status-pending">접수</span></td>
-                    <td>
-                        <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.submissionId}', event)"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 `;
                 
@@ -1606,9 +1609,13 @@ class PageManager {
                 this.openPressEditModal(item, config, pageType);
                 break;
                 
-            case '고객문의':
+            case '고객문의(KOR)':
+            case '고객문의(ENG)':
+                this.openInquiryEditModal(item, config, pageType);
+                break;
+                
             case '부패및윤리신고':
-                // 문의 모달 (필요시 추가)
+                // 신고 모달 (필요시 추가)
                 alert('해당 항목의 수정 기능은 준비 중입니다.');
                 break;
                 
@@ -1758,6 +1765,40 @@ class PageManager {
         // 모달 표시
         modal.style.display = 'flex';
         console.groupEnd();
+    }
+    
+    // 고객문의(KOR/ENG) 보기 모달 열기
+    openInquiryEditModal(item, config, pageType) {
+        const modal = document.getElementById('editModal');
+        const title = document.getElementById('editModalTitle');
+        const form = document.getElementById('editForm');
+        
+        if (!modal || !title || !form) {
+            console.error('고객문의(KOR/ENG) 모달 요소를 찾을 수 없습니다.');
+            return;
+        }
+        
+        // 모달 제목 설정 - "보기"로 변경
+        title.textContent = `${pageType} 보기`;
+        
+        // 폼 내용 생성
+        const formHTML = this.generateInquiryEditForm(item, pageType);
+        
+        form.innerHTML = formHTML;
+        
+        // 현재 보기 중인 아이템 저장
+        window.currentInquiryEditItem = item;
+        window.currentInquiryEditConfig = config;
+        window.currentInquiryPageType = pageType;
+        
+        // 모달 표시
+        modal.style.display = 'flex';
+        
+        // 저장 버튼 숨기기 (읽기 전용)
+        const saveButton = modal.querySelector('button[onclick="saveEditedItem()"]');
+        if (saveButton) {
+            saveButton.style.display = 'none';
+        }
     }
     
     // 직접 수정 모달 열기 (기존 로직)
@@ -2331,6 +2372,114 @@ class PageManager {
         return formHTML;
     }
     
+    // 고객문의(KOR/ENG) 보기 폼 생성 (읽기 전용)
+    generateInquiryEditForm(item, pageType) {
+        console.group('🔍 [DEBUG] generateInquiryEditForm 호출됨');
+        console.log('📋 pageType:', pageType);
+        console.log('📦 item 데이터:', item);
+        
+        // 첨부파일 처리 - 문자열 또는 배열 처리
+        let attachmentHTML = '';
+        if (item.attachment) {
+            if (typeof item.attachment === 'string') {
+                // 문자열인 경우 - 단일 파일 URL
+                const fileName = item.attachment.split('/').pop().split('?')[0] || '첨부파일';
+                attachmentHTML = `<div class="attachment-item" style="margin-bottom: 5px;">
+                    <i class="fas fa-file"></i> 
+                    <a href="${item.attachment}" target="_blank" style="color: #007cba; text-decoration: none;">
+                        ${fileName}
+                    </a>
+                </div>`;
+            } else if (Array.isArray(item.attachment) && item.attachment.length > 0) {
+                // 배열인 경우 - 여러 파일
+                attachmentHTML = item.attachment.map((file, index) => {
+                    const fileName = file.split('/').pop().split('?')[0] || `첨부파일 ${index + 1}`;
+                    return `<div class="attachment-item" style="margin-bottom: 5px;">
+                        <i class="fas fa-file"></i> 
+                        <a href="${file}" target="_blank" style="color: #007cba; text-decoration: none;">
+                            ${fileName}
+                        </a>
+                    </div>`;
+                }).join('');
+            }
+        }
+        
+        if (!attachmentHTML) {
+            attachmentHTML = '<span style="color: #999;">첨부파일 없음</span>';
+        }
+        
+        console.log('📎 첨부파일 HTML:', attachmentHTML);
+        
+        // 확인 상태 (답변 완료 여부)
+        const isConfirmed = item.confirmation === true || item.confirmation === 'true' || 
+                           item.confirmation === '확인됨' || item.confirmation === 'Y' || 
+                           item.confirmation === 'yes' || item.confirmation === '답변완료';
+        
+        const confirmationStatus = isConfirmed ? '답변완료' : '미답변';
+        const confirmationClass = isConfirmed ? 'status-confirmed' : 'status-pending';
+        console.log('✅ 확인 상태:', isConfirmed);
+        
+        // 개인정보 동의 상태
+        const hasPrivacyConsent = item.privacyConsent === true || item.privacyConsent === 'true' || 
+                                 item.privacyConsent === '동의' || item.privacyConsent === 'Y';
+        
+        const formHTML = `
+            <div class="edit-form-section-title">문의 정보</div>
+
+            
+            <div class="edit-form-group">
+                <label>제출일시:</label>
+                <input type="text" name="submittedAt" value="${item.submittedAt || ''}" class="edit-form-readonly" readonly>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>문의 유형:</label>
+                <input type="text" name="inquiryType" value="${item.inquiryType || ''}" class="edit-form-readonly" readonly>
+            </div>
+
+            <div class="edit-form-section-title">문의자 정보</div>
+            
+            <div class="edit-form-group">
+                <label>성함/회사명:</label>
+                <input type="text" name="nameCompany" value="${item.nameCompany || ''}" class="edit-form-readonly" readonly>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>이메일/전화번호:</label>
+                <input type="text" name="emailPhone" value="${item.emailPhone || ''}" class="edit-form-readonly" readonly>
+            </div>
+
+            <div class="edit-form-section-title">문의 내용</div>
+            
+            <div class="edit-form-group">
+                <label>제목:</label>
+                <input type="text" name="subject" value="${item.subject || ''}" class="edit-form-readonly" readonly>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>문의 내용:</label>
+                <textarea name="content" rows="6" class="edit-form-readonly" readonly>${item.content || ''}</textarea>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>첨부파일:</label>
+                <div class="attachment-preview" style="border: 1px solid #ddd; padding: 10px; border-radius: 4px; min-height: 40px;">
+                    ${attachmentHTML}
+                </div>
+            </div>
+            
+            <div class="edit-form-group">
+                <label>개인정보 수집·이용 동의:</label>
+                <input type="text" value="${hasPrivacyConsent ? '동의함' : '동의하지 않음'}" class="edit-form-readonly" readonly>
+            </div>
+        `;
+        
+        console.log('✅ 고객문의(KOR/ENG) 폼 HTML 생성 완료, 길이:', formHTML.length);
+        console.groupEnd();
+        
+        return formHTML;
+    }
+    
     // 갤러리 토글 버튼 설정
     setupGalleryToggle() {
         const toggle = document.getElementById('galleryActiveToggle');
@@ -2378,7 +2527,109 @@ class PageManager {
             });
         }
     }
+    
+    // 고객문의(KOR/ENG) 토글 버튼 설정 - 읽기전용으로 변경되어 더이상 사용하지 않음
+    // setupInquiryToggle() - 읽기 전용으로 변경되어 더 이상 사용하지 않음
+    // setupInquiryToggle() {
+    //     const toggle = document.getElementById('inquiryConfirmToggle');
+    //     const hiddenInput = toggle?.querySelector('input[name="confirmation"]');
+    //     const label = document.getElementById('inquiryToggleLabel');
+    //     
+    //     if (toggle && hiddenInput && label) {
+    //         toggle.addEventListener('click', () => {
+    //             toggle.classList.toggle('active');
+    //             const isConfirmed = toggle.classList.contains('active');
+    //             hiddenInput.value = isConfirmed ? 'true' : 'false';
+    //             label.textContent = isConfirmed ? '답변완료' : '미답변';
+    //         });
+    //     }
+    // }
 }
+
+// 고객문의(KOR/ENG) 저장 함수 - 읽기 전용으로 변경되어 더 이상 사용하지 않음
+/*
+async function saveInquiryEditedItem() {
+    const form = document.getElementById('editForm');
+    const formData = new FormData(form);
+    
+    // 폼 유효성 검사
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    
+    // 폼 데이터를 객체로 변환
+    const updatedData = {};
+    for (let [key, value] of formData.entries()) {
+        updatedData[key] = value;
+    }
+    
+    // 원본 아이템의 읽기 전용 필드들 유지
+    const originalItem = window.currentEditItem;
+    updatedData.submissionId = originalItem.submissionId;
+    updatedData.respondentId = originalItem.respondentId;
+    updatedData.submittedAt = originalItem.submittedAt;
+    updatedData.inquiryType = originalItem.inquiryType;
+    updatedData.nameCompany = originalItem.nameCompany;
+    updatedData.emailPhone = originalItem.emailPhone;
+    updatedData.subject = originalItem.subject;
+    updatedData.content = originalItem.content;
+    updatedData.attachment = originalItem.attachment;
+    updatedData.privacyConsent = originalItem.privacyConsent;
+    
+    // 확인 상태 처리 (토글 값)
+    const confirmationInput = form.querySelector('input[name="confirmation"]');
+    updatedData.confirmation = confirmationInput ? (confirmationInput.value === 'true') : false;
+    
+    if (!confirm('수정사항을 저장하시겠습니까?')) {
+        return;
+    }
+    
+    try {
+        const config = window.currentInquiryEditConfig || window.currentEditConfig;
+        const pageManager = window.pageManagerInstance;
+        
+        if (!config || !pageManager) {
+            alert('오류: 설정 정보를 찾을 수 없습니다.');
+            return;
+        }
+        
+        const itemId = originalItem.submissionId || originalItem.id;
+        const updateUrl = `${pageManager.appsScriptUrl}?action=update&sheet=${config.apiSheet}&id=${encodeURIComponent(itemId)}&data=${encodeURIComponent(JSON.stringify(updatedData))}`;
+        
+        // 디버깅을 위한 로그
+        console.log('=== 고객문의(KOR/ENG) 수정 요청 디버깅 ===');
+        console.log('시트:', config.apiSheet);
+        console.log('ID:', itemId);
+        console.log('원본 아이템:', originalItem);
+        console.log('수정할 데이터:', updatedData);
+        console.log('요청 URL:', updateUrl);
+        console.log('===========================');
+        
+        const response = await fetch(updateUrl, {
+            method: 'GET'
+        });
+        
+        console.log('응답 상태:', response.status);
+        console.log('응답 헤더:', response.headers);
+        
+        const result = await response.json();
+        console.log('Apps Script 응답:', result);
+        
+        if (result.success) {
+            alert('수정이 완료되었습니다.');
+            closeEditModal();
+            location.reload();
+        } else {
+            alert(`오류: 수정에 실패했습니다. (${result.message})`);
+        }
+        
+    } catch (error) {
+        console.error('고객문의(KOR/ENG) 수정 오류:', error);
+        alert('오류: 수정에 실패했습니다.');
+    }
+}
+*/
 
 // 전역 함수들 (버튼 onclick에서 사용)
 async function deleteItem(id, event) {
@@ -2453,9 +2704,21 @@ function closeGroupEditSelectModal() {
 
 // 수정 모달 관련 전역 함수들
 function closeEditModal() {
-    document.getElementById('editModal').style.display = 'none';
+    const modal = document.getElementById('editModal');
+    modal.style.display = 'none';
+    
+    // 저장 버튼 다시 표시 (다음에 다른 모달을 열 때를 위해)
+    const saveButton = modal.querySelector('button[onclick="saveEditedItem()"]');
+    if (saveButton) {
+        saveButton.style.display = '';
+    }
+    
+    // 전역 변수 정리
     window.currentEditItem = null;
     window.currentEditConfig = null;
+    window.currentInquiryEditItem = null;
+    window.currentInquiryEditConfig = null;
+    window.currentInquiryPageType = null;
 }
 
 // 수정된 항목 저장
@@ -2463,6 +2726,13 @@ async function saveEditedItem() {
     // 보도자료 편집인지 확인
     if (window.currentPressEditItem) {
         return savePressEditedItem();
+    }
+    
+    // 고객문의(KOR/ENG)는 읽기 전용이므로 저장 기능 없음
+    if (window.currentInquiryEditItem) {
+        const pageType = window.currentInquiryPageType || '고객문의';
+        alert(`${pageType}는 읽기 전용입니다.`);
+        return;
     }
     
     const form = document.getElementById('editForm');

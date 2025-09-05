@@ -644,9 +644,9 @@ function getCustomHeaders(sheetName) {
       subject: 6,             // 제목
       content: 7,             // 문의 내용
       attachment: 8,          // 파일 첨부 (도면, 제안서, 사양서 등)
-      privacyConsent: 9,      // 개인정보 수집·이용 동의
-      confirmation: 10,        // 확인
-      remarks: 11              // 비고
+      privacyConsent: 10,      // 개인정보 수집·이용 동의
+      confirmation: 11,        // 확인
+      remarks: 12              // 비고
     },
     
     [SHEET_HELP_EN]: { // 문의 ENG (영한 동일 구조)
@@ -659,9 +659,9 @@ function getCustomHeaders(sheetName) {
       subject: 6,             // 제목
       content: 7,             // 문의 내용
       attachment: 8,          // 파일 첨부 (도면, 제안서, 사양서 등)
-      privacyConsent: 9,      // 개인정보 수집·이용 동의
-      confirmation: 10,        // 확인
-      remarks: 11              // 비고
+      privacyConsent: 10,      // 개인정보 수집·이용 동의
+      confirmation: 11,        // 확인
+      remarks: 12              // 비고
     },
     
     [SHEET_REPORT]: { // 신고

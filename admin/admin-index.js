@@ -85,7 +85,8 @@ function updateNavCounts(data) {
         'psac': data.applyPSAC,        // PSAC
         'relay-school': data.applyRelay, // Relay School
         'relay-school-special': data.applyRelaySpecial, // Relay School Special
-        'customer-inquiries': data.helpKR + data.helpEN, // 고객문의 (한+영)
+        'customer-inquiries-kr': data.helpKR, // 고객문의 (한)
+        'customer-inquiries-en': data.helpEN, // 고객문의 (영)
         'corruption-report': data.report  // 부패신고
     };
     
@@ -204,7 +205,8 @@ function handleNavClick(navType) {
         'relay-school': 'RelaySchool',
         'relay-school-special': 'RelaySchoolSpecial',
         'faq': '자주묻는질문',
-        'customer-inquiries': '고객문의',
+        'customer-inquiries-kr': '고객문의(KOR)',
+        'customer-inquiries-en': '고객문의(ENG)',
         'corruption-report': '부패및윤리신고'
     };
     

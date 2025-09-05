@@ -172,7 +172,7 @@ class PageManager {
     }
     constructor() {
         // Google Apps Script 웹앱 URL (index.html과 동일)
-        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbyDDYwafRb1JJQWx9v8QZapCoqlyDJ9bDnDMvkdG9dyjNT8_PkcHjk2XXRGw_H4t1KB';
+        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxr5XYHZxjMyKKmu8tvA5lHEl3_NUaLmATf5IEUp4F9M5s8HRCGGoMA2L8ycXM0_rr-';
         // this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxpCCjRsLr1A2Yv8UUQMbcsTyqRi1Jt_pPDERgwFUSUyQv83P8ex8G03u8dNaJQfhRV';
         this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
         this.pageConfigs = this.initPageConfigs();

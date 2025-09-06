@@ -283,34 +283,17 @@
     },
     "media": {
       "title": {
-        "ko": "홍보",
-        "en": "Media"
+        "ko": "커뮤니티",
+        "en": "Community"
       },
       "url": "/pages/media/newsroom/content.html",
       "children": {
-        "newsroom": {
+        "press": {
           "title": {
-            "ko": "미디어룸",
-            "en": "Media Room"
+            "ko": "소식",
+            "en": "News"
           },
-          "url": "/pages/media/newsroom/press.html",
-          "children": {
-            "content": {
-              "title": {
-                "ko": "미디어컨텐츠",
-                "en": "Media Contents"
-              },
-              "url": "/pages/media/newsroom/content.html",
-              "sections": ["기존 미디어룸 자료", "유튜브 자료", "나무위키 링크"]
-            },
-            "press": {
-              "title": {
-                "ko": "보도자료",
-                "en": "Press Release"
-              },
-              "url": "/pages/media/newsroom/press.html"
-            }
-          }
+          "url": "/pages/media/newsroom/press.html"
         },
         "gallery": {
           "title": {
@@ -319,6 +302,14 @@
           },
           "url": "/pages/media/gallery/academy.html",
           "children": {
+            "inside": {
+              "title": {
+                "ko": "YPP 인사이드",
+                "en": "YPP Inside"
+              },
+              "url": "/pages/media/gallery/inside.html",
+              "access": "public"
+            },
             "academy": {
               "title": {
                 "ko": "아카데미갤러리",
@@ -326,14 +317,6 @@
               },
               "url": "/pages/media/gallery/academy.html",
               "sections": ["PSAC", "Relay School"]
-            },
-            "inside": {
-              "title": {
-                "ko": "인사이드",
-                "en": "Inside"
-              },
-              "url": "/pages/media/gallery/inside.html",
-              "access": "public"
             },
             "gclp": {
               "title": {
@@ -348,6 +331,14 @@
               }
             }
           }
+        },
+        "content": {
+          "title": {
+            "ko": "미디어컨텐츠",
+            "en": "Media Contents"
+          },
+          "url": "/pages/media/newsroom/content.html",
+          "sections": ["기존 미디어룸 자료", "유튜브 자료", "나무위키 링크"]
         },
         "ci": {
           "title": {

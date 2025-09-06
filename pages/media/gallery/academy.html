@@ -751,9 +751,54 @@ class PSACGalleryController {
         modalDescription.textContent = item.text;
         totalImages.textContent = item.image.length;
 
+        // 로컬스토리지 기반 한영 전환 설정
+        this.setupModalLanguageToggle();
+
         this.updateModalImage();
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
+    }
+
+    // 모달 한영 전환 설정
+    setupModalLanguageToggle() {
+        const modalTitle = document.getElementById('modal-title');
+        
+        const updateModalLanguage = () => {
+            const selectedLanguage = localStorage.getItem('selectedLanguage') || 'kr';
+            const isEnglish = selectedLanguage === 'en';
+            
+            const titleKor = modalTitle.getAttribute('data-kor');
+            const titleEng = modalTitle.getAttribute('data-eng');
+            
+            if (isEnglish && titleEng) {
+                modalTitle.textContent = titleEng;
+            } else if (titleKor) {
+                modalTitle.textContent = titleKor;
+            }
+        };
+        
+        // 초기 언어 설정 적용
+        updateModalLanguage();
+        
+        // 언어 변경 이벤트 리스너
+        const handleLanguageChange = () => {
+            updateModalLanguage();
+        };
+        
+        document.addEventListener('languageChanged', handleLanguageChange);
+        
+        // 로컬스토리지 변경 감지
+        const handleStorageChange = (e) => {
+            if (e.key === 'selectedLanguage') {
+                updateModalLanguage();
+            }
+        };
+        
+        window.addEventListener('storage', handleStorageChange);
+        
+        // 모달 닫을 때 정리할 수 있도록 저장
+        this.modalLanguageHandler = handleLanguageChange;
+        this.modalStorageHandler = handleStorageChange;
     }
 
     closeModal() {
@@ -761,6 +806,16 @@ class PSACGalleryController {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
         this.currentModal = null;
+        
+        // 모달 언어 이벤트 리스너 정리
+        if (this.modalLanguageHandler) {
+            document.removeEventListener('languageChanged', this.modalLanguageHandler);
+            this.modalLanguageHandler = null;
+        }
+        if (this.modalStorageHandler) {
+            window.removeEventListener('storage', this.modalStorageHandler);
+            this.modalStorageHandler = null;
+        }
     }
 
     showPreviousImage() {
@@ -1072,9 +1127,54 @@ class RelaySchoolGalleryController {
                 modalDescription.textContent = item.text;
                 totalImages.textContent = item.image.length;
 
+                // 로컬스토리지 기반 한영 전환 설정
+                this.setupModalLanguageToggle();
+
                 this.updateModalImage();
                 modal.style.display = 'block';
                 document.body.style.overflow = 'hidden';
+            }
+
+            // 모달 한영 전환 설정
+            setupModalLanguageToggle() {
+                const modalTitle = document.getElementById('modal-title');
+                
+                const updateModalLanguage = () => {
+                    const selectedLanguage = localStorage.getItem('selectedLanguage') || 'kr';
+                    const isEnglish = selectedLanguage === 'en';
+                    
+                    const titleKor = modalTitle.getAttribute('data-kor');
+                    const titleEng = modalTitle.getAttribute('data-eng');
+                    
+                    if (isEnglish && titleEng) {
+                        modalTitle.textContent = titleEng;
+                    } else if (titleKor) {
+                        modalTitle.textContent = titleKor;
+                    }
+                };
+                
+                // 초기 언어 설정 적용
+                updateModalLanguage();
+                
+                // 언어 변경 이벤트 리스너
+                const handleLanguageChange = () => {
+                    updateModalLanguage();
+                };
+                
+                document.addEventListener('languageChanged', handleLanguageChange);
+                
+                // 로컬스토리지 변경 감지
+                const handleStorageChange = (e) => {
+                    if (e.key === 'selectedLanguage') {
+                        updateModalLanguage();
+                    }
+                };
+                
+                window.addEventListener('storage', handleStorageChange);
+                
+                // 모달 닫을 때 정리할 수 있도록 저장
+                this.modalLanguageHandler = handleLanguageChange;
+                this.modalStorageHandler = handleStorageChange;
             }
 
             closeModal() {
@@ -1082,6 +1182,16 @@ class RelaySchoolGalleryController {
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto';
                 this.currentModal = null;
+                
+                // 모달 언어 이벤트 리스너 정리
+                if (this.modalLanguageHandler) {
+                    document.removeEventListener('languageChanged', this.modalLanguageHandler);
+                    this.modalLanguageHandler = null;
+                }
+                if (this.modalStorageHandler) {
+                    window.removeEventListener('storage', this.modalStorageHandler);
+                    this.modalStorageHandler = null;
+                }
             }
 
             showPreviousImage() {

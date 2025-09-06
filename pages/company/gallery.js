@@ -130,7 +130,7 @@ class GallerySystem {
             
             <div class="gallery-container">
                 <div class="gallery-content">
-                    <div class="gallery-loading">갤러리를 불러오는 중...</div>
+                    <div class="gallery-loading"></div>
                 </div>
                 <!--
                 <div class="gallery-search-wrap">
@@ -421,7 +421,7 @@ class GallerySystem {
         const koreanText = `총 ${totalCount}건`;
         const englishText = `Total: ${totalCount} items`;
         
-        descriptionElement.textContent = koreanText;
+        // descriptionElement.textContent = koreanText;
         descriptionElement.setAttribute('data-kor', koreanText);
         descriptionElement.setAttribute('data-eng', englishText);
         
@@ -432,14 +432,14 @@ class GallerySystem {
         this.setupLanguageToggle(descriptionElement);
     }
     
-    // 한영 전환 기능 설정
+    // 한영 전환 기능 설정 (로컬스토리지 기반)
     setupLanguageToggle(element) {
         // 기존 이벤트 리스너 제거 (중복 방지)
         element.removeEventListener('languageChanged', this.handleLanguageChange);
         
-        // 새 이벤트 리스너 추가
-        this.handleLanguageChange = () => {
-            const isEnglish = document.documentElement.classList.contains('lang-en');
+        const updateLanguage = () => {
+            const selectedLanguage = localStorage.getItem('selectedLanguage') || 'kr';
+            const isEnglish = selectedLanguage === 'en';
             const korText = element.getAttribute('data-kor');
             const engText = element.getAttribute('data-eng');
             
@@ -450,8 +450,23 @@ class GallerySystem {
             }
         };
         
+        // 초기 언어 설정 적용
+        updateLanguage();
+        
+        // 새 이벤트 리스너 추가
+        this.handleLanguageChange = () => {
+            updateLanguage();
+        };
+        
         element.addEventListener('languageChanged', this.handleLanguageChange);
         document.addEventListener('languageChanged', this.handleLanguageChange);
+        
+        // 로컬스토리지 변경 감지
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'selectedLanguage') {
+                updateLanguage();
+            }
+        });
     }
     
     // 현재 페이지 렌더링
@@ -491,12 +506,13 @@ class GallerySystem {
         this.setupGalleryItemsLanguageToggle();
     }
     
-    // 갤러리 아이템들의 한영 전환 설정
+    // 갤러리 아이템들의 한영 전환 설정 (로컬스토리지 기반)
     setupGalleryItemsLanguageToggle() {
         const galleryItems = this.galleryContent.querySelectorAll('.gallery-item-title');
         
-        const handleItemLanguageChange = () => {
-            const isEnglish = document.documentElement.classList.contains('lang-en');
+        const updateItemsLanguage = () => {
+            const selectedLanguage = localStorage.getItem('selectedLanguage') || 'kr';
+            const isEnglish = selectedLanguage === 'en';
             
             galleryItems.forEach(titleElement => {
                 const korText = titleElement.getAttribute('data-kor');
@@ -510,8 +526,22 @@ class GallerySystem {
             });
         };
         
+        // 초기 언어 설정 적용
+        updateItemsLanguage();
+        
+        const handleItemLanguageChange = () => {
+            updateItemsLanguage();
+        };
+        
         // 언어 전환 이벤트 리스너 추가
         document.addEventListener('languageChanged', handleItemLanguageChange);
+        
+        // 로컬스토리지 변경 감지
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'selectedLanguage') {
+                updateItemsLanguage();
+            }
+        });
         
         // 갤러리가 새로 렌더링될 때마다 기존 리스너 제거하고 새로 추가하기 위해 저장
         this.galleryItemsLanguageHandler = handleItemLanguageChange;
@@ -640,18 +670,19 @@ class GallerySystem {
         const title = item.title || '';
         const titleEng = item.title_eng || item.titleEng || title;
         
-        this.popupTitle.textContent = title;
         this.popupTitle.setAttribute('data-kor', title);
         this.popupTitle.setAttribute('data-eng', titleEng);
+        this.popupTitle.textContent = title;
         
         // 날짜는 그대로 (날짜는 보통 언어 상관없이 동일)
         this.popupDate.textContent = item.date || '';
     }
     
-    // 팝업에서 한영 전환 설정
+    // 팝업에서 한영 전환 설정 (로컬스토리지 기반)
     setupPopupLanguageToggle(item) {
-        const handlePopupLanguageChange = () => {
-            const isEnglish = document.documentElement.classList.contains('lang-en');
+        const updatePopupLanguage = () => {
+            const selectedLanguage = localStorage.getItem('selectedLanguage') || 'kr';
+            const isEnglish = selectedLanguage === 'en';
             
             // 제목 변경
             const titleKor = this.popupTitle.getAttribute('data-kor');
@@ -664,11 +695,28 @@ class GallerySystem {
             }
         };
         
-        // 이벤트 리스너 추가
+        // 초기 언어 설정 적용
+        updatePopupLanguage();
+        
+        // 언어 변경 이벤트 리스너 추가
+        const handlePopupLanguageChange = () => {
+            updatePopupLanguage();
+        };
+        
         document.addEventListener('languageChanged', handlePopupLanguageChange);
+        
+        // 로컬스토리지 변경 감지 (다른 탭에서 언어 변경시)
+        const handleStorageChange = (e) => {
+            if (e.key === 'selectedLanguage') {
+                updatePopupLanguage();
+            }
+        };
+        
+        window.addEventListener('storage', handleStorageChange);
         
         // 팝업 닫을 때 이벤트 리스너 제거를 위해 저장
         this.popupLanguageHandler = handlePopupLanguageChange;
+        this.popupStorageHandler = handleStorageChange;
     }
     
     // 다중 이미지 설정
@@ -764,7 +812,9 @@ class GallerySystem {
         // 팝업 언어 전환 이벤트 리스너 제거
         if (this.popupLanguageHandler) {
             document.removeEventListener('languageChanged', this.popupLanguageHandler);
+            window.removeEventListener('storage', this.popupStorageHandler);
             this.popupLanguageHandler = null;
+            this.popupStorageHandler = null;
         }
         
         // 슬라이더 상태 초기화

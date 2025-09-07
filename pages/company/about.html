@@ -1493,6 +1493,18 @@
                     activeTabContent.classList.add('active');
                 }
                 
+                // 주요사업 탭 전환 시 비즈니스 슬라이더 초기화
+                if (tabId === 'business') {
+                    // 약간의 지연을 두고 캐러셀 초기화 (DOM 렌더링 완료 후)
+                    setTimeout(() => {
+                        if (typeof window.reinitializeBusinessSlider === 'function') {
+                            window.reinitializeBusinessSlider();
+                        } else if (typeof updateCarousel === 'function') {
+                            updateCarousel();
+                        }
+                    }, 50);
+                }
+                
                 // 섹션 네비게이션 전환
                 this.switchSectionNav(tabId);
             }

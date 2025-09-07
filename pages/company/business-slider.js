@@ -45,9 +45,23 @@ items.forEach((item, i) => {
 });
 
 // 초기 배치 (DOM 렌더링 완료 후)
-requestAnimationFrame(() => {
-    updateCarousel();
-});
+function initializeCarousel() {
+    requestAnimationFrame(() => {
+        updateCarousel();
+    });
+}
+
+// 페이지 로드 시 초기화
+initializeCarousel();
+
+// 탭 전환이나 가시성 변화 감지를 위한 함수
+function reinitializeIfNeeded() {
+    const carousel = document.getElementById('carousel');
+    if (carousel && carousel.offsetWidth > 0) {
+        // 캐러셀이 보이는 상태이면 초기화
+        updateCarousel();
+    }
+}
 
 // 회전 및 업데이트 함수
 function updateCarousel() {

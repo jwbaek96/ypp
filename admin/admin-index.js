@@ -174,12 +174,22 @@ function refreshData() {
 
 // 클릭 이벤트 리스너 추가 (각 nav 항목 클릭 시)
 document.addEventListener('DOMContentLoaded', () => {
+    // 웹 데이터 관리 항목들 (page-web.html로 이동하는 항목들)
+    const webDataNavItems = ['faq', 'history', 'nuclear', 'thermal', 'substation', 'us-base'];
+    
     document.querySelectorAll('[data-nav]').forEach(navItem => {
+        const navType = navItem.getAttribute('data-nav');
+        
         navItem.addEventListener('click', (e) => {
-            const navType = e.currentTarget.getAttribute('data-nav');
             console.log(`${navType} 항목 클릭됨`);
             
-            // 여기에 각 섹션별 상세 페이지 로드 로직 추가 가능
+            // 웹 데이터 관리 항목들은 page-web.html로 이동
+            if (webDataNavItems.includes(navType)) {
+                window.location.href = `./page-web.html#${navType}`;
+                return;
+            }
+            
+            // 기존 페이지 관리 항목들은 page.html로 이동
             handleNavClick(navType);
         });
     });

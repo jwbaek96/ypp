@@ -284,9 +284,9 @@
     vertical-align: middle;
 }
 
-.project-table tbody tr:hover {
+/* .project-table tbody tr:hover {
     background: #f8f9fa;
-}
+} */
 
 .project-name .project-info {
     display: flex;
@@ -364,7 +364,7 @@
     
 }
 
-.status-badge.ongoing {
+#us-military .in-progress {
     color: #004085;
     background: #cce5ff;
     border: 1px solid #b3d7ff;

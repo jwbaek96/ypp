@@ -68,22 +68,22 @@ let relayStudentCount = 0;
 
 // 세부 교육 과정 리스트 (PSAC)
 const psacCourses = {
-    1:{kor:"1주: 전력계통 해석의 기본 이론", eng:"Week 1: Basic Theory of Power System Analysis", tooltipKR: "<br><span>(마감)</span>", tooltipEN: "<br><span>(closed)</span>"},
-    2:{kor:"2주: 전력계통(설비) 보호기술", eng:"Week 2: Power System (Facility) Protection Technology", tooltipKR: "<br><span>(마감)</span>", tooltipEN: "<br><span>(closed)</span>"},
+    1:{kor:"1주: 전력계통 해석의 기본 이론", eng:"Week 1: Basic Theory of Power System Analysis", tooltipKR: "", tooltipEN: ""},
+    2:{kor:"2주: 전력계통(설비) 보호기술", eng:"Week 2: Power System (Facility) Protection Technology", tooltipKR: "", tooltipEN: ""},
     3:{kor:"3주: 동기발전기 기술", eng:"Week 3: Synchronous Generator Technology", tooltipKR: "<br><span style='color:red'>(*마감임박)</span>", tooltipEN: "<br><span style='color:red'>(*almost full)</span>"},
     4:{kor:"4주: 무효전력 운영과 전압제어", eng:"Week 4: Reactive Power Operation and Voltage Control", tooltipKR: "<br><span style='color:red'>(*마감임박)</span>", tooltipEN: "<br><span style='color:red'>(*almost full)</span>"},
     5:{kor:"5주: 전력설비의 동특성(계통안정도)", eng:"Week 5: Dynamic Characteristics of Power Facilities (System Stability)", tooltipKR: "<br><span>(마감)</span>", tooltipEN: "<br><span>(closed)</span>"},
     6:{kor:"6주: 분산에너지 시스템 기술", eng:"Week 6: Distributed Energy System Technology", tooltipKR: "", tooltipEN: ""},
-    7:{kor:"7주: 보호릴레이 정정법과 보호협조기술", eng:"Week 7: Protection Relay Setting and Coordination Technology", tooltipKR: "<br><span style='color:red'>(*마감주의)</span>", tooltipEN: "<br><span style='color:red'>(*almost full)</span>"},
-    8:{kor:"8주: HVDC, MVDC, LVDC 및 FACTS기술", eng:"Week 8: HVDC, MVDC, LVDC and FACTS Technology", tooltipKR: "<br><span style='color:red'>(*마감주의)</span>", tooltipEN: "<br><span style='color:red'>(*almost full)</span>"},
+    7:{kor:"7주: 보호릴레이 정정법과 보호협조기술", eng:"Week 7: Protection Relay Setting and Coordination Technology", tooltipKR: "<br><span style='color:#0088ff'>(*마감주의)</span>", tooltipEN: "<br><span style='color:#0088ff'>(*almost full)</span>"},
+    8:{kor:"8주: HVDC, MVDC, LVDC 및 FACTS기술", eng:"Week 8: HVDC, MVDC, LVDC and FACTS Technology", tooltipKR: "<br><span style='color:#0088ff'>(*마감주의)</span>", tooltipEN: "<br><span style='color:#0088ff'>(*almost full)</span>"},
     9:{kor:"9주: 에너지 전환기의 전력계통 계획과 운영/에너지 시장과 신사업 모델", eng:"Week 9: Power System Planning and Operation in Energy Transition / Energy Market and New Business Models", tooltipKR: "<br><span style='color:red'>(*마감임박)</span>", tooltipEN: "<br><span style='color:red'>(*almost full)</span>"},
     10:{kor:"10주: 신재생에너지 계통연계 기술", eng:"Week 10: Renewable Energy Grid Connection Technology", tooltipKR: "", tooltipEN: ""}
 };
 
 // PSAC 마감된 과정들 (정원 초과)
 const psacCoursesClosed = {
-    1:{tooltip: "해당 항목은 정원 초과로 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"},
-    2:{tooltip: "해당 항목은 정원 초과로 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"},
+    1:{tooltip: "해당 항목은 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"},
+    2:{tooltip: "해당 항목은 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"},
     5: {tooltip: "해당 항목은 정원 초과로 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"}
 };
 

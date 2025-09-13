@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="handleFetchSheet()">구글시트 불러오기</button>
+<div id="data-container"></div>
+</body>
+</html>
+<script src="test.js"></script>
+<script>
+    async function fetchSheetCSV() {
+    const url = 'https://docs.google.com/spreadsheets/d/1VloYSdnC53L4cUvNTifIoQxKC6YP3IWvHzeZRQsYdGk/export?format=csv&id=1VloYSdnC53L4cUvNTifIoQxKC6YP3IWvHzeZRQsYdGk&gid=1444206870';
+    const response = await fetch(url);
+    const csvText = await response.text();
+    const rows = csvText.split('\n').map(row => row.split(','));
+    displayData(rows);
+}
+
+function displayData(data) {
+    const container = document.getElementById('data-container');
+    const table = document.createElement('table');
+    table.style.border = '1px solid #ccc';
+    table.style.borderCollapse = 'collapse';
+
+    data.forEach((row, index) => {
+        const tr = document.createElement('tr');
+        row.forEach(cell => {
+            const td = document.createElement(index === 0 ? 'th' : 'td');
+            td.textContent = cell || '';
+            td.style.border = '1px solid #ccc';
+            td.style.padding = '8px';
+            tr.appendChild(td);
+        });
+        table.appendChild(tr);
+    });
+
+    container.innerHTML = '';
+    container.appendChild(table);
+}
+
+// 버튼 클릭 시 실행
+function handleFetchSheet() {
+    fetchSheetCSV();
+}
+</script>

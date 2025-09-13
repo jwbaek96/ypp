@@ -1,24 +1,5 @@
 // YPP 아카데미 신청 폼 통합 JavaScript
-document.addEventListener('DOMContentLoaded', async function() {
-    // 로딩 상태 표시
-    showLoadingState();
-    
-    // 먼저 과정 데이터 로드
-    console.log('Starting course data load...');
-    const dataLoaded = await loadCourseData();
-    
-    // 로딩 상태 숨김
-    hideLoadingState();
-    
-    if (!dataLoaded) {
-        console.error('Failed to load course data');
-        alert('교육과정 데이터를 불러오는데 실패했습니다. 페이지를 새로고침하거나 관리자에게 문의하세요.');
-        // 데이터 로드 실패 시 수강자 추가를 하지 않음
-        return;
-    }
-    
-    console.log('Course data loaded successfully, initializing forms...');
-    
+document.addEventListener('DOMContentLoaded', function() {
     // Relay School 폼이 있을 경우 첫 번째 수강자 자동 추가
     if (document.getElementById('relayschool-students-container')) {
         addRelayschoolStudent();
@@ -85,75 +66,51 @@ const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyHhQzzGXZGkxenE8g7-
 let psacStudentCount = 0;
 let relayStudentCount = 0;
 
+// 세부 교육 과정 리스트 (PSAC)
+const psacCourses = {
+    1:{kor:"1주: 전력계통 해석의 기본 이론", eng:"Week 1: Basic Theory of Power System Analysis", tooltipKR: "", tooltipEN: ""},
+    2:{kor:"2주: 전력계통(설비) 보호기술", eng:"Week 2: Power System (Facility) Protection Technology", tooltipKR: "", tooltipEN: ""},
+    3:{kor:"3주: 동기발전기 기술", eng:"Week 3: Synchronous Generator Technology", tooltipKR: "<br><span style='color:red'>(*마감임박)</span>", tooltipEN: "<br><span style='color:red'>(*almost full)</span>"},
+    4:{kor:"4주: 무효전력 운영과 전압제어", eng:"Week 4: Reactive Power Operation and Voltage Control", tooltipKR: "<br><span style='color:red'>(*마감임박)</span>", tooltipEN: "<br><span style='color:red'>(*almost full)</span>"},
+    5:{kor:"5주: 전력설비의 동특성(계통안정도)", eng:"Week 5: Dynamic Characteristics of Power Facilities (System Stability)", tooltipKR: "<br><span>(마감)</span>", tooltipEN: "<br><span>(closed)</span>"},
+    6:{kor:"6주: 분산에너지 시스템 기술", eng:"Week 6: Distributed Energy System Technology", tooltipKR: "", tooltipEN: ""},
+    7:{kor:"7주: 보호릴레이 정정법과 보호협조기술", eng:"Week 7: Protection Relay Setting and Coordination Technology", tooltipKR: "<br><span style='color:#0088ff'>(*마감주의)</span>", tooltipEN: "<br><span style='color:#0088ff'>(*almost full)</span>"},
+    8:{kor:"8주: HVDC, MVDC, LVDC 및 FACTS기술", eng:"Week 8: HVDC, MVDC, LVDC and FACTS Technology", tooltipKR: "<br><span style='color:#0088ff'>(*마감주의)</span>", tooltipEN: "<br><span style='color:#0088ff'>(*almost full)</span>"},
+    9:{kor:"9주: 에너지 전환기의 전력계통 계획과 운영/에너지 시장과 신사업 모델", eng:"Week 9: Power System Planning and Operation in Energy Transition / Energy Market and New Business Models", tooltipKR: "<br><span style='color:red'>(*마감임박)</span>", tooltipEN: "<br><span style='color:red'>(*almost full)</span>"},
+    10:{kor:"10주: 신재생에너지 계통연계 기술", eng:"Week 10: Renewable Energy Grid Connection Technology", tooltipKR: "", tooltipEN: ""}
+};
+
+// PSAC 마감된 과정들 (정원 초과)
+const psacCoursesClosed = {
+    1:{tooltip: "해당 항목은 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"},
+    2:{tooltip: "해당 항목은 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"},
+    5: {tooltip: "해당 항목은 정원 초과로 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"}
+};
+
 // 현재 언어 감지 함수
 function getCurrentLanguage() {
     return localStorage.getItem('language') || 'kor';
 }
 
-// 동적으로 로드될 과정 데이터 저장소
-let psacCoursesData = null;
-let relayCoursesData = null;
 
-// 과정 데이터 로드 함수들
-async function loadCourseData() {
-    try {
-        console.log('Loading course data from Google Sheets...');
-        
-        // 병렬로 데이터 로드
-        const [psacData, relayData] = await Promise.all([
-            fetchPsacCourses(),
-            fetchRelayCourses()
-        ]);
-        
-        psacCoursesData = psacData;
-        relayCoursesData = relayData;
-        
-        console.log('Course data loaded successfully');
-        return true;
-    } catch (error) {
-        console.error('Error loading course data:', error);
-        return false;
-    }
-}
+// Relay School 과정별 일정
+const relayCoursesData = {
+    1:{kor: '디지털릴레이 기본반 (2025년 9월 17일(수) ~ 9월 19일(금))', eng: 'Digital Relay Basic Course (September 17-19, 2025)'},
+    2:{kor: '디지털릴레이 고급반 (2025년 10월 22일(수) ~ 10월 24일(금))', eng: 'Digital Relay Advanced Course (October 22-24, 2025)'},
+    3:{kor: '고장분석반 (2025년 11월 19일(수) ~ 11월 21일(금))', eng: 'Fault Analysis Course (November 19-21, 2025)'}
+};
+// Relay School 마감된 과정들
+const relayCoursesDataPassed = {
+    1:{kor: '디지털릴레이 기본반 (2025년 3월 19일(수) ~ 3월 21일(금))', eng: 'Digital Relay Basic Course (March 19-21, 2025)'},
+    2:{kor: '디지털릴레이 고급반 (2025년 4월 16일(수) ~ 4월 18일(금))', eng: 'Digital Relay Advanced Course (April 16-18, 2025)'},
+    3:{kor: '고장분석반 (2025년 5월 21일(수) ~ 5월 23일(금))', eng: 'Fault Analysis Course (May 21-23, 2025)'},
+    4:{kor: 'ECMS운영반 (2025년 6월 18일(수) ~ 6월 20일(금))', eng: 'ECMS Operation Course (June 18-20, 2025)'},
+    5:{kor: '원자력 특성화반 (2025년 7월 16일(수) ~ 7월 20일(일))', eng: 'Nuclear Specialization Course (July 16-20, 2025)'},
+};
 
 /* ==========================================================================
    공통 유틸리티 함수
    ========================================================================== */
-
-// 페이지 로딩 상태 표시
-function showLoadingState() {
-    const body = document.body;
-    const loadingDiv = document.createElement('div');
-    loadingDiv.id = 'course-data-loading';
-    loadingDiv.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.9);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        font-size: 18px;
-        color: #333;
-    `;
-    loadingDiv.innerHTML = `
-        <div style="text-align: center;">
-            <div style="margin-bottom: 10px; font-size: 24px;"><i class="fas fa-spinner fa-spin"></i></div>
-        </div>
-    `;
-    body.appendChild(loadingDiv);
-}
-
-// 페이지 로딩 상태 숨김
-function hideLoadingState() {
-    const loadingDiv = document.getElementById('course-data-loading');
-    if (loadingDiv) {
-        loadingDiv.remove();
-    }
-}
 
 // 메시지 표시 함수
 function showMessage(message, type, containerId) {
@@ -296,53 +253,40 @@ document.addEventListener('input', function(e) {
 
 // PSAC 수강자 추가
 function addPsacStudent() {
-    // 데이터가 로드되지 않았으면 추가하지 않음
-    if (!psacCoursesData || !psacCoursesData.courses) {
-        console.error('PSAC course data not loaded, cannot add student');
-        alert('교육과정 데이터가 아직 로드되지 않았습니다. 잠시 후 다시 시도해주세요.');
-        return;
-    }
-    
     psacStudentCount++;
     const container = document.getElementById('psac-students-container');
     
     const studentDiv = document.createElement('div');
     studentDiv.className = 'ac-form-student-section';
     studentDiv.id = `psac-student-${psacStudentCount}`;
-    
+    // 
     const currentLang = getCurrentLanguage();
-    
-    // 동적으로 로드된 PSAC 과정 데이터 사용
-    let courseCheckboxes = '';
-    
-    if (psacCoursesData && psacCoursesData.courses) {
-        courseCheckboxes = Object.keys(psacCoursesData.courses).map((courseKey) => {
-            const course = psacCoursesData.courses[courseKey];
-            const courseText = course[currentLang];
-            const isClosed = psacCoursesData.closedCourses && psacCoursesData.closedCourses.hasOwnProperty(courseKey);
-            const closedTooltip = isClosed ? psacCoursesData.closedCourses[courseKey].tooltip : '';
-            
-            // 코스 자체의 툴팁 가져오기
-            const courseTooltip = course.tooltip || '';
-            
-            // title 속성용 툴팁 (닫힌 과정은 closedTooltip, 아니면 courseTooltip)
-            const titleTooltip = isClosed ? closedTooltip : courseTooltip;
+    const courseCheckboxes = Object.keys(psacCourses).map((courseKey) => {
+        const course = psacCourses[courseKey];
+        const courseText = course[currentLang];
+        const isClosed = psacCoursesClosed.hasOwnProperty(courseKey);
+        const closedTooltip = isClosed ? psacCoursesClosed[courseKey].tooltip : '';
+        
+        // 코스 자체의 툴팁 가져오기
+        const courseTooltip = course.tooltip || '';
+        
+        // title 속성용 툴팁 (닫힌 과정은 closedTooltip, 아니면 courseTooltip)
+        const titleTooltip = isClosed ? closedTooltip : courseTooltip;
 
-            return `
-            <div class="psac-checkbox-item ${isClosed ? 'psac-checkbox-disabled' : ''}">
-                <input type="checkbox" 
-                       id="psac-course-${psacStudentCount}-${courseKey}" 
-                       name="psac-student-${psacStudentCount}-courses" 
-                       value="${courseText}"
-                       ${isClosed ? 'disabled' : ''}>
-                <label for="psac-course-${psacStudentCount}-${courseKey}" 
-                       data-kor="${course.kor} ${course.tooltipKR || ''}" 
-                       data-eng="${course.eng} ${course.tooltipEN || ''}"
-                       ${titleTooltip ? `title="${titleTooltip}"` : ''}>${courseText}</label>
-            </div>
-        `;
-        }).join('');
-    }
+        return `
+        <div class="psac-checkbox-item ${isClosed ? 'psac-checkbox-disabled' : ''}">
+            <input type="checkbox" 
+                   id="psac-course-${psacStudentCount}-${courseKey}" 
+                   name="psac-student-${psacStudentCount}-courses" 
+                   value="${courseText}"
+                   ${isClosed ? 'disabled' : ''}>
+            <label for="psac-course-${psacStudentCount}-${courseKey}" 
+                   data-kor="${course.kor} ${course.tooltipKR}" 
+                   data-eng="${course.eng} ${course.tooltipEN}"
+                   ${titleTooltip ? `title="${titleTooltip}"` : ''}>${courseText}</label>
+        </div>
+    `;
+    }).join('');
     
     studentDiv.innerHTML = `
         <div class="ac-form-student-header">
@@ -536,13 +480,6 @@ async function submitPsacForm(e) {
 
 // Relay School 수강자 추가
 function addRelayschoolStudent() {
-    // 데이터가 로드되지 않았으면 추가하지 않음
-    if (!relayCoursesData) {
-        console.error('Relay course data not loaded, cannot add student');
-        alert('교육과정 데이터가 아직 로드되지 않았습니다. 잠시 후 다시 시도해주세요.');
-        return;
-    }
-    
     relayStudentCount++;
     const container = document.getElementById('relayschool-students-container');
     
@@ -552,46 +489,29 @@ function addRelayschoolStudent() {
     
     const currentLang = getCurrentLanguage();
     
-    // 동적으로 로드된 Relay School 과정 데이터 사용
-    let courseCheckboxes = '';
-    let passedCourseItems = '';
+    // Relay School 과정 체크박스 생성 (선택 가능한 과정)
+    const courseCheckboxes = Object.keys(relayCoursesData).map((courseKey) => {
+        const course = relayCoursesData[courseKey];
+        const courseText = course[currentLang];
+        return `
+        <div class="psac-checkbox-item">
+            <input type="checkbox" id="relayschool-course-${relayStudentCount}-${courseKey}" name="relayschool-student-${relayStudentCount}-courses" value="${courseText}">
+            <label for="relayschool-course-${relayStudentCount}-${courseKey}" data-kor="${course.kor}" data-eng="${course.eng}">${courseText}</label>
+        </div>
+    `;
+    }).join('');
     
-    if (relayCoursesData) {
-        // courseData.js의 convertRelayData 함수가 반환하는 구조에 맞춰 처리
-        // relayCoursesData는 {1: {kor: '...', eng: '...', status: 'ON/OFF'}, ...} 형태
-        
-        const availableCourses = Object.keys(relayCoursesData).filter(key => 
-            relayCoursesData[key].status === 'ON'
-        );
-        
-        const closedCourses = Object.keys(relayCoursesData).filter(key => 
-            relayCoursesData[key].status === 'OFF'
-        );
-        
-        // 선택 가능한 과정 체크박스 생성
-        courseCheckboxes = availableCourses.map((courseKey) => {
-            const course = relayCoursesData[courseKey];
-            const courseText = course[currentLang];
-            return `
-            <div class="psac-checkbox-item">
-                <input type="checkbox" id="relayschool-course-${relayStudentCount}-${courseKey}" name="relayschool-student-${relayStudentCount}-courses" value="${courseText}">
-                <label for="relayschool-course-${relayStudentCount}-${courseKey}" data-kor="${course.kor}" data-eng="${course.eng}">${courseText}</label>
-            </div>
-        `;
-        }).join('');
-        
-        // 마감된 과정 표시 (선택 불가)
-        passedCourseItems = closedCourses.map((courseKey) => {
-            const course = relayCoursesData[courseKey];
-            const courseText = course[currentLang];
-            return `
-            <div class="psac-checkbox-item psac-checkbox-disabled">
-                <input type="checkbox" id="relayschool-passed-${relayStudentCount}-${courseKey}" disabled>
-                <label for="relayschool-passed-${relayStudentCount}-${courseKey}" class="disabled-label" data-kor="${course.kor}" data-eng="${course.eng}">${courseText}</label>
-            </div>
-        `;
-        }).join('');
-    }
+    // Relay School 마감 과정 표시 (선택 불가)
+    const passedCourseItems = Object.keys(relayCoursesDataPassed).map((courseKey) => {
+        const course = relayCoursesDataPassed[courseKey];
+        const courseText = course[currentLang];
+        return `
+        <div class="psac-checkbox-item psac-checkbox-disabled">
+            <input type="checkbox" id="relayschool-passed-${relayStudentCount}-${courseKey}" disabled>
+            <label for="relayschool-passed-${relayStudentCount}-${courseKey}" class="disabled-label" data-kor="${course.kor}" data-eng="${course.eng}">${courseText}</label>
+        </div>
+    `;
+    }).join('');
     
     studentDiv.innerHTML = `
         <div class="ac-form-student-header">
@@ -639,14 +559,12 @@ function addRelayschoolStudent() {
             </div>
         </div>
         
-        ${passedCourseItems ? `
         <div class="ac-form-group">
             <label class="ac-form-label" data-kor='마감 과정' data-eng='Passed Courses'>마감 과정</label>
             <div class="psac-checkbox-group">
                 ${passedCourseItems}
             </div>
         </div>
-        ` : ''}
     `;
     
     container.appendChild(studentDiv);
@@ -793,18 +711,13 @@ async function submitRelayschoolForm(e) {
 function updatePsacCourseLabels() {
     const currentLang = getCurrentLanguage();
     
-    if (!psacCoursesData || !psacCoursesData.courses) {
-        return;
-    }
-    
     // 모든 PSAC 과정 체크박스 라벨 업데이트
-    Object.keys(psacCoursesData.courses).forEach(courseKey => {
-        const course = psacCoursesData.courses[courseKey];
+    Object.keys(psacCourses).forEach(courseKey => {
+        const course = psacCourses[courseKey];
         const labels = document.querySelectorAll(`label[for*="psac-course"][for*="-${courseKey}"]`);
         
         labels.forEach(label => {
-            const tooltipText = course[`tooltip${currentLang === 'kor' ? 'KR' : 'EN'}`] || '';
-            label.textContent = course[currentLang] + tooltipText;
+            label.textContent = course[currentLang];
         });
     });
 }
@@ -813,23 +726,22 @@ function updatePsacCourseLabels() {
 function updateRelayCoursesLabels() {
     const currentLang = getCurrentLanguage();
     
-    if (!relayCoursesData) {
-        return;
-    }
-    
-    // 모든 Relay School 과정 체크박스 라벨 업데이트
+    // 모든 Relay School 과정 체크박스 라벨 업데이트 (선택 가능한 과정)
     Object.keys(relayCoursesData).forEach(courseKey => {
         const course = relayCoursesData[courseKey];
+        const labels = document.querySelectorAll(`label[for*="relayschool-course"][for*="-${courseKey}"]`);
         
-        // 선택 가능한 과정 업데이트
-        const activeLabels = document.querySelectorAll(`label[for*="relayschool-course"][for*="-${courseKey}"]`);
-        activeLabels.forEach(label => {
+        labels.forEach(label => {
             label.textContent = course[currentLang];
         });
+    });
+    
+    // 모든 Relay School 마감 과정 체크박스 라벨 업데이트
+    Object.keys(relayCoursesDataPassed).forEach(courseKey => {
+        const course = relayCoursesDataPassed[courseKey];
+        const labels = document.querySelectorAll(`label[for*="relayschool-passed"][for*="-${courseKey}"]`);
         
-        // 마감된 과정 업데이트
-        const passedLabels = document.querySelectorAll(`label[for*="relayschool-passed"][for*="-${courseKey}"]`);
-        passedLabels.forEach(label => {
+        labels.forEach(label => {
             label.textContent = course[currentLang];
         });
     });

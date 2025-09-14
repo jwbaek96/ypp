@@ -116,7 +116,9 @@ function convertRelayData(sheetData) {
         converted[id] = {
             kor: course.nameKR,
             eng: course.nameEN,
-            status: course.status
+            status: course.status || 'ON', // 기본값은 'ON'
+            tooltipKR: getTooltipByStatus(course.status, 'KR'),
+            tooltipEN: getTooltipByStatus(course.status, 'EN')
         };
     });
 

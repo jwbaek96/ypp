@@ -100,9 +100,9 @@
         /* =========== Data List Styles =========== */
         .data-toolbar {display: flex;justify-content: space-between;align-items: center;margin-bottom: 1.5rem;}
         .toolbar-left,
-        .toolbar-right {display: flex;gap: 1rem;align-items: center;}
+        .toolbar-right {display: flex;gap: .5rem;align-items: center;}
         .toolbar-left{gap: .2rem;}
-        .btn {padding: 0.5rem 1rem;border: none;border-radius: 6px;cursor: pointer;font-size: 0.9rem;}
+        .btn {padding: 0.4rem;border: none;border-radius: 6px;cursor: pointer;font-size: 0.8rem;}
         .btn-sm {padding: 0.25rem 0.5rem;font-size: 0.8rem;margin: 0 0.125rem;}
         .btn-sm:hover {background-color: #e2e6ea;}
 
@@ -698,17 +698,14 @@
                             </select>
                         </div>
                         <div class="toolbar-right">
-                            <button class="btn btn-secondary" id="btn-curriculum" style="display: none;">
-                                 교육과정 관리(준비중)
-                            </button>
                             <!-- <button class="btn btn-success" id="btn-excel-download">
                                 <i class="fas fa-file-excel"></i> 엑셀 다운로드
                             </button> -->
                             <button class="btn btn-primary" id="btn-add">
-                                <i class="fas fa-plus"></i> 새로 추가
+                                <i class="fas fa-plus"></i>
                             </button>
                             <button class="btn btn-danger" id="btn-delete-selected" disabled>
-                                <i class="fas fa-trash"></i> 선택 삭제
+                                <i class="fas fa-trash"></i>
                             </button>
                         </div>
                     </div>
@@ -813,7 +810,35 @@
             </div>
         </div>
     </div>
+
+    <!-- 신청과목 관리 모달 -->
+    <div id="curriculumModal" class="modal">
+        <div class="modal-content" style="width: 95%; height: 90vh; max-width: 1200px;">
+            <div class="modal-header">
+                <h2 class="modal-title">신청과목 관리</h2>
+                <button class="modal-close" onclick="closeCurriculumModal()">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 0;">
+                <iframe id="curriculumIframe" 
+                        src="" 
+                        style="width: 100%; height: 100%; border: none;"
+                        title="신청과목 관리">
+                </iframe>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 <!--  -->
+<script>
+// 전역 함수로 모달 닫기 함수 정의
+function closeCurriculumModal() {
+    const modal = document.getElementById('curriculumModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+</script>
 <script src="./admin-page.js"></script>

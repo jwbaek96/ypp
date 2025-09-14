@@ -57,9 +57,9 @@
         .header-clock {display: flex;margin-bottom: 0px;padding: 10px 0;}
         .clock-widget { background-color: #fff;color: #000;border-radius: 15px;padding: 15px 20px;min-width: 200px;}
         .clock-time {font-size: 5rem;font-weight: 400;margin-bottom: 5px;letter-spacing: 2px;}
-        .clock-period {font-size: 2rem;margin-left: 8px;}
-        .clock-date {font-size: 1.5rem;margin-top: 1rem}
-        .nav-title{font-size: 1.2rem;margin-bottom: 12px; display: none;}
+        .clock-period {font-size: 2.5rem;margin-left: 8px;}
+        .clock-date {font-size: 1.7rem;margin-top: 1rem}
+        .nav-title{font-size: 1.2rem;margin-bottom: 12px; display: block;}
         .nav-name{font-size: 1.25rem; font-weight: 400;margin-bottom: 1rem;}
         .nav-info{text-align: right;}
         .nav-count{font-size: 1.25rem;}
@@ -89,22 +89,22 @@
             </div>
         </header>
         <section class="nav-container">
-            <!--  -->
+            <!-- 웹사이트 관리 -->
             <nav class="">
+                <div class="nav-title">웹사이트 관리</div>
                 <ul>
                     <li data-nav="faq">
-                        <div class="nav-name">웹 데이터 편집</div>
-                        <div class="nav-info">
-                            <p class="nav-text">관리영역 ➡️ 회사연혁, 프로젝트테이블[원자력/화력발전/변전소/미군기지], 자주 묻는 질문</p>
-                        </div>
+                        <div class="nav-name" style="margin-bottom: 0;">회사연혁<br><br>프로젝트 테이블(원자력/화력발전/변전소/미군기지)<br><br>자주 묻는 질문</div>
                     </li>
                 </ul>
             </nav>
-            <!--  -->
-            <div style="background-color: #00000023; width: 100%;height: 1px; margin: 0 0 24px 0;"></div>
             <!-- 아카데미 -->
             <nav class="">
-                <div class="nav-title">아카데미</div>
+                <div class="nav-title">아카데미 
+                    <button style="color: #333; background: none; border: none; font-size: 1rem; cursor: pointer;" onclick="openCurriculumModal()">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                </div>
                 <ul>
                     <li data-nav="psac">
                         <div class="nav-name">PSAC</div>
@@ -161,6 +161,13 @@
                             <p class="nav-text"></p>
                         </div>
                     </li>
+                    <li data-nav="video">
+                        <div class="nav-name">비디오(준비중)</div>
+                        <div class="nav-info">
+                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
+                            <p class="nav-text"></p>
+                        </div>
+                    </li>
                 </ul>
             </nav>
             <!-- 게시판 -->
@@ -204,6 +211,8 @@
                 </ul>
             </nav>
             
+            
+            <!--  -->
             <!--  -->
             <div style="background-color: #00000023; width: 100%;height: 1px; margin: 0 0 24px 0;"></div>
             </nav>
@@ -225,7 +234,92 @@
         <section class="links">
             <a href="/" target="_blank"><img src="/assets/images/favicon/apple-icon-76x76.png" alt="" srcset=""></a>
         </section>
+
+        <!-- FAQ 관리 모달 -->
+        <div id="faqModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4);">
+            <div class="modal-content" style="background-color: #fefefe; margin: 2% auto; padding: 0; border: none; width: 95%; height: 95%; border-radius: 10px; position: relative;">
+                <div class="modal-header" style="height: 30px">
+                    <button class="modal-close" onclick="closeFaqModal()" style="position: absolute; right: 15px; top: 7px; background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">×</button>
+                </div>
+                <div class="modal-body" style="padding: 0; height: calc(100% - 45px);">
+                    <iframe style="width: 100%; height: 100%; border: none;" src="https://docs.google.com/spreadsheets/d/1YZKUJNqCf63gxzfnoBnWugUEi04dYUZ8LeTdtENfg4k/edit?usp=sharing"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- 커리큘럼 관리 모달 -->
+        <div id="curriculumModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4);">
+            <div class="modal-content" style="background-color: #fefefe; margin: 2% auto; padding: 0; border: none; width: 95%; height: 90vh; max-width: 1200px; border-radius: 10px; position: relative;">
+                <div class="modal-header" style="padding: 15px 20px; border-bottom: 1px solid #ddd;">
+                    <h2 class="modal-title" style="margin: 0; font-size: 1.2rem;">아카데미 관리(현재 제출폼 과목 관리만 가능합니다.)</h2>
+                    <button class="modal-close" onclick="closeCurriculumModal()" style="position: absolute; right: 15px; top: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">×</button>
+                </div>
+                <div class="modal-body" style="padding: 0; height: calc(100% - 60px);">
+                    <iframe id="curriculumIframe" 
+                            src="" 
+                            style="width: 100%; height: 100%; border: none;"
+                            title="아카데미 관리">
+                    </iframe>
+                </div>
+            </div>
+        </div>
 </body>
 </html>
 <!--  -->
+<script>
+// FAQ 모달 열기
+function openFaqModal() {
+    const modal = document.getElementById('faqModal');
+    if (modal) {
+        modal.style.display = 'block';
+        
+        // 실제 구글시트 URL로 설정 (여기에 실제 시트 URL을 넣으세요)
+        const faqSheetUrl = "https://docs.google.com/spreadsheets/d/1abcd.../edit#gid=0";
+        document.getElementById('faqIframe').src = faqSheetUrl;
+    }
+}
+
+// FAQ 모달 닫기
+function closeFaqModal() {
+    const modal = document.getElementById('faqModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// 커리큘럼 관리 모달 열기
+function openCurriculumModal() {
+    const modal = document.getElementById('curriculumModal');
+    const iframe = document.getElementById('curriculumIframe');
+    
+    if (modal && iframe) {
+        // PSAC 커리큘럼 관리 시트 URL 설정
+        const curriculumSheetUrl = "https://docs.google.com/spreadsheets/d/1VloYSdnC53L4cUvNTifIoQxKC6YP3IWvHzeZRQsYdGk/edit#gid=0";
+        iframe.src = curriculumSheetUrl;
+        
+        modal.style.display = 'block';
+    }
+}
+
+// 커리큘럼 관리 모달 닫기
+function closeCurriculumModal() {
+    const modal = document.getElementById('curriculumModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// 모달 외부 클릭시 닫기
+window.onclick = function(event) {
+    const faqModal = document.getElementById('faqModal');
+    const curriculumModal = document.getElementById('curriculumModal');
+    
+    if (event.target === faqModal) {
+        closeFaqModal();
+    }
+    if (event.target === curriculumModal) {
+        closeCurriculumModal();
+    }
+}
+</script>
 <script src="./admin-index.js"></script>

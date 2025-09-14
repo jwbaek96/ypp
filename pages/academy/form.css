@@ -164,10 +164,6 @@
     margin-bottom: 10px;
 }
 
-
-#relayschool-form .ac-form-student-section > .ac-form-group:last-child {
-    display: none;
-}
 /* ==========================================================================
    PSAC 전용 스타일 (psac-)
    ========================================================================== */
@@ -329,7 +325,7 @@
 }
 /* 마감된 과정 스타일 */
 .psac-checkbox-disabled {
-    opacity: 0.6;
+    opacity: 0.35;
 }
 
 .psac-checkbox-disabled input[type="checkbox"] {

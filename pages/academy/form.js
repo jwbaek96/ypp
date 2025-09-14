@@ -155,6 +155,60 @@ function hideLoadingState() {
     }
 }
 
+// 폼 제출 로딩 상태 표시
+function showSubmitLoadingState(message = '신청서를 제출하는 중입니다...') {
+    const body = document.body;
+    
+    // 모든 제출 버튼 비활성화
+    const submitButtons = document.querySelectorAll('button[type="submit"], input[type="submit"]');
+    submitButtons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = '0.6';
+        btn.style.cursor = 'not-allowed';
+    });
+    
+    const loadingDiv = document.createElement('div');
+    loadingDiv.id = 'form-submit-loading';
+    loadingDiv.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        font-size: 18px;
+        color: #333;
+    `;
+    loadingDiv.innerHTML = `
+        <div style="text-align: center;">
+            <div style="margin-bottom: 10px; font-size: 24px;"><i class="fas fa-spinner fa-spin"></i></div>
+            <div>${message}</div>
+            <div style="margin-top: 10px; font-size: 14px; color: #666;">잠시만 기다려주세요...</div>
+        </div>
+    `;
+    body.appendChild(loadingDiv);
+}
+
+// 폼 제출 로딩 상태 숨김
+function hideSubmitLoadingState() {
+    const loadingDiv = document.getElementById('form-submit-loading');
+    if (loadingDiv) {
+        loadingDiv.remove();
+    }
+    
+    // 모든 제출 버튼 다시 활성화
+    const submitButtons = document.querySelectorAll('button[type="submit"], input[type="submit"]');
+    submitButtons.forEach(btn => {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
+    });
+}
+
 // 메시지 표시 함수
 function showMessage(message, type, containerId) {
     const messageDiv = document.getElementById(containerId);
@@ -505,28 +559,31 @@ function validatePsacForm(formData) {
 async function submitPsacForm(e) {
     e.preventDefault();
     
-    toggleLoading(true, 'psac-loading');
+    // 폼 제출 로딩 상태 표시 (중복 제출 방지)
+    showSubmitLoadingState('Processing...');
     
     try {
         const formData = collectPsacFormData();
         
         if (!validatePsacForm(formData)) {
+            hideSubmitLoadingState();
             return;
         }
         
         // CORS 우회를 위한 iframe 방식 사용
         await submitFormData(formData);
         
-        alert(`신청이 완료되었습니다. (수강자 ${formData.students.length}명) \nYour application has been completed. (Number of participants: ${formData.students.length})`, 'success','psac-message');
+        // 로딩 상태를 유지한 채로 성공 메시지 표시
+        hideSubmitLoadingState();
+        alert(`신청이 완료되었습니다. (수강자 ${formData.students.length}명) \nYour application has been completed. (Number of participants: ${formData.students.length})`);
         
         // alert 확인 후 페이지 리로드
         location.reload();
         
     } catch (error) {
         console.error('Error:', error);
+        hideSubmitLoadingState();
         showMessage('서버 연결에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
-    } finally {
-        toggleLoading(false, 'psac-loading');
     }
 }
 
@@ -552,45 +609,53 @@ function addRelayschoolStudent() {
     
     const currentLang = getCurrentLanguage();
     
-    // 동적으로 로드된 Relay School 과정 데이터 사용
+    // 동적으로 로드된 Relay School 과정 데이터 사용 - 모든 과정을 함께 표시
     let courseCheckboxes = '';
-    let passedCourseItems = '';
     
     if (relayCoursesData) {
-        // courseData.js의 convertRelayData 함수가 반환하는 구조에 맞춰 처리
         // relayCoursesData는 {1: {kor: '...', eng: '...', status: 'ON/OFF'}, ...} 형태
+        const courseKeys = Object.keys(relayCoursesData);
         
-        const availableCourses = Object.keys(relayCoursesData).filter(key => 
-            relayCoursesData[key].status === 'ON'
-        );
-        
-        const closedCourses = Object.keys(relayCoursesData).filter(key => 
-            relayCoursesData[key].status === 'OFF'
-        );
-        
-        // 선택 가능한 과정 체크박스 생성
-        courseCheckboxes = availableCourses.map((courseKey) => {
-            const course = relayCoursesData[courseKey];
-            const courseText = course[currentLang];
-            return `
-            <div class="psac-checkbox-item">
-                <input type="checkbox" id="relayschool-course-${relayStudentCount}-${courseKey}" name="relayschool-student-${relayStudentCount}-courses" value="${courseText}">
-                <label for="relayschool-course-${relayStudentCount}-${courseKey}" data-kor="${course.kor}" data-eng="${course.eng}">${courseText}</label>
+        if (courseKeys.length === 0) {
+            courseCheckboxes = '<p>사용 가능한 교육과정이 없습니다.</p>';
+        } else {
+            courseCheckboxes = courseKeys.map((courseKey) => {
+                const course = relayCoursesData[courseKey];
+                const courseText = currentLang === 'kor' ? 
+                    `${course.kor}${course.tooltipKR || ''}` : 
+                    `${course.eng}${course.tooltipEN || ''}`;
+                const isClosed = course.status === 'OFF' || course.status === '마감';
+                
+                // 코스 자체의 툴팁 가져오기 (상태에 따른 스타일링 포함)
+                const courseTooltip = course.tooltip || '';
+                
+                // title 속성용 툴팁
+                let titleTooltip = '';
+                if (isClosed) {
+                    titleTooltip = currentLang === 'kor' ? '해당 항목은 접수 마감되었습니다.' : 'This course is closed due to exceeding capacity.';
+                } else if (course.status === '마감임박') {
+                    titleTooltip = currentLang === 'kor' ? '마감임박 - 빠른 신청 바랍니다.' : 'Almost full - Please apply quickly.';
+                } else if (course.status === '마감주의') {
+                    titleTooltip = currentLang === 'kor' ? '마감주의 - 신청을 서둘러 주세요.' : 'Almost full - Please hurry up with your application.';
+                }
+                
+                return `
+            <div class="psac-checkbox-item ${isClosed ? 'psac-checkbox-disabled' : ''}">
+                <input type="checkbox" 
+                       id="relayschool-course-${relayStudentCount}-${courseKey}" 
+                       name="relayschool-student-${relayStudentCount}-courses" 
+                       value="${courseText}"
+                       ${isClosed ? 'disabled' : ''}>
+                <label for="relayschool-course-${relayStudentCount}-${courseKey}" 
+                       data-kor="${course.kor}${course.tooltipKR || ''}" 
+                       data-eng="${course.eng}${course.tooltipEN || ''}"
+                       ${titleTooltip ? `title="${titleTooltip}"` : ''}>${courseText}</label>
             </div>
         `;
-        }).join('');
-        
-        // 마감된 과정 표시 (선택 불가)
-        passedCourseItems = closedCourses.map((courseKey) => {
-            const course = relayCoursesData[courseKey];
-            const courseText = course[currentLang];
-            return `
-            <div class="psac-checkbox-item psac-checkbox-disabled">
-                <input type="checkbox" id="relayschool-passed-${relayStudentCount}-${courseKey}" disabled>
-                <label for="relayschool-passed-${relayStudentCount}-${courseKey}" class="disabled-label" data-kor="${course.kor}" data-eng="${course.eng}">${courseText}</label>
-            </div>
-        `;
-        }).join('');
+            }).join('');
+        }
+    } else {
+        courseCheckboxes = '<p>교육과정 데이터를 불러오는 중입니다...</p>';
     }
     
     studentDiv.innerHTML = `
@@ -638,15 +703,6 @@ function addRelayschoolStudent() {
                 ${courseCheckboxes}
             </div>
         </div>
-        
-        ${passedCourseItems ? `
-        <div class="ac-form-group">
-            <label class="ac-form-label" data-kor='마감 과정' data-eng='Passed Courses'>마감 과정</label>
-            <div class="psac-checkbox-group">
-                ${passedCourseItems}
-            </div>
-        </div>
-        ` : ''}
     `;
     
     container.appendChild(studentDiv);
@@ -765,27 +821,35 @@ function validateRelayschoolForm(formData) {
 // Relay School 폼 제출 처리
 async function submitRelayschoolForm(e) {
     e.preventDefault();
-    // alert('1. 함수 진입');
-    toggleLoading(true, 'rs-loading');
+    
+    // 폼 제출 로딩 상태 표시 (중복 제출 방지)
+    showSubmitLoadingState('Processing...');
 
     try {
         const formData = collectRelayschoolFormData();
-            if (formData.students.length > 0) {
-                console.log('첫번째 수강자:', formData.students[0]);
-            }
+        
+        if (!validateRelayschoolForm(formData)) {
+            hideSubmitLoadingState();
+            return;
+        }
+        
+        if (formData.students.length > 0) {
+            console.log('첫번째 수강자:', formData.students[0]);
+        }
 
         await submitFormData(formData);
 
-        alert(`신청이 완료되었습니다. (수강자 ${formData.students.length}명) \nYour application has been completed. (Number of participants: ${formData.students.length})`, 'success','rs-message');
+        // 로딩 상태를 유지한 채로 성공 메시지 표시
+        hideSubmitLoadingState();
+        alert(`신청이 완료되었습니다. (수강자 ${formData.students.length}명) \nYour application has been completed. (Number of participants: ${formData.students.length})`);
         
         // alert 확인 후 페이지 리로드
         location.reload();
 
     } catch (error) {
+        hideSubmitLoadingState();
         showMessage('신청 처리 중 오류가 발생했습니다.', 'error', 'rs-message');
         console.error('Form submission error:', error);
-    } finally {
-        toggleLoading(false, 'rs-loading');
     }
 }
 
@@ -821,16 +885,28 @@ function updateRelayCoursesLabels() {
     Object.keys(relayCoursesData).forEach(courseKey => {
         const course = relayCoursesData[courseKey];
         
-        // 선택 가능한 과정 업데이트
-        const activeLabels = document.querySelectorAll(`label[for*="relayschool-course"][for*="-${courseKey}"]`);
-        activeLabels.forEach(label => {
-            label.textContent = course[currentLang];
-        });
+        // 상태에 따른 표시 텍스트 추가
+        let statusDisplay = '';
         
-        // 마감된 과정 업데이트
-        const passedLabels = document.querySelectorAll(`label[for*="relayschool-passed"][for*="-${courseKey}"]`);
-        passedLabels.forEach(label => {
-            label.textContent = course[currentLang];
+        switch(course.status) {
+            case 'OFF':
+            case '마감':
+                statusDisplay = currentLang === 'kor' ? ' (마감)' : ' (Closed)';
+                break;
+            case '마감임박':
+                statusDisplay = currentLang === 'kor' ? ' (마감임박)' : ' (Almost Full)';
+                break;
+            case '마감주의':
+                statusDisplay = currentLang === 'kor' ? ' (마감주의)' : ' (Almost Full)';
+                break;
+            default:
+                statusDisplay = '';
+        }
+        
+        // 모든 릴레이스쿨 과정 라벨 업데이트 (통합된 형태)
+        const labels = document.querySelectorAll(`label[for*="relayschool-course"][for*="-${courseKey}"]`);
+        labels.forEach(label => {
+            label.textContent = course[currentLang] + statusDisplay;
         });
     });
 }

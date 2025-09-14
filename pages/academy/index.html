@@ -2569,7 +2569,6 @@
                                 <!-- 로딩 표시 -->
                                 <div id="loading-indicator" style="display: none; text-align: center; padding: 10dvh 2rem; color: #4a90e2;">
                                     <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                                    <div style="font-size: 1.1rem; font-weight: 500;">조회중입니다...</div>
                                 </div>
                                 
                                 <div id="search-results-list" class="results-list">
@@ -3664,12 +3663,6 @@ function showEditModal(item, pageType) {
 function generateEditForm(item, pageType) {
     let formHTML = `
         <div class="edit-form-section-title">신청 정보</div>
-        
-        <div class="edit-form-group">
-            <label>신청번호</label>
-            <input type="text" name="number" value="${item.number || ''}" class="edit-form-readonly" readonly>
-        </div>
-        
         <div class="edit-form-group">
             <label>신청일시</label>
             <input type="text" name="applicationDate" value="${item.applicationDate || ''}" class="edit-form-readonly" readonly>
@@ -3681,11 +3674,6 @@ function generateEditForm(item, pageType) {
         <div class="edit-form-group">
             <label>과정명</label>
             <input type="text" name="courseName" value="${item.courseName || ''}" class="edit-form-readonly" readonly>
-        </div>
-        
-        <div class="edit-form-group">
-            <label>교육일정</label>
-            <textarea name="educationSchedule" readonly class="edit-form-readonly">${item.educationSchedule || ''}</textarea>
         </div>`;
     }
     

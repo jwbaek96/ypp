@@ -94,7 +94,7 @@ function convertPsacData(sheetData) {
         };
 
         // 마감된 과정 처리
-        if (course.status === 'OFF' || course.status === '마감') {
+        if (course.status === 'OFF' || course.status === '접수마감') {
             closedCourses[id] = {
                 tooltip: "해당 항목은 접수 마감되었습니다. \n(This course is closed due to exceeding capacity.)"
             };
@@ -131,8 +131,9 @@ function convertRelayData(sheetData) {
 function getTooltipByStatus(status, language) {
     switch(status) {
         case 'OFF':
-        case '마감':
             return language === 'KR' ? "<br><span>(마감)</span>" : "<br><span>(closed)</span>";
+        case '접수마감':
+            return language === 'KR' ? "<br><span>(접수마감)</span>" : "<br><span>(closed)</span>";
         case '마감임박':
             return language === 'KR' ? "<br><span style='color:red'>(*마감임박)</span>" : "<br><span style='color:red'>(*almost full)</span>";
         case '마감주의':

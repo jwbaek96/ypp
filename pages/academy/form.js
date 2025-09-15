@@ -624,7 +624,7 @@ function addRelayschoolStudent() {
                 const courseText = currentLang === 'kor' ? 
                     `${course.kor}${course.tooltipKR || ''}` : 
                     `${course.eng}${course.tooltipEN || ''}`;
-                const isClosed = course.status === 'OFF' || course.status === '마감';
+                const isClosed = course.status === 'OFF' || course.status === '접수마감';
                 
                 // 코스 자체의 툴팁 가져오기 (상태에 따른 스타일링 포함)
                 const courseTooltip = course.tooltip || '';
@@ -890,8 +890,10 @@ function updateRelayCoursesLabels() {
         
         switch(course.status) {
             case 'OFF':
-            case '마감':
                 statusDisplay = currentLang === 'kor' ? ' (마감)' : ' (Closed)';
+                break;
+            case '접수마감':
+                statusDisplay = currentLang === 'kor' ? ' (접수마감)' : ' (Closed)';
                 break;
             case '마감임박':
                 statusDisplay = currentLang === 'kor' ? ' (마감임박)' : ' (Almost Full)';

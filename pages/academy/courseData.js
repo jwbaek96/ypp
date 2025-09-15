@@ -131,13 +131,13 @@ function convertRelayData(sheetData) {
 function getTooltipByStatus(status, language) {
     switch(status) {
         case 'OFF':
-            return language === 'KR' ? "<br><span>(마감)</span>" : "<br><span>(closed)</span>";
+            return language === 'KR' ? "<span class='form-course-list form-course-list-off'>마감</span>" : "<span class='form-course-list form-course-list-off'>Closed</span>";
         case '접수마감':
-            return language === 'KR' ? "<br><span>(접수마감)</span>" : "<br><span>(closed)</span>";
+            return language === 'KR' ? "<span class='form-course-list form-course-list-접수마감'>접수마감</span>" : "<span class='form-course-list form-course-list-접수마감'>Closed</span>";
         case '마감임박':
-            return language === 'KR' ? "<br><span style='color:red'>(*마감임박)</span>" : "<br><span style='color:red'>(*almost full)</span>";
+            return language === 'KR' ? "<span class='form-course-list form-course-list-마감임박'>마감임박</span>" : "<span class='form-course-list form-course-list-마감임박'>Almost Full</span>";
         case '마감주의':
-            return language === 'KR' ? "<br><span style='color:#0088ff'>(*마감주의)</span>" : "<br><span style='color:#0088ff'>(*almost full)</span>";
+            return language === 'KR' ? "<span class='form-course-list form-course-list-마감주의'>마감주의</span>" : "<span class='form-course-list form-course-list-마감주의'>Almost Full</span>";
         default:
             return "";
     }

@@ -170,7 +170,8 @@
 
 .psac-checkbox-group {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+    /* grid-template-columns: 1fr; */
     gap: 10px;
     margin-top: 10px;
 }
@@ -179,7 +180,7 @@
     display: flex;
     align-items: center;
     padding: 10px;
-    background: #f8f9fa;
+    background: #ffffff;
     border-radius: 5px;
     border: 1px solid #e9ecef;
 }
@@ -188,7 +189,7 @@
     margin-right: 10px;
     width: auto;
 }
-
+.psac-checkbox-item label {width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 5px;}
 .psac-course-list {
     background: #f8f9fa;
     padding: 15px;
@@ -196,6 +197,19 @@
     border: 1px solid #e9ecef;
     margin-top: 10px;
 }
+.form-course-list{
+    min-width: 80px;
+    padding: 3px 6px;
+    border-radius: 10px;
+    background-color: #155724;
+    font-size: .9rem;
+    vertical-align: middle;
+    text-align: center;
+}
+.form-course-list-off,
+.form-course-list-접수마감{background-color: #e6e6e6; color: #3d3d3d;}
+.form-course-list-마감주의{background-color: #ffcfc9; color: #c20248;}
+.form-course-list-마감임박{background-color: #bfe1f6; color: #0052eb;}
 
 .psac-course-list h4 {
     color: #1e3c72;

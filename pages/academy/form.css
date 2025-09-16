@@ -208,8 +208,8 @@
 }
 .form-course-list-off,
 .form-course-list-접수마감{background-color: #e6e6e6; color: #3d3d3d;}
-.form-course-list-마감주의{background-color: #ffcfc9; color: #c20248;}
-.form-course-list-마감임박{background-color: #bfe1f6; color: #0052eb;}
+.form-course-list-마감임박{background-color: #ffcfc9; color: #c20248;}
+.form-course-list-마감주의{background-color: #bfe1f6; color: #0052eb;}
 
 .psac-course-list h4 {
     color: #1e3c72;

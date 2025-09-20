@@ -1046,7 +1046,7 @@
 /* 이미지 컨테이너 섹션 */
 .academy-images-section {
     margin: 40px 0;
-    padding: 40px 0;
+    padding: 15px 0;
     background: #f8fafc;
 }
 
@@ -1056,7 +1056,8 @@
     justify-content: center;
     align-items: center;
     overflow-x: auto;
-    padding: 0 20px;
+    padding: 10px 20px;
+    scrollbar-width: thin;
 }
 
 .academy-image-item {
@@ -1067,11 +1068,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-}
-
-.academy-image-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .academy-image-item img {
@@ -1365,7 +1361,7 @@
     /* 이미지 컨테이너 반응형 */
     .academy-images-container {
         gap: 15px;
-        padding: 0 15px;
+        padding: 10px 15px;
     }
     
     .academy-image-item {
@@ -1398,9 +1394,14 @@
 }
 
 @media (max-width: 480px) {
+    #intro .stat-item {padding: 20px 10px; box-shadow: none;}
+    #intro .stat-item:first-child {border-radius: 0; border-bottom: 1px solid #eee;}
+    #intro .stat-number {font-size: 2rem;}
+    .academy-vision-section .vision-steps{gap: 5px;}
+    .vision-step{padding: 20px 10px; box-shadow: none; border-radius: 0; border-bottom: 1px solid #eee;}
     .academy-images-container {
+        justify-content: normal;
         gap: 10px;
-        padding: 0 10px;
     }
     
     .academy-image-item {
@@ -1412,8 +1413,13 @@
         padding: 15px;
     }
     
+    .history-timeline {
+        padding-left: 0;
+    }
+    
     .strength-item {
         padding: 20px;
+        flex: 0 0 100%
     }
     
     /* 모바일 모달 스타일 */

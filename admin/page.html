@@ -640,14 +640,6 @@
         .lock-toggle.active::after {
             transform: translateX(26px);
         }
-        
-        /* =========== Responsive =========== */
-        @media (max-width: 768px) {
-            .toolbar-left { flex-direction: column; gap: 0.5rem; }
-        }
-        
-        @media (min-width: 769px) {
-        }
     </style>
 </head>
 <body>
@@ -693,7 +685,7 @@
                             <button class="btn btn-secondary btn-sm" id="btn-category-filter" title="카테고리 필터" style="display: none;">
                                 모두보기
                             </button>
-                            <select class="btn btn-secondary btn-sm" id="course-filter-select" title="과목 필터" style="display: inline-block; margin-left: 8px;padding: 6px 12px; background-color: rgb(243 245 247); cursor: pointer; width: auto;">
+                            <select class="btn btn-secondary btn-sm" id="course-filter-select" title="과목 필터" style="display: inline-block; padding: 6px 12px; background-color: rgb(243 245 247); cursor: pointer; width: auto;">
                                 <option value="all">전체</option>
                             </select>
                         </div>

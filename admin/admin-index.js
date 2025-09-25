@@ -81,6 +81,7 @@ function updateNavCounts(data) {
         'qualification': data.galB,     // 유자격
         'inside': data.galC,           // 인사이드
         'academy': data.galD,          // 아카데미
+        'video': data.galVideo,          // 비디오
         'news': data.boardNews,        // 보도자료
         'psac': data.applyPSAC,        // PSAC
         'relay-school': data.applyRelay, // Relay School

@@ -21,6 +21,10 @@ const ORIGINAL_SHEETS = {
     id: '1gY5o_fHrXxAShXdSzqhyZBdLskbsAEwIdihci0UeU8c',
     name: '시트1'
   },
+  SHEET_GAL_VIDEO: {
+    id: '1BopJLpq_yYbpJDTFtUxPRQKW2p5A1S9FE-wuXN32ph4',
+    name: '시트1'
+  },
   SHEET_BOARD_NEWS: {
     id: '1ZEtN7--25jDh_fY4l_KLNs18mNJx3vmQEsgunvD69jo',
     name: '시트1'
@@ -56,6 +60,7 @@ const SHEET_GAL_A = '갤러리 인허가'; // 대시보드 시트의 IMPORTRANGE
 const SHEET_GAL_B = '갤러리 유자격';
 const SHEET_GAL_C = '갤러리 인사이드';
 const SHEET_GAL_F = '갤러리 아카데미';
+const SHEET_GAL_VIDEO = '갤러리 비디오';
 const SHEET_BOARD_NEWS = '게시판 보도자료';
 const SHEET_APPLY_P = '신청 PSAC';
 const SHEET_APPLY_R = '신청 RelaySchool';
@@ -293,6 +298,12 @@ function doGet(e) {
         response.message = '갤러리 아카데미 데이터 조회 성공';
         response.success = true;
         break;
+
+      case 'SHEET_GAL_VIDEO':
+        response.data = getData(SHEET_GAL_VIDEO);
+        response.message = '갤러리 비디오 데이터 조회 성공';
+        response.success = true;
+        break;
         
       case 'SHEET_BOARD_NEWS':
         response.data = getData(SHEET_BOARD_NEWS);
@@ -404,19 +415,14 @@ function getDashboardData(sheet) {
         galB: sheet.getRange('C3').getValue() || 0,    // 갤러리 유자격  
         galC: sheet.getRange('D3').getValue() || 0,    // 갤러리 인사이드
         galD: sheet.getRange('E3').getValue() || 0,    // 갤러리 아카데미
-        boardNews: sheet.getRange('F3').getValue() || 0,     // 게시판 보도자료
-        applyPSAC: sheet.getRange('G3').getValue() || 0,     // 신청 PSAC
-        applyRelay: sheet.getRange('H3').getValue() || 0,    // 신청 RelaySchool
-        applyRelaySpecial: sheet.getRange('I3').getValue() || 0,    // 신청 RelaySchool Special
-        helpKR: sheet.getRange('J3').getValue() || 0,        // 문의 KOR
-        helpEN: sheet.getRange('K3').getValue() || 0,        // 문의 ENG
-        report: sheet.getRange('L3').getValue() || 0         // 신고
-      // 추가 통계 데이터
-    //   monthlyStats: {
-    //     currentMonth: sheet.getRange('D2').getValue() || 0,
-    //     previousMonth: sheet.getRange('D3').getValue() || 0,
-    //     growth: sheet.getRange('D4').getValue() || 0
-    //   },
+        galVideo: sheet.getRange('F3').getValue() || 0,    // 갤러리 비디
+        boardNews: sheet.getRange('G3').getValue() || 0,     // 게시판 보도자료
+        applyPSAC: sheet.getRange('H3').getValue() || 0,     // 신청 PSAC
+        applyRelay: sheet.getRange('I3').getValue() || 0,    // 신청 RelaySchool
+        applyRelaySpecial: sheet.getRange('J3').getValue() || 0,    // 신청 RelaySchool Special
+        helpKR: sheet.getRange('K3').getValue() || 0,        // 문의 KOR
+        helpEN: sheet.getRange('L3').getValue() || 0,        // 문의 ENG
+        report: sheet.getRange('M3').getValue() || 0         // 신고
     };
     
     console.log(`DASHBOARD 데이터 조회 완료`);
@@ -543,6 +549,18 @@ function getCustomHeaders(sheetName) {
       textKR: 7,
       textEN: 8,
       image: 9
+    },
+    [SHEET_GAL_VIDEO]: { // 갤러리 비디오
+      id: 0,              // Submission ID
+      respondentId: 1,     // Respondent ID
+      submittedAt: 2,      // Submitted at
+      number: 3,           // 순번
+      state: 4,            // 상태
+      titleKR: 5,          // 제목(한글)
+      titleEN: 6,          // 제목(영문)
+      videoLink: 7,            // 비디오 링크
+      contentKR: 8,        // 내용(한글)
+      contentEN: 9         // 내용(영문)
     },
     
     [SHEET_BOARD_NEWS]: { // 게시판 보도자료
@@ -691,6 +709,7 @@ function getDataStartRow(sheetName) {
     [SHEET_GAL_B]: 2,        // 2행부터 데이터 시작 (헤더 2줄)
     [SHEET_GAL_C]: 2,        // 2행부터 데이터 시작
     [SHEET_GAL_F]: 2,        // 2행부터 데이터 시작
+    [SHEET_GAL_VIDEO]: 2,        // 2행부터 데이터 시작
     [SHEET_BOARD_NEWS]: 2,   // 2행부터 데이터 시작
     [SHEET_APPLY_P]: 2,      // 2행부터 데이터 시작
     [SHEET_APPLY_R]: 2,      // 2행부터 데이터 시작
@@ -716,6 +735,7 @@ function getAllStats() {
         qualified: getSheetStats(SHEET_GAL_B),
         inside: getSheetStats(SHEET_GAL_C),
         academy: getSheetStats(SHEET_GAL_F),
+        video: getSheetStats(SHEET_GAL_VIDEO),
         total: 0
       },
       board: {
@@ -738,7 +758,7 @@ function getAllStats() {
     
     // 합계 계산
     stats.galleries.total = stats.galleries.permit.count + stats.galleries.qualified.count + 
-                           stats.galleries.inside.count + stats.galleries.academy.count;
+                           stats.galleries.inside.count + stats.galleries.academy.count + stats.galleries.video.count;
     
     stats.applications.total = stats.applications.psac.count + stats.applications.relaySchool.count + stats.applications.relaySchoolSpecial.count;
     stats.inquiries.total = stats.inquiries.korean.count + stats.inquiries.english.count;
@@ -827,7 +847,7 @@ function addData(sheetName, data) {
  */
 function processFieldValue(value, key, sheetName) {
   // 갤러리 시트들 공통 처리
-  const gallerySheets = [SHEET_GAL_A, SHEET_GAL_B, SHEET_GAL_C, SHEET_GAL_F];
+  const gallerySheets = [SHEET_GAL_A, SHEET_GAL_B, SHEET_GAL_C, SHEET_GAL_F, SHEET_GAL_VIDEO];
   if (gallerySheets.includes(sheetName)) {
     return processGalleryField(value, key, sheetName);
   }
@@ -977,27 +997,6 @@ function formatDate(dateValue, format = 'date') {
   }
 }
 
-/**
- * 테스트용 함수 - 수동 실행으로 데이터 확인 가능
- */
-function testGetData() {
-  try {
-    console.log('=== 테스트 시작 ===');
-    
-    // 대시보드 데이터 테스트
-    const dashboardData = getData(SHEET_DASHBOARD);
-    console.log(`대시보드 데이터: ${dashboardData.length}개`);
-    
-    // 전체 통계 테스트
-    const stats = getAllStats();
-    console.log('전체 통계:', stats);
-    
-    console.log('=== 테스트 완료 ===');
-    
-  } catch (error) {
-    console.error('테스트 에러:', error);
-  }
-}
 
 /**
  * 단일 항목 삭제 함수 (오리지널 시트에서 삭제)
@@ -1383,6 +1382,7 @@ function getSheetNameByType(sheetType) {
     'SHEET_GAL_B': SHEET_GAL_B,
     'SHEET_GAL_C': SHEET_GAL_C,
     'SHEET_GAL_F': SHEET_GAL_F,
+    'SHEET_GAL_VIDEO': SHEET_GAL_VIDEO,
     'SHEET_BOARD_NEWS': SHEET_BOARD_NEWS,
     'SHEET_APPLY_P': SHEET_APPLY_P,
     'SHEET_APPLY_R': SHEET_APPLY_R,

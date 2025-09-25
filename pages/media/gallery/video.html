@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO 메타 태그 -->
-    <title>보도자료 - YPP</title>
-    <meta name="description" content="YPP 보도자료 - 최신 뉴스 및 언론 보도 자료">
-    <meta name="keywords" content="YPP, 보도자료, 뉴스, 언론보도, 미디어">
+    <title data-kor="비디오 갤러리 - YPP" data-eng="Video Gallery - YPP">비디오 갤러리 - YPP</title>
+    <meta name="description" content="YPP 비디오 갤러리">
+    <meta name="keywords" content="YPP, 비디오, 갤러리, 뉴스, 언론보도, 미디어">
     
     <!-- 파비콘 -->
     <link rel="icon" type="image/ico" href="../../../assets/images/favicon/favicon.ico">
@@ -35,12 +35,8 @@
         <section class="page-header">
             <div class="container">
                 <div class="page-header-content">
-                    <h1 class="page-title"
-                        data-eng="News"
-                        data-kor="소식">소식</h1>
-                    <p class="page-subtitle"
-                        data-eng="Latest YPP news and press releases"
-                        data-kor="YPP의 최신 소식과 언론 보도 자료">YPP의 최신 소식과 언론 보도 자료</p>
+                    <h1 class="page-title" data-kor="비디오 갤러리" data-eng="Video Gallery"></h1>
+                    <p class="page-subtitle">YPP의 최신 영상 소식 자료</p>
                 </div>
             </div>
         </section>
@@ -53,7 +49,9 @@
                     <span class="breadcrumb-separator">></span>
                     <span data-eng="Community"data-kor="커뮤니티">커뮤니티</span>
                     <span class="breadcrumb-separator">></span>
-                    <a href="./press.html" class="breadcrumb-current"data-eng="News"data-kor="소식"></a>
+                    <span data-eng="Gallery"data-kor="갤러리">갤러리</span>
+                    <span class="breadcrumb-separator">></span>
+                    <a href="./press.html" class="breadcrumb-current" data-kor="비디오갤러리" data-eng="Video Gallery"></a>
                 </nav>
             </div>
         </section>
@@ -61,14 +59,6 @@
         <!-- Content Section -->
         <section class="content-section">
             <div class="container">
-                <!-- <div class="content-header">
-                    <h2 class="content-title"
-                        data-eng="News"
-                        data-kor="보도자료">보도자료</h2>
-                    <p class="content-subtitle"
-                        data-eng="Introducing YPP's major activities and achievements through the media"
-                        data-kor="YPP의 주요 활동과 성과를 언론을 통해 소개합니다">YPP의 주요 활동과 성과를 언론을 통해 소개합니다</p>
-                </div> -->
 
                 <!-- Press Release List Section -->
                 <div id="press-list-section" class="press-list">
@@ -98,7 +88,7 @@
                 <!-- Press Article Detail Section -->
                 <div id="press-detail-section" class="press-article-detail hidden">
                     <div class="article-header">
-                        <button class="back-to-list" onclick="pressPageController.goBackToList()">
+                        <button class="back-to-list" onclick="videoPageController.goBackToList()">
                             <i class="fas fa-arrow-left"></i><span data-kor="목록으로 돌아가기" data-eng="Back to list">목록으로 돌아가기</span>
                         </button>
                     </div>
@@ -113,11 +103,11 @@
                     </article>
                     
                     <div class="article-navigation">
-                        <button class="nav-btn prev-article" onclick="pressPageController.navigateArticle(-1)">
-                            <span>이전 기사</span>
+                        <button class="nav-btn prev-article" onclick="videoPageController.navigateArticle(-1)">
+                            <span>이전 비디오</span>
                         </button>
-                        <button class="nav-btn next-article" onclick="pressPageController.navigateArticle(1)">
-                            <span>다음 기사</span>
+                        <button class="nav-btn next-article" onclick="videoPageController.navigateArticle(1)">
+                            <span>다음 비디오</span>
                         </button>
                     </div>
                 </div>
@@ -147,10 +137,10 @@
 
     <script>
 
-// ===== 보도자료 페이지 컨트롤러 클래스 =====
-class PressPageController {
+// ===== 비디오 갤러리 페이지 컨트롤러 클래스 =====
+class VideoPageController {
     constructor() {
-        this.pressManager = new PressManager();
+        this.videoManager = new VideoManager();
         this.currentPage = 1;
         this.itemsPerPage = 20;
         this.allArticles = [];
@@ -189,10 +179,8 @@ class PressPageController {
     
     async loadAllArticles() {
         try {
-            this.allArticles = await this.pressManager.loadArticleList();
-            console.log('전체 기사 로드 완료:', this.allArticles.length, '개');
+            this.allArticles = await this.videoManager.loadArticleList();
         } catch (error) {
-            console.error('기사 목록 로드 실패:', error);
             throw error;
         }
     }
@@ -209,7 +197,7 @@ class PressPageController {
         }
         
         // 페이지 메타 업데이트
-        this.updatePageMeta('보도자료', 'YPP의 최신 소식과 언론 보도 자료');
+        this.updatePageMeta('비디오 갤러리', 'YPP의 최신 영상 자료');
         
         this.renderArticleList();
         this.setupListEventListeners();
@@ -220,8 +208,8 @@ class PressPageController {
         try {
             this.currentArticleId = articleId;
             
-            // 기사 데이터 로드
-            const article = await this.pressManager.loadArticleDetail(articleId);
+            // 비디오 데이터 로드
+            const article = await this.videoManager.loadArticleDetail(articleId);
             
             this.hideAllSections();
             this.detailSection.classList.remove('hidden');
@@ -234,7 +222,7 @@ class PressPageController {
             
             // 페이지 메타 업데이트
             this.updatePageMeta(
-                article.titleKR || '보도자료',
+                article.titleKR || '비디오 갤러리',
                 (article.contentKR || '').substring(0, 150)
             );
             
@@ -242,8 +230,8 @@ class PressPageController {
             this.renderArticleDetail(article);
             
         } catch (error) {
-            console.error('기사 상세보기 실패:', error);
-            this.showError('기사를 불러오는데 실패했습니다.');
+            console.error('비디오 상세보기 실패:', error);
+            this.showError('비디오를 불러오는데 실패했습니다.');
             this.showArticleList(); // 에러 시 리스트로 돌아감
         }
     }
@@ -279,7 +267,7 @@ class PressPageController {
         if (totalCount === 0) {
             container.innerHTML = `
                 <div class="empty-message">
-                    <p>등록된 보도자료가 없습니다.</p>
+                    <p>등록된 비디오가 없습니다.</p>
                 </div>
             `;
             return;
@@ -295,11 +283,9 @@ class PressPageController {
             const date = this.formatDate(article.submittedAt || article.date);
             const titleKR = article.titleKR || '제목 없음';
             const titleEN = article.titleEN || article.titleKR || 'No Title';
-            const summaryKR = (article.contentKR || '').substring(0, 150) + '...';
-            const summaryEN = (article.contentEN || article.contentKR || '').substring(0, 150) + '...';
             
             return `
-                <div class="press-item" onclick="pressPageController.viewArticle('${article.id || article.number}')">
+                <div class="press-item" onclick="videoPageController.viewArticle('${article.id || article.number}')">
                     <div class="press-content">
                         <div class="press-meta">
                             <span class="press-date">${date}</span>
@@ -307,7 +293,6 @@ class PressPageController {
                         <h3 class="press-title">
                             <span data-kor='${titleKR}' data-eng='${titleEN}'>${selectedLanguage === 'en' ? titleEN : titleKR}</span>
                         </h3>
-                        <p class="press-summary" data-kor='${summaryKR}' data-eng='${summaryEN}'>${selectedLanguage === 'en' ? summaryEN : summaryKR}</p>
                     </div>
                 </div>
             `;
@@ -339,16 +324,44 @@ class PressPageController {
         titleElement.setAttribute('data-kor', titleKR);
         titleElement.setAttribute('data-eng', titleEN);
         
-        // 내용 업데이트 - 언어 전환 지원
+        // 내용 업데이트
         const contentElement = detailSection.querySelector('.article-content');
-        const contentKR = article.contentKR || '내용이 없습니다.';
-        const contentEN = article.contentEN || article.contentKR || 'No content available.';
+        let contentHTML = '';
         
-        contentElement.innerHTML = this.formatContent(selectedLanguage === 'en' ? contentEN : contentKR);
-        contentElement.setAttribute('data-kor', contentKR.replace(/"/g, '&quot;'));
-        contentElement.setAttribute('data-eng', contentEN.replace(/"/g, '&quot;'));
+        // 비디오 링크가 있으면 비디오 표시
+        if (article.videoLink) {
+            contentHTML += `
+                <div class="video-container" style="margin-bottom: 2rem;">
+                    <iframe 
+                        width="100%" 
+                        height="auto"
+                        src="${this.convertToEmbedUrl(article.videoLink)}" 
+                        frameborder="0" 
+                        allowfullscreen
+                        style="border-radius: 8px; aspect-ratio: 16 / 9;">
+                    </iframe>
+                </div>
+            `;
+        }
         
-        // 이미지 업데이트
+        // 텍스트 내용을 data-kor, data-eng 속성으로 구성된 div로 추가
+        if (article.contentKR || article.contentEN) {
+            const contentKR = article.contentKR || '내용이 없습니다.';
+            const contentEN = article.contentEN || article.contentKR || 'No content available.';
+            
+            contentHTML += `
+                <div class="article-text-content" 
+                     data-kor="${contentKR.replace(/"/g, '&quot;')}" 
+                     data-eng="${contentEN.replace(/"/g, '&quot;')}"
+                     style="line-height: 1.8; font-size: 1.1rem; color: var(--text-primary, #333);">
+                    ${this.formatContent(selectedLanguage === 'en' ? contentEN : contentKR)}
+                </div>
+            `;
+        }
+        
+        contentElement.innerHTML = contentHTML;
+        
+        // 이미지 업데이트 (비디오가 있어도 추가 이미지가 있을 수 있음)
         this.renderArticleImages(article.image || []);
         
         // 이전/다음 기사 네비게이션 업데이트
@@ -379,6 +392,61 @@ class PressPageController {
         return content
             .replace(/\n/g, '<br>')
             .replace(/\r/g, '');
+    }
+    
+    // YouTube URL을 embed URL로 변환
+    convertToEmbedUrl(url) {
+        if (!url) return url;
+        
+        let videoId = '';
+        let startTime = '';
+        
+        // URL 파라미터 파싱
+        const urlObj = new URL(url);
+        const params = new URLSearchParams(urlObj.search);
+        
+        // 시작 시간 추출 (t 파라미터)
+        if (params.get('t')) {
+            startTime = params.get('t');
+            // 숫자만 있는 경우 초 단위로 처리
+            if (/^\d+$/.test(startTime)) {
+                startTime = `${startTime}s`;
+            }
+        }
+        
+        // YouTube 일반 URL (watch?v=)
+        if (url.includes('youtube.com/watch?v=')) {
+            videoId = params.get('v');
+        }
+        // YouTube 라이브 URL (live/)
+        else if (url.includes('youtube.com/live/')) {
+            videoId = url.split('/live/')[1].split('?')[0];
+        }
+        // YouTube 단축 URL (youtu.be/)
+        else if (url.includes('youtu.be/')) {
+            videoId = url.split('youtu.be/')[1].split('?')[0];
+            // youtu.be URL에서 시간 파라미터 추출
+            if (url.includes('?t=')) {
+                const timeParam = url.split('?t=')[1].split('&')[0];
+                startTime = /^\d+$/.test(timeParam) ? `${timeParam}s` : timeParam;
+            }
+        }
+        // 이미 embed URL이면 그대로 반환
+        else if (url.includes('/embed/')) {
+            return url;
+        }
+        
+        // videoId가 있으면 embed URL 생성
+        if (videoId) {
+            let embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            if (startTime) {
+                embedUrl += `?start=${startTime.replace('s', '')}`;
+            }
+            return embedUrl;
+        }
+        
+        // 기타 비디오 플랫폼은 그대로 반환
+        return url;
     }
     
     // 날짜 포맷팅
@@ -439,11 +507,11 @@ class PressPageController {
         const prevBtn = this.detailSection.querySelector('.prev-article');
         const nextBtn = this.detailSection.querySelector('.next-article');
         
-        // 이전 기사 버튼
+        // 이전 비디오 버튼
         if (currentIndex <= 0) {
             prevBtn.disabled = true;
-            const noPrevTextKR = '이전 기사가 없습니다';
-            const noPrevTextEN = 'No previous article';
+            const noPrevTextKR = '이전 비디오가 없습니다';
+            const noPrevTextEN = 'No previous video';
             prevBtn.innerHTML = `<span data-kor="${noPrevTextKR}" data-eng="${noPrevTextEN}">${selectedLanguage === 'en' ? noPrevTextEN : noPrevTextKR}</span>`;
         } else {
             prevBtn.disabled = false;
@@ -455,11 +523,11 @@ class PressPageController {
             prevBtn.innerHTML = `<span data-kor="${prevTextKR}" data-eng="${prevTextEN}">${selectedLanguage === 'en' ? prevTextEN : prevTextKR}</span>`;
         }
         
-        // 다음 기사 버튼
+        // 다음 비디오 버튼
         if (currentIndex >= this.allArticles.length - 1) {
             nextBtn.disabled = true;
-            const noNextTextKR = '다음 기사가 없습니다';
-            const noNextTextEN = 'No next article';
+            const noNextTextKR = '다음 비디오가 없습니다';
+            const noNextTextEN = 'No next video';
             nextBtn.innerHTML = `<span data-kor="${noNextTextKR}" data-eng="${noNextTextEN}">${selectedLanguage === 'en' ? noNextTextEN : noNextTextKR}</span>`;
         } else {
             nextBtn.disabled = false;
@@ -545,46 +613,46 @@ class PressPageController {
     }
 }
 
-// ===== 구글 시트 API 연동 보도자료 시스템 =====
+// ===== 구글 시트 API 연동 비디오 갤러리 시스템 =====
 
-class PressManager {
+class VideoManager {
     constructor() {
         // 관리자 페이지와 동일한 Apps Script URL
-        this.appsScriptUrl = 'https://script.google.com/macros/s/AKfycbzys_Wtyki3iTakXqwDL4VJkBP-oUC482jUiWyZuzNzglmVfar1_EUC_ym91NMIrrFH/exec';
+        this.appsScriptUrl = 'https://script.google.com/macros/s/AKfycbxB2_0dc5Wim-sRuAtrk3G14GL-iSUljdoWRtSpsJsy6NGhbLfbATfzWncitqCyhWKm/exec';
         this.itemsPerPage = 20; // 20개씩 제한
     }
 
-    // 보도자료 목록 가져오기
+    // 비디오 갤러리 목록 가져오기
     async loadArticleList() {
         try {
-            const url = `${this.appsScriptUrl}?sheet=SHEET_BOARD_NEWS&action=getData`;
-            console.log('보도자료 데이터 요청:', url);
+            const url = `${this.appsScriptUrl}?sheet=SHEET_GAL_VIDEO&action=getData`;
+            console.log('비디오 갤러리 데이터 요청:', url);
             
             const response = await fetch(url);
             const result = await response.json();
             
-            console.log('보도자료 API 응답:', result);
+            console.log('비디오 갤러리 API 응답:', result);
             
             if (!result.success) {
                 throw new Error(result.message || '데이터 로딩 실패');
             }
 
-            // 활성화된 기사만 필터링하고 날짜순 정렬
+            // 활성화된 비디오만 필터링하고 날짜순 정렬
             const articles = (result.data || [])
                 .filter(item => item.state === 'on')
                 .sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
             
-            console.log('필터링된 보도자료:', articles.length, '개');
+            console.log('필터링된 비디오 갤러리:', articles.length, '개');
             
             return articles;
             
         } catch (error) {
-            console.error('보도자료 목록 로드 실패:', error);
+            console.error('비디오 갤러리 목록 로드 실패:', error);
             throw error;
         }
     }
 
-    // 단일 기사 상세 정보 가져오기
+    // 단일 비디오 상세 정보 가져오기
     async loadArticleDetail(articleId) {
         try {
             const articles = await this.loadArticleList();
@@ -595,14 +663,14 @@ class PressManager {
             );
             
             if (!article) {
-                throw new Error('기사를 찾을 수 없습니다.');
+                throw new Error('비디오를 찾을 수 없습니다.');
             }
             
-            console.log('기사 상세 정보:', article);
+            console.log('비디오 상세 정보:', article);
             return article;
             
         } catch (error) {
-            console.error('기사 상세 정보 로드 실패:', error);
+            console.error('비디오 상세 정보 로드 실패:', error);
             throw error;
         }
     }
@@ -610,46 +678,46 @@ class PressManager {
 
 // 브라우저 뒤로가기 지원
 window.addEventListener('popstate', (event) => {
-    if (window.pressPageController) {
-        window.pressPageController.init();
+    if (window.videoPageController) {
+        window.videoPageController.init();
     }
 });
 
 // 전역 변수
-let pressPageController = null;
+let videoPageController = null;
 
 // 초기화 함수
-function initPressPage() {
-    if (!pressPageController) {
-        pressPageController = new PressPageController();
+function initVideoPage() {
+    if (!videoPageController) {
+        videoPageController = new VideoPageController();
     }
-    return pressPageController;
+    return videoPageController;
 }
 
 // 자동 초기화
 document.addEventListener('DOMContentLoaded', function() {
     // 컴포넌트 로딩 완료 후 초기화
     if (document.querySelector('.press-list')) {
-        initPressPage();
+        initVideoPage();
     } else {
         // 컴포넌트 로딩 대기
         const checkComponents = setInterval(() => {
             if (document.querySelector('.press-list')) {
                 clearInterval(checkComponents);
-                initPressPage();
+                initVideoPage();
             }
         }, 100);
     }
 });
 
 // 전역 함수 내보내기
-window.initPressPage = initPressPage;
-window.pressPageController = null;
+window.initVideoPage = initVideoPage;
+window.videoPageController = null;
 
-// pressPageController 전역 접근을 위한 설정
-Object.defineProperty(window, 'pressPageController', {
-    get: function() { return pressPageController; },
-    set: function(value) { pressPageController = value; }
+// videoPageController 전역 접근을 위한 설정
+Object.defineProperty(window, 'videoPageController', {
+    get: function() { return videoPageController; },
+    set: function(value) { videoPageController = value; }
 });
     </script>
 </body>
@@ -673,7 +741,7 @@ Object.defineProperty(window, 'pressPageController', {
 .press-detail-section {padding: 2rem 0;max-width: 800px;margin: 0 auto;}
 
 .article-header,
-.list-header {display: flex;justify-content: flex-end;align-items: center;padding: 0 .5rem 1rem 0;border-bottom: 1px solid #404040;}
+.list-header {display: flex;justify-content: flex-end;align-items: center;padding: 0 .5rem 1rem 0;border-bottom: 1px solid #040404;}
 .article-header{justify-content: flex-start; border-bottom: none ;}
 .back-to-list {border: none;background: none;cursor: pointer;font-size: 1rem;transition: all 0.3s ease;color: #000000;padding-left: .1rem;}
 .back-to-list span{padding-left: .5rem;}
@@ -717,8 +785,7 @@ Object.defineProperty(window, 'pressPageController', {
 /* Press Items */
 /* .press-list{margin-top: 4.5rem;} */
 .press-items {min-height: 60vh; padding: 1rem 0;}
-.press-item {display: block;padding: 1.5rem;margin-bottom: 1rem;border-radius: 8px;transition: all 0.3s ease;cursor: pointer;}
-.press-item:hover{background: #ececec }
+.press-item {display: block;padding: 1rem; border-bottom: 1px solid #eee; transition: all 0.3s ease;cursor: pointer;}
 .press-item:hover .press-title span{color: var(--primary-blue, #0066cc);}
 .press-meta {display: flex;gap: 1rem;margin-bottom: 0.5rem;font-size: 0.85rem;}
 .press-date {color: var(--text-secondary, #666);}

@@ -318,6 +318,13 @@
               "url": "/pages/media/gallery/academy.html",
               "sections": ["PSAC", "Relay School"]
             },
+            "video": {
+              "title": {
+                "ko": "비디오갤러리",
+                "en": "Video Gallery"
+              },
+              "url": "/pages/media/gallery/video.html"
+            },
             "gclp": {
               "title": {
                 "ko": "GCLP",

@@ -172,7 +172,7 @@ class PageManager {
     }
     constructor() {
         // Google Apps Script 웹앱 URL (index.html과 동일)
-        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxr5XYHZxjMyKKmu8tvA5lHEl3_NUaLmATf5IEUp4F9M5s8HRCGGoMA2L8ycXM0_rr-';
+        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxB2_0dc5Wim-sRuAtrk3G14GL-iSUljdoWRtSpsJsy6NGhbLfbATfzWncitqCyhWKm';
         // this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxpCCjRsLr1A2Yv8UUQMbcsTyqRi1Jt_pPDERgwFUSUyQv83P8ex8G03u8dNaJQfhRV';
         this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
         this.pageConfigs = this.initPageConfigs();
@@ -2220,54 +2220,50 @@ class PageManager {
                                  item.privacyConsent === '동의' || item.privacyConsent === 'Y';
         
         const formHTML = `
-            <div class="edit-form-section-title">문의 정보</div>
-
-            
-            <div class="edit-form-group">
-                <label>제출일시:</label>
-                <input type="text" name="submittedAt" value="${item.submittedAt || ''}" class="edit-form-readonly" readonly>
-            </div>
-            
-            <div class="edit-form-group">
-                <label>문의 유형:</label>
-                <input type="text" name="inquiryType" value="${item.inquiryType || ''}" class="edit-form-readonly" readonly>
-            </div>
-
-            <div class="edit-form-section-title">문의자 정보</div>
-            
-            <div class="edit-form-group">
-                <label>성함/회사명:</label>
-                <input type="text" name="nameCompany" value="${item.nameCompany || ''}" class="edit-form-readonly" readonly>
-            </div>
-            
-            <div class="edit-form-group">
-                <label>이메일/전화번호:</label>
-                <input type="text" name="emailPhone" value="${item.emailPhone || ''}" class="edit-form-readonly" readonly>
-            </div>
-
             <div class="edit-form-section-title">문의 내용</div>
             
-            <div class="edit-form-group">
-                <label>제목:</label>
-                <input type="text" name="subject" value="${item.subject || ''}" class="edit-form-readonly" readonly>
-            </div>
-            
-            <div class="edit-form-group">
-                <label>문의 내용:</label>
-                <textarea name="content" rows="6" class="edit-form-readonly" readonly>${item.content || ''}</textarea>
-            </div>
-            
-            <div class="edit-form-group">
-                <label>첨부파일:</label>
-                <div class="attachment-preview" style="border: 1px solid #ddd; padding: 10px; border-radius: 4px; min-height: 40px;">
-                    ${attachmentHTML}
+                <div class="edit-form-group">
+                    <label>제목:</label>
+                    <input type="text" name="subject" value="${item.subject || ''}" class="edit-form-readonly" readonly>
                 </div>
-            </div>
-            
-            <div class="edit-form-group">
-                <label>개인정보 수집·이용 동의:</label>
-                <input type="text" value="${hasPrivacyConsent ? '동의함' : '동의하지 않음'}" class="edit-form-readonly" readonly>
-            </div>
+                
+                <div class="edit-form-group">
+                    <label>문의 내용:</label>
+                    <textarea name="content" rows="6" class="edit-form-readonly" readonly>${item.content || ''}</textarea>
+                </div>
+                
+                <div class="edit-form-group">
+                    <label>첨부파일:</label>
+                    <div class="attachment-preview" style="border: 1px solid #ddd; padding: 10px; border-radius: 4px; min-height: 40px;">
+                        ${attachmentHTML}
+                    </div>
+                </div>
+
+                <div class="edit-form-section-title">문의자 정보</div>
+                
+                <div class="edit-form-group">
+                    <label>성함/회사명:</label>
+                    <input type="text" name="nameCompany" value="${item.nameCompany || ''}" class="edit-form-readonly" readonly>
+                </div>
+                
+                <div class="edit-form-group">
+                    <label>이메일/전화번호:</label>
+                    <input type="text" name="emailPhone" value="${item.emailPhone || ''}" class="edit-form-readonly" readonly>
+                </div>         
+                <div class="edit-form-group">
+                    <label>제출일시:</label>
+                    <input type="text" name="submittedAt" value="${item.submittedAt || ''}" class="edit-form-readonly" readonly>
+                </div>
+                
+                <div class="edit-form-group">
+                    <label>문의 유형:</label>
+                    <input type="text" name="inquiryType" value="${item.inquiryType || ''}" class="edit-form-readonly" readonly>
+                </div>
+                
+                <div class="edit-form-group">
+                    <label>개인정보 수집·이용 동의:</label>
+                    <input type="text" value="${hasPrivacyConsent ? '동의함' : '동의하지 않음'}" class="edit-form-readonly" readonly>
+                </div>
         `;
         
         console.log('✅ 고객문의(KOR/ENG) 폼 HTML 생성 완료, 길이:', formHTML.length);

@@ -415,7 +415,7 @@ function getDashboardData(sheet) {
         galB: sheet.getRange('C3').getValue() || 0,    // 갤러리 유자격  
         galC: sheet.getRange('D3').getValue() || 0,    // 갤러리 인사이드
         galD: sheet.getRange('E3').getValue() || 0,    // 갤러리 아카데미
-        galVideo: sheet.getRange('F3').getValue() || 0,    // 갤러리 비디
+        galVideo: sheet.getRange('F3').getValue() || 0,    // 갤러리 비디오
         boardNews: sheet.getRange('G3').getValue() || 0,     // 게시판 보도자료
         applyPSAC: sheet.getRange('H3').getValue() || 0,     // 신청 PSAC
         applyRelay: sheet.getRange('I3').getValue() || 0,    // 신청 RelaySchool

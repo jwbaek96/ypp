@@ -1,5 +1,5 @@
 // Google Apps Script 웹앱 URL (배포 후 받은 URL)
-const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbyw7jwrWG5vrjeZxogBrl3HUsBiZmbr_HrR9K_jni0OmHk7neQWBFUCgd6kzZcqmA3C';
+const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxB2_0dc5Wim-sRuAtrk3G14GL-iSUljdoWRtSpsJsy6NGhbLfbATfzWncitqCyhWKm';
 // const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxpCCjRsLr1A2Yv8UUQMbcsTyqRi1Jt_pPDERgwFUSUyQv83P8ex8G03u8dNaJQfhRV';
 const DASHBOARD_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DASHBOARD_APPS_SCRIPT_ID}/exec`;
 
@@ -65,7 +65,7 @@ async function loadDashboardData() {
         
         // 에러 시 기본값 표시
         const defaultData = {
-            galA: 0, galB: 0, galC: 0, galD: 0,
+            galA: 0, galB: 0, galC: 0, galD: 0, galVideo: 0,
             boardNews: 0, applyPSAC: 0, applyRelay: 0, applyRelaySpecial: 0,
             helpKR: 0, helpEN: 0, report: 0
         };

@@ -84,8 +84,89 @@
     <script src="./js/scrolltotop.js"></script>
     <!-- 한영 전환 기능 -->
     <script src="./js/lang-switch.js"></script>
-    <!-- 팝업창(리뉴얼 안내, 회사소개서 다운로드, 교육안내 및 자료, 신청서 다운로드) -->
+    <!-- 팝업창 -->
     <script src="/popup/popup-modal.js"></script>
+    <!-- 트로피 팝업  -->
+    <script src="/js/trophy.js"></script>
+<style>
+    
+            /* 컨텐츠 준비 중 알림창 */
+            @import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
+            .trophy-notice {
+                position: fixed;
+                bottom: 10px;
+                left: 16px;
+                padding: 1rem;
+                z-index: 998;
+                animation: contentPreparingSlideUp 4.5s ease-in-out;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            .trophy-notice .notice-container {
+                border-radius:50px;
+                margin: 0 auto;
+                background: #ffffff;
+                padding: .8rem 1.2rem;
+                box-shadow: 0 -12px 40px rgb(234 204 102 / 40%), 0 -6px 20px rgb(162 143 75 / 30%), 0 -2px 10px rgb(251 212 147 / 20%);
+                backdrop-filter: blur(10px);
+                
+                text-align: center;
+                color: white;
+                display: flex; align-items: center; justify-content: center;
+                gap: .5rem;
+            }
+            .notice-img{
+                max-width: 50px;
+            }
+            .notice-img img {
+                width: 100%;
+                height: auto;
+                scale: 1.1;
+            }
+            .notice-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 0.2rem;
+            }
+            .notice-content p { 
+                font-family: "Song Myung", serif;
+                margin: 0;
+                font-size: 1rem;
+                font-weight: 600;
+                color: #9e5e11;
+                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.199);
+                vertical-align: middle;
+            }
+
+            @keyframes contentPreparingSlideUp {
+                from {
+                    transform: translateY(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+            
+            /* 모바일 반응형 */
+            @media (max-width: 768px) {
+                .trophy-notice {bottom: 0px;left: 0px;}
+            }
+            
+            @media (max-width: 480px) {
+                .trophy-notice {
+                    /* width: 100%; */
+                    right: 0;
+                    padding: 0.2em;
+                    bottom: 12px;
+                }
+                .trophy-notice .notice-container{gap: 1rem; }
+            }
+</style>
+
+
     <link rel="stylesheet" href="/popup/popup-style.css">
 
     <!-- 최초 접속 시 한국어 자동 선택 -->

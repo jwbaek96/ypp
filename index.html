@@ -94,25 +94,40 @@
             @import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
             .trophy-notice {
                 position: fixed;
-                bottom: 10px;
-                left: 16px;
+                bottom: 13px;
+                left: 19px;
                 padding: 1rem;
                 z-index: 998;
-                animation: contentPreparingSlideUp 4.5s ease-in-out;
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                transition: all 0.3s ease;
             }
             .trophy-notice .notice-container {
                 border-radius:50px;
                 margin: 0 auto;
-                background: #ffffff;
-                padding: .8rem 1.2rem;
-                box-shadow: 0 -12px 40px rgb(234 204 102 / 40%), 0 -6px 20px rgb(162 143 75 / 30%), 0 -2px 10px rgb(251 212 147 / 20%);
+                background: rgba(255, 255, 255, 0.63);
+                padding: .65rem 1.2rem;
+                
+                /* `border: 1px solid rgba(229, 229, 229, 0.18); */
+                box-shadow: 13px 10px 27px rgb(255 255 255 / 24%) inset, 0 -6px 20px rgba(168, 165, 154, 0.3) inset, 0 -3px 10px rgba(255, 242, 219, 0.2) inset;
                 backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px); /* Safari 지원 */
+                
+                /* 백드롭 필터 안정성을 위한 추가 속성 */
+                will-change: backdrop-filter;
+                isolation: isolate;
                 
                 text-align: center;
                 color: white;
                 display: flex; align-items: center; justify-content: center;
                 gap: .5rem;
+                
+                animation: contentPreparingSlideUp 1.5s 3s ease-in-out forwards;
+                transform: translateX(-100%);
+                transition: all 0.3s ease;
+            }
+            .trophy-notice:hover{
+                bottom: 15px;
+                transition: all 0.3s ease;
             }
             .notice-img{
                 max-width: 50px;
@@ -135,17 +150,17 @@
                 font-size: 1rem;
                 font-weight: 600;
                 color: #9e5e11;
-                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.199);
+                text-shadow:0px 0px 7px rgb(255 255 255), 0px 0px 22px rgb(255 255 255);
                 vertical-align: middle;
             }
 
             @keyframes contentPreparingSlideUp {
                 from {
-                    transform: translateY(100%);
+                    transform: translateX(-100%);
                     opacity: 0;
                 }
                 to {
-                    transform: translateY(0);
+                    transform: translateX(0);
                     opacity: 1;
                 }
             }
@@ -159,7 +174,7 @@
                 .trophy-notice {
                     /* width: 100%; */
                     right: 0;
-                    padding: 0.2em;
+                    padding: 0.4em;
                     bottom: 12px;
                 }
                 .trophy-notice .notice-container{gap: 1rem; }

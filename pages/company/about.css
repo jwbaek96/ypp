@@ -48,7 +48,7 @@
 .company-details {background: #fff;border-radius: 8px;overflow: hidden;}
 .detail-row {display: flex;padding: 1rem 1.5rem;border-bottom: 1px solid #f1f3f4;}
 .detail-row:last-child {border-bottom: none;}
-.detail-label {font-weight: 600;color: #333;padding: 0 1.5rem;flex-shrink: 0;min-width: 120px; text-align: right;}
+.detail-label {font-weight: 600;color: #333;padding: 0 1.5rem;flex-shrink: 0;min-width: 130px; text-align: right;}
 .detail-value {color: #666;line-height: 1.5;text-align: left; padding-left: 1rem;}
 
 /* 모바일 반응형 */

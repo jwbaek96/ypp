@@ -49,6 +49,7 @@
 .groupware-btn:hover {
     background-color: var(--dark-gray);
     color: var(--white);
+    cursor: pointer;
 }
 /*  */
 .header-container {
@@ -79,7 +80,7 @@
     padding: 3px;
 }
 
-.lang-btn {
+/* .lang-btn {
     padding: 0.25rem 0.75rem;
     border: none;
     background: transparent;
@@ -94,7 +95,7 @@
     background-color: var(--white);
     color: var(--primary-blue);
     box-shadow: 0 2px 5px var(--shadow);
-}
+} */
 
 .hamburger-btn {
     display: none;
@@ -117,11 +118,13 @@
 
 
 /* 모바일에서는 숨김 */
-@media (max-width: 768px) {
-
+@media (max-width: 900px) {
     .header-links, .lang-btn {
         display: none;
     }
+}
+@media (max-width: 768px) {
+
     .header-container {
     padding: 0 1rem;
     }

@@ -27,11 +27,12 @@ class LanguageSwitch {
                 const button = e.target.matches('.lang-btn, .sidebar-lang-btn') ? 
                               e.target : e.target.closest('.lang-btn, .sidebar-lang-btn');
                 
-                const selectedLang = button.dataset.lang;
-                if (selectedLang) {
-                    this.switchLanguage(selectedLang);
-                    console.log('언어 버튼 클릭:', selectedLang);
-                }
+                // 현재 언어의 반대 언어로 토글
+                const currentLang = this.getSavedLanguage();
+                const toggleLang = currentLang === 'ko' ? 'en' : 'ko';
+                
+                this.switchLanguage(toggleLang);
+                console.log('언어 토글:', currentLang, '→', toggleLang);
             }
         });
     }

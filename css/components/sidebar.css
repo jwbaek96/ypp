@@ -249,6 +249,9 @@
 /* ===== 간소화된 사이드바 푸터 ===== */
 
 .sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
     padding: 1rem;
     /* border-top: 1px solid var(--border-color); */
     background-color: var(--white);
@@ -263,7 +266,7 @@
     text-align: center;
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     transition: all 0.3s ease;
     text-decoration: none;
     font-weight: 500;
@@ -276,14 +279,24 @@
     border-color: var(--primary-blue);
 }
 
-.sidebar-lang {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-}
+/* .sidebar-lang {
+} */
 
 .sidebar-lang-btn {
-    width: 40px;
+    display: block;
+    width: 100% !important;
+    padding: 0.75rem;
+    background-color: transparent;
+    color: var(--text-primary);
+    text-align: center;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-weight: 550 !important;
+    font-size: 0.85rem !important;
+    padding: 0.625rem;
+    /* width: 40px;
     height: 32px;
     border: 1px solid var(--border-color);
     background-color: var(--white);
@@ -295,7 +308,8 @@
     font-weight: 500;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
+    
 }
 
 .sidebar-lang-btn:hover {
@@ -311,18 +325,7 @@
 
 /* 모바일 최적화 */
 @media (max-width: 900px) {
-    .sidebar-footer {
-        padding: 0.875rem;
-    }
-    
-    .sidebar-groupware {
-        padding: 0.625rem;
-        font-size: 0.85rem;
-    }
-    
-    .sidebar-lang-btn {
-        width: 36px;
-        height: 30px;
-        font-size: 0.75rem;
-    }
+    .sidebar-footer {padding: 0.875rem;}
+    .sidebar-groupware {padding: 0.625rem;font-size: 0.85rem;}
+    .sidebar-lang-btn {font-size: 0.75rem;}
 }

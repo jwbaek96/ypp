@@ -74,9 +74,8 @@ function createSidebarMenuItem(item, key, depth) {
         textSpan.setAttribute('data-kor', item.title.ko);
         textSpan.setAttribute('data-eng', item.title.en);
         
-        // 현재 언어에 맞는 텍스트 설정
-        const currentLang = localStorage.getItem('selectedLanguage') || 'ko';
-        textSpan.textContent = currentLang === 'en' ? item.title.en : item.title.ko;
+        // 기본적으로 한국어로 설정 (lang-switch.js가 나중에 처리)
+        textSpan.textContent = item.title.ko;
         
         link.appendChild(textSpan);
     } else {
@@ -163,9 +162,8 @@ function createSidebarSubMenuItem(item, key, depth) {
         // JSON에서 title이 객체인 경우
         link.setAttribute('data-kor', item.title.ko);
         link.setAttribute('data-eng', item.title.en);
-        // 현재 언어에 맞는 텍스트 설정
-        const currentLang = localStorage.getItem('selectedLanguage') || 'ko';
-        link.textContent = currentLang === 'en' ? item.title.en : item.title.ko;
+        // 기본적으로 한국어로 설정 (lang-switch.js가 나중에 처리)
+        link.textContent = item.title.ko;
     } else {
         // 기존 방식 호환성 (문자열인 경우)
         link.textContent = item.title || '';
@@ -221,8 +219,8 @@ function createSidebarSubMenuItem(item, key, depth) {
             if (typeof subChildItem.title === 'object' && subChildItem.title.ko && subChildItem.title.en) {
                 subChildLink.setAttribute('data-kor', subChildItem.title.ko);
                 subChildLink.setAttribute('data-eng', subChildItem.title.en);
-                const currentLang = localStorage.getItem('selectedLanguage') || 'ko';
-                subChildLink.textContent = currentLang === 'en' ? subChildItem.title.en : subChildItem.title.ko;
+                // 기본적으로 한국어로 설정 (lang-switch.js가 나중에 처리)
+                subChildLink.textContent = subChildItem.title.ko;
             } else {
                 subChildLink.textContent = subChildItem.title || '';
             }
@@ -556,50 +554,21 @@ async function insertSidebarMenu() {
     container.innerHTML = '';
     container.appendChild(menuElement);
     
-    // 언어 전환 기능이 있으면 즉시 적용
-    if (window.languageSwitchInstance) {
-        const savedLang = localStorage.getItem('selectedLanguage') || 'ko';
-        window.languageSwitchInstance.applyLanguage(savedLang);
-    } else {
-        // 언어 전환 기능이 아직 로드되지 않은 경우, 저장된 언어로 설정
-        const savedLang = localStorage.getItem('selectedLanguage') || 'ko';
-        const sidebarLinks = container.querySelectorAll('[data-kor][data-eng]');
-        sidebarLinks.forEach(link => {
-            if (savedLang === 'en') {
-                link.textContent = link.getAttribute('data-eng');
-            } else {
-                link.textContent = link.getAttribute('data-kor');
-            }
-        });
-    }
+    // 사이드바 메뉴 삽입 완료 (lang-switch.js가 언어 처리 담당)
     
-    console.log('Sidebar menu inserted with bilingual support');
-     setTimeout(() => {
-        const sidebarLangButtons = document.querySelectorAll('.sidebar-lang-btn');
-        sidebarLangButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                const selectedLang = e.target.dataset.lang;
-                if (window.languageSwitchInstance) {
-                    window.languageSwitchInstance.switchLanguage(selectedLang);
-                }
-            });
-        });
-        console.log('사이드바 언어 버튼 연결됨:', sidebarLangButtons.length);
-    }, 200);    
-}
-
-// ===== 언어 버튼 이벤트 =====
-function initLanguageButtons() {
-    const langButtons = document.querySelectorAll('.sidebar-lang-btn');
-    
-    langButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // 모든 버튼에서 active 제거
-            langButtons.forEach(b => b.classList.remove('active'));
-            // 클릭된 버튼에 active 추가
-            btn.classList.add('active');
-        });
-    });
+    // console.log('Sidebar menu inserted with bilingual support');
+    //  setTimeout(() => {
+    //     const sidebarLangButtons = document.querySelectorAll('.sidebar-lang-btn');
+    //     sidebarLangButtons.forEach(button => {
+    //         button.addEventListener('click', (e) => {
+    //             const selectedLang = e.target.dataset.lang;
+    //             if (window.languageSwitchInstance) {
+    //                 window.languageSwitchInstance.switchLanguage(selectedLang);
+    //             }
+    //         });
+    //     });
+    //     console.log('사이드바 언어 버튼 연결됨:', sidebarLangButtons.length);
+    // }, 200);    
 }
 
 // ===== 초기화 함수 =====
@@ -607,39 +576,13 @@ function initSidebar() {
     // 컴포넌트 로딩 완료 후 실행
     if (document.querySelector('#mobile-sidebar')) {
         insertSidebarMenu();
-        initLanguageButtons();
     } else {
         // 컴포넌트 로딩 대기
         document.addEventListener('componentsLoaded', () => {
             setTimeout(() => {
                 insertSidebarMenu();
-                initLanguageButtons();
             }, 200);
         });
-    }
-}
-
-function connectSidebarLanguageButtons() {
-    const sidebarLangButtons = document.querySelectorAll('.sidebar-lang-btn');
-    
-    sidebarLangButtons.forEach(button => {
-        // 기존 이벤트 리스너 제거 (중복 방지)
-        button.removeEventListener('click', handleSidebarLangClick);
-        
-        // 새 이벤트 리스너 추가
-        button.addEventListener('click', handleSidebarLangClick);
-    });
-    
-    console.log('사이드바 언어 버튼 연결됨:', sidebarLangButtons.length);
-}
-
-function handleSidebarLangClick(e) {
-    const selectedLang = e.target.dataset.lang;
-    console.log('사이드바 언어 버튼 클릭:', selectedLang);
-    
-    // 언어 전환 실행
-    if (window.languageSwitchInstance) {
-        window.languageSwitchInstance.switchLanguage(selectedLang);
     }
 }
 

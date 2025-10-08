@@ -225,11 +225,16 @@
 
 </script>
 <script>
-    // 히어로 섹션 비디오 한영 전환 기능
-function switchHeroVideo(lang) {
+    // 히어로 섹션 비디오 한영 전환 기능 (data 속성 활용)
+function switchHeroVideo(lang = null) {
     // 메인 페이지에서만 실행
     if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
         return;
+    }
+    
+    // lang가 없으면 localStorage에서 가져오기
+    if (!lang) {
+        lang = localStorage.getItem('selectedLanguage') || 'ko';
     }
     
     const videoElement = document.querySelector('#hero-section video, .hero-section video, .hero-video');
@@ -239,58 +244,64 @@ function switchHeroVideo(lang) {
         return;
     }
     
-    console.log('히어로 비디오 찾음:', videoElement);
+    console.log('히어로 비디오 언어 전환:', lang);
     
-    // 비디오 소스 매핑 (실제 파일 경로로 수정하세요)
-    const videoSources = {
-        en: '/assets/videos/hero-video-2-eng.mp4',  // 한국어 비디오 경로
-        ko: '/assets/videos/hero-bg.mp4'  // 영어 비디오 경로
-    };
+    // data 속성에서 해당 언어의 소스 가져오기
+    const dataAttr = lang === 'en' ? 'data-eng' : 'data-kor';
+    const sourceHTML = videoElement.getAttribute(dataAttr);
     
-    const newVideoSrc = videoSources[lang];
-    
-    if (!newVideoSrc) {
-        console.log('해당 언어의 비디오 소스가 없습니다:', lang);
+    if (!sourceHTML) {
+        console.log('해당 언어의 비디오 데이터가 없습니다:', lang);
         return;
     }
     
-    // 현재 재생 시간과 상태 저장
-    const currentTime = videoElement.currentTime;
-    const wasPlaying = !videoElement.paused;
-    
     try {
-        // 비디오 소스 변경
-        videoElement.src = newVideoSrc;
+        // 기존 source 태그 제거
+        const existingSources = videoElement.querySelectorAll('source');
+        existingSources.forEach(source => source.remove());
         
-        // 비디오 로드 후 이전 위치와 상태 복원
-        videoElement.addEventListener('loadeddata', function restoreVideo() {
-            videoElement.currentTime = currentTime;
-            
-            if (wasPlaying) {
-                videoElement.play().catch(error => {
-                    console.log('비디오 자동 재생 실패:', error);
-                });
-            }
-            
-            // 이벤트 리스너 제거 (한 번만 실행)
-            videoElement.removeEventListener('loadeddata', restoreVideo);
-        });
+        // 새로운 source 태그 추가
+        videoElement.innerHTML = sourceHTML;
         
-        // 비디오 로드
+        // 비디오 다시 로드하고 재생
         videoElement.load();
         
-        console.log('비디오 소스 변경 성공:', newVideoSrc);
+        // 비디오가 로드되면 자동 재생 (처음부터)
+        videoElement.addEventListener('loadeddata', function restartVideo() {
+            videoElement.currentTime = 0; // 처음부터 재생
+            videoElement.play().catch(error => {
+                console.log('비디오 자동 재생 실패:', error);
+            });
+            
+            // 이벤트 리스너 제거 (한 번만 실행)
+            videoElement.removeEventListener('loadeddata', restartVideo);
+        });
+        
+        console.log('히어로 비디오 전환 완료:', lang);
         
     } catch (error) {
-        console.error('비디오 변경 실패:', error);
-        
-        // 비디오 변경이 실패하면 페이지 리로드
-        console.log('비디오 변경 실패 - 페이지 리로드 실행');
-        setTimeout(() => {
-            window.location.reload();
-        }, 500);
+        console.error('비디오 전환 실패:', error);
     }
 }
+
+// 전역 함수로 등록
+window.switchHeroVideo = switchHeroVideo;
+
+// 페이지 로드 시 언어에 맞는 동영상 초기화
+function initializeHeroVideo() {
+    // 컴포넌트가 로드될 때까지 대기
+    setTimeout(() => {
+        const savedLang = localStorage.getItem('selectedLanguage') || 'ko';
+        console.log('페이지 로드 시 히어로 동영상 초기화:', savedLang);
+        // 영어인 경우에만 전환 (한국어가 기본값이므로)
+        if (savedLang === 'en') {
+            switchHeroVideo(savedLang);
+        }
+    }, 1500); // 컴포넌트 로딩 후 실행
+}
+
+// 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', initializeHeroVideo);
 
 // 페이지 리로드 방식 (대안)
 function reloadPageForVideoSwitch(lang) {
@@ -311,40 +322,7 @@ function reloadPageForVideoSwitch(lang) {
 // lang-switch.js의 switchLanguage 함수에 추가하거나
 // 별도로 언어 전환 이벤트를 감지
 
-// 방법 1: MutationObserver로 언어 전환 감지
-function observeLanguageChange() {
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                const target = mutation.target;
-                if (target.classList.contains('lang-btn') && target.classList.contains('active')) {
-                    const selectedLang = target.dataset.lang;
-                    console.log('언어 전환 감지:', selectedLang);
-                    
-                    // 비디오 교체 시도
-                    switchHeroVideo(selectedLang);
-                    
-                    // 또는 페이지 리로드 (주석 해제해서 사용)
-                    // reloadPageForVideoSwitch(selectedLang);
-                }
-            }
-        });
-    });
-    
-    // 언어 버튼들을 관찰
-    document.querySelectorAll('.lang-btn').forEach(button => {
-        observer.observe(button, { attributes: true });
-    });
-}
-
-// 페이지 로드 후 관찰 시작
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(observeLanguageChange, 1000);
-});
-
-// 방법 2: 직접 언어 전환 함수에 추가 (더 간단)
-// lang-switch.js의 switchLanguage 함수 마지막에 추가:
-// switchHeroVideo(selectedLang);
+// 히어로 동영상 전환은 이제 lang-switch.js의 switchLanguage 함수에서 자동으로 처리됩니다.
 </script>
 
 </body>

@@ -20,19 +20,25 @@ class LanguageSwitch {
     // 이벤트 위임으로 동적 요소도 처리
     setupEventDelegation() {
         document.body.addEventListener('click', (e) => {
-            // 언어 버튼 클릭 체크
-            if (e.target.matches('.lang-btn, .sidebar-lang-btn') || 
-                e.target.closest('.lang-btn, .sidebar-lang-btn')) {
-                
-                const button = e.target.matches('.lang-btn, .sidebar-lang-btn') ? 
-                              e.target : e.target.closest('.lang-btn, .sidebar-lang-btn');
+            // .lang-btn 클래스만 감지
+            const isLangButton = e.target.classList.contains('lang-btn') || 
+                                e.target.closest('.lang-btn');
+            
+            if (isLangButton) {
+                const button = e.target.classList.contains('lang-btn') ? 
+                              e.target : e.target.closest('.lang-btn');
                 
                 // 현재 언어의 반대 언어로 토글
                 const currentLang = this.getSavedLanguage();
                 const toggleLang = currentLang === 'ko' ? 'en' : 'ko';
                 
+                console.log('🔄 언어 버튼 클릭 감지!');
+                console.log('클릭된 버튼:', button);
+                console.log('버튼 클래스:', button.className);
+                console.log('현재 언어:', currentLang, '→ 대상 언어:', toggleLang);
+                
                 this.switchLanguage(toggleLang);
-                console.log('언어 토글:', currentLang, '→', toggleLang);
+                console.log('✅ 언어 토글 완료:', currentLang, '→', toggleLang);
             }
         });
     }
@@ -78,6 +84,11 @@ class LanguageSwitch {
         this.applyLanguage(lang);
         this.updateActiveButton();
         
+        // 히어로 섹션 동영상 전환 (메인 페이지인 경우)
+        if (typeof window.switchHeroVideo === 'function') {
+            window.switchHeroVideo(lang);
+        }
+        
         // 언어 변경 이벤트 발생 (다른 컴포넌트들에게 알림)
         const languageChangeEvent = new CustomEvent('languageChanged', {
             detail: { language: lang }
@@ -88,10 +99,16 @@ class LanguageSwitch {
     // 페이지의 모든 텍스트 변경
     applyLanguage(lang) {
         const elements = document.querySelectorAll('[data-kor][data-eng]');
+        console.log('언어 적용 중:', lang, '대상 요소 수:', elements.length);
         
         elements.forEach(element => {
             const korText = element.dataset.kor;
             const engText = element.dataset.eng;
+            
+            // 언어 버튼인지 확인 (디버깅용)
+            if (element.classList.contains('lang-btn')) {
+                console.log('언어 버튼 업데이트:', element, '언어:', lang, '텍스트:', lang === 'ko' ? korText : engText);
+            }
             
             if (lang === 'ko') {
                 // HTML 태그가 포함된 경우 innerHTML 사용
@@ -113,19 +130,22 @@ class LanguageSwitch {
 
     // 활성화된 버튼 스타일 업데이트
     updateActiveButton() {
-        // 헤더와 사이드바의 모든 언어 버튼 찾기
-        const allLangButtons = document.querySelectorAll('.lang-btn, .sidebar-lang-btn');
+        // 모든 .lang-btn 클래스 버튼들을 forEach로 처리
+        const allLangButtons = document.querySelectorAll('.lang-btn');
         
         allLangButtons.forEach(button => {
+            // 모든 버튼에서 active 클래스 제거
             button.classList.remove('active');
+            
+            // 현재 언어와 일치하는 버튼에만 active 클래스 추가
             if (button.dataset.lang === this.currentLang) {
                 button.classList.add('active');
             }
         });
         
-        // 동적으로 추가된 버튼들도 처리 (약간의 지연 후)
+        // 동적으로 추가된 버튼들도 처리
         setTimeout(() => {
-            const newButtons = document.querySelectorAll('.lang-btn, .sidebar-lang-btn');
+            const newButtons = document.querySelectorAll('.lang-btn');
             newButtons.forEach(button => {
                 if (button.dataset.lang === this.currentLang) {
                     button.classList.add('active');

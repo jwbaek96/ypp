@@ -21,6 +21,12 @@
         
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- YPP Config -->
+    <script src="../../../js/config.js"></script>
 </head>
 <body>
     <!-- Header Container -->
@@ -549,15 +555,38 @@ class PressPageController {
 
 class PressManager {
     constructor() {
-        // 관리자 페이지와 동일한 Apps Script URL
-        this.appsScriptUrl = 'https://script.google.com/macros/s/AKfycbzys_Wtyki3iTakXqwDL4VJkBP-oUC482jUiWyZuzNzglmVfar1_EUC_ym91NMIrrFH/exec';
+        this.appsScriptUrl = null; // 동적으로 로드될 URL
         this.itemsPerPage = 20; // 20개씩 제한
+    }
+
+    // Apps Script URL을 동적으로 가져오기
+    async getAppsScriptUrl() {
+        if (this.appsScriptUrl) {
+            return this.appsScriptUrl; // 이미 로드된 경우 캐시된 값 사용
+        }
+
+        try {
+            // YPP Config가 로드되어 있는지 확인
+            if (!window.YPPConfig) {
+                throw new Error('YPP Config가 로드되지 않았습니다.');
+            }
+
+            // Press 페이지 Apps Script URL 가져오기
+            this.appsScriptUrl = await window.YPPConfig.get('PRESS');
+            console.log('✅ Press Apps Script URL 로드 완료:', this.appsScriptUrl);
+            return this.appsScriptUrl;
+        } catch (error) {
+            console.error('💥 Press Apps Script URL 로드 실패:', error);
+            throw error; // 에러를 상위로 전파
+        }
     }
 
     // 보도자료 목록 가져오기
     async loadArticleList() {
         try {
-            const url = `${this.appsScriptUrl}?sheet=SHEET_BOARD_NEWS&action=getData`;
+            // 동적으로 Apps Script URL 가져오기
+            const baseUrl = await this.getAppsScriptUrl();
+            const url = `${baseUrl}?sheet=SHEET_BOARD_NEWS&action=getData`;
             console.log('보도자료 데이터 요청:', url);
             
             const response = await fetch(url);
@@ -628,17 +657,32 @@ function initPressPage() {
 
 // 자동 초기화
 document.addEventListener('DOMContentLoaded', function() {
-    // 컴포넌트 로딩 완료 후 초기화
-    if (document.querySelector('.press-list')) {
-        initPressPage();
-    } else {
-        // 컴포넌트 로딩 대기
-        const checkComponents = setInterval(() => {
-            if (document.querySelector('.press-list')) {
-                clearInterval(checkComponents);
-                initPressPage();
+    // YPP Config 및 컴포넌트 로딩 확인
+    const initWhenReady = () => {
+        if (document.querySelector('.press-list') && window.YPPConfig) {
+            initPressPage();
+            return true;
+        }
+        return false;
+    };
+
+    // 즉시 확인
+    if (!initWhenReady()) {
+        // 주기적 확인
+        const checkReady = setInterval(() => {
+            if (initWhenReady()) {
+                clearInterval(checkReady);
             }
         }, 100);
+        
+        // 타임아웃 설정 (5초 후 강제 초기화)
+        setTimeout(() => {
+            clearInterval(checkReady);
+            if (!pressPageController) {
+                console.warn('YPP Config 로드 대기 시간 초과, 강제 초기화');
+                initPressPage();
+            }
+        }, 5000);
     }
 });
 

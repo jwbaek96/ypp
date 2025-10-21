@@ -21,6 +21,8 @@ class PSACOverviewManager {
         return currentLang === 'en' ? 'english' : 'korean';
     }
     
+
+
     /**
      * 초기화
      */

@@ -1,5 +1,27 @@
-const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbwVzRfzyNn2Q-bYUbZWNw3A5Q-gFxLRs3tzYwXn5B2zCOrsTdQ9YALg1JFh4pqT4OEI-g';
-const DASHBOARD_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DASHBOARD_APPS_SCRIPT_ID}/exec`;
+// 동적으로 로드될 Apps Script URL
+let DASHBOARD_APPS_SCRIPT_URL = null;
+
+// Apps Script URL을 동적으로 가져오기
+async function getAppsScriptUrl() {
+    if (DASHBOARD_APPS_SCRIPT_URL) {
+        return DASHBOARD_APPS_SCRIPT_URL; // 이미 로드된 경우 캐시된 값 사용
+    }
+
+    try {
+        // YPP Config가 로드되어 있는지 확인
+        if (!window.YPPConfig) {
+            throw new Error('YPP Config가 로드되지 않았습니다.');
+        }
+
+        // Company Apps Script URL 가져오기
+        DASHBOARD_APPS_SCRIPT_URL = await window.YPPConfig.get('COMPANY');
+        console.log('✅ Company Apps Script URL 로드 완료:', DASHBOARD_APPS_SCRIPT_URL);
+        return DASHBOARD_APPS_SCRIPT_URL;
+    } catch (error) {
+        console.error('💥 Company Apps Script URL 로드 실패:', error);
+        throw error; // 에러를 상위로 전파
+    }
+}
 
 /**
  * 연혁 데이터 매니저 클래스
@@ -17,7 +39,9 @@ class HistoryDataManager {
         
         try {
             console.log('📊 연혁 데이터 로딩 시작...');
-            const url = `${DASHBOARD_APPS_SCRIPT_URL}?sheet=history&action=getData`;
+            // 동적으로 Apps Script URL 가져오기
+            const baseUrl = await getAppsScriptUrl();
+            const url = `${baseUrl}?sheet=history&action=getData`;
             
             const response = await fetch(url);
             if (!response.ok) {
@@ -281,14 +305,37 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('#status-history')) {
         console.log('🎯 연혁 섹션 감지 - 데이터 로딩 준비');
         
-        // 컴포넌트가 로드된 후 연혁 데이터 로드
-        if (document.querySelector('#status-history .block-content')) {
-            setTimeout(loadHistoryData, 500);
-        } else {
-            document.addEventListener('componentsLoaded', () => {
-                setTimeout(loadHistoryData, 500);
-            });
-        }
+        // YPP Config 및 컴포넌트 로딩 확인
+        const initWhenReady = async () => {
+            if (window.YPPConfig && document.querySelector('#status-history .block-content')) {
+                try {
+                    await loadHistoryData();
+                    return true;
+                } catch (error) {
+                    console.error('연혁 데이터 로딩 실패:', error);
+                    return true; // 에러가 발생해도 초기화는 완료된 것으로 처리
+                }
+            }
+            return false;
+        };
+
+        // 즉시 확인
+        initWhenReady().then(success => {
+            if (!success) {
+                // 주기적 확인
+                const checkReady = setInterval(async () => {
+                    if (await initWhenReady()) {
+                        clearInterval(checkReady);
+                    }
+                }, 100);
+                
+                // 타임아웃 설정 (5초 후 강제 초기화)
+                setTimeout(() => {
+                    clearInterval(checkReady);
+                    console.warn('YPP Config 로드 대기 시간 초과');
+                }, 5000);
+            }
+        });
         
         // 언어 전환 이벤트 리스너 추가
         document.addEventListener('languageChanged', (e) => {

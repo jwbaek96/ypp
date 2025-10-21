@@ -1,5 +1,27 @@
-const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxrBjwJRbcaOWXk3Vrnv8GySyiSfeYSKLLzYvZxmHmsZ_AqUZwxDKMmOW53lRXliQgdRg';
-const DASHBOARD_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DASHBOARD_APPS_SCRIPT_ID}/exec`;
+// 동적으로 로드될 Apps Script URL
+let DASHBOARD_APPS_SCRIPT_URL = null;
+
+// Apps Script URL을 동적으로 가져오기
+async function getAppsScriptUrl() {
+    if (DASHBOARD_APPS_SCRIPT_URL) {
+        return DASHBOARD_APPS_SCRIPT_URL; // 이미 로드된 경우 캐시된 값 사용
+    }
+
+    try {
+        // YPP Config가 로드되어 있는지 확인
+        if (!window.YPPConfig) {
+            throw new Error('YPP Config가 로드되지 않았습니다.');
+        }
+
+        // Business Apps Script URL 가져오기
+        DASHBOARD_APPS_SCRIPT_URL = await window.YPPConfig.get('BUSINESS');
+        console.log('✅ Business Apps Script URL 로드 완료:', DASHBOARD_APPS_SCRIPT_URL);
+        return DASHBOARD_APPS_SCRIPT_URL;
+    } catch (error) {
+        console.error('💥 Business Apps Script URL 로드 실패:', error);
+        throw error; // 에러를 상위로 전파
+    }
+}
 
 // 원자력 데이터 관리 클래스
 class NuclearDataManager {
@@ -15,7 +37,9 @@ class NuclearDataManager {
         
         try {
             console.log('📊 원자력 데이터 로딩 시작...');
-            const url = `${DASHBOARD_APPS_SCRIPT_URL}?sheet=nuclear&action=getData`;
+            // 동적으로 Apps Script URL 가져오기
+            const baseUrl = await getAppsScriptUrl();
+            const url = `${baseUrl}?sheet=nuclear&action=getData`;
             
             const response = await fetch(url);
             if (!response.ok) {
@@ -366,7 +390,9 @@ class ThermalPowerDataManager {
         
         try {
             console.log('📊 복합화력 데이터 로딩 시작...');
-            const url = `${DASHBOARD_APPS_SCRIPT_URL}?sheet=thermal&action=getData`;
+            // 동적으로 Apps Script URL 가져오기
+            const baseUrl = await getAppsScriptUrl();
+            const url = `${baseUrl}?sheet=thermal&action=getData`;
             
             const response = await fetch(url);
             if (!response.ok) {
@@ -536,7 +562,9 @@ class SubstationDataManager {
         
         try {
             console.log('📊 변전소 데이터 로딩 시작...');
-            const url = `${DASHBOARD_APPS_SCRIPT_URL}?sheet=substation&action=getData`;
+            // 동적으로 Apps Script URL 가져오기
+            const baseUrl = await getAppsScriptUrl();
+            const url = `${baseUrl}?sheet=substation&action=getData`;
             
             const response = await fetch(url);
             if (!response.ok) {
@@ -713,7 +741,9 @@ class MilitaryDataManager {
         
         try {
             console.log('📊 미군기지 데이터 로딩 시작...');
-            const url = `${DASHBOARD_APPS_SCRIPT_URL}?sheet=military&action=getData`;
+            // 동적으로 Apps Script URL 가져오기
+            const baseUrl = await getAppsScriptUrl();
+            const url = `${baseUrl}?sheet=military&action=getData`;
             
             const response = await fetch(url);
             if (!response.ok) {
@@ -949,41 +979,56 @@ async function loadMilitaryData() {
 function initBusinessDataLoaders() {
     // 페이지 로드 시 데이터 로드
     document.addEventListener('DOMContentLoaded', function() {
-        // 원자력 데이터 로딩
-        if (document.querySelector('#nuclear-power .cgid-supply-section')) {
-            loadNuclearData();
-        } else {
-            document.addEventListener('componentsLoaded', () => {
-                setTimeout(loadNuclearData, 300);
-            });
-        }
-        
-        // 복합화력 데이터 로딩
-        if (document.querySelector('#thermal-power .simple-projects-table')) {
-            loadThermalData();
-        } else {
-            document.addEventListener('componentsLoaded', () => {
-                setTimeout(loadThermalData, 300);
-            });
-        }
-        
-        // 변전소 데이터 로딩
-        if (document.querySelector('#substation .substation-project-table')) {
-            loadSubstationData();
-        } else {
-            document.addEventListener('componentsLoaded', () => {
-                setTimeout(loadSubstationData, 300);
-            });
-        }
-        
-        // 미군기지 데이터 로딩
-        if (document.querySelector('#us-military .substation-project-table')) {
-            loadMilitaryData();
-        } else {
-            document.addEventListener('componentsLoaded', () => {
-                setTimeout(loadMilitaryData, 300);
-            });
-        }
+        // YPP Config 및 컴포넌트 로딩 확인
+        const initWhenReady = async () => {
+            if (window.YPPConfig) {
+                try {
+                    // 원자력 데이터 로딩
+                    if (document.querySelector('#nuclear-power .cgid-supply-section')) {
+                        await loadNuclearData();
+                    }
+                    
+                    // 복합화력 데이터 로딩
+                    if (document.querySelector('#thermal-power .simple-projects-table')) {
+                        await loadThermalData();
+                    }
+                    
+                    // 변전소 데이터 로딩
+                    if (document.querySelector('#substation .substation-project-table')) {
+                        await loadSubstationData();
+                    }
+                    
+                    // 미군기지 데이터 로딩
+                    if (document.querySelector('#us-military .substation-project-table')) {
+                        await loadMilitaryData();
+                    }
+                    
+                    return true;
+                } catch (error) {
+                    console.error('Business 데이터 로딩 실패:', error);
+                    return true; // 에러가 발생해도 초기화는 완료된 것으로 처리
+                }
+            }
+            return false;
+        };
+
+        // 즉시 확인
+        initWhenReady().then(success => {
+            if (!success) {
+                // 주기적 확인
+                const checkReady = setInterval(async () => {
+                    if (await initWhenReady()) {
+                        clearInterval(checkReady);
+                    }
+                }, 100);
+                
+                // 타임아웃 설정 (5초 후 강제 초기화)
+                setTimeout(() => {
+                    clearInterval(checkReady);
+                    console.warn('YPP Config 로드 대기 시간 초과');
+                }, 5000);
+            }
+        });
     });
     
     // 언어 변경 이벤트 리스너

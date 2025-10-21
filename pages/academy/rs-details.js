@@ -5,13 +5,37 @@
 
 class RelaySchoolDetailsManager {
     constructor() {
-        this.apiUrl = 'https://script.google.com/macros/s/AKfycbzVwT_a8MDrI2-GJvicN0aEXzxN2vDjm5Tr6uvNLWOMzss9sC7uRtc98ErZ9fLlNqAybQ/exec';
+        this.apiUrl = null; // 동적으로 로드될 URL
         this.currentLang = this.detectLanguage();
         this.detailsData = null;
         this.selectedCourseId = null;
         
         // 초기화
         this.init();
+    }
+
+    /**
+     * Apps Script URL을 동적으로 가져오기
+     */
+    async getAppsScriptUrl() {
+        if (this.apiUrl) {
+            return this.apiUrl; // 이미 로드된 경우 캐시된 값 사용
+        }
+
+        try {
+            // YPP Config가 로드되어 있는지 확인
+            if (!window.YPPConfig) {
+                throw new Error('YPP Config가 로드되지 않았습니다.');
+            }
+
+            // Academy RS1 Apps Script URL 가져오기
+            this.apiUrl = await window.YPPConfig.get('ACADEMY_RS1');
+            console.log('✅ Academy RS1 Apps Script URL 로드 완료:', this.apiUrl);
+            return this.apiUrl;
+        } catch (error) {
+            console.error('💥 Academy RS1 Apps Script URL 로드 실패:', error);
+            throw error; // 에러를 상위로 전파
+        }
     }
     
     /**
@@ -41,8 +65,10 @@ class RelaySchoolDetailsManager {
      */
     async loadDetailsData() {
         try {
-            console.log('Requesting data from:', `${this.apiUrl}?action=get_rs_details`);
-            const response = await fetch(`${this.apiUrl}?action=get_rs_details`);
+            // 동적으로 Apps Script URL 가져오기
+            const baseUrl = await this.getAppsScriptUrl();
+            console.log('Requesting data from:', `${baseUrl}?action=get_rs_details`);
+            const response = await fetch(`${baseUrl}?action=get_rs_details`);
             const result = await response.json();
             
             console.log('Raw API response:', result);

@@ -21,6 +21,12 @@
         
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- YPP Config -->
+    <script src="../../../js/config.js"></script>
 </head>
 <body>
     <!-- Header Container -->
@@ -617,15 +623,38 @@ class VideoPageController {
 
 class VideoManager {
     constructor() {
-        // 관리자 페이지와 동일한 Apps Script URL
-        this.appsScriptUrl = 'https://script.google.com/macros/s/AKfycbxB2_0dc5Wim-sRuAtrk3G14GL-iSUljdoWRtSpsJsy6NGhbLfbATfzWncitqCyhWKm/exec';
+        this.appsScriptUrl = null; // 동적으로 로드될 URL
         this.itemsPerPage = 20; // 20개씩 제한
+    }
+
+    // Apps Script URL을 동적으로 가져오기
+    async getAppsScriptUrl() {
+        if (this.appsScriptUrl) {
+            return this.appsScriptUrl; // 이미 로드된 경우 캐시된 값 사용
+        }
+
+        try {
+            // YPP Config가 로드되어 있는지 확인
+            if (!window.YPPConfig) {
+                throw new Error('YPP Config가 로드되지 않았습니다.');
+            }
+
+            // Media Video 페이지 Apps Script URL 가져오기
+            this.appsScriptUrl = await window.YPPConfig.get('MEDIA_VIDEO');
+            console.log('✅ Media Video Apps Script URL 로드 완료:', this.appsScriptUrl);
+            return this.appsScriptUrl;
+        } catch (error) {
+            console.error('💥 Media Video Apps Script URL 로드 실패:', error);
+            throw error; // 에러를 상위로 전파
+        }
     }
 
     // 비디오 갤러리 목록 가져오기
     async loadArticleList() {
         try {
-            const url = `${this.appsScriptUrl}?sheet=SHEET_GAL_VIDEO&action=getData`;
+            // 동적으로 Apps Script URL 가져오기
+            const baseUrl = await this.getAppsScriptUrl();
+            const url = `${baseUrl}?sheet=SHEET_GAL_VIDEO&action=getData`;
             console.log('비디오 갤러리 데이터 요청:', url);
             
             const response = await fetch(url);
@@ -696,17 +725,32 @@ function initVideoPage() {
 
 // 자동 초기화
 document.addEventListener('DOMContentLoaded', function() {
-    // 컴포넌트 로딩 완료 후 초기화
-    if (document.querySelector('.press-list')) {
-        initVideoPage();
-    } else {
-        // 컴포넌트 로딩 대기
-        const checkComponents = setInterval(() => {
-            if (document.querySelector('.press-list')) {
-                clearInterval(checkComponents);
-                initVideoPage();
+    // YPP Config 및 컴포넌트 로딩 확인
+    const initWhenReady = () => {
+        if (document.querySelector('.press-list') && window.YPPConfig) {
+            initVideoPage();
+            return true;
+        }
+        return false;
+    };
+
+    // 즉시 확인
+    if (!initWhenReady()) {
+        // 주기적 확인
+        const checkReady = setInterval(() => {
+            if (initWhenReady()) {
+                clearInterval(checkReady);
             }
         }, 100);
+        
+        // 타임아웃 설정 (5초 후 강제 초기화)
+        setTimeout(() => {
+            clearInterval(checkReady);
+            if (!videoPageController) {
+                console.warn('YPP Config 로드 대기 시간 초과, 강제 초기화');
+                initVideoPage();
+            }
+        }, 5000);
     }
 });
 

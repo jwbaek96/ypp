@@ -1,5 +1,20 @@
-const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxrBjwJRbcaOWXk3Vrnv8GySyiSfeYSKLLzYvZxmHmsZ_AqUZwxDKMmOW53lRXliQgdRg';
-const DASHBOARD_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DASHBOARD_APPS_SCRIPT_ID}/exec`;
+// YPP Config를 사용한 Apps Script URL 가져오기
+async function getAppsScriptURL() {
+    try {
+        // YPP Config가 로드되어 있는지 확인
+        if (!window.YPPConfig) {
+            throw new Error('YPP Config가 로드되지 않았습니다.');
+        }
+
+        // Support 페이지 Apps Script URL 가져오기
+        const url = await window.YPPConfig.get('SUPPORT');
+        console.log('✅ Apps Script URL 로드 완료:', url);
+        return url;
+    } catch (error) {
+        console.error('💥 Apps Script URL 로드 실패:', error);
+        throw error; // 에러를 상위로 전파
+    }
+}
 
 // FAQ 데이터 관리 클래스
 class FAQDataManager {
@@ -15,7 +30,10 @@ class FAQDataManager {
         
         try {
             console.log('📊 FAQ 데이터 로딩 시작...');
-            const url = `${DASHBOARD_APPS_SCRIPT_URL}?sheet=faq&action=getData`;
+            
+            // Supabase에서 Apps Script URL 가져오기
+            const baseURL = await getAppsScriptURL();
+            const url = `${baseURL}?sheet=faq&action=getData`;
             
             const response = await fetch(url);
             if (!response.ok) {
@@ -181,6 +199,12 @@ async function loadFAQData() {
 function initFAQDataLoader() {
     // 페이지 로드 시 FAQ 데이터 로드
     document.addEventListener('DOMContentLoaded', function() {
+        // YPP Config 로드 확인
+        if (!window.YPPConfig) {
+            console.error('YPP Config가 로드되지 않았습니다. config.js 스크립트 태그를 확인해주세요.');
+            return;
+        }
+
         // 컴포넌트 로딩 완료 후 FAQ 데이터 로드
         if (document.querySelector('.faq-container')) {
             loadFAQData();

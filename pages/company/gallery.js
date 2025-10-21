@@ -106,11 +106,32 @@ class GallerySystem {
         this.currentItems = [];
         this.searchKeyword = '';
         
-        // Apps Script 설정
-        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbwpIMqmuoDP3qTTm3bIgExc30IVBCNrdupkDX5VxgeZUxAZXRB2DJePGAUBsohX4Egc';
-        this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
+        // Apps Script 설정 - 동적으로 로드
+        this.appsScriptUrl = null;
         
         this.init();
+    }
+
+    // Apps Script URL을 동적으로 가져오기
+    async getAppsScriptUrl() {
+        if (this.appsScriptUrl) {
+            return this.appsScriptUrl; // 이미 로드된 경우 캐시된 값 사용
+        }
+
+        try {
+            // YPP Config가 로드되어 있는지 확인
+            if (!window.YPPConfig) {
+                throw new Error('YPP Config가 로드되지 않았습니다.');
+            }
+
+            // Company Gallery Apps Script URL 가져오기
+            this.appsScriptUrl = await window.YPPConfig.get('COMPANY_GALLERY');
+            console.log('✅ Company Gallery Apps Script URL 로드 완료:', this.appsScriptUrl);
+            return this.appsScriptUrl;
+        } catch (error) {
+            console.error('💥 Company Gallery Apps Script URL 로드 실패:', error);
+            throw error; // 에러를 상위로 전파
+        }
     }
 
     // 초기화
@@ -310,8 +331,9 @@ class GallerySystem {
     // 갤러리 데이터 로드
     async loadGalleryData() {
         try {
-            // Apps Script에서 데이터 가져오기
-            const url = `${this.appsScriptUrl}?sheet=${this.sheetType}&action=getData`;
+            // 동적으로 Apps Script URL 가져오기
+            const baseUrl = await this.getAppsScriptUrl();
+            const url = `${baseUrl}?sheet=${this.sheetType}&action=getData`;
             console.log('갤러리 데이터 요청:', url);
             
             const response = await fetch(url);

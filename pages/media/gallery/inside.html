@@ -21,6 +21,12 @@
     
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- YPP Config -->
+    <script src="../../../js/config.js"></script>
 </head>
 <body>
     <!-- Header Container -->
@@ -153,18 +159,39 @@
     <!-- Inside Gallery Script -->
     <script>
 
-// 배포 ID
-const DEPLOYMENT_ID = 'AKfycbwnyMgT9b-B11mWwEVSfzsL6-_zn8PQZklfMntssPqXRrXkcqsGB4lnlHRGbUf1JjQdxA';
-// 웹 앱 URL
-const GOOGLE_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DEPLOYMENT_ID}/exec`;
 // 전역 변수 선언
 let insideGalleryData = [];
+let GOOGLE_APPS_SCRIPT_URL = null; // 동적으로 로드될 URL
+
+// Apps Script URL을 동적으로 가져오기
+async function getAppsScriptUrl() {
+    if (GOOGLE_APPS_SCRIPT_URL) {
+        return GOOGLE_APPS_SCRIPT_URL; // 이미 로드된 경우 캐시된 값 사용
+    }
+
+    try {
+        // YPP Config가 로드되어 있는지 확인
+        if (!window.YPPConfig) {
+            throw new Error('YPP Config가 로드되지 않았습니다.');
+        }
+
+        // Media Inside 페이지 Apps Script URL 가져오기
+        GOOGLE_APPS_SCRIPT_URL = await window.YPPConfig.get('MEDIA_INSIDE');
+        console.log('✅ Media Inside Apps Script URL 로드 완료:', GOOGLE_APPS_SCRIPT_URL);
+        return GOOGLE_APPS_SCRIPT_URL;
+    } catch (error) {
+        console.error('💥 Media Inside Apps Script URL 로드 실패:', error);
+        throw error; // 에러를 상위로 전파
+    }
+}
 
 async function loadGalleryDataFromSheets() {
     try {
         console.log('📊 Google Sheets에서 갤러리 데이터 로드 시작...');
         
-        const response = await fetch(`${GOOGLE_APPS_SCRIPT_URL}?category=all`);
+        // 동적으로 Apps Script URL 가져오기
+        const baseUrl = await getAppsScriptUrl();
+        const response = await fetch(`${baseUrl}?category=all`);
         const result = await response.json();
         
         if (result.success) {
@@ -581,16 +608,46 @@ class InsideGalleryController {
 
 // 기존 DOMContentLoaded 이벤트를 수정
 document.addEventListener('DOMContentLoaded', async function() {
-    // Google Sheets에서 데이터 로드
-    const success = await loadGalleryDataFromSheets();
-    
-    if (success) {
-        // Inside 갤러리 컨트롤러 초기화
-        new InsideGalleryController(insideGalleryData, 'inside-gallery-section');
-    } else {
-        console.error('갤러리 데이터 로드 실패로 빈 갤러리를 표시합니다.');
-        // 실패해도 빈 배열로 갤러리 초기화
-        new InsideGalleryController([], 'inside-gallery-section');
+    // YPP Config 및 컴포넌트 로딩 확인
+    const initWhenReady = async () => {
+        if (window.YPPConfig) {
+            try {
+                // Google Sheets에서 데이터 로드
+                const success = await loadGalleryDataFromSheets();
+                
+                if (success) {
+                    // Inside 갤러리 컨트롤러 초기화
+                    new InsideGalleryController(insideGalleryData, 'inside-gallery-section');
+                } else {
+                    console.error('갤러리 데이터 로드 실패로 빈 갤러리를 표시합니다.');
+                    // 실패해도 빈 배열로 갤러리 초기화
+                    new InsideGalleryController([], 'inside-gallery-section');
+                }
+                return true;
+            } catch (error) {
+                console.error('Inside 갤러리 초기화 실패:', error);
+                new InsideGalleryController([], 'inside-gallery-section');
+                return true;
+            }
+        }
+        return false;
+    };
+
+    // 즉시 확인
+    if (!(await initWhenReady())) {
+        // 주기적 확인
+        const checkReady = setInterval(async () => {
+            if (await initWhenReady()) {
+                clearInterval(checkReady);
+            }
+        }, 100);
+        
+        // 타임아웃 설정 (5초 후 강제 초기화)
+        setTimeout(() => {
+            clearInterval(checkReady);
+            console.warn('YPP Config 로드 대기 시간 초과, 빈 갤러리로 초기화');
+            new InsideGalleryController([], 'inside-gallery-section');
+        }, 5000);
     }
 });
 </script>

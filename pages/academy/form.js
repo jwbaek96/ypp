@@ -94,6 +94,8 @@ function getCurrentLanguage() {
 let psacCoursesData = null;
 let relayCoursesData = null;
 
+
+
 // 과정 데이터 로드 함수들
 async function loadCourseData() {
     try {
@@ -296,8 +298,8 @@ function validatePhoneNumber(number) {
 }
 
 // CORS 우회 데이터 제출 함수 (iframe 방식)
-function submitFormData(formData) {
-    return new Promise((resolve, reject) => {
+async function submitFormData(formData) {
+    return new Promise(async (resolve, reject) => {
         // 숨겨진 iframe 생성
         const iframe = document.createElement('iframe');
         iframe.style.display = 'none';
@@ -307,27 +309,27 @@ function submitFormData(formData) {
         // 폼 생성
         const form = document.createElement('form');
         form.action = WEBAPP_URL;
-        form.method = 'POST';
-        form.target = 'hidden_iframe';
-        
-        // 데이터를 JSON 문자열로 변환하여 hidden input에 저장
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'data';
-        input.value = JSON.stringify(formData);
-        
-        form.appendChild(input);
-        document.body.appendChild(form);
-        
-        // iframe 로드 완료 시 처리
-        iframe.onload = function() {
-            setTimeout(() => {
-                document.body.removeChild(form);
-                document.body.removeChild(iframe);
-                resolve();
-            }, 1000);
-        };
-        
+            form.method = 'POST';
+            form.target = 'hidden_iframe';
+            
+            // 데이터를 JSON 문자열로 변환하여 hidden input에 저장
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'data';
+            input.value = JSON.stringify(formData);
+            
+            form.appendChild(input);
+            document.body.appendChild(form);
+            
+            // iframe 로드 완료 시 처리
+            iframe.onload = function() {
+                setTimeout(() => {
+                    document.body.removeChild(form);
+                    document.body.removeChild(iframe);
+                    resolve();
+                }, 1000);
+            };
+            
         // 폼 제출
         form.submit();
     });

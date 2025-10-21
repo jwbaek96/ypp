@@ -5,10 +5,34 @@
 
 class PSACScheduleManager {
     constructor() {
-        // Apps Script 웹앱 URL (appscript1.gs와 동일한 스프레드시트)
-        this.APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwIBWN67LFMvxgh61qn3m38RMohUEe--M125_UkS6MfjhhR34m-nGSPGaQSdcXxgk767Q/exec';
+        // Apps Script 웹앱 URL - 동적으로 로드될 URL
+        this.APPS_SCRIPT_URL = null;
         this.scheduleData = null;
         this.currentLanguage = 'korean';
+    }
+
+    /**
+     * Apps Script URL을 동적으로 가져오기
+     */
+    async getAppsScriptUrl() {
+        if (this.APPS_SCRIPT_URL) {
+            return this.APPS_SCRIPT_URL; // 이미 로드된 경우 캐시된 값 사용
+        }
+
+        try {
+            // YPP Config가 로드되어 있는지 확인
+            if (!window.YPPConfig) {
+                throw new Error('YPP Config가 로드되지 않았습니다.');
+            }
+
+            // Academy PSAC2 Apps Script URL 가져오기
+            this.APPS_SCRIPT_URL = await window.YPPConfig.get('ACADEMY_PSAC2');
+            console.log('✅ Academy PSAC2 Apps Script URL 로드 완료:', this.APPS_SCRIPT_URL);
+            return this.APPS_SCRIPT_URL;
+        } catch (error) {
+            console.error('💥 Academy PSAC2 Apps Script URL 로드 실패:', error);
+            throw error; // 에러를 상위로 전파
+        }
     }
 
     /**
@@ -30,7 +54,9 @@ class PSACScheduleManager {
      */
     async loadScheduleData() {
         try {
-            const response = await fetch(`${this.APPS_SCRIPT_URL}?action=get_psac_schedule`);
+            // 동적으로 Apps Script URL 가져오기
+            const baseUrl = await this.getAppsScriptUrl();
+            const response = await fetch(`${baseUrl}?action=get_psac_schedule`);
             const result = await response.json();
             
             if (result.success) {

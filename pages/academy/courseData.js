@@ -2,9 +2,8 @@
  * 구글 시트 기반 과정 데이터 관리
  */
 
-// Apps Script 웹앱 URL
-const APPS_SCRIPT_ID = 'AKfycbzhGw0bYOCgC2LyRsOQVnmgsw13PoSiIxM1pqq5n_y2Gj-1fesd6D0llRnAKHcLh_-iqw';
-const COURSE_DATA_API_URL = `https://script.google.com/macros/s/${APPS_SCRIPT_ID}/exec`;
+// Apps Script 웹앱 URL (동적으로 로드됨)
+let COURSE_DATA_API_URL = null;
 
 // 캐시 저장소
 let courseDataCache = {
@@ -13,6 +12,70 @@ let courseDataCache = {
     lastUpdated: null,
     cacheTimeout: 5 * 60 * 1000 // 5분 캐시
 };
+
+/**
+ * YPPConfig 로드 대기 (더 강력한 버전)
+ */
+async function waitForYPPConfig() {
+    // 이미 초기화되어 있으면 즉시 반환
+    if (window.YPPConfig && 
+        typeof window.YPPConfig.getConfig === 'function' && 
+        window.YPPConfig.initialized) {
+        return true;
+    }
+    
+    // Promise와 이벤트 리스너를 결합한 방식
+    return new Promise((resolve, reject) => {
+        let attempts = 0;
+        const maxAttempts = 150; // 15초 대기
+        
+        const checkConfig = () => {
+            attempts++;
+            
+            if (window.YPPConfig && 
+                typeof window.YPPConfig.getConfig === 'function' && 
+                window.YPPConfig.initialized) {
+                resolve(true);
+                return;
+            }
+            
+            if (attempts >= maxAttempts) {
+                reject(new Error('YPP Config 로드 대기 시간 초과'));
+                return;
+            }
+            
+            setTimeout(checkConfig, 100);
+        };
+        
+        // 즉시 첫 번째 체크 시작
+        checkConfig();
+        
+        // 추가로 DOMContentLoaded와 load 이벤트도 감지
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', checkConfig);
+        }
+        window.addEventListener('load', checkConfig);
+    });
+}
+
+/**
+ * Apps Script URL 가져오기 (캐싱 포함)
+ */
+async function getCourseDataApiUrl() {
+    if (COURSE_DATA_API_URL) {
+        return COURSE_DATA_API_URL;
+    }
+    
+    try {
+        await waitForYPPConfig();
+        COURSE_DATA_API_URL = await window.YPPConfig.getConfig('YPP_APPSURL_ACADEMY_COURSEDATA');
+        return COURSE_DATA_API_URL;
+    } catch (error) {
+        // 폴백: 하드코딩된 URL 사용
+        COURSE_DATA_API_URL = 'https://script.google.com/macros/s/AKfycbzhGw0bYOCgC2LyRsOQVnmgsw13PoSiIxM1pqq5n_y2Gj-1fesd6D0llRnAKHcLh_-iqw/exec';
+        return COURSE_DATA_API_URL;
+    }
+}
 
 /**
  * PSAC 과정 데이터 가져오기
@@ -24,7 +87,8 @@ async function fetchPsacCourses() {
             return courseDataCache.psac;
         }
 
-        const response = await fetch(`${COURSE_DATA_API_URL}?action=get_psac_courses`);
+        const apiUrl = await getCourseDataApiUrl();
+        const response = await fetch(`${apiUrl}?action=get_psac_courses`);
         const result = await response.json();
         
         if (result.success) {
@@ -55,7 +119,8 @@ async function fetchRelayCourses() {
             return courseDataCache.relay;
         }
 
-        const response = await fetch(`${COURSE_DATA_API_URL}?action=get_relay_courses`);
+        const apiUrl = await getCourseDataApiUrl();
+        const response = await fetch(`${apiUrl}?action=get_relay_courses`);
         const result = await response.json();
         
         if (result.success) {

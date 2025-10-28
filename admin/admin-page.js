@@ -2049,8 +2049,8 @@ class PageManager {
                 <div class="edit-form-group" style="width: 100%;">
                     <label>카테고리</label>
                     <select name="category" required>
-                        <option value="psac" ${(item.category || '').toLowerCase() === 'psac' ? 'selected' : ''}>PSAC</option>
-                        <option value="relay" ${(item.category || '').toLowerCase() === 'relay' ? 'selected' : ''}>Relay School</option>
+                        <option value="PSAC" ${(item.category || '').toLowerCase() === 'psac' ? 'selected' : ''}>PSAC</option>
+                        <option value="Relay School" ${(item.category || '').toLowerCase() === 'relay' ? 'selected' : ''}>Relay School</option>
                     </select>
                 </div>
             </div>

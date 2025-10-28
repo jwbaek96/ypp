@@ -351,19 +351,28 @@ async function loadGalleryDataFromSheets() {
         if (result.success) {
             console.log(`✅ 총 ${result.data.length}개의 데이터를 성공적으로 로드했습니다.`);
             
-            // 카테고리별로 데이터 분리
+            // 카테고리별로 데이터 분리 (Google Sheets의 row 순서 그대로 사용)
             psacGalleryData = result.data.filter(item => 
                 item.category && item.category.toLowerCase() === 'psac'
-            ).reverse();
+            );
             
             relaySchoolGalleryData = result.data.filter(item => 
                 item.category && item.category.toLowerCase() === 'relay school'
-            ).reverse();
+            );
             
             console.log(`📋 PSAC 갤러리: ${psacGalleryData.length}개`);
             console.log(`📋 Relay School 갤러리: ${relaySchoolGalleryData.length}개`);
-            console.log(psacGalleryData);
-            console.log(relaySchoolGalleryData);
+            
+            // 날짜 정보 디버깅
+            console.log('PSAC 갤러리 날짜 정보:');
+            psacGalleryData.forEach((item, index) => {
+                console.log(`${index + 1}. ID: ${item.id}, Date: ${item.date}, Created: ${item.created_at}, Title: ${item.titleKR}`);
+            });
+            
+            console.log('Relay School 갤러리 날짜 정보:');
+            relaySchoolGalleryData.forEach((item, index) => {
+                console.log(`${index + 1}. ID: ${item.id}, Date: ${item.date}, Created: ${item.created_at}, Title: ${item.titleKR}`);
+            });
 
             return true;
         } else {
@@ -1263,15 +1272,6 @@ class RelaySchoolGalleryController {
                     nextBtn.style.display = 'none';
                 }
             }
-
-            // formatDate(dateString) {
-            //     const date = new Date(dateString);
-            //     return date.toLocaleDateString('ko-KR', {
-            //         year: 'numeric',
-            //         month: 'long',
-            //         day: 'numeric'
-            //     });
-            // }
         }
 
 // 기존 DOMContentLoaded 이벤트를 수정
@@ -1409,7 +1409,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     .image-container:active {cursor: grabbing;}
     .image-container img {max-width: 100%;max-height: 95%;object-fit: contain;pointer-events: none; border-radius: 12px;}
     /* Touch areas for left/right navigation */
-    .image-touch-area {position: absolute;top: 0;bottom: 0;width: 50%;cursor: pointer;z-index: 100;}
+    .image-touch-area {position: absolute;top: 0;bottom: 0;width: 40%;cursor: pointer;z-index: 100;}
     .left-touch {left: 0;}
     .right-touch {right: 0;}
     .modal-body p {padding: 20px;margin: 0;color: #666;line-height: 1.6;max-height: 30%;}

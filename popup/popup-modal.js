@@ -157,6 +157,8 @@ const YppPopupSlider = {
         return this.generateRenewalSlide(popup, index);
       } else if (popup.type === 'celebration') {
         return this.generateCelebrationSlide(popup, index);
+      } else if (popup.type === 'announcement') {
+        return this.generateAnnouncementSlide(popup, index);
       }
     }).join('');
   },
@@ -251,6 +253,32 @@ const YppPopupSlider = {
             </div>
             
             <p class="closing-message" data-kor="${popup.content.closing.kor}" data-eng="${popup.content.closing.eng}">${popup.content.closing.kor}</p>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  /**
+   * 공지사항 슬라이드 생성
+   */
+  generateAnnouncementSlide(popup, index) {
+    const imageHtml = popup.image ? `
+      <div class="announcement-image">
+        <img src="${popup.image.src}" alt="${popup.image.alt.kor}" data-alt-kor="${popup.image.alt.kor}" data-alt-eng="${popup.image.alt.eng}">
+      </div>
+    ` : '';
+
+    return `
+      <div class="popup-slide ${index === 0 ? 'active' : ''}" data-slide="${index}">
+        <div class="slide-content">
+          <h2 class="slide-title" data-kor="${popup.title.kor}" data-eng="${popup.title.eng}">${popup.title.kor}</h2>
+          
+          <div class="announcement-content">
+            ${imageHtml}
+            <div class="announcement-text">
+              <p class="announcement-message" data-kor="${popup.content.kor}" data-eng="${popup.content.eng}">${popup.content.kor}</p>
+            </div>
           </div>
         </div>
       </div>

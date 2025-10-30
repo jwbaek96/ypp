@@ -141,6 +141,7 @@
 .popup-slides-container {
   display: flex;
   transition: transform 0.3s ease-in-out;
+  justify-content: flex-start;
 }
 
 /* 개별 슬라이드 */

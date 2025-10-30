@@ -298,7 +298,12 @@ class PressPageController {
         
         // 리스트 HTML 생성
         container.innerHTML = this.currentArticles.map(article => {
+            console.log('📋 리스트 렌더링 - 기사:', article.titleKR || '제목없음');
+            console.log('  - submittedAt 원본:', article.submittedAt);
+            console.log('  - date 원본:', article.date);
+            
             const date = this.formatDate(article.submittedAt || article.date);
+            console.log('  - 최종 표시 날짜:', date);
             const titleKR = article.titleKR || '제목 없음';
             const titleEN = article.titleEN || article.titleKR || 'No Title';
             const summaryKR = (article.contentKR || '').substring(0, 150) + '...';
@@ -328,7 +333,12 @@ class PressPageController {
         const detailSection = this.detailSection;
         
         // 날짜 포맷팅
+        console.log('📄 상세보기 렌더링 - 기사:', article.titleKR || '제목없음');
+        console.log('  - submittedAt 원본:', article.submittedAt);
+        console.log('  - date 원본:', article.date);
+        
         const date = this.formatDate(article.submittedAt || article.date);
+        console.log('  - 최종 표시 날짜:', date);
         
         // 메타 정보 업데이트
         detailSection.querySelector('.article-date').textContent = date;
@@ -387,18 +397,35 @@ class PressPageController {
             .replace(/\r/g, '');
     }
     
-    // 날짜 포맷팅
+    // 날짜 포맷팅 (Apps Script에서 이미 올바른 형식으로 전송됨)
     formatDate(dateString) {
         if (!dateString) return '-';
         
         try {
+            // 구글 시트에서 오는 날짜가 "YYYY-MM-DD HH:MM:SS" 형식인 경우
+            if (typeof dateString === 'string' && dateString.includes(' ')) {
+                // 날짜 부분만 추출 (시간 제거)
+                const datePart = dateString.split(' ')[0];
+                if (/^\d{4}-\d{2}-\d{2}$/.test(datePart)) {
+                    return datePart.replace(/-/g, '.');
+                }
+            }
+            
+            // 'YYYY-MM-DD' 형식만 있는 경우
+            if (typeof dateString === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+                return dateString.replace(/-/g, '.');
+            }
+            
+            // 다른 형식인 경우 - 기본 Date 처리
             const date = new Date(dateString);
             return date.toLocaleDateString('ko-KR', {
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit'
             });
+            
         } catch (error) {
+            console.error('날짜 포맷팅 오류:', error);
             return dateString;
         }
     }
@@ -593,6 +620,47 @@ class PressManager {
             const result = await response.json();
             
             console.log('보도자료 API 응답:', result);
+            
+            // Apps Script 날짜 처리 분석
+            if (result.data && result.data.length > 0) {
+                console.log('� Apps Script 날짜 처리 분석:');
+                console.log('📡 API URL:', `${baseUrl}?sheet=SHEET_BOARD_NEWS&action=getData`);
+                console.log('📅 전체 응답 구조:', {
+                    success: result.success,
+                    message: result.message,
+                    timestamp: result.timestamp,
+                    dataCount: result.data.length
+                });
+                
+                result.data.forEach((article, index) => {
+                    console.log(`\n📰 기사 ${index + 1} 상세 분석:`);
+                    console.log('  🗂️ 전체 필드들:', Object.keys(article));
+                    console.log('  📅 submittedAt:', {
+                        value: article.submittedAt,
+                        type: typeof article.submittedAt,
+                        isDate: article.submittedAt instanceof Date,
+                        toString: String(article.submittedAt)
+                    });
+                    console.log('  📅 date 필드:', {
+                        value: article.date,
+                        type: typeof article.date,
+                        isDate: article.date instanceof Date,
+                        toString: String(article.date)
+                    });
+                    
+                    // 다른 날짜 관련 필드들도 확인
+                    Object.keys(article).forEach(key => {
+                        if (key.toLowerCase().includes('date') || key.toLowerCase().includes('time') || key.toLowerCase().includes('created') || key.toLowerCase().includes('updated')) {
+                            console.log(`  📅 ${key}:`, {
+                                value: article[key],
+                                type: typeof article[key]
+                            });
+                        }
+                    });
+                });
+                
+                console.log('\n🎯 결론: Apps Script에서 전송하는 날짜 형식을 확인하세요!');
+            }
             
             if (!result.success) {
                 throw new Error(result.message || '데이터 로딩 실패');

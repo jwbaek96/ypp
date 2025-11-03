@@ -568,12 +568,18 @@ function getCustomHeaders(sheetName) {
       respondentId: 1,     // Respondent ID
       submittedAt: 2,      // Submitted at
       number: 3,           // 순번
-      state: 4,            // 상태
-      titleKR: 5,          // 제목(한글)
-      titleEN: 6,          // 제목(영문)
-      image: 7,            // 이미지 업로드
-      contentKR: 8,        // 내용(한글)
-      contentEN: 9         // 내용(영문)
+      category: 4,         // 분류 (공지사항/보도자료)
+      state: 5,            // 상태
+      titleKR: 6,          // 제목(한글)
+      titleEN: 7,          // 제목(영문)
+      image: 8,            // 이미지 업로드
+      contentKR: 9,        // 내용(한글)
+      contentEN: 10,       // 내용(영문)
+      sourceLink: 11,      // 출처(링크)
+      fileUpload: 12,      // 파일 업로드
+      popup: 13,           // 팝업
+      popupImageKR: 14,    // 팝업이미지 업로드(한글)
+      popupImageEN: 15     // 팝업이미지 업로드(영문)
     },
     
     [SHEET_APPLY_P]: { // 신청 PSAC
@@ -877,6 +883,9 @@ function processFieldValue(value, key, sheetName) {
   if (sheetName === SHEET_BOARD_NEWS) {
     if (key === 'submittedAt') {
       return formatDate(value, 'datetime');
+    }
+    if (key === 'state') {
+      return (value || '').toString().toLowerCase() === 'on' ? 'on' : 'off';
     }
   }
   
@@ -1307,12 +1316,18 @@ function updateItem(sheetType, itemId, updateData) {
           'respondentId': 1, // Respondent ID (2번째 컬럼)
           'submittedAt': 2, // Submitted at (3번째 컬럼)
           'number': 3,     // 순번 (4번째 컬럼)
-          'state': 4,      // 상태 (5번째 컬럼) 
-          'titleKR': 5,    // 제목(한글) (6번째 컬럼)
-          'titleEN': 6,    // 제목(영문) (7번째 컬럼)
-          'image': 7,      // 이미지 업로드 (8번째 컬럼)
-          'contentKR': 8,  // 내용(한글) (9번째 컬럼)
-          'contentEN': 9   // 내용(영문) (10번째 컬럼)
+          'category': 4,   // 분류 (5번째 컬럼)
+          'state': 5,      // 상태 (6번째 컬럼) 
+          'titleKR': 6,    // 제목(한글) (7번째 컬럼)
+          'titleEN': 7,    // 제목(영문) (8번째 컬럼)
+          'image': 8,      // 이미지 업로드 (9번째 컬럼)
+          'contentKR': 9,  // 내용(한글) (10번째 컬럼)
+          'contentEN': 10, // 내용(영문) (11번째 컬럼)
+          'sourceLink': 11,// 출처(링크) (12번째 컬럼)
+          'fileUpload': 12,// 파일 업로드 (13번째 컬럼)
+          'popup': 13,     // 팝업 (14번째 컬럼)
+          'popupImageKR': 14, // 팝업이미지 업로드(한글) (15번째 컬럼)
+          'popupImageEN': 15  // 팝업이미지 업로드(영문) (16번째 컬럼)
         };
         
         columnIndex = pressFieldMappings[key];

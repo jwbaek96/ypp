@@ -427,7 +427,154 @@
   .renewal-content .message-main{font-size: 1rem;}
   .renewal-content .message-sub{font-size: .9rem;}
 }
+/* 보도자료 팝업 스타일 */
+.press-popup-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.press-popup-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.press-popup-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.press-popup-link:hover {
+  transform: scale(1.02);
+}
+
+.press-popup-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4; /* 3:4 세로비율 고정 */
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.press-popup-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.press-popup-link:hover .press-popup-image {
+  transform: scale(1.05);
+}
+
+.press-popup-fallback {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.press-popup-fallback .press-category {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.press-popup-fallback .press-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0 0 1rem 0;
+  color: white;
+}
+
+.press-popup-fallback .press-date {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.press-popup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(2px);
+}
+
+.press-popup-link:hover .press-popup-overlay {
+  opacity: 1;
+}
+
+.press-popup-hover-text {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid white;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
+}
+
+.press-popup-link:hover .press-popup-hover-text {
+  transform: translateY(0);
+}
+
+/* 모바일 대응 */
+@media (max-width: 1042px) {
+  .press-popup-image-container {
+    aspect-ratio: 3/4;
+    border-radius: 8px;
+  }
+  
+  .press-popup-fallback {
+    padding: 1.5rem;
+  }
+  
+  .press-popup-fallback .press-title {
+    font-size: 1.1rem;
+  }
+  
+  .press-popup-hover-text {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
 /* 접근성 개선 */
 @media (prefers-reduced-motion: reduce) {
   .ypp-popup-modal {animation: none; /* 애니메이션 제거 */}
+  .press-popup-link,
+  .press-popup-image,
+  .press-popup-overlay,
+  .press-popup-hover-text {
+    transition: none;
+  }
 }

@@ -82,7 +82,8 @@ function updateNavCounts(data) {
         'inside': data.galC,           // 인사이드
         'academy': data.galD,          // 아카데미
         'video': data.galVideo,          // 비디오
-        'news': data.boardNews,        // 보도자료
+        'news': data.boardNews,        // 보도자료 (기존)
+        'news-popup': data.boardNews + (data.popup || 0), // 보도자료 & 팝업 통합
         'psac': data.applyPSAC,        // PSAC
         'relay-school': data.applyRelay, // Relay School
         'relay-school-special': data.applyRelaySpecial, // Relay School Special
@@ -218,6 +219,7 @@ function handleNavClick(navType) {
         'inside': '인사이드',
         'academy': '아카데미',
         'news': '보도자료',
+        'news-popup': 'news-popup', // 통합 페이지
         'psac': 'PSAC',
         'relay-school': 'RelaySchool',
         'relay-school-special': 'RelaySchoolSpecial',
@@ -229,8 +231,14 @@ function handleNavClick(navType) {
     const pageName = pageMapping[navType];
     if (pageName) {
         console.log(`${pageName} 페이지로 이동`);
-        // page.html로 이동하면서 파라미터 전달
-        window.location.href = `page.html?page=${encodeURIComponent(pageName)}`;
+        
+        // 통합 페이지는 별도 HTML로 이동
+        if (navType === 'news-popup') {
+            window.location.href = 'news-popup.html';
+        } else {
+            // 기존 페이지들은 page.html로 이동하면서 파라미터 전달
+            window.location.href = `page.html?page=${encodeURIComponent(pageName)}`;
+        }
     } else {
         console.log(`알 수 없는 네비게이션: ${navType}`);
     }

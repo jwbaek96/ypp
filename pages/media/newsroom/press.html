@@ -116,6 +116,7 @@
                         </div>
                         <div class="article-images"></div>
                         <div class="article-content"></div>
+                        <div class="article-files"></div>
                     </article>
                     
                     <div class="article-navigation">
@@ -309,10 +310,17 @@ class PressPageController {
             const summaryKR = (article.contentKR || '').substring(0, 150) + '...';
             const summaryEN = (article.contentEN || article.contentKR || '').substring(0, 150) + '...';
             
+            // 분류 처리
+            const category = article.category || '보도자료'; // 기본값: 보도자료
+            const categoryKR = category === '공지사항' ? '공지사항' : '보도자료';
+            const categoryEN = category === '공지사항' ? 'Notice' : 'Press Release';
+            const categoryClass = category === '공지사항' ? 'notice' : 'press';
+            
             return `
                 <div class="press-item" onclick="pressPageController.viewArticle('${article.id || article.number}')">
                     <div class="press-content">
                         <div class="press-meta">
+                            <span class="press-category ${categoryClass}" data-kor="${categoryKR}" data-eng="${categoryEN}">${selectedLanguage === 'en' ? categoryEN : categoryKR}</span>
                             <span class="press-date">${date}</span>
                         </div>
                         <h3 class="press-title">
@@ -340,11 +348,21 @@ class PressPageController {
         const date = this.formatDate(article.submittedAt || article.date);
         console.log('  - 최종 표시 날짜:', date);
         
-        // 메타 정보 업데이트
-        detailSection.querySelector('.article-date').textContent = date;
+        // 분류 및 날짜 메타 정보 업데이트
+        const category = article.category || '보도자료';
+        const categoryKR = category === '공지사항' ? '공지사항' : '보도자료';
+        const categoryEN = category === '공지사항' ? 'Notice' : 'Press Release';
+        const categoryClass = category === '공지사항' ? 'notice' : 'press';
         
         // 현재 선택된 언어 확인
         const selectedLanguage = localStorage.getItem('selectedLanguage') || 'kr';
+        
+        // 메타 정보 HTML 업데이트
+        const articleMeta = detailSection.querySelector('.article-meta');
+        articleMeta.innerHTML = `
+        <span class="article-date">${date}</span>
+        <span class="article-category ${categoryClass}" data-kor="${categoryKR}" data-eng="${categoryEN}">${selectedLanguage === 'en' ? categoryEN : categoryKR}</span>
+        `;
         
         // 제목 업데이트 - 언어 전환 지원
         const titleElement = detailSection.querySelector('.article-title');
@@ -367,6 +385,9 @@ class PressPageController {
         // 이미지 업데이트
         this.renderArticleImages(article.image || []);
         
+        // 파일 다운로드 섹션 업데이트
+        this.renderArticleFiles(article.fileUpload || '');
+        
         // 이전/다음 기사 네비게이션 업데이트
         this.updateArticleNavigation();
     }
@@ -388,6 +409,107 @@ class PressPageController {
                 <img src="${imageUrl}" alt="기사 이미지" loading="lazy">
             </div>
         `).join('');
+    }
+    
+    // 기사 파일 다운로드 섹션 렌더링
+    renderArticleFiles(fileData) {
+        const filesContainer = this.detailSection.querySelector('.article-files');
+        
+        if (!fileData || fileData.trim() === '') {
+            filesContainer.innerHTML = '';
+            return;
+        }
+        
+        // 현재 선택된 언어 확인
+        const selectedLanguage = localStorage.getItem('selectedLanguage') || 'kr';
+        
+        // 파일 데이터 파싱 (줄바꿈으로 구분된 URL들 또는 JSON 배열)
+        let fileArray = [];
+        if (typeof fileData === 'string') {
+            if (fileData.trim().startsWith('[')) {
+                try {
+                    fileArray = JSON.parse(fileData);
+                } catch (e) {
+                    fileArray = fileData.split('\n').filter(url => url.trim() !== '');
+                }
+            } else {
+                fileArray = fileData.split('\n').filter(url => url.trim() !== '');
+            }
+        } else if (Array.isArray(fileData)) {
+            fileArray = fileData;
+        }
+        
+        if (fileArray.length === 0) {
+            filesContainer.innerHTML = '';
+            return;
+        }
+        
+        const titleKR = '첨부파일';
+        const titleEN = 'Attachments';
+        
+        filesContainer.innerHTML = `
+            <div class="article-files-section">
+                <h3 class="files-title" data-kor="${titleKR}" data-eng="${titleEN}">${selectedLanguage === 'en' ? titleEN : titleKR}</h3>
+                <div class="files-list">
+                    ${fileArray.map((fileUrl, index) => {
+                        const fileName = this.extractFileName(fileUrl);
+                        const fileExtension = this.getFileExtension(fileName);
+                        const downloadTextKR = '다운로드';
+                        const downloadTextEN = 'Download';
+                        
+                        return `
+                            <div class="file-item">
+                                <div class="file-info">
+                                    <i class="fas ${this.getFileIcon(fileExtension)}"></i>
+                                    <span class="file-name">${fileName}</span>
+                                </div>
+                                <a href="${fileUrl}" target="_blank" rel="noopener noreferrer" class="file-download-btn" 
+                                   data-kor="${downloadTextKR}" data-eng="${downloadTextEN}">
+                                    <i class="fas fa-download"></i>
+                                    <span>${selectedLanguage === 'en' ? downloadTextEN : downloadTextKR}</span>
+                                </a>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    }
+    
+    // 파일명 추출 함수
+    extractFileName(url) {
+        if (!url) return 'file';
+        const parts = url.split('/');
+        const fileName = parts[parts.length - 1];
+        // URL 디코딩
+        return decodeURIComponent(fileName);
+    }
+    
+    // 파일 확장자 추출 함수
+    getFileExtension(fileName) {
+        const lastDot = fileName.lastIndexOf('.');
+        return lastDot > 0 ? fileName.substring(lastDot + 1).toLowerCase() : '';
+    }
+    
+    // 파일 타입별 아이콘 반환 함수
+    getFileIcon(extension) {
+        const iconMap = {
+            pdf: 'fa-file-pdf',
+            doc: 'fa-file-word',
+            docx: 'fa-file-word',
+            xls: 'fa-file-excel',
+            xlsx: 'fa-file-excel',
+            ppt: 'fa-file-powerpoint',
+            pptx: 'fa-file-powerpoint',
+            zip: 'fa-file-archive',
+            rar: 'fa-file-archive',
+            txt: 'fa-file-text',
+            jpg: 'fa-file-image',
+            jpeg: 'fa-file-image',
+            png: 'fa-file-image',
+            gif: 'fa-file-image'
+        };
+        return iconMap[extension] || 'fa-file';
     }
     
     // 내용 포맷팅 (줄바꿈 처리)
@@ -475,7 +597,7 @@ class PressPageController {
         // 이전 기사 버튼
         if (currentIndex <= 0) {
             prevBtn.disabled = true;
-            const noPrevTextKR = '이전 기사가 없습니다';
+            const noPrevTextKR = '이전 게시물이 없습니다';
             const noPrevTextEN = 'No previous article';
             prevBtn.innerHTML = `<span data-kor="${noPrevTextKR}" data-eng="${noPrevTextEN}">${selectedLanguage === 'en' ? noPrevTextEN : noPrevTextKR}</span>`;
         } else {
@@ -491,7 +613,7 @@ class PressPageController {
         // 다음 기사 버튼
         if (currentIndex >= this.allArticles.length - 1) {
             nextBtn.disabled = true;
-            const noNextTextKR = '다음 기사가 없습니다';
+            const noNextTextKR = '다음 게시물이 없습니다';
             const noNextTextEN = 'No next article';
             nextBtn.innerHTML = `<span data-kor="${noNextTextKR}" data-eng="${noNextTextEN}">${selectedLanguage === 'en' ? noNextTextEN : noNextTextKR}</span>`;
         } else {
@@ -666,9 +788,9 @@ class PressManager {
                 throw new Error(result.message || '데이터 로딩 실패');
             }
 
-            // 활성화된 기사만 필터링하고 날짜순 정렬
+            // 활성화된 기사만 필터링하고 날짜순 정렬 (대소문자 무관)
             const articles = (result.data || [])
-                .filter(item => item.state === 'on')
+                .filter(item => (item.state || '').toString().toLowerCase() === 'on')
                 .sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
             
             console.log('필터링된 보도자료:', articles.length, '개');
@@ -795,10 +917,28 @@ Object.defineProperty(window, 'pressPageController', {
 .article-title {font-size: 2rem;font-weight: 700;line-height: 1.3;color: var(--text-primary, #333);margin: 0 0 1rem 0;border-left: var(--primary-blue, #0066cc) 5px solid;padding-left: 1rem;}
 
 .article-date {color: var(--primary-blue, #0066cc);font-weight: 500;font-size: 0.95rem;}
+.article-category {padding: 0.4rem 1rem;border-radius: 20px;font-weight: 600;font-size: 0.85rem;white-space: nowrap;}
+.article-category.notice {background-color: #e3f2fd;color: #1976d2;border: 1px solid #bbdefb;}
+.article-category.press {background-color: #f3e5f5;color: #7b1fa2;border: 1px solid #ce93d8;}
 .article-content {margin-top: 2rem;margin-bottom: 2rem;line-height: 1.8;font-size: 1.1rem;color: var(--text-primary, #333);}
 .article-images {margin: 0 0 2rem 0;}
 .article-image {margin-bottom: 1rem;}
 .article-image img {width: 100%;height: auto;border-radius: 8px;box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
+
+/* Article Files Section */
+.article-files {margin: 2rem 0;}
+.article-files-section {background: #f8f9fa;border-radius: 8px;padding: 1.5rem;border: 1px solid #e9ecef;}
+.files-title {font-size: 1.2rem;font-weight: 600;color: var(--text-primary, #333);margin: 0 0 1rem 0;display: flex;align-items: center;}
+.files-title::before {content: '📎';margin-right: 0.5rem;font-size: 1.1rem;}
+.files-list {display: flex;flex-direction: column;gap: 0.75rem;}
+.file-item {display: flex;justify-content: space-between;align-items: center;padding: 0.75rem;background: white;border-radius: 6px;border: 1px solid #dee2e6;transition: all 0.3s ease;}
+.file-item:hover {border-color: var(--primary-blue, #0066cc);box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
+.file-info {display: flex;align-items: center;flex: 1;gap: 0.75rem;}
+.file-info i {color: var(--primary-blue, #0066cc);font-size: 1.2rem;width: 20px;text-align: center;}
+.file-name {font-weight: 500;color: var(--text-primary, #333);word-break: break-word;}
+.file-download-btn {display: flex;align-items: center;gap: 0.5rem;padding: 0.5rem 1rem;background: var(--primary-blue, #0066cc);color: white;text-decoration: none;border-radius: 4px;font-size: 0.9rem;font-weight: 500;transition: background-color 0.3s ease;}
+.file-download-btn:hover {background: var(--primary-dark, #004499);color: white;text-decoration: none;}
+.file-download-btn i {font-size: 0.85rem;}
 .article-navigation {display: flex;justify-content: space-between;align-items: center;margin-top: 3rem;padding: 2rem 0;border-top: 1px solid var(--border-light, #e5e5e5);gap: 1rem;}
 
 
@@ -829,16 +969,18 @@ Object.defineProperty(window, 'pressPageController', {
 /* Press Items */
 /* .press-list{margin-top: 4.5rem;} */
 .press-items {min-height: 60vh; padding: 1rem 0;}
-.press-item {display: block;padding: 1.5rem;margin-bottom: 1rem;border-radius: 8px;transition: all 0.3s ease;cursor: pointer;}
+.press-item {display: block;padding: .5rem 1.5rem;margin-bottom: 1rem;border-radius: 8px;transition: all 0.3s ease;cursor: pointer;}
 .press-item:hover{background: #ececec }
 .press-item:hover .press-title span{color: var(--primary-blue, #0066cc);}
-.press-meta {display: flex;gap: 1rem;margin-bottom: 0.5rem;font-size: 0.85rem;}
+.press-meta {display: flex;gap: 1rem;margin-bottom: 0.5rem;font-size: 0.85rem;align-items: center;}
 .press-date {color: var(--text-secondary, #666);}
-.press-category {color: var(--primary-blue, #0066cc);font-weight: 500;}
+.press-category {padding: 0.25rem 0.75rem;border-radius: 15px;font-weight: 500;font-size: 0.8rem;white-space: nowrap;}
+.press-category.notice {background-color: #e3f2fd;color: #1976d2;border: 1px solid #bbdefb;}
+.press-category.press {background-color: #fafafa;color: #515151;border: 1px solid #bbbbbb;}
 .press-title {margin-bottom: 0.5rem;}
 .press-title span {color: var(--text-primary, #333);text-decoration: none;font-size: 1.4rem;font-weight: 600;}
 .press-title span:hover {color: var(--primary-blue, #0066cc);}
-.press-summary {color: var(--text-secondary, #666);line-height: 1.5;margin-bottom: 0.75rem;font-size: .88rem;}
+.press-summary {display: none; color: var(--text-secondary, #666);line-height: 1.5;margin-bottom: 0.75rem;font-size: .88rem;}
 .press-source {font-size: 0.85rem;color: var(--text-light, #999);}
 
 /* Empty Message */
@@ -860,7 +1002,9 @@ Object.defineProperty(window, 'pressPageController', {
     .search-box {max-width: none;}
     .filter-box {flex-direction: column;}
     .list-header {flex-direction: column;gap: 1rem;align-items: stretch;}
-    .press-meta {flex-direction: column;gap: 0.25rem;font-size: .9rem;}
+    .press-meta {flex-direction: row;gap: 0.5rem;font-size: .9rem;flex-wrap: wrap;}
+    .press-category {font-size: 0.75rem;padding: 0.2rem 0.5rem;}
+    .article-category {font-size: 0.8rem;padding: 0.3rem 0.8rem;}
     .pagination {flex-wrap: wrap;}
     .press-item{padding: .75rem .25rem;margin-bottom: .5rem;}
     h3.press-title,h3.press-title a {font-size: 1.05rem;line-height: 1;}
@@ -869,6 +1013,11 @@ Object.defineProperty(window, 'pressPageController', {
     .press-detail-section {padding: 1rem 0;}
     .article-title {font-size: 1.5rem;}
     .article-content {font-size: 1rem;line-height: 1.6;}
+    .article-files-section {padding: 1rem;}
+    .file-item {flex-direction: column;align-items: stretch;gap: 0.75rem;}
+    .file-info {justify-content: flex-start;}
+    .file-name {font-size: 0.9rem;}
+    .file-download-btn {justify-content: center;width: 100%;}
     .article-navigation {flex-direction: column;gap: 1rem;align-items: stretch;}
     .article-nav-buttons {flex-direction: column;justify-content: stretch;}
     .nav-btn {max-width: none;text-align: center;}

@@ -345,23 +345,77 @@ async function loadGalleryDataFromSheets() {
         
         // 동적으로 Apps Script URL 가져오기
         const baseUrl = await getAppsScriptUrl();
-        const response = await fetch(`${baseUrl}?category=all`);
+        console.log('🔗 API 호출 URL:', `${baseUrl}?sheet=SHEET_GAL_F&action=getData`);
+        
+        const response = await fetch(`${baseUrl}?sheet=SHEET_GAL_F&action=getData`);
+        console.log('📡 HTTP 응답 상태:', response.status, response.statusText);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP 오류: ${response.status} ${response.statusText}`);
+        }
+        
         const result = await response.json();
+        console.log('📋 API 응답 전체:', result);
+        console.log('✅ API 응답 성공 여부:', result.success);
         
         if (result.success) {
             console.log(`✅ 총 ${result.data.length}개의 데이터를 성공적으로 로드했습니다.`);
             
+            // 데이터 전처리: 이미지 필드 안전하게 파싱
+            const processedData = result.data.map(item => {
+                // 이미지 필드 처리
+                if (item.image) {
+                    if (typeof item.image === 'string') {
+                        try {
+                            // JSON 배열 문자열인 경우 파싱
+                            if (item.image.trim().startsWith('[')) {
+                                item.image = JSON.parse(item.image);
+                            } else {
+                                // 일반 문자열인 경우 배열로 변환
+                                item.image = [item.image];
+                            }
+                        } catch (e) {
+                            console.warn('이미지 파싱 실패:', item.image, e);
+                            item.image = [];
+                        }
+                    }
+                    
+                    // 배열이 아닌 경우 배열로 변환
+                    if (!Array.isArray(item.image)) {
+                        item.image = [item.image];
+                    }
+                    
+                    // 빈 URL 제거
+                    item.image = item.image.filter(url => url && url.trim() !== '');
+                } else {
+                    item.image = [];
+                }
+                
+                return item;
+            });
+            
             // 카테고리별로 데이터 분리 (Google Sheets의 row 순서 그대로 사용)
-            psacGalleryData = result.data.filter(item => 
+            psacGalleryData = processedData.filter(item => 
                 item.category && item.category.toLowerCase() === 'psac'
             );
             
-            relaySchoolGalleryData = result.data.filter(item => 
+            relaySchoolGalleryData = processedData.filter(item => 
                 item.category && item.category.toLowerCase() === 'relay school'
             );
             
             console.log(`📋 PSAC 갤러리: ${psacGalleryData.length}개`);
             console.log(`📋 Relay School 갤러리: ${relaySchoolGalleryData.length}개`);
+            
+            // 이미지 데이터 디버깅
+            console.log('🖼️ 이미지 데이터 샘플:');
+            [...psacGalleryData, ...relaySchoolGalleryData].slice(0, 3).forEach((item, index) => {
+                console.log(`${index + 1}. 제목: ${item.titleKR}`);
+                console.log(`   이미지 타입: ${typeof item.image}, 배열여부: ${Array.isArray(item.image)}`);
+                console.log(`   이미지 개수: ${item.image ? item.image.length : 0}`);
+                if (item.image && item.image.length > 0) {
+                    console.log(`   첫 번째 이미지: ${item.image[0].substring(0, 100)}...`);
+                }
+            });
             
             // 날짜 정보 디버깅
             console.log('PSAC 갤러리 날짜 정보:');
@@ -376,11 +430,18 @@ async function loadGalleryDataFromSheets() {
 
             return true;
         } else {
-            throw new Error(`API 오류: ${result.error || '알 수 없는 오류'}`);
+            console.error('❌ API 응답 실패:', result);
+            throw new Error(`API 오류: ${result.error || result.message || '알 수 없는 오류'}`);
         }
         
     } catch (error) {
         console.error('💥 갤러리 데이터 로드 실패:', error);
+        console.error('🔍 오류 상세:', {
+            name: error.name,
+            message: error.message,
+            stack: error.stack
+        });
+        
         // 오류 발생 시 빈 배열로 초기화
         psacGalleryData = [];
         relaySchoolGalleryData = [];
@@ -561,16 +622,23 @@ class PSACGalleryController {
         galleryGrid.innerHTML = '';
 
         currentItems.forEach(item => {
+            // 이미지가 있는 경우에만 갤러리 아이템 생성
+            if (!item.image || item.image.length === 0) {
+                console.warn('이미지가 없는 항목 건너뛰기:', item.titleKR || item.id);
+                return;
+            }
+            
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
             
             const thumbnailImage = item.image[0];                    
             galleryItem.innerHTML = `
                 <div class="gallery-thumbnail" data-id="${item.id}">
-                    <img src="${thumbnailImage}" alt="${item.titleKR}" loading="lazy">
+                    <img src="${thumbnailImage}" alt="${item.titleKR || '이미지'}" loading="lazy" 
+                         onerror="this.src='/assets/images/placeholder.jpg'; console.warn('이미지 로드 실패:', '${thumbnailImage}');">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
-                            <h4 class="gallery-title" data-eng="${item.titleEN}" data-kor="${item.titleKR}">${item.titleKR}</h4>
+                            <h4 class="gallery-title" data-eng="${item.titleEN || ''}" data-kor="${item.titleKR || ''}">${item.titleKR || '제목 없음'}</h4>
                         </div>
                     </div>
                 </div>
@@ -909,7 +977,8 @@ class PSACGalleryController {
 // Relay School Gallery Controller Class
 class RelaySchoolGalleryController {
             constructor(data, containerId, itemsPerPage = 12) {
-                this.data = data.filter(item => item.state === "on");
+                // RelaySchool은 데이터를 역순으로 정렬 (최신순)
+                this.data = data.filter(item => item.state === "on").reverse();
                 this.container = document.getElementById(containerId);
                 this.itemsPerPage = itemsPerPage;
                 this.currentPage = 1;
@@ -935,6 +1004,12 @@ class RelaySchoolGalleryController {
                 galleryGrid.innerHTML = '';
 
                 currentItems.forEach(item => {
+                    // 이미지가 있는 경우에만 갤러리 아이템 생성
+                    if (!item.image || item.image.length === 0) {
+                        console.warn('이미지가 없는 항목 건너뛰기:', item.titleKR || item.id);
+                        return;
+                    }
+                    
                     const galleryItem = document.createElement('div');
                     galleryItem.className = 'gallery-item';
                     
@@ -942,10 +1017,11 @@ class RelaySchoolGalleryController {
                     
                     galleryItem.innerHTML = `
                         <div class="gallery-thumbnail" data-id="${item.id}">
-                            <img src="${thumbnailImage}" alt="${item.titleKR}" loading="lazy">
+                            <img src="${thumbnailImage}" alt="${item.titleKR || '이미지'}" loading="lazy"
+                                 onerror="this.src='/assets/images/placeholder.jpg'; console.warn('이미지 로드 실패:', '${thumbnailImage}');">
                             <div class="gallery-overlay">
                                 <div class="gallery-info">
-                                    <h4 class="gallery-title" data-eng="${item.titleEN}" data-kor="${item.titleKR}">${item.titleKR}</h4>
+                                    <h4 class="gallery-title" data-eng="${item.titleEN || ''}" data-kor="${item.titleKR || ''}">${item.titleKR || '제목 없음'}</h4>
                                     </div>
                                     </div>
                                     </div>

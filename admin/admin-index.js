@@ -217,7 +217,7 @@ function handleNavClick(navType) {
         'license': '인허가',
         'qualification': '유자격',
         'inside': '인사이드',
-        'academy': '아카데미',
+        'academy': 'academy-gallery', // 아카데미 갤러리 전용 페이지
         'news': '보도자료',
         'news-popup': 'news-popup', // 통합 페이지
         'psac': 'PSAC',
@@ -232,9 +232,11 @@ function handleNavClick(navType) {
     if (pageName) {
         console.log(`${pageName} 페이지로 이동`);
         
-        // 통합 페이지는 별도 HTML로 이동
+        // 별도 HTML 페이지로 이동하는 항목들
         if (navType === 'news-popup') {
             window.location.href = 'news-popup.html';
+        } else if (navType === 'academy') {
+            window.location.href = 'academy-gallery.html';
         } else {
             // 기존 페이지들은 page.html로 이동하면서 파라미터 전달
             window.location.href = `page.html?page=${encodeURIComponent(pageName)}`;

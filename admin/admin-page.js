@@ -1402,8 +1402,11 @@ class PageManager {
             case '인허가':
             case '유자격':
             case '인사이드':
-            case '아카데미':
                 this.openGalleryEditModal(item, config, pageType);
+                break;
+                
+            case '아카데미':
+                this.openAcademyGalleryIframeModal();
                 break;
                 
             case '보도자료':
@@ -3161,6 +3164,110 @@ PageManager.prototype.openPopupIframeModal = function() {
         
         const iframe = document.createElement('iframe');
         iframe.src = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSjdEScShzyC2g1bQfs2DaucC-F_jbjssgxrAYjSJNLDO4IzDQwHaK_8-E1WNCFo0PbndIY0YChio98/pubhtml?widget=true&headers=false';
+        iframe.style.cssText = `
+            width: 100%;
+            height: 100%;
+            border: none;
+            flex: 1;
+        `;
+        
+        modalHeader.appendChild(modalTitle);
+        modalHeader.appendChild(closeButton);
+        modalContent.appendChild(modalHeader);
+        modalContent.appendChild(iframe);
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+        
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'flex') {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // 모달 배경 클릭으로 닫기
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+    
+    // 모달 표시
+    modal.style.display = 'flex';
+}
+
+// 아카데미 갤러리용 iframe 모달 열기
+PageManager.prototype.openAcademyGalleryIframeModal = function() {
+    // 기존 iframe 모달이 있는지 확인
+    let modal = document.getElementById('academyGalleryIframeModal');
+    
+    if (!modal) {
+        // 모달이 없으면 생성
+        modal = document.createElement('div');
+        modal.id = 'academyGalleryIframeModal';
+        modal.className = 'modal-overlay';
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        `;
+        
+        const modalContent = document.createElement('div');
+        modalContent.className = 'modal-content';
+        modalContent.style.cssText = `
+            background: white;
+            border-radius: 8px;
+            width: 95%;
+            height: 90%;
+            max-width: 1200px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        `;
+        
+        const modalHeader = document.createElement('div');
+        modalHeader.style.cssText = `
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        `;
+        
+        const modalTitle = document.createElement('h3');
+        modalTitle.textContent = '아카데미 갤러리 관리 (Google Sheets)';
+        modalTitle.style.margin = '0';
+        
+        const closeButton = document.createElement('button');
+        closeButton.innerHTML = '&times;';
+        closeButton.style.cssText = `
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        `;
+        
+        closeButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://docs.google.com/spreadsheets/d/1gY5o_fHrXxAShXdSzqhyZBdLskbsAEwIdihci0UeU8c/edit?usp=sharing';
         iframe.style.cssText = `
             width: 100%;
             height: 100%;

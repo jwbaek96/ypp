@@ -558,9 +558,10 @@ function getCustomHeaders(sheetName) {
       state: 4,            // 상태
       titleKR: 5,          // 제목(한글)
       titleEN: 6,          // 제목(영문)
-      videoLink: 7,            // 비디오 링크
-      contentKR: 8,        // 내용(한글)
-      contentEN: 9         // 내용(영문)
+      videoFile: 7,        // 비디오 첨부
+      videoLink: 8,        // 비디오 링크(youtube 링크)
+      contentKR: 9,        // 내용(한글)
+      contentEN: 10        // 내용(영문)
     },
     
     [SHEET_BOARD_NEWS]: { // 게시판 보도자료

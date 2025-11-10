@@ -334,7 +334,39 @@ class VideoPageController {
         const contentElement = detailSection.querySelector('.article-content');
         let contentHTML = '';
         
-        // 비디오 링크가 있으면 비디오 표시
+        // 비디오 파일이 있으면 표시
+        if (article.videoFile) {
+            // videoFile이 YouTube 링크가 아닌 경우 직접 비디오 태그 사용
+            if (!article.videoFile.includes('youtube.com') && !article.videoFile.includes('youtu.be')) {
+                contentHTML += `
+                    <div class="video-container" style="margin-bottom: 2rem;">
+                        <video 
+                            width="100%" 
+                            controls
+                            style="border-radius: 8px; aspect-ratio: 16 / 9;">
+                            <source src="${article.videoFile}" type="video/mp4">
+                            브라우저가 비디오 태그를 지원하지 않습니다.
+                        </video>
+                    </div>
+                `;
+            } else {
+                // videoFile이 YouTube 링크인 경우
+                contentHTML += `
+                    <div class="video-container" style="margin-bottom: 2rem;">
+                        <iframe 
+                            width="100%" 
+                            height="auto"
+                            src="${this.convertToEmbedUrl(article.videoFile)}" 
+                            frameborder="0" 
+                            allowfullscreen
+                            style="border-radius: 8px; aspect-ratio: 16 / 9;">
+                        </iframe>
+                    </div>
+                `;
+            }
+        }
+        
+        // 비디오 링크가 있으면 추가로 표시
         if (article.videoLink) {
             contentHTML += `
                 <div class="video-container" style="margin-bottom: 2rem;">

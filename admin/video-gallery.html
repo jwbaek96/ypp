@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YPP Admin - 비디오 갤러리 관리</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .admin-header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin: 0;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: #0066cc;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0052a3;
+        }
+
+        .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4b5563;
+        }
+
+        .btn-success {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #059669;
+        }
+
+        .main-container {
+            height: calc(100vh - 80px);
+            padding: 0;
+            margin: 0;
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #0066cc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .page-info {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .page-info p {
+            margin: 0;
+        }
+
+        .page-info .info-highlight {
+            color: #0066cc;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .admin-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .admin-title {
+                font-size: 1.25rem;
+                text-align: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Header -->
+    <div class="admin-header">
+        <h1 class="admin-title">
+            <i class="fas fa-video"></i>
+            비디오 갤러리 관리
+        </h1>
+        <div class="admin-actions">
+            <a href="https://tally.so/r/wdrkGy" target="_blank" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                신규 등록
+            </a>
+            <a href="/pages/media/gallery/video.html" target="_blank" class="btn btn-success">
+                <i class="fas fa-eye"></i>
+                갤러리 보기
+            </a>
+            <a href="/admin/" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i>
+                관리자 메인
+            </a>
+        </div>
+    </div>
+
+    <!-- Page Info -->
+    <!-- <div class="page-info">
+        <p>
+            <i class="fas fa-info-circle"></i>
+            비디오 갤러리를 관리할 수 있습니다. 
+            <span class="info-highlight">비디오 첨부</span>는 직접 업로드한 파일, 
+            <span class="info-highlight">비디오 링크</span>는 YouTube URL을 입력하세요. 
+            둘 다 입력하면 둘 다 표시됩니다.
+        </p>
+    </div> -->
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="iframe-container">
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="loading-spinner"></div>
+            </div>
+            <iframe 
+                id="mainIframe"
+                src="https://docs.google.com/spreadsheets/d/1BopJLpq_yYbpJDTFtUxPRQKW2p5A1S9FE-wuXN32ph4/edit?usp=sharing"
+                title="비디오 갤러리 관리">
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        // iframe 로딩 완료 시 로딩 오버레이 숨기기
+        document.getElementById('mainIframe').addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }, 500);
+        });
+
+        // 키보드 단축키
+        document.addEventListener('keydown', function(e) {
+            // Ctrl + N: 신규 등록
+            if (e.ctrlKey && e.key === 'n') {
+                e.preventDefault();
+                window.open('https://tally.so/r/3yQxdb', '_blank');
+            }
+            
+            // Ctrl + V: 갤러리 보기
+            if (e.ctrlKey && e.key === 'v') {
+                e.preventDefault();
+                window.open('/pages/media/gallery/video.html', '_blank');
+            }
+            
+            // Ctrl + H: 관리자 메인으로 이동
+            if (e.ctrlKey && e.key === 'h') {
+                e.preventDefault();
+                window.location.href = '/admin/';
+            }
+        });
+
+        // 페이지 제목 동적 업데이트
+        document.title = 'YPP Admin - 비디오 갤러리 관리';
+        
+        // 브라우저 뒤로가기/앞으로가기 감지
+        window.addEventListener('popstate', function(event) {
+            // 필요시 상태 복원 로직 추가
+        });
+
+        // 페이지 가시성 변경 시 iframe 새로고침 (옵션)
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                // 페이지가 다시 보일 때 필요시 iframe 새로고침
+                // document.getElementById('mainIframe').src = document.getElementById('mainIframe').src;
+            }
+        });
+
+        // 페이지 로드 시 콘솔에 안내 메시지
+        console.log(`
+╔═══════════════════════════════════════╗
+║   YPP 비디오 갤러리 관리 페이지       ║
+╠═══════════════════════════════════════╣
+║  키보드 단축키:                       ║
+║  • Ctrl + N : 신규 등록              ║
+║  • Ctrl + V : 갤러리 보기            ║
+║  • Ctrl + H : 관리자 메인            ║
+╚═══════════════════════════════════════╝
+        `);
+    </script>
+</body>
+</html>

@@ -184,22 +184,6 @@
   gap: 6px;
 }
 
-.academy-link {
-  display: block;
-  color: #0066cc;
-  text-decoration: none;
-  font-size: 0.85rem;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  border: 1px solid #e5e7eb;
-}
-
-.academy-link:hover {
-  background: #f0f9ff;
-  border-color: #0066cc;
-  color: #0052a3;
-}
 
 .academy-item {
   display: block;

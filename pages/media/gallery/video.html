@@ -334,17 +334,21 @@ class VideoPageController {
         const contentElement = detailSection.querySelector('.article-content');
         let contentHTML = '';
         
+        // 현재 언어에 따라 비디오 파일 선택
+        const videoFile = selectedLanguage === 'en' ? (article.videoFileEN || article.videoFileKR) : article.videoFileKR;
+        const videoLink = selectedLanguage === 'en' ? (article.videoLinkEN || article.videoLinkKR) : article.videoLinkKR;
+        
         // 비디오 파일이 있으면 표시
-        if (article.videoFile) {
+        if (videoFile) {
             // videoFile이 YouTube 링크가 아닌 경우 직접 비디오 태그 사용
-            if (!article.videoFile.includes('youtube.com') && !article.videoFile.includes('youtu.be')) {
+            if (!videoFile.includes('youtube.com') && !videoFile.includes('youtu.be')) {
                 contentHTML += `
                     <div class="video-container" style="margin-bottom: 2rem;">
                         <video 
                             width="100%" 
                             controls
                             style="border-radius: 8px; aspect-ratio: 16 / 9;">
-                            <source src="${article.videoFile}" type="video/mp4">
+                            <source src="${videoFile}" type="video/mp4">
                             브라우저가 비디오 태그를 지원하지 않습니다.
                         </video>
                     </div>
@@ -356,7 +360,7 @@ class VideoPageController {
                         <iframe 
                             width="100%" 
                             height="auto"
-                            src="${this.convertToEmbedUrl(article.videoFile)}" 
+                            src="${this.convertToEmbedUrl(videoFile)}" 
                             frameborder="0" 
                             allowfullscreen
                             style="border-radius: 8px; aspect-ratio: 16 / 9;">
@@ -367,13 +371,13 @@ class VideoPageController {
         }
         
         // 비디오 링크가 있으면 추가로 표시
-        if (article.videoLink) {
+        if (videoLink) {
             contentHTML += `
                 <div class="video-container" style="margin-bottom: 2rem;">
                     <iframe 
                         width="100%" 
                         height="auto"
-                        src="${this.convertToEmbedUrl(article.videoLink)}" 
+                        src="${this.convertToEmbedUrl(videoLink)}" 
                         frameborder="0" 
                         allowfullscreen
                         style="border-radius: 8px; aspect-ratio: 16 / 9;">
@@ -385,7 +389,7 @@ class VideoPageController {
         // 텍스트 내용을 data-kor, data-eng 속성으로 구성된 div로 추가
         if (article.contentKR || article.contentEN) {
             const contentKR = article.contentKR || '내용이 없습니다.';
-            const contentEN = article.contentEN || article.contentKR || 'No content available.';
+            const contentEN = (article.contentEN && article.contentEN.trim()) ? article.contentEN : 'No data';
             
             // 줄바꿈 처리된 내용 준비
             const formattedContentKR = this.formatContent(contentKR);
@@ -406,7 +410,7 @@ class VideoPageController {
         const textContentElement = contentElement.querySelector('.article-text-content');
         if (textContentElement && (article.contentKR || article.contentEN)) {
             const contentKR = article.contentKR || '내용이 없습니다.';
-            const contentEN = article.contentEN || article.contentKR || 'No content available.';
+            const contentEN = (article.contentEN && article.contentEN.trim()) ? article.contentEN : 'No data';
             const formattedContentKR = this.formatContent(contentKR);
             const formattedContentEN = this.formatContent(contentEN);
             

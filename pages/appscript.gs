@@ -579,10 +579,9 @@ function getCustomHeaders(sheetName) {
       contentKR: 9,        // 내용(한글)
       contentEN: 10,       // 내용(영문)
       sourceLink: 11,      // 출처(링크)
-      fileUpload: 12,      // 파일 업로드
-      popup: 13,           // 팝업
-      popupImageKR: 14,    // 팝업이미지 업로드(한글)
-      popupImageEN: 15     // 팝업이미지 업로드(영문)
+      popup: 12,           // 팝업
+      popupImageKR: 13,    // 팝업이미지 업로드(한글)
+      popupImageEN: 14     // 팝업이미지 업로드(영문)
     },
     
     [SHEET_APPLY_P]: { // 신청 PSAC

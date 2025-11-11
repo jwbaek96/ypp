@@ -387,17 +387,36 @@ class VideoPageController {
             const contentKR = article.contentKR || '내용이 없습니다.';
             const contentEN = article.contentEN || article.contentKR || 'No content available.';
             
+            // 줄바꿈 처리된 내용 준비
+            const formattedContentKR = this.formatContent(contentKR);
+            const formattedContentEN = this.formatContent(contentEN);
+            
             contentHTML += `
                 <div class="article-text-content" 
-                     data-kor="${contentKR.replace(/"/g, '&quot;')}" 
-                     data-eng="${contentEN.replace(/"/g, '&quot;')}"
+                     data-kor="${formattedContentKR.replace(/"/g, '&quot;')}" 
+                     data-eng="${formattedContentEN.replace(/"/g, '&quot;')}"
                      style="line-height: 1.8; font-size: 1.1rem; color: var(--text-primary, #333);">
-                    ${this.formatContent(selectedLanguage === 'en' ? contentEN : contentKR)}
                 </div>
             `;
         }
         
         contentElement.innerHTML = contentHTML;
+        
+        // 내용 요소에 실제 텍스트 삽입 (innerHTML로 한번에 설정하면 큰따옴표 문제 발생 방지)
+        const textContentElement = contentElement.querySelector('.article-text-content');
+        if (textContentElement && (article.contentKR || article.contentEN)) {
+            const contentKR = article.contentKR || '내용이 없습니다.';
+            const contentEN = article.contentEN || article.contentKR || 'No content available.';
+            const formattedContentKR = this.formatContent(contentKR);
+            const formattedContentEN = this.formatContent(contentEN);
+            
+            // data 속성 설정
+            textContentElement.setAttribute('data-kor', formattedContentKR);
+            textContentElement.setAttribute('data-eng', formattedContentEN);
+            
+            // 현재 언어에 맞는 내용 표시
+            textContentElement.innerHTML = selectedLanguage === 'en' ? formattedContentEN : formattedContentKR;
+        }
         
         // 이미지 업데이트 (비디오가 있어도 추가 이미지가 있을 수 있음)
         this.renderArticleImages(article.image || []);

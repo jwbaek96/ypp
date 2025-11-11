@@ -76,22 +76,24 @@ const SimplePopupModal = {
       const result = await response.json();
       
       if (result.success && result.data) {
-        // 데이터 재매핑 (앱스크립트에서 필드가 섞여서 나오는 문제 해결)
+        // 데이터 재매핑 (원본 popup 필드 값 유지)
         const mappedData = result.data.map(item => ({
           ...item,
-          // popup 필드에 있는 이미지 URL을 popupImageKR로 이동
-          popupImageKR: item.popup,
-          // popupImageKR 필드에 있는 이미지 URL을 popupImageEN으로 이동  
-          popupImageEN: item.popupImageKR,
-          // popup 필드는 on/off로 설정
-          popup: 'on',
+          // 원본 popup 필드의 실제 on/off 값을 popupStatus로 저장
+          popupStatus: (item.popup || '').toString().toLowerCase(),
+          // popup 필드에 있던 이미지 URL을 popupImageKR로 이동
+          popupImageKR: item.popupImageKR || '',
+          // popupImageEN 필드 유지
+          popupImageEN: item.popupImageEN || '',
           // 타입 지정
           type: 'press'
         }));
         
-        // 필터링
+        // 필터링: popup이 'on'이고, state가 'on'이며, 이미지가 있는 것만
         const filtered = mappedData.filter(item => {
-          const hasPopupValue = item.popup && item.popup.toString().trim() !== '';
+          // popup 상태가 'on'인지 확인
+          const popupOn = item.popupStatus === 'on';
+          // state가 'on'인지 확인
           const stateOn = (item.state || '').toString().toLowerCase() === 'on';
           
           // 언어에 따른 이미지 선택 (fallback 방식)
@@ -100,7 +102,9 @@ const SimplePopupModal = {
             popupImage = currentLang === 'ko' ? item.popupImageEN : item.popupImageKR;
           }
           
-          return hasPopupValue && stateOn && popupImage && popupImage.trim();
+          const hasImage = popupImage && popupImage.trim() !== '';
+          
+          return popupOn && stateOn && hasImage;
         });
         
         console.log('✅ 구글 시트 데이터 로드 완료:', filtered.length, '개');

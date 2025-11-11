@@ -334,54 +334,64 @@ class VideoPageController {
         const contentElement = detailSection.querySelector('.article-content');
         let contentHTML = '';
         
-        // 현재 언어에 따라 비디오 파일 선택
-        const videoFile = selectedLanguage === 'en' ? (article.videoFileEN || article.videoFileKR) : article.videoFileKR;
-        const videoLink = selectedLanguage === 'en' ? (article.videoLinkEN || article.videoLinkKR) : article.videoLinkKR;
+        // 비디오 파일 URL 준비 (한글/영문)
+        const videoFileKR = article.videoFileKR || '';
+        const videoFileEN = article.videoFileEN || article.videoFileKR || '';
+        const videoLinkKR = article.videoLinkKR || '';
+        const videoLinkEN = article.videoLinkEN || article.videoLinkKR || '';
         
-        // 비디오 파일이 있으면 표시
-        if (videoFile) {
-            // videoFile이 YouTube 링크가 아닌 경우 직접 비디오 태그 사용
-            if (!videoFile.includes('youtube.com') && !videoFile.includes('youtu.be')) {
-                contentHTML += `
-                    <div class="video-container" style="margin-bottom: 2rem;">
-                        <video 
-                            width="100%" 
-                            controls
-                            style="border-radius: 8px; aspect-ratio: 16 / 9;">
-                            <source src="${videoFile}" type="video/mp4">
-                            브라우저가 비디오 태그를 지원하지 않습니다.
-                        </video>
-                    </div>
-                `;
-            } else {
-                // videoFile이 YouTube 링크인 경우
-                contentHTML += `
-                    <div class="video-container" style="margin-bottom: 2rem;">
-                        <iframe 
-                            width="100%" 
-                            height="auto"
-                            src="${this.convertToEmbedUrl(videoFile)}" 
-                            frameborder="0" 
-                            allowfullscreen
-                            style="border-radius: 8px; aspect-ratio: 16 / 9;">
-                        </iframe>
-                    </div>
-                `;
+        // 비디오 파일이 있으면 표시 (HTML 코드를 data-kor, data-eng에 저장)
+        if (videoFileKR || videoFileEN) {
+            // 한글 비디오 HTML 생성
+            let videoHTMLKR = '';
+            if (videoFileKR) {
+                const isYouTubeKR = videoFileKR.includes('youtube.com') || videoFileKR.includes('youtu.be');
+                if (isYouTubeKR) {
+                    videoHTMLKR = `<iframe width="100%" height="auto" src="${this.convertToEmbedUrl(videoFileKR)}" frameborder="0" allowfullscreen style="border-radius: 8px; aspect-ratio: 16 / 9;"></iframe>`;
+                } else {
+                    videoHTMLKR = `<video width="100%" controls style="border-radius: 8px; aspect-ratio: 16 / 9;"><source src="${videoFileKR}" type="video/mp4">브라우저가 비디오 태그를 지원하지 않습니다.</video>`;
+                }
             }
+            
+            // 영문 비디오 HTML 생성
+            let videoHTMLEN = '';
+            if (videoFileEN) {
+                const isYouTubeEN = videoFileEN.includes('youtube.com') || videoFileEN.includes('youtu.be');
+                if (isYouTubeEN) {
+                    videoHTMLEN = `<iframe width="100%" height="auto" src="${this.convertToEmbedUrl(videoFileEN)}" frameborder="0" allowfullscreen style="border-radius: 8px; aspect-ratio: 16 / 9;"></iframe>`;
+                } else {
+                    videoHTMLEN = `<video width="100%" controls style="border-radius: 8px; aspect-ratio: 16 / 9;"><source src="${videoFileEN}" type="video/mp4">브라우저가 비디오 태그를 지원하지 않습니다.</video>`;
+                }
+            }
+            
+            contentHTML += `
+                <div class="video-container video-file-container" 
+                     data-kor="${videoHTMLKR.replace(/"/g, '&quot;')}" 
+                     data-eng="${videoHTMLEN.replace(/"/g, '&quot;')}"
+                     style="margin-bottom: 2rem;">
+                </div>
+            `;
         }
         
-        // 비디오 링크가 있으면 추가로 표시
-        if (videoLink) {
+        // 비디오 링크가 있으면 추가로 표시 (HTML 코드를 data-kor, data-eng에 저장)
+        if (videoLinkKR || videoLinkEN) {
+            // 한글 비디오 링크 HTML 생성
+            let linkHTMLKR = '';
+            if (videoLinkKR) {
+                linkHTMLKR = `<iframe width="100%" height="auto" src="${this.convertToEmbedUrl(videoLinkKR)}" frameborder="0" allowfullscreen style="border-radius: 8px; aspect-ratio: 16 / 9;"></iframe>`;
+            }
+            
+            // 영문 비디오 링크 HTML 생성
+            let linkHTMLEN = '';
+            if (videoLinkEN) {
+                linkHTMLEN = `<iframe width="100%" height="auto" src="${this.convertToEmbedUrl(videoLinkEN)}" frameborder="0" allowfullscreen style="border-radius: 8px; aspect-ratio: 16 / 9;"></iframe>`;
+            }
+            
             contentHTML += `
-                <div class="video-container" style="margin-bottom: 2rem;">
-                    <iframe 
-                        width="100%" 
-                        height="auto"
-                        src="${this.convertToEmbedUrl(videoLink)}" 
-                        frameborder="0" 
-                        allowfullscreen
-                        style="border-radius: 8px; aspect-ratio: 16 / 9;">
-                    </iframe>
+                <div class="video-container video-link-container" 
+                     data-kor="${linkHTMLKR.replace(/"/g, '&quot;')}" 
+                     data-eng="${linkHTMLEN.replace(/"/g, '&quot;')}"
+                     style="margin-bottom: 2rem;">
                 </div>
             `;
         }
@@ -406,6 +416,9 @@ class VideoPageController {
         
         contentElement.innerHTML = contentHTML;
         
+        // 비디오 컨테이너에 실제 비디오 렌더링 (언어 전환 지원)
+        this.renderVideoContainers(selectedLanguage);
+        
         // 내용 요소에 실제 텍스트 삽입 (innerHTML로 한번에 설정하면 큰따옴표 문제 발생 방지)
         const textContentElement = contentElement.querySelector('.article-text-content');
         if (textContentElement && (article.contentKR || article.contentEN)) {
@@ -427,6 +440,22 @@ class VideoPageController {
         
         // 이전/다음 기사 네비게이션 업데이트
         this.updateArticleNavigation();
+    }
+    
+    // 비디오 컨테이너 렌더링 (언어 전환 지원)
+    renderVideoContainers(selectedLanguage) {
+        const videoContainers = this.detailSection.querySelectorAll('.video-container');
+        
+        videoContainers.forEach(container => {
+            const korHTML = container.getAttribute('data-kor');
+            const engHTML = container.getAttribute('data-eng');
+            const currentHTML = selectedLanguage === 'en' ? engHTML : korHTML;
+            
+            // HTML 엔티티 디코딩 후 삽입
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = currentHTML;
+            container.innerHTML = tempDiv.innerHTML;
+        });
     }
     
     // 기사 이미지 렌더링
@@ -807,6 +836,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 5000);
     }
+    
+    // 언어 전환 이벤트 리스너 추가 (비디오 업데이트)
+    document.addEventListener('languageChanged', function(e) {
+        if (videoPageController && videoPageController.detailSection && !videoPageController.detailSection.classList.contains('hidden')) {
+            const newLanguage = e.detail.language;
+            videoPageController.renderVideoContainers(newLanguage);
+        }
+    });
 });
 
 // 전역 함수 내보내기

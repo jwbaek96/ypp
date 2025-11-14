@@ -180,21 +180,22 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  margin-top: 10px;
 }
 
 
-.academy-item {
+.academy-link {
   display: block;
   font-size: 0.85rem;
-  padding: 6px 12px;
-  color: #6b7280;
+  padding: 12px 12px;
+  color: #1764ff;
   border: 1px solid #e5e7eb;
   border-radius: 4px;
-  background: #f9fafb;
 }
 
-.academy-card:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+.academy-link:hover {
+  background: #efeff0;
+  /* box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2); */
 }
 
 /* 모바일 대응 */

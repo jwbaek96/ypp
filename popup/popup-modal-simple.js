@@ -337,7 +337,7 @@ const SimplePopupModal = {
         if (item.link) {
           return `<a href="${item.link}" class="academy-link" target="_blank">${itemName}</a>`;
         } else if (item.filename) {
-          return `<a href="/documents/academy/${item.filename}" class="academy-link" target="_blank" download>${itemName}</a>`;
+          return `<a href="/documents/academy/${item.filename}" class="academy-link" target="_blank" download="${item.filename}">${itemName}</a>`;
         } else {
           return `<span class="academy-item">${itemName}</span>`;
         }

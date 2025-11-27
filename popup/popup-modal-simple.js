@@ -76,22 +76,18 @@ const SimplePopupModal = {
       const result = await response.json();
       
       if (result.success && result.data) {
-        // 데이터 재매핑
+        // 타입만 추가
         const mappedData = result.data.map(item => ({
           ...item,
-          // popup 필드를 popupStatus로 저장 (대소문자 무관)
-          popupStatus: (item.popup || '').toString().toLowerCase(),
-          // 이미지 필드 유지
-          popupImageKR: item.popupImageKR || '',
-          popupImageEN: item.popupImageEN || '',
-          // 타입 지정
           type: 'press'
         }));
         
         // 필터링: popup이 'on'이고, state가 'on'이며, 이미지가 있는 것만
+        console.log('🔍 필터링 전 전체 데이터:', mappedData.length, '개');
+        
         const filtered = mappedData.filter(item => {
           // popup 상태가 'on'인지 확인 (대소문자 무관)
-          const popupOn = item.popupStatus === 'on';
+          const popupOn = (item.popup || '').toString().toUpperCase() === 'ON';
           // state가 'on'인지 확인 (대소문자 무관)
           const stateOn = (item.state || '').toString().toLowerCase() === 'on';
           
@@ -103,10 +99,25 @@ const SimplePopupModal = {
           
           const hasImage = popupImage && popupImage.trim() !== '';
           
-          return popupOn && stateOn && hasImage;
+          // 디버깅: 각 항목별 필터링 조건 출력
+          console.log('📋 항목 체크:', {
+            id: item.id,
+            titleKR: item.titleKR?.substring(0, 20),
+            popup: item.popup,
+            popupOn,
+            state: item.state,
+            stateOn,
+            popupImageKR: item.popupImageKR ? '있음' : '없음',
+            popupImageEN: item.popupImageEN ? '있음' : '없음',
+            hasImage,
+            통과: popupOn
+          });
+          
+          return popupOn;
         });
         
         console.log('✅ 구글 시트 데이터 로드 완료:', filtered.length, '개');
+        console.log('✅ 필터링된 항목들:', filtered);
         
         return filtered;
       }

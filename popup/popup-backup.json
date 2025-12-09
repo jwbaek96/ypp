@@ -1,55 +1,78 @@
-
+{
+  "popups": [
     {
       "id": 1,
-      "type": "celebration",
+      "type": "renewal",
       "title": {
-        "kor": "🎉 경축! 대통령 표창 수상 🎉",
-        "eng": "🎉 Congratulations! Presidential Citation Award 🎉"
+        "kor": "YPP 아카데미 안내",
+        "eng": "YPP Academy Announcement"
       },
-      "content": {
-        "greeting": {
-          "kor": "저희 YPP 백종만 회장님께서",
-          "eng": "Our YPP Chairman Bek Jong-man has received"
+      "downloads": {
+        "title": {
+          "kor": "",
+          "eng": ""
         },
-        "main": {
-          "kor": "2025년 제26회 중소기업 기술·경영 혁신대전에서<br><strong>경영혁신 분야 대통령 표창</strong>을 수상하십니다.",
-          "eng": "the <strong>Presidential Citation for Management Innovation</strong><br>at the 26th SME Technology & Management Innovation Fair 2025."
-        },
-        "details": [
+        "categories": [
           {
-            "label": {
-              "kor": "시상식:",
-              "eng": "Award Ceremony:"
+            "name": {
+              "kor": "PSAC2025 전력계통 고급기술 교육과정 9.2~12.5 (접수중)",
+              "eng": "PSAC2025 Power System Advanced Technology Training Course 9.2~12.5 (Applications Open)"
             },
-            "value": {
-              "kor": "2025년 9월 4일(목) 오후 2시",
-              "eng": "September 4, 2025 (Thu) 2:00 PM"
-            }
+            "items": [
+              {
+                "name": {
+                  "kor": "과정개요, 교육일정 및 교육계획",
+                  "eng": "Course Overview, Schedule, and Plan"
+                },
+                "link": "/pages/academy/index.html?tab=psac"
+              },
+              {
+                "name": {
+                  "kor": "교육신청",
+                  "eng": "Apply Now"
+                },
+                "link": "/pages/academy/index.html?tab=apply"
+              },
+              {
+                "name": {
+                  "kor": "PSAC 2025 교육안내 브로슈어",
+                  "eng": "PSAC 2025 Brochure"
+                },
+                "filename": "2025_PSAC_brochure.pdf"
+              }
+            ]
           },
           {
-            "label": {
-              "kor": "장소:",
-              "eng": "Venue:"
+            "name": {
+              "kor": "RelaySchool2025 전력계통 보호기술 교육과정 3~12 (접수,개강)",
+              "eng": "RelaySchool2025 Power System Protection Technology Training Course 3~12 (Applications Open/Courses Start)"
             },
-            "value": {
-              "kor": "제주 부영호텔 & 리조트 우정홀",
-              "eng": "Jeju Booyoung Hotel & Resort Friendship Hall"
-            }
-          },
-          {
-            "label": {
-              "kor": "행사 정보 및 유튜브 생중계:",
-              "eng": "Information & YouTube Live:"
-            },
-            "value": {
-              "kor": "<a href='https://www.k-innoshow.com/Opening' target='_blank' style='color: #007bff; text-decoration: underline;'>바로가기</a>",
-              "eng": "<a href='https://www.k-innoshow.com/Opening' target='_blank' style='color: #007bff; text-decoration: underline;'>Watch Live</a>"
-            }
+            "items": [
+              {
+                "name": {
+                  "kor": "과정개요, 교육일정 및 교육계획",
+                  "eng": "Course Overview, Schedule, and Plan"
+                },
+                "link": "/pages/academy/index.html?tab=relay"
+              },
+              {
+                "name": {
+                  "kor": "교육신청",
+                  "eng": "Apply Now"
+                },
+                "link": "/pages/academy/index.html?tab=apply"
+              },
+              {
+                "name": {
+                  "kor": "RelaySchool 2025 교육계획 안내 브로슈어",
+                  "eng": "RelaySchool 2025 Brochure"
+                },
+                "filename": "2025_Relay_School_brochure_250304.pdf"
+              }
+            ]
           }
-        ],
-        "closing": {
-          "kor": "이번 수상은 회장님의 혁신적 경영철학이 국가적으로 인정받은 성과이자,<br>우리 YPP 임직원 모두의 자랑입니다.<br><br>앞으로도 끊임없는 혁신과 성장으로 보답하겠습니다.",
-          "eng": "This award represents national recognition of our Chairman's innovative management philosophy<br>and is a source of pride for all YPP employees.<br><br>We will continue to repay this honor with endless innovation and growth."
-        }
+        ]
       }
     }
+  ]
+}

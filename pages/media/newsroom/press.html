@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO 메타 태그 -->
-    <title>보도자료 - YPP</title>
-    <meta name="description" content="YPP 보도자료 - 최신 뉴스 및 언론 보도 자료">
-    <meta name="keywords" content="YPP, 보도자료, 뉴스, 언론보도, 미디어">
+    <title>보도자료 - YPP ENERGY</title>
+    <meta name="description" content="YPP ENERGY 보도자료 - 최신 뉴스 및 언론 보도 자료">
+    <meta name="keywords" content="YPP ENERGY, 보도자료, 뉴스, 언론보도, 미디어">
     
     <!-- 파비콘 -->
     <link rel="icon" type="image/ico" href="../../../assets/images/favicon/favicon.ico">
@@ -45,8 +45,8 @@
                         data-eng="News"
                         data-kor="소식">소식</h1>
                     <p class="page-subtitle"
-                        data-eng="Latest YPP news and press releases"
-                        data-kor="YPP의 최신 소식과 언론 보도 자료">YPP의 최신 소식과 언론 보도 자료</p>
+                        data-eng="Latest YPP ENERGY news and press releases"
+                        data-kor="YPP ENERGY의 최신 소식과 언론 보도 자료">YPP ENERGY의 최신 소식과 언론 보도 자료</p>
                 </div>
             </div>
         </section>
@@ -72,8 +72,8 @@
                         data-eng="News"
                         data-kor="보도자료">보도자료</h2>
                     <p class="content-subtitle"
-                        data-eng="Introducing YPP's major activities and achievements through the media"
-                        data-kor="YPP의 주요 활동과 성과를 언론을 통해 소개합니다">YPP의 주요 활동과 성과를 언론을 통해 소개합니다</p>
+                        data-eng="Introducing YPP ENERGY's major activities and achievements through the media"
+                        data-kor="YPP ENERGY의 주요 활동과 성과를 언론을 통해 소개합니다">YPP ENERGY의 주요 활동과 성과를 언론을 통해 소개합니다</p>
                 </div> -->
 
                 <!-- Press Release List Section -->
@@ -216,7 +216,7 @@ class PressPageController {
         }
         
         // 페이지 메타 업데이트
-        this.updatePageMeta('보도자료', 'YPP의 최신 소식과 언론 보도 자료');
+        this.updatePageMeta('보도자료', 'YPP ENERGY의 최신 소식과 언론 보도 자료');
         
         this.renderArticleList();
         this.setupListEventListeners();
@@ -680,7 +680,7 @@ class PressPageController {
     
     // 페이지 메타 정보 업데이트 (SEO)
     updatePageMeta(title, description) {
-        document.title = `${title} - YPP`;
+        document.title = `${title} - YPP ENERGY`;
         
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) {

@@ -1,9 +1,12 @@
-// Supabase 설정
-const SUPABASE_URL = 'https://mcdpmkipopgishxjpbvi.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jZHBta2lwb3BnaXNoeGpwYnZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA5NDM1NDIsImV4cCI6MjA3NjUxOTU0Mn0.UyASY-e556o1qCs4INZOxpLjz1n1DC9erxOowImVkQ8';
+// Supabase 설정 (현재 비활성화 - Supabase 문제로 임시 로컬 인증 사용)
+// const SUPABASE_URL = 'https://mcdpmkipopgishxjpbvi.supabase.co';
+// const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jZHBta2lwb3BnaXNoeGpwYnZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA5NDM1NDIsImV4cCI6MjA3NjUxOTU0Mn0.UyASY-e556o1qCs4INZOxpLjz1n1DC9erxOowImVkQ8';
 
 // Supabase 클라이언트 초기화
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// 임시 로컬 비밀번호 (Supabase 복구 후 제거 필요)
+const ADMIN_PASSWORD = 'ypp8720';
 
 // DOM 요소들
 const loginForm = document.getElementById('loginForm');
@@ -41,8 +44,10 @@ function setLoading(isLoading) {
     }
 }
 
-// 패스워드 검증 함수
+// 패스워드 검증 함수 (임시 로컬 인증)
 async function verifyPassword(password) {
+    // Supabase 방식 (현재 비활성화)
+    /*
     try {
         const { data, error } = await supabase
             .from('env_variables')
@@ -61,6 +66,10 @@ async function verifyPassword(password) {
         console.error('Verification error:', error);
         return false;
     }
+    */
+    
+    // 임시 로컬 인증 (Supabase 복구 후 위 코드로 복원)
+    return password === ADMIN_PASSWORD;
 }
 
 // 로그인 처리 함수

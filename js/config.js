@@ -9,6 +9,9 @@ const SUPABASE_CONFIG = {
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jZHBta2lwb3BnaXNoeGpwYnZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA5NDM1NDIsImV4cCI6MjA3NjUxOTU0Mn0.UyASY-e556o1qCs4INZOxpLjz1n1DC9erxOowImVkQ8'
 };
 
+// Admin 비밀번호 (임시 - Supabase 복구 후 제거)
+const ADMIN_PASSWORD = 'ypp8720';
+
 // 환경변수 키 목록
 const ENV_VARIABLES = {
     // Academy 관련

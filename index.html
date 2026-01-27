@@ -330,6 +330,31 @@ function reloadPageForVideoSwitch(lang) {
 // 별도로 언어 전환 이벤트를 감지
 
 // 히어로 동영상 전환은 이제 lang-switch.js의 switchLanguage 함수에서 자동으로 처리됩니다.
+
+// 히어로 비디오 뮤트 토글 (이벤트 위임 방식)
+document.addEventListener('click', function(e) {
+    const muteBtn = e.target.closest('#video-mute-toggle');
+    if (!muteBtn) return;
+
+    const video = document.querySelector('.hero-video');
+    const volumeLines = document.getElementById('volume-lines');
+    const volumeLinesLarge = document.getElementById('volume-lines-large');
+    const volumeSlash = document.getElementById('volume-slash');
+
+    if (video) {
+        if (video.muted) {
+            video.muted = false;
+            if (volumeLines) volumeLines.style.display = 'block';
+            if (volumeLinesLarge) volumeLinesLarge.style.display = 'block';
+            if (volumeSlash) volumeSlash.style.display = 'none';
+        } else {
+            video.muted = true;
+            if (volumeLines) volumeLines.style.display = 'none';
+            if (volumeLinesLarge) volumeLinesLarge.style.display = 'none';
+            if (volumeSlash) volumeSlash.style.display = 'block';
+        }
+    }
+});
 </script>
 
 </body>

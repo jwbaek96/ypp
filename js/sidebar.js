@@ -88,6 +88,34 @@ function createSidebarMenuItem(item, key, depth) {
     
     link.className = 'sidebar-link';
     
+    // Disabled 메뉴 처리
+    if (item.disabled) {
+        link.style.opacity = '0.6';
+        link.style.cursor = 'not-allowed';
+        link.href = '#';
+        
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // 현재 언어에 맞는 메시지 표시
+            const currentLang = localStorage.getItem('selectedLanguage') || 'ko';
+            let message = '준비중입니다';
+            
+            if (item.disabledMessage) {
+                if (typeof item.disabledMessage === 'object') {
+                    message = currentLang === 'en' ? item.disabledMessage.en : item.disabledMessage.ko;
+                } else {
+                    message = item.disabledMessage;
+                }
+            }
+            
+            alert(message);
+        });
+        
+        li.classList.add('menu-disabled');
+    }
+    
     // 현재 페이지 활성 상태 체크
     if (item.url && window.location.pathname.includes(item.url.replace('.html', ''))) {
         li.classList.add('current-page');
@@ -170,6 +198,34 @@ function createSidebarSubMenuItem(item, key, depth) {
     }
     
     link.className = 'sidebar-sublink';
+    
+    // Disabled 서브메뉴 처리
+    if (item.disabled) {
+        link.style.opacity = '0.6';
+        link.style.cursor = 'not-allowed';
+        link.href = '#';
+        
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // 현재 언어에 맞는 메시지 표시
+            const currentLang = localStorage.getItem('selectedLanguage') || 'ko';
+            let message = '준비중입니다';
+            
+            if (item.disabledMessage) {
+                if (typeof item.disabledMessage === 'object') {
+                    message = currentLang === 'en' ? item.disabledMessage.en : item.disabledMessage.ko;
+                } else {
+                    message = item.disabledMessage;
+                }
+            }
+            
+            alert(message);
+        });
+        
+        li.classList.add('menu-disabled');
+    }
     
     // 현재 페이지 체크
     if (item.url && window.location.pathname.includes(item.url.replace('.html', ''))) {

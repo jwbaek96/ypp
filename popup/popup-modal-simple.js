@@ -342,6 +342,16 @@ const SimplePopupModal = {
     
     return academyData.categories.map(category => {
       const categoryName = currentLang === 'en' ? category.name.eng : category.name.kor;
+      
+      // items가 없거나 빈 배열인 경우 처리
+      if (!category.items || category.items.length === 0) {
+        return `
+          <div class="academy-section">
+            <div class="academy-category-title">${categoryName}</div>
+          </div>
+        `;
+      }
+      
       const items = category.items.map(item => {
         const itemName = currentLang === 'en' ? item.name.eng : item.name.kor;
         

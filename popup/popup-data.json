@@ -1,0 +1,42 @@
+{
+  "popups": [
+    {
+      "id": 1,
+      "type": "renewal",
+      "title": {
+        "kor": "YPP 아카데미 안내",
+        "eng": "YPP Academy Announcement"
+      },
+      "downloads": {
+        "title": {
+          "kor": "",
+          "eng": ""
+        },
+        "categories": [
+          {
+            "name": {
+              "kor": "RelaySchool2026 전력계통 보호기술 교육과정 (접수중)",
+              "eng": "RelaySchool2026 Power System Protection Technology Training Course (Applications Open)"
+            },
+            "items": [
+              {
+                "name": {
+                  "kor": "과정개요, 교육일정 및 교육계획",
+                  "eng": "Course Overview, Schedule, and Plan"
+                },
+                "link": "/pages/academy/index.html?tab=relay-school"
+              },
+              {
+                "name": {
+                  "kor": "교육신청",
+                  "eng": "Apply Now"
+                },
+                "link": "/pages/academy/index.html?tab=apply"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -181,6 +181,13 @@ class PageManager {
         this.currentConfig = null; // 현재 설정 저장
         this.currentCategoryFilter = 'all'; // 카테고리 필터 상태 (all, psac, relay)
         this.currentCourseFilter = 'all'; // 과목 필터 상태 (all, 또는 특정 과목명)
+        
+        // 과목 목록 초기화
+        this.cachedPsacCourses = [];
+        this.cachedRelayCourses = [];
+        
+        // 과목 목록 로드
+        this.loadCoursesFromSheet();
     }
     
     // 페이지별 설정 데이터 초기화
@@ -1792,6 +1799,20 @@ class PageManager {
     generateEducationCheckboxes(pageType, item) {
         const currentEducation = item.detailedEducation || '';
         
+        // 신청 연도 확인
+        const applicationYear = new Date(item.applicationDate || item.submittedAt).getFullYear();
+        const currentYear = new Date().getFullYear();
+        
+        // 과거 신청 건은 텍스트로만 표시 (수정 불가)
+        if (applicationYear < currentYear) {
+            return `
+                <div style="margin-bottom: 10px; padding: 8px; background-color: #fff9e6; border-left: 3px solid #ffa500; font-size: 13px; color: #856404;">
+                    ⚠️ 과거 신청 내역은 수정할 수 없습니다.
+                </div>
+                <textarea name="detailedEducation" readonly style="width: 100%; min-height: 100px; padding: 12px; border: 1px solid #ddd; border-radius: 4px; background-color: #f3f4f6; color: #666; cursor: not-allowed; font-size: 14px; line-height: 1.6; resize: vertical;">${currentEducation}</textarea>
+            `;
+        }
+        
         // 더 안전한 구분자 처리 - 쉼표+공백 또는 세미콜론으로 구분
         let selectedCourses = [];
         if (currentEducation) {
@@ -1820,18 +1841,12 @@ class PageManager {
         });
         
         if (pageType === 'PSAC') {
-            const psacCourses = [
-                '1주: 전력계통 해석의 기본 이론',
-                '2주: 전력계통(설비) 보호기술',
-                '3주: 동기발전기 기술',
-                '4주: 무효전력 운영과 전압제어',
-                '5주: 전력설비의 동특성(계통안정도)',
-                '6주: 분산에너지 시스템 기술',
-                '7주: 보호릴레이 정정법과 보호협조기술',
-                '8주: HVDC, MVDC, LVDC 및 FACTS기술',
-                '9주: 에너지 전환기의 전력계통 계획과 운영/에너지 시장과 신사업 모델',
-                '10주: 신재생에너지 계통연계 기술'
-            ];
+            // 구글 시트에서 가져온 과목 목록 사용
+            const psacCourses = this.cachedPsacCourses.length > 0 ? this.cachedPsacCourses : [];
+            
+            if (psacCourses.length === 0) {
+                return `<p style="color: #999; padding: 10px;">과목 목록을 불러오는 중입니다...</p>`;
+            }
             
             console.log('PSAC 체크박스 생성 중...');
             return psacCourses.map((course, index) => {
@@ -1847,18 +1862,12 @@ class PageManager {
             }).join('');
             
         } else if (pageType === 'RelaySchool') {
-            const relayCourses = [
-                // 현재 진행 중인 과정들
-                '디지털릴레이 기본반 (2025년 9월 17일(수) ~ 9월 19일(금))',
-                '디지털릴레이 고급반 (2025년 10월 22일(수) ~ 10월 24일(금))',
-                '고장분석반 (2025년 11월 19일(수) ~ 11월 21일(금))',
-                // 마감된 과정들
-                '디지털릴레이 기본반 (2025년 3월 19일(수) ~ 3월 21일(금))',
-                '디지털릴레이 고급반 (2025년 4월 16일(수) ~ 4월 18일(금))',
-                '고장분석반 (2025년 5월 21일(수) ~ 5월 23일(금))',
-                'ECMS운영반 (2025년 6월 18일(수) ~ 6월 20일(금))',
-                '원자력 특성화반 (2025년 7월 16일(수) ~ 7월 20일(일))'
-            ];
+            // 구글 시트에서 가져온 과목 목록 사용
+            const relayCourses = this.cachedRelayCourses.length > 0 ? this.cachedRelayCourses : [];
+            
+            if (relayCourses.length === 0) {
+                return `<p style="color: #999; padding: 10px;">과목 목록을 불러오는 중입니다...</p>`;
+            }
             
             console.log('RelaySchool 체크박스 생성 중...');
             return relayCourses.map((course, index) => {

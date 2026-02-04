@@ -3276,6 +3276,125 @@ function showEditModal(item, pageType) {
     modal.style.display = 'flex';
 }
 
+// 교육과정 체크박스 생성
+function generateEducationCheckboxes(pageType, item) {
+    const currentEducation = item.detailedEducation || '';
+    
+    // 신청 연도 확인
+    const applicationYear = new Date(item.applicationDate || item.submittedAt).getFullYear();
+    const currentYear = new Date().getFullYear();
+    
+    // 과거 신청 건은 텍스트로만 표시 (수정 불가)
+    if (applicationYear < currentYear) {
+        return `
+            <div style="margin-bottom: 10px; padding: 8px; background-color: #fff9e6; border-left: 3px solid #ffa500; font-size: 13px; color: #856404;">
+                ⚠️ 과거 신청 내역은 수정할 수 없습니다.
+            </div>
+            <p>${currentEducation}</p>
+            <!--<textarea name="detailedEducation" readonly style="width: 100%; min-height: 100px; padding: 12px; border: 1px solid #ddd; border-radius: 4px; background-color: #f3f4f6; color: #666; cursor: not-allowed; font-size: 14px; line-height: 1.6; resize: vertical;"></textarea>-->
+        `;
+    }
+    
+    // 더 안전한 구분자 처리 - 쉼표+공백 또는 세미콜론으로 구분
+    let selectedCourses = [];
+    if (currentEducation) {
+        // 먼저 세미콜론으로 구분 시도 (더 안전한 구분자)
+        if (currentEducation.includes(';')) {
+            selectedCourses = currentEducation.split(';').map(course => course.trim()).filter(course => course);
+        } else {
+            // 쉼표로 구분하되, 연속된 쉼표+공백 패턴을 찾아서 구분
+            // 예: "과정1, 과정2" (구분자) vs "HVDC, MVDC" (과정명 내부)
+            const parts = currentEducation.split(/,\s*(?=\d+주:)/); // 숫자+주: 패턴 앞의 쉼표+공백으로 구분
+            if (parts.length > 1) {
+                selectedCourses = parts.map(course => course.trim()).filter(course => course);
+            } else {
+                // 단일 과정인 경우
+                selectedCourses = [currentEducation.trim()];
+            }
+        }
+    }
+    
+    // 디버깅을 위한 콘솔 로그
+    console.log('신청자 이름:', item.applicantName || item.studentName || '이름 없음');
+    console.log('신청과목들:', {
+        원본데이터: currentEducation,
+        파싱된배열: selectedCourses,
+        배열길이: selectedCourses.length
+    });
+    
+    if (pageType === 'PSAC') {
+        // form.js에서 로드한 과목 데이터 사용 (교육신청 탭과 동일한 방식)
+        if (typeof psacCoursesData === 'undefined' || !psacCoursesData) {
+            console.warn('PSAC 과목 데이터가 아직 로드되지 않았습니다.');
+            return `<p style="color: #999; padding: 10px;">과목 목록을 불러오는 중입니다...</p>`;
+        }
+        
+        // psacCoursesData 구조: { 1: {kor, eng, status, ...}, 2: {...}, ... }
+        let psacCourses = [];
+        // courses 속성이 있으면 사용, 없으면 직접 사용
+        const coursesObj = psacCoursesData.courses || psacCoursesData;
+        if (coursesObj && typeof coursesObj === 'object') {
+            psacCourses = Object.entries(coursesObj)
+                .filter(([id, course]) => course.status === 'ON')
+                .map(([id, course]) => course.kor);
+        }
+        
+        if (psacCourses.length === 0) {
+            return `<p style="color: #999; padding: 10px;">현재 신청 가능한 과목이 없습니다.</p>`;
+        }
+        
+        console.log('PSAC 체크박스 생성 중...', psacCourses);
+        return psacCourses.map((course, index) => {
+            const isChecked = selectedCourses.includes(course);
+            const checkedAttr = isChecked ? 'checked="checked"' : '';
+            console.log(`${course}: ${isChecked ? '체크됨' : '체크안됨'}`);
+            return `
+                <div class="education-checkbox-item">
+                    <input type="checkbox" id="psac_week_${index + 1}" name="detailedEducation" value="${course}" ${checkedAttr}>
+                    <label for="psac_week_${index + 1}">${course}</label>
+                </div>
+            `;
+        }).join('');
+        
+    } else if (pageType === 'RelaySchool') {
+        // form.js에서 로드한 과목 데이터 사용 (교육신청 탭과 동일한 방식)
+        if (typeof relayCoursesData === 'undefined' || !relayCoursesData) {
+            console.warn('RelaySchool 과목 데이터가 아직 로드되지 않았습니다.');
+            return `<p style="color: #999; padding: 10px;">과목 목록을 불러오는 중입니다...</p>`;
+        }
+        
+        // relayCoursesData 구조: { 1: {kor, eng, status, ...}, 2: {...}, ... }
+        let relayCourses = [];
+        // courses 속성이 있으면 사용, 없으면 직접 사용
+        const coursesObj = relayCoursesData.courses || relayCoursesData;
+        if (coursesObj && typeof coursesObj === 'object') {
+            relayCourses = Object.entries(coursesObj)
+                .filter(([id, course]) => course.status === 'ON')
+                .map(([id, course]) => course.kor);
+        }
+        
+        if (relayCourses.length === 0) {
+            return `<p style="color: #999; padding: 10px;">현재 신청 가능한 과목이 없습니다.</p>`;
+        }
+        
+        console.log('RelaySchool 체크박스 생성 중...', relayCourses);
+        return relayCourses.map((course, index) => {
+            const isChecked = selectedCourses.includes(course);
+            const checkedAttr = isChecked ? 'checked="checked"' : '';
+            console.log(`${course}: ${isChecked ? '체크됨' : '체크안됨'}`);
+            return `
+                <div class="education-checkbox-item">
+                    <input type="checkbox" id="relay_course_${index + 1}" name="detailedEducation" value="${course}" ${checkedAttr}>
+                    <label for="relay_course_${index + 1}">${course}</label>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    // 기본 fallback: 텍스트 영역 반환
+    return `<textarea name="detailedEducation" required>${currentEducation}</textarea>`;
+}
+
 // 수정 폼 생성 (어드민 페이지와 동일)
 function generateEditForm(item, pageType) {
     let formHTML = `

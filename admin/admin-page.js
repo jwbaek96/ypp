@@ -171,9 +171,10 @@ class PageManager {
         return dateString;
     }
     constructor() {
-        // Google Apps Script 웹앱 URL (index.html과 동일)
+        // Google Apps Script 웹앱 URL (PSAC/RelaySchool 전용, academy/index.html과 동일)
+        this.PSAC_RELAY_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzVwT_a8MDrI2-GJvicN0aEXzxN2vDjm5Tr6uvNLWOMzss9sC7uRtc98ErZ9fLlNqAybQ/exec';
+        // 기존 대시보드용 URL (다른 용도에 사용)
         this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxB2_0dc5Wim-sRuAtrk3G14GL-iSUljdoWRtSpsJsy6NGhbLfbATfzWncitqCyhWKm';
-        // this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxpCCjRsLr1A2Yv8UUQMbcsTyqRi1Jt_pPDERgwFUSUyQv83P8ex8G03u8dNaJQfhRV';
         this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
         this.pageConfigs = this.initPageConfigs();
         this.isDescending = true; // 기본값: 최신순 (내림차순)
@@ -188,6 +189,39 @@ class PageManager {
         
         // 과목 목록 로드
         this.loadCoursesFromSheet();
+    }
+
+    // Google Apps Script에서 PSAC/RelaySchool 과정 데이터 동적 로드
+    async loadCoursesFromSheet() {
+        // PSAC/RelaySchool 과정 데이터 (academy/index.html과 동일한 URL 및 fetch 패턴 사용)
+        try {
+            // index.html과 완전히 동일한 URL/파라미터 사용
+            const psacUrl = 'https://script.google.com/macros/s/AKfycbzVwT_a8MDrI2-GJvicN0aEXzxN2vDjm5Tr6uvNLWOMzss9sC7uRtc98ErZ9fLlNqAybQ/exec?sheet=SHEET_APPLY_P&action=getData';
+            const relayUrl = 'https://script.google.com/macros/s/AKfycbzVwT_a8MDrI2-GJvicN0aEXzxN2vDjm5Tr6uvNLWOMzss9sC7uRtc98ErZ9fLlNqAybQ/exec?sheet=SHEET_APPLY_R&action=getData';
+
+            const [psacRes, relayRes] = await Promise.all([
+                fetch(psacUrl),
+                fetch(relayUrl)
+            ]);
+
+            if (!psacRes.ok || !relayRes.ok) {
+                throw new Error('과정 데이터를 불러오지 못했습니다.');
+            }
+
+            const psacResult = await psacRes.json();
+            const relayResult = await relayRes.json();
+
+            this.cachedPsacCourses = psacResult.success ? psacResult.data : [];
+            this.cachedRelayCourses = relayResult.success ? relayResult.data : [];
+
+            // 필요시 콘솔 출력
+            console.log('PSAC 과정 데이터:', this.cachedPsacCourses);
+            console.log('RelaySchool 과정 데이터:', this.cachedRelayCourses);
+        } catch (error) {
+            console.error('과정 데이터 로드 오류:', error);
+            this.cachedPsacCourses = {};
+            this.cachedRelayCourses = {};
+        }
     }
     
     // 페이지별 설정 데이터 초기화
@@ -1841,18 +1875,17 @@ class PageManager {
         });
         
         if (pageType === 'PSAC') {
-            // 구글 시트에서 가져온 과목 목록 사용
-            const psacCourses = this.cachedPsacCourses.length > 0 ? this.cachedPsacCourses : [];
-            
+            // 구글 시트에서 가져온 과목 목록 사용 (객체 → 배열 변환, status 'ON'만)
+            const coursesObj = this.cachedPsacCourses && typeof this.cachedPsacCourses === 'object' ? this.cachedPsacCourses : {};
+            const psacCourses = Object.entries(coursesObj)
+                .filter(([id, course]) => course.status === 'ON')
+                .map(([id, course]) => course.kor);
             if (psacCourses.length === 0) {
                 return `<p style="color: #999; padding: 10px;">과목 목록을 불러오는 중입니다...</p>`;
             }
-            
-            console.log('PSAC 체크박스 생성 중...');
             return psacCourses.map((course, index) => {
                 const isChecked = selectedCourses.includes(course);
                 const checkedAttr = isChecked ? 'checked="checked"' : '';
-                console.log(`${course}: ${isChecked ? '체크됨' : '체크안됨'}`);
                 return `
                     <div class="education-checkbox-item">
                         <input type="checkbox" id="psac_week_${index + 1}" name="detailedEducation" value="${course}" ${checkedAttr}>
@@ -1860,20 +1893,18 @@ class PageManager {
                     </div>
                 `;
             }).join('');
-            
         } else if (pageType === 'RelaySchool') {
-            // 구글 시트에서 가져온 과목 목록 사용
-            const relayCourses = this.cachedRelayCourses.length > 0 ? this.cachedRelayCourses : [];
-            
+            // 구글 시트에서 가져온 과목 목록 사용 (객체 → 배열 변환, status 'ON'만)
+            const coursesObj = this.cachedRelayCourses && typeof this.cachedRelayCourses === 'object' ? this.cachedRelayCourses : {};
+            const relayCourses = Object.entries(coursesObj)
+                .filter(([id, course]) => course.status === 'ON')
+                .map(([id, course]) => course.kor);
             if (relayCourses.length === 0) {
                 return `<p style="color: #999; padding: 10px;">과목 목록을 불러오는 중입니다...</p>`;
             }
-            
-            console.log('RelaySchool 체크박스 생성 중...');
             return relayCourses.map((course, index) => {
                 const isChecked = selectedCourses.includes(course);
                 const checkedAttr = isChecked ? 'checked="checked"' : '';
-                console.log(`${course}: ${isChecked ? '체크됨' : '체크안됨'}`);
                 return `
                     <div class="education-checkbox-item">
                         <input type="checkbox" id="relay_course_${index + 1}" name="detailedEducation" value="${course}" ${checkedAttr}>

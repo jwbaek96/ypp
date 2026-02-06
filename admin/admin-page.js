@@ -195,14 +195,22 @@ class PageManager {
     async loadCoursesFromSheet() {
         // PSAC/RelaySchool 과정 데이터 (academy/index.html과 동일한 URL 및 fetch 패턴 사용)
         try {
-            // index.html과 완전히 동일한 URL/파라미터 사용
-            const psacUrl = 'https://script.google.com/macros/s/AKfycbzVwT_a8MDrI2-GJvicN0aEXzxN2vDjm5Tr6uvNLWOMzss9sC7uRtc98ErZ9fLlNqAybQ/exec?sheet=SHEET_APPLY_P&action=getData';
-            const relayUrl = 'https://script.google.com/macros/s/AKfycbzVwT_a8MDrI2-GJvicN0aEXzxN2vDjm5Tr6uvNLWOMzss9sC7uRtc98ErZ9fLlNqAybQ/exec?sheet=SHEET_APPLY_R&action=getData';
+            console.log('🔄 과목 데이터 로딩 시작...');
+            
+            // Apps Script 백엔드의 과목 목록 액션 호출 - 올바른 URL 사용
+            const psacUrl = `${this.PSAC_RELAY_APPS_SCRIPT_URL}?action=get_psac_courses`;
+            const relayUrl = `${this.PSAC_RELAY_APPS_SCRIPT_URL}?action=get_relay_courses`;
+
+            console.log('📡 PSAC URL:', psacUrl);
+            console.log('📡 Relay URL:', relayUrl);
 
             const [psacRes, relayRes] = await Promise.all([
                 fetch(psacUrl),
                 fetch(relayUrl)
             ]);
+
+            console.log('📥 PSAC 응답 상태:', psacRes.status, psacRes.ok);
+            console.log('📥 Relay 응답 상태:', relayRes.status, relayRes.ok);
 
             if (!psacRes.ok || !relayRes.ok) {
                 throw new Error('과정 데이터를 불러오지 못했습니다.');
@@ -211,14 +219,19 @@ class PageManager {
             const psacResult = await psacRes.json();
             const relayResult = await relayRes.json();
 
-            this.cachedPsacCourses = psacResult.success ? psacResult.data : [];
-            this.cachedRelayCourses = relayResult.success ? relayResult.data : [];
+            console.log('📦 PSAC 원본 응답:', psacResult);
+            console.log('📦 Relay 원본 응답:', relayResult);
+            console.log('🔍 PSAC success:', psacResult.success, 'data:', psacResult.data);
+            console.log('🔍 Relay success:', relayResult.success, 'data:', relayResult.data);
 
-            // 필요시 콘솔 출력
-            console.log('PSAC 과정 데이터:', this.cachedPsacCourses);
-            console.log('RelaySchool 과정 데이터:', this.cachedRelayCourses);
+            this.cachedPsacCourses = psacResult.success ? psacResult.data : {};
+            this.cachedRelayCourses = relayResult.success ? relayResult.data : {};
+
+            // 최종 저장된 데이터 확인
+            console.log('✅ PSAC 과정 데이터 로드됨:', this.cachedPsacCourses);
+            console.log('✅ RelaySchool 과정 데이터 로드됨:', this.cachedRelayCourses);
         } catch (error) {
-            console.error('과정 데이터 로드 오류:', error);
+            console.error('❌ 과정 데이터 로드 오류:', error);
             this.cachedPsacCourses = {};
             this.cachedRelayCourses = {};
         }
@@ -538,28 +551,31 @@ class PageManager {
             this.showLoading(false);
         }
     }
-    
-    // 테이블 렌더링 (데스크톱)
+
+    // 데이터 테이블 렌더링
     renderDataTable(data, config) {
-        const tbody = document.getElementById('data-table-body');
-        const thead = document.querySelector('.data-table thead tr');
+        const tableContainer = document.querySelector('.data-table-container');
+        const table = tableContainer.querySelector('table');
+        const thead = table.querySelector('thead');
+        const tbody = table.querySelector('tbody');
+
+        // 카테고리 필터 적용
+        let filteredData = this.filterDataByCategory(data);
         
-        // 데이터 그룹핑 적용 (PSAC, RelaySchool에서만)
-        let processedData = this.groupDataByDateAndBusinessNumber(data);
+        // 데이터 정렬
+        filteredData = this.sortData(filteredData);
         
-        // 카테고리 필터 적용 (아카데미 페이지에서만)
-        processedData = this.filterDataByCategory(processedData);
+        // 데이터 그룹핑
+        const groupedData = this.groupDataByDateAndBusinessNumber(filteredData);
         
-        // 과목 필터 적용 (PSAC, RelaySchool 페이지에서만)
-        processedData = this.filterDataByCourse(processedData);
+        // 과목 필터 적용 (그룹핑 후)
+        const processedData = this.filterDataByCourse(groupedData);
         
-        // 데이터 정렬 적용
-        processedData = this.sortData(processedData);
+        // 실제 개별 아이템 개수 계산 (그룹핑된 아이템 내부 개수 포함)
+        const actualItemCount = this.calculateActualItemCount(processedData);
         
-    // 실제 개별 아이템 개수 계산 (그룹핑된 아이템 내부 개수 포함)
-    const actualItemCount = this.calculateActualItemCount(processedData);
-    // 테이블 헤더 동적 생성 (실제 개별 아이템 개수 포함)
-    thead.innerHTML = this.generateTableHeaderHTML(config, actualItemCount);
+        // 테이블 헤더 생성
+        thead.innerHTML = this.generateTableHeaderHTML(config, actualItemCount);
         
         // 현재 처리된 데이터 저장 (모달에서 사용)
         this.currentProcessedData = processedData;
@@ -1875,11 +1891,14 @@ class PageManager {
         });
         
         if (pageType === 'PSAC') {
-            // 구글 시트에서 가져온 과목 목록 사용 (객체 → 배열 변환, status 'ON'만)
-            const coursesObj = this.cachedPsacCourses && typeof this.cachedPsacCourses === 'object' ? this.cachedPsacCourses : {};
-            const psacCourses = Object.entries(coursesObj)
-                .filter(([id, course]) => course.status === 'ON')
-                .map(([id, course]) => course.kor);
+            // 구글 시트에서 가져온 과목 목록 사용 (배열에서 status 'ON'만 필터링)
+            const coursesArray = Array.isArray(this.cachedPsacCourses) ? this.cachedPsacCourses : [];
+            const psacCourses = coursesArray
+                .filter(course => course.status === 'ON')
+                .map(course => course.nameKR);
+            
+            console.log('PSAC 과목 목록:', psacCourses);
+            
             if (psacCourses.length === 0) {
                 return `<p style="color: #999; padding: 10px;">과목 목록을 불러오는 중입니다...</p>`;
             }
@@ -1894,11 +1913,14 @@ class PageManager {
                 `;
             }).join('');
         } else if (pageType === 'RelaySchool') {
-            // 구글 시트에서 가져온 과목 목록 사용 (객체 → 배열 변환, status 'ON'만)
-            const coursesObj = this.cachedRelayCourses && typeof this.cachedRelayCourses === 'object' ? this.cachedRelayCourses : {};
-            const relayCourses = Object.entries(coursesObj)
-                .filter(([id, course]) => course.status === 'ON')
-                .map(([id, course]) => course.kor);
+            // 구글 시트에서 가져온 과목 목록 사용 (배열에서 status 'ON'만 필터링)
+            const coursesArray = Array.isArray(this.cachedRelayCourses) ? this.cachedRelayCourses : [];
+            const relayCourses = coursesArray
+                .filter(course => course.status === 'ON')
+                .map(course => course.nameKR);
+            
+            console.log('RelaySchool 과목 목록:', relayCourses);
+            
             if (relayCourses.length === 0) {
                 return `<p style="color: #999; padding: 10px;">과목 목록을 불러오는 중입니다...</p>`;
             }

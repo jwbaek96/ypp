@@ -32,6 +32,13 @@
                   "eng": "Apply Now"
                 },
                 "link": "/pages/academy/index.html?tab=apply"
+              },
+              {
+                "name": {
+                  "kor": "RelaySchool 2026 교육계획 안내 브로슈어",
+                  "eng": "RelaySchool 2026 Brochure"
+                },
+                "filename": "YPP RELAY SCHOOL + CV 2026 교육계획 (용량압축).pdf"
               }
             ]
           }

@@ -57,6 +57,7 @@
                     <a href="#environment" class="tab-link" data-tab="environment" data-eng="Environment" data-kor="환경">환경</a>
                     <a href="#social" class="tab-link" data-tab="social" data-eng="Social" data-kor="사회">사회</a>
                     <a href="#governance" class="tab-link" data-tab="governance" data-eng="Governance" data-kor="지배구조">지배구조</a>
+                    <a href="와이피피 지속가능경영보고서 2026.pdf" class="tab-download" target="_blank" data-eng="Sustainability Report" data-kor="지속가능경영보고서">지속가능경영보고서</a>
                 </nav>
 
                 <!-- Section Navigation for 경영 -->
@@ -75,8 +76,8 @@
                     data-eng="Environmental Management Policy"
                     data-kor="환경경영 방침">환경경영 방침</a>
                     <a href="#environment-certifications" class="section-nav-link"
-                    data-eng="Environment Certifications"
-                    data-kor="환경 인증">환경 인증</a>
+                    data-eng="Environment Certifications • Agreements"
+                    data-kor="환경 인증 • 협약">환경 인증 • 협약</a>
                 </div>
 
                 <!-- Section Navigation for 사회 -->
@@ -433,8 +434,8 @@
                         <!-- 환경 인증 -->
                         <div id="environment-certifications" class="environment-certifications content-block">
                             <h3 class="block-title"
-                                data-eng="Environmental Certifications"
-                                data-kor="환경 인증">환경 인증</h3>
+                                data-eng="Environmental Certifications • Agreements"
+                                data-kor="환경 인증 • 협약">환경 인증 • 협약</h3>
                             <div class="certifications-grid">
                                 <div class="certification-item">
                                     <a target="_blank" href="esg_certified_img1.jpg" class="certification-image">
@@ -446,14 +447,19 @@
                                         <img src="esg_certified_img2.jpg">
                                     </a>
                                 </div>
+                                <div class="certification-item">
+                                    <a target="_blank" href="esg_certified_img2.jpg" class="certification-image">
+                                        <img src="녹색산업활성화업무협약서.png">
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <style>
                         .certifications-grid {
                             display: grid;
-                            grid-template-columns: 1fr 1fr;
+                            grid-template-columns: 1fr 1fr 1fr;
                             gap: 30px;
-                            max-width: 800px;
+                            /* max-width: 800px; */
                             margin: 2rem auto;
                         }
 
@@ -489,7 +495,8 @@
 
                         @media (max-width: 480px) {
                             .environment-certifications .block-title {font-size: 1.3rem;}
-                            .certifications-grid {padding: 0 10px;}
+                            .certifications-grid {padding: 0 10px;
+                            grid-template-columns: 1fr 1fr;}
                             .certification-image {padding: 10px;}
                         }
                         </style>
@@ -1691,6 +1698,22 @@ label.report-popup-cancel {
         min-width: 0;
         width: 95vw;
         padding: 18px 6vw 16px 6vw;
+    }
+}
+/* ===ESG페이지 별도 추가 스타일=== */
+.tab-download {
+    text-decoration: none;
+    color: var(--text-secondary, #666);
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: .92rem;
+    padding: 1rem 1.5rem;
+}@media (max-width: 768px) {
+    .tab-download {
+        flex: 0 0 auto;
+        padding: 0.85rem 1rem;
     }
 }
     </style>

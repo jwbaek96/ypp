@@ -32,10 +32,29 @@ class HistoryDataManager {
         this.isLoading = false;
     }
     
+    // 로딩 스피너 표시
+    showLoadingSpinner() {
+        const spinners = document.querySelectorAll('.history-loading-spinner');
+        spinners.forEach(spinner => {
+            spinner.style.display = 'flex';
+        });
+    }
+    
+    // 로딩 스피너 숨김
+    hideLoadingSpinner() {
+        const spinners = document.querySelectorAll('.history-loading-spinner');
+        spinners.forEach(spinner => {
+            spinner.style.display = 'none';
+        });
+    }
+    
     // Apps Script에서 연혁 데이터 로드
     async loadHistoryData() {
         if (this.isLoading) return;
         this.isLoading = true;
+        
+        // 로딩 스피너 표시
+        this.showLoadingSpinner();
         
         try {
             console.log('📊 연혁 데이터 로딩 시작...');
@@ -61,10 +80,14 @@ class HistoryDataManager {
             // 연혁 섹션 렌더링
             this.renderHistorySection();
             
+            // 로딩 스피너 숨김
+            this.hideLoadingSpinner();
+            
             return true;
             
         } catch (error) {
             console.error('💥 연혁 데이터 로드 실패:', error);
+            this.hideLoadingSpinner();
             this.showErrorMessage();
             return false;
         } finally {

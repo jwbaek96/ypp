@@ -587,16 +587,30 @@
                         </div>
 
                         <!-- 교육 안내 -->
-                        <div id="psac-info" class="content-block">
+                        <!-- <div id="psac-info" class="content-block">
                             <h3 class="block-title"
                                 data-eng="Course Information"
                                 data-kor="교육 일정">교육 일정</h3>
                             <div class="block-content">
                                 <div class="psac-schedule-container">
-                                    <!-- 교육일정 테이블이 JavaScript로 동적 생성됩니다 -->
+                                    교육일정 테이블이 JavaScript로 동적 생성됩니다
                                     <div style="text-align: center; padding: 2rem; color: #666;">
                                         <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
                                         <p data-kor="교육일정을 불러오는 중입니다..." data-eng="Loading schedule...">교육일정을 불러오는 중입니다...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div id="psac-info" class="content-block">
+                            <h3 class="block-title"
+                                data-kor="PSAC 주차별 교육일정 및 개요"
+                                data-eng="PSAC Weekly Schedule and Overview">교육 일정</h3>
+                            <div class="block-content">
+                                <div class="psac-weekly-overview-container">
+                                    <!-- 주차별 교육일정 및 개요 테이블이 JavaScript로 동적 생성됩니다 -->
+                                    <div style="text-align: center; padding: 2rem; color: #666;">
+                                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                                        <p data-kor="주차별 교육일정 및 개요를 불러오는 중입니다..." data-eng="Loading weekly schedule and overview...">주차별 교육일정 및 개요를 불러오는 중입니다...</p>
                                     </div>
                                 </div>
                             </div>
@@ -2267,7 +2281,6 @@
      
     <script src="courseData.js"></script>
     <script src="form.js"></script>
-    <script src="psac-schedule.js"></script>
     <script src="psac-overview.js"></script>
     <!-- <script src="rs-details.js"></script> -->
 
@@ -3857,6 +3870,108 @@ document.addEventListener('DOMContentLoaded', () => {
 .subject-cell {background: #ffffff;color: #1f2937;font-size: 0.8rem;font-weight: 600;line-height: 1.4;padding: 0.75rem;border-right: 1px solid #e5e7eb;vertical-align: middle;}
 .instructor-cell {background: #ffffff;color: #6b7280;font-size: 0.8rem;line-height: 1.4;padding: 0.75rem;margin: 0;}
 
+/* ===== PSAC Weekly Overview Table (namespaced) ===== */
+.psac-weekly-overview-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #d9e1ec;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.psac-weekly-overview-table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.psac-weekly-overview-head {
+    padding: 10px 6px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #d9e1ec;
+    border-right: 1px solid #d9e1ec;
+    background: #f4f7fb;
+    color: #2f3a4b;
+    font-weight: 700;
+    font-size: 0.9rem;
+    line-height: 1.35;
+}
+
+.psac-weekly-overview-cell {
+    padding: 8px 6px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #e7edf5;
+    border-right: 1px solid #e7edf5;
+    color: #374151;
+    line-height: 1.45;
+    white-space: pre-line;
+}
+
+.psac-weekly-overview-head:last-child,
+.psac-weekly-overview-cell:last-child {
+    border-right: none;
+}
+
+.psac-weekly-overview-head-week,
+.psac-weekly-overview-week {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.psac-weekly-overview-head-period,
+.psac-weekly-overview-period {
+    width: 1%;
+    white-space: pre-line;
+}
+
+.psac-weekly-overview-head-topic,
+.psac-weekly-overview-topic {
+    width: auto;
+    white-space: normal;
+}
+
+.psac-weekly-overview-head-days,
+.psac-weekly-overview-days {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.psac-weekly-overview-head-fee,
+.psac-weekly-overview-fee {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.psac-weekly-overview-row:last-child .psac-weekly-overview-cell {
+    border-bottom: none;
+}
+
+.psac-weekly-overview-topic {
+    color: #5b5b5b;
+}
+
+.psac-weekly-overview-topic-line {
+    margin: 0;
+}
+
+.psac-weekly-overview-topic-line-first {
+    color: #111111;
+    font-weight: 700;
+}
+
+.psac-weekly-overview-topic-line-mid {
+    color: #5b5b5b;
+    font-weight: 500;
+}
+
+.psac-weekly-overview-topic-line-last {
+    color: #0f2747;
+    font-weight: 600;
+}
+
 /* 신청 및 문의 섹션 + 오시는길 + 숙박 */
 .contact-info, .inquiry-info,
 .psac-location-info, .psac-stay-info {background: #ffffff;border: 1px solid #e5e7eb;border-radius: 12px;padding: 1.5rem;}
@@ -3901,6 +4016,16 @@ document.addEventListener('DOMContentLoaded', () => {
     .schedule-header-week { width: 8%; }
     .schedule-header-subject { width: 28%; }
     .schedule-header-instructor { width: 52%; }
+
+    .psac-weekly-overview-head,
+    .psac-weekly-overview-cell {
+        padding: 8px 8px;
+        font-size: 0.86rem;
+    }
+
+    .psac-weekly-overview-table {
+        min-width: 640px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -3949,8 +4074,8 @@ document.addEventListener('DOMContentLoaded', () => {
 .day-row {border-bottom: 1px solid #e5e7eb;}
 .day-cell {background: #f8fafc;font-weight: 600;text-align: center;vertical-align: middle;padding: 0.75rem 0.5rem;border-right: 1px solid #e5e7eb;font-size: 0.85rem;line-height: 1.2;}
 .opening-cell {background: #ffffff;color: #b21717;text-align: center;padding: 1rem;font-size: 0.9rem;}
-.class-cell {background: #ffffff;color: #374151;font-weight: 500;text-align: center;padding: 0.75rem 0.5rem;line-height: 1.3;font-size: 0.75rem;vertical-align: middle;}
-.daily-schedule-table .instructor-cell {background: #fff;color: #7083a8;text-align: center;padding: 0.25rem;}
+.class-cell {background: #ffffff;color: #000815;font-weight: 500;text-align: center;padding: 0.75rem 0.5rem;line-height: 1.3;font-size: 0.9rem;vertical-align: middle;}
+.daily-schedule-table .instructor-cell {background: #fff;color: #375289;text-align: center;padding: 0.25rem;}
 
 .empty-cell {background: #f6f6f6;}
 

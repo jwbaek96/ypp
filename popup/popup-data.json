@@ -15,8 +15,8 @@
         "categories": [
           {
             "name": {
-              "kor": "RelaySchool2026 전력계통 보호기술 교육과정",
-              "eng": "RelaySchool2026 Power System Protection Technology Training Course (Applications Open)"
+              "kor": "RelaySchool 전력계통 보호기술 교육과정",
+              "eng": "RelaySchool Power System Protection Technology Training Course"
             },
             "items": [
               {
@@ -35,8 +35,8 @@
               },
               {
                 "name": {
-                  "kor": "RelaySchool 2026 교육계획 안내 브로슈어",
-                  "eng": "RelaySchool 2026 Brochure"
+                  "kor": "RelaySchool 교육계획 안내 브로슈어",
+                  "eng": "RelaySchool Brochure"
                 },
                 "filename": "YPP RELAY SCHOOL_CV 2026 교육계획.pdf"
               }

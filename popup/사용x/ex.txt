@@ -1,0 +1,8 @@
+,
+              {
+                "name": {
+                  "kor": "PSAC 2026 교육안내 브로슈어",
+                  "eng": "PSAC 2026 Brochure"
+                },
+                "filename": "2026_PSAC_brochure.pdf"
+              }

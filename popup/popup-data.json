@@ -15,7 +15,7 @@
         "categories": [
           {
             "name": {
-              "kor": "RelaySchool2026 전력계통 보호기술 교육과정 (접수중)",
+              "kor": "RelaySchool2026 전력계통 보호기술 교육과정",
               "eng": "RelaySchool2026 Power System Protection Technology Training Course (Applications Open)"
             },
             "items": [
@@ -39,6 +39,28 @@
                   "eng": "RelaySchool 2026 Brochure"
                 },
                 "filename": "YPP RELAY SCHOOL_CV 2026 교육계획.pdf"
+              }
+            ]
+          },
+          {
+            "name": {
+              "kor": "PSAC 2026 전력계통 고급기술 교육과정",
+              "eng": "PSAC 2026 Power System Advanced Technology Training Course"
+            },
+            "items": [
+              {
+                "name": {
+                  "kor": "과정개요, 교육일정 및 교육계획",
+                  "eng": "Course Overview, Schedule, and Plan"
+                },
+                "link": "/pages/academy/index.html?tab=psac"
+              },
+              {
+                "name": {
+                  "kor": "교육신청",
+                  "eng": "Apply Now"
+                },
+                "link": "/pages/academy/index.html?tab=apply"
               }
             ]
           }

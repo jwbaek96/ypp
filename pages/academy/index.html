@@ -72,7 +72,8 @@
                 <nav class="tab-nav">
                     <a href="#intro" class="tab-link active" data-tab="intro" data-eng="Introduction" data-kor="소개">소개</a>
                     <a href="#relay-school" class="tab-link" data-tab="relay-school">Relay School</a>
-                    <a href="#psac" class="tab-link" data-tab="psac"><i class="fas fa-lock" style="font-size: 0.8em; margin-right: 5px;"></i>PSAC</a>
+                    <a href="#psac" class="tab-link" data-tab="psac">PSAC 2026</a>
+                    <!-- <i class="fas fa-lock" style="font-size: 0.8em; margin-right: 5px;"></i> -->
                     <a href="#apply" class="tab-link" data-tab="apply" data-eng="Course Application" data-kor="교육신청">교육신청</a>
                     <a href="#check" class="tab-link" data-tab="check" data-eng="Check Application" data-kor="신청조회">신청조회</a>
                 </nav>
@@ -2314,15 +2315,15 @@ class AcademyPageController {
                 const tabId = link.getAttribute('data-tab');
                 
                 // PSAC 탭 비밀번호 확인
-                if (tabId === 'psac') {
-                    const password = prompt(document.documentElement.lang === 'ko' ? "비밀번호를 입력하세요." : "Please enter the password.");
-                    if (password !== '2026') {
-                        if (password !== null) {
-                            alert(document.documentElement.lang === 'ko' ? "비밀번호가 올바르지 않습니다." : "Incorrect password.");
-                        }
-                        return;
-                    }
-                }
+                // if (tabId === 'psac') {
+                //     const password = prompt(document.documentElement.lang === 'ko' ? "비밀번호를 입력하세요." : "Please enter the password.");
+                //     if (password !== '2026') {
+                //         if (password !== null) {
+                //             alert(document.documentElement.lang === 'ko' ? "비밀번호가 올바르지 않습니다." : "Incorrect password.");
+                //         }
+                //         return;
+                //     }
+                // }
                 
                 this.switchTab(tabId);
                 this.updateTabActiveState(link);
@@ -2363,7 +2364,8 @@ class AcademyPageController {
         const tab = urlParams.get('tab');
         
         // PSAC 탭은 직접 접근 불가 (클릭 및 비밀번호 입력 통해서만 가능)
-        if (tab && this.isValidTab(tab) && tab !== 'psac') {
+        // if (tab && this.isValidTab(tab) && tab !== 'psac') {
+        if (tab && this.isValidTab(tab)) {
             setTimeout(() => {
                 this.switchTab(tab);
                 const correspondingLink = document.querySelector(`[data-tab="${tab}"]`);
@@ -2517,8 +2519,9 @@ class AcademyPageController {
                         break;
                     case '2':
                         e.preventDefault();
-                        // PSAC는 비활성화됨
-                        alert('준비중입니다.\nPreparing.');
+                        
+                        // alert('준비중입니다.\nPreparing.');// PSAC 비활성화용
+                        this.switchTab('psac');
                         break;
                     case '3':
                         e.preventDefault();
@@ -3972,6 +3975,7 @@ document.addEventListener('DOMContentLoaded', () => {
 .psac-weekly-overview-topic-line-last {
     color: #2e62a3;
     /* font-weight: 600; */
+    font-size: 0.96rem;
 }
 
 /* 신청 및 문의 섹션 + 오시는길 + 숙박 */

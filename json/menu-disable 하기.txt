@@ -1,0 +1,5 @@
+"disabled": true,
+          "disabledMessage": {
+            "ko": "2026년도 PSAC 과정이 현재 준비중입니다",
+            "en": "2026 PSAC course is currently under preparation"
+          }

@@ -351,7 +351,8 @@ class PageManager {
                 location: 'ESG > 지배구조 > 부패 및 윤리 신고',
                 link: '/pages/esg/esg.html#governance-report',
                 apiSheet: 'SHEET_REPORT',
-                dataKey: 'report'
+                dataKey: 'report',
+                embedSheetUrl: 'https://docs.google.com/spreadsheets/d/1mLh1yywTgwZ_NNaIic-46pPP8VfVR5FG5CeOG1XhiAU/edit?usp=sharing'
             }
         };
     }
@@ -374,6 +375,13 @@ class PageManager {
         
         // 페이지 정보 업데이트
         this.updatePageInfo(config);
+
+        // 부패 및 윤리 신고 페이지는 구글시트 임베딩 전용 화면으로 처리
+        if (pageParam === '부패및윤리신고') {
+            await this.loadPageCount(config);
+            this.renderEmbeddedSheetPage(config);
+            return;
+        }
         
         // 데이터 카운트 로드
         await this.loadPageCount(config);
@@ -402,6 +410,74 @@ class PageManager {
         
         // 삭제 버튼 이벤트 설정
         this.setupDeleteButtons();
+    }
+
+    // 구글시트 임베드 전용 화면 렌더링
+    renderEmbeddedSheetPage(config) {
+        const toolbar = document.querySelector('.data-toolbar');
+        const tableContainer = document.querySelector('.data-table-container');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const emptyState = document.getElementById('empty-state');
+        const dataContainer = document.querySelector('.data-container');
+
+        if (toolbar) toolbar.style.display = 'none';
+        if (tableContainer) tableContainer.style.display = 'none';
+        if (loadingIndicator) loadingIndicator.style.display = 'none';
+        if (emptyState) emptyState.style.display = 'none';
+
+        if (!dataContainer) return;
+
+        const existingEmbed = document.getElementById('sheet-embed-container');
+        if (existingEmbed) {
+            existingEmbed.style.display = 'block';
+            return;
+        }
+
+        const embedContainer = document.createElement('div');
+        embedContainer.id = 'sheet-embed-container';
+        embedContainer.style.cssText = [
+            'position: relative',
+            'width: 100%',
+            'height: 70vh',
+            'min-height: 560px',
+            'background: #fff',
+            'border-radius: 10px',
+            'overflow: hidden',
+            'box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)'
+        ].join(';');
+
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.id = 'sheet-embed-loading';
+        loadingOverlay.style.cssText = [
+            'position: absolute',
+            'top: 0',
+            'left: 0',
+            'width: 100%',
+            'height: 100%',
+            'background: rgba(255, 255, 255, 0.9)',
+            'display: flex',
+            'align-items: center',
+            'justify-content: center',
+            'z-index: 2'
+        ].join(';');
+        loadingOverlay.innerHTML = '<i class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;시트를 불러오는 중...';
+
+        const iframe = document.createElement('iframe');
+        iframe.src = config.embedSheetUrl;
+        iframe.title = `${config.title} 관리 시트`;
+        iframe.style.cssText = [
+            'width: 100%',
+            'height: 100%',
+            'border: 0',
+            'display: block'
+        ].join(';');
+        iframe.addEventListener('load', () => {
+            loadingOverlay.style.display = 'none';
+        });
+
+        embedContainer.appendChild(loadingOverlay);
+        embedContainer.appendChild(iframe);
+        dataContainer.appendChild(embedContainer);
     }
     
     // 신청과목 관리 버튼 설정

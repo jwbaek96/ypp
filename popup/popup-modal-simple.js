@@ -5,6 +5,10 @@ const SimplePopupModal = {
   popups: [],
   currentPage: 0,
   itemsPerPage: 2, // 데스크톱: 2개, 모바일: 1개 (CSS로 제어)
+  historyPushed: false,
+  isHandlingHistoryBack: false,
+  keydownHandler: null,
+  popstateHandler: null,
 
   /**
    * 초기화
@@ -277,8 +281,64 @@ const SimplePopupModal = {
     
     // 네비게이션 버튼 표시/숨김
     this.updateNavigationButtons(totalPages);
+
+    // ESC/뒤로가기 닫기 동작 활성화
+    this.bindModalCloseEvents();
+    this.pushHistoryStateForModal();
     
     console.log(`📱 그리드 팝업 표시 완료 (${currentLang}): 페이지 ${this.currentPage + 1}/${totalPages}, ${currentPagePopups.length}개 아이템`);
+  },
+
+  /**
+   * 모달 닫기 이벤트 바인딩 (ESC / 뒤로가기)
+   */
+  bindModalCloseEvents() {
+    if (!this.keydownHandler) {
+      this.keydownHandler = (event) => {
+        if (event.key === 'Escape' || event.key === 'Esc') {
+          const modal = document.getElementById('popup-modal');
+          if (modal) {
+            this.closePopup();
+          }
+        }
+      };
+      document.addEventListener('keydown', this.keydownHandler);
+    }
+
+    if (!this.popstateHandler) {
+      this.popstateHandler = () => {
+        const modal = document.getElementById('popup-modal');
+        if (modal) {
+          this.closePopup({ fromPopstate: true });
+        }
+      };
+      window.addEventListener('popstate', this.popstateHandler);
+    }
+  },
+
+  /**
+   * 팝업 전용 히스토리 상태 추가
+   */
+  pushHistoryStateForModal() {
+    if (this.historyPushed) return;
+
+    history.pushState({ simplePopupModalOpen: true }, '', window.location.href);
+    this.historyPushed = true;
+  },
+
+  /**
+   * 모달 닫기 이벤트 해제
+   */
+  unbindModalCloseEvents() {
+    if (this.keydownHandler) {
+      document.removeEventListener('keydown', this.keydownHandler);
+      this.keydownHandler = null;
+    }
+
+    if (this.popstateHandler) {
+      window.removeEventListener('popstate', this.popstateHandler);
+      this.popstateHandler = null;
+    }
   },
 
   /**
@@ -426,11 +486,23 @@ const SimplePopupModal = {
   /**
    * 팝업 닫기
    */
-  closePopup() {
+  closePopup(options = {}) {
+    const { fromPopstate = false } = options;
     const modal = document.getElementById('popup-modal');
     if (modal) {
       modal.remove();
     }
+
+    this.unbindModalCloseEvents();
+
+    // ESC/X 버튼 등으로 닫을 때는 history를 한 단계 되돌려 URL 히스토리 정리
+    if (this.historyPushed && !fromPopstate && !this.isHandlingHistoryBack) {
+      this.isHandlingHistoryBack = true;
+      history.back();
+      this.isHandlingHistoryBack = false;
+    }
+
+    this.historyPushed = false;
   }
 };
 

@@ -75,7 +75,7 @@ function insertMetaTags() {
     // Title 업데이트
     document.title = pageConfig.title;
     
-    console.log(`✅ Meta tags updated for: ${currentPage}`);
+    // console.log(`✅ Meta tags updated for: ${currentPage}`);
 }
 
 // ===== 파비콘 동적 삽입 =====
@@ -118,7 +118,7 @@ function insertFavicons() {
         head.appendChild(link);
     });
     
-    console.log(`✅ Favicons inserted with base path: ${faviconPath}`);
+    // console.log(`✅ Favicons inserted with base path: ${faviconPath}`);
 }
 
 // ===== SEO 메타태그 추가 =====
@@ -167,7 +167,7 @@ function insertSEOTags() {
         tag.content = tagConfig.content;
     });
     
-    console.log(`✅ SEO tags inserted for: ${currentPage}`);
+    // console.log(`✅ SEO tags inserted for: ${currentPage}`);
 }
 
 // ===== 초기화 함수 =====
@@ -176,7 +176,7 @@ function initializeMetaSystem() {
     insertFavicons();
     insertSEOTags();
     
-    console.log('🎯 Meta system initialized successfully');
+    // console.log('🎯 Meta system initialized successfully');
 }
 
 // ===== 자동 실행 =====

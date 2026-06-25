@@ -14,7 +14,7 @@ async function loadMenuData() {
         const { basePath } = window.YPP_CONFIG;
         const menuPath = `${basePath}/json/menu-data.json`;
         
-        console.log(`Loading menu data from: ${menuPath}`);
+        // console.log(`Loading menu data from: ${menuPath}`);
         
         const response = await fetch(menuPath);
         if (!response.ok) {
@@ -22,7 +22,7 @@ async function loadMenuData() {
         }
         
         menuData = await response.json();
-        console.log('Menu data loaded successfully');
+        // console.log('Menu data loaded successfully');
         return menuData;
     } catch (error) {
         console.error('Error loading menu data:', error);
@@ -194,10 +194,10 @@ async function insertDesktopMenu() {
     // 생성된 메뉴 확인
     const hasChildrenItems = container.querySelectorAll('.has-children');
     const subMenus = container.querySelectorAll('.sub-menu');
-    console.log('하위 메뉴가 있는 항목들:', hasChildrenItems.length);
-    console.log('서브메뉴 개수:', subMenus.length);
+    // console.log('하위 메뉴가 있는 항목들:', hasChildrenItems.length);
+    // console.log('서브메뉴 개수:', subMenus.length);
     
-    console.log('Desktop menu inserted with bilingual support');
+    // console.log('Desktop menu inserted with bilingual support');
 }
 
 // ===== 메뉴 상호작용 이벤트 =====
@@ -306,10 +306,10 @@ async function insertDesktopMenu() {
     // 생성된 메뉴 확인
     const hasChildrenItems = container.querySelectorAll('.has-children');
     const subMenus = container.querySelectorAll('.sub-menu');
-    console.log('하위 메뉴가 있는 항목들:', hasChildrenItems.length);
-    console.log('서브메뉴 개수:', subMenus.length);
+    // console.log('하위 메뉴가 있는 항목들:', hasChildrenItems.length);
+    // console.log('서브메뉴 개수:', subMenus.length);
     
-    console.log('Desktop menu inserted - 모든 상호작용은 CSS가 처리합니다');
+    // console.log('Desktop menu inserted - 모든 상호작용은 CSS가 처리합니다');
 }
 
 // ===== 외부 클릭 핸들러 =====

@@ -2,6 +2,54 @@
   "popups": [
     {
       "id": 1,
+      "type": "maintenance",
+      "title": {
+        "kor": "사이트 점검 안내",
+        "eng": "Website Maintenance Notice"
+      },
+      "downloads": {
+        "title": {
+          "kor": "",
+          "eng": ""
+        },
+        "categories": [
+          {
+            "name": {
+              "kor": "안내",
+              "eng": "Notice"
+            },
+            "items": [
+              {
+                "name": {
+                  "kor": "현재 홈페이지 시스템 점검이 진행 중입니다.",
+                  "eng": "The website is currently undergoing system maintenance."
+                }
+              },
+              {
+                "name": {
+                  "kor": "일부 페이지 또는 기능이 일시적으로 원활하지 않을 수 있습니다.",
+                  "eng": "Some pages or features may be temporarily unavailable or unstable."
+                }
+              },
+              {
+                "name": {
+                  "kor": "이용에 불편을 드려 죄송합니다.",
+                  "eng": "We apologize for the inconvenience."
+                }
+              },
+              {
+                "name": {
+                  "kor": "점검일시 : 2026-06-25 10:00 ~ 14:00, ±9 hours (UTC+9)",
+                  "eng": "Maintenance Window: 2026-06-25 10:00 ~ 14:00, ±9 hours (UTC+9)"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
       "type": "renewal",
       "title": {
         "kor": "YPP 아카데미 안내",

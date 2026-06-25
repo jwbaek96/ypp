@@ -22,9 +22,6 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
     
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
     <!-- YPP Config -->
     <script src="../../../js/config.js"></script>
 </head>
@@ -191,7 +188,7 @@ async function loadGalleryDataFromSheets() {
         
         // 동적으로 Apps Script URL 가져오기
         const baseUrl = await getAppsScriptUrl();
-        const response = await fetch(`${baseUrl}?category=all`);
+        const response = await fetch(`${baseUrl}?sheet=SHEET_GAL_C&action=getData`);
         const result = await response.json();
         
         if (result.success) {
@@ -205,7 +202,7 @@ async function loadGalleryDataFromSheets() {
 
             return true;
         } else {
-            throw new Error(`API 오류: ${result.error || '알 수 없는 오류'}`);
+            throw new Error(`API 오류: ${result.message || result.error || '알 수 없는 오류'}`);
         }
         
     } catch (error) {

@@ -131,7 +131,7 @@ function createMenuItem(item, key, depth) {
         li.appendChild(link);
         li.appendChild(subMenu);
         
-        console.log('서브메뉴 생성됨:', item.title); // 디버깅용
+        // console.log('서브메뉴 생성됨:', item.title); // 디버깅용
     } else {
         li.appendChild(link);
     }
@@ -167,7 +167,7 @@ async function insertDesktopMenu() {
         return;
     }
     
-    console.log('메뉴 데이터:', data.navigation); // 디버깅용
+    // console.log('메뉴 데이터:', data.navigation); // 디버깅용
     
     // 메뉴 생성 및 삽입
     const menuElement = createDesktopMenu(data.navigation);
@@ -230,7 +230,7 @@ function addMenuInteraction(menuItem, link, subMenu) {
 
 // ===== 서브메뉴 표시/숨김 함수들 =====
 function showSubmenu(menuItem, link, subMenu) {
-    console.log('서브메뉴 표시:', menuItem, subMenu); // 디버깅용
+    // console.log('서브메뉴 표시:', menuItem, subMenu); // 디버깅용
     
     menuItem.classList.add('active');
     link.setAttribute('aria-expanded', 'true');
@@ -245,7 +245,7 @@ function showSubmenu(menuItem, link, subMenu) {
 }
 
 function hideSubmenu(menuItem, link, subMenu) {
-    console.log('서브메뉴 숨김:', menuItem, subMenu); // 디버깅용
+    // console.log('서브메뉴 숨김:', menuItem, subMenu); // 디버깅용
     
     menuItem.classList.remove('active');
     link.setAttribute('aria-expanded', 'false');
@@ -296,7 +296,7 @@ async function insertDesktopMenu() {
         return;
     }
     
-    console.log('메뉴 데이터:', data.navigation); // 디버깅용
+    // console.log('메뉴 데이터:', data.navigation); // 디버깅용
     
     // 메뉴 생성 및 삽입
     const menuElement = createDesktopMenu(data.navigation);

@@ -42,21 +42,21 @@ const ENV_VARIABLES = {
 
 // 폴백 URL들 (Supabase 로드 실패 시 사용)
 const FALLBACK_URLS = {
-    ACADEMY1: 'https://script.google.com/macros/s/default_academy1/exec',
-    ACADEMY2: 'https://script.google.com/macros/s/default_academy2/exec',
-    ACADEMY_FORM: 'https://script.google.com/macros/s/default_academy_form/exec',
-    ACADEMY_COURSEDATA: 'https://script.google.com/macros/s/default_academy_coursedata/exec',
-    ACADEMY_PSAC1: 'https://script.google.com/macros/s/default_academy_psac1/exec',
-    ACADEMY_PSAC2: 'https://script.google.com/macros/s/default_academy_psac2/exec',
-    ACADEMY_RS1: 'https://script.google.com/macros/s/default_academy_rs1/exec',
-    BUSINESS: 'https://script.google.com/macros/s/default_business/exec',
-    COMPANY: 'https://script.google.com/macros/s/default_company/exec',
-    COMPANY_GALLERY: 'https://script.google.com/macros/s/default_company_gallery/exec',
-    MEDIA_ACADEMY: 'https://script.google.com/macros/s/default_media_academy/exec',
-    MEDIA_INSIDE: 'https://script.google.com/macros/s/default_media_inside/exec',
-    MEDIA_VIDEO: 'https://script.google.com/macros/s/default_media_video/exec',
-    PRESS: 'https://script.google.com/macros/s/default_press/exec',
-    SUPPORT: 'https://script.google.com/macros/s/AKfycbxrBjwJRbcaOWXk3Vrnv8GySyiSfeYSKLLzYvZxmHmsZ_AqUZwxDKMmOW53lRXliQgdRg/exec'
+    ACADEMY1: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    ACADEMY2: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    ACADEMY_FORM: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    ACADEMY_COURSEDATA: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    ACADEMY_PSAC1: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    ACADEMY_PSAC2: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    ACADEMY_RS1: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    BUSINESS: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    COMPANY: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    COMPANY_GALLERY: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    MEDIA_ACADEMY: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    MEDIA_INSIDE: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    MEDIA_VIDEO: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    PRESS: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    SUPPORT: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec'
 };
 
 /**

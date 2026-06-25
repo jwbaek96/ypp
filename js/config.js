@@ -33,6 +33,7 @@ const ENV_VARIABLES = {
 
 // 페이지별 Apps Script URL 설정
 const FALLBACK_URLS = {
+    // Academy 관련 *건들이지 마세요.*
     ACADEMY1: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
     ACADEMY2: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
     ACADEMY_FORM: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
@@ -40,22 +41,22 @@ const FALLBACK_URLS = {
     ACADEMY_PSAC1: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
     ACADEMY_PSAC2: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
     ACADEMY_RS1: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
-    //Read Only for Web ✅
+    //YPP VIEW for Web Data ✅
     BUSINESS: 'https://script.google.com/macros/s/AKfycbwVzRfzyNn2Q-bYUbZWNw3A5Q-gFxLRs3tzYwXn5B2zCOrsTdQ9YALg1JFh4pqT4OEI-g/exec',
-    //Read Only for Web ✅
+    //YPP VIEW for Web Data ✅
     COMPANY: 'https://script.google.com/macros/s/AKfycbwVzRfzyNn2Q-bYUbZWNw3A5Q-gFxLRs3tzYwXn5B2zCOrsTdQ9YALg1JFh4pqT4OEI-g/exec',
     //YPP DATA ✅
     COMPANY_GALLERY: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
     //YPP DATA ✅
-    MEDIA_ACADEMY: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',//YPP DATA
+    MEDIA_ACADEMY: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
     //YPP DATA 
-    MEDIA_INSIDE: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',//YPP DATA
+    MEDIA_INSIDE: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
     //YPP DATA ✅
-    MEDIA_VIDEO: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',//YPP DATA
+    MEDIA_VIDEO: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
     //YPP DATA ✅
-    PRESS: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',//YPP DATA
-    //YPP DATA
-    SUPPORT: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec'//YPP DATA
+    PRESS: 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec',
+    //YPP VIEW for Web Data ✅
+    SUPPORT: 'https://script.google.com/macros/s/AKfycbwVzRfzyNn2Q-bYUbZWNw3A5Q-gFxLRs3tzYwXn5B2zCOrsTdQ9YALg1JFh4pqT4OEI-g/exec'
 };
 
 /**

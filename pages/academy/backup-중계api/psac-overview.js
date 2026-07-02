@@ -5,7 +5,7 @@
 
 class PSACOverviewManager {
     constructor() {
-        this.apiUrl = 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec';
+        this.apiUrl = 'https://script.google.com/macros/s/AKfycbzvcFA7rwVCSJnhzQHlZH0a8AI0_S-EN-tyTg0tp_lJUmEXTN8d7axtVGrUjkOJLht-kA/exec';
         this.currentLang = this.detectLanguage();
         this.overviewData = this.createFallbackOverviewData();
         this.weeklyOverviewData = this.createFallbackWeeklyOverviewData();
@@ -19,8 +19,6 @@ class PSACOverviewManager {
     }
 
     async init() {
-        await this.loadApiUrl();
-
         this.renderInfoTable();
         this.renderContactGrid();
         this.renderWeeklyOverviewSection();
@@ -35,21 +33,6 @@ class PSACOverviewManager {
         this.renderInfoTable();
         this.renderContactGrid();
         this.renderWeeklyOverviewSection();
-    }
-
-    async loadApiUrl() {
-        try {
-            if (!window.YPPConfig || typeof window.YPPConfig.getConfig !== 'function') {
-                return;
-            }
-
-            const configuredUrl = await window.YPPConfig.getConfig('ACADEMY_PSAC1');
-            if (configuredUrl) {
-                this.apiUrl = configuredUrl;
-            }
-        } catch (error) {
-            console.warn('ACADEMY_PSAC1 URL load failed. fallback URL is used.', error);
-        }
     }
 
     async loadOverviewData() {

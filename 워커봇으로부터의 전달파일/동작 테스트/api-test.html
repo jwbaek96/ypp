@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YPP API Relay Test</title>
+</head>
+<body>
+  <h1>YPP API Relay Test</h1>
+
+  <p>
+    Base URL:
+    <input id="baseUrl" size="80" value="https://ypp-api-relay.yppapi.workers.dev" />
+  </p>
+
+  <hr />
+
+  <h2>1) Courses</h2>
+  <button id="btnCourses">GET /api/academy/courses</button>
+
+  <h2>2) Apply</h2>
+  <p>
+    formType:
+    <select id="applyFormType">
+      <option value="relay" selected>relay</option>
+      <option value="psac">psac</option>
+    </select>
+  </p>
+  <button id="btnApply">POST /api/academy/apply (sample)</button>
+
+  <h2>3) Check</h2>
+  <p>formType: <select id="checkFormType"><option value="relay" selected>relay</option><option value="psac">psac</option></select></p>
+  <p>name: <input id="checkName" value="홍길동" /></p>
+  <p>phone: <input id="checkPhone" value="010-1111-1111" /></p>
+  <p>email: <input id="checkEmail" value="hong@example.com" /></p>
+  <p>companyName: <input id="checkCompany" value="테스트회사" /></p>
+  <button id="btnCheck">POST /api/academy/check</button>
+
+  <hr />
+
+  <h2>Result</h2>
+  <pre id="result">(not run yet)</pre>
+
+  <script>
+    const resultEl = document.getElementById("result");
+
+    function getBaseUrl() {
+      return document.getElementById("baseUrl").value.trim().replace(/\/$/, "");
+    }
+
+    function setResult(title, data) {
+      const pretty = typeof data === "string" ? data : JSON.stringify(data, null, 2);
+      resultEl.textContent = title + "\n\n" + pretty;
+    }
+
+    async function callJson(path, options) {
+      const url = getBaseUrl() + path;
+      const response = await fetch(url, options);
+      const text = await response.text();
+      let parsed;
+      try {
+        parsed = JSON.parse(text);
+      } catch {
+        parsed = text;
+      }
+
+      return {
+        url,
+        status: response.status,
+        ok: response.ok,
+        body: parsed
+      };
+    }
+
+    document.getElementById("btnCourses").addEventListener("click", async () => {
+      try {
+        const data = await callJson("/api/academy/courses", { method: "GET" });
+        setResult("GET /api/academy/courses", data);
+      } catch (error) {
+        setResult("GET /api/academy/courses ERROR", String(error));
+      }
+    });
+
+    document.getElementById("btnApply").addEventListener("click", async () => {
+      const formType = document.getElementById("applyFormType").value;
+      const payload = {
+        formType,
+        companyInfo: {
+          companyName: "테스트회사",
+          representative: "대표",
+          businessNumber: "123-45-67890",
+          businessType: "서비스",
+          address: "서울"
+        },
+        managerInfo: {
+          name: "담당자",
+          department: "교육팀",
+          position: "매니저",
+          phone: "02-0000-0000",
+          mobile: "010-0000-0000",
+          email: "manager@example.com"
+        },
+        students: [
+          {
+            name: "홍길동",
+            department: "개발팀",
+            position: "사원",
+            phone: "02-1111-1111",
+            mobile: "010-1111-1111",
+            email: "hong@example.com",
+            selectedCourses: ["샘플과목"]
+          }
+        ]
+      };
+
+      try {
+        const data = await callJson("/api/academy/apply", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        setResult("POST /api/academy/apply", { payload, response: data });
+      } catch (error) {
+        setResult("POST /api/academy/apply ERROR", String(error));
+      }
+    });
+
+    document.getElementById("btnCheck").addEventListener("click", async () => {
+      const payload = {
+        formType: document.getElementById("checkFormType").value,
+        name: document.getElementById("checkName").value,
+        phone: document.getElementById("checkPhone").value,
+        email: document.getElementById("checkEmail").value,
+        companyName: document.getElementById("checkCompany").value
+      };
+
+      Object.keys(payload).forEach((key) => {
+        if (payload[key] === "") {
+          delete payload[key];
+        }
+      });
+
+      try {
+        const data = await callJson("/api/academy/check", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        setResult("POST /api/academy/check", { payload, response: data });
+      } catch (error) {
+        setResult("POST /api/academy/check ERROR", String(error));
+      }
+    });
+  </script>
+</body>
+</html>

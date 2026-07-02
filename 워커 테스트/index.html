@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>워커 API 테스트</title>
+</head>
+<body>
+  <h1>워커 API 테스트 페이지</h1>
+  <p>운영 페이지와 분리된 단순 검증용 페이지입니다.</p>
+
+  <hr>
+  <h2>기본 설정</h2>
+  <label for="baseUrl">Worker Base URL</label>
+  <input id="baseUrl" type="text" style="width: 100%;" value="https://ypp-api-relay.yppapi.workers.dev">
+
+  <hr>
+  <h2>1) Courses 테스트</h2>
+  <button id="btnCourses">GET /api/academy/courses</button>
+
+  <hr>
+  <h2>2) Apply 테스트</h2>
+  <p>필요 최소 데이터만 넣은 샘플 요청입니다.</p>
+  <button id="btnApply">POST /api/academy/apply</button>
+
+  <hr>
+  <h2>3) Check 테스트</h2>
+  <label for="formType">formType</label>
+  <select id="formType">
+    <option value="relay" selected>relay</option>
+    <option value="psac">psac</option>
+  </select>
+  <br><br>
+  <label for="name">name</label>
+  <input id="name" type="text" value="홍길동">
+  <br><br>
+  <label for="phone">phone</label>
+  <input id="phone" type="text" value="010-1111-1111">
+  <br><br>
+  <label for="email">email</label>
+  <input id="email" type="text" value="hong@example.com">
+  <br><br>
+  <label for="companyName">companyName</label>
+  <input id="companyName" type="text" value="테스트회사">
+  <br><br>
+  <button id="btnCheck">POST /api/academy/check</button>
+
+  <hr>
+  <h2>응답</h2>
+  <pre id="result" style="white-space: pre-wrap; word-break: break-word; border: 1px solid #ccc; padding: 12px;"></pre>
+
+  <script>
+    const resultEl = document.getElementById('result');
+
+    function getBaseUrl() {
+      return document.getElementById('baseUrl').value.trim().replace(/\/$/, '');
+    }
+
+    function showResult(title, status, data) {
+      const lines = [];
+      lines.push('[' + new Date().toISOString() + '] ' + title);
+      lines.push('HTTP Status: ' + status);
+      lines.push('');
+      lines.push(JSON.stringify(data, null, 2));
+      resultEl.textContent = lines.join('\n');
+    }
+
+    function showError(title, err) {
+      const lines = [];
+      lines.push('[' + new Date().toISOString() + '] ' + title);
+      lines.push('Error: ' + (err && err.message ? err.message : String(err)));
+      resultEl.textContent = lines.join('\n');
+    }
+
+    async function requestJson(url, options) {
+      const response = await fetch(url, options);
+      let data;
+      try {
+        data = await response.json();
+      } catch (e) {
+        data = { parseError: true, message: 'JSON 파싱 실패' };
+      }
+      return { response, data };
+    }
+
+    document.getElementById('btnCourses').addEventListener('click', async () => {
+      const url = getBaseUrl() + '/api/academy/courses';
+      try {
+        const { response, data } = await requestJson(url, { method: 'GET' });
+        showResult('GET /api/academy/courses', response.status, data);
+      } catch (err) {
+        showError('GET /api/academy/courses', err);
+      }
+    });
+
+    document.getElementById('btnApply').addEventListener('click', async () => {
+      const url = getBaseUrl() + '/api/academy/apply';
+      const payload = {
+        formType: 'relay',
+        companyInfo: {
+          companyName: '테스트회사',
+          representative: '대표자',
+          businessNumber: '123-45-67890',
+          businessType: '서비스',
+          address: '서울'
+        },
+        managerInfo: {
+          name: '담당자',
+          department: '교육팀',
+          position: '매니저',
+          phone: '02-0000-0000',
+          mobile: '010-0000-0000',
+          email: 'manager@example.com'
+        },
+        students: [
+          {
+            name: '홍길동',
+            department: '개발팀',
+            position: '사원',
+            phone: '02-1111-1111',
+            mobile: '010-1111-1111',
+            email: 'hong@example.com',
+            selectedCourses: ['샘플과목']
+          }
+        ]
+      };
+
+      try {
+        const { response, data } = await requestJson(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        showResult('POST /api/academy/apply', response.status, data);
+      } catch (err) {
+        showError('POST /api/academy/apply', err);
+      }
+    });
+
+    document.getElementById('btnCheck').addEventListener('click', async () => {
+      const url = getBaseUrl() + '/api/academy/check';
+      const payload = {
+        formType: document.getElementById('formType').value,
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        companyName: document.getElementById('companyName').value
+      };
+
+      try {
+        const { response, data } = await requestJson(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        showResult('POST /api/academy/check', response.status, data);
+      } catch (err) {
+        showError('POST /api/academy/check', err);
+      }
+    });
+  </script>
+</body>
+</html>

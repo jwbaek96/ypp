@@ -1,0 +1,43 @@
+목표: 기존 프론트의 Apps Script 직접 호출을 Cloudflare Worker 중계 API로 교체해줘.
+
+기준 API:
+- Base URL: https://ypp-api-relay.yppapi.workers.dev
+- GET /api/academy/courses
+- POST /api/academy/apply
+- POST /api/academy/check
+
+중요 응답 구조:
+- courses는 단일 배열이 아니라 psac/relay 묶음
+- 경로: success.data.data.psac / success.data.data.relay
+  (중간 success/data 래퍼가 있음)
+
+요청 스펙:
+1) apply
+{
+  "formType": "relay",
+  "companyInfo": {...},
+  "managerInfo": {...},
+  "students": [{...}]
+}
+
+2) check
+{
+  "formType": "relay",
+  "name": "...",
+  "phone": "...",
+  "email": "...",
+  "companyName": "..."
+}
+- name/phone/email/companyName은 필요한 것만 보낼 수 있음
+
+작업 요구:
+1. 프론트의 courses/apply/check 호출부를 위 스펙으로 교체
+2. 기존 화면/UX는 유지
+3. 에러 처리(네트워크/서버/빈결과) 추가
+4. 콘솔 에러 없이 동작하도록 수정
+
+완료 조건:
+- courses: 화면에 과정 목록 정상 렌더
+- apply: 제출 성공 메시지 확인
+- check: 조건 검색 결과 정상 표시
+- 변경 파일과 테스트 방법을 함께 보고

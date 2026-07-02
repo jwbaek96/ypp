@@ -1,7 +1,5 @@
 // YPP 아카데미 신청 폼 통합 JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-    loadAcademyFormApiUrl();
-
     // 탭과 무관하게 앱스크립트 데이터는 백그라운드에서 미리 로드
     startCourseDataPreload();
 
@@ -12,23 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
    공통 설정 및 변수
    ========================================================================== */
 
-// 웹 앱 URL (config 우선, 실패 시 fallback)
-let WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec';
-
-async function loadAcademyFormApiUrl() {
-    try {
-        if (!window.YPPConfig || typeof window.YPPConfig.getConfig !== 'function') {
-            return;
-        }
-
-        const configuredUrl = await window.YPPConfig.getConfig('ACADEMY_FORM');
-        if (configuredUrl) {
-            WEBAPP_URL = configuredUrl;
-        }
-    } catch (error) {
-        console.warn('ACADEMY_FORM URL load failed. fallback URL is used.', error);
-    }
-}
+// 웹 앱 URL - 실제 Apps Script 웹 앱 URL로 변경해주세요
+const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbztXmHnUtt3rQkAe6Gp8N_mIkLCChfrdbSPlDY16vXtxQWvamPb2gZZ8JtE-aOZ6Hlx/exec';
 
 // 공통 변수
 let psacStudentCount = 0;
@@ -416,94 +399,38 @@ function validatePhoneNumber(number) {
 
 // CORS 우회 데이터 제출 함수 (iframe 방식)
 async function submitFormData(formData) {
-    if (isWorkerApplyEndpoint(WEBAPP_URL)) {
-        return submitFormDataWithFetch(formData);
-    }
-
-    // Apps Script iframe 제출은 교차 출처 응답 본문/상태를 확인할 수 없어 "전송됨" 상태로만 처리한다.
-    return submitFormDataWithIframe(formData);
-}
-
-function isWorkerApplyEndpoint(url) {
-    return typeof url === 'string' && /workers\.dev\/api\/academy\/apply(?:\?|$)/.test(url);
-}
-
-async function submitFormDataWithFetch(formData) {
-    const response = await fetch(WEBAPP_URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    });
-
-    let payload = null;
-    try {
-        payload = await response.json();
-    } catch (error) {
-        payload = null;
-    }
-
-    if (!response.ok) {
-        const serverMessage = payload?.error || payload?.message || '';
-        throw new Error(`신청 요청이 실패했습니다. (HTTP ${response.status}) ${serverMessage}`.trim());
-    }
-
-    const successFlag = payload?.success === true || payload?.data?.success === true;
-    if (!successFlag) {
-        const serverMessage = payload?.error || payload?.message || '서버가 성공 응답을 반환하지 않았습니다.';
-        throw new Error(serverMessage);
-    }
-
-    return { verified: true, payload };
-}
-
-async function submitFormDataWithIframe(formData) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
+        // 숨겨진 iframe 생성
         const iframe = document.createElement('iframe');
         iframe.style.display = 'none';
-        iframe.name = `hidden_iframe_${Date.now()}`;
+        iframe.name = 'hidden_iframe';
         document.body.appendChild(iframe);
-
+        
+        // 폼 생성
         const form = document.createElement('form');
         form.action = WEBAPP_URL;
-        form.method = 'POST';
-        form.target = iframe.name;
-
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'data';
-        input.value = JSON.stringify(formData);
-
-        form.appendChild(input);
-        document.body.appendChild(form);
-
-        const cleanup = () => {
-            if (form.parentNode) {
-                form.parentNode.removeChild(form);
-            }
-            if (iframe.parentNode) {
-                iframe.parentNode.removeChild(iframe);
-            }
-        };
-
-        const timeoutId = setTimeout(() => {
-            cleanup();
-            reject(new Error('신청 서버 응답 대기 시간이 초과되었습니다.'));
-        }, 15000);
-
-        iframe.onload = function() {
-            clearTimeout(timeoutId);
-            cleanup();
-            resolve({ verified: false, unverified: true });
-        };
-
-        iframe.onerror = function() {
-            clearTimeout(timeoutId);
-            cleanup();
-            reject(new Error('신청 전송 중 네트워크 오류가 발생했습니다.'));
-        };
-
+            form.method = 'POST';
+            form.target = 'hidden_iframe';
+            
+            // 데이터를 JSON 문자열로 변환하여 hidden input에 저장
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'data';
+            input.value = JSON.stringify(formData);
+            
+            form.appendChild(input);
+            document.body.appendChild(form);
+            
+            // iframe 로드 완료 시 처리
+            iframe.onload = function() {
+                setTimeout(() => {
+                    document.body.removeChild(form);
+                    document.body.removeChild(iframe);
+                    resolve();
+                }, 1000);
+            };
+            
+        // 폼 제출
         form.submit();
     });
 }
@@ -745,15 +672,11 @@ async function submitPsacForm(e) {
             return;
         }
         
-        const submitResult = await submitFormData(formData);
-
+        // CORS 우회를 위한 iframe 방식 사용
+        await submitFormData(formData);
+        
+        // 로딩 상태를 유지한 채로 성공 메시지 표시
         hideSubmitLoadingState();
-        if (submitResult?.unverified) {
-            alert('신청 요청이 전송되었습니다.\n서버 응답 확인이 제한되어 신청조회 탭에서 최종 반영 여부를 확인해 주세요.');
-            location.reload();
-            return;
-        }
-
         alert(`신청이 완료되었습니다. (수강자 ${formData.students.length}명) \nYour application has been completed. (Number of participants: ${formData.students.length})`);
         
         // alert 확인 후 페이지 리로드
@@ -763,7 +686,6 @@ async function submitPsacForm(e) {
         console.error('Error:', error);
         hideSubmitLoadingState();
         showMessage('서버 연결에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
-        alert(`신청 처리 중 오류가 발생했습니다.\n${error?.message || ''}`.trim());
     }
 }
 
@@ -1017,15 +939,10 @@ async function submitRelayschoolForm(e) {
             console.log('첫번째 수강자:', formData.students[0]);
         }
 
-        const submitResult = await submitFormData(formData);
+        await submitFormData(formData);
 
+        // 로딩 상태를 유지한 채로 성공 메시지 표시
         hideSubmitLoadingState();
-        if (submitResult?.unverified) {
-            alert('신청 요청이 전송되었습니다.\n서버 응답 확인이 제한되어 신청조회 탭에서 최종 반영 여부를 확인해 주세요.');
-            location.reload();
-            return;
-        }
-
         alert(`신청이 완료되었습니다. (수강자 ${formData.students.length}명) \nYour application has been completed. (Number of participants: ${formData.students.length})`);
         
         // alert 확인 후 페이지 리로드
@@ -1034,7 +951,6 @@ async function submitRelayschoolForm(e) {
     } catch (error) {
         hideSubmitLoadingState();
         showMessage('신청 처리 중 오류가 발생했습니다.', 'error', 'rs-message');
-        alert(`신청 처리 중 오류가 발생했습니다.\n${error?.message || ''}`.trim());
         console.error('Form submission error:', error);
     }
 }

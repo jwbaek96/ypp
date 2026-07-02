@@ -25,7 +25,7 @@
     <script src="../../js/head-meta.js"></script>
 
     <!-- YPP Config -->
-    <script src="../../js/config.js"></script>
+    <script src="config.js"></script>
 </head>
 <body>
     <!-- Header Container -->
@@ -3200,51 +3200,23 @@ class CourseApplicationManager {
         resultsList.style.display = 'none';
         
         try {
-            const workerBaseUrl = 'https://ypp-api-relay.yppapi.workers.dev';
-
-            const parseCheckItems = (result) => {
-                if (!result || !result.success) {
-                    return [];
-                }
-
-                if (result.data && result.data.success && result.data.data && Array.isArray(result.data.data.items)) {
-                    return result.data.data.items;
-                }
-
-                if (Array.isArray(result.data)) {
-                    return result.data;
-                }
-
-                return [];
-            };
-
-            const requestCheck = async (formType, typeLabel) => {
-                const payload = {
-                    formType,
-                    name: studentName,
-                    phone: studentPhone
-                };
-
-                const response = await fetch(`${workerBaseUrl}/api/academy/check`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-                if (!response.ok) {
-                    throw new Error(result.error || '검색 요청에 실패했습니다.');
-                }
-
-                return parseCheckItems(result).map(item => ({ ...item, type: typeLabel }));
-            };
-
-            const [psacItems, relayItems] = await Promise.all([
-                requestCheck('psac', 'PSAC'),
-                requestCheck('relay', 'RelaySchool')
-            ]);
-
-            const allApplications = [...psacItems, ...relayItems];
+            // Google Apps Script API 호출 (하드코딩된 URL)
+            const apiUrl = 'https://script.google.com/macros/s/AKfycbye3yDhu02ftky51LcYHEjcFr1zk71hCpgVlw152tdAbLSoCX2PpM8vesS-tSIgg51T/exec';
+            
+            // PSAC 데이터 검색
+            const psacUrl = `${apiUrl}?sheet=SHEET_APPLY_P&action=getData`;
+            const psacResponse = await fetch(psacUrl);
+            const psacResult = await psacResponse.json();
+            
+            // Relay School 데이터 검색
+            const relayUrl = `${apiUrl}?sheet=SHEET_APPLY_R&action=getData`;
+            const relayResponse = await fetch(relayUrl);
+            const relayResult = await relayResponse.json();
+            
+            const allApplications = [
+                ...(psacResult.success ? psacResult.data.map(item => ({ ...item, type: 'PSAC' })) : []),
+                ...(relayResult.success ? relayResult.data.map(item => ({ ...item, type: 'RelaySchool' })) : [])
+            ];
             
             // 검색 조건에 맞는 데이터 필터링
             const matchedApplications = allApplications.filter(app => {
@@ -3459,13 +3431,8 @@ function generateEducationCheckboxes(pageType, item) {
         const coursesObj = psacCoursesData.courses || psacCoursesData;
         if (coursesObj && typeof coursesObj === 'object') {
             psacCourses = Object.entries(coursesObj)
-                // PSAC 변환 데이터는 status가 없을 수 있으므로, 마감 상태만 제외하고 표시한다.
-                .filter(([id, course]) => {
-                    const status = course && course.status;
-                    return status !== 'OFF' && status !== '접수마감';
-                })
-                .map(([id, course]) => course.kor)
-                .filter(Boolean);
+                .filter(([id, course]) => course.status === 'ON')
+                .map(([id, course]) => course.kor);
         }
         
         if (psacCourses.length === 0) {
@@ -3663,41 +3630,6 @@ function closeEditModal() {
     window.currentEditLocked = null;
 }
 
-function clearEditFormSystemNotice() {
-    const existingNotice = document.getElementById('edit-form-system-notice');
-    if (existingNotice) {
-        existingNotice.remove();
-    }
-}
-
-function showEditFormSystemNotice(message) {
-    const formContainer = document.getElementById('edit-form-container');
-    if (!formContainer) {
-        return;
-    }
-
-    clearEditFormSystemNotice();
-
-    const notice = document.createElement('div');
-    notice.id = 'edit-form-system-notice';
-    notice.innerHTML = `
-        <div style="background-color: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 14px; border-radius: 8px; margin-bottom: 16px; line-height: 1.55;">
-            <div style="font-weight: 700; margin-bottom: 6px;">
-                <i class="fas fa-triangle-exclamation" style="margin-right: 6px;"></i>
-                수정 저장 중 시스템 오류가 발생했습니다.
-            </div>
-            <div style="font-size: 14px;">
-                ${message || '요청 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'}
-            </div>
-            <div style="font-size: 13px; margin-top: 8px; color: #7f1d1d;">
-                문제가 계속되면 YPP(주) 교육팀 (TEL: +82-2-2104-8720, 4683 / 이메일: yppedu@ypp.co.kr)으로 문의해 주세요.
-            </div>
-        </div>
-    `;
-
-    formContainer.insertBefore(notice, formContainer.firstChild);
-}
-
 // 신청서 저장
 async function saveApplication() {
     // 잠금 상태 확인
@@ -3708,8 +3640,6 @@ async function saveApplication() {
     
     const formContainer = document.getElementById('edit-form-container');
     const saveButton = document.querySelector('.btn-save');
-
-    clearEditFormSystemNotice();
     
     // 저장 버튼을 로딩 상태로 변경
     const originalText = saveButton.innerHTML;
@@ -3748,17 +3678,7 @@ async function saveApplication() {
         const updateUrl = `${apiUrl}?action=update&sheet=${sheetName}&id=${encodeURIComponent(itemId)}&data=${encodeURIComponent(JSON.stringify(updatedData))}`;
         
         const response = await fetch(updateUrl, { method: 'GET' });
-
-        if (!response.ok) {
-            throw new Error(`수정 저장 요청에 실패했습니다. (HTTP ${response.status})`);
-        }
-
-        let result = null;
-        try {
-            result = await response.json();
-        } catch (parseError) {
-            throw new Error('서버 응답을 확인할 수 없습니다.');
-        }
+        const result = await response.json();
         
         if (result.success) {
             alert('수정이 완료되었습니다.');
@@ -3768,9 +3688,7 @@ async function saveApplication() {
                 location.reload();
             }, 100);
         } else {
-            const failMessage = result.message || '서버에서 수정 저장을 처리하지 못했습니다.';
-            showEditFormSystemNotice(failMessage);
-            alert(`수정에 실패했습니다: ${failMessage}`);
+            alert(`수정에 실패했습니다: ${result.message}`);
             // 버튼 상태 복원
             saveButton.innerHTML = originalText;
             saveButton.disabled = false;
@@ -3778,9 +3696,7 @@ async function saveApplication() {
         
     } catch (error) {
         console.error('저장 오류:', error);
-        const errorMessage = error && error.message ? error.message : '저장 중 오류가 발생했습니다.';
-        showEditFormSystemNotice(errorMessage);
-        alert('저장 중 오류가 발생했습니다. 모달 상단 안내를 확인해 주세요.');
+        alert('저장 중 오류가 발생했습니다.');
         // 버튼 상태 복원
         saveButton.innerHTML = originalText;
         saveButton.disabled = false;

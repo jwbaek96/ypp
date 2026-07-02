@@ -1,0 +1,47 @@
+[현재 상황 요약]
+1) Cloudflare Worker 중계 API는 x64 환경에서 배포 및 기본 동작 검증이 완료된 상태.
+2) 배포 URL: https://ypp-api-relay.yppapi.workers.dev
+3) 구현된 P0 엔드포인트:
+   - GET /api/academy/courses
+   - POST /api/academy/apply
+   - POST /api/academy/check
+4) 동작 테스트용 파일이 준비됨:
+   - api-test.html
+   - 요청문.txt
+5) ypp 프론트는 아직 운영 코드 반영 전이며, 안전하게 검증 후 단계적으로 반영 예정.
+
+[판단(리스크 최소화 기준)]
+결론: 프론트 대수정보다 Worker 쪽 호환성 보강 + 프론트 최소 변경이 더 안전함.
+
+근거:
+1) 프론트는 화면/폼/탭/검증 로직이 얽혀 있어 변경 영향 범위가 큼.
+2) Worker는 단일 진입점(index.ts) 중심이라 변경 범위가 작고 롤백이 쉬움.
+3) Worker에서 기존 프론트가 기대하는 요청/응답 구조를 맞추면 프론트 변경량을 크게 줄일 수 있음.
+
+권장 순서:
+1) Worker 호환성 보강(기존 프론트 요청/응답 형식 수용)
+2) 프론트는 URL 교체 중심의 최소 변경
+3) 단계 반영: courses -> apply -> check
+4) 단계별 검증 완료 후 다음 단계 진행
+
+[요청사항(작업자/AI 공통 지시)]
+1) P0 범위만 우선 처리
+   - /api/academy/courses
+   - /api/academy/apply
+   - /api/academy/check
+2) 기존 ypp 운영 페이지 UX/구조는 최대한 유지
+3) 에러 처리 강화(네트워크 오류/서버 오류/빈 결과)
+4) 진행 중 막히면 우회 즉시 적용 금지
+   - 먼저 실패 보고(에러 원문/재현절차/기시도 해결책/대안 A-B) 후 승인받고 진행
+5) GitHub Actions 우회는 승인 이후에만 적용
+
+[검증 체크리스트]
+1) courses: 과정 목록(psac/relay) 정상 렌더
+2) apply: 제출 성공/실패 메시지 정상 표시
+3) check: 조건(name/phone/email/companyName) 조회 정상
+4) CORS: 운영 도메인 허용, 비허용 도메인 차단 확인
+5) 운영 반영 전 테스트 페이지(api-test.html) 기준 검증 완료
+
+[비고]
+- 테스트 목적상 apply는 실제 데이터가 저장될 수 있으므로 테스트용 데이터로만 실행.
+- 운영 반영 시 ALLOWED_ORIGINS에 테스트 도메인(workers.dev, localhost) 유지 여부 최종 결정 필요.

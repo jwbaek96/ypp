@@ -13,8 +13,6 @@ let courseDataCache = {
     cacheTimeout: 5 * 60 * 1000 // 5분 캐시
 };
 
-let bundledCoursesPromise = null;
-
 /**
  * YPPConfig 로드 대기 (더 강력한 버전)
  */
@@ -70,11 +68,11 @@ async function getCourseDataApiUrl() {
     
     try {
         await waitForYPPConfig();
-        COURSE_DATA_API_URL = await window.YPPConfig.getConfig('ACADEMY_COURSEDATA');
+        COURSE_DATA_API_URL = await window.YPPConfig.getConfig('YPP_APPSURL_ACADEMY_COURSEDATA');
         return COURSE_DATA_API_URL;
     } catch (error) {
         // 폴백: 하드코딩된 URL 사용
-        COURSE_DATA_API_URL = 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec';
+        COURSE_DATA_API_URL = 'https://script.google.com/macros/s/AKfycbzhGw0bYOCgC2LyRsOQVnmgsw13PoSiIxM1pqq5n_y2Gj-1fesd6D0llRnAKHcLh_-iqw/exec';
         return COURSE_DATA_API_URL;
     }
 }
@@ -90,34 +88,21 @@ async function fetchPsacCourses() {
         }
 
         const apiUrl = await getCourseDataApiUrl();
-
-        if (isWorkerCoursesEndpoint(apiUrl)) {
-            const bundledData = await fetchBundledCourses(apiUrl);
-            const convertedPsac = convertPsacData(bundledData.psac);
-            const convertedRelay = convertRelayData(bundledData.relay);
-
-            courseDataCache.psac = convertedPsac;
-            courseDataCache.relay = convertedRelay;
-            courseDataCache.lastUpdated = new Date();
-
-            return convertedPsac;
-        }
-
         const response = await fetch(`${apiUrl}?action=get_psac_courses`);
         const result = await response.json();
-
-        if (!result.success || !Array.isArray(result.data)) {
+        
+        if (result.success) {
+            // 기존 form.js 형식으로 변환
+            const convertedData = convertPsacData(result.data);
+            
+            // 캐시 저장
+            courseDataCache.psac = convertedData;
+            courseDataCache.lastUpdated = new Date();
+            
+            return convertedData;
+        } else {
             throw new Error(result.error || 'Failed to fetch PSAC courses');
         }
-
-        // 기존 form.js 형식으로 변환
-        const convertedData = convertPsacData(result.data);
-
-        // 캐시 저장
-        courseDataCache.psac = convertedData;
-        courseDataCache.lastUpdated = new Date();
-
-        return convertedData;
     } catch (error) {
         console.error('Error fetching PSAC courses:', error);
         throw error; // 에러를 다시 throw하여 상위에서 처리하도록 함
@@ -135,69 +120,25 @@ async function fetchRelayCourses() {
         }
 
         const apiUrl = await getCourseDataApiUrl();
-
-        if (isWorkerCoursesEndpoint(apiUrl)) {
-            const bundledData = await fetchBundledCourses(apiUrl);
-            const convertedPsac = convertPsacData(bundledData.psac);
-            const convertedRelay = convertRelayData(bundledData.relay);
-
-            courseDataCache.psac = convertedPsac;
-            courseDataCache.relay = convertedRelay;
-            courseDataCache.lastUpdated = new Date();
-
-            return convertedRelay;
-        }
-
         const response = await fetch(`${apiUrl}?action=get_relay_courses`);
         const result = await response.json();
-
-        if (!result.success || !Array.isArray(result.data)) {
+        
+        if (result.success) {
+            // 기존 form.js 형식으로 변환
+            const convertedData = convertRelayData(result.data);
+            
+            // 캐시 저장
+            courseDataCache.relay = convertedData;
+            courseDataCache.lastUpdated = new Date();
+            
+            return convertedData;
+        } else {
             throw new Error(result.error || 'Failed to fetch Relay courses');
         }
-
-        // 기존 form.js 형식으로 변환
-        const convertedData = convertRelayData(result.data);
-
-        // 캐시 저장
-        courseDataCache.relay = convertedData;
-        courseDataCache.lastUpdated = new Date();
-
-        return convertedData;
     } catch (error) {
         console.error('Error fetching Relay courses:', error);
         throw error; // 에러를 다시 throw하여 상위에서 처리하도록 함
     }
-}
-
-function isWorkerCoursesEndpoint(apiUrl) {
-    return /\/api\/academy\/courses\/?$/i.test(apiUrl || '');
-}
-
-async function fetchBundledCourses(apiUrl) {
-    if (!bundledCoursesPromise) {
-        bundledCoursesPromise = (async () => {
-            const response = await fetch(apiUrl);
-            const result = await response.json();
-
-            if (!response.ok) {
-                throw new Error(`Courses request failed with status ${response.status}`);
-            }
-
-            const payload = result && result.data && result.data.data;
-            const psac = payload && Array.isArray(payload.psac) ? payload.psac : null;
-            const relay = payload && Array.isArray(payload.relay) ? payload.relay : null;
-
-            if (!result.success || !psac || !relay) {
-                throw new Error('Invalid worker courses response format');
-            }
-
-            return { psac, relay };
-        })().finally(() => {
-            bundledCoursesPromise = null;
-        });
-    }
-
-    return bundledCoursesPromise;
 }
 
 /**

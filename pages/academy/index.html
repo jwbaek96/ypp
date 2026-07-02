@@ -1670,7 +1670,7 @@
                                             data-kor="교육장소">교육장소</td>
                                             <td class="info-value"
                                             data-eng="RelaySchool Training Room, 8th Floor, Gasan YPP Arsen Tower, 24 Gasan Digital 2-ro, Geumcheon-gu, Seoul"
-                                            data-kor="RelaySchool 교육실 서울시 금천구 가산디지털2로 24 가산YPP아르센타워 8층">RelaySchool 교육실<br>서울시 금천구 가산디지털2로 24 가산YPP아르센타워 8층</td>
+                                            data-kor="RelaySchool 교육실, 서울시 금천구 가산디지털2로 24 가산YPP아르센타워 8층"></td>
                                         </tr>
                                         <tr>
                                             <td class="info-label"
@@ -2322,12 +2322,15 @@ class AcademyPageController {
                 //     }
                 // }
                 
-                this.switchTab(tabId);
-                this.updateTabActiveState(link);
+                const activatedTabId = this.switchTab(tabId);
+                const activatedLink = document.querySelector(`[data-tab="${activatedTabId}"]`);
+                if (activatedLink) {
+                    this.updateTabActiveState(activatedLink);
+                }
                 
                 // URL 파라미터 업데이트
                 const newUrl = new URL(window.location);
-                newUrl.searchParams.set('tab', tabId);
+                newUrl.searchParams.set('tab', activatedTabId);
                 window.history.pushState(null, null, newUrl);
                 
                 // 페이지 맨 위로 스크롤
@@ -2364,8 +2367,8 @@ class AcademyPageController {
         // if (tab && this.isValidTab(tab) && tab !== 'psac') {
         if (tab && this.isValidTab(tab)) {
             setTimeout(() => {
-                this.switchTab(tab);
-                const correspondingLink = document.querySelector(`[data-tab="${tab}"]`);
+                const activatedTabId = this.switchTab(tab);
+                const correspondingLink = document.querySelector(`[data-tab="${activatedTabId}"]`);
                 if (correspondingLink) {
                     this.updateTabActiveState(correspondingLink);
                 }
@@ -2373,7 +2376,7 @@ class AcademyPageController {
         } else {
             // 기본 탭으로 설정
             setTimeout(() => {
-                this.switchTab('intro');
+                const activatedTabId = this.switchTab('intro');
                 const correspondingLink = document.querySelector(`[data-tab="intro"]`);
                 if (correspondingLink) {
                     this.updateTabActiveState(correspondingLink);
@@ -2395,11 +2398,37 @@ class AcademyPageController {
     
     // 탭 전환
     switchTab(tabId) {
-        /* PSAC 탭 차단 로직 주석 처리
-        if (tabId === 'psac') {
-            return false;
+        if (hasCourseDataLoadFailed && (tabId === 'apply' || tabId === 'check')) {
+            if (typeof maybeShowCourseLoadFailureAlert === 'function') {
+                maybeShowCourseLoadFailureAlert(tabId);
+            }
+
+            const fallbackTabId = 'intro';
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            document.querySelectorAll('.section-nav').forEach(nav => {
+                nav.style.display = 'none';
+            });
+
+            const fallbackTab = document.getElementById(fallbackTabId);
+            if (fallbackTab) {
+                fallbackTab.classList.add('active');
+            }
+
+            const fallbackSectionNav = document.getElementById(`section-nav-${fallbackTabId}`);
+            if (fallbackSectionNav) {
+                fallbackSectionNav.style.display = 'flex';
+                const firstSectionLink = fallbackSectionNav.querySelector('.section-nav-link');
+                if (firstSectionLink) {
+                    this.updateSectionActiveState(firstSectionLink);
+                }
+            }
+
+            this.currentTab = fallbackTabId;
+            return fallbackTabId;
         }
-        */
         
         // 모든 탭 컨텐츠 숨기기
         document.querySelectorAll('.tab-content').forEach(content => {
@@ -2441,6 +2470,8 @@ class AcademyPageController {
             top: totalOffset,
             behavior: 'smooth'
         });
+
+        return tabId;
     }
     
     // 섹션 네비게이션 설정
@@ -2584,13 +2615,13 @@ class AcademyPageController {
     // 외부에서 호출 가능한 메서드들
     goToTab(tabId) {
         if (this.isValidTab(tabId)) {
-            this.switchTab(tabId);
-            const correspondingLink = document.querySelector(`[data-tab="${tabId}"]`);
+            const activatedTabId = this.switchTab(tabId);
+            const correspondingLink = document.querySelector(`[data-tab="${activatedTabId}"]`);
             if (correspondingLink) {
                 this.updateTabActiveState(correspondingLink);
             }
             const newUrl = new URL(window.location);
-            newUrl.searchParams.set('tab', tabId);
+            newUrl.searchParams.set('tab', activatedTabId);
             window.history.pushState(null, null, newUrl);
         }
     }
@@ -2615,6 +2646,12 @@ function initAcademyPage() {
 function goToTab(tabId) {
     if (academyPageController) {
         academyPageController.goToTab(tabId);
+    }
+}
+
+function redirectAcademyToIntro() {
+    if (academyPageController) {
+        academyPageController.goToTab('intro');
     }
 }
 

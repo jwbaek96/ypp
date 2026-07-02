@@ -1,78 +1,10 @@
 // YPP 아카데미 신청 폼 통합 JavaScript
-document.addEventListener('DOMContentLoaded', async function() {
-    // 로딩 상태 표시
-    showLoadingState();
-    
-    // 먼저 과정 데이터 로드
-    console.log('Starting course data load...');
-    const dataLoaded = await loadCourseData();
-    
-    // 로딩 상태 숨김
-    hideLoadingState();
-    
-    if (!dataLoaded) {
-        console.error('Failed to load course data');
-        alert('교육과정 데이터를 불러오는데 실패했습니다. 페이지를 새로고침하거나 관리자에게 문의하세요.');
-        // 데이터 로드 실패 시 수강자 추가를 하지 않음
-        return;
-    }
-    
-    console.log('Course data loaded successfully, initializing forms...');
-    
-    // Relay School 폼이 있을 경우 첫 번째 수강자 자동 추가
-    if (document.getElementById('relayschool-students-container')) {
-        addRelayschoolStudent();
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    // 탭과 무관하게 앱스크립트 데이터는 백그라운드에서 미리 로드
+    startCourseDataPreload();
 
-    // PSAC 폼이 있을 경우 첫 번째 수강자 자동 추가
-    if (document.getElementById('psac-students-container')) {
-        addPsacStudent();
-    }
-
-    // 폼 제출 이벤트 연결
-    const psacForm = document.getElementById('psac-form');
-    if (psacForm) {
-        psacForm.addEventListener('submit', submitPsacForm);
-    }
-
-    const relayForm = document.getElementById('relayschool-form');
-    if (relayForm) {
-        relayForm.addEventListener('submit', submitRelayschoolForm);
-    }
-
-    // 사업자등록번호 포맷팅 (각 폼별로 id가 다르면 각각 처리)
-    const psacBusinessNumberInput = document.getElementById('psac-businessNumber');
-    if (psacBusinessNumberInput) {
-        psacBusinessNumberInput.addEventListener('input', function(e) {
-            e.target.value = formatBusinessNumber(e.target.value);
-        });
-    }
-    const relayBusinessNumberInput = document.getElementById('relayschool-businessNumber');
-    if (relayBusinessNumberInput) {
-        relayBusinessNumberInput.addEventListener('input', function(e) {
-            e.target.value = formatBusinessNumber(e.target.value);
-        });
-    }
-
-    // 전화번호 포맷팅 (담당자, 각 폼별로 id가 다르면 각각 처리)
-    const psacManagerPhoneInputs = ['psac-managerPhone', 'psac-managerMobile'];
-    psacManagerPhoneInputs.forEach(id => {
-        const input = document.getElementById(id);
-        if (input) {
-            input.addEventListener('input', function(e) {
-                e.target.value = formatPhoneNumber(e.target.value);
-            });
-        }
-    });
-    const relayManagerPhoneInputs = ['relayschool-managerPhone', 'relayschool-managerMobile'];
-    relayManagerPhoneInputs.forEach(id => {
-        const input = document.getElementById(id);
-        if (input) {
-            input.addEventListener('input', function(e) {
-                e.target.value = formatPhoneNumber(e.target.value);
-            });
-        }
-    });
+    // 탭 전환 시 스피너 표시 조건을 apply/check로 제한
+    setupTabAwareLoadingIndicator();
 });
 /* ==========================================================================
    공통 설정 및 변수
@@ -84,6 +16,174 @@ const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbztXmHnUtt3rQkAe6Gp8
 // 공통 변수
 let psacStudentCount = 0;
 let relayStudentCount = 0;
+let courseDataLoadPromise = null;
+let isCourseDataLoading = false;
+let isCourseDataLoaded = false;
+let hasCourseDataLoadFailed = false;
+let hasShownCourseDataLoadErrorAlert = false;
+let formsInitialized = false;
+
+const COURSE_DATA_LOAD_FAILURE_MESSAGE = '데이터 로드에 실패하였습니다.\n공공기관 또는 기업 내부망 등의 보안정책으로 외부 호출이 차단된 경우, 아래 연락처로 문의 바랍니다.\nYPP(주) 교육팀\nTEL: +82-2-2104-8720, 4683\n이메일: yppedu@ypp.co.kr';
+
+function getCurrentAcademyTab() {
+    const activeTabLink = document.querySelector('.tab-link.active');
+    if (activeTabLink) {
+        return activeTabLink.getAttribute('data-tab');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('tab') || 'intro';
+}
+
+function isApplyOrCheckTab(tabId = getCurrentAcademyTab()) {
+    return tabId === 'apply' || tabId === 'check';
+}
+
+function maybeShowCourseLoadFailureAlert(tabId = getCurrentAcademyTab()) {
+    if (!hasCourseDataLoadFailed || hasShownCourseDataLoadErrorAlert || !isApplyOrCheckTab(tabId)) {
+        return;
+    }
+
+    hasShownCourseDataLoadErrorAlert = true;
+    alert(COURSE_DATA_LOAD_FAILURE_MESSAGE);
+
+    if (typeof redirectAcademyToIntro === 'function') {
+        redirectAcademyToIntro();
+    }
+}
+
+function initializeFormsIfNeeded() {
+    if (formsInitialized || !isCourseDataLoaded) {
+        return;
+    }
+
+    console.log('Course data loaded successfully, initializing forms...');
+
+    // Relay School 폼이 있을 경우 첫 번째 수강자 자동 추가
+    if (document.getElementById('relayschool-students-container') && relayStudentCount === 0) {
+        addRelayschoolStudent();
+    }
+
+    // PSAC 폼이 있을 경우 첫 번째 수강자 자동 추가
+    if (document.getElementById('psac-students-container') && psacStudentCount === 0) {
+        addPsacStudent();
+    }
+
+    // 폼 제출 이벤트 연결
+    const psacForm = document.getElementById('psac-form');
+    if (psacForm && !psacForm.dataset.submitBound) {
+        psacForm.addEventListener('submit', submitPsacForm);
+        psacForm.dataset.submitBound = 'true';
+    }
+
+    const relayForm = document.getElementById('relayschool-form');
+    if (relayForm && !relayForm.dataset.submitBound) {
+        relayForm.addEventListener('submit', submitRelayschoolForm);
+        relayForm.dataset.submitBound = 'true';
+    }
+
+    // 사업자등록번호 포맷팅
+    const psacBusinessNumberInput = document.getElementById('psac-businessNumber');
+    if (psacBusinessNumberInput && !psacBusinessNumberInput.dataset.formatBound) {
+        psacBusinessNumberInput.addEventListener('input', function(e) {
+            e.target.value = formatBusinessNumber(e.target.value);
+        });
+        psacBusinessNumberInput.dataset.formatBound = 'true';
+    }
+
+    const relayBusinessNumberInput = document.getElementById('relayschool-businessNumber');
+    if (relayBusinessNumberInput && !relayBusinessNumberInput.dataset.formatBound) {
+        relayBusinessNumberInput.addEventListener('input', function(e) {
+            e.target.value = formatBusinessNumber(e.target.value);
+        });
+        relayBusinessNumberInput.dataset.formatBound = 'true';
+    }
+
+    // 전화번호 포맷팅
+    const psacManagerPhoneInputs = ['psac-managerPhone', 'psac-managerMobile'];
+    psacManagerPhoneInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input && !input.dataset.phoneBound) {
+            input.addEventListener('input', function(e) {
+                e.target.value = formatPhoneNumber(e.target.value);
+            });
+            input.dataset.phoneBound = 'true';
+        }
+    });
+
+    const relayManagerPhoneInputs = ['relayschool-managerPhone', 'relayschool-managerMobile'];
+    relayManagerPhoneInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input && !input.dataset.phoneBound) {
+            input.addEventListener('input', function(e) {
+                e.target.value = formatPhoneNumber(e.target.value);
+            });
+            input.dataset.phoneBound = 'true';
+        }
+    });
+
+    formsInitialized = true;
+}
+
+async function startCourseDataPreload() {
+    if (courseDataLoadPromise) {
+        return courseDataLoadPromise;
+    }
+
+    isCourseDataLoading = true;
+    if (isApplyOrCheckTab()) {
+        showLoadingState();
+    }
+
+    console.log('Starting course data preload...');
+    courseDataLoadPromise = loadCourseData()
+        .then((dataLoaded) => {
+            isCourseDataLoaded = !!dataLoaded;
+            hasCourseDataLoadFailed = !dataLoaded;
+
+            if (dataLoaded) {
+                initializeFormsIfNeeded();
+            } else {
+                console.error('Failed to load course data');
+                maybeShowCourseLoadFailureAlert();
+            }
+
+            return dataLoaded;
+        })
+        .catch((error) => {
+            console.error('Failed to preload course data:', error);
+            hasCourseDataLoadFailed = true;
+            return false;
+        })
+        .finally(() => {
+            isCourseDataLoading = false;
+            hideLoadingState();
+        });
+
+    return courseDataLoadPromise;
+}
+
+function setupTabAwareLoadingIndicator() {
+    const tabLinks = document.querySelectorAll('.tab-link');
+
+    tabLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const targetTab = link.getAttribute('data-tab');
+
+            if (isApplyOrCheckTab(targetTab)) {
+                if (isCourseDataLoading) {
+                    showLoadingState();
+                } else {
+                    hideLoadingState();
+                    initializeFormsIfNeeded();
+                    maybeShowCourseLoadFailureAlert();
+                }
+            } else {
+                hideLoadingState();
+            }
+        });
+    });
+}
 
 // 현재 언어 감지 함수
 function getCurrentLanguage() {

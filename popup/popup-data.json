@@ -35,7 +35,7 @@
               },
               {
                 "name": {
-                  "kor": "RelaySchool 교육계획 안내 브로슈어",
+                  "kor": "RelaySchool 2026 브로슈어",
                   "eng": "RelaySchool Brochure"
                 },
                 "filename": "YPP RELAY SCHOOL_CV 2026 교육계획.pdf"
@@ -61,6 +61,13 @@
                   "eng": "Apply Now"
                 },
                 "link": "/pages/academy/index.html?tab=apply"
+              },
+              {
+                "name": {
+                  "kor": "PSAC 2026 브로슈어",
+                  "eng": "PSAC 2026 Brochure"
+                },
+                "filename": "2026 PSAC 전력계통 고급기술 교육과정_안내책자(웹용-저용량).pdf"
               }
             ]
           }

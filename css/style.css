@@ -1,15 +1,15 @@
 /* ===== CSS RESET & BASE ===== */
-@import "./base/reset.css";
-@import "./base/variables.css";
-@import "./base/base.css";
+@import "base/reset.css";
+@import "base/variables.css";
+@import "base/base.css";
 /* ===== 전역 COMPONENTS ===== */
-@import "./components/header.css";
-@import "./components/header-nav.css";
-@import "./components/footer.css";
-@import "./components/sidebar.css";
+@import "components/header.css";
+@import "components/header-nav.css";
+@import "components/footer.css";
+@import "components/sidebar.css";
 
 /* ===== EXPEND 기능 ===== */
-@import "./expend/breadcrumb.css";
+@import "expend/breadcrumb.css";
 
 /* YPP Website - Main Stylesheet */
 

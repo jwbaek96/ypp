@@ -29,6 +29,9 @@
 <!-- YPP Config -->
     <script src="js/config.js"></script>
 
+<!-- 프텐다드 폰트 -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+
 <!-- 리뉴얼 작업 시 잠금 화면 활성화 스크립트 -->
      <!-- <script src="./redirect.js"></script>-->
 
@@ -368,8 +371,8 @@ document.addEventListener('click', function(e) {
     .index-section-header{text-align: left;}
     .index-section-title{font-size: 2.5rem;font-weight: 700;margin-bottom: 2.5rem;text-transform: uppercase;}
     .index-section-title:hover{color: #007bff;transition: color 0.3s ease;}
-    .index-section-description{font-size: 0.95rem;font-weight: normal;line-height: 1.5;margin: 1rem 0;text-transform:initial;}
-    .index-section-subtitle{font-size: 1.5rem;font-weight: 600;padding: .2rem 1rem;border-left: 7px solid #007bff;vertical-align: middle;margin-bottom: 1.5rem;}
+    .index-section-description{font-size: var(--font-size-body, 1.2rem);font-weight: normal;line-height: 1.5;margin: 1rem 0;text-transform:initial;}
+    .index-section-subtitle{font-size: var(--font-size-h3, 2rem);font-weight: 600;padding: .2rem 1rem;border-left: 7px solid #007bff;vertical-align: middle;margin-bottom: 1.5rem;}
 
 
     #keypartners .container,

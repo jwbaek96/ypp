@@ -94,7 +94,7 @@
     padding: 1rem 1.5rem;
     color: var(--text-primary, #333);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: var(--font-size-body, 1.2rem);
     transition: all 0.3s ease;
     text-decoration: none;
     cursor: pointer;
@@ -144,7 +144,7 @@
     justify-content: space-between;
     padding: 0.75rem 2.5rem;
     color: var(--text-secondary, #666);
-    font-size: 0.9rem;
+    font-size: var(--font-size-small, 1rem);
     transition: all 0.3s ease;
     text-decoration: none;
 }
@@ -171,7 +171,7 @@
             display: block;
             padding: 0.6rem 3.5rem;
             color: var(--text-secondary, #666);
-            font-size: 0.85rem;
+            font-size: var(--font-size-small, 1rem);
             transition: all 0.3s ease;
             text-decoration: none;
         }
@@ -187,29 +187,6 @@
         }
 
 
-
-
-
-
-
-
-
-
-/* .sidebar-link {
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-.sidebar-submenu a {
-    font-size: 0.9rem;
-    padding-left: 2.5rem;
-    color: var(--text-secondary);
-}
-
-.sidebar-submenu a:hover {
-    color: var(--primary-blue);
-    background-color: rgba(0, 102, 204, 0.1);
-} */
 
 /* ===사이드바 푸터=== */
 
@@ -233,17 +210,17 @@
     }
     .sidebar-link {
         padding: 0.875rem 1rem;
-        font-size: 0.95rem;
+        /* font-size: 0.95rem; */
     }
     
     .sidebar-sublink {
         padding: 0.625rem 2rem;
-        font-size: 0.85rem;
+        /* font-size: 0.85rem; */
     }
     
     .sidebar-sub-sublink {
         padding: 0.5rem 3rem;
-        font-size: 0.8rem;
+        /* font-size: 0.8rem; */
     }
 }
 /* ===== 간소화된 사이드바 푸터 ===== */
@@ -270,7 +247,7 @@
     transition: all 0.3s ease;
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: var(--font-size-small, 1rem);
 }
 
 .sidebar-groupware:hover {
@@ -294,21 +271,8 @@
     transition: all 0.3s ease;
     text-decoration: none;
     font-weight: 550 !important;
-    font-size: 0.85rem !important;
+    font-size: var(--font-size-small, 1rem) !important;
     padding: 0.625rem;
-    /* width: 40px;
-    height: 32px;
-    border: 1px solid var(--border-color);
-    background-color: var(--white);
-    color: var(--text-secondary);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.8rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center; */
     
 }
 
@@ -326,6 +290,6 @@
 /* 모바일 최적화 */
 @media (max-width: 900px) {
     .sidebar-footer {padding: 0.875rem;}
-    .sidebar-groupware {padding: 0.625rem;font-size: 0.85rem;}
-    .sidebar-lang-btn {font-size: 0.75rem;}
+    .sidebar-groupware {padding: 0.625rem;font-size: var(--font-size-small, 1rem);}
+    .sidebar-lang-btn {font-size: var(--font-size-small, 1rem);}
 }

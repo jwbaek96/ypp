@@ -27,7 +27,7 @@
 }
 
 .stat-icon {
-    font-size: 2.5rem;
+    font-size: var(--font-size-large, 2.5rem);
     opacity: 0.8;
 }
 
@@ -37,13 +37,13 @@
 }
 
 .stat-number {
-    font-size: 2rem;
+    font-size: var(--font-size-body, 1.2rem);
     font-weight: bold;
     margin-bottom: 5px;
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: var(--font-size-small, 1rem);
     opacity: 0.9;
 }
 
@@ -67,7 +67,7 @@
     gap: 10px;
     margin-bottom: 20px;
     color: #1e3c72;
-    font-size: 1.1rem;
+    font-size: var(--font-size-body, 1.2rem);
 }
 
 .bases-grid {
@@ -127,13 +127,13 @@
 }
 
 .capability-icon {
-    font-size: 2rem;
+    font-size: var(--font-size-large, 2.5rem);
     opacity: 0.9;
 }
 
 .capability-header h4 {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: var(--font-size-body, 1.2rem);
 }
 
 .capability-content {
@@ -165,7 +165,7 @@
 }
 
 .feature-item span {
-    font-size: 0.95rem;
+    font-size: var(--font-size-small, 1rem);
     line-height: 1.5;
 }
 
@@ -242,7 +242,7 @@
 
 .achievement-detail {
     display: block;
-    font-size: 0.85rem;
+    font-size: var(--font-size-small, 1rem);
     color: #666;
 }
 
@@ -304,7 +304,7 @@
     display: inline-block;
     padding: 6px 12px;
     border-radius: 20px;
-    font-size: 0.85rem;
+    font-size: var(--font-size-small, 1rem);
     font-weight: 500;
     text-align: center;
 }
@@ -341,21 +341,11 @@
     display: inline-block;
     padding: 6px 12px;
     border-radius: 20px;
-    font-size: 0.85rem;
+    font-size: var(--font-size-small, 1rem);
     font-weight: 600;
     text-align: center;
     width: 100%;
 }
-/* 
-.status-badge {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-} */
 
 .status-badge.completed {
     color: #155724;
@@ -454,7 +444,7 @@
     padding: 6px 12px;
     border-radius: 20px;
     border: 1px solid #dee2e6;
-    font-size: 0.8rem;
+    font-size: var(--font-size-small, 1rem);
     color: #495057;
 }
 
@@ -495,7 +485,7 @@
 }
 
 .metric-label {
-    font-size: 0.9rem;
+    font-size: var(--font-size-small, 1rem);
     opacity: 0.9;
 }
 
@@ -532,7 +522,7 @@
     }
     
     .project-table {
-        font-size: 0.9rem;
+        font-size: var(--font-size-small, 1rem);
     }
     
     .project-table th,
@@ -551,7 +541,7 @@
     }
     
     .stat-number {font-size: 1.4rem;}
-    .stat-label {font-size: 0.8rem;}
+    .stat-label {font-size: var(--font-size-small, 1rem);}
     
     .metrics-grid {
         grid-template-columns: 1fr;
@@ -681,17 +671,6 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* .project-card.wind {
-    border-left: 4px solid #17a2b8;
-}
-
-.project-card.solar {
-    border-left: 4px solid #ffc107;
-}
-
-.project-card.hydrogen {
-    border-left: 4px solid #28a745;
-} */
 
 .project-icon {
     font-size: 3rem;
@@ -740,7 +719,7 @@
 .project-capacity {
     padding: 4px 8px;
     border-radius: 4px;
-    font-size: 0.85rem;
+    font-size: var(--font-size-small, 1rem);
     font-weight: bold;
     color: #6c757d;
 }
@@ -844,12 +823,12 @@
 .chain-content h5 {
     color: #495057;
     margin-bottom: 5px;
-    font-size: 1rem;
+    font-size: var(--font-size-body, 1.2rem);
 }
 
 .chain-content p {
     color: #6c757d;
-    font-size: 0.85rem;
+    font-size: var(--font-size-small, 1rem);
     margin: 0;
 }
 
@@ -960,7 +939,7 @@
 
 .phase-subtitle {
     color: #7f8c8d;
-    font-size: 0.9rem;
+    font-size: var(--font-size-small, 1rem);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1012,7 +991,7 @@
 
 .detail-list li {
     color: #6c757d;
-    font-size: 0.9rem;
+    font-size: var(--font-size-small, 1rem);
     margin-bottom: 5px;
     position: relative;
     padding-left: 20px;
@@ -1117,7 +1096,7 @@
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.5;
     margin: 0;
-    font-size: 0.9rem;
+    font-size: var(--font-size-small, 1rem);
 }
 
 /* ==========================================
@@ -1174,7 +1153,7 @@
 .step-name {
     font-weight: 600;
     color: #1976d2;
-    font-size: 0.9rem;
+    font-size: var(--font-size-small, 1rem);
 }
 
 .process-arrow {
@@ -1204,7 +1183,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 0.85rem;
+    font-size: var(--font-size-small, 1rem);
 }
 
 .project-status.completed {
@@ -1258,7 +1237,7 @@
 }
 
 .scale-unit {
-    font-size: 0.85rem;
+    font-size: var(--font-size-small, 1rem);
     color: #6c757d;
 }
 
@@ -1477,7 +1456,7 @@
     }
     
     .chain-description {
-        font-size: 1rem;
+        font-size: var(--font-size-body, 1.2rem);
     }
     
     .value-proposition {
@@ -1491,35 +1470,35 @@
     }
     
     .phase-title h4 {
-        font-size: 1.2rem;
+        font-size: var(--font-size-body, 1.2rem);
     }
     
     .phase-subtitle {
-        font-size: 0.8rem;
+        font-size: var(--font-size-small, 1rem);
     }
     
     .chain-details h5 {
-        font-size: 1.1rem;
+        font-size: var(--font-size-body, 1.2rem);
     }
     
     .chain-details p {
-        font-size: 0.9rem;
+        font-size: var(--font-size-small, 1rem);
     }
     
     .detail-list li {
-        font-size: 0.85rem;
+        font-size: var(--font-size-small, 1rem);
     }
     
     .proposition-header h4 {
-        font-size: 1.3rem;
+        font-size: var(--font-size-body, 1.2rem);
     }
     
     .prop-content h5 {
-        font-size: 1rem;
+        font-size: var(--font-size-body, 1.2rem);
     }
     
     .prop-content p {
-        font-size: 0.85rem;
+        font-size: var(--font-size-small, 1rem);
     }
 }
 

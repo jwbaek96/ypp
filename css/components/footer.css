@@ -40,7 +40,7 @@
 .footer-title {
     color: var(--white);
     margin-bottom: 1rem;
-    font-size: 1.125rem;
+    font-size: var(--font-size-body, 1.2rem);
 }
 
 .footer-links,
@@ -64,7 +64,7 @@
 
 .footer-contact li {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 0.875rem;
+    font-size: var(--font-size-small, 1rem);
 }
 
 .footer-bottom {
@@ -79,7 +79,7 @@
 
 .footer-copyright {
     color: rgba(255, 255, 255, 0.6);
-    font-size: 0.875rem;
+    font-size: var(--font-size-small, 1rem);
 }
 
 .footer-legal {
@@ -89,7 +89,7 @@
 
 .footer-legal a {
     color: rgba(255, 255, 255, 0.6);
-    font-size: 0.875rem;
+    font-size: var(--font-size-small, 1rem);
 }
 
 .footer-legal a:hover {

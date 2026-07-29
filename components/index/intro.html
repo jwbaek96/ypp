@@ -41,9 +41,9 @@
 .intro-section .container {max-width: 1200px;margin: 0 auto;padding: 0 2rem;width: 100%;}
 .intro-grid {display: grid;grid-template-columns: 1fr 1fr;align-items: center;gap: 4rem;height: 100%;}
 .intro-content {text-align: left;}
-.intro-title {font-size: 3rem;font-weight: 400;margin-bottom: 1.5rem;color: var(--text-primary);line-height: 1.2;}
+.intro-title {font-size: var(--font-size-large, 2.5rem);font-weight: 400;margin-bottom: 1.5rem;color: var(--text-primary);line-height: 1.2;}
 .intro-title .bold-text {font-weight: 900;}
-.intro-subtitle {font-size: 1.1rem;color: var(--text-secondary);margin-bottom: 3rem;line-height: 1.6;}
+.intro-subtitle {font-size: var(--font-size-body, 1.2rem);color: var(--text-secondary);margin-bottom: 3rem;line-height: 1.6;}
 .intro-actions {display: flex;gap: 1rem;flex-wrap: nowrap;margin-top: 2rem;justify-content: flex-start;}
 /* 인트로 버튼 */
 .intro-btn {
@@ -51,7 +51,7 @@
     align-items: center;
     justify-content: center;
     padding: 12px 24px;
-    font-size: 0.95rem;
+    font-size: var(--font-size-body, 1.2rem);
     font-weight: 500;
     text-decoration: none;
     border: 2px solid transparent;
@@ -81,7 +81,7 @@
 @media (max-width: 1024px) {
     .intro-section {padding: 80px 0;}
     .intro-grid {gap: 3rem;}
-    .intro-title {font-size: 3rem;}
+    .intro-title {font-size: var(--font-size-large, 2.5rem);}
     .intro-visual img {max-height: 500px;}
 }
 
@@ -94,10 +94,10 @@
     /* 모바일에서 콘텐츠가 위, 비주얼이 아래 */
     .intro-content {order: 1;text-align: center;}
     .intro-visual {order: 2;}
-    .intro-title {font-size: 2.2rem;margin-bottom: 1rem;}
-    .intro-subtitle {font-size: 1rem;margin-bottom: 2rem;line-height: 1.5;}
+    .intro-title {font-size: var(--font-size-large, 2.5rem);margin-bottom: 1rem;}
+    .intro-subtitle {font-size: var(--font-size-body, 1.2rem);margin-bottom: 2rem;line-height: 1.5;}
     .intro-actions {justify-content: center;gap: 0.5rem;flex-wrap: nowrap;}
-    .intro-btn {padding: 10px 16px;font-size: 0.85rem;min-width: auto;flex: 1;white-space: nowrap;}
+    .intro-btn {padding: 10px 16px;font-size: var(--font-size-small, 1rem);min-width: auto;flex: 1;white-space: nowrap;}
     .intro-visual img {max-height: 300px;border-radius: 12px;}
 }
 
@@ -106,10 +106,10 @@
     .intro-visual img {max-height: 200px;border-radius: 12px;}
     .intro-section {padding: 40px 0;}
     .intro-grid {gap: 2rem;}
-    .intro-title {font-size: 1.9rem;}
-    .intro-subtitle {font-size: 0.85rem;margin-bottom: 1.5rem;}
+    .intro-title {font-size: var(--font-size-large, 2.5rem);}
+    .intro-subtitle {font-size: var(--font-size-body, 1.2rem);margin-bottom: 1.5rem;}
     .intro-actions {gap: 0.4rem;}
-    .intro-btn {padding: 9px 12px;font-size: 0.8rem;flex: 1;}
+    .intro-btn {padding: 9px 12px;font-size: var(--font-size-body, 1.2rem);flex: 1;}
 }
 
 /* 버튼 호버 효과 (인트로 섹션 내) */

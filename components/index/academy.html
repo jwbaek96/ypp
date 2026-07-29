@@ -134,14 +134,14 @@
 }
 
 .academy-title {
-    font-size: 2.5rem;
+    font-size: var(--font-size-large, 2.5rem);
     font-weight: 700;
     color: var(--text-primary, #333);
     margin-bottom: 1rem;
 }
 
 .academy-subtitle {
-    font-size: 1.1rem;
+    font-size: var(--font-size-body, 1.2rem);
     color: var(--text-secondary, #666);
     max-width: 1000px;
     margin: 0 auto;
@@ -175,8 +175,8 @@
 .program-image img {width: 100%;height: 100%;object-fit: cover;transition: transform 0.3s ease;}
 .program-card:hover .program-image img {transform: scale(1.01);}
 .program-content {flex: 1;padding: 2rem .5rem;display: flex;flex-direction: column;align-items: stretch;justify-content: space-evenly;}
-.program-title {font-size: 1.4rem;font-weight: 600;color: var(--text-primary, #333);margin-bottom: 0.5rem;}
-.program-period {font-size: 0.9rem;color: var(--text-secondary, #666);margin-bottom: 1rem;font-weight: 500;}
+.program-title {font-size: var(--font-size-large, 2.5rem);font-weight: 600;color: var(--text-primary, #333);margin-bottom: 0.5rem;}
+.program-period {font-size: var(--font-size-body, 1.2rem);color: var(--text-secondary, #666);margin-bottom: 1rem;font-weight: 500;}
 
 .program-description {
     color: var(--text-secondary, #666);
@@ -204,7 +204,7 @@
     color: white;
     border: none;
     border-radius: 6px;
-    font-size: 1rem;
+    font-size: var(--font-size-body, 1.2rem);
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -212,10 +212,11 @@
 }
 
 .academy-btn:hover {background-color: #004499;}
-.academy-contact {color: var(--text-secondary, #666);font-size: 0.95rem;}
+.academy-contact {color: var(--text-secondary, #666);font-size: var(--font-size-body, 1.2rem);}
 .academy-contact p {margin: 0;}
 .academy-link{text-align: center;width: 100%;transition: all 0.2s ease;}
 .academy-link a {
+    fontsize: var(--font-size-body, 1.2rem);
     display: inline-block;
     padding: 1rem;
     color: #fff;
@@ -235,8 +236,8 @@
 /* Responsive */
 @media (max-width: 768px) {
     .academy-section {padding: 3rem 0;}
-    .academy-title {font-size: 2rem;}
-    .academy-subtitle {font-size: .9rem;margin-bottom: 1.5rem;}
+    .academy-title {font-size: var(--font-size-large, 2.5rem);}
+    .academy-subtitle {font-size: var(--font-size-body, 1.2rem);margin-bottom: 1.5rem;}
     .academy-programs {grid-template-columns: 1fr 1fr;gap: 1.2rem;}
     .program-image {height: 180px;}
     .program-content {padding: 1.5rem;}
@@ -267,7 +268,7 @@
     width: 100%;
     min-width: 120px;
     padding: 0.6em 1.4em;
-    font-size: 1em;
+    font-size: var(--font-size-body, 1.2rem);
     font-weight: 500;
     color: #444;
     background: #f6f7f8;

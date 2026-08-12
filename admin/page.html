@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,18 @@
         a:hover{color: #007bff;}
         /* =========== */
 
-        .main-container{ max-width: var(--mxw); max-height: var(--mxh); margin: 0 auto; padding: 20px; box-sizing: border-box;}
+        .main-container{ 
+            /* max-width: var(--mxw);  */
+            /* max-height: var(--mxh);  */
+            margin: 0 auto; 
+            padding: 0 40px 40px 40px; 
+            box-sizing: border-box;
+        }
+        @media (max-width: 600px) {
+            .main-container {
+                padding: 0 10px 10px 10px;
+            }
+        }
         
         /* =========== */
 
@@ -88,17 +99,19 @@
         #curriculum-items {max-height: 300px;overflow-y: auto;margin-bottom: 15px;}
 
         /* =========== Clock Styles =========== */
-        header{width: 100%;display: flex; justify-content: space-between;padding: 10px 0;}
+        /* header{width: 100%;display: flex; gap:15px; padding: 10px 0;} */
         .clock-widget {font-size: 1.1rem;}
         /* =========== */
-        .page-top{padding: 1rem 0 1rem 0;width: 100%;display: flex;justify-content: space-between;flex-direction: column;gap: 2rem;}
-        .page-title{font-size: 2.5rem;}
-        .page-info{display: flex; flex-direction: column; gap: 4px; text-align: right;font-size: .8rem;}
-        .page-count{font-size: 1.8rem;}
+        .page-top{padding: 1rem 0 1rem 0;width: 100%;
+            /* display: flex;justify-content: space-between;flex-direction: column;gap: 2rem; */
+            }
+        .page-title{font-size: 1.5rem; font-weight: 600; color: #000; margin-left: 1rem;}
+        .page-info{font-size: .8rem; line-height: 1.2rem;}
+        .page-count{font-size: 1.8rem; font-weight: 600; margin-bottom: 8px;} 
         .page-count i{font-size: 1rem; margin-bottom: 1rem;}
 
         /* =========== Data List Styles =========== */
-        .data-toolbar {display: flex;justify-content: space-between;align-items: center;margin-bottom: 1.5rem;}
+        .data-toolbar {display: flex;justify-content: space-between;align-items: center;margin-bottom: 1rem;}
         .toolbar-left,
         .toolbar-right {display: flex;gap: .5rem;align-items: center;}
         .toolbar-left{gap: .2rem;}
@@ -114,6 +127,7 @@
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             max-height: 600px; /* 테이블 최대 높이 설정 */
+            max-height: 70dvh; /* 테이블 최대 높이 설정 */
             overflow-y: auto; /* 세로 스크롤 활성화 */
         }
         .data-table-container::-webkit-scrollbar { 
@@ -134,11 +148,9 @@
         
         .data-table th {
             background: #f8f9fa;
-            font-weight: 600;
             position: sticky;
             top: 0;
             z-index: 10; /* 헤더가 위에 오도록 설정 */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 헤더 하단에 그림자 추가 */
         }
         
         .data-table tbody tr:hover {
@@ -391,7 +403,7 @@
         
         .edit-form-readonly {
             background-color: #f8f9fa;
-            color: #6c757d;
+            color: #080808;
         }
         
         .edit-form-section-title {
@@ -673,10 +685,10 @@
         .admin-header {
             display: flex;
             justify-content: space-between;
+            /* justify-content: flex-end; */
             align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 1rem;
+            padding: 1rem;
+            /* margin-bottom: 1rem; */
         }
         
         .admin-title {
@@ -710,13 +722,6 @@
             background: #ff3742;
         }
     </style>
-
-<!--[if gte mso 9]><xml>
-<mso:CustomDocumentProperties>
-<mso:DeletedSystemTags msdt:dt="string"></mso:DeletedSystemTags>
-<mso:TagListTags msdt:dt="string"></mso:TagListTags>
-</mso:CustomDocumentProperties>
-</xml><![endif]-->
 </head>
 <body>
     <!-- 인증 확인 로딩 화면 -->
@@ -727,9 +732,14 @@
     <div id="mainContent" style="display: none;">
         <!-- Admin Header -->
         <div class="admin-header">
-            <div class="admin-title">페이지 관리</div>
+            <!-- <div class="admin-title">페이지 관리</div> -->
+             
+            <a href="/admin" class="btn-home" style="margin-left: .5rem; ">
+                <i class="fas fa-home"></i>
+            </a>
+            <div class="page-title" style="margin-right:auto"></div>
             <div class="admin-user">
-                <div class="user-info" id="adminUserInfo">관리자로 로그인됨</div>
+                <!-- <div class="user-info" id="adminUserInfo">관리자로 로그인됨</div> -->
                 <button class="logout-btn" id="logoutBtn">
                     <i class="fas fa-sign-out-alt"></i> 로그아웃
                 </button>
@@ -743,20 +753,17 @@
         </div>
     </section>
     <div class="main-container">
-        <header>
-            <a href="/admin" class="btn-home">
-                <i class="fas fa-home"></i>
-            </a>
+        <!-- <header>
             <div class="clock-widget">
                 <span class="clock-date" id="clock-date"></span>
                 <span class="clock-time">
-                    <span id="clock-hours"></span>:<span id="clock-minutes"></span><span class="clock-period" id="clock-period"></span>
+                    <span id="clock-hours"></span>:<span id="clock-minutes"></span>:<span id="clock-seconds"></span><span class="clock-period" id="clock-period"></span>
                 </span>
             </div>
-        </header>
+        </header> -->
         <main>
             <div class="page-top">
-                <div class="page-title"></div>
+                
                 <div class="page-info">
                     <p class="page-count">
                         <i class="fas fa-spinner fa-spin"></i>
@@ -810,7 +817,7 @@
                     
                     <!-- 로딩 표시 -->
                     <div id="loading-indicator" style="text-align: center; padding: 20dvh 2rem;">
-                        <i class="fas fa-spinner fa-spin"></i> 데이터를 불러오는 중...
+                        <i class="fas fa-spinner fa-spin"></i> 
                     </div>
 
                     <!-- 빈 상태 표시 -->
@@ -915,6 +922,7 @@
         </div>
     </div>
     </div>
+
 </body>
 </html>
 <!--  -->
@@ -964,11 +972,11 @@ function checkAuthStatus() {
         mainContent.style.display = 'block';
         
         // 로그인 시간 표시
-        const loginTime = localStorage.getItem('adminLoginTime');
-        if (loginTime) {
-            const loginDate = new Date(parseInt(loginTime));
-            adminUserInfo.textContent = `로그인: ${loginDate.toLocaleString()}`;
-        }
+        // const loginTime = localStorage.getItem('adminLoginTime');
+        // if (loginTime) {
+        //     const loginDate = new Date(parseInt(loginTime));
+        //     adminUserInfo.textContent = `로그인: ${loginDate.toLocaleString()}`;
+        // }
     } else {
         // 미로그인 또는 세션 만료 - 로그인 페이지로 리다이렉트
         window.location.href = '/admin/login.html';

@@ -1,7 +1,7 @@
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
-    const clock = new Clock(); // 시계 인스턴스 생성
-    clock.start(); // 시계 시작
+    // const clock = new Clock(); // 시계 인스턴스 생성
+    // clock.start(); // 시계 시작
     const pageManager = new PageManager(); // 페이지 매니저 생성
     window.pageManagerInstance = pageManager; // 전역 변수로 저장
     pageManager.init(); // 페이지 초기화
@@ -11,50 +11,51 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // 시계 클래스
-class Clock {
-    constructor() {
-        this.intervalId = null;
-    }
+// class Clock {
+//     constructor() {
+//         this.intervalId = null;
+//     }
     
-    start() {
-        this.updateClock(); // 즉시 시계 업데이트
-        this.intervalId = setInterval(() => this.updateClock(), 1000); // 1초마다 업데이트
-    }
+//     start() {
+//         this.updateClock(); // 즉시 시계 업데이트
+//         this.intervalId = setInterval(() => this.updateClock(), 1000); // 1초마다 업데이트
+//     }
     
-    stop() {
-        if (this.intervalId) {
-            clearInterval(this.intervalId);
-            this.intervalId = null;
-        }
-    }
+//     stop() {
+//         if (this.intervalId) {
+//             clearInterval(this.intervalId);
+//             this.intervalId = null;
+//         }
+//     }
     
-    updateClock() {
-        const now = new Date();
+//     updateClock() {
+//         const now = new Date();
         
-        // 시간 계산 (12시간 형식)
-        let hours = now.getHours();
-        const minutes = now.getMinutes();
-        const period = hours >= 12 ? 'PM' : 'AM';
+//         // 시간 계산 (12시간 형식)
+//         let hours = now.getHours();
+//         const minutes = now.getMinutes();
+//         const period = hours >= 12 ? 'PM' : 'AM';
         
-        // 12시간 형식으로 변환
-        if (hours > 12) {
-            hours = hours - 12;
-        } else if (hours === 0) {
-            hours = 12;
-        }
+//         // 12시간 형식으로 변환
+//         if (hours > 12) {
+//             hours = hours - 12;
+//         } else if (hours === 0) {
+//             hours = 12;
+//         }
         
-        // 날짜 계산
-        const year = now.getFullYear();
-        const month = now.getMonth() + 1;
-        const date = now.getDate();
+//         // 날짜 계산
+//         const year = now.getFullYear();
+//         const month = now.getMonth() + 1;
+//         const date = now.getDate();
         
-        // DOM 업데이트 (한자리수도 그대로 표시)
-        document.getElementById('clock-hours').textContent = hours.toString();
-        document.getElementById('clock-minutes').textContent = minutes.toString().padStart(2, '0'); // 분은 항상 2자리
-        document.getElementById('clock-period').textContent = period;
-        document.getElementById('clock-date').textContent = `${year}년 ${month}월 ${date}일`;
-    }
-}
+//         // DOM 업데이트 (한자리수도 그대로 표시)
+//         document.getElementById('clock-hours').textContent = hours.toString();
+//         document.getElementById('clock-minutes').textContent = minutes.toString().padStart(2, '0'); // 분은 항상 2자리
+//         document.getElementById('clock-seconds').textContent = now.getSeconds().toString().padStart(2, '0'); // 초는 항상 2자리
+//         document.getElementById('clock-period').textContent = period;
+//         document.getElementById('clock-date').textContent = `${year}년 ${month}월 ${date}일`;
+//     }
+// }
 // ===========================================================================================
 // 날짜/시간 유틸리티 함수들
 // ===========================================================================================
@@ -574,7 +575,7 @@ class PageManager {
     
     // 에러 표시
     showError(message) {
-        document.querySelector('.page-title').textContent = '오류';
+        // document.querySelector('.page-title').textContent = '오류';
         document.querySelector('.page-descripation').textContent = message;
         document.querySelector('.page-location').textContent = '오류 페이지';
         document.querySelector('.page-count').textContent = '0건';
@@ -773,11 +774,11 @@ class PageManager {
             case '고객문의(KOR)':
             case '고객문의(ENG)':
                 return `
-                    <th>문의유형</th>
+                    <th style="width: 140px; text-align: center;">문의유형</th>
                     <th>제목</th>
                     <th>문의자</th>
                     <th>이메일/연락처</th>
-                    <th>문의일</th>
+                    <th style="width: 150px; text-align: center;">문의일</th>
                 `;
                 
             case '보도자료':
@@ -1278,7 +1279,7 @@ class PageManager {
                     <td>${item.managerName || ''}</td>
                     <td>${item.courseContents || ''}</td>
                     <td class="col-date">
-                        <div>${rsDatetime.dateOnly}</div>
+                        <span>${rsDatetime.dateOnly}</span>
                         ${rsDatetime.timeOnly !== '-' ? `<small style="color: #666;">${rsDatetime.timeOnly}</small>` : ''}
                     </td>
                     <td class="col-actions">
@@ -1320,7 +1321,7 @@ class PageManager {
                             </div>
                         </td>
                         <td class="col-date">
-                            <div>${datetime.dateOnly}</div>
+                            <span>${datetime.dateOnly}</span>
                             ${datetime.timeOnly !== '-' ? `<small style="color: #666;">${datetime.timeOnly}</small>` : ''}
                         </td>
                         <td class="col-actions">
@@ -1343,7 +1344,7 @@ class PageManager {
                             ${item.lockStatus === true || item.lockStatus === 'true' ? ' <i class="fas fa-lock" style="color: #000;"></i>' : ''}
                         </td>
                         <td class="col-date">
-                            <div>${datetime.dateOnly}</div>
+                            <span>${datetime.dateOnly}</span>
                             ${datetime.timeOnly !== '-' ? `<small>${datetime.timeOnly}</small>` : ''}
                         </td>
                         <td class="col-actions">
@@ -1360,7 +1361,7 @@ class PageManager {
                     <td>${item.nameCompany || '-'}</td>
                     <td>${item.emailPhone || '-'}</td>
                     <td>
-                        <div>${inquiryDatetime.dateOnly}</div>
+                        <span>${inquiryDatetime.dateOnly}</span>
                         <small style="color: #666;">${inquiryDatetime.timeOnly}</small>
                     </td>
                 `;
@@ -1372,7 +1373,7 @@ class PageManager {
                     <td class="col-number">${item.number}</td>
                     <td>${item.titleKR || '제목 없음'}<br><span style="color: #4747477a; margin-top: 4px;">${item.titleEN || ''}</span></td>
                     <td class="col-date">
-                        <div>${pressDatetime.dateOnly}</div>
+                        <span>${pressDatetime.dateOnly}</span>
                         ${pressDatetime.timeOnly !== '-' ? `<small>${pressDatetime.timeOnly}</small>` : ''}
                     </td>
                     <td><span class="status-badge ${item.state === 'on' ? 'status-active' : 'status-inactive'}">${item.state === 'on' ? 'ON' : 'OFF'}</span></td>

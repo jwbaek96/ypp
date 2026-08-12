@@ -172,7 +172,7 @@ class PageManager {
     }
     constructor() {
         // Google Apps Script 웹앱 URL (PSAC/RelaySchool 전용, academy/index.html과 동일)
-        this.PSAC_RELAY_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbztXmHnUtt3rQkAe6Gp8N_mIkLCChfrdbSPlDY16vXtxQWvamPb2gZZ8JtE-aOZ6Hlx/exec';
+        this.PSAC_RELAY_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec';
         // 기존 대시보드용 URL (다른 용도에 사용)
         this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxB2_0dc5Wim-sRuAtrk3G14GL-iSUljdoWRtSpsJsy6NGhbLfbATfzWncitqCyhWKm';
         this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;

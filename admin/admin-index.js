@@ -1,7 +1,12 @@
 // Google Apps Script 웹앱 URL (배포 후 받은 URL)
-const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxB2_0dc5Wim-sRuAtrk3G14GL-iSUljdoWRtSpsJsy6NGhbLfbATfzWncitqCyhWKm';
+const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx';
+// const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxB2_0dc5Wim-sRuAtrk3G14GL-iSUljdoWRtSpsJsy6NGhbLfbATfzWncitqCyhWKm';
 // const DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxpCCjRsLr1A2Yv8UUQMbcsTyqRi1Jt_pPDERgwFUSUyQv83P8ex8G03u8dNaJQfhRV';
 const DASHBOARD_APPS_SCRIPT_URL = `https://script.google.com/macros/s/${DASHBOARD_APPS_SCRIPT_ID}/exec`;
+const DASHBOARD_CACHE_KEY = 'ypp_admin_dashboard_cache_v1';
+const DASHBOARD_CACHE_TTL_MS = 15000; // 15초
+const DASHBOARD_RETRY_COUNT = 2;
+const DASHBOARD_RETRY_DELAY_MS = 700;
 
 // 인증된 요청을 위한 헬퍼 함수
 async function makeAuthenticatedRequest(url, options = {}) {
@@ -42,19 +47,90 @@ async function makeAuthenticatedRequest(url, options = {}) {
     }
 }
 
+function getCachedDashboardData() {
+    try {
+        const raw = localStorage.getItem(DASHBOARD_CACHE_KEY);
+        if (!raw) {
+            return null;
+        }
+
+        const cached = JSON.parse(raw);
+        if (!cached || typeof cached.fetchedAt !== 'number' || !cached.data) {
+            return null;
+        }
+
+        const isFresh = Date.now() - cached.fetchedAt <= DASHBOARD_CACHE_TTL_MS;
+        return isFresh ? cached.data : null;
+    } catch (error) {
+        console.warn('대시보드 캐시 파싱 실패:', error);
+        return null;
+    }
+}
+
+function setCachedDashboardData(data) {
+    try {
+        localStorage.setItem(
+            DASHBOARD_CACHE_KEY,
+            JSON.stringify({ fetchedAt: Date.now(), data })
+        );
+    } catch (error) {
+        console.warn('대시보드 캐시 저장 실패:', error);
+    }
+}
+
+function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function fetchDashboardDataWithRetry() {
+    const url = `${DASHBOARD_APPS_SCRIPT_URL}?sheet=SHEET_DASHBOARD`;
+    let lastError = null;
+
+    for (let attempt = 0; attempt <= DASHBOARD_RETRY_COUNT; attempt++) {
+        try {
+            const response = await fetch(url, { cache: 'no-store' });
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const contentType = response.headers.get('content-type') || '';
+            if (!contentType.includes('application/json')) {
+                const responseText = await response.text();
+                throw new Error(`JSON 응답이 아닙니다. (content-type: ${contentType || 'unknown'}, body: ${responseText.slice(0, 120)})`);
+            }
+
+            const result = await response.json();
+            if (!result.success) {
+                throw new Error(result.message || '대시보드 응답 실패');
+            }
+
+            return result.data;
+        } catch (error) {
+            lastError = error;
+            if (attempt < DASHBOARD_RETRY_COUNT) {
+                await wait(DASHBOARD_RETRY_DELAY_MS * (attempt + 1));
+            }
+        }
+    }
+
+    throw lastError || new Error('대시보드 호출 실패');
+}
+
 // 대시보드 데이터 로드 및 표시
-async function loadDashboardData() {
+async function loadDashboardData(forceRefresh = false) {
     try {
         console.log('대시보드 데이터 로드 중...');
 
-        const response = await fetch(`${DASHBOARD_APPS_SCRIPT_URL}?sheet=SHEET_DASHBOARD`);
-        const result = await response.json();
-        
-        if (!result.success) {
-            throw new Error(result.message);
+        if (!forceRefresh) {
+            const cachedData = getCachedDashboardData();
+            if (cachedData) {
+                updateNavCounts(cachedData);
+                return;
+            }
         }
-        
-        const data = result.data;
+
+        const data = await fetchDashboardDataWithRetry();
+        setCachedDashboardData(data);
         console.log('대시보드 데이터:', data);
         
         // 각 nav-count 요소에 데이터 표시
@@ -171,7 +247,7 @@ class Clock {
 
 // 새로고침 버튼 기능 (필요시 추가)
 function refreshData() {
-    loadDashboardData();
+    loadDashboardData(true);
 }
 
 // 클릭 이벤트 리스너 추가 (각 nav 항목 클릭 시)

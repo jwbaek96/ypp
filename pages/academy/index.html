@@ -3262,12 +3262,10 @@ class CourseApplicationManager {
                 
                 return businessMatch && nameMatch && phoneMatch;
             });
-            
-            // 로딩 표시 종료
+
             loadingIndicator.style.display = 'none';
             resultsList.style.display = 'block';
-            
-            // 디버깅용 로그 추가
+
             console.log('=== 신청서 검색 결과 디버깅 ===');
             console.log('매칭된 신청서 수:', matchedApplications.length);
             matchedApplications.forEach((app, index) => {
@@ -3279,23 +3277,23 @@ class CourseApplicationManager {
                 });
             });
             console.log('==========================');
-            
+
             this.displaySearchResults(matchedApplications);
-            
+
         } catch (error) {
             console.error('검색 오류:', error);
-            // 로딩 표시 종료
             loadingIndicator.style.display = 'none';
             resultsList.style.display = 'block';
             alert('검색 중 오류가 발생했습니다.');
         }
     }
+
     
     // 검색 결과 표시
     displaySearchResults(applications) {
         const resultsContainer = document.getElementById('search-results');
         const resultsList = document.getElementById('search-results-list');
-        
+
         if (applications.length === 0) {
             resultsList.innerHTML = '<p style="padding: 12dvh 2rem; margin: 0; text-align: center; color: #6b7280;">일치하는 신청서가 없습니다.</p>';
         } else {
@@ -3307,15 +3305,14 @@ class CourseApplicationManager {
                                lockStatusValue === 'TRUE' || 
                                lockStatusValue === 1 || 
                                lockStatusValue === '1';
-                               
                 const lockText = isLocked ? ' (수정 불가)' : '';
-                
+
                 console.log(`신청서 ${app.studentName} 잠금 상태:`, {
                     원본값: lockStatusValue,
                     타입: typeof lockStatusValue,
                     잠금여부: isLocked
                 });
-                
+
                 return `
                     <div class="result-item" onclick="showEditModal(${JSON.stringify(app).replace(/"/g, '&quot;')}, '${app.type}')">
                         <div class="result-header">
@@ -3326,7 +3323,8 @@ class CourseApplicationManager {
                 `;
             }).join('');
         }
-        
+
+
                     // <div class="result-details">
                     //     <p>회사: ${app.companyName}</p>
                     //     <p>과정: ${app.detailedEducation || app.courseName || ''}</p>

@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
    ========================================================================== */
 
 // 웹 앱 URL (config 우선, 실패 시 fallback)
-let WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec';
+let WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbztXmHnUtt3rQkAe6Gp8N_mIkLCChfrdbSPlDY16vXtxQWvamPb2gZZ8JtE-aOZ6Hlx/exec';
+const DIRECT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbztXmHnUtt3rQkAe6Gp8N_mIkLCChfrdbSPlDY16vXtxQWvamPb2gZZ8JtE-aOZ6Hlx/exec';
 
 async function loadAcademyFormApiUrl() {
     try {
@@ -414,22 +415,26 @@ function validatePhoneNumber(number) {
     return cleanNumber.length >= 10 && cleanNumber.length <= 11;
 }
 
-// CORS 우회 데이터 제출 함수 (iframe 방식)
+// CORS 우회 데이터 제출 함수 (worker는 fetch, direct는 iframe)
 async function submitFormData(formData) {
     if (isWorkerApplyEndpoint(WEBAPP_URL)) {
-        return submitFormDataWithFetch(formData);
+        try {
+            return await submitFormDataWithFetch(formData, WEBAPP_URL);
+        } catch (error) {
+            console.warn('Worker apply request failed. Retrying with direct Apps Script.', error);
+            return submitFormDataWithIframe(formData, DIRECT_WEBAPP_URL);
+        }
     }
 
-    // Apps Script iframe 제출은 교차 출처 응답 본문/상태를 확인할 수 없어 "전송됨" 상태로만 처리한다.
-    return submitFormDataWithIframe(formData);
+    return submitFormDataWithIframe(formData, WEBAPP_URL);
 }
 
 function isWorkerApplyEndpoint(url) {
     return typeof url === 'string' && /workers\.dev\/api\/academy\/apply(?:\?|$)/.test(url);
 }
 
-async function submitFormDataWithFetch(formData) {
-    const response = await fetch(WEBAPP_URL, {
+async function submitFormDataWithFetch(formData, targetUrl = WEBAPP_URL) {
+    const response = await fetch(targetUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -458,7 +463,7 @@ async function submitFormDataWithFetch(formData) {
     return { verified: true, payload };
 }
 
-async function submitFormDataWithIframe(formData) {
+async function submitFormDataWithIframe(formData, targetUrl = WEBAPP_URL) {
     return new Promise((resolve, reject) => {
         const iframe = document.createElement('iframe');
         iframe.style.display = 'none';
@@ -466,7 +471,7 @@ async function submitFormDataWithIframe(formData) {
         document.body.appendChild(iframe);
 
         const form = document.createElement('form');
-        form.action = WEBAPP_URL;
+        form.action = targetUrl;
         form.method = 'POST';
         form.target = iframe.name;
 

@@ -3,7 +3,7 @@
 /* 페이지 헤더 배경 이미지 */
 .page-header {
     position: relative;
-    background: url(./header-bg.jpg);
+    background: url("header-bg.jpg");
     background-size: cover;
     background-position: center;
 }

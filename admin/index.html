@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
             --gap: 16px;
             --box-color: #d9d9d9;
         }
-        body{min-height: 100dvh;}
+        body{min-height: 100dvh; background-color: linear-gradient(180deg, #f0f0f0 0%, #d88585 100%);}
         /* =========== */
         
         nav ul li,
@@ -30,10 +30,14 @@
         .links a:hover img{transform: scale(1.05);transition: all 0.3s ease;}
 
         /* Admin Header */
-        .admin-header{display: flex;justify-content: space-between;align-items: center;padding: 1rem 0;border-bottom: 1px solid #ddd;margin-bottom: 2rem;}
+        .admin-header{display: flex;justify-content: space-between;align-items: center;padding: 1rem;margin-bottom: 1.5rem;
+            border-radius: 25px;
+            background: #bdbdbd1c;}
+            
         .admin-title{font-size: 1.5rem;font-weight: bold;color: #333;}
         .admin-user{display: flex;align-items: center;gap: 1rem;}
         .user-info{font-size: 0.9rem;color: #666;}
+        .user-info{display: none;}
         .logout-btn{background-color: #00000000; color: #ff4757;border: none;padding: 0.5rem 1rem;border-radius: 5px;cursor: pointer;font-size: 0.9rem;}
         .logout-btn:hover{color: #ff3742;}
         
@@ -84,11 +88,11 @@
         /* =========== Clock Styles =========== */
         .header-clock {display: flex;margin-bottom: 0px;padding: 10px 0;}
         .clock-widget { background-color: #fff;color: #000;border-radius: 15px;padding: 15px 20px;min-width: 200px;}
-        .clock-time {font-size: 5rem;font-weight: 400;margin-bottom: 5px;letter-spacing: 2px;}
+        .clock-time {font-size: 4rem;font-weight: 400;margin-bottom: 5px;letter-spacing: 2px;}
         .clock-period {font-size: 2.5rem;margin-left: 8px;}
         .clock-date {font-size: 1.7rem;margin-top: 1rem}
-        .nav-title{font-size: 1.2rem;margin-bottom: 12px; display: block;}
-        .nav-name{font-size: 1.25rem; font-weight: 400;margin-bottom: 1rem;}
+        .nav-title{font-size: 1.2rem;margin-bottom: 12px; display: block;font-weight: 750;}
+        .nav-name{font-size: 1.1rem; font-weight: 400;margin-bottom: 1rem;}
         .nav-info{text-align: right;}
         .nav-count{font-size: 1.25rem;}
         .nav-count .fa-spinner {
@@ -101,15 +105,9 @@
         @media screen and (max-width: 500px) {
             nav ul{grid-template-columns: 1fr 1fr;}
             .nav-container>nav>ul {flex-direction: column;}
+            .user-info{display: none;}
         }
     </style>
-
-<!--[if gte mso 9]><xml>
-<mso:CustomDocumentProperties>
-<mso:DeletedSystemTags msdt:dt="string"></mso:DeletedSystemTags>
-<mso:TagListTags msdt:dt="string"></mso:TagListTags>
-</mso:CustomDocumentProperties>
-</xml><![endif]-->
 </head>
 <body>
     <!-- 인증 확인 로딩 화면 -->
@@ -120,7 +118,7 @@
     <div class="main-container" id="mainContent" style="display: none;">
         <!-- Admin Header -->
         <div class="admin-header">
-            <div class="admin-title">YPP Admin Panel</div>
+            <div class="admin-title">YPP ADMIN</div>
             <div class="admin-user">
                 <div class="user-info" id="adminUserInfo">관리자로 로그인됨</div>
                 <button class="logout-btn" id="logoutBtn">
@@ -145,7 +143,7 @@
                 <div class="nav-title">웹사이트 관리</div>
                 <ul>
                     <li data-nav="faq">
-                        <div class="nav-name" style="margin-bottom: 0;">회사연혁<br><br>프로젝트 테이블(원자력/화력발전/변전소/미군기지)<br><br>자주 묻는 질문</div>
+                        <div class="nav-name" style="margin-bottom: 0;">회사연혁<br><br>프로젝트 테이블(원자력|화력발전|변전소|미군기지)<br><br>자주 묻는 질문</div>
                     </li>
                 </ul>
             </nav>
@@ -229,7 +227,7 @@
                         <div class="nav-name">보도자료 & 팝업</div>
                         <div class="nav-info">
                             <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text">통합 관리</p>
+                            <!-- <p class="nav-text">통합 관리</p> -->
                         </div>
                     </li>
                 </ul>

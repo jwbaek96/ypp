@@ -210,8 +210,8 @@ class PageManager {
                 fetch(relayUrl)
             ]);
 
-            console.log('📥 PSAC 응답 상태:', psacRes.status, psacRes.ok);
-            console.log('📥 Relay 응답 상태:', relayRes.status, relayRes.ok);
+            // console.log('📥 PSAC 응답 상태:', psacRes.status, psacRes.ok);
+            // console.log('📥 Relay 응답 상태:', relayRes.status, relayRes.ok);
 
             if (!psacRes.ok || !relayRes.ok) {
                 throw new Error('과정 데이터를 불러오지 못했습니다.');
@@ -220,17 +220,17 @@ class PageManager {
             const psacResult = await psacRes.json();
             const relayResult = await relayRes.json();
 
-            console.log('📦 PSAC 원본 응답:', psacResult);
-            console.log('📦 Relay 원본 응답:', relayResult);
-            console.log('🔍 PSAC success:', psacResult.success, 'data:', psacResult.data);
-            console.log('🔍 Relay success:', relayResult.success, 'data:', relayResult.data);
+            // console.log('📦 PSAC 원본 응답:', psacResult);
+            // console.log('📦 Relay 원본 응답:', relayResult);
+            // console.log('🔍 PSAC success:', psacResult.success, 'data:', psacResult.data);
+            // console.log('🔍 Relay success:', relayResult.success, 'data:', relayResult.data);
 
             this.cachedPsacCourses = psacResult.success ? psacResult.data : {};
             this.cachedRelayCourses = relayResult.success ? relayResult.data : {};
 
             // 최종 저장된 데이터 확인
-            console.log('✅ PSAC 과정 데이터 로드됨:', this.cachedPsacCourses);
-            console.log('✅ RelaySchool 과정 데이터 로드됨:', this.cachedRelayCourses);
+            // console.log('✅ PSAC 과정 데이터 로드됨:', this.cachedPsacCourses);
+            // console.log('✅ RelaySchool 과정 데이터 로드됨:', this.cachedRelayCourses);
         } catch (error) {
             console.error('❌ 과정 데이터 로드 오류:', error);
             this.cachedPsacCourses = {};
@@ -591,13 +591,13 @@ class PageManager {
             const data = result.data;
             
             // 🟡 디버깅: 로드된 데이터 확인
-            console.group('🔍 [DEBUG] 페이지 데이터 로드됨');
-            console.log('📊 데이터 개수:', data ? data.length : 0);
-            console.log('📦 첫 번째 데이터:', data && data.length > 0 ? data[0] : 'no data');
-            if (data && data.length > 0) {
-                console.log('🔑 첫 번째 데이터 키들:', Object.keys(data[0]));
-            }
-            console.groupEnd();
+            // console.group('🔍 [DEBUG] 페이지 데이터 로드됨');
+            // console.log('📊 데이터 개수:', data ? data.length : 0);
+            // console.log('📦 첫 번째 데이터:', data && data.length > 0 ? data[0] : 'no data');
+            // if (data && data.length > 0) {
+            //     console.log('🔑 첫 번째 데이터 키들:', Object.keys(data[0]));
+            // }
+            // console.groupEnd();
             
             // 현재 데이터와 설정 저장
             this.currentData = data;
@@ -663,7 +663,7 @@ class PageManager {
             // 행 클릭 이벤트 (모달 열기)
             row.addEventListener('click', (e) => {
                 // 🟡 디버깅: 행 클릭 이벤트
-                console.log('👆 [DEBUG] 행 클릭됨, item:', item);
+                // console.log('👆 [DEBUG] 행 클릭됨, item:', item);
                 
                 // 클릭된 요소가 버튼이거나 버튼의 자식 요소인지 확인
                 const clickedElement = e.target;
@@ -671,17 +671,17 @@ class PageManager {
                 const isCheckbox = clickedElement.matches('input[type="checkbox"]');
                 const isIcon = clickedElement.matches('i') || clickedElement.closest('i');
                 
-                console.log('🎯 [DEBUG] 클릭된 요소:', clickedElement.tagName);
-                console.log('🔘 [DEBUG] 버튼 여부:', isButton);
-                console.log('☑️ [DEBUG] 체크박스 여부:', isCheckbox);
-                console.log('🎨 [DEBUG] 아이콘 여부:', isIcon);
+                // console.log('🎯 [DEBUG] 클릭된 요소:', clickedElement.tagName);
+                // console.log('🔘 [DEBUG] 버튼 여부:', isButton);
+                // console.log('☑️ [DEBUG] 체크박스 여부:', isCheckbox);
+                // console.log('🎨 [DEBUG] 아이콘 여부:', isIcon);
                 
                 // 버튼, 체크박스, 아이콘이 아닌 경우에만 모달 열기
                 if (!isButton && !isCheckbox && !isIcon) {
-                    console.log('✅ [DEBUG] 모달 열기 조건 만족, openEditModal 호출');
+                    // console.log('✅ [DEBUG] 모달 열기 조건 만족, openEditModal 호출');
                     this.openEditModal(item, config);
                 } else {
-                    console.log('❌ [DEBUG] 모달 열기 조건 불만족, 이벤트 무시');
+                    // console.log('❌ [DEBUG] 모달 열기 조건 불만족, 이벤트 무시');
                 }
             });
             
@@ -1241,8 +1241,8 @@ class PageManager {
             
             case '인사이드':
                 const formattedDate = this.formatDate(item.date);
-                console.log(item.date); // 디버깅 출력
-                console.log('Formatted Date:', formattedDate); // 디버깅 출력
+                // console.log(item.date); // 디버깅 출력
+                // console.log('Formatted Date:', formattedDate); // 디버깅 출력
                 return `
                     <td class="col-checkbox"><input type="checkbox" data-id="${item.id}"></td>
                     <td>${item.titleKR || '제목 없음'}<br><span style="color: #4747477a; margin-top: 4px;">${item.titleEN || ''}</span></td>
@@ -1516,7 +1516,7 @@ class PageManager {
     openEditModal(item, config) {
         const pageType = new URLSearchParams(window.location.search).get('page');
         
-        console.log('🔧 [DEBUG] openEditModal 호출됨, pageType:', pageType);
+        // console.log('🔧 [DEBUG] openEditModal 호출됨, pageType:', pageType);
         
         // 페이지 타입에 따라 적절한 모달 열기
         switch(pageType) {
@@ -1953,12 +1953,12 @@ class PageManager {
         }
         
         // 디버깅을 위한 콘솔 로그
-        console.log('신청자 이름:', item.applicantName || item.studentName || '이름 없음');
-        console.log('신청과목들:', {
-            원본데이터: currentEducation,
-            파싱된배열: selectedCourses,
-            배열길이: selectedCourses.length
-        });
+        // console.log('신청자 이름:', item.applicantName || item.studentName || '이름 없음');
+        // console.log('신청과목들:', {
+        //     원본데이터: currentEducation,
+        //     파싱된배열: selectedCourses,
+        //     배열길이: selectedCourses.length
+        // });
         
         if (pageType === 'PSAC') {
             // 구글 시트에서 가져온 과목 목록 사용 (배열에서 status 'ON'만 필터링)
@@ -2118,16 +2118,16 @@ class PageManager {
     generateGalleryEditForm(item, pageType) {
         // 🟡 디버깅: 폼 생성 시작
         console.group('🔍 [DEBUG] generateGalleryEditForm 호출됨');
-        console.log('📋 pageType:', pageType);
-        console.log('📦 item 데이터:', item);
+        // console.log('📋 pageType:', pageType);
+        // console.log('📦 item 데이터:', item);
         
         const isContentType = (pageType === '인사이드' || pageType === '아카데미');
         console.log('📝 컨텐츠 타입 여부:', isContentType);
         
         // 이미지 슬라이드와 링크 처리 - 실제 데이터 구조에 맞게 수정
         const imageArray = item.image || [];
-        console.log('🖼️ 이미지 배열:', imageArray);
-        console.log('🔢 이미지 개수:', imageArray.length);
+        // console.log('🖼️ 이미지 배열:', imageArray);
+        // console.log('🔢 이미지 개수:', imageArray.length);
         
         // 모든 이미지들을 HTML로 생성
         let allImagesHTML = '';
@@ -2141,20 +2141,20 @@ class PageManager {
         
         // 현재 활성화 상태 - 실제 데이터 구조에 맞게 수정
         const isActive = item.active === true || item.active === 'true' || item.active === 'ON' || item.state === 'on';
-        console.log('✅ 활성화 상태:', isActive);
+        // console.log('✅ 활성화 상태:', isActive);
         
         // 제목 필드 값들 확인 - 실제 데이터 구조에 맞게 수정
         const titleKor = item.titleKor || item.titleKR || item.title || '';
         const titleEng = item.titleEng || item.titleEN || item.titleEnglish || '';
-        console.log('🏷️ 한글 제목:', titleKor);
-        console.log('🏷️ 영어 제목:', titleEng);
+        // console.log('🏷️ 한글 제목:', titleKor);
+        // console.log('🏷️ 영어 제목:', titleEng);
         
         // 내용 필드 값들 확인 (컨텐츠 타입인 경우만)
         if (isContentType) {
             const contentKor = item.contentKor || item.contentKR || item.content || '';
             const contentEng = item.contentEng || item.contentEN || item.contentEnglish || '';
-            console.log('📝 한글 내용:', contentKor);
-            console.log('📝 영어 내용:', contentEng);
+            // console.log('📝 한글 내용:', contentKor);
+            // console.log('📝 영어 내용:', contentEng);
         }
         
         const formHTML = `
@@ -2740,14 +2740,14 @@ async function saveEditedItem() {
         const updateUrl = `${pageManager.appsScriptUrl}?action=update&sheet=${config.apiSheet}&id=${encodeURIComponent(itemId)}&data=${encodeURIComponent(JSON.stringify(updatedData))}`;
         
         // 디버깅을 위한 로그
-        console.log('=== 수정 요청 디버깅 ===');
-        console.log('페이지 타입:', pageType);
-        console.log('시트:', config.apiSheet);
-        console.log('ID:', itemId);
-        console.log('원본 아이템:', originalItem);
-        console.log('수정할 데이터:', updatedData);
-        console.log('요청 URL:', updateUrl);
-        console.log('========================');
+        // console.log('=== 수정 요청 디버깅 ===');
+        // console.log('페이지 타입:', pageType);
+        // console.log('시트:', config.apiSheet);
+        // console.log('ID:', itemId);
+        // console.log('원본 아이템:', originalItem);
+        // console.log('수정할 데이터:', updatedData);
+        // console.log('요청 URL:', updateUrl);
+        // console.log('========================');
         
         const response = await fetch(updateUrl, {
             method: 'GET'

@@ -385,8 +385,8 @@
             box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
         }
         
-        .edit-form-group textarea {
-            min-height: 300px;
+        .edit-form-group textarea { 
+            field-sizing: content;
             resize: vertical;
         }
         
@@ -785,7 +785,7 @@
                             <button class="btn btn-secondary btn-sm" id="btn-category-filter" title="카테고리 필터" style="display: none;">
                                 모두보기
                             </button>
-                            <select class="btn btn-secondary btn-sm" id="course-filter-select" title="과목 필터" style="display: inline-block; padding: 6px 12px; background-color: rgb(243 245 247); cursor: pointer; width: auto;">
+                            <select class="btn btn-secondary btn-sm" id="course-filter-select" title="과목 필터" style="max-width: 270px; display: inline-block; padding: 6px 12px; background-color: rgb(243 245 247); cursor: pointer; width: auto;">
                                 <option value="all">전체</option>
                             </select>
                         </div>

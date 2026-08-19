@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const navType = navItem.getAttribute('data-nav');
         
         navItem.addEventListener('click', (e) => {
-            console.log(`${navType} 항목 클릭됨`);
+            // console.log(`${navType} 항목 클릭됨`);
             
             // FAQ는 모달로 처리
             if (navType === 'faq') {
@@ -307,7 +307,7 @@ function handleNavClick(navType) {
     
     const pageName = pageMapping[navType];
     if (pageName) {
-        console.log(`${pageName} 페이지로 이동`);
+        // console.log(`${pageName} 페이지로 이동`);
         
         // 별도 HTML 페이지로 이동하는 항목들
         if (navType === 'news-popup') {

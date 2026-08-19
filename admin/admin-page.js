@@ -10,52 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupModalKeyboardEvents();
 });
 
-// 시계 클래스
-// class Clock {
-//     constructor() {
-//         this.intervalId = null;
-//     }
-    
-//     start() {
-//         this.updateClock(); // 즉시 시계 업데이트
-//         this.intervalId = setInterval(() => this.updateClock(), 1000); // 1초마다 업데이트
-//     }
-    
-//     stop() {
-//         if (this.intervalId) {
-//             clearInterval(this.intervalId);
-//             this.intervalId = null;
-//         }
-//     }
-    
-//     updateClock() {
-//         const now = new Date();
-        
-//         // 시간 계산 (12시간 형식)
-//         let hours = now.getHours();
-//         const minutes = now.getMinutes();
-//         const period = hours >= 12 ? 'PM' : 'AM';
-        
-//         // 12시간 형식으로 변환
-//         if (hours > 12) {
-//             hours = hours - 12;
-//         } else if (hours === 0) {
-//             hours = 12;
-//         }
-        
-//         // 날짜 계산
-//         const year = now.getFullYear();
-//         const month = now.getMonth() + 1;
-//         const date = now.getDate();
-        
-//         // DOM 업데이트 (한자리수도 그대로 표시)
-//         document.getElementById('clock-hours').textContent = hours.toString();
-//         document.getElementById('clock-minutes').textContent = minutes.toString().padStart(2, '0'); // 분은 항상 2자리
-//         document.getElementById('clock-seconds').textContent = now.getSeconds().toString().padStart(2, '0'); // 초는 항상 2자리
-//         document.getElementById('clock-period').textContent = period;
-//         document.getElementById('clock-date').textContent = `${year}년 ${month}월 ${date}일`;
-//     }
-// }
 // ===========================================================================================
 // 날짜/시간 유틸리티 함수들
 // ===========================================================================================
@@ -171,12 +125,57 @@ class PageManager {
         // 그 외의 경우는 모두 텍스트로 간주하여 그대로 반환
         return dateString;
     }
+
+    getCachedDashboardData() {
+        try {
+            const raw = localStorage.getItem('ypp_admin_dashboard_cache_v1');
+            if (!raw) {
+                return null;
+            }
+
+            const cached = JSON.parse(raw);
+            if (!cached || typeof cached.fetchedAt !== 'number' || !cached.data) {
+                return null;
+            }
+
+            return Date.now() - cached.fetchedAt <= 15000 ? cached.data : null;
+        } catch (error) {
+            console.warn('대시보드 카운트 캐시 읽기 실패:', error);
+            return null;
+        }
+    }
+
+    async fetchDashboardData() {
+        const url = `${this.appsScriptUrl}?sheet=SHEET_DASHBOARD`;
+        const response = await fetch(url, { cache: 'no-store' });
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const result = await response.json();
+        if (!result.success) {
+            throw new Error(result.message || '대시보드 데이터 조회 실패');
+        }
+
+        try {
+            localStorage.setItem(
+                'ypp_admin_dashboard_cache_v1',
+                JSON.stringify({ fetchedAt: Date.now(), data: result.data })
+            );
+        } catch (error) {
+            console.warn('대시보드 카운트 캐시 저장 실패:', error);
+        }
+
+        return result.data;
+    }
+
     constructor() {
         // Google Apps Script 웹앱 URL (PSAC/RelaySchool 전용, academy/index.html과 동일)
         this.PSAC_RELAY_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvcFA7rwVCSJnhzQHlZH0a8AI0_S-EN-tyTg0tp_lJUmEXTN8d7axtVGrUjkOJLht-kA/exec';
         // this.PSAC_RELAY_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec';
         // 기존 대시보드용 URL (다른 용도에 사용)
-        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxB2_0dc5Wim-sRuAtrk3G14GL-iSUljdoWRtSpsJsy6NGhbLfbATfzWncitqCyhWKm';
+        // this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbxB2_0dc5Wim-sRuAtrk3G14GL-iSUljdoWRtSpsJsy6NGhbLfbATfzWncitqCyhWKm';
+        this.DASHBOARD_APPS_SCRIPT_ID = 'AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx';
         this.appsScriptUrl = `https://script.google.com/macros/s/${this.DASHBOARD_APPS_SCRIPT_ID}/exec`;
         this.pageConfigs = this.initPageConfigs();
         this.isDescending = true; // 기본값: 최신순 (내림차순)
@@ -553,18 +552,8 @@ class PageManager {
     // 페이지별 데이터 카운트 로드
     async loadPageCount(config) {
         try {
-            
-            // 대시보드에서 카운트 정보 가져오기 (index.html과 동일한 URL 형식)
-            const url = `${this.appsScriptUrl}?sheet=SHEET_DASHBOARD&action=getData`;
-            const response = await fetch(url);
-            const result = await response.json();
-            
-            if (!result.success) {
-                throw new Error(result.message);
-            }
-            
-            
-            const count = result.data[config.dataKey] || 0;
+            const dashboardData = this.getCachedDashboardData() || await this.fetchDashboardData();
+            const count = dashboardData[config.dataKey] || 0;
             document.querySelector('.page-count').textContent = `${count}건`;
             
             

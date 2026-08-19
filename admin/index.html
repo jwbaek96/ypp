@@ -274,7 +274,7 @@
                     <button class="modal-close" onclick="closeFaqModal()" style="position: absolute; right: 15px; top: 7px; background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">×</button>
                 </div>
                 <div class="modal-body" style="padding: 0; height: calc(100% - 45px);">
-                    <iframe style="width: 100%; height: 100%; border: none;" src="https://docs.google.com/spreadsheets/d/1YZKUJNqCf63gxzfnoBnWugUEi04dYUZ8LeTdtENfg4k/edit?usp=sharing"></iframe>
+                    <iframe id="faqIframe" style="width: 100%; height: 100%; border: none;" src="https://docs.google.com/spreadsheets/d/1YZKUJNqCf63gxzfnoBnWugUEi04dYUZ8LeTdtENfg4k/edit?usp=sharing"></iframe>
                 </div>
                 <!-- <iframe style="width: 100%; height: 100%; border: none;" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-R3KRxo-9iJaCA9PdbZn23w0ezPW2LJJVxiWFpmo7sXqScYJVDMRMm0i9hYSUMYcaO6NOui68C_o/pubhtml?widget=true&amp;headers=false"></iframe> -->
             </div>
@@ -307,7 +307,8 @@ function openFaqModal() {
         modal.style.display = 'block';
         
         // 실제 구글시트 URL로 설정 (여기에 실제 시트 URL을 넣으세요)
-        const faqSheetUrl = "https://docs.google.com/spreadsheets/d/1abcd.../edit#gid=0";
+        // const faqSheetUrl = "https://docs.google.com/spreadsheets/d/1abcd.../edit#gid=0";
+        const faqSheetUrl = "https://docs.google.com/spreadsheets/d/1YZKUJNqCf63gxzfnoBnWugUEi04dYUZ8LeTdtENfg4k/edit?usp=sharing";
         document.getElementById('faqIframe').src = faqSheetUrl;
     }
 }

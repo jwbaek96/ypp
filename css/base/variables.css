@@ -32,7 +32,9 @@
     --section-padding: 5rem 0;
     --container-padding: 0 2rem;
     --card-padding: 2rem;
-
+    
     /* Header height */
+    --header-border-color: #E0E0E080;
     --header-container-height : 80px;
+    /* --header-container-height : 66px; */
 }

@@ -41,12 +41,6 @@
     color: var(--primary-blue, #0066cc);
 }
 
-.menu-link:focus {
-    outline: 2px solid var(--primary-blue, #0066cc);
-    outline-offset: 2px;
-    color: var(--primary-blue, #0066cc);
-}
-
 /* ===== SUB MENUS (사이드바 스타일 적용) ===== */
 .sub-menu {
     position: absolute;

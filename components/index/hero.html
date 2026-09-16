@@ -5,7 +5,7 @@
         <video class="hero-video" autoplay loop muted playsinline
             data-eng='<source src="/assets/videos/hero-video-eng.mp4" type="video/mp4">'
             data-kor='<source src="/assets/videos/hero-video-kor.mp4" type="video/mp4">'>
-            <!-- <source src="./assets/videos/hero-video-eng.mp4" type="video/mp4"> -->
+            <!-- <source src="" type="video/mp4"> -->
         </video>
     </div>
     <!-- 사운드 토글 버튼 -->
@@ -19,10 +19,13 @@
     </button>
 </section>
 <style>
-.hero-section {position: relative;overflow: hidden;}
+    #hero-section-container{padding: 11px;}
+.hero-section {position: relative;overflow: hidden; border-radius: 11px;}
 .hero-background {width: 100%;display: flex;justify-content: center;}
-.hero-video {position: relative;width: 110%;object-fit: cover;}
-.video-overlay {position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.25);z-index: 1;}
+.hero-video {position: relative;width: 110%;object-fit: cover; scale: 1.01;}
+.video-overlay {position: absolute;z-index: 1;top: 0;left: 0;width: 100%;height: 100%;
+    /* background: rgba(0, 0, 0, 0.25); */
+}
 
 /* 사운드 버튼 스타일 */
 .mute-toggle-btn {
@@ -30,8 +33,9 @@
     bottom: 30px;
     right: 30px;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0);
     border: 1px solid rgba(255, 255, 255, 0.4);
+    border: none;
     color: white;
     width: 44px;
     height: 44px;
@@ -44,8 +48,8 @@
     padding: 0;
 }
 .mute-toggle-btn:hover {
-    background: rgba(0, 0, 0, 0.6);
-    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
 }
 .volume-icon {
     width: 20px;
@@ -63,11 +67,4 @@
         height: 36px;
     }
 }
-</style><html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"><head>
-<!--[if gte mso 9]><xml>
-<mso:CustomDocumentProperties>
-<mso:DeletedSystemTags msdt:dt="string"></mso:DeletedSystemTags>
-<mso:TagListTags msdt:dt="string"></mso:TagListTags>
-</mso:CustomDocumentProperties>
-</xml><![endif]-->
-</head>
+</style>

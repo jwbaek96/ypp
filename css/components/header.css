@@ -142,13 +142,13 @@
 @media (max-width: 900px) {
     .header-links,
     .lang-btn,
-    #desktop-nav-container {
+    .header-container > #desktop-nav-container {
         display: none;
     }
     .logo-mobile {
         display: block;
     }
-
+    #desktop-nav-container{padding: 0;}
     .header-container {
         justify-content: space-between;
     }

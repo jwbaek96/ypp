@@ -167,23 +167,25 @@ function fixComponentPaths(container) {
 function updateLogoLink() {
     // 컴포넌트가 로드된 후 실행되도록 지연
     setTimeout(() => {
-        const logoLink = document.getElementById('logo-link');
-        if (!logoLink) return;
+        const logoLinks = document.querySelectorAll('.logo-link');
+        if (!logoLinks.length) return;
         
         const { basePath, isGitHubPages } = window.YPP_CONFIG;
         
         // 항상 홈페이지로 이동하는 링크 설정
-        if (isGitHubPages) {
-            logoLink.href = basePath + '/';
-        } else {
-            logoLink.href = '/';
-        }
+        logoLinks.forEach(logoLink => {
+            if (isGitHubPages) {
+                logoLink.href = basePath + '/';
+            } else {
+                logoLink.href = '/';
+            }
+            
+            // 기본 커서로 되돌리기
+            logoLink.style.cursor = 'pointer';
+            logoLink.onclick = null; // 이벤트 리스너 제거
+        });
         
-        // 기본 커서로 되돌리기
-        logoLink.style.cursor = 'pointer';
-        logoLink.onclick = null; // 이벤트 리스너 제거
-        
-        console.log('로고 링크 설정 완료:', logoLink.href);
+        console.log('로고 링크 설정 완료:', logoLinks[0].href);
     }, 100);
 }
 

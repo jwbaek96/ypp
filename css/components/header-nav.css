@@ -3,15 +3,23 @@
     display: flex;
     align-items: center;
     height: 100%;
+    width: 100%;
 }
 
+#desktop-nav-container {
+    height: 100%;
+    width: 100%;
+    padding: 12px 100px 22px;
+}
 .main-menu {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
     list-style: none;
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
     gap: .5rem;
 }
 
@@ -29,8 +37,8 @@
     padding: 0 1rem;
     text-decoration: none;
     color: var(--text-primary, #333);
-    font-weight: 500;
-    font-size: var(--font-size-body, 1.2rem);
+    font-weight: 700;
+    font-size: var(--font-size-body, 1rem);
     white-space: nowrap;
     transition: all 0.3s ease;
     border-bottom: 3px solid transparent;
@@ -39,6 +47,44 @@
 
 .menu-link:hover {
     color: var(--primary-blue, #0066cc);
+}
+
+/* ===== TOP HEADER NAVIGATION ===== */
+
+.header-top-nav .main-menu {
+    gap: 0.15rem;
+}
+
+.header-top-nav .menu-link {
+    /* padding: 0 0.65rem; */
+    padding: 0.5rem 0.7rem;
+    border-bottom: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-secondary, #666);
+}
+
+.header-top-nav .menu-link:hover,
+.header-top-nav .menu-item.has-children.active > .menu-link,
+.header-top-nav .menu-item.has-children:hover > .menu-link {
+    color: var(--primary-blue, #0066cc);
+}
+
+.header-top-nav .sub-menu {
+    min-width: 180px;
+    z-index: 1100;
+}
+
+.header-top-nav .sub-menu .menu-link {
+    height: auto;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: var(--text-primary, #333);
+}
+
+.header-top-nav .sub-menu .sub-menu .menu-link {
+    padding: 0.65rem 1.75rem;
+    font-size: 0.8rem;
 }
 
 /* ===== SUB MENUS (사이드바 스타일 적용) ===== */
@@ -87,7 +133,7 @@
     height: auto;
     border-bottom: none;
     font-weight: 500;
-    font-size: var(--font-size-body, 1.2rem)    ;
+    font-size: var(--font-size-header-sub, 1rem);
     color: var(--text-primary, #333);
     display: block;
     width: 100%;

@@ -2,6 +2,25 @@
 
 // ===== 메뉴 데이터 로딩 =====
 let menuData = null;
+const HEADER_TOP_MENU_KEYS = ['academy', 'media', 'support'];
+
+function pickNavigationItems(navigation, keys) {
+    return keys.reduce((result, key) => {
+        if (navigation[key]) {
+            result[key] = navigation[key];
+        }
+        return result;
+    }, {});
+}
+
+function omitNavigationItems(navigation, keys) {
+    return Object.keys(navigation).reduce((result, key) => {
+        if (!keys.includes(key)) {
+            result[key] = navigation[key];
+        }
+        return result;
+    }, {});
+}
 
 async function loadMenuData() {
     try {
@@ -31,9 +50,9 @@ async function loadMenuData() {
 }
 
 // ===== 메뉴 HTML 생성 =====
-function createDesktopMenu(navigation) {
+function createDesktopMenu(navigation, extraClassName = '') {
     const nav = document.createElement('nav');
-    nav.className = 'desktop-nav';
+    nav.className = `desktop-nav${extraClassName ? ` ${extraClassName}` : ''}`;
     nav.setAttribute('role', 'navigation');
     nav.setAttribute('aria-label', '주요 네비게이션');
     
@@ -142,8 +161,9 @@ function createMenuItem(item, key, depth) {
 // ===== 메뉴 삽입 후 언어 적용 =====
 async function insertDesktopMenu() {
     const container = document.getElementById('desktop-nav-container');
+    const topContainer = document.getElementById('header-top-nav-container');
     
-    if (!container) {
+    if (!container && !topContainer) {
         console.log('Desktop nav container not found');
         return;
     }
@@ -169,10 +189,20 @@ async function insertDesktopMenu() {
     
     // console.log('메뉴 데이터:', data.navigation); // 디버깅용
     
-    // 메뉴 생성 및 삽입
-    const menuElement = createDesktopMenu(data.navigation);
-    container.innerHTML = '';
-    container.appendChild(menuElement);
+    const topNavigation = pickNavigationItems(data.navigation, HEADER_TOP_MENU_KEYS);
+    const mainNavigation = omitNavigationItems(data.navigation, HEADER_TOP_MENU_KEYS);
+    
+    if (topContainer) {
+        const topMenuElement = createDesktopMenu(topNavigation, 'header-top-nav');
+        topContainer.innerHTML = '';
+        topContainer.appendChild(topMenuElement);
+    }
+    
+    if (container) {
+        const menuElement = createDesktopMenu(mainNavigation);
+        container.innerHTML = '';
+        container.appendChild(menuElement);
+    }
     
     // 언어 전환 기능이 있으면 즉시 적용
     if (window.languageSwitchInstance) {
@@ -271,8 +301,9 @@ function toggleSubmenu(menuItem, link, subMenu) {
 // ===== 메뉴 삽입 =====
 async function insertDesktopMenu() {
     const container = document.getElementById('desktop-nav-container');
+    const topContainer = document.getElementById('header-top-nav-container');
     
-    if (!container) {
+    if (!container && !topContainer) {
         console.log('Desktop nav container not found');
         return;
     }
@@ -298,14 +329,24 @@ async function insertDesktopMenu() {
     
     // console.log('메뉴 데이터:', data.navigation); // 디버깅용
     
-    // 메뉴 생성 및 삽입
-    const menuElement = createDesktopMenu(data.navigation);
-    container.innerHTML = '';
-    container.appendChild(menuElement);
+    const topNavigation = pickNavigationItems(data.navigation, HEADER_TOP_MENU_KEYS);
+    const mainNavigation = omitNavigationItems(data.navigation, HEADER_TOP_MENU_KEYS);
+    
+    if (topContainer) {
+        const topMenuElement = createDesktopMenu(topNavigation, 'header-top-nav');
+        topContainer.innerHTML = '';
+        topContainer.appendChild(topMenuElement);
+    }
+    
+    if (container) {
+        const menuElement = createDesktopMenu(mainNavigation);
+        container.innerHTML = '';
+        container.appendChild(menuElement);
+    }
     
     // 생성된 메뉴 확인
-    const hasChildrenItems = container.querySelectorAll('.has-children');
-    const subMenus = container.querySelectorAll('.sub-menu');
+    const hasChildrenItems = document.querySelectorAll('.desktop-nav .has-children');
+    const subMenus = document.querySelectorAll('.desktop-nav .sub-menu');
     // console.log('하위 메뉴가 있는 항목들:', hasChildrenItems.length);
     // console.log('서브메뉴 개수:', subMenus.length);
     

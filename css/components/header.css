@@ -17,35 +17,51 @@
 }
 /*  */
 .header-links {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    background-color: rgba(241, 241, 241, 0);
 }
 .header-links-container{
-    max-width: 1400px;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: .5rerm 0 2rem;
     display: flex;
     align-items: center;
-    justify-content:flex-end;
-    /* gap: 3px; */
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: var(--header-links-height);
+}
+.header-top-right {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+#header-top-nav-container {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 24px;
+}
+.header-utility-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0.15rem;
 }
 .groupware-btn {
-    padding: 3px 0.5rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
     font-size: 0.7rem;
     transition: all 0.3s ease;
     background-color: var(--very-light-gray2);
     color: #333;
+    text-decoration: none;
 }
 .groupware-btn:first-child{
     border-right: solid #fff 1px;
 }
-/* .groupware-btn:last-child {
-    margin-right: 0.5rem;
-} */
 
 .groupware-btn:hover {
     background-color: var(--dark-gray);
@@ -56,15 +72,19 @@
 .header-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 12px 2rem 0;
+    padding: 0 2rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     height: var(--header-container-height);
 }
 
+.logo-mobile {
+    display: none;
+}
+
 .logo img {
-    height: 50px;
+    height: 45px;
     width: auto;
 }
 
@@ -120,8 +140,17 @@
 
 /* 모바일에서는 숨김 */
 @media (max-width: 900px) {
-    .header-links, .lang-btn {
+    .header-links,
+    .lang-btn,
+    #desktop-nav-container {
         display: none;
+    }
+    .logo-mobile {
+        display: block;
+    }
+
+    .header-container {
+        justify-content: space-between;
     }
 }
 @media (max-width: 768px) {

@@ -24,8 +24,9 @@
     --font-size-h1: 3.2rem;
     --font-size-h2: 2.7rem;
     --font-size-h3: 2rem;
-    --font-size-body: 1.2rem;
-    --font-size-small: 1rem;
+    --font-size-header-sub: 1.1rem;
+    --font-size-body: 1.3rem;
+    --font-size-small: 1.15rem;
     --font-size-large: 2.5rem;
     
     /* Spacing */
@@ -35,6 +36,7 @@
     
     /* Header height */
     --header-border-color: #E0E0E080;
-    --header-container-height : 80px;
-    /* --header-container-height : 66px; */
+    /* --header-container-height : 90px; */
+    --header-container-height : 66px;
+    --header-links-height : 70px;
 }

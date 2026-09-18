@@ -19,8 +19,7 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
-	/* font: inherit; */
+	font-size: 100.6%;
 	vertical-align: baseline;
 	text-decoration: none;
 	word-break: keep-all;
@@ -55,3 +54,4 @@ a{
 .dpnone{
 display: none;
 }
+.invisible{visibility: hidden;}

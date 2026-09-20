@@ -73,16 +73,22 @@
         .form-group {
             margin-bottom: 1.5rem;
             text-align: left;
+            position: relative;
         }
 
         .form-input {
             width: 100%;
-            padding: 1rem;
+            padding: 1rem 3.25rem 1rem 1rem;
             border: 1px solid var(--border-gray);
             border-radius: 8px;
             font-size: 1rem;
             box-sizing: border-box;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-input::-ms-reveal,
+        .form-input::-ms-clear {
+            display: none;
         }
 
         .form-input:focus {
@@ -93,6 +99,31 @@
 
         .form-input::placeholder {
             color: #999;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 0.75rem;
+            width: 2rem;
+            height: 2rem;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: var(--text-gray);
+            cursor: pointer;
+            transform: translateY(-50%);
+        }
+
+        .password-toggle:hover,
+        .password-toggle:focus-visible {
+            color: var(--primary-blue);
+        }
+
+        .password-toggle:focus-visible {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+            border-radius: 4px;
         }
 
         .login-button {
@@ -191,6 +222,15 @@
                     required 
                     autocomplete="current-password"
                 >
+                <button
+                    type="button"
+                    id="passwordToggle"
+                    class="password-toggle"
+                    aria-label="Show password"
+                    aria-pressed="false"
+                >
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                </button>
             </div>
             
             <button type="submit" id="loginButton" class="login-button">
@@ -207,8 +247,18 @@
     <script src="auth.js"></script>
     
     <script>
+        const passwordToggle = document.getElementById('passwordToggle');
+
+        passwordToggle.addEventListener('click', function() {
+            const isVisible = passwordInput.type === 'text';
+            passwordInput.type = isVisible ? 'password' : 'text';
+            passwordToggle.setAttribute('aria-label', isVisible ? 'Show password' : 'Hide password');
+            passwordToggle.setAttribute('aria-pressed', String(!isVisible));
+            passwordToggle.querySelector('i').className = isVisible ? 'fas fa-eye' : 'fas fa-eye-slash';
+        });
+
         // 엔터 키 처리
-        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+        passwordInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 document.getElementById('loginForm').dispatchEvent(new Event('submit'));

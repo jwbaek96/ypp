@@ -78,6 +78,18 @@ function setCachedDashboardData(data) {
     }
 }
 
+function updateDashboardTimestamp(message = null) {
+    const timestampElement = document.getElementById('dashboardUpdatedAt');
+    if (!timestampElement) {
+        return;
+    }
+
+    timestampElement.textContent = message || `마지막 갱신 ${new Date().toLocaleTimeString('ko-KR', {
+        hour: '2-digit',
+        minute: '2-digit'
+    })}`;
+}
+
 function wait(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -125,6 +137,7 @@ async function loadDashboardData(forceRefresh = false) {
             const cachedData = getCachedDashboardData();
             if (cachedData) {
                 updateNavCounts(cachedData);
+                updateDashboardTimestamp('최근 조회 결과 표시');
                 return;
             }
         }
@@ -135,6 +148,7 @@ async function loadDashboardData(forceRefresh = false) {
         
         // 각 nav-count 요소에 데이터 표시
         updateNavCounts(data);
+        updateDashboardTimestamp();
         
     } catch (error) {
         console.error('대시보드 데이터 로드 실패:', error);
@@ -146,6 +160,7 @@ async function loadDashboardData(forceRefresh = false) {
             helpKR: 0, helpEN: 0, report: 0
         };
         updateNavCounts(defaultData);
+        updateDashboardTimestamp('현황을 불러오지 못했습니다');
     }
 }
 
@@ -194,56 +209,19 @@ function updateNavCounts(data) {
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
     console.log('YPP Admin Panel 초기화...');
-    const clock = new Clock(); // 시계 인스턴스 생성
-    clock.start(); // 시계 시작
     loadDashboardData();
+    const refreshButton = document.getElementById('refreshDashboard');
+    if (refreshButton) {
+        refreshButton.addEventListener('click', () => {
+            refreshButton.disabled = true;
+            refreshButton.querySelector('i')?.classList.add('fa-spin');
+            loadDashboardData(true).finally(() => {
+                refreshButton.disabled = false;
+                refreshButton.querySelector('i')?.classList.remove('fa-spin');
+            });
+        });
+    }
 });
-
-// 시계 클래스
-class Clock {
-    constructor() {
-        this.intervalId = null;
-    }
-    
-    start() {
-        this.updateClock(); // 즉시 시계 업데이트
-        this.intervalId = setInterval(() => this.updateClock(), 1000); // 1초마다 업데이트
-    }
-    
-    stop() {
-        if (this.intervalId) {
-            clearInterval(this.intervalId);
-            this.intervalId = null;
-        }
-    }
-    
-    updateClock() {
-        const now = new Date();
-        
-        // 시간 계산 (12시간 형식)
-        let hours = now.getHours();
-        const minutes = now.getMinutes();
-        const period = hours >= 12 ? 'PM' : 'AM';
-        
-        // 12시간 형식으로 변환
-        if (hours > 12) {
-            hours = hours - 12;
-        } else if (hours === 0) {
-            hours = 12;
-        }
-        
-        // 날짜 계산
-        const year = now.getFullYear();
-        const month = now.getMonth() + 1;
-        const date = now.getDate();
-        
-        // DOM 업데이트 (한자리수도 그대로 표시)
-        document.getElementById('clock-hours').textContent = hours.toString();
-        document.getElementById('clock-minutes').textContent = minutes.toString().padStart(2, '0'); // 분은 항상 2자리
-        document.getElementById('clock-period').textContent = period;
-        document.getElementById('clock-date').textContent = `${year}년 ${month}월 ${date}일`;
-    }
-}
 
 // 새로고침 버튼 기능 (필요시 추가)
 function refreshData() {
@@ -260,6 +238,32 @@ document.addEventListener('DOMContentLoaded', () => {
         
         navItem.addEventListener('click', (e) => {
             // console.log(`${navType} 항목 클릭됨`);
+
+            const sheetModalItems = {
+                inside: {
+                    title: '인사이드',
+                    sheetUrl: 'https://docs.google.com/spreadsheets/d/1883SgdNBFGLDyGXs5zITslHQPV-Oa90ilt9eG7af70c/edit?usp=sharing'
+                },
+                academy: {
+                    title: '아카데미 갤러리',
+                    sheetUrl: 'https://docs.google.com/spreadsheets/d/1gY5o_fHrXxAShXdSzqhyZBdLskbsAEwIdihci0UeU8c/edit?usp=sharing'
+                },
+                video: {
+                    title: '비디오',
+                    sheetUrl: 'https://docs.google.com/spreadsheets/d/1BopJLpq_yYbpJDTFtUxPRQKW2p5A1S9FE-wuXN32ph4/edit?usp=sharing'
+                },
+                'news-popup': {
+                    title: '보도자료 및 팝업',
+                    sheetUrl: 'https://docs.google.com/spreadsheets/d/1ZEtN7--25jDh_fY4l_KLNs18mNJx3vmQEsgunvD69jo/edit?usp=sharing',
+                    createUrl: 'https://tally.so/r/3qr11G'
+                }
+            };
+
+            const sheetModalItem = sheetModalItems[navType];
+            if (sheetModalItem && window.adminSheetModal) {
+                window.adminSheetModal.open({ ...sheetModalItem, trigger: navItem });
+                return;
+            }
             
             // FAQ는 모달로 처리
             if (navType === 'faq') {

@@ -7,9 +7,11 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="admin-layout.css">
     
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
+    <script src="admin-layout.js" defer></script>
 
     <!-- Style -->
     <style>
@@ -42,7 +44,7 @@
         
         /* =========== */
 
-        .links{position: fixed;bottom: 25px;left: 25px; display: flex; gap: .5rem;}
+        .links{position: fixed;bottom: 12px;right: 12px; display: flex; gap: .5rem;}
         .links a img, 
         .links div{
             width: 2.25rem;
@@ -733,17 +735,7 @@
         <!-- Admin Header -->
         <div class="admin-header">
             <!-- <div class="admin-title">페이지 관리</div> -->
-             
-            <a href="/admin" class="btn-home" style="margin-left: .5rem; ">
-                <i class="fas fa-home"></i>
-            </a>
             <div class="page-title" style="margin-right:auto"></div>
-            <div class="admin-user">
-                <!-- <div class="user-info" id="adminUserInfo">관리자로 로그인됨</div> -->
-                <button class="logout-btn" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i> 로그아웃
-                </button>
-            </div>
         </div>
     
     <section class="links">
@@ -790,9 +782,9 @@
                             </select>
                         </div>
                         <div class="toolbar-right">
-                            <!-- <button class="btn btn-success" id="btn-excel-download">
-                                <i class="fas fa-file-excel"></i> 엑셀 다운로드
-                            </button> -->
+                            <button class="btn btn-secondary" id="btn-open-original-sheet" type="button" title="원본 Google Sheets에서 열기" aria-label="원본 Google Sheets에서 열기" style="display: none;">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                            </button>
                             <button class="btn btn-primary" id="btn-add">
                                 <i class="fas fa-plus"></i>
                             </button>

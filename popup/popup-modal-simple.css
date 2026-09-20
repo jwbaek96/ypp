@@ -131,6 +131,7 @@
   border: 1px solid #e5e7eb;
   overflow-y: auto;
   min-width: 350px;
+  width:480px;
 }
 
 .popup-grid-item .academy-header {

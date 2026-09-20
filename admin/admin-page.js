@@ -250,38 +250,42 @@ class PageManager {
                 dataKey: 'popup',
             },
             '인허가': {
-                title: '갤러리 인허가',
+                title: '미디어 | 인허가',
                 description: '인허가 관련 갤러리 이미지 관리',
                 location: '회사소개 > 기업현황 > 인허가',
                 link: '/pages/company/business.html',
                 apiSheet: 'SHEET_GAL_A',
+                originalSheetUrl: 'https://docs.google.com/spreadsheets/d/1TSX0ds3gxKp-GENREmnckvuTI3RpwhuLZq6ZJbrVJuA/edit',
                 dataKey: 'galA',
                 createlink: 'https://tally.so/r/31e5NQ'
             },
             '유자격': {
-                title: '갤러리 유자격/수상',
+                title: '미디어 | 유자격/수상',
                 description: '유자격 관련 갤러리 이미지 관리',
                 location: '회사소개 > 기업현황 > 유자격',
                 link: '/pages/company/business.html',
                 apiSheet: 'SHEET_GAL_B',
+                originalSheetUrl: 'https://docs.google.com/spreadsheets/d/17hLRXv-zXuo-xsIhsN7Qks4nVwaRuW6_uVkkTNI72e8/edit',
                 dataKey: 'galB',
                 createlink: 'https://tally.so/r/m6l5WP'
             },
             '인사이드': {
-                title: '갤러리 인사이드',
+                title: '미디어 | 인사이드',
                 description: '인사이드 관련 갤러리 컨텐츠 관리 *수정중입니다. 데이터 신규 등록과 삭제만 가능합니다.',
                 location: '홍보 > 갤러리 > 인사이드',
                 link: '/pages/media/gallery/inside.html',
                 apiSheet: 'SHEET_GAL_C',
+                originalSheetUrl: 'https://docs.google.com/spreadsheets/d/1883SgdNBFGLDyGXs5zITslHQPV-Oa90ilt9eG7af70c/edit',
                 dataKey: 'galC',
                 createlink: 'https://tally.so/r/n09LMN'
             },
             '아카데미': {
-                title: '갤러리 아카데미',
+                title: '미디어 | 아카데미',
                 description: '아카데미 관련 갤러리 컨텐츠 관리',
                 location: '홍보 > 갤러리 > 아카데미 갤러리',
                 link: '/pages/media/gallery/academy.html',
                 apiSheet: 'SHEET_GAL_F',
+                originalSheetUrl: 'https://docs.google.com/spreadsheets/d/1gY5o_fHrXxAShXdSzqhyZBdLskbsAEwIdihci0UeU8c/edit',
                 dataKey: 'galD',
                 createlink: 'https://tally.so/r/wojrpX'
             },
@@ -291,6 +295,7 @@ class PageManager {
                 location: '홍보 > 게시판 > 보도자료',
                 link: '/pages/media/newsroom/press.html',
                 apiSheet: 'SHEET_BOARD_NEWS',
+                originalSheetUrl: 'https://docs.google.com/spreadsheets/d/1ZEtN7--25jDh_fY4l_KLNs18mNJx3vmQEsgunvD69jo/edit',
                 dataKey: 'boardNews',
                 createlink: 'https://tally.so/r/3qr11G'
             },
@@ -300,6 +305,7 @@ class PageManager {
                 location: '아카데미 > PSAC',
                 link: '/pages/academy/index.html?tab=psac',
                 apiSheet: 'SHEET_APPLY_P',
+                originalSheetUrl: 'https://docs.google.com/spreadsheets/d/1QAhkg8kpYjVsfXxrgR07dr4t5pRKtLEyg2vc8WeOet4/edit',
                 dataKey: 'applyPSAC',
                 createlink: '/pages/academy/index.html?tab=apply'
             },
@@ -309,6 +315,7 @@ class PageManager {
                 location: '아카데미 > Relay School',
                 link: '/pages/academy/index.html?tab=relay-school',
                 apiSheet: 'SHEET_APPLY_R',
+                originalSheetUrl: 'https://docs.google.com/spreadsheets/d/1QAhkg8kpYjVsfXxrgR07dr4t5pRKtLEyg2vc8WeOet4/edit',
                 dataKey: 'applyRelay',
                 createlink: '/pages/academy/index.html?tab=apply'
             },
@@ -318,6 +325,7 @@ class PageManager {
                 location: '아카데미 > Relay School Special',
                 link: '/pages/academy/index.html?tab=relay-school',
                 apiSheet: 'SHEET_APPLY_RS',
+                originalSheetUrl: 'https://docs.google.com/spreadsheets/d/1Py8yKWngNV8iRW4lBWzcQ1qiENaPL3QjJGuhvYbnmQg/edit',
                 dataKey: 'applyRelaySpecial',
                 createlink: '/pages/academy/index.html?tab=apply'
             },
@@ -336,6 +344,7 @@ class PageManager {
                 location: '고객센터 > 문의하기',
                 link: '/pages/support/index.html#contact',
                 apiSheet: 'SHEET_HELP_KR',
+                originalSheetUrl: 'https://docs.google.com/spreadsheets/d/1PCIS1sJyR2HMniaIC-Ga4NIpFGv1xSKYbo1rqXXaMq8/edit',
                 dataKey: 'helpKR'
             },
             '고객문의(ENG)': {
@@ -344,6 +353,7 @@ class PageManager {
                 location: '고객센터 > 문의하기',
                 link: '/pages/support/index.html#contact',
                 apiSheet: 'SHEET_HELP_EN',
+                originalSheetUrl: 'https://docs.google.com/spreadsheets/d/1CgXONK55xzAx_WV3-T1b1IawNgJsE94tbLMebZUekDA/edit',
                 dataKey: 'helpEN'
             },
             '부패및윤리신고': {
@@ -353,6 +363,7 @@ class PageManager {
                 link: '/pages/esg/esg.html#governance-report',
                 apiSheet: 'SHEET_REPORT',
                 dataKey: 'report',
+                originalSheetUrl: 'https://docs.google.com/spreadsheets/d/1mLh1yywTgwZ_NNaIic-46pPP8VfVR5FG5CeOG1XhiAU/edit',
                 embedSheetUrl: 'https://docs.google.com/spreadsheets/d/1mLh1yywTgwZ_NNaIic-46pPP8VfVR5FG5CeOG1XhiAU/edit?usp=sharing'
             }
         };
@@ -376,6 +387,7 @@ class PageManager {
         
         // 페이지 정보 업데이트
         this.updatePageInfo(config);
+        this.setupOriginalSheetButton(config);
 
         // 부패 및 윤리 신고 페이지는 구글시트 임베딩 전용 화면으로 처리
         if (pageParam === '부패및윤리신고') {
@@ -547,6 +559,21 @@ class PageManager {
         
         // 페이지 타이틀도 업데이트
         document.title = `YPP Admin - ${config.title}`;
+    }
+
+    setupOriginalSheetButton(config) {
+        const button = document.getElementById('btn-open-original-sheet');
+        if (!button) {
+            return;
+        }
+
+        if (!config.originalSheetUrl) {
+            button.style.display = 'none';
+            return;
+        }
+
+        button.style.display = 'inline-flex';
+        button.onclick = () => window.open(config.originalSheetUrl, '_blank', 'noopener,noreferrer');
     }
     
     // 페이지별 데이터 카운트 로드

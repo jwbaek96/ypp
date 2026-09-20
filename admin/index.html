@@ -7,39 +7,116 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="admin-layout.css">
     
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
+    <script src="admin-layout.js" defer></script>
 
     <!-- Style -->
     <style>
-        :root{
-            --mxw: 900px;
-            --gap: 16px;
-            --box-color: #d9d9d9;
+        :root {
+            --admin-max-width: 1160px;
+            --admin-background: #f4f6f8;
+            --admin-surface: #ffffff;
+            --admin-text: #1f2933;
+            --admin-muted: #667085;
+            --admin-border: #d9e0e7;
+            --admin-primary: #0066cc;
+            --admin-primary-soft: #edf6ff;
+            --admin-danger: #d92d20;
         }
-        body{min-height: 100dvh; background-color: linear-gradient(180deg, #f0f0f0 0%, #d88585 100%);}
-        /* =========== */
-        
-        nav ul li,
-        p, span{margin-bottom: 0; color: #000;}
 
-        /* =========== */
-        .links{position: fixed;bottom: 25px;left: 25px;}
-        .links a img{width: 2.25rem;box-shadow: 0 1px 5px rgb(0 0 0 / 56%);border-radius: 7px;}
-        .links a:hover img{transform: scale(1.05);transition: all 0.3s ease;}
+        body {
+            min-height: 100dvh;
+            background: var(--admin-background);
+            color: var(--admin-text);
+        }
 
-        /* Admin Header */
-        .admin-header{display: flex;justify-content: space-between;align-items: center;padding: 1rem;margin-bottom: 1.5rem;
-            border-radius: 25px;
-            background: #bdbdbd1c;}
-            
-        .admin-title{font-size: 1.5rem;font-weight: bold;color: #333;}
-        .admin-user{display: flex;align-items: center;gap: 1rem;}
-        .user-info{font-size: 0.9rem;color: #666;}
-        .user-info{display: none;}
-        .logout-btn{background-color: #00000000; color: #ff4757;border: none;padding: 0.5rem 1rem;border-radius: 5px;cursor: pointer;font-size: 0.9rem;}
-        .logout-btn:hover{color: #ff3742;}
+        p,
+        span {
+            margin-bottom: 0;
+        }
+
+        .main-container {
+            max-width: var(--admin-max-width);
+            margin: 0 auto;
+            padding: 32px 24px 56px;
+            box-sizing: border-box;
+        }
+
+        .admin-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 0 0 24px;
+            border-bottom: 1px solid var(--admin-border);
+        }
+
+        .admin-eyebrow {
+            margin: 0 0 6px;
+            color: var(--admin-primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .admin-title {
+            margin: 0;
+            color: var(--admin-text);
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: 0;
+        }
+
+        .admin-subtitle {
+            margin: 8px 0 0;
+            color: var(--admin-muted);
+            font-size: 0.95rem;
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-info {
+            display: none;
+        }
+
+        .header-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            padding: 0;
+            border: 1px solid var(--admin-border);
+            border-radius: 6px;
+            background: var(--admin-surface);
+            color: var(--admin-muted);
+            cursor: pointer;
+            transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .header-action:hover,
+        .header-action:focus-visible {
+            border-color: var(--admin-primary);
+            background: var(--admin-primary-soft);
+            color: var(--admin-primary);
+        }
+
+        .header-action:focus-visible,
+        .nav-card:focus-visible {
+            outline: 2px solid var(--admin-primary);
+            outline-offset: 2px;
+        }
+
+        .logout-btn {
+            color: var(--admin-danger);
+        }
         
         /* 로딩 스크린 */
         .auth-loading {
@@ -48,7 +125,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #f0f0f0;
+            background-color: var(--admin-background);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -69,43 +146,167 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* =========== */
-
-        .main-container{ max-width: var(--mxw); margin: 0 auto; padding: 20px; box-sizing: border-box;}
-
-        /* =========== */
-        .nav-container{display: flex; flex-direction: column;padding-top: 2rem;}
-        nav{margin-bottom: 24px;}
-        nav ul{display: flex;gap: var(--gap);flex-direction: row;justify-content: flex-end;}
-        nav ul li{flex: auto;background-color: #f3f5f7;padding: 16px 16px;display: flex;flex-direction: column;justify-content: space-between;cursor: pointer;transition: all 0.3s ease;border-radius: 12px;}
-        nav ul li:hover{background-color: var(--box-color);}
-        @keyframes dots {
-            0%, 20% { content: '...'; }
-            40% { content: ''; }
-            60% { content: '.'; }
-            80% { content: '..'; }
+        .dashboard-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 20px 0 32px;
+            color: var(--admin-muted);
+            font-size: 0.85rem;
         }
-        /* =========== Clock Styles =========== */
-        .header-clock {display: flex;margin-bottom: 0px;padding: 10px 0;}
-        .clock-widget { background-color: #fff;color: #000;border-radius: 15px;padding: 15px 20px;min-width: 200px;}
-        .clock-time {font-size: 4rem;font-weight: 400;margin-bottom: 5px;letter-spacing: 2px;}
-        .clock-period {font-size: 2.5rem;margin-left: 8px;}
-        .clock-date {font-size: 1.7rem;margin-top: 1rem}
-        .nav-title{font-size: 1.2rem;margin-bottom: 12px; display: block;font-weight: 750;}
-        .nav-name{font-size: 1.1rem; font-weight: 400;margin-bottom: 1rem;}
-        .nav-info{text-align: right;}
-        .nav-count{font-size: 1.25rem;}
+
+        .dashboard-meta i {
+            color: var(--admin-primary);
+        }
+
+        .nav-container {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 32px;
+        }
+
+        .admin-section {
+            min-width: 0;
+        }
+
+        .nav-title {
+            margin: 0 0 12px;
+            color: var(--admin-text);
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .nav-title-action {
+            margin-left: 4px;
+            padding: 2px;
+            border: 0;
+            background: transparent;
+            color: var(--admin-muted);
+            cursor: pointer;
+        }
+
+        .nav-title-action:hover,
+        .nav-title-action:focus-visible {
+            color: var(--admin-primary);
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-grid-single {
+            grid-template-columns: 1fr;
+        }
+
+        .nav-card {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            min-height: 92px;
+            padding: 16px;
+            border: 1px solid var(--admin-border);
+            border-radius: 8px;
+            background: var(--admin-surface);
+            color: inherit;
+            text-align: left;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav-card:hover {
+            border-color: #9cc8ef;
+            box-shadow: 0 4px 12px rgba(16, 24, 40, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .nav-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 6px;
+            background: var(--admin-primary-soft);
+            color: var(--admin-primary);
+            font-size: 1rem;
+        }
+
+        .nav-name {
+            margin: 0;
+            color: var(--admin-text);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .nav-description {
+            margin: 5px 0 0;
+            color: var(--admin-muted);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .nav-info {
+            text-align: right;
+        }
+
+        .nav-count {
+            color: var(--admin-text);
+            font-size: 0.9rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
         .nav-count .fa-spinner {
-            background: #00000066;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--admin-muted);
         }
-        /* =========== */
-        @media screen and (max-width: 500px) {
-            nav ul{grid-template-columns: 1fr 1fr;}
-            .nav-container>nav>ul {flex-direction: column;}
-            .user-info{display: none;}
+
+        .links {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+        }
+
+        .links a img {
+            width: 2.25rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgb(0 0 0 / 18%);
+        }
+
+        @media screen and (max-width: 760px) {
+            .main-container {
+                padding: 24px 16px 48px;
+            }
+
+            .admin-header {
+                gap: 16px;
+            }
+
+            .admin-title {
+                font-size: 1.45rem;
+            }
+
+            .nav-container {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-action {
+                width: 2.25rem;
+                height: 2.25rem;
+            }
         }
     </style>
 </head>
@@ -118,150 +319,82 @@
     <div class="main-container" id="mainContent" style="display: none;">
         <!-- Admin Header -->
         <div class="admin-header">
-            <div class="admin-title">YPP ADMIN</div>
+            <div>
+                <p class="admin-eyebrow">YPP ADMINISTRATION</p>
+                <h1 class="admin-title">웹사이트 관리</h1>
+                <p class="admin-subtitle">콘텐츠와 고객 접점 관리 메뉴를 빠르게 확인하세요.</p>
+            </div>
             <div class="admin-user">
                 <div class="user-info" id="adminUserInfo">관리자로 로그인됨</div>
-                <button class="logout-btn" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i> 로그아웃
+                <button class="header-action" id="refreshDashboard" type="button" title="현황 새로고침" aria-label="현황 새로고침">
+                    <i class="fas fa-rotate-right" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
-        
-        <header>
-            <div class="header-clock">
-                <div class="clock-widget">
-                    <div class="clock-time">
-                        <span id="clock-hours">12</span>:<span id="clock-minutes">00</span><span class="clock-period" id="clock-period">PM</span>
-                    </div>
-                    <div class="clock-date" id="clock-date">2025년 11월 16일</div>
-                </div>
-            </div>
-        </header>
+        <div class="dashboard-meta" aria-live="polite">
+            <i class="fas fa-circle-check" aria-hidden="true"></i>
+            <span>관리 현황</span>
+            <span aria-hidden="true">·</span>
+            <span id="dashboardUpdatedAt">불러오는 중</span>
+        </div>
+
         <section class="nav-container">
             <!-- 웹사이트 관리 -->
-            <nav class="">
-                <div class="nav-title">웹사이트 관리</div>
-                <ul>
-                    <li data-nav="faq">
-                        <div class="nav-name" style="margin-bottom: 0;">회사연혁<br><br>프로젝트 테이블(원자력|화력발전|변전소|미군기지)<br><br>자주 묻는 질문</div>
+            <nav class="admin-section" aria-labelledby="website-management-title">
+                <h2 class="nav-title" id="website-management-title">웹사이트 관리</h2>
+                <ul class="nav-grid nav-grid-single">
+                    <li>
+                        <button class="nav-card" type="button" data-nav="faq">
+                            <span class="nav-icon"><i class="fas fa-globe" aria-hidden="true"></i></span>
+                            <span>
+                                <p class="nav-name">웹사이트 콘텐츠</p>
+                                <span class="nav-description">회사연혁, 프로젝트, 자주 묻는 질문</span>
+                            </span>
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </button>
                     </li>
                 </ul>
             </nav>
             <!-- 아카데미 -->
-            <nav class="">
-                <div class="nav-title">아카데미 
-                    <button style="color: #333; background: none; border: none; font-size: 1rem; cursor: pointer;" onclick="openCurriculumModal()">
+            <nav class="admin-section" aria-labelledby="academy-title">
+                <h2 class="nav-title" id="academy-title">아카데미
+                    <button class="nav-title-action" type="button" onclick="openCurriculumModal()" title="아카데미 커리큘럼 관리" aria-label="아카데미 커리큘럼 관리">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                </div>
-                <ul>
-                    <li data-nav="psac">
-                        <div class="nav-name">PSAC</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                    <li data-nav="relay-school">
-                        <div class="nav-name">Relay School</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                    <li data-nav="relay-school-special">
-                        <div class="nav-name">Relay School Special</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
+                </h2>
+                <ul class="nav-grid">
+                    <li><button class="nav-card" type="button" data-nav="psac"><span class="nav-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></span><span><p class="nav-name">PSAC</p><span class="nav-description">교육 신청 관리</span></span><span class="nav-info"><span class="nav-count"><i class="fas fa-spinner fa-spin"></i></span></span></button></li>
+                    <li><button class="nav-card" type="button" data-nav="relay-school"><span class="nav-icon"><i class="fas fa-school" aria-hidden="true"></i></span><span><p class="nav-name">Relay School</p><span class="nav-description">교육 신청 관리</span></span><span class="nav-info"><span class="nav-count"><i class="fas fa-spinner fa-spin"></i></span></span></button></li>
+                    <li><button class="nav-card" type="button" data-nav="relay-school-special"><span class="nav-icon"><i class="fas fa-star" aria-hidden="true"></i></span><span><p class="nav-name">Relay School Special</p><span class="nav-description">특별 과정 신청 관리</span></span><span class="nav-info"><span class="nav-count"><i class="fas fa-spinner fa-spin"></i></span></span></button></li>
                 </ul>
             </nav>
             <!-- 갤러리 -->
-            <nav class="">
-                <div class="nav-title">갤러리</div>
-                <ul>
-                    <li data-nav="license">
-                        <div class="nav-name">인허가</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                    <li data-nav="qualification">
-                        <div class="nav-name">유자격/수상</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                    <li data-nav="inside">
-                        <div class="nav-name">인사이드</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                    <li data-nav="academy">
-                        <div class="nav-name">아카데미</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                    <li data-nav="video">
-                        <div class="nav-name">비디오</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
+            <nav class="admin-section" aria-labelledby="gallery-title">
+                <h2 class="nav-title" id="gallery-title">미디어</h2>
+                <ul class="nav-grid">
+                    <li><button class="nav-card" type="button" data-nav="license"><span class="nav-icon"><i class="fas fa-file-signature" aria-hidden="true"></i></span><span><p class="nav-name">인허가</p><span class="nav-description">인허가 자료 관리</span></span><span class="nav-info"><span class="nav-count"><i class="fas fa-spinner fa-spin"></i></span></span></button></li>
+                    <li><button class="nav-card" type="button" data-nav="qualification"><span class="nav-icon"><i class="fas fa-award" aria-hidden="true"></i></span><span><p class="nav-name">유자격·수상</p><span class="nav-description">인증 및 수상 자료 관리</span></span><span class="nav-info"><span class="nav-count"><i class="fas fa-spinner fa-spin"></i></span></span></button></li>
+                    <li><button class="nav-card" type="button" data-nav="inside"><span class="nav-icon"><i class="fas fa-images" aria-hidden="true"></i></span><span><p class="nav-name">인사이드</p><span class="nav-description">현장 및 조직 문화 관리</span></span><span class="nav-info"><span class="nav-count"><i class="fas fa-spinner fa-spin"></i></span></span></button></li>
+                    <li><button class="nav-card" type="button" data-nav="academy"><span class="nav-icon"><i class="fas fa-camera" aria-hidden="true"></i></span><span><p class="nav-name">아카데미</p><span class="nav-description">교육 활동 자료 관리</span></span><span class="nav-info"><span class="nav-count"><i class="fas fa-spinner fa-spin"></i></span></span></button></li>
+                    <li><button class="nav-card" type="button" data-nav="video"><span class="nav-icon"><i class="fas fa-video" aria-hidden="true"></i></span><span><p class="nav-name">비디오</p><span class="nav-description">영상 콘텐츠 관리</span></span><span class="nav-info"><span class="nav-count"><i class="fas fa-spinner fa-spin"></i></span></span></button></li>
                 </ul>
             </nav>
             <!-- 게시판 & 팝업 -->
-            <nav class="">
-                <div class="nav-title">게시판 & 팝업</div>
-                <ul>
-                    <li data-nav="news-popup">
-                        <div class="nav-name">보도자료 & 팝업</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <!-- <p class="nav-text">통합 관리</p> -->
-                        </div>
-                    </li>
+            <nav class="admin-section" aria-labelledby="news-title">
+                <h2 class="nav-title" id="news-title">게시판 및 팝업</h2>
+                <ul class="nav-grid nav-grid-single">
+                    <li><button class="nav-card" type="button" data-nav="news-popup"><span class="nav-icon"><i class="fas fa-bullhorn" aria-hidden="true"></i></span><span><p class="nav-name">보도자료 및 팝업</p><span class="nav-description">공지와 팝업 노출 관리</span></span><span class="nav-info"><span class="nav-count"><i class="fas fa-spinner fa-spin"></i></span></span></button></li>
                 </ul>
             </nav>
             <!-- 고객센터 -->
-            <nav class="">
-                <div class="nav-title">고객센터</div>
-                <ul>
-                    <li data-nav="customer-inquiries-kr">
-                        <div class="nav-name">고객문의(KOR)</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                    <li data-nav="customer-inquiries-en">
-                        <div class="nav-name">고객문의(ENG)</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
-                    <li data-nav="corruption-report">
-                        <div class="nav-name">부패 및 윤리 신고</div>
-                        <div class="nav-info">
-                            <p class="nav-count"><i class="fas fa-spinner fa-spin"></i></p>
-                            <p class="nav-text"></p>
-                        </div>
-                    </li>
+            <nav class="admin-section" aria-labelledby="support-title">
+                <h2 class="nav-title" id="support-title">고객센터</h2>
+                <ul class="nav-grid">
+                    <li><button class="nav-card" type="button" data-nav="customer-inquiries-kr"><span class="nav-icon"><i class="fas fa-comments" aria-hidden="true"></i></span><span><p class="nav-name">고객문의 (KOR)</p><span class="nav-description">국문 문의 관리</span></span><span class="nav-info"><span class="nav-count"><i class="fas fa-spinner fa-spin"></i></span></span></button></li>
+                    <li><button class="nav-card" type="button" data-nav="customer-inquiries-en"><span class="nav-icon"><i class="fas fa-comment-dots" aria-hidden="true"></i></span><span><p class="nav-name">고객문의 (ENG)</p><span class="nav-description">영문 문의 관리</span></span><span class="nav-info"><span class="nav-count"><i class="fas fa-spinner fa-spin"></i></span></span></button></li>
+                    <li><button class="nav-card" type="button" data-nav="corruption-report"><span class="nav-icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></span><span><p class="nav-name">부패 및 윤리 신고</p><span class="nav-description">신고 내역 확인</span></span><span class="nav-info"><span class="nav-count"><i class="fas fa-spinner fa-spin"></i></span></span></button></li>
                 </ul>
             </nav>
-            
-            
-
         </section>
         <section class="links">
             <a href="/" target="_blank"><img src="/assets/images/favicon/apple-icon-76x76.png" alt="" srcset=""></a>
@@ -355,6 +488,23 @@ window.onclick = function(event) {
         closeCurriculumModal();
     }
 }
+
+document.addEventListener('keydown', function(event) {
+    if (event.key !== 'Escape') {
+        return;
+    }
+
+    const curriculumModal = document.getElementById('curriculumModal');
+    if (curriculumModal?.style.display === 'block') {
+        closeCurriculumModal();
+        return;
+    }
+
+    const faqModal = document.getElementById('faqModal');
+    if (faqModal?.style.display === 'block') {
+        closeFaqModal();
+    }
+});
 </script>
 
 <!-- 인증 보호 스크립트 -->

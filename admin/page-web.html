@@ -7,9 +7,11 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="admin-layout.css">
     
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/e4704dcbbd.js" crossorigin="anonymous"></script>
+    <script src="admin-layout.js" defer></script>
 
     <style>
         :root {
@@ -243,19 +245,10 @@
         <!-- Admin Header -->
         <div class="admin-header">
             <div class="admin-title">웹 데이터 관리</div>
-            <div class="admin-user">
-                <div class="user-info" id="adminUserInfo">관리자로 로그인됨</div>
-                <button class="logout-btn" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i> 로그아웃
-                </button>
-            </div>
         </div>
         <!-- Header -->
 
         <header>
-            <a href="/admin" class="btn-home">
-                <i class="fas fa-home" aria-hidden="true"></i>
-            </a>
             <div class="clock-widget">
                 <span class="clock-date" id="clock-date">2025년 9월 8일</span>
                 <span class="clock-time">

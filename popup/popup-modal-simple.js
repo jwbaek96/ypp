@@ -172,7 +172,11 @@ const SimplePopupModal = {
     const modalHtml = `
       <div id="popup-modal" class="popup-modal">
         <div class="popup-content">
-          <button class="popup-close" onclick="SimplePopupModal.closePopup()">&times;</button>
+          <button class="popup-close" type="button" onclick="SimplePopupModal.closePopup()" aria-label="팝업 닫기" title="닫기">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
           <div id="popup-grid-container" class="popup-grid-container">
             <!-- 그리드 이미지들이 여기에 동적으로 생성됨 -->
           </div>
@@ -186,6 +190,17 @@ const SimplePopupModal = {
     `;
 
     document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    const modal = document.getElementById('popup-modal');
+    modal.addEventListener('click', (event) => {
+      const clickedGrid = event.target.closest('#popup-grid-container');
+      const clickedNavigation = event.target.closest('.popup-navigation');
+      const clickedCloseButton = event.target.closest('.popup-close');
+
+      if (!clickedGrid && !clickedNavigation && !clickedCloseButton) {
+        this.closePopup();
+      }
+    });
     
     // CSS 파일 로드
     this.loadCSS();

@@ -84,7 +84,7 @@ function updateDashboardTimestamp(message = null) {
         return;
     }
 
-    timestampElement.textContent = message || `마지막 갱신 ${new Date().toLocaleTimeString('ko-KR', {
+    timestampElement.textContent = message || `마지막 데이터 갱신 시각 -  ${new Date().toLocaleTimeString('ko-KR', {
         hour: '2-digit',
         minute: '2-digit'
     })}`;
@@ -137,7 +137,7 @@ async function loadDashboardData(forceRefresh = false) {
             const cachedData = getCachedDashboardData();
             if (cachedData) {
                 updateNavCounts(cachedData);
-                updateDashboardTimestamp('최근 조회 결과 표시');
+                updateDashboardTimestamp('캐시된 카운트 표시');
                 return;
             }
         }
@@ -160,7 +160,7 @@ async function loadDashboardData(forceRefresh = false) {
             helpKR: 0, helpEN: 0, report: 0
         };
         updateNavCounts(defaultData);
-        updateDashboardTimestamp('현황을 불러오지 못했습니다');
+        updateDashboardTimestamp('카운트를 불러오지 못했습니다');
     }
 }
 

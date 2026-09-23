@@ -57,6 +57,27 @@ function isApplyOrCheckTab(tabId = getCurrentAcademyTab()) {
     return tabId === 'apply' || tabId === 'check';
 }
 
+function showCourseDataLoading(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container || container.querySelector('.course-data-inline-loading')) {
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="course-data-inline-loading" role="status" aria-live="polite">
+            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+            <span data-kor="교육과정 데이터를 불러오는 중입니다..." data-eng="Loading course data...">교육과정 데이터를 불러오는 중입니다...</span>
+        </div>
+    `;
+}
+
+function clearCourseDataLoading(containerId) {
+    const loading = document.querySelector(`#${containerId} .course-data-inline-loading`);
+    if (loading) {
+        loading.remove();
+    }
+}
+
 function maybeShowCourseLoadFailureAlert(tabId = getCurrentAcademyTab()) {
     if (!hasCourseDataLoadFailed || hasShownCourseDataLoadErrorAlert || !isApplyOrCheckTab(tabId)) {
         return;
@@ -149,9 +170,6 @@ async function startCourseDataPreload() {
     }
 
     isCourseDataLoading = true;
-    if (isApplyOrCheckTab()) {
-        showLoadingState();
-    }
 
     console.log('Starting course data preload...');
     courseDataLoadPromise = loadCourseData()
@@ -189,9 +207,7 @@ function setupTabAwareLoadingIndicator() {
             const targetTab = link.getAttribute('data-tab');
 
             if (isApplyOrCheckTab(targetTab)) {
-                if (isCourseDataLoading) {
-                    showLoadingState();
-                } else {
+                if (!isCourseDataLoading) {
                     hideLoadingState();
                     initializeFormsIfNeeded();
                     maybeShowCourseLoadFailureAlert();
@@ -532,10 +548,11 @@ document.addEventListener('input', function(e) {
 function addPsacStudent() {
     // 데이터가 로드되지 않았으면 추가하지 않음
     if (!psacCoursesData || !psacCoursesData.courses) {
-        console.error('PSAC course data not loaded, cannot add student');
-        alert('교육과정 데이터가 아직 로드되지 않았습니다. 잠시 후 다시 시도해주세요.');
+        showCourseDataLoading('psac-students-container');
         return;
     }
+
+    clearCourseDataLoading('psac-students-container');
     
     psacStudentCount++;
     const container = document.getElementById('psac-students-container');
@@ -780,10 +797,11 @@ async function submitPsacForm(e) {
 function addRelayschoolStudent() {
     // 데이터가 로드되지 않았으면 추가하지 않음
     if (!relayCoursesData) {
-        console.error('Relay course data not loaded, cannot add student');
-        alert('교육과정 데이터가 아직 로드되지 않았습니다. 잠시 후 다시 시도해주세요.');
+        showCourseDataLoading('relayschool-students-container');
         return;
     }
+
+    clearCourseDataLoading('relayschool-students-container');
     
     relayStudentCount++;
     const container = document.getElementById('relayschool-students-container');

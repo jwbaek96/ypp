@@ -3799,7 +3799,7 @@ async function cancelAcademyApplication() {
     cancelButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 취소 처리 중...';
 
     try {
-        const apiUrl = 'https://script.google.com/macros/s/AKfycbyChhUXLJHVjVBjUQ-K4gYpAWRJO85wvTbcvspGX0CQyNYIRG6Yxw3n-R5bsgqhvVBk/exec';
+        const apiUrl = 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec';
         const sheetName = window.currentEditType === 'PSAC' ? 'SHEET_APPLY_P' : 'SHEET_APPLY_R';
         const itemId = item.id || item.number;
         const deleteUrl = `${apiUrl}?action=delete&sheet=${sheetName}&id=${encodeURIComponent(itemId)}`;
@@ -3864,7 +3864,7 @@ async function saveApplication() {
     });
     
     try {
-        const apiUrl = 'https://script.google.com/macros/s/AKfycbyChhUXLJHVjVBjUQ-K4gYpAWRJO85wvTbcvspGX0CQyNYIRG6Yxw3n-R5bsgqhvVBk/exec';
+        const apiUrl = 'https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec';
         const sheetName = window.currentEditType === 'PSAC' ? 'SHEET_APPLY_P' : 'SHEET_APPLY_R';
         const itemId = window.currentEditItem.id || window.currentEditItem.number;
         

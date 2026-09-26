@@ -119,18 +119,14 @@ async function checkExistingCourses(studentSection, formType) {
     const name = studentSection.querySelector(`[id^="${prefix}-studentName-"]`)?.value.trim() || '';
     const mobile = studentSection.querySelector(`[id^="${prefix}-studentMobile-"]`)?.value || '';
     const mobileDigits = mobile.replace(/\D/g, '');
-    const status = studentSection.querySelector('.course-duplicate-status');
     const signature = `${name}|${mobileDigits}`;
 
     studentSection.dataset.duplicateLookupSignature = signature;
     clearExistingCourseMarks(studentSection);
 
     if (!name || mobileDigits.length < 10 || mobileDigits.length > 11) {
-        if (status) status.textContent = '';
         return;
     }
-
-    if (status) status.textContent = '기존 신청 과목을 확인하고 있습니다...';
 
     try {
         const response = await fetch('https://ypp-api-relay.yppapi.workers.dev/api/academy/check', {
@@ -156,12 +152,9 @@ async function checkExistingCourses(studentSection, formType) {
                 .map(normalizeAppliedCourse)
                 .filter(Boolean)
         );
-        let duplicateCount = 0;
-
         studentSection.querySelectorAll('.course-option-checkbox').forEach(checkbox => {
             if (!appliedCourses.has(normalizeAppliedCourse(checkbox.value))) return;
 
-            duplicateCount++;
             checkbox.dataset.checkedBeforeDuplicate = String(checkbox.checked);
             checkbox.checked = true;
             checkbox.disabled = false;
@@ -176,13 +169,7 @@ async function checkExistingCourses(studentSection, formType) {
             }
         });
 
-        if (status) {
-            status.textContent = duplicateCount ? '이미 신청한 과목은 이번 신청에서 제외됩니다. 새 과목만 선택해 주세요.' : '기존 신청 과목이 없습니다.';
-        }
     } catch (error) {
-        if (studentSection.dataset.duplicateLookupSignature === signature && status) {
-            status.textContent = '기존 신청 내역을 확인하지 못했습니다. 제출 시 서버에서 다시 확인합니다.';
-        }
         console.error('Existing course lookup failed:', error);
     }
 }
@@ -777,7 +764,6 @@ function addPsacStudent() {
             <div class="psac-checkbox-group">
                 ${courseCheckboxes}
             </div>
-            <p class="course-duplicate-status" role="status" aria-live="polite"></p>
         </div>
     `;
     
@@ -1051,7 +1037,6 @@ function addRelayschoolStudent() {
             <div class="psac-checkbox-group">
                 ${courseCheckboxes}
             </div>
-            <p class="course-duplicate-status" role="status" aria-live="polite"></p>
         </div>
     `;
     

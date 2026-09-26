@@ -130,13 +130,6 @@
     font-size: 2rem;
 }
 
-.course-duplicate-status {
-    min-height: 1.25em;
-    margin: 8px 0 0;
-    color: #555;
-    font-size: 0.875rem;
-}
-
 .course-already-applied label {
     color: #b42318;
     cursor: pointer;

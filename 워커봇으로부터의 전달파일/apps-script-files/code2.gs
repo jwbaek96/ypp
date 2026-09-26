@@ -81,7 +81,10 @@ function getPsacCourses() {
       id: index + 1,
       nameKR: row[0] || '',
       nameEN: row[1] || '',
-      status: row[2] || 'OFF'
+      status: row[2] || 'OFF',
+      emphasize: row[3] === true || String(row[3]).toLowerCase() === 'true',
+      emphasisText: row[4] || '',
+      emphasisTextEN: row[5] || ''
     };
   }).filter(course => course.nameKR); // 빈 행 제거
   
@@ -105,7 +108,10 @@ function getRelayCourses() {
       id: index + 1,
       nameKR: row[0] || '',
       nameEN: row[1] || '',
-      status: row[2] || 'OFF'
+      status: row[2] || 'OFF',
+      emphasize: row[3] === true || String(row[3]).toLowerCase() === 'true',
+      emphasisText: row[4] || '',
+      emphasisTextEN: row[5] || ''
     };
   }).filter(course => course.nameKR); // 빈 행 제거
   

@@ -213,6 +213,9 @@ function convertPsacData(sheetData) {
         converted[id] = {
             kor: course.nameKR,
             eng: course.nameEN,
+            emphasize: course.emphasize === true || String(course.emphasize).toLowerCase() === 'true',
+            emphasisText: course.emphasisText || '',
+            emphasisTextEN: course.emphasisTextEN || '',
             tooltipKR: getTooltipByStatus(course.status, 'KR'),
             tooltipEN: getTooltipByStatus(course.status, 'EN')
         };
@@ -241,6 +244,9 @@ function convertRelayData(sheetData) {
             kor: course.nameKR,
             eng: course.nameEN,
             status: course.status || 'ON', // 기본값은 'ON'
+            emphasize: course.emphasize === true || String(course.emphasize).toLowerCase() === 'true',
+            emphasisText: course.emphasisText || '',
+            emphasisTextEN: course.emphasisTextEN || '',
             tooltipKR: getTooltipByStatus(course.status, 'KR'),
             tooltipEN: getTooltipByStatus(course.status, 'EN')
         };

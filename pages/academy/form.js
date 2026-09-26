@@ -92,6 +92,25 @@ function normalizeAppliedCourse(value) {
         .toLocaleLowerCase();
 }
 
+function escapeCourseHtml(value) {
+    return String(value || '').replace(/[&<>"']/g, character => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    })[character]);
+}
+
+function getCourseEmphasisMarkup(course, language = getCurrentLanguage()) {
+    const enabled = course.emphasize === true || String(course.emphasize).toLowerCase() === 'true';
+    const emphasisText = language === 'kor'
+        ? course.emphasisText
+        : course.emphasisTextEN || course.emphasisText;
+    const text = String(emphasisText || '').trim();
+    return enabled && text ? `<span class="course-emphasis">${escapeCourseHtml(text)}</span>` : '';
+}
+
 function normalizeStudentName(value) {
     return String(value || '').trim().replace(/\s+/g, '').toLocaleLowerCase();
 }
@@ -693,6 +712,9 @@ function addPsacStudent() {
         courseCheckboxes = Object.keys(psacCoursesData.courses).map((courseKey) => {
             const course = psacCoursesData.courses[courseKey];
             const courseText = course[currentLang];
+            const emphasisMarkup = getCourseEmphasisMarkup(course, currentLang);
+            const labelKor = `<span class="course-label-main">${escapeCourseHtml(course.kor)}${getCourseEmphasisMarkup(course, 'kor')}</span>${course.tooltipKR || ''}`;
+            const labelEng = `<span class="course-label-main">${escapeCourseHtml(course.eng)}${getCourseEmphasisMarkup(course, 'eng')}</span>${course.tooltipEN || ''}`;
             const isClosed = psacCoursesData.closedCourses && psacCoursesData.closedCourses.hasOwnProperty(courseKey);
             const closedTooltip = isClosed ? psacCoursesData.closedCourses[courseKey].tooltip : '';
             
@@ -708,13 +730,13 @@ function addPsacStudent() {
                       class="course-option-checkbox"
                        id="psac-course-${psacStudentCount}-${courseKey}" 
                        name="psac-student-${psacStudentCount}-courses" 
-                       value="${courseText}"
+                       value="${escapeCourseHtml(courseText)}"
                       data-course-closed="${isClosed}"
                        ${isClosed ? 'disabled' : ''}>
                 <label for="psac-course-${psacStudentCount}-${courseKey}" 
-                       data-kor="${course.kor} ${course.tooltipKR || ''}" 
-                       data-eng="${course.eng} ${course.tooltipEN || ''}"
-                       ${titleTooltip ? `title="${titleTooltip}"` : ''}>${courseText}</label>
+                       data-kor="${escapeCourseHtml(labelKor)}"
+                      data-eng="${escapeCourseHtml(labelEng)}"
+                       ${titleTooltip ? `title="${titleTooltip}"` : ''}><span class="course-label-main">${escapeCourseHtml(courseText)}${emphasisMarkup}</span>${course[currentLang === 'kor' ? 'tooltipKR' : 'tooltipEN'] || ''}</label>
             </div>
         `;
         }).join('');
@@ -954,9 +976,10 @@ function addRelayschoolStudent() {
         } else {
             courseCheckboxes = courseKeys.map((courseKey) => {
                 const course = relayCoursesData[courseKey];
-                const courseText = currentLang === 'kor' ? 
-                    `${course.kor}${course.tooltipKR || ''}` : 
-                    `${course.eng}${course.tooltipEN || ''}`;
+                const courseName = currentLang === 'kor' ? course.kor : course.eng;
+                const emphasisMarkup = getCourseEmphasisMarkup(course, currentLang);
+                const labelKor = `<span class="course-label-main">${escapeCourseHtml(course.kor)}${getCourseEmphasisMarkup(course, 'kor')}</span>${course.tooltipKR || ''}`;
+                const labelEng = `<span class="course-label-main">${escapeCourseHtml(course.eng)}${getCourseEmphasisMarkup(course, 'eng')}</span>${course.tooltipEN || ''}`;
                 const isClosed = course.status === 'OFF' || course.status === '접수마감';
                 
                 // 코스 자체의 툴팁 가져오기 (상태에 따른 스타일링 포함)
@@ -978,13 +1001,13 @@ function addRelayschoolStudent() {
                       class="course-option-checkbox"
                        id="relayschool-course-${relayStudentCount}-${courseKey}" 
                        name="relayschool-student-${relayStudentCount}-courses" 
-                       value="${courseText}"
+                       value="${escapeCourseHtml(courseName)}"
                       data-course-closed="${isClosed}"
                        ${isClosed ? 'disabled' : ''}>
                 <label for="relayschool-course-${relayStudentCount}-${courseKey}" 
-                       data-kor="${course.kor}${course.tooltipKR || ''}" 
-                       data-eng="${course.eng}${course.tooltipEN || ''}"
-                       ${titleTooltip ? `title="${titleTooltip}"` : ''}>${courseText}</label>
+                       data-kor="${escapeCourseHtml(labelKor)}"
+                       data-eng="${escapeCourseHtml(labelEng)}"
+                      ${titleTooltip ? `title="${titleTooltip}"` : ''}><span class="course-label-main">${escapeCourseHtml(courseName)}${emphasisMarkup}</span>${course[currentLang === 'kor' ? 'tooltipKR' : 'tooltipEN'] || ''}</label>
             </div>
         `;
             }).join('');
@@ -1213,8 +1236,7 @@ function updatePsacCourseLabels() {
         const labels = document.querySelectorAll(`label[for*="psac-course"][for*="-${courseKey}"]`);
         
         labels.forEach(label => {
-            const tooltipText = course[`tooltip${currentLang === 'kor' ? 'KR' : 'EN'}`] || '';
-            label.textContent = course[currentLang] + tooltipText;
+            label.innerHTML = label.dataset[currentLang === 'kor' ? 'kor' : 'eng'] || escapeCourseHtml(course[currentLang]);
         });
     });
 }
@@ -1230,31 +1252,10 @@ function updateRelayCoursesLabels() {
     // 모든 Relay School 과정 체크박스 라벨 업데이트
     Object.keys(relayCoursesData).forEach(courseKey => {
         const course = relayCoursesData[courseKey];
-        
-        // 상태에 따른 표시 텍스트 추가
-        let statusDisplay = '';
-        
-        switch(course.status) {
-            case 'OFF':
-                statusDisplay = currentLang === 'kor' ? ' (마감)' : ' (Closed)';
-                break;
-            case '접수마감':
-                statusDisplay = currentLang === 'kor' ? ' (접수마감)' : ' (Closed)';
-                break;
-            case '마감임박':
-                statusDisplay = currentLang === 'kor' ? ' (마감임박)' : ' (Almost Full)';
-                break;
-            case '마감주의':
-                statusDisplay = currentLang === 'kor' ? ' (마감주의)' : ' (Almost Full)';
-                break;
-            default:
-                statusDisplay = '';
-        }
-        
         // 모든 릴레이스쿨 과정 라벨 업데이트 (통합된 형태)
         const labels = document.querySelectorAll(`label[for*="relayschool-course"][for*="-${courseKey}"]`);
         labels.forEach(label => {
-            label.textContent = course[currentLang] + statusDisplay;
+            label.innerHTML = label.dataset[currentLang === 'kor' ? 'kor' : 'eng'] || escapeCourseHtml(course[currentLang]);
         });
     });
 }

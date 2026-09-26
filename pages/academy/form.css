@@ -229,6 +229,19 @@
     width: auto;
 }
 .psac-checkbox-item label {width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 5px;}
+
+.course-label-main {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.course-emphasis {
+    color: #e21700;
+    font-size: 0.85em;
+    font-weight: 400;
+}
+
 .psac-course-list {
     background: #f8f9fa;
     padding: 15px;

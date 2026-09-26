@@ -130,6 +130,37 @@
     font-size: 2rem;
 }
 
+.course-duplicate-status {
+    min-height: 1.25em;
+    margin: 8px 0 0;
+    color: #555;
+    font-size: 0.875rem;
+}
+
+.course-already-applied label {
+    color: #b42318;
+    cursor: pointer;
+}
+
+.psac-checkbox-item.course-already-applied {
+    border-color: #b42318;
+}
+
+.course-already-applied-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: #fee4e2;
+    color: #b42318;
+    font-size: 0.75rem;
+    vertical-align: middle;
+}
+
+.course-already-applied input[type="checkbox"] {
+    accent-color: #b42318;
+}
+
 .ac-form-message {
     padding: 15px;
     border-radius: 5px;

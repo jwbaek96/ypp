@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
    ========================================================================== */
 
 // 웹 앱 URL (config 우선, 실패 시 fallback)
-let WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbztXmHnUtt3rQkAe6Gp8N_mIkLCChfrdbSPlDY16vXtxQWvamPb2gZZ8JtE-aOZ6Hlx/exec';
-const DIRECT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbztXmHnUtt3rQkAe6Gp8N_mIkLCChfrdbSPlDY16vXtxQWvamPb2gZZ8JtE-aOZ6Hlx/exec';
+// let WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbztXmHnUtt3rQkAe6Gp8N_mIkLCChfrdbSPlDY16vXtxQWvamPb2gZZ8JtE-aOZ6Hlx/exec';
+// const DIRECT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbztXmHnUtt3rQkAe6Gp8N_mIkLCChfrdbSPlDY16vXtxQWvamPb2gZZ8JtE-aOZ6Hlx/exec';
+let WEBAPP_URL = 'https://ypp-api-relay.yppapi.workers.dev/api/academy/apply';
+const DIRECT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyOEpckfR2WrHhO14zsWRc1d1TusfSJUXAOrgrm2X0COpLOY1gfVZbhY_3i-TOof0mJ/exec';
 
 async function loadAcademyFormApiUrl() {
     try {
@@ -76,6 +78,129 @@ function clearCourseDataLoading(containerId) {
     if (loading) {
         loading.remove();
     }
+}
+
+function normalizeAppliedCourse(value) {
+    return String(value || '')
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/&nbsp;/gi, ' ')
+        .replace(/&amp;/gi, '&')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(/\s*(접수\s*마감|마감임박|마감주의|마감|closed|almost full)\s*$/i, '')
+        .trim()
+        .toLocaleLowerCase();
+}
+
+function normalizeStudentName(value) {
+    return String(value || '').trim().replace(/\s+/g, '').toLocaleLowerCase();
+}
+
+function getApplicationYear(value) {
+    const match = String(value || '').match(/\b(20\d{2})\b/);
+    return match ? Number(match[1]) : null;
+}
+
+function clearExistingCourseMarks(studentSection) {
+    studentSection.querySelectorAll('.course-option-checkbox').forEach(checkbox => {
+        if (checkbox.dataset.alreadyApplied === 'true') {
+            checkbox.checked = checkbox.dataset.checkedBeforeDuplicate === 'true';
+        }
+        checkbox.disabled = checkbox.dataset.courseClosed === 'true';
+        checkbox.dataset.alreadyApplied = 'false';
+        delete checkbox.dataset.checkedBeforeDuplicate;
+        checkbox.closest('.psac-checkbox-item')?.classList.remove('course-already-applied');
+        checkbox.parentElement.querySelector('.course-already-applied-badge')?.remove();
+    });
+}
+
+async function checkExistingCourses(studentSection, formType) {
+    const prefix = formType === 'psac' ? 'psac' : 'relayschool';
+    const name = studentSection.querySelector(`[id^="${prefix}-studentName-"]`)?.value.trim() || '';
+    const mobile = studentSection.querySelector(`[id^="${prefix}-studentMobile-"]`)?.value || '';
+    const mobileDigits = mobile.replace(/\D/g, '');
+    const status = studentSection.querySelector('.course-duplicate-status');
+    const signature = `${name}|${mobileDigits}`;
+
+    studentSection.dataset.duplicateLookupSignature = signature;
+    clearExistingCourseMarks(studentSection);
+
+    if (!name || mobileDigits.length < 10 || mobileDigits.length > 11) {
+        if (status) status.textContent = '';
+        return;
+    }
+
+    if (status) status.textContent = '기존 신청 과목을 확인하고 있습니다...';
+
+    try {
+        const response = await fetch('https://ypp-api-relay.yppapi.workers.dev/api/academy/check', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ formType, phone: mobile })
+        });
+        const result = await response.json();
+        const responseItems = result?.data?.data?.items;
+
+        if (!response.ok || !Array.isArray(responseItems)) {
+            throw new Error(result?.error || '신청 내역 조회에 실패했습니다.');
+        }
+        if (studentSection.dataset.duplicateLookupSignature !== signature) return;
+
+        const items = responseItems.filter(item =>
+            normalizeStudentName(item.studentName) === normalizeStudentName(name) &&
+            String(item.studentMobile || '').replace(/\D/g, '') === mobileDigits &&
+            getApplicationYear(item.applicationDate) === new Date().getFullYear()
+        );
+        const appliedCourses = new Set(
+            items.flatMap(item => String(item.detailedEducation || '').split(';'))
+                .map(normalizeAppliedCourse)
+                .filter(Boolean)
+        );
+        let duplicateCount = 0;
+
+        studentSection.querySelectorAll('.course-option-checkbox').forEach(checkbox => {
+            if (!appliedCourses.has(normalizeAppliedCourse(checkbox.value))) return;
+
+            duplicateCount++;
+            checkbox.dataset.checkedBeforeDuplicate = String(checkbox.checked);
+            checkbox.checked = true;
+            checkbox.disabled = false;
+            checkbox.dataset.alreadyApplied = 'true';
+            checkbox.closest('.psac-checkbox-item')?.classList.add('course-already-applied');
+            const label = checkbox.parentElement.querySelector('label');
+            if (label && !label.querySelector('.course-already-applied-badge')) {
+                const badge = document.createElement('span');
+                badge.className = 'course-already-applied-badge';
+                badge.textContent = '이미 신청';
+                label.appendChild(badge);
+            }
+        });
+
+        if (status) {
+            status.textContent = duplicateCount ? '이미 신청한 과목은 이번 신청에서 제외됩니다. 새 과목만 선택해 주세요.' : '기존 신청 과목이 없습니다.';
+        }
+    } catch (error) {
+        if (studentSection.dataset.duplicateLookupSignature === signature && status) {
+            status.textContent = '기존 신청 내역을 확인하지 못했습니다. 제출 시 서버에서 다시 확인합니다.';
+        }
+        console.error('Existing course lookup failed:', error);
+    }
+}
+
+function bindExistingCourseLookup(studentSection, formType) {
+    const prefix = formType === 'psac' ? 'psac' : 'relayschool';
+    const inputs = [
+        studentSection.querySelector(`[id^="${prefix}-studentName-"]`),
+        studentSection.querySelector(`[id^="${prefix}-studentMobile-"]`)
+    ].filter(Boolean);
+    let timer;
+
+    inputs.forEach(input => {
+        input.addEventListener('blur', () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => checkExistingCourses(studentSection, formType), 250);
+        });
+    });
 }
 
 function maybeShowCourseLoadFailureAlert(tabId = getCurrentAcademyTab()) {
@@ -437,6 +562,9 @@ async function submitFormData(formData) {
         try {
             return await submitFormDataWithFetch(formData, WEBAPP_URL);
         } catch (error) {
+            if (error?.status === 409) {
+                throw error;
+            }
             console.warn('Worker apply request failed. Retrying with direct Apps Script.', error);
             return submitFormDataWithIframe(formData, DIRECT_WEBAPP_URL);
         }
@@ -465,9 +593,17 @@ async function submitFormDataWithFetch(formData, targetUrl = WEBAPP_URL) {
         payload = null;
     }
 
+    if (payload?.data?.success === false) {
+        const error = new Error(payload.data.message || payload.data.error || '신청이 거절되었습니다.');
+        error.status = 409;
+        throw error;
+    }
+
     if (!response.ok) {
         const serverMessage = payload?.error || payload?.message || '';
-        throw new Error(`신청 요청이 실패했습니다. (HTTP ${response.status}) ${serverMessage}`.trim());
+        const error = new Error(`신청 요청이 실패했습니다. (HTTP ${response.status}) ${serverMessage}`.trim());
+        error.status = response.status;
+        throw error;
     }
 
     const successFlag = payload?.success === true || payload?.data?.success === true;
@@ -582,9 +718,11 @@ function addPsacStudent() {
             return `
             <div class="psac-checkbox-item ${isClosed ? 'psac-checkbox-disabled' : ''}">
                 <input type="checkbox" 
+                      class="course-option-checkbox"
                        id="psac-course-${psacStudentCount}-${courseKey}" 
                        name="psac-student-${psacStudentCount}-courses" 
                        value="${courseText}"
+                      data-course-closed="${isClosed}"
                        ${isClosed ? 'disabled' : ''}>
                 <label for="psac-course-${psacStudentCount}-${courseKey}" 
                        data-kor="${course.kor} ${course.tooltipKR || ''}" 
@@ -639,10 +777,12 @@ function addPsacStudent() {
             <div class="psac-checkbox-group">
                 ${courseCheckboxes}
             </div>
+            <p class="course-duplicate-status" role="status" aria-live="polite"></p>
         </div>
     `;
     
     container.appendChild(studentDiv);
+    bindExistingCourseLookup(studentDiv, 'psac');
 }
 
 // PSAC 수강자 삭제
@@ -784,6 +924,10 @@ async function submitPsacForm(e) {
     } catch (error) {
         console.error('Error:', error);
         hideSubmitLoadingState();
+        if (error?.status === 409) {
+            showMessage('이미 신청한 과목은 선택할 수 없습니다.', 'error', 'psac-message');
+            return;
+        }
         showMessage('서버 연결에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
         alert(`신청 처리 중 오류가 발생했습니다.\n${error?.message || ''}`.trim());
     }
@@ -845,9 +989,11 @@ function addRelayschoolStudent() {
                 return `
             <div class="psac-checkbox-item ${isClosed ? 'psac-checkbox-disabled' : ''}">
                 <input type="checkbox" 
+                      class="course-option-checkbox"
                        id="relayschool-course-${relayStudentCount}-${courseKey}" 
                        name="relayschool-student-${relayStudentCount}-courses" 
                        value="${courseText}"
+                      data-course-closed="${isClosed}"
                        ${isClosed ? 'disabled' : ''}>
                 <label for="relayschool-course-${relayStudentCount}-${courseKey}" 
                        data-kor="${course.kor}${course.tooltipKR || ''}" 
@@ -905,10 +1051,12 @@ function addRelayschoolStudent() {
             <div class="psac-checkbox-group">
                 ${courseCheckboxes}
             </div>
+            <p class="course-duplicate-status" role="status" aria-live="polite"></p>
         </div>
     `;
     
     container.appendChild(studentDiv);
+    bindExistingCourseLookup(studentDiv, 'relay');
 }
 
 
@@ -1056,6 +1204,10 @@ async function submitRelayschoolForm(e) {
 
     } catch (error) {
         hideSubmitLoadingState();
+        if (error?.status === 409) {
+            showMessage('이미 신청한 과목은 선택할 수 없습니다.', 'error', 'rs-message');
+            return;
+        }
         showMessage('신청 처리 중 오류가 발생했습니다.', 'error', 'rs-message');
         alert(`신청 처리 중 오류가 발생했습니다.\n${error?.message || ''}`.trim());
         console.error('Form submission error:', error);

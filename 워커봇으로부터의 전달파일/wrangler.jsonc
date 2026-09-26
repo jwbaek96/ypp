@@ -7,7 +7,7 @@
 	},
 	"vars": {
 		"APPS_SCRIPT_URL_COURSES": "https://script.google.com/macros/s/AKfycbzvcFA7rwVCSJnhzQHlZH0a8AI0_S-EN-tyTg0tp_lJUmEXTN8d7axtVGrUjkOJLht-kA/exec",
-		"APPS_SCRIPT_URL_APPLY": "https://script.google.com/macros/s/AKfycbztXmHnUtt3rQkAe6Gp8N_mIkLCChfrdbSPlDY16vXtxQWvamPb2gZZ8JtE-aOZ6Hlx/exec",
+		"APPS_SCRIPT_URL_APPLY": "https://script.google.com/macros/s/AKfycbyOEpckfR2WrHhO14zsWRc1d1TusfSJUXAOrgrm2X0COpLOY1gfVZbhY_3i-TOof0mJ/exec",
 		"APPS_SCRIPT_URL_CHECK": "https://script.google.com/macros/s/AKfycbyoMc0WSMtDwJJc4yARLNDAUAaUgtSyyzetW2sSwmZq91PvWHPUTrPd60x1iwBCzDVx/exec",
 		"ALLOWED_ORIGINS": "https://www.ypp.co.kr,https://ypp.co.kr,http://localhost:5173,http://localhost:5500,http://127.0.0.1:5500,http://localhost:5502,http://127.0.0.1:5502,https://ypp-api-relay.yppapi.workers.dev",
 		"RATE_LIMIT_MAX_PER_MINUTE": "30"

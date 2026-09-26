@@ -127,7 +127,7 @@ function doPost(e) {
         response.message = batchResult.message;
         response.data = batchResult.data;
         break;
-        
+
       default:
         response.message = `지원하지 않는 액션입니다: ${action}`;
     }

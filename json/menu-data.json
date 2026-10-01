@@ -5,6 +5,7 @@
         "ko": "회사소개",
         "en": "Company"
       },
+      "megaMenuImage": "../assets/images/menu/SAMPLE%20IMAGE.png",
       "url": "/pages/company/about.html?tab=status",
       "children": {
         "status": {
@@ -54,6 +55,7 @@
         "ko": "사업분야",
         "en": "Business Area"
       },
+      "megaMenuImage": "../assets/images/menu/SAMPLE%20IMAGE.png",
       "url": "/pages/business/index.html?tab=nuclear-power",
       "children": {
         "nuclear-power": {
@@ -144,6 +146,7 @@
         "en": "Services and Offerings"
       },
       "url": "/pages/workingscope/index.html",
+      "megaMenuImage": "../assets/images/menu/SAMPLE%20IMAGE.png",
       "children": {
         "development-solution": {
           "title": {
@@ -192,6 +195,7 @@
         "en": "ESG"
       },
       "url": "/pages/esg/esg.html",
+      "megaMenuImage": "../assets/images/menu/SAMPLE%20IMAGE.png",
       "children": {
         "esg": {
           "title": {
@@ -232,7 +236,7 @@
         "ko": "YPP아카데미",
         "en": "YPP Academy"
       },
-      "url": "/pages/academy/index.html?tab=intro",
+      "url": "/pages/academy/index.html",
       "sections": ["소개", "PSAC", "Relay School"],
       "type": "section-page",
       "children": {

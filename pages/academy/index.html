@@ -37,7 +37,11 @@
     <!-- Main Content -->
     <main class="main-content">
         <!-- Page Header -->
-        <section class="page-header">
+        <section class="page-header" 
+            style="background: url(page-header_YPP아카데미.webp);
+            text-align: center;
+            background-size: cover;
+            background-position: center;">
             <div class="container">
                 <div class="page-header-content">
                     <h1 class="page-title"
@@ -2356,7 +2360,6 @@
     <script src="courseData.js"></script>
     <script src="form.js"></script>
     <script src="psac-overview.js"></script>
-    <!-- <script src="rs-details.js"></script> -->
 
 
 <script>
@@ -2540,10 +2543,10 @@ class AcademyPageController {
         
         const headerHeight = header ? header.getBoundingClientRect().height : 0;
         const tabNavHeight = tabNavigation ? tabNavigation.getBoundingClientRect().height : 0;
-        const totalOffset = headerHeight + tabNavHeight + 20; // 여유 공간 20px
+        // const totalOffset = headerHeight + tabNavHeight + 20; // 여유 공간 20px
         
         window.scrollTo({
-            top: totalOffset,
+            top: 0,
             behavior: 'smooth'
         });
 

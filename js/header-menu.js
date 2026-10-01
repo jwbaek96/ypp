@@ -74,6 +74,7 @@ function createDesktopMenu(navigation, extraClassName = '') {
 function createMenuItem(item, key, depth) {
     const li = document.createElement('li');
     li.className = `menu-item depth-${depth}`;
+    li.dataset.menuKey = key;
     
     // 메인 링크 생성
     const link = document.createElement('a');
@@ -156,6 +157,209 @@ function createMenuItem(item, key, depth) {
     }
     
     return li;
+}
+
+const megaMenuPageCache = new Map();
+
+function getMenuTitle(item) {
+    if (typeof item.title === 'object' && item.title) {
+        const language = localStorage.getItem('selectedLanguage') || 'ko';
+        return item.title[language] || item.title.ko || item.title.en || '';
+    }
+    return item.title || '';
+}
+
+function getPageDocument(item) {
+    const pageUrl = new URL(window.getPath(item.url), window.location.href);
+    const cacheKey = pageUrl.pathname;
+
+    if (!megaMenuPageCache.has(cacheKey)) {
+        megaMenuPageCache.set(cacheKey, fetch(cacheKey)
+            .then(response => response.ok ? response.text() : '')
+            .then(html => new DOMParser().parseFromString(html, 'text/html'))
+            .catch(() => null));
+    }
+
+    return megaMenuPageCache.get(cacheKey);
+}
+
+async function getSectionLinks(item, key) {
+    const pageUrl = new URL(window.getPath(item.url), window.location.href);
+    const sectionKey = pageUrl.searchParams.get('tab') || pageUrl.hash.slice(1) || key;
+    const pageDocument = await getPageDocument(item);
+    const sectionNav = pageDocument && (
+        pageDocument.getElementById(`section-nav-${sectionKey}`) ||
+        (!pageUrl.search && !pageUrl.hash && pageDocument.querySelector('.tab-nav')) ||
+        pageDocument.querySelector('.section-nav') ||
+        pageDocument.querySelector('.tab-nav')
+    );
+
+    if (sectionNav) {
+        const language = localStorage.getItem('selectedLanguage') || 'ko';
+        const links = Array.from(sectionNav.querySelectorAll('a')).map(anchor => {
+            const href = anchor.getAttribute('href') || '';
+            const targetUrl = new URL(pageUrl.href);
+            if (href.startsWith('#')) {
+                targetUrl.hash = href.slice(1);
+            } else if (href) {
+                return {
+                    title: anchor.getAttribute(language === 'en' ? 'data-eng' : 'data-kor') || anchor.textContent.trim(),
+                    href: new URL(href, pageUrl.href).href
+                };
+            }
+            return {
+                title: anchor.getAttribute(language === 'en' ? 'data-eng' : 'data-kor') || anchor.textContent.trim(),
+                href: targetUrl.href
+            };
+        }).filter(link => link.title);
+
+        if (links.length) return links;
+    }
+
+    return (item.sections || []).map(title => ({
+        title,
+        href: pageUrl.href
+    }));
+}
+
+function createMegaMenuPanel(header) {
+    let panel = header.querySelector('.header-mega-menu');
+    if (panel) return panel;
+
+    panel = document.createElement('div');
+    panel.className = 'header-mega-menu';
+    panel.setAttribute('aria-hidden', 'true');
+    panel.innerHTML = `
+        <div class="header-mega-menu-inner">
+            <section class="mega-menu-intro">
+                <h2 class="mega-menu-title"></h2>
+                <img class="mega-menu-image" alt="">
+            </section>
+            <div class="mega-menu-content" role="group" aria-label="하위 메뉴와 상세 메뉴"></div>
+        </div>`;
+    header.appendChild(panel);
+
+    header.addEventListener('mouseleave', () => {
+        clearTimeout(panel.switchTimer);
+        panel.classList.remove('is-switching');
+        panel.classList.remove('is-open');
+        panel.setAttribute('aria-hidden', 'true');
+        header.querySelectorAll('.mega-menu-active').forEach(item => item.classList.remove('mega-menu-active'));
+    });
+
+    return panel;
+}
+
+function renderMegaMenu(panel, menuItem, item, key) {
+    const children = item.children || {};
+    const title = getMenuTitle(item);
+    const titleElement = panel.querySelector('.mega-menu-title');
+    const image = panel.querySelector('.mega-menu-image');
+    const content = panel.querySelector('.mega-menu-content');
+    const fallbackImage = '/assets/images/menu/SAMPLE%20IMAGE.png';
+    image.src = window.getPath(item.megaMenuImage || fallbackImage);
+    image.alt = `${title} 메뉴 이미지`;
+    titleElement.textContent = title;
+    content.replaceChildren();
+
+    Object.entries(children).forEach(([childKey, child]) => {
+        const childLink = document.createElement('a');
+        childLink.className = 'mega-menu-child-link';
+        childLink.href = window.getPath(child.url || '#');
+        childLink.textContent = getMenuTitle(child);
+
+        const menuRow = document.createElement('div');
+        menuRow.className = 'mega-menu-row';
+        menuRow.dataset.menuKey = childKey;
+
+        const sectionRow = document.createElement('div');
+        sectionRow.className = 'mega-menu-section-row';
+        (child.sections || []).forEach(sectionTitle => {
+            const sectionLink = document.createElement('a');
+            sectionLink.href = window.getPath(child.url || '#');
+            sectionLink.textContent = sectionTitle;
+            sectionRow.appendChild(sectionLink);
+        });
+
+        childLink.addEventListener('mouseenter', () => {
+            content.querySelectorAll('.is-current').forEach(link => link.classList.remove('is-current'));
+            childLink.classList.add('is-current');
+        });
+
+        menuRow.append(childLink, sectionRow);
+        content.appendChild(menuRow);
+
+        getSectionLinks(child, childKey).then(links => {
+            if (panel.dataset.menuKey !== key || !panel.classList.contains('is-open')) return;
+            const row = Array.from(content.children).find(element => element.dataset.menuKey === childKey);
+            const rowLinks = row && row.querySelector('.mega-menu-section-row');
+            if (!rowLinks || !links.length) return;
+            rowLinks.replaceChildren();
+            links.forEach(link => {
+                const sectionLink = document.createElement('a');
+                sectionLink.href = link.href;
+                sectionLink.textContent = link.title;
+                rowLinks.appendChild(sectionLink);
+            });
+        });
+    });
+
+    panel.dataset.menuKey = key;
+    panel.classList.add('is-open');
+    panel.setAttribute('aria-hidden', 'false');
+    menuItem.classList.add('mega-menu-active');
+}
+
+function bindDesktopMegaMenu(header, navigation) {
+    const panel = createMegaMenuPanel(header);
+    const menuItems = header.querySelectorAll('#desktop-nav-container > .desktop-nav:not(.header-top-nav) > .main-menu > .menu-item');
+
+    const closeMegaMenu = () => {
+        clearTimeout(panel.switchTimer);
+        panel.dataset.pendingMenuKey = '';
+        panel.classList.remove('is-switching', 'is-open');
+        panel.setAttribute('aria-hidden', 'true');
+        header.querySelectorAll('.mega-menu-active').forEach(activeItem => activeItem.classList.remove('mega-menu-active'));
+    };
+
+    const topNavigation = header.querySelector('#header-top-nav-container');
+    if (topNavigation) {
+        topNavigation.addEventListener('mouseenter', closeMegaMenu);
+    }
+
+    menuItems.forEach(menuItem => {
+        menuItem.addEventListener('mouseenter', () => {
+            if (window.innerWidth <= 900) return;
+            const key = menuItem.dataset.menuKey;
+            const item = navigation[key];
+            if (!item || !item.children || !Object.keys(item.children).length) {
+                clearTimeout(panel.switchTimer);
+                panel.classList.remove('is-switching');
+                header.querySelectorAll('.mega-menu-active').forEach(activeItem => activeItem.classList.remove('mega-menu-active'));
+                panel.classList.remove('is-open');
+                panel.setAttribute('aria-hidden', 'true');
+                return;
+            }
+
+            if (panel.classList.contains('is-open') && panel.dataset.menuKey === key) return;
+
+            header.querySelectorAll('.mega-menu-active').forEach(activeItem => activeItem.classList.remove('mega-menu-active'));
+            if (!panel.classList.contains('is-open')) {
+                renderMegaMenu(panel, menuItem, item, key);
+                return;
+            }
+
+            clearTimeout(panel.switchTimer);
+            panel.dataset.pendingMenuKey = key;
+            panel.classList.add('is-switching');
+            panel.switchTimer = setTimeout(() => {
+                if (panel.dataset.pendingMenuKey !== key) return;
+                renderMegaMenu(panel, menuItem, item, key);
+                panel.dataset.pendingMenuKey = '';
+                requestAnimationFrame(() => panel.classList.remove('is-switching'));
+            }, 160);
+        });
+    });
 }
 
 // ===== 메뉴 삽입 후 언어 적용 =====
@@ -343,13 +547,18 @@ async function insertDesktopMenu() {
         container.innerHTML = '';
         container.appendChild(menuElement);
     }
-    
+
     // 생성된 메뉴 확인
     const hasChildrenItems = document.querySelectorAll('.desktop-nav .has-children');
     const subMenus = document.querySelectorAll('.desktop-nav .sub-menu');
     // console.log('하위 메뉴가 있는 항목들:', hasChildrenItems.length);
     // console.log('서브메뉴 개수:', subMenus.length);
     
+    const header = document.getElementById('header');
+    if (header && container) {
+        bindDesktopMegaMenu(header, data.navigation);
+    }
+
     // console.log('Desktop menu inserted - 모든 상호작용은 CSS가 처리합니다');
 }
 

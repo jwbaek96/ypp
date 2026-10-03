@@ -303,7 +303,7 @@ function isIndexSectionLoaded(sectionName) {
 // ===== 자동 초기화 =====
 document.addEventListener('DOMContentLoaded', function() {
     // 컴포넌트 로딩 완료 후 섹션 로딩 시작
-    if (document.querySelector('.main-content')) {
+    if (document.querySelector('main')) {
         initIndexSections();
     } else {
         document.addEventListener('componentsLoaded', () => {

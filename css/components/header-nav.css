@@ -437,7 +437,7 @@
 
     .header .desktop-nav > .main-menu > .menu-item.mega-menu-active > .menu-link {
         color: var(--primary-blue, #0066cc);
-        border-bottom-color: var(--primary-blue, #0066cc);
+        /* border-bottom-color: var(--primary-blue, #0066cc); */
     }
 
     #desktop-nav-container > .desktop-nav > .main-menu > .menu-item > .sub-menu {

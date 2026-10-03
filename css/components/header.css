@@ -4,7 +4,8 @@
 }
 /* ===== HEADER ===== */
 .header {
-    position: fixed;
+    /* position: fixed; */
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -140,6 +141,8 @@
 
 /* 모바일에서는 숨김 */
 @media (max-width: 900px) {
+    .header {position: fixed;}
+
     .header-links,
     .lang-btn,
     .header-container > #desktop-nav-container {

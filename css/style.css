@@ -1,6 +1,6 @@
 /* ===== CSS RESET & BASE ===== */
 @import "base/reset.css";
-@import "base/variables.css";
+@import "variables.css";
 @import "base/base.css";
 /* ===== 전역 COMPONENTS ===== */
 @import "components/header.css";
@@ -9,14 +9,15 @@
 @import "components/sidebar.css";
 
 /* ===== EXPEND 기능 ===== */
-@import "expend/breadcrumb.css";
+/* @import "expend/breadcrumb.css"; */
 
 /* YPP Website - Main Stylesheet */
 
 
 /* ===== LAYOUT COMPONENTS ===== */
-.container {max-width: 1200px;margin: 0 auto;padding: var(--container-padding);}
-.main-content img{max-width: 100%;}
+/* .container {max-width: 1200px;margin: 0 auto;padding: var(--container-padding);} */
+.container {margin: 0 auto;padding: var(--container-padding);}
+/* .main-content img{max-width: 100%;} */
 /* ===== SECTION COMPONENTS ===== */
 .section-title {color: var(--text-primary);margin-bottom: 1rem;}
 .section-subtitle {color: var(--text-secondary);font-size: 1.125rem;max-width: 600px;margin: 0 auto;}

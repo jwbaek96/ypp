@@ -1,0 +1,113 @@
+/* ===== COLOR VARIABLES ===== */
+:root {
+    /* Primary Colors */
+    --primary-blue: #0066CC;
+    --primary-red: #CC0033;
+    
+    /* Grayscale */
+    --black: #000000;
+    --dark-gray: #2C2C2C;
+    --medium-gray: #666666;
+    --light-gray: #CCCCCC;
+    --very-light-gray: #F5F5F5;
+    --very-light-gray2:rgb(230, 230, 230);
+    --white: #FFFFFF;
+    
+    /* Functional Colors */
+    --text-primary: #2C2C2C;
+    --text-secondary: #666666;
+    --text-light: #999999;
+    --border-color: #E0E0E0;
+    --shadow: rgba(0, 0, 0, 0.1);
+    
+    /* Typography */
+    --font-size-h1: 3.2rem;
+    --font-size-h2: 2.7rem;
+    --font-size-h3: 2rem;
+    --font-size-header-sub: 1.1rem;
+    --font-size-body: 1.3rem;
+    --font-size-small: 1.15rem;
+    --font-size-large: 2.5rem;
+    
+    /* Spacing */
+    --section-padding: 5rem 0;
+    --container-padding: 0 2rem;
+    --card-padding: 2rem;
+    
+    /* Header height */
+    --header-border-color: #E0E0E080;
+    --header-container-height : 66px;
+    --header-links-height : 70px;
+/* ============================================== */
+    /* 커스텀 */
+    --section-mxw: 1200px;
+    --section-mxw-full: 100%;
+
+    --page-header-title-fz:3.5rem;
+    --page-header-title-fw:700;
+    --page-header-title-c:#083495;
+    --page-header-subtitle-fz:1.2rem;
+    --page-header-subtitle-fw:normal;
+    --page-header-subtitle-c:#181818;
+    --page-header-subtitle-line-height: 1.5;
+    --page-header-before-bgc: rgba(255, 255, 255, 0.65);
+    --page-header-before-blur: blur(29px);
+    --page-header-bgc: linear-gradient(135deg, #dde2ff 0%, #364f70 100%);
+    --page-header-padding: 5.5rem 0;
+    --page-header-br: 20px;
+    --page-header-margin: 10px;
+    
+    --page-content-padding: 3rem 0;
+    --page-content-c:#000;
+
+    /* --page-tab-top: calc(var(--header-container-height) + var(--header-links-height)); */
+    --page-tab-top: 0;
+    --page-tab-bd: 1px solid #e5e5e5;
+    --page-tab-bgc: #ffffff;
+    --page-tab-gap: 0;
+
+    --page-tab-item-fz: 1.02rem;
+    --page-tab-item-padding: 1rem 1.5rem;
+    --page-tab-item-c: #666;
+    --page-tab-item-hover-c: #0066cc;
+    --page-tab-item-hover-bgc: #f8f9fa;
+    --page-tab-item-hover-bdc: #0066cc;
+    --page-tab-item-active-c: #0066cc;
+    --page-tab-item-active-bgc: #f8f9fa;
+    --page-tab-item-active-bdc: #0066cc;
+    
+    --page-tab-2-gap: 1rem;
+    --page-tab-2-padding: 0.6rem 2rem;
+    --page-tab-2-bgc: #ffffff54;
+    --page-tab-2-blur: blur(10px);
+    --page-tab-2-item-bgc: #ffffff;
+    --page-tab-2-item-br: 20px;
+    --page-tab-2-item-fz: 1rem;
+    --page-tab-2-item-fw: 500;
+    --page-tab-2-item-padding: 0.5rem 1rem;
+    --page-tab-2-item-hover-bgc: rgba(0, 102, 204, 0.05);
+    --page-tab-2-item-active-c: #fff;
+    --page-tab-2-item-active-bgc: #0066cc;
+    
+}
+@media (max-width: 900px) {
+    :root {
+        --page-header-margin: calc(var(--header-container-height) + 10px) 10px 10px 10px;
+        --page-tab-top: calc(var(--header-container-height));
+    }
+}
+
+
+
+
+
+
+
+
+
+/* 커스텀 클래스 */
+.section-mxw {
+    max-width: var(--section-mxw);
+    margin: 0 auto;
+}
+.section-mxw-full {max-width: var(--section-mxw-full);}

@@ -1,5 +1,5 @@
 /**
- * 간단한 팝업 시스템 - 구글 시트 이미지만 표시
+ * 간단한 팝업 시스템 - 보도자료 이미지, 아카데미 및 일반 공지 표시
  */
 const SimplePopupModal = {
   popups: [],
@@ -46,14 +46,14 @@ const SimplePopupModal = {
       // 1. 구글 시트 보도자료 데이터 로드
       const pressPopups = await this.loadGoogleSheetPopups(currentLang);
       
-      // 2. JSON 아카데미 공지 데이터 로드
-      const academyPopups = await this.loadAcademyPopups(currentLang);
+      // 2. JSON 아카데미 및 일반 공지 데이터 로드
+      const jsonPopups = await this.loadJsonPopups();
       
       // 3. 두 데이터 통합
-      this.popups = [...pressPopups, ...academyPopups];
+      this.popups = [...pressPopups, ...jsonPopups];
       
       console.log('✅ 통합 팝업 데이터 로드 완료:', this.popups.length, '개');
-      console.log('� 구성:', `보도자료 ${pressPopups.length}개 + 아카데미 ${academyPopups.length}개`);
+      console.log('� 구성:', `보도자료 ${pressPopups.length}개 + JSON 공지 ${jsonPopups.length}개`);
       
     } catch (error) {
       console.error('� 통합 데이터 로드 오류:', error);
@@ -134,33 +134,44 @@ const SimplePopupModal = {
   },
 
   /**
-   * JSON에서 아카데미 공지 데이터 불러오기
+   * JSON 공지 로드: enabled가 false이면 제외, notice는 sections, 아카데미는 downloads 사용
    */
-  async loadAcademyPopups(currentLang) {
+  async loadJsonPopups() {
     try {
-      console.log('📚 아카데미 공지 JSON 로드 중...');
+      console.log('📚 공지 JSON 로드 중...');
       
       const response = await fetch('/popup/popup-data.json');
+      if (!response.ok) {
+        throw new Error(`공지 JSON 로드 실패: HTTP ${response.status}`);
+      }
       const data = await response.json();
       
       if (data.popups && data.popups.length > 0) {
-        const academyPopups = data.popups.map((popup, index) => ({
-          id: `academy_${popup.id || index}`,
-          type: 'academy',
-          titleKR: popup.title.kor,
-          titleEN: popup.title.eng,
-          academyData: popup.downloads, // 아카데미 상세 데이터
-          popup: 'on',
-          state: 'on'
-        }));
+        const jsonPopups = data.popups.filter(popup => popup.enabled !== false).map((popup, index) => {
+          const type = popup.type === 'notice' ? 'notice' : 'academy';
+          if (type === 'notice' && !Array.isArray(popup.sections)) {
+            throw new Error(`공지 ${popup.id ?? index}: sections 배열이 필요합니다.`);
+          }
+          return {
+            id: `${type}_${popup.id || index}`,
+            type,
+            titleKR: popup.title.kor,
+            titleEN: popup.title.eng,
+            ...(type === 'notice'
+              ? { sections: popup.sections }
+              : { academyData: popup.downloads }),
+            popup: 'on',
+            state: 'on'
+          };
+        });
         
-        console.log('✅ 아카데미 데이터 로드 완료:', academyPopups.length, '개');
-        return academyPopups;
+        console.log('✅ JSON 공지 데이터 로드 완료:', jsonPopups.length, '개');
+        return jsonPopups;
       }
       
       return [];
     } catch (error) {
-      console.error('💥 아카데미 데이터 로드 오류:', error);
+      console.error('💥 JSON 공지 데이터 로드 오류:', error);
       return [];
     }
   },
@@ -283,6 +294,8 @@ const SimplePopupModal = {
         } else if (popup.type === 'academy') {
           // 아카데미 타입: 카드로 표시
           this.renderAcademyItem(gridItem, popup, currentLang);
+        } else if (popup.type === 'notice') {
+          this.renderNoticeItem(gridItem, popup, currentLang);
         }
         
         gridContainer.appendChild(gridItem);
@@ -407,6 +420,48 @@ const SimplePopupModal = {
     
     // 클릭 이벤트는 개별 링크에 적용
     this.addAcademyClickEvents(gridItem, academyData);
+  },
+
+  /**
+   * 일반 공지 렌더링 (한/영 텍스트, items[].enabled가 false인 문장은 숨김)
+   */
+  renderNoticeItem(gridItem, popup, currentLang) {
+    const languageKey = currentLang === 'en' ? 'eng' : 'kor';
+    gridItem.classList.add('notice-popup-item');
+
+    const card = document.createElement('div');
+    card.className = 'academy-card notice-card';
+    const header = document.createElement('div');
+    header.className = 'academy-header';
+    const title = document.createElement('h3');
+    title.className = 'academy-title';
+    title.textContent = currentLang === 'en' ? popup.titleEN : popup.titleKR;
+    header.appendChild(title);
+    card.appendChild(header);
+
+    const content = document.createElement('div');
+    content.className = 'academy-content';
+    popup.sections.forEach(section => {
+      const sectionElement = document.createElement('div');
+      sectionElement.className = 'academy-section';
+      const heading = document.createElement('div');
+      heading.className = 'academy-category-title';
+      heading.textContent = section.name[languageKey];
+      sectionElement.appendChild(heading);
+
+      const items = document.createElement('div');
+      items.className = 'academy-items';
+      (section.items || []).filter(item => item.enabled !== false).forEach(item => {
+        const paragraph = document.createElement('p');
+        paragraph.className = 'notice-text';
+        paragraph.textContent = item.name[languageKey];
+        items.appendChild(paragraph);
+      });
+      sectionElement.appendChild(items);
+      content.appendChild(sectionElement);
+    });
+    card.appendChild(content);
+    gridItem.replaceChildren(card);
   },
 
   /**

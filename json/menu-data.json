@@ -6,14 +6,14 @@
         "en": "Company"
       },
       "megaMenuImage": "../assets/images/menu/SAMPLE%20IMAGE.png",
-      "url": "/pages/company/about.html?tab=status",
+      "url": "/pages/company/about.html?tab=회사소개-기업현황",
       "children": {
         "status": {
           "title": {
             "ko": "기업현황",
             "en": "About"
           },
-          "url": "/pages/company/about.html?tab=status",
+          "url": "/pages/company/about.html?tab=회사소개-기업현황",
           "sections": ["소개", "인사말", "연혁", "조직도"]
         },
         "business": {

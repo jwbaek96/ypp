@@ -30,8 +30,8 @@ h2 { font-size: var(--font-size-h2); }
 h3 { font-size: var(--font-size-h3); }
 
 p {
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
+    color: var(--c-black);
+    line-height: var(--line-height);
 }
 
 a {

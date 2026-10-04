@@ -40,6 +40,12 @@
     --header-links-height : 70px;
 /* ============================================== */
     /* 커스텀 */
+    --c-black: #000000;
+    --c-blue: #0066CC;
+    --line-height: 1.5;
+    --br: 15px;
+    --bdc1: #e8e8e8d4;
+
     --section-mxw: 1200px;
     --section-mxw-full: 100%;
 
@@ -59,6 +65,7 @@
     
     --page-content-padding: 3rem 0;
     --page-content-c:#000;
+    --page-content-fz: 1rem;
 
     /* --page-tab-top: calc(var(--header-container-height) + var(--header-links-height)); */
     --page-tab-top: 0;
@@ -88,21 +95,18 @@
     --page-tab-2-item-hover-bgc: rgba(0, 102, 204, 0.05);
     --page-tab-2-item-active-c: #fff;
     --page-tab-2-item-active-bgc: #0066cc;
+
+    --page-tab-section-padding: 1rem;
     
 }
 @media (max-width: 900px) {
     :root {
         --page-header-margin: calc(var(--header-container-height) + 10px) 10px 10px 10px;
         --page-tab-top: calc(var(--header-container-height));
+        --page-header-title-fz: 2.5rem;
+        --page-header-subtitle-fz: 1rem;
     }
 }
-
-
-
-
-
-
-
 
 
 /* 커스텀 클래스 */
@@ -111,3 +115,5 @@
     margin: 0 auto;
 }
 .section-mxw-full {max-width: var(--section-mxw-full);}
+.section-blank-1rem{display:block; width: 100%; height: 1rem;}
+.section-blank-2rem{display:block; width: 100%; height: 2rem;}

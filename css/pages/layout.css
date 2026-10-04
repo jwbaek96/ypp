@@ -27,13 +27,13 @@
     backdrop-filter: var(--page-header-before-blur);
     z-index: 2;
 }
-.page-title {
+.page-header-title {
     font-size: var(--page-header-title-fz);
     font-weight: var(--page-header-title-fw);
     color: var(--page-header-title-c);
     margin-bottom: 1rem;
 }
-.page-subtitle {
+.page-header-subtitle {
     font-size: var(--page-header-subtitle-fz);
     font-weight: var(--page-header-subtitle-fw);
     color: var(--page-header-subtitle-c);
@@ -65,11 +65,7 @@
     margin: 0;
     padding: 0;
 }
-/* 
-.tab-nav,
-.section-nav {margin: 0;} */
 
-/* Tab Navigation */
 .tab-nav {
     display: flex;
     justify-content: center;
@@ -146,62 +142,22 @@
 }
 
 /* Tab Content */
-.tab-content-section {
+/* .tab-content-section {
     padding: var(--page-content-padding);
     overflow-x: hidden;
+} */
+.page-content {
+    padding: var(--page-content-padding);
+    overflow-x: hidden;
+    font-size: var(--page-content-fz);
+    color: var(--page-content-c);
 }
 
 .tab-content {display: none;}
 .tab-content.active {display: block;}
 
-
-.content-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.content-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--text-primary, #333);
-    margin-bottom: 1rem;
-}
-
-.content-subtitle {
-    font-size: 1.1rem;
-    color: var(--text-secondary, #666);
-}
-
-/* Content*/
-.container {
-    width: 100%;
-    /* max-width: 1350px; */
-}
-/* Content Grid */
-.content-grid {
-    gap: 2rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.content-block {
-    width: 100%;
-    background: var(--white, #ffffff);
-    border: 1px solid var(--border-light, #e5e5e5);
-    border-radius: 8px;
-    padding: 2rem;
-    transition: box-shadow 0.3s ease;
-}
-
-.content-block:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.content-block.full-width {
-    grid-column: 1 / -1;
-}
-
-.block-title {
+.tab-section {padding: var(--page-tab-section-padding);}
+.tab-section-title {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--text-primary, #333);
@@ -210,7 +166,68 @@
     padding: 0 calc(1.5rem + 2px) 0.5rem 1.5rem;
 }
 
-.block-content {
+.tab-section-block {
+    color: #000;
+    line-height: var(--line-height);
+    padding: var(--page-tab-section-padding);
+}
+.tab-section-block-header{
+    & span {
+        color: var(--c-blue);
+        margin-bottom: 12px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+    & h2 {text-transform: uppercase;}
+    & p {font-size: 17px; letter-spacing: -0.025em;}
+    @media (max-width: 650px) {
+        & h2 {font-size: 29px;}
+        & p {font-size: 16px; letter-spacing: 1.7;}
+    }
+}
+.content-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary, #666);
+}
+
+/* .container {width: 100%;} */
+
+/* Content Grid */
+/* .content-grid {
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+} */
+
+/* .content-block {
+    width: 100%;
+    background: var(--white, #ffffff);
+    border: 1px solid var(--border-light, #e5e5e5);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: box-shadow 0.3s ease;
+} */
+
+/* .content-block:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+} */
+
+/* .content-block.full-width {
+    grid-column: 1 / -1;
+} */
+
+/* .block-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary, #333);
+    margin-bottom: 1rem;
+    border-left: 5px solid var(--primary-blue, #0066cc);
+    padding: 0 calc(1.5rem + 2px) 0.5rem 1.5rem;
+} */
+
+/* .block-content {
     color: var(--text-secondary, #666);
     line-height: 1.6;
     min-height: 100px;
@@ -219,7 +236,7 @@
     justify-content: center;
     display: block;
     border-radius: 4px;
-}
+} */
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -274,13 +291,13 @@
     }
     .history-timeline-content,
     .block-content p{
-        font-size: .9rem;
+        font-size: 1rem;
     }
 }
 /* Section Scroll Offset */
-.content-block[id] {
+/* .content-block[id] {
     scroll-margin-top: 140px;
-}
+} */
 .content-section {
     padding: 3rem 0;
     background-color: var(--white, #ffffff);

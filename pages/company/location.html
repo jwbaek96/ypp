@@ -15,6 +15,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/pages/layout.css">
+    <link rel="stylesheet" href="location.css">
     
     <!-- 메타 시스템 -->
     <script src="../../js/head-meta.js"></script>
@@ -28,674 +29,296 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Page Header -->
         <section class="page-header">
-            <div class="container">
-                <div class="page-header-content">
-                    <h1 class="page-title" data-eng="Location" data-kor="오시는 길">오시는 길</h1>
-                    <p class="page-subtitle"data-eng="YPP Headquarters, Factory, and Branch Locations"data-kor="YPP 본사, 공장, 지사 위치 안내"></p>
-                </div>
+            <div class="page-header-content">
+                <h1 class="page-header-title" data-kor="오시는 길"data-eng="Location">오시는 길</h1>
+                <p class="page-header-subtitle"data-eng="YPP Headquarters, Factory, and Branch Locations"data-kor="YPP 본사, 공장, 지사 위치 안내"></p>
             </div>
         </section>
 
-        <!-- Breadcrumb -->
-        <!-- <section class="breadcrumb-section">
-            <div class="container">
-                <nav class="breadcrumb">
-                    <a href="/"data-eng="Home" data-kor="홈"></a>
-                    <span class="breadcrumb-separator">></span>
-                    <a href="../company"data-eng="Company" data-kor="회사소개"></a>
-                    <span class="breadcrumb-separator">></span>
-                    <span class="breadcrumb-current"data-eng="Location" data-kor="오시는 길">오시는 길</span>
-                </nav>
-            </div>
-        </section> -->
-
         <!-- Tab Navigation -->
         <section class="tab-navigation">
-            <div class="container">
-                <nav class="tab-nav">
-                    <a href="#headquarters" class="tab-link active" data-tab="headquarters"data-eng="Location" data-kor="본사"></a>
-                    <a href="#factory" class="tab-link" data-tab="factory"data-eng="Research Institute · Factory" data-kor="연구소 · 공장"></a>
-                    <a href="#branches" class="tab-link" data-tab="branches"data-eng="Branches" data-kor="지사"></a>
-                </nav>
-                
-                <!-- Section Navigation for 본사 -->
-                <div class="section-nav" id="section-nav-headquarters">
-                    <a href="#headquarters-map" class="section-nav-link"data-eng="Map" data-kor="지도"></a>
-                    <a href="#headquarters-info" class="section-nav-link"data-eng="Information" data-kor="위치정보"></a>
-                    <a href="#headquarters-contact" class="section-nav-link"data-eng="Contact" data-kor="연락처"></a>
-                </div>
-                
-                <!-- Section Navigation for 공장 -->
-                <div class="section-nav" id="section-nav-factory" style="display: none;">
-                    <a href="#factory-research" class="section-nav-link"data-eng="Research Institute · 1st Factory" data-kor="연구소 · 제1공장"></a>
-                    <a href="#factory-second" class="section-nav-link"data-eng="Research Institute · 2nd Factory" data-kor="연구소 · 제2공장"></a>
-                </div>
-                
-                <!-- Section Navigation for 지사 -->
-                <div class="section-nav" id="section-nav-branches" style="display: none;">
-                    <a href="#branches-yeongnam" class="section-nav-link"data-eng="Yeongnam branch" data-kor="영남 지사"></a>
-                    <a href="#branches-honam" class="section-nav-link"data-eng="Honam branch" data-kor="호남 지사"></a>
-                    <a href="#branches-kazakhstan" class="section-nav-link"data-eng="Kazakhstan branch" data-kor="카자흐스탄 지사"></a>
-                    <a href="#branches-usa" class="section-nav-link"data-eng="USA branch" data-kor="미국 지사"></a>
-                </div>
+            <nav class="tab-nav">
+                <a href="#headquarters" class="tab-link active" data-tab="headquarters"data-eng="Location" data-kor="본사"></a>
+                <a href="#factory" class="tab-link" data-tab="factory"data-eng="Research Institute · Factory" data-kor="연구소 · 공장"></a>
+                <a href="#branches" class="tab-link" data-tab="branches"data-eng="Branches" data-kor="지사"></a>
+            </nav>
+            
+            <!-- Section Navigation for 본사 -->
+            <div class="section-nav" id="section-nav-headquarters">
+                <a href="#headquarters-오시는길" class="section-nav-link"data-eng="Map" data-kor="지도"></a>
+                <a href="#headquarters-위치정보" class="section-nav-link"data-eng="Information" data-kor="위치정보"></a>
+                <a href="#headquarters-연락처" class="section-nav-link"data-eng="Contact" data-kor="연락처"></a>
+            </div>
+            
+            <!-- Section Navigation for 공장 -->
+            <div class="section-nav" id="section-nav-factory" style="display: none;">
+                <a href="#factory-1" class="section-nav-link"data-eng="Research Institute · 1st Factory" data-kor="연구소 · 제1공장"></a>
+                <a href="#factory-2" class="section-nav-link"data-eng="Research Institute · 2nd Factory" data-kor="연구소 · 제2공장"></a>
+            </div>
+            
+            <!-- Section Navigation for 지사 -->
+            <div class="section-nav" id="section-nav-branches" style="display: none;">
+                <a href="#branches-yeongnam" class="section-nav-link"data-eng="Yeongnam branch" data-kor="영남 지사"></a>
+                <a href="#branches-honam" class="section-nav-link"data-eng="Honam branch" data-kor="호남 지사"></a>
+                <a href="#branches-kazakhstan" class="section-nav-link"data-eng="Kazakhstan branch" data-kor="카자흐스탄 지사"></a>
+                <a href="#branches-usa" class="section-nav-link"data-eng="USA branch" data-kor="미국 지사"></a>
             </div>
         </section>
 
         <!-- Tab Content -->
-        <section class="tab-content-section">
-            <div class="container">
-                <!-- 본사 -->
-                <div id="headquarters" class="tab-content active">
-                    <div class="content-header">
-                        <h2 class="content-title"
-                            data-eng="Headquarters"
-                            data-kor="본사">본사</h2>
-                        <p class="content-subtitle"
-                            data-eng="YPP Headquarters Location and Contact Information"
-                            data-kor="YPP 본사 위치 및 연락처 안내">YPP 본사 위치 및 연락처 안내</p>
-                    </div>
-                    
-                    <div class="content-grid-location">
-                        <!-- 지도 -->
-                        <div id="headquarters-map" class="content-block full-width">
-                            <h3 class="block-title" data-eng="Directions" data-kor="오시는 길">오시는 길</h3>
-                            <div class="block-content map-container">
-                                <div class="map-placeholder">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3166.5713296942845!2d126.8810957552351!3d37.47084199999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b61ef519e8d49%3A0xc6a7965a6e4d8f1!2z7JWE66W07IS87YOA7JuM!5e0!3m2!1sko!2skr!4v1751529700768!5m2!1sko!2skr" width="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                </div>
-                                <div class="map-placeholder">
-                    <div class="map-info"
-                    data-eng="<p><strong>Subway + Bus:</strong> Near Exit 8 of Gasan Digital Complex Station</p>
-                    <p>Bus No. 5 (7 minutes, get off at Atom Corporation Stop)</p>
-                    <p>Bus No. 75 (5 minutes, get off at Guro Customs Office Stop)</p>
-                    <p><strong>Bus:</strong> Bus No. 5 – get off at Atom Corporation Stop / Bus No. 75 – get off at Guro Customs Office Stop</p>""
-                    data-kor="
-                         <p><strong>지하철+버스:</strong> 가산디지털단지역 8번출구 부근 버스정류장</p>
-                         <p>5번 버스(7분소요: 아톰주식회사정류장하차)</p>
-                         <p>75번 버스(5분소요: 구로세관정류장 하차)</p>
-                         <p><strong>버스:</strong> 5번 아톰주식회사 정류창 하차 / 75번 구로세관정류장 하차</p>">
-                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 위치정보 -->
-                        <div id="headquarters-info" class="content-block">
-                            <h3 class="block-title" data-eng="Location Information" data-kor="위치정보">위치정보</h3>
-                            <div class="block-content location-info">
-                                <div class="location-details">
-                                    <div class="location-item">
-                                        <strong data-eng="Address" data-kor="주소">주소</strong>
-                                        <p data-eng="24, Gasan Digital 2-ro(Gasan-dong 327-30), Geumcheon-gu, Seoul, Republic of Korea<br>Gasan YPP Arsen Tower (B2, 8F, 20F)" data-kor="서울시 금천구 가산디지털2로 24 (가산동 327-30) 가산YPP 아르센타워(B2층, 8층, 20층)"></p>
-                                    </div>
-                                    <div class="location-item">
-                                        <strong data-eng="Postal Code" data-kor="우편번호">우편번호</strong>
-                                        <p data-eng="08506" data-kor="08506">08506</p>
-                                    </div>
-                    <!-- <div class="location-item">
-                        <strong data-eng="Floors" data-kor="층별 안내">층별 안내</strong>
-                        <p data-eng="B2, 8F, 20F" data-kor="B2층, 8층, 20층">B2층, 8층, 20층</p>
+        <section class="page-content">
+            <!-- 본사 -->
+            <div id="headquarters" class="tab-content active">
+                <section class="tab-section section-mxw" id="headquarters-탭제목">
+                    <h2 data-eng="Headquarters"data-kor="본사"></h2>
+                    <p data-eng="YPP Headquarters Location and Contact Information"data-kor="YPP 본사 위치 및 연락처 안내"></p>
+                </section>
+                <section class="tab-section tab-section-block-header section-mxw" id="headquarters-오시는길">
+                    <!-- <div class="tab-section-block">
+                        <h2 data-kor="오시는 길" data-eng="Directions"></h2>
                     </div> -->
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 연락처 -->
-                        <div id="headquarters-contact" class="content-block">
-                            <h3 class="block-title"
-                            data-eng="Contact"
-                            data-kor="연락처">연락처</h3>
-                            <div class="block-content contact-info">
-                                <div class="contact-details">
-                    <div class="contact-item">
-                        <strong data-eng="Main Phone" data-kor="대표전화">대표전화</strong>
-                        <p data-eng="+82-2-2104-8700" data-kor="+82-2-2104-8700">+82-2-2104-8700</p>
-                    </div>
-                    <div class="contact-item">
-                        <strong data-eng="Fax" data-kor="팩스">팩스</strong>
-                        <p data-eng="+82-2-2104-8711" data-kor="+82-2-2104-8711">+82-2-2104-8711</p>
-                    </div>
-                    <div class="contact-item">
-                        <strong data-eng="Education Inquiries" data-kor="교육문의">교육문의</strong>
-                        <p data-eng="+82-2-2104-8720, 4683" data-kor="+82-2-2104-8720, 4683">+82-2-2104-8720, 4683</p>
-                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-                </div>
 
-                <!-- 공장 -->
-                <div id="factory" class="tab-content">
-                    <div class="content-header">
-                        <h2 class="content-title"
-                            data-eng="Research Institute · Factories"
-                            data-kor="연구소 · 공장"></h2>
-                        <p class="content-subtitle"
-                            data-eng="YPP Factory Locations and Facility Status"
-                            data-kor="YPP 생산시설 위치 및 시설 현황">YPP 생산시설 위치 및 시설 현황</p>
+                    <div class="tab-section-block" id="headquarters-구글지도">
+                        <div class="map-placeholder">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3166.5713296942845!2d126.8810957552351!3d37.47084199999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b61ef519e8d49%3A0xc6a7965a6e4d8f1!2z7JWE66W07IS87YOA7JuM!5e0!3m2!1sko!2skr!4v1751529700768!5m2!1sko!2skr" width="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                    <div class="tab-section-block map-placeholder" id="headquarters-교통편">
+                        <div class="map-info"
+                                data-eng="<p><strong>Subway + Bus:</strong> Near Exit 8 of Gasan Digital Complex Station</p>
+                                <p>Bus No. 5 (7 minutes, get off at Atom Corporation Stop)</p>
+                                <p>Bus No. 75 (5 minutes, get off at Guro Customs Office Stop)</p>
+                                <p><strong>Bus:</strong> Bus No. 5 – get off at Atom Corporation Stop / Bus No. 75 – get off at Guro Customs Office Stop</p>""
+                                data-kor="<p><strong>지하철+버스:</strong> 가산디지털단지역 8번출구 부근 버스정류장</p>
+                                <p>5번 버스(7분소요: 아톰주식회사정류장하차)</p>
+                                <p>75번 버스(5분소요: 구로세관정류장 하차)</p>
+                                <p><strong>버스:</strong> 5번 아톰주식회사 정류창 하차 / 75번 구로세관정류장 하차</p>">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tab-section tab-section-block-header section-mxw" id="headquarters-위치정보">   
+                    <div class="tab-section-block" id="headquarters-위치정보-section-title">
+                        <h2 data-eng="Location Information" data-kor="위치정보"></h2>
+                    </div>
+                    <div class="tab-section-block grid-table" id="headquarters-위치정보-content">
+                        <div class="grid-table-row">
+                            <strong data-eng="Address" data-kor="주소"></strong>
+                            <p data-eng="24, Gasan Digital 2-ro(Gasan-dong 327-30), Geumcheon-gu, Seoul, Republic of Korea<br>Gasan YPP Arsen Tower (B2, 8F, 20F)" data-kor="서울시 금천구 가산디지털2로 24 (가산동 327-30) 가산YPP 아르센타워(B2층, 8층, 20층)"></p>
+                        </div>
+                        <div class="grid-table-row">
+                            <strong data-eng="Postal Code" data-kor="우편번호"></strong>
+                            <p data-eng="08506" data-kor="08506">08506</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tab-section tab-section-block-header section-mxw" id="headquarters-연락처">   
+                    <div class="tab-section-block" id="headquarters-연락처-section-title">
+                        <h2 data-eng="Contact Information" data-kor="연락처"></h2>
+                    </div>
+                    <div class="tab-section-block grid-table" id="headquarters-연락처-content">
+                        <div class="grid-table-row">
+                            <strong data-eng="Main Phone" data-kor="대표전화"></strong>
+                            <p>+82-2-2104-8700</p>
+                        </div>
+                        <div class="grid-table-row">
+                            <strong data-eng="Fax" data-kor="팩스"></strong>
+                            <p>+82-2-2104-8701</p>
+                        </div>
+                        <div class="grid-table-row">
+                            <strong data-eng="Education Inquiries" data-kor="교육문의"></strong>
+                            <p>+82-2-2104-8720, 4683</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- 공장 -->
+            <div id="factory" class="tab-content">
+                <section class="tab-section section-mxw" id="factory-탭제목">
+                    <h2 data-kor="연구소 · 공장"data-eng="Research Institute · Factories"></h2>
+                    <p data-kor="YPP 생산시설 위치 및 시설 현황" data-eng="YPP Factory Locations and Facility Status"></p>
+                </section>
+
+                <section class="tab-section section-mxw" id="factory-1">
+                    <div class="tab-section-block-header" id="factory-1-section-title">
+                        <h3 class="tab-section-title" data-kor="연구소 · 제1공장" data-eng="Research Institute & 1st Factory"></h3>
+                    </div>
+
+                    <div class="tab-section-block" id="factory-1-map">
+                        <div class="map-placeholder">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3166.5713296942845!2d126.8810957552351!3d37.47084199999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b61ef519e8d49%3A0xc6a7965a6e4d8f1!2z7JWE66W07IS87YOA7JuM!5e0!3m2!1sko!2skr!4v1751529700768!5m2!1sko!2skr" width="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                     
-                    <div class="content-grid">
-                        <!-- 연구소 · 제1공장 -->
-                        <div id="factory-research" class="content-block full-width">
-                            <h3 class="block-title" data-eng="Research Institute & 1st Factory" data-kor="연구소 · 제1공장">연구소 · 제1공장</h3>
-                            <div class="block-content">
-                                <div class="factory-layout">
-                                    <!-- 지도 영역 -->
-                                    <div class="factory-map">
-                                        <!-- <h4 class="sub-title">위치</h4> -->
-                                        <div class="map-container">
-                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3166.5713296942845!2d126.8810957552351!3d37.47084199999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b61ef519e8d49%3A0xc6a7965a6e4d8f1!2z7JWE66W07IS87YOA7JuM!5e0!3m2!1sko!2skr!4v1751529700768!5m2!1sko!2skr" width="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- 정보 영역 -->
-                                    <div class="factory-info">
-                                         <h4 class="sub-title" data-eng="Contact & Address" data-kor="연락처 및 주소">연락처 및 주소</h4>
-                                         <div class="info-content">
-                                             <div class="contact-section">
-                                                 <div class="contact-item">
-                                                     <strong data-eng="Research Institute" data-kor="연구소">연구소</strong>
-                                                     <span data-eng="TEL. +82-2-2104-8826" data-kor="TEL. +82-2-2104-8826">TEL. +82-2-2104-8826</span>
-                                                     <span data-eng="FAX. 070-7580-1490" data-kor="FAX. 070-7580-1490">FAX. 070-7580-1490</span>
-                                                 </div>
-                                                 <div class="contact-item">
-                                                     <strong data-eng="Factory" data-kor="공장">공장</strong>
-                                                     <span data-eng="TEL. +82-2-2104-8710" data-kor="TEL. +82-2-2104-8710">TEL. +82-2-2104-8710</span>
-                                                 </div>
-                                             </div>
-                                             <div class="address-section">
-                                                 <span class="address-text"
-                                                       data-eng="(08592) 24, Gasan Digital 2-ro(Gasan-dong 327-30), Geumcheon-gu, Seoul, Republic of Korea<br>Gasan YPP Arsen Tower (B2, 8F, 20F)"
-                                                       data-kor="(08592) 서울시 금천구 가산디지털2로 24 (가산동 327-30) 가산YPP아르센타워(B2층, 8층, 20층)">
-                                                     서울시 금천구 가산디지털2로 24 (가산동 327-30)<br>가산YPP아르센타워(B2층, 8층, 20층)
-                                                 </span>
-                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="tab-section-block" id="factory-1-info">
+                        <div class="tab-section-block grid-table" id="factory-1-위치정보-content">
+                            <div class="grid-table-row">
+                                <strong data-eng="Research Institute" data-kor="연구소"></strong>
+                                <p>TEL. +82-2-2104-8826<br>FAX. 070-7580-1490</p>
+                            </div>
+                            <div class="grid-table-row">
+                                <strong data-eng="Factory" data-kor="공장"></strong>
+                                <p>TEL. +82-2-2104-8710</p>
+                            </div>
+                            <div class="grid-table-row">
+                                <strong data-eng="Address" data-kor="주소"></strong>
+                                <p data-eng="(08592) 24, Gasan Digital 2-ro(Gasan-dong 327-30), Geumcheon-gu, Seoul, Republic of Korea<br>Gasan YPP Arsen Tower (B2, 8F, 20F)"data-kor="(08592) 서울시 금천구 가산디지털2로 24 (가산동 327-30) 가산YPP아르센타워(B2층, 8층, 20층)"></p>
                             </div>
                         </div>
-                        
-                        <!-- 제2공장 -->
-                        <div id="factory-second" class="content-block full-width">
-                            <h3 class="block-title" data-eng="Research Institute & 2nd Factory" data-kor="연구소 · 제2공장"></h3>
-                            <div class="block-content">
-                                <div class="factory-layout">
-                                    <!-- 지도 영역 -->
-                                    <div class="factory-map">
-                                        <!-- <h4 class="sub-title">위치</h4> -->
-                                        <div class="map-container">
-                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3189.488803695117!2d127.0223861!3d36.9264851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b23ebbcd06eb7%3A0x55e83829943963e!2z7Kun7LKt64Ko64-EIOyVhOyCsOyLnCDrkZTtj6zrqbQg7JWE7IKw7Zi466GcIDExMDg!5e0!3m2!1sko!2skr!4v1751741959483!5m2!1sko!2skr" width="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- 정보 영역 -->
-                                    <div class="factory-info">
-                                         <h4 class="sub-title"
-                                            data-eng="Contact & Address"
-                                            data-kor="연락처 및 주소">연락처 및 주소</h4>
-                                        <div class="info-content">
-                                            <div class="contact-section">
-                                                <div class="contact-item">
-                                                    <span data-eng="TEL. +82-2-2104-8710" data-kor="TEL. +82-2-2104-8710">TEL. +82-2-2104-8710</span>
-                                                    <span data-eng="FAX. +82-2-2104-8787" data-kor="FAX. +82-2-2104-8787">FAX. +82-2-2104-8787</span>
-                                                </div>
-                                            </div>
-                                            <div class="address-section">
-                                                <span class="address-text"
-                                                    data-eng='(31400) 1108, Asanho-ro, Dunpo-myeon, Asan-si, <span style="white-space: nowrap;">Chungcheongnam-do</span>'
-                                                    data-kor="(31400) 충청남도 아산시 둔포면 아산호로 1108">충청남도 아산시 둔포면 아산호로 1108</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- 오시는 길 -->
-                                        <div class="directions-section">
-                                            <h4 class="sub-title"
-                                                data-eng="Directions"
-                                                data-kor="오시는 길">오시는 길</h4>
-                                            <div class="directions-content">
-                                                <div class="transport-method">
-                                                    <div class="method-title"
-                                                        data-eng="By Car"
-                                                        data-kor="자동차">자동차</div>
-                                                    <div class="method-content"
-                                                        data-eng="Headquarters → Seobu Urban Expressway (Anyang direction) → Suwon-Gwangmyeong Expressway (Suwon direction) → Pyeongtaek-Hwaseong Expressway (Pyeongtaek direction) → Paengseong-Ohseong Expressway (Ohseong IC) → 1108, Asanho-ro"
-                                                        data-kor="본사(출발) → 서부간선도로(안양방향) → 수원광명고속도로(수원방향) → 평택화성고속도로(평택방면) → 팽성오성간 고속도로(오성IC) → 아산호로1108">
-                                                        본사(출발) → 서부간선도로(안양방향) → 수원광명고속도로(수원방향) → 평택화성고속도로(평택방면) → 팽성오성간 고속도로(오성IC) → 아산호로1108
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="transport-method">
-                                                    <div class="method-title"
-                                                        data-eng="By Public Transport"
-                                                        data-kor="대중교통">대중교통</div>
-                                                    <div class="method-content"
-                                                        data-eng="Headquarters → Walk to Exit 4 of Gasan Digital Complex Station (700m) → Take subway at Gasan Digital Complex Station (23 stops toward Sinchang) → Get off at Pyeongtaek Station (Exit 1) → Walk to AKPLAZA bus stop (400m) → Take bus (Blue 510 or 512) → Get off at Sipori stop → 1108, Asanho-ro"
-                                                        data-kor="본사(출발) → 가산디지털단지역 4번 출구까지 도보(700m) → 가산디지털단지역 승차(신창방면 23개 역 이동) → 평택역 하차(1번 출구) → AKPLAZA 정류장(도보 400m) 이동 후 → 버스승차(간선510번 512번) → 시포리 정류장 하차 → 아산호로 1108">
-                                                        본사(출발) → 가산디지털단지역 4번 출구까지 도보(700m) → 가산디지털단지역 승차(신창방면 23개 역 이동) → 평택역 하차(1번 출구) → AKPLAZA 정류장(도보 400m) 이동 후 → 버스승차(간선510번 512번) → 시포리 정류장 하차 → 아산호로 1108
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
-                </div>
-                <style>
-                    /* 공장 레이아웃 */
-                .factory-layout {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 2rem;
-                }
+                </section>
 
-                /* .factory-map, */
-                .factory-info {
-                    background: #f8f9fa;
-                    padding: 1.5rem;
-                    border-radius: 8px;
-                    border: 1px solid #e0e6ed;
-                }
-                #factory
-                .sub-title {
-                    font-size: 1.2rem;
-                    font-weight: 700;
-                    color: #0066cc;
-                    margin-bottom: 1rem;
-                    padding-bottom: 0.5rem;
-                    border-bottom: 2px solid #e8f4ff;
-                }
+                <section class="tab-section section-mxw" id="factory-2">
+                    <div class="tab-section-block-header" id="factory-2-section-title">
+                        <h3 class="tab-section-title" data-kor="연구소 · 제2공장" data-eng="Research Institute & 2nd Factory"></h3>
+                    </div>
 
-                /* 지도 스타일 */
-                #factory
-                .map-container {
-                    width: 100%;
-                    height: 100%;
-                    padding: 0;
-                }
-                #factory
-                .map-container iframe {
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 6px;
-                }
-
-                /* 정보 섹션 */
-                #factory
-                .info-content {
-                    margin-bottom: 1.5rem;
-                }
-                #factory
-                .contact-section {
-                    padding: 0;
-                    margin-bottom: 1.5rem;
-                }
-                #factory
-                .contact-item {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.5rem;
-                    margin-bottom: 1rem;
-                    padding: 1rem;
-                    background: #fff;
-                    border-radius: 6px;
-                    border: 1px solid #e0e6ed;
-                }
-                #factory
-                .contact-item strong {
-                    color: #0066cc;
-                    font-weight: 700;
-                    margin-bottom: 0.5rem;
-                }
-                #factory
-                .contact-item span {
-                    color: #333;
-                    font-size: 0.95rem;
-                }
-                #factory
-                .address-section {
-                    padding: 1rem;
-                    background: #fff;
-                    border-radius: 6px;
-                }
-                #factory
-                .address-text {
-                    color: #333;
-                    line-height: 1.5;
-                }
-
-
-                /* 오시는 길 섹션 */
-                #factory
-                .directions-section {
-                    margin-top: 1.5rem;
-                }
-                #factory
-                .directions-content {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1rem;
-                }
-                #factory
-                .transport-method {
-                    background: #fff;
-                    padding: 1rem;
-                    border-radius: 6px;
-                    border: 1px solid #e0e6ed;
-                }
-                #factory
-                .method-title {
-                    font-weight: 700;
-                    color: #0066cc;
-                    margin-bottom: 0.75rem;
-                    font-size: 1rem;
-                }
-                #factory
-                .method-content {
-                    color: #333;
-                    line-height: 1.6;
-                    font-size: 0.95rem;
-                }
-
-                /* 모바일 반응형 */
-                @media (max-width: 768px) {
-                    .factory-layout {
-                        grid-template-columns: 1fr;
-                        gap: 1.5rem;
-                    }
-                    #factory
-                    .map-container{
-                        min-height: auto;
-                    }
-                    #factory
-                    .map-container iframe {
-                        height: 300px;
-                    }
-                    
-                    .factory-map,
-                    .factory-info {
-                        padding: 1rem;
-                    }
-                    #factory
-                    .address-section {
-                        flex-direction: column;
-                        gap: 0.5rem;
-                    }
-                }
-                </style>
-                <!-- 지사 -->
-                <div id="branches" class="tab-content">
-                    <div class="content-header">
-                        <h2 class="content-title"
-                            data-eng="Branches"
-                            data-kor="지사">지사</h2>
-                        <p class="content-subtitle"
-                            data-eng="YPP Branch Locations and Contact Information"
-                            data-kor="YPP 지사 위치 및 연락처 안내">YPP 지사 위치 및 연락처 안내</p>
+                    <div class="tab-section-block" id="factory-2-map">
+                        <div class="map-placeholder">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3189.488803695117!2d127.0223861!3d36.9264851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b23ebbcd06eb7%3A0x55e83829943963e!2z7Kun7LKt64Ko64-EIOyVhOyCsOyLnCDrkZTtj6zrqbQg7JWE7IKw7Zi466GcIDExMDg!5e0!3m2!1sko!2skr!4v1751741959483!5m2!1sko!2skr" width="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                     
-                    <div class="content-grid">
-                        <!-- 영남지사 -->
-                        <div id="branches-yeongnam" class="content-block full-width">
-                            <h3 class="block-title"
-                                data-eng="Yeongnam Branch"
-                                data-kor="영남지사">영남지사</h3>
-                            <div class="block-content">
-                                <div class="content-grid-location">
-                                    <!-- 지도 -->
-                                    <div id="yeongnam-map" class="content-block full-width">
-                                        <h4 class="sub-title"
-                                            data-eng="Directions"
-                                            data-kor="오시는 길">오시는 길</h4>
-                                        <div class="block-content map-container">
-                                            <div class="map-placeholder">
-                                                <!-- 영남지사 지도 iframe (실제 좌표로 교체 필요) -->
-                                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3247.6303354456318!2d129.30727231161302!3d35.51341787252779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35662d3822374455%3A0xd3516122535d66d4!2z7Jq47IKw6rSR7Jet7IucIOuCqOq1rCDshKDslZTrj5kgNTk0LTE4!5e0!3m2!1sko!2skr!4v1751748068502!5m2!1sko!2skr"style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                            </div>
-                                            <div class="map-placeholder">
-                                                <div class="map-info">
-                                                    <strong>
-                                                        <p data-eng="(44774) 5-13, Duwang-ro 106beon-gil, Nam-gu, Ulsan Metropolitan City, 2nd Floor"    
-                                                        data-kor="(44774) 울산광역시 남구 두왕로 106번길 5-13, 2층"></p>
-                                                    </strong>
-                                                </div>
-                                            </div>
-                                            <div class="map-placeholder">
-                                                <div class="map-info"
-                                                    data-eng="<p><strong>Car:</strong> 5.9km via Nambu Circulation Road (Petrochemical Complex Ulsan Port, Onsan Port direction)</p><p><strong>Airport:</strong> Headquarters → Gimpo Airport (1 hour) → Gimhae Airport (54 minutes by taxi)</p><p><strong>KTX:</strong> Headquarters → Gwangmyeong Station → Singyeongju Station (44 minutes by taxi)</p>"
-                                                    data-kor="<p><strong>자동차:</strong> 남부순환도로(석유화학공단 울산항, 온산항 방면) 5.9km</p><p><strong>항공:</strong> 본사 → 김포국제공항(1시간) → 김해국제공항(택시 54분)</p><p><strong>KTX:</strong> 본사 → 광명역 → 신경주역(택시 44분)</p>">
-                                                    <p><strong>자동차:</strong> 남부순환도로(석유화학공단 울산항, 온산항 방면) 5.9km</p>
-                                                    <p><strong>항공:</strong> 본사 → 김포국제공항(1시간) → 김해국제공항(택시 54분)</p>
-                                                    <p><strong>KTX:</strong> 본사 → 광명역 → 신경주역(택시 44분)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- 상세 교통편 -->
-                                    <div id="yeongnam-directions" class="content-block">
-                                        <h4 class="sub-title"
-                                            data-eng="Detailed Directions"
-                                            data-kor="상세 교통편">상세 교통편</h4>
-                                        <div class="block-content directions-info">
-                                            <div class="directions-details">
-                                                <div class="directions-item">
-                                                    <strong data-eng="By Car (from Headquarters)" data-kor="자동차 (본사 출발)">자동차 (본사 출발)</strong>
-                                                    <p data-eng="Seobu Arterial Road (Anyang direction) → Seohae Expressway (Asan Junction Dangjin direction) → Jungbu Inland Expressway (Yangpyeong Chungju direction) → Sangju Yeongcheon Expressway (Yeongcheon direction) → Gyeongbu Expressway (Ulsan direction) → Ulsan Expressway (Nambu Circulation Road direction) → Nambu Circulation Road (Petrochemical Complex Ulsan Port, Onsan Port direction) 5.9km"
-                                                    data-kor="서부간선도로(안양방향) → 서해안고속도로(아산분기점 당진방향) → 중부내륙고속도로(양평충주방면) → 상주영천고속도로(영천방면) → 경부고속도로(울산방면) → 울산고속도로(남부순환도로 방향) → 남부순환도로(석유화학공단 울산항, 온산항 방면) 5.9km">서부간선도로(안양방향) → 서해안고속도로(아산분기점 당진방향) → 중부내륙고속도로(양평충주방면) → 상주영천고속도로(영천방면) → 경부고속도로(울산방면) → 울산고속도로(남부순환도로 방향) → 남부순환도로(석유화학공단 울산항, 온산항 방면) 5.9km</p>
-                                                </div>
-                                                <div class="directions-item">
-                                                    <strong data-eng="By Air" data-kor="항공">항공</strong>
-                                                    <p data-eng="Headquarters (departure) → Gimpo International Airport (1 hour) → Gimhae International Airport (54 minutes by taxi)"
-                                                    data-kor="본사(출발) → 김포국제공항(1시간) → 김해국제공항(택시로 54분)">본사(출발) → 김포국제공항(1시간) → 김해국제공항(택시로 54분)</p>
-                                                </div>
-                                                <div class="directions-item">
-                                                    <strong data-eng="By KTX" data-kor="KTX">KTX</strong>
-                                                    <p data-eng="Headquarters (departure) → Gwangmyeong Station → Singyeongju Station (44 minutes by taxi)"
-                                                    data-kor="본사(출발) → 광명역 → 신경주역(택시로 44분)">본사(출발) → 광명역 → 신경주역(택시로 44분)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="tab-section-block" id="factory-2-info">
+                        <div class="tab-section-block grid-table" id="factory-2-위치정보-content">
+                            <div class="grid-table-row">
+                                <strong data-eng="Research Institute" data-kor="연구소"></strong>
+                                <p>TEL. +82-2-2104-8710<br>FAX. +82-2-2104-8787</p>
                             </div>
-                        </div>
-                        <!-- 호남지사 -->
-                        <div id="branches-honam" class="content-block full-width">
-                            <h3 class="block-title"
-                                data-eng="Honam Branch"
-                                data-kor="호남지사">호남지사</h3>
-                            <div class="block-content">
-                                <div class="content-grid-location">
-                                    <!-- 지도 -->
-                                    <div id="honam-map" class="content-block full-width">
-                                        <h4 class="sub-title"
-                                            data-eng="Directions"
-                                            data-kor="오시는 길">오시는 길</h4>
-                                        <div class="block-content map-container">
-                                            <div class="map-placeholder">
-                                                <iframe src="https://www.google.com/maps/embed?pb=!1m5!3m3!1m2!1s0x356dde36aae65113%3A0x6aec0d7aba142157!2z7KCE652864Ko64-EIOyXrOyImOyLnCDsnqXshLHrp4jsnYTquLggMTEgM-y4tQ!5e0!3m2!1sko!2skr!4v1789916730450!5m2!1sko!2skr"style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                            </div>
-                                            <div class="map-placeholder">
-                                                <div class="map-info">
-                                                    <strong>
-                                                        <p data-eng="(59662) 11, Jangseongmaeul-gil, Yeosu-si, Jeollanam-do, Korea, 3rd Floor"    
-                                                        data-kor="(59662) 전남광주통합특별시 여수시 장성마을길11, 3층"></p>
-                                                    </strong>
-                                                </div>
-                                            </div>
-                                            <!-- <div class="map-placeholder">
-                                                <div class="map-info"
-                                                    data-eng="<p><strong>Car:</strong> 5.9km via Nambu Circulation Road (Petrochemical Complex Ulsan Port, Onsan Port direction)</p><p><strong>Airport:</strong> Headquarters → Gimpo Airport (1 hour) → Gimhae Airport (54 minutes by taxi)</p><p><strong>KTX:</strong> Headquarters → Gwangmyeong Station → Singyeongju Station (44 minutes by taxi)</p>"
-                                                    data-kor="<p><strong>자동차:</strong> 남부순환도로(석유화학공단 울산항, 온산항 방면) 5.9km</p><p><strong>항공:</strong> 본사 → 김포국제공항(1시간) → 김해국제공항(택시 54분)</p><p><strong>KTX:</strong> 본사 → 광명역 → 신경주역(택시 44분)</p>">
-                                                    <p><strong>자동차:</strong> 남부순환도로(석유화학공단 울산항, 온산항 방면) 5.9km</p>
-                                                    <p><strong>항공:</strong> 본사 → 김포국제공항(1시간) → 김해국제공항(택시 54분)</p>
-                                                    <p><strong>KTX:</strong> 본사 → 광명역 → 신경주역(택시 44분)</p>
-                                                </div>
-                                            </div> -->
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div id="honam-directions" class="content-block">
-                                        <h4 class="sub-title"
-                                            data-eng="Detailed Directions"
-                                            data-kor="상세 교통편">상세 교통편</h4>
-                                        <div class="block-content directions-info">
-                                            <div class="directions-details">
-                                                <div class="directions-item">
-                                                    <strong data-eng="By Car (from Headquarters)" data-kor="자동차 (본사 출발)">자동차 (본사 출발)</strong>
-                                                    <p data-eng="Seobu Arterial Road (Anyang direction) → Seohae Expressway (Asan Junction Dangjin direction) → Jungbu Inland Expressway (Yangpyeong Chungju direction) → Sangju Yeongcheon Expressway (Yeongcheon direction) → Gyeongbu Expressway (Ulsan direction) → Ulsan Expressway (Nambu Circulation Road direction) → Nambu Circulation Road (Petrochemical Complex Ulsan Port, Onsan Port direction) 5.9km"
-                                                    data-kor="서부간선도로(안양방향) → 서해안고속도로(아산분기점 당진방향) → 중부내륙고속도로(양평충주방면) → 상주영천고속도로(영천방면) → 경부고속도로(울산방면) → 울산고속도로(남부순환도로 방향) → 남부순환도로(석유화학공단 울산항, 온산항 방면) 5.9km">서부간선도로(안양방향) → 서해안고속도로(아산분기점 당진방향) → 중부내륙고속도로(양평충주방면) → 상주영천고속도로(영천방면) → 경부고속도로(울산방면) → 울산고속도로(남부순환도로 방향) → 남부순환도로(석유화학공단 울산항, 온산항 방면) 5.9km</p>
-                                                </div>
-                                                <div class="directions-item">
-                                                    <strong data-eng="By Air" data-kor="항공">항공</strong>
-                                                    <p data-eng="Headquarters (departure) → Gimpo International Airport (1 hour) → Gimhae International Airport (54 minutes by taxi)"
-                                                    data-kor="본사(출발) → 김포국제공항(1시간) → 김해국제공항(택시로 54분)">본사(출발) → 김포국제공항(1시간) → 김해국제공항(택시로 54분)</p>
-                                                </div>
-                                                <div class="directions-item">
-                                                    <strong data-eng="By KTX" data-kor="KTX">KTX</strong>
-                                                    <p data-eng="Headquarters (departure) → Gwangmyeong Station → Singyeongju Station (44 minutes by taxi)"
-                                                    data-kor="본사(출발) → 광명역 → 신경주역(택시로 44분)">본사(출발) → 광명역 → 신경주역(택시로 44분)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 카자흐스탄 지사 -->
-                        <div id="branches-kazakhstan" class="content-block full-width">
-                            <h3 class="block-title"
-                                data-eng="Kazakhstan Branch"
-                                data-kor="카자흐스탄 지사">카자흐스탄 지사</h3>
-                            <div class="block-content">
-                                <div class="content-grid-location">
-                                    <!-- 지도 -->
-                                    <div id="kazakhstan-map" class="content-block full-width">
-                                        <h4 class="sub-title"
-                                            data-eng="Directions"
-                                            data-kor="오시는 길">오시는 길</h4>
-                                        <div class="block-content map-container">
-                                            <div class="map-placeholder">
-                                                <!-- 카자흐스탄 지사 지도 iframe (실제 좌표로 교체 필요) -->
-                                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d726.499661337978!2d76.93304366965403!3d43.25145019819529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836eb8ecd2f1d3%3A0x3dedf53d18133778!2zU2V5ZnVsbGluIEF2ZW51ZSA0OTgsIEFsbWF0eSAwNTAwMDAg7Lm07J6Q7Z2Q7Iqk7YOE!5e0!3m2!1sko!2skr!4v1759217127752!5m2!1sko!2skr"style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                            </div>
-                                            <div class="map-placeholder">
-                                                <div class="map-info">                                                
-                                                    <strong>
-                                                        <p>Republic of Kazakhstan, Almaty city, 498 Seifullin Avenue, Office 306A</p>
-                                                    </strong>
-                                                </div>
-                                            </div>
-                                            <div class="map-placeholder">
-                                                <div class="map-info">                                                
-                                                    <strong>
-                                                        <p>Республика Казахстан, город Алматы, пр. Сейфуллина, дом 498, кабинет 306А</p>
-                                                    </strong>
-                                                </div>
-                                            </div>
-                                            <div class="map-placeholder">
-                                                <div class="map-info"
-                                                    data-eng="<p><strong>Car:</strong> Approximately 35 minutes / 16km from Almaty International Airport</p>"
-                                                    data-kor="<p><strong>자동차:</strong> 알마티 국제공항에서 약 35분 거리  / 16km</p>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 미국 지사 -->
-                        <div id="branches-usa" class="content-block full-width">
-                            <h3 class="block-title"
-                                data-eng="USA Branch"
-                                data-kor="미국 지사">미국 지사</h3>
-                            <div class="block-content">
-                                <div class="content-grid-location">
-                                    <!-- 지도 -->
-                                    <div id="usa-map" class="content-block full-width">
-                                        <h4 class="sub-title"
-                                            data-eng="Directions"
-                                            data-kor="오시는 길">오시는 길</h4>
-                                        <div class="block-content map-container">
-                                            <div class="map-placeholder">
-                                                <!-- 미국 지사 지도 iframe (실제 좌표로 교체 필요) -->
-                                                 <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d726.499661337978!2d76.93304366965403!3d43.25145019819529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836eb8ecd2f1d3%3A0x3dedf53d18133778!2zU2V5ZnVsbGluIEF2ZW51ZSA0OTgsIEFsbWF0eSAwNTAwMDAg7Lm07J6Q7Z2Q7Iqk7YOE!5e0!3m2!1sko!2skr!4v1759217127752!5m2!1sko!2skr"style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-                                            </div>
-                                            <div class="map-placeholder">
-                                                <div class="map-info">                                                
-                                                    <strong>
-                                                        <p>Universal Technology International, Inc.</p>
-                                                    </strong>
-                                                </div>
-                                            </div>
-                                            <div class="map-placeholder">
-                                                <div class="map-info">
-                                                    <p>
-                                                        <strong>Contact:</strong> Melissa McCurry<br>
-                                                        <strong>E-mail:</strong> utiincusa@aol.com<br>
-                                                        <strong>Tel:</strong> +1 215-332-8093
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="grid-table-row">
+                                <strong data-eng="Address" data-kor="주소"></strong>
+                                <p data-eng='(31400) 1108, Asanho-ro, Dunpo-myeon, Asan-si, <span style="white-space: nowrap;">Chungcheongnam-do</span>' data-kor="(31400) 충청남도 아산시 둔포면 아산호로 1108"></p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <style>
-                    /* 지사 전용 스타일 (본사와 동일한 구조) */
-                    .directions-info {
-                        display: block;
-                        text-align: left;
-                    }
+                </section>
+                
+            </div>
 
-                    .directions-details {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 1.5rem;
-                    }
+            <!-- 지사 -->
+            <div id="branches" class="tab-content">
+                <section class="tab-section section-mxw" id="branches-탭제목">
+                    <h2 data-eng="Branches"data-kor="지사"></h2>
+                    <p data-kor="YPP 지사 위치 및 연락처 안내" data-eng="YPP Branch Locations and Contact Information"></p>
+                </section>
 
-                    .directions-item {
-                        padding: 1rem;
-                        background-color: var(--white, #ffffff);
-                        border: 1px solid var(--border-light, #e5e5e5);
-                        border-radius: 6px;
-                    }
+                <section class="tab-section section-mxw" id="branches-yeongnam">
+                    <div class="tab-section-block-header" id="branches-yeongnam-section-title">
+                        <h3 class="tab-section-title" data-kor="영남지사" data-eng="Yeongnam Branch"></h3>
+                    </div>
 
-                    .directions-item strong {
-                        display: block;
-                        color: var(--primary-blue, #0066cc);
-                        font-weight: 600;
-                        margin-bottom: 0.5rem;
-                        font-size: 0.95rem;
-                    }
+                    <div class="tab-section-block" id="branches-yeongnam-구글지도">
+                        <div class="map-placeholder">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3247.6303354456318!2d129.30727231161302!3d35.51341787252779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35662d3822374455%3A0xd3516122535d66d4!2z7Jq47IKw6rSR7Jet7IucIOuCqOq1rCDshKDslZTrj5kgNTk0LTE4!5e0!3m2!1sko!2skr!4v1751748068502!5m2!1sko!2skr"style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
 
-                    .directions-item p {
-                        color: var(--text-primary, #333);
-                        margin: 0;
-                        line-height: 1.5;
-                    }
+                    <div class="tab-section-block map-placeholder" id="branches-yeongnam-주소">
+                        <div class="map-info">
+                            <strong>
+                                <p data-eng="(44774) 5-13, Duwang-ro 106beon-gil, Nam-gu, Ulsan Metropolitan City, 2nd Floor"    
+                                data-kor="(44774) 울산광역시 남구 두왕로 106번길 5-13, 2층"></p>
+                            </strong>
+                        </div>
+                    </div>
 
-                    .sub-title {
-                        font-size: 1.1rem;
-                        font-weight: 700;
-                        color: #0066cc;
-                        margin-bottom: 1rem;
-                        padding-bottom: 0.5rem;
-                        border-bottom: 2px solid #e8f4ff;
-                    }
-                </style>
+                    <div class="tab-section-block map-placeholder" id="branches-yeongnam-교통편">
+                        <div class="map-info"
+                            data-eng="<p><strong>Car:</strong> 5.9km via Nambu Circulation Road (Petrochemical Complex Ulsan Port, Onsan Port direction)</p><p><strong>Airport:</strong> Headquarters → Gimpo Airport (1 hour) → Gimhae Airport (54 minutes by taxi)</p><p><strong>KTX:</strong> Headquarters → Gwangmyeong Station → Singyeongju Station (44 minutes by taxi)</p>"
+                            data-kor="<p><strong>자동차:</strong> 남부순환도로(석유화학공단 울산항, 온산항 방면) 5.9km</p><p><strong>항공:</strong> 본사 → 김포국제공항(1시간) → 김해국제공항(택시 54분)</p><p><strong>KTX:</strong> 본사 → 광명역 → 신경주역(택시 44분)</p>">
+                        </div>
+                    </div>
+
+                    <div class="tab-section tab-section-block-header section-mxw" id="branches-yeongnam-상세교통편">   
+                        <div class="tab-section-block" id="headquarters-연락처-section-title">
+                            <h2 data-kor="상세 교통편" data-eng="Detailed Directions"></h2>
+                        </div>
+                        <div class="tab-section-block grid-table" id="headquarters-연락처-content">
+                            <div class="grid-table-row">
+                                <strong data-eng="By Car<br>(from Headquarters)" data-kor="자동차<br>(본사 출발)"></strong>
+                                <p data-eng="Seobu Arterial Road (Anyang direction) → Seohae Expressway (Asan Junction Dangjin direction) → Jungbu Inland Expressway (Yangpyeong Chungju direction) → Sangju Yeongcheon Expressway (Yeongcheon direction) → Gyeongbu Expressway (Ulsan direction) → Ulsan Expressway (Nambu Circulation Road direction) → Nambu Circulation Road (Petrochemical Complex Ulsan Port, Onsan Port direction) 5.9km"
+                                    data-kor="서부간선도로(안양방향) → 서해안고속도로(아산분기점 당진방향) → 중부내륙고속도로(양평충주방면) → 상주영천고속도로(영천방면) → 경부고속도로(울산방면) → 울산고속도로(남부순환도로 방향) → 남부순환도로(석유화학공단 울산항, 온산항 방면) 5.9km"></p>
+                            </div>
+                            <div class="grid-table-row">
+                                <strong data-eng="By Air" data-kor="항공"></strong>
+                                <p data-eng="Headquarters (departure) → Gimpo International Airport (1 hour) → Gimhae International Airport (54 minutes by taxi)"
+                                    data-kor="본사(출발) → 김포국제공항(1시간) → 김해국제공항(택시로 54분)"></p>
+                            </div>
+                            <div class="grid-table-row">
+                                <strong data-eng="By KTX" data-kor="KTX"></strong>
+                                <p data-eng="Headquarters (departure) → Gwangmyeong Station → Singyeongju Station (44 minutes by taxi)"
+                                    data-kor="본사(출발) → 광명역 → 신경주역(택시로 44분)"></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="tab-section section-mxw" id="branches-honam">
+                    <div class="tab-section-block-header" id="branches-honam-section-title">
+                        <h3 class="tab-section-title" data-kor="호남지사" data-eng="Honam Branch"></h3>
+                    </div>
+
+                    <div class="tab-section-block" id="branches-honam-구글지도">
+                        <div class="map-placeholder">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m5!3m3!1m2!1s0x356dde36aae65113%3A0x6aec0d7aba142157!2z7KCE652864Ko64-EIOyXrOyImOyLnCDsnqXshLHrp4jsnYTquLggMTEgM-y4tQ!5e0!3m2!1sko!2skr!4v1789916730450!5m2!1sko!2skr"style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="tab-section-block map-placeholder" id="branches-honam-주소">
+                        <div class="map-info">
+                            <strong>
+                                <p data-eng="(59662) 11, Jangseongmaeul-gil, Yeosu-si, Jeollanam-do, Korea, 3rd Floor"    
+                                    data-kor="(59662) 전남광주통합특별시 여수시 장성마을길11, 3층"></p>
+                            </strong>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="tab-section section-mxw" id="branches-kazakhstan">
+                    <div class="tab-section-block-header" id="branches-kazakhstan-section-title">
+                        <h3 class="tab-section-title" data-kor="카자흐스탄 지사" data-eng="Kazakhstan Branch"></h3>
+                    </div>
+
+                    <div class="tab-section-block" id="branches-kazakhstan-구글지도">
+                        <div class="map-placeholder">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d726.499661337978!2d76.93304366965403!3d43.25145019819529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836eb8ecd2f1d3%3A0x3dedf53d18133778!2zU2V5ZnVsbGluIEF2ZW51ZSA0OTgsIEFsbWF0eSAwNTAwMDAg7Lm07J6Q7Z2Q7Iqk7YOE!5e0!3m2!1sko!2skr!4v1759217127752!5m2!1sko!2skr"style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="tab-section-block map-placeholder" id="branches-kazakhstan-주소">
+                        <div class="map-info">
+                            <strong>
+                                <p>Republic of Kazakhstan, Almaty city, 498 Seifullin Avenue, Office 306A</p>
+                                <p>Республика Казахстан, город Алматы, пр. Сейфуллина, дом 498, кабинет 306А</p>
+                            </strong>
+                        </div>
+                        <div class="section-blank-1rem"></div>
+                        <div class="map-info" data-eng="&lt;p&gt;&lt;strong&gt;Car:&lt;/strong&gt; Approximately 35 minutes / 16km from Almaty International Airport&lt;/p&gt;" data-kor="&lt;p&gt;&lt;strong&gt;자동차:&lt;/strong&gt; 알마티 국제공항에서 약 35분 거리  / 16km&lt;/p&gt;"></div>
+                    </div>
+                </section>
+
+                <section class="tab-section section-mxw" id="branches-usa">
+                    <div class="tab-section-block-header" id="branches-usa-section-title">
+                        <h3 class="tab-section-title" data-kor="미국 지사" data-eng="USA Branch"></h3>
+                    </div>
+                    <div class="tab-section-block map-placeholder" id="branches-usa-주소">
+                        <div class="map-info">
+                            <strong>
+                                <p>Universal Technology International, Inc.</p>
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="tab-section-block map-placeholder" id="branches-usa-연락처">
+                        <div class="map-info">
+                            <p><strong>Contact:</strong> Melissa McCurry</p>
+                            <p><strong>E-mail:</strong> utiincusa@aol.com</p>
+                            <p><strong>Tel:</strong> +1 215-332-8093</p>
+                        </div>
+                    </div>
+                </section>
             </div>
         </section>
     </main>
@@ -1050,149 +673,3 @@ window.getCurrentSection = getCurrentSection;
     </script>
 </body>
 </html>
-
-<style>
-/* ===== LOCATION PAGE SPECIFIC STYLES ===== */
-
-/* Location Info Styling */
-.location-info,
-.contact-info,
-.transportation-info {
-    display: block;
-    text-align: left;
-    /* padding: 1.5rem; */
-}
-
-.location-details,
-.contact-details,
-.transport-details,
-.car-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.location-item,
-.contact-item,
-.transport-item,
-.route-item {
-    padding: 1rem;
-    background-color: var(--white, #ffffff);
-    border: 1px solid var(--border-light, #e5e5e5);
-    border-radius: 6px;
-}
-
-.location-item strong,
-.contact-item strong,
-.transport-item strong,
-.route-item strong {
-    display: block;
-    color: var(--primary-blue, #0066cc);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-}
-
-.location-item p,
-.contact-item p,
-.transport-item p,
-.route-item p {
-    color: var(--text-primary, #333);
-    margin: 0;
-    line-height: 1.5;
-}
-
-/* Map Container */
-.map-container {
-    display: block;
-    /* padding: 2rem; */
-    /* min-height: 250px; */
-    width: 100%;    
-}
-
-.map-placeholder {
-    text-align: center;
-    color: var(--text-secondary, #666);
-    max-height: 500px;
-}
-.map-placeholder iframe {
-    aspect-ratio: 5/2;
-    max-height: 500px;
-    border-radius: 8px;
-}
-
-.map-info {
-    background-color: var(--background-light, #f8f9fa);
-    border: 2px dashed var(--border-light, #e5e5e5);
-    border-radius: 8px;
-    padding: 1rem;
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.map-info p {
-    margin: 0;
-    font-size: 0.9rem;
-}
-
-.map-info strong {
-    color: var(--primary-blue, #0066cc);
-}
-
-/* Parking Info */
-.parking-info {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: rgba(0, 102, 204, 0.05);
-    border-radius: 6px;
-    border-left: 4px solid var(--primary-blue, #0066cc);
-}
-
-.parking-info strong {
-    display: block;
-    color: var(--primary-blue, #0066cc);
-    margin-bottom: 0.5rem;
-}
-
-.content-grid-location {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-}
-#branches-yeongnam .content-grid-location,
-#branches-kazakhstan .content-grid-location {
-    grid-template-columns: 1fr;
-}
- 
-/* Responsive */
-@media (max-width: 768px) {
-    .content-grid-location {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    .location-details,
-    .contact-details,
-    .transport-details {
-        gap: 1rem;
-    }
-    
-    .location-item,
-    .contact-item,
-    .transport-item,
-    .route-item {
-        padding: 0.75rem;
-    }
-    
-    .map-container {
-        /* padding: 1rem; */
-        min-height: 250px;
-    }
-}
-@media (max-width: 425px) {
-    .map-placeholder iframe {
-        aspect-ratio: 5/3.5;
-    }
-}
-</style>

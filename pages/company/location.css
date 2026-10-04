@@ -1,0 +1,39 @@
+#headquarters-탭제목,
+#factory-탭제목,
+#branches-탭제목{display: none;}
+
+#headquarters-탭제목,
+#factory-탭제목{text-align: center;
+    & h2{margin-bottom: 5px;}
+}
+#headquarters-위치정보-section-title h2,
+#headquarters-연락처-section-title h2{ font-size: 2rem;  font-weight: bold;  margin-bottom: 0px;
+}
+.grid-table{ padding: 0; border: 1px solid var(--bdc1);
+    & .grid-table-row{ display: grid; grid-template-columns: minmax(100px, 180px) 1fr; border-bottom: 1px solid var(--bdc1);
+        & strong,p{padding: 25px;}
+        & strong{color: var(--c-blue); border-right: 1px solid var(--bdc1); font-size: 20px; background-color: var(--page-tab-2-item-hover-bgc);}
+        & p{font-size: 18px;}
+    }
+    & .grid-table-row:last-child{border-bottom: none;}
+}
+
+.map-info {
+    background-color: #f8f9fa;
+    border: 2px dashed var(--bdc1);
+    padding: 30px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.map-info strong {color: var(--c-blue);}
+.map-placeholder {
+    text-align: center;
+    color: var(--text-secondary, #666);
+    max-height: 500px;
+}
+.map-placeholder iframe {
+    aspect-ratio: 5/2;
+    max-height: 500px;
+    border-radius: 8px;
+}

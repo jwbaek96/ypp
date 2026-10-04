@@ -1,33 +1,128 @@
-.content-grid{display: grid;grid-template-columns: 1fr;gap: 2rem;}
-.content-block:hover {box-shadow: none;}
 /* 페이지 헤더 배경 이미지 */
 .page-header {
     position: relative;
-    background: url("회사소개.webp");
+    background: url("./image/회사소개.webp");
     background-size: cover;
     background-position: center;
 }
 
-.page-header > * { position: relative; z-index: 2; }
+/* .page-header > * { position: relative; z-index: 2; } */
+
+/* .content-grid{display: grid;grid-template-columns: 1fr;gap: 2rem;}
+.content-block:hover {box-shadow: none;} */
 
 /* ++++++++++++++++++++++++++++++++++++++++++++ */
-#status-intro .block-content{ display: block; text-align: center; }
-#status-intro p{ text-align: center;}
-/* 심플한 소개 파트 스타일 */
-.intro-header { display: flex; align-items: center; justify-content: center; gap: 3rem; margin-bottom: 3rem;}
-.intro-text {flex: 2;}
-.intro-logo { max-width: 300px; text-align: center;}
-.intro-greeting { font-size: 1.4rem; color: #1a1a1a; margin-bottom: 1rem; line-height: 1.5;}
-.intro-description { font-size: 1.1rem; color: #666; line-height: 1.6; margin: 0;}
-.company-logo { max-width: 120px; height: auto;}
-.company-story {margin-bottom: 3rem;}
-.company-story p { font-size: 1.05rem; line-height: 1.7; color: #333; margin-bottom: 1.5rem;}
-.company-story p:last-child {margin-bottom: 0;}
-.company-footer{ display: flex; flex-wrap: wrap; gap: 10px;}
-.company-footer-a{width: 40%;}
-.company-footer-b{flex: 1;}
+#회사소개-기업현황-탭제목{display:none;}
+#회사소개-기업현황-소개{
+    & #회사소개-기업현황-소개-section-title{display:none;}
+    & #회사소개-기업현황-소개-text{text-align: center; font-size: 1rem;}
+    & #회사소개-기업현황-소개-text-headline {font-size: 2.4rem; margin-bottom: 1rem;}
+    
+    & #회사소개-기업현황-소개-회사정보{
+        & #회사소개-기업현황-소개-회사정보-이미지1{height: 360px;}
+        & #회사소개-기업현황-소개-회사정보-핵심정보 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid #dfe5ed;
+            border-bottom: 1px solid #dfe5ed;
+        }
+        & #회사소개-기업현황-소개-회사정보-핵심정보>div{
+            position: relative;
+            min-height: 125px;
+            padding: 27px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        & #회사소개-기업현황-소개-회사정보-핵심정보>div + div::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 28px;
+            bottom: 28px;
+            
+            width: 1px;
+            background: #dfe5ed;
+        }
+        & #회사소개-기업현황-소개-회사정보-핵심정보>div span{
+            margin-bottom: 9px;
+            color: var(--c-blue);
+            font-weight: 700;
+        }
+        & #회사소개-기업현황-소개-회사정보-핵심정보>div strong{
+            color: #17253d;
+            font-weight: 600;
+            line-height: 1.5;
+            font-size: 1.2rem;
+            letter-spacing: -0.03em;
+        }
+        & #회사소개-기업현황-소개-회사정보-설명 {padding: 38px 18px;}
+        & #회사소개-기업현황-소개-회사정보-설명 p {line-height: 1.85;letter-spacing: -0.025em; }
+        & #회사소개-기업현황-소개-회사정보-설명 p + p {margin-top: 5px;}
+        & #회사소개-기업현황-소개-회사정보-위치 { 
+            padding: 12px 18px;
+            & .location {
+                display: grid;
+                grid-template-columns: 150px 1fr;
+                gap: 30px;
+                padding: 24px 0;
+                border-bottom: 1px solid #dfe5ed;
+            }
+            & .location:first-child{border-top: 1px solid #dfe5ed;}
+            & .location__title {color: var(--c-blue);font-weight: 700;}
+            & .location__content {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                color: #596477;
+                line-height: 1.65;
+            }
+            & .location__content strong {color: #26344c;font-weight: 500;}
+        }
+        @media (max-width: 900px) {
+            #회사소개-기업현황-소개-회사정보-이미지1 {height: 300px;}
+            #회사소개-기업현황-소개-회사정보-핵심정보 {grid-template-columns: repeat(2, 1fr);}
+            #회사소개-기업현황-소개-회사정보-핵심정보>div:nth-child(3)::before {display: none;}
+            #회사소개-기업현황-소개-회사정보-핵심정보>div:nth-child(3),
+            #회사소개-기업현황-소개-회사정보-핵심정보>div:nth-child(4) {border-top: 1px solid #e5e9ef;}
+        }
+        @media (max-width: 650px) {
+            #회사소개-기업현황-소개-회사정보-이미지1 {height: 220px;}
+            #회사소개-기업현황-소개-회사정보-핵심정보>div {padding: 20px;}
+            #회사소개-기업현황-소개-회사정보-핵심정보>div + div::before {top: 20px; bottom: 20px;}
+            #회사소개-기업현황-소개-회사정보-핵심정보>div strong{font-size: 1rem;}
+            #회사소개-기업현황-소개-회사정보-설명 {padding: 38px 0px;}
+            #회사소개-기업현황-소개-회사정보-설명 p {line-height: 1.75;font-size: 16px;}
+            #회사소개-기업현황-소개-회사정보-위치{padding: 0;
+                & .location {grid-template-columns: 1fr;gap: 8px;padding: 20px 0;}
+                & .location__title {font-size: 15px;}
+                & .location__content {font-size: 15px;}
+            }
+        }
+    }
+    @media (max-width: 650px) {
+        #회사소개-기업현황-소개-text-headline {font-size: 1.25rem;}
+        #회사소개-기업현황-소개-text{font-size: 14px;}
+        #회사소개-기업현황-소개-이미지1{height: 260px;}
+    }
+}
+#회사소개-기업현황-인사말 {
+    & .tab-section-block-header h2{margin-bottom: 1.5rem;}
+    & #회사소개-기업현황-인사말-content{ display: grid;grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);gap: 30px;}
+    & #회사소개-기업현황-인사말-text {min-width: 0; container-type: inline-size;
+        & h2 {font-size: clamp(1.2rem, 7cqi, 2.5rem);font-weight: 900; line-height: 1.2; margin: 0 0 2rem 0;white-space: nowrap;}
+        & p {font-size: clamp(0.875rem, 4.5cqi, 1.25rem); margin-top: 1.25rem; color: rgb(87, 94, 104); font-weight: 300;}
+        & h3 {font-size: clamp(1rem, 5cqi, 1.5rem); margin-top: 2rem; color: rgb(29, 99, 241); font-style: italic;}
+    }
+    @media (max-width: 768px) {
+        .tab-section-block-header h2{margin-bottom: -1rem;}
+        #회사소개-기업현황-인사말-content{ grid-template-columns: 1fr; gap: 20px;}
+        #회사소개-기업현황-인사말-content > :first-child {order: 2; text-align: center;}
+        #회사소개-기업현황-인사말-content > :last-child {order: 1; max-height: 350px;}
+    }
+}
+/* ++++++++++++++++++++++++++++++++++++++++++++ */
 
-.building-photo {width: 100%;height: 250px;object-fit: cover;border-radius: 8px;background: #f5f5f5;display: flex;align-items: center;justify-content: center;color: #999;font-size: 1rem;}
 .business-intro {text-align: center;margin-bottom: 3rem;padding: 2rem;background: #f8f9fa;border-radius: 8px;}
 .business-intro p {font-size: 1.1rem;line-height: 1.6;color: #333;margin: 0;font-weight: 500;}
 .company-details {background: #fff;border-radius: 8px;overflow: hidden;}

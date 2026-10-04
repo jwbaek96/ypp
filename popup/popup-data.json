@@ -22,13 +22,6 @@
             "items": [
               {
                 "name": {
-                  "kor": "과정개요, 교육일정 및 교육계획",
-                  "eng": "Course Overview, Schedule, and Plan"
-                },
-                "link": "/pages/academy/index.html?tab=relay-school"
-              },
-              {
-                "name": {
                   "kor": "교육신청",
                   "eng": "Apply Now"
                 },
@@ -40,6 +33,13 @@
                   "eng": "RelaySchool Brochure"
                 },
                 "filename": "YPP RELAY SCHOOL_CV 2026 교육계획.pdf"
+              },
+              {
+                "name": {
+                  "kor": "RelaySchool 보러가기",
+                  "eng": "Go to RelaySchool Page"
+                },
+                "link": "/pages/academy/index.html?tab=relay-school"
               }
             ]
           },
@@ -49,13 +49,6 @@
               "eng": "PSAC 2026 Power System Advanced Technology Training Course"
             },
             "items": [
-              {
-                "name": {
-                  "kor": "과정개요, 교육일정 및 교육계획",
-                  "eng": "Course Overview, Schedule, and Plan"
-                },
-                "link": "/pages/academy/index.html?tab=psac"
-              },
               {
                 "name": {
                   "kor": "교육신청",
@@ -76,6 +69,13 @@
                   "eng": "PSAC 2026 Official Notice"
                 },
                 "filename": "[시행]_YPP-아카데미-26-001_PSAC2026_교육개강안내_전력계통_고급기술_교육과정.pdf"
+              },
+              {
+                "name": {
+                  "kor": "PSAC 보러가기",
+                  "eng": "Go to PSAC Page"
+                },
+                "link": "/pages/academy/index.html?tab=psac"
               }
             ]
           }

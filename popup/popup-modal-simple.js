@@ -191,10 +191,18 @@ const SimplePopupModal = {
           <div id="popup-grid-container" class="popup-grid-container">
             <!-- 그리드 이미지들이 여기에 동적으로 생성됨 -->
           </div>
-          <div class="popup-navigation" style="text-align: center; margin-top: 15px;">
-            <button id="prev-btn" onclick="SimplePopupModal.prevPage()" style="display:none;">이전</button>
+          <div class="popup-navigation" style="text-align: center;">
+            <button id="prev-btn" type="button" onclick="SimplePopupModal.prevPage()" aria-label="이전 페이지" title="이전 페이지" style="display:none;">
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
             <span id="popup-counter">1 / 1</span>
-            <button id="next-btn" onclick="SimplePopupModal.nextPage()" style="display:none;">다음</button>
+            <button id="next-btn" type="button" onclick="SimplePopupModal.nextPage()" aria-label="다음 페이지" title="다음 페이지" style="display:none;">
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -408,11 +416,11 @@ const SimplePopupModal = {
     
     // 아카데미 공지 카드 HTML 생성
     gridItem.innerHTML = `
-      <div class="academy-card">
-        <div class="academy-header">
-          <h3 class="academy-title">${title}</h3>
+      <div class="popup-card">
+        <div class="popup-header">
+          <h3 class="popup-title">${title}</h3>
         </div>
-        <div class="academy-content">
+        <div class="popup-content">
           ${this.renderAcademyContent(academyData, currentLang)}
         </div>
       </div>
@@ -430,27 +438,27 @@ const SimplePopupModal = {
     gridItem.classList.add('notice-popup-item');
 
     const card = document.createElement('div');
-    card.className = 'academy-card notice-card';
+    card.className = 'popup-card notice-card';
     const header = document.createElement('div');
-    header.className = 'academy-header';
+    header.className = 'popup-header';
     const title = document.createElement('h3');
-    title.className = 'academy-title';
+    title.className = 'popup-title';
     title.textContent = currentLang === 'en' ? popup.titleEN : popup.titleKR;
     header.appendChild(title);
     card.appendChild(header);
 
     const content = document.createElement('div');
-    content.className = 'academy-content';
+    content.className = 'popup-content';
     popup.sections.forEach(section => {
       const sectionElement = document.createElement('div');
-      sectionElement.className = 'academy-section';
+      sectionElement.className = 'popup-section';
       const heading = document.createElement('div');
-      heading.className = 'academy-category-title';
+      heading.className = 'popup-category-title';
       heading.textContent = section.name[languageKey];
       sectionElement.appendChild(heading);
 
       const items = document.createElement('div');
-      items.className = 'academy-items';
+      items.className = 'popup-items';
       (section.items || []).filter(item => item.enabled !== false).forEach(item => {
         const paragraph = document.createElement('p');
         paragraph.className = 'notice-text';
@@ -476,8 +484,8 @@ const SimplePopupModal = {
       // items가 없거나 빈 배열인 경우 처리
       if (!category.items || category.items.length === 0) {
         return `
-          <div class="academy-section">
-            <div class="academy-category-title">${categoryName}</div>
+          <div class="popup-section">
+            <div class="popup-category-title">${categoryName}</div>
           </div>
         `;
       }
@@ -486,18 +494,18 @@ const SimplePopupModal = {
         const itemName = currentLang === 'en' ? item.name.eng : item.name.kor;
         
         if (item.link) {
-          return `<a href="${item.link}" class="academy-link" target="_blank">${itemName}</a>`;
+          return `<a href="${item.link}" class="popup-link" target="_blank">${itemName}</a>`;
         } else if (item.filename) {
-          return `<a href="./documents/${item.filename}" class="academy-link" target="_blank">${itemName}</a>`;
+          return `<a href="./documents/${item.filename}" class="popup-link" target="_blank">${itemName}</a>`;
         } else {
-          return `<span class="academy-item">${itemName}</span>`;
+          return `<span class="popup-item">${itemName}</span>`;
         }
       }).join('');
       
       return `
-        <div class="academy-section">
-          <div class="academy-category-title">${categoryName}</div>
-          <div class="academy-items">${items}</div>
+        <div class="popup-section">
+          <div class="popup-category-title">${categoryName}</div>
+          <div class="popup-items">${items}</div>
         </div>
       `;
     }).join('');

@@ -201,23 +201,14 @@
 
 /* 태블릿 */
 @media (max-width: 1100px) {
-    .main-menu{
-        gap: 0;
-    }
-    
-    .menu-link {
-        padding: 0 .5rem;
-        font-size: var(--font-size-small, 1rem);
-    }
-    
-    .sub-menu {
-        min-width: 200px;
-    }
+    .main-menu{gap: 0;}
+    .menu-link {padding: 0 .5rem;}
+    .sub-menu {min-width: 200px;}
 }
 
 /* 작은 데스크톱 */
 @media (max-width: 900px) {
-    .menu-link {padding: 0 0.8rem;font-size: var(--font-size-small, 1rem);}
+    .menu-link {padding: 0 0.8rem;}
     .sub-menu {min-width: 180px;}
     .language-switch,
     .desktop-nav {display: none;}
@@ -278,7 +269,7 @@
         pointer-events: none;
         background: #fff;
         border-top: 1px solid var(--border-color, #e0e0e0);
-        box-shadow: 0 12px 24px rgba(20, 48, 76, 0.12);
+        box-shadow: 0 12px 24px rgba(14, 34, 54, 0.13);
         transform: translateY(-8px);
         transition: max-height 0.3s ease, opacity 0.5s ease, visibility 0.5s, transform 0.35s ease;
     }
@@ -423,13 +414,9 @@
         transition: color 0.18s ease;
     }
 
-    .mega-menu-section-row a:first-child {
-        padding-left: 0;
-    }
+    .mega-menu-section-row a:first-child {padding-left: 0;}
 
-    .mega-menu-section-row a:last-child {
-        border-right: 0;
-    }
+    .mega-menu-section-row a:last-child {border-right: 0;}
 
     .mega-menu-section-row a:hover {
         color: var(--primary-blue, #0066cc);
@@ -445,28 +432,27 @@
     }
 }
 
+@media (max-width: 1000px) {
+    .header-mega-menu-inner {padding: 24px 50px 40px;}  
+    .mega-menu-intro{padding: 0 30px 0 8px;}
+    .mega-menu-title{font-size: 2rem;}
+    .mega-menu-child-link {font-size: 1rem; padding: 8px 30px 8px 30px;}
+    .mega-menu-section-row{font-size: 1rem; padding: 8px 0 8px 26px;}
+}
+
 @media (max-width: 900px) {
     .header-mega-menu {
         display: none !important;
     }
 }
 
-.sub-menu .menu-item:nth-child(4) {
-    transition-delay: 0.2s;
-}
+.sub-menu .menu-item:nth-child(4) {transition-delay: 0.2s;}
 
-.sub-menu .menu-item:nth-child(5) {
-    transition-delay: 0.25s;
-}
+.sub-menu .menu-item:nth-child(5) {transition-delay: 0.25s;}
 
 /* ===== SPECIAL CASES ===== */
 
 /* 긴 메뉴 이름을 위한 처리 */
-.menu-link {
-    white-space: nowrap;
-}
+.menu-link {white-space: nowrap;}
 
-.sub-menu .menu-link {
-    white-space: normal;
-    word-break: keep-all;
-}
+.sub-menu .menu-link {white-space: normal;word-break: keep-all;}

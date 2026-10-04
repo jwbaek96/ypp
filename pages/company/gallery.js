@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 탭 전환 시 갤러리 새로고침 (필요한 경우)
     document.addEventListener('tabChanged', function(e) {
-        if (e.detail.tabId === 'business') {
-            // business 탭으로 전환될 때 갤러리 새로고침
+        if (e.detail.tabId === 'aboutus-mainbusiness') {
+            // aboutus-mainbusiness 탭으로 전환될 때 갤러리 새로고침
             setTimeout(() => {
                 if (window.galleryInstances.licenseGallery) {
                     window.galleryInstances.licenseGallery.refresh();
@@ -256,7 +256,6 @@ class GallerySystem {
         // 검색 관련 요소들
         this.searchInput = this.container.querySelector('.gallery-search-input');
         this.searchBtn = this.container.querySelector('.gallery-search-btn');
-        // this.searchResetBtn = this.container.querySelector('.gallery-search-reset-btn');
     }
     
     // 이미지 프리로딩 함수

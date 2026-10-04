@@ -1,5 +1,5 @@
 /*/* ===== 갤러리 시스템 CSS ===== */
-
+.gallery-description{text-align: right; padding: 0 10px;}
 /* 갤러리 컨테이너 */
 .gallery-container {
     width: 100%;

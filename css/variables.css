@@ -96,7 +96,7 @@
     --page-tab-2-item-active-c: #fff;
     --page-tab-2-item-active-bgc: #0066cc;
 
-    --page-tab-section-padding: 1rem;
+    --page-tab-section-padding:.5rem 1rem;
     
 }
 @media (max-width: 900px) {

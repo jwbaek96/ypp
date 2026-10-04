@@ -1,0 +1,212 @@
+/* #thermal-overview,
+#thermal-ecms .tab-section-block-header,
+#renewable-solar .tab-section-block-header,
+#renewable-wind .tab-section-block-header,
+#renewable-ess .tab-section-block-header,
+#renewable-projects .tab-section-block-header,
+#nuclear-strengths .tab-section-block-header,
+#nuclear-scope .tab-section-block-header,
+#nuclear-projects .tab-section-block-header,
+#nuclear-overview .tab-section-block-header{max-width: 1000px; margin: 0 auto; text-align: center;} */
+.tab-section-block-header{max-width: 1000px; margin: 0 auto; text-align: center;}
+
+#thermal-power{
+    & .tab-section-block-header{ text-align: center; }
+    & .thermal-overview-card {
+        background: linear-gradient(135deg, #007fff57 0%, #f8fafc 40%, #0066cc8c 100%);
+        /* background: linear-gradient(135deg, #007fff57 0%, #f8fafc 24%, #f8fafc 50%, #0066cc8c 100%); */
+        border-radius: 12px;padding: 1rem 2rem;margin-bottom: 1rem;}
+    & .thermal-overview-list {list-style: none;padding: 0;margin: 0;}
+    & .thermal-overview-list li {display: flex;align-items: center;padding: 0.75rem 0;font-size: .95rem;color: var(--c-black);}
+    & .thermal-overview-list li i {color: var(--c-blue);margin-right: 0.75rem;font-size: 1.1rem;}
+    & .expertise-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+    & .expertise-card {
+        flex: 1; width: 100%; 
+        background: #fff;
+        border-radius: 50%;
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    & .expertise-card:hover{transform: none; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);}
+    & .expertise-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem auto;
+    }
+    & .expertise-icon i {font-size: 1.5rem; color: white;}
+
+
+    @media (max-width: 768px) {
+        .thermal-overview-card {padding: 1.5rem;}
+        
+        .expertise-grid {flex-direction: column;align-items: center;}
+        .expertise-icon{display: none;}
+        .expertise-card{background-color: aliceblue; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);}
+        
+        .simple-projects-table {font-size: 0.9rem;}
+        .simple-projects-table th,
+        .simple-projects-table td {padding: 1rem 0.8rem;}
+    }
+    @media (max-width: 480px) {
+        .expertise-desc,
+        .expertise-desc-2,
+        .expertise-desc-3,
+        .projects-desc {font-size: 1rem;}
+    
+        .expertise-card,
+        .project-card {padding: 1.25rem;}
+        
+        .projects-map-section {padding: 1.5rem;}
+    }
+}
+#nuclear-power{
+    & .nuclear-overview-list {list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 16px;}
+    & .nuclear-overview-list i {color: #3a7bd5; font-size: 1.1em;}
+    & .nuclear-overview-list li {
+        width: 100%;max-width: calc(50% - 8px); /* 두 개씩 나열 */
+        display: flex; align-items: center; gap: 8px;border-radius: 8px; padding: 10px 18px;
+        background: #eaf3fa; box-shadow: 0 1px 4px rgba(30,60,90,0.06); color: #1a3557; font-size: 1em;
+    }
+    & .nuclear-overview-images {
+        display: flex; flex-direction: row; gap: 24px; 
+        width: 100%; margin-top: 0px;
+    }
+    & .nuclear-overview-img{ border: 10px solid #ffffff00; background: #eaf3fa;box-shadow: 0 2px 12px rgba(30,60,90,0.10);border-radius: 12px; flex: 1 1 0; display: flex; align-items: center; justify-content: center; flex-direction: column;}
+    & .nuclear-overview-img img{object-fit: cover;width: 100%; border-radius: 12px;  height: 240px;}
+    & .nuclear-overview-img p{ padding: 10px; width: 100%; margin: 0; background: rgba(255, 255, 255, 0); color: #1a3557; font-size: 1em; text-align: center;}
+    @media (max-width: 900px) {
+        .nuclear-overview-img{margin-top: 15px; width: 100%;}
+        .nuclear-overview-images {flex-direction: column; gap: 12px;}
+    }
+    @media (max-width: 600px) {
+        .nuclear-overview-list{flex-direction: column;}
+        .nuclear-overview-list li{max-width: 100%;}
+    }
+    /* CGID */
+    /* Modern CGID Section Styles */
+    & .cgid-intro-header.content-block{ border: none; border-top: 1px solid #eee; background: none; box-shadow: none; margin-top: 1.25rem;}
+    & .cgid-intro-card {display: flex; flex-direction: column; gap: 10px; background: #fff; border-radius: 16px; box-shadow: 0 2px 12px 0 rgba(0,0,0,0.06); padding: 40px; margin-bottom: 10px; border: 1px solid #e5e7eb;}
+    & .cgid-intro-header {display: flex; flex-direction: column; align-items: center; margin-top: 2.5rem; font-size: 1.25rem; color: #2563eb; font-weight: 700;}
+    & .cgid-intro-header i {color: #2563eb; margin: .9rem 0;}
+    & .cgid-intro-title {color: #1e293b;font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px;}
+    & .cgid-intro-title-4 {font-weight: 800;}
+    & .cgid-intro-title-2 {font-size: 1.2rem; font-weight: 600;}
+    & .cgid-intro-title-3 {font-size: 1.5rem; font-weight: 700;}
+    & .cgid-intro-body p {color: #334155;  font-size: 1.05rem; line-height: 1.7; margin: 0; text-align: center;}
+    & .cgid-intro-header i, .cgid-intro-title-1{font-size: 3rem;}
+    & .cgid-service-card {display: flex; flex-direction: column; align-items: center; gap: 8px;padding: 22px 24px 16px 24px; text-align: center;}
+    & .cgid-service-header {display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: 700; color: #0ea5e9;}
+    & .cgid-service-header i {font-size: 1.5rem; color: #0ea5e9;}
+    & .cgid-service-title {color: #1e293b; font-size: 1.35rem; font-weight: 700;}
+    & .cgid-service-list { margin: 0; padding-left: 18px; color: #334155; font-size: 1.01rem; line-height: 1.7; font-weight: 500;}
+    & .cgid-diagram { margin: 0; display: flex; width: 100%;}
+    & .cgid-diagram .image-container {width: 35%; border-radius: 12px; box-shadow: 0 1px 6px 0 rgba(30,41,59,0.04); margin: 0;}
+    & .cgid-diagram img { width: 100%; height: auto;}
+    & .cgid-diagram-list {width: 100%;margin: 0 auto 0 15px;list-style: none;display: flex;flex-direction: column;gap: 8px;}
+    & .cgid-diagram-list li {display: flex; align-items: center; flex: 1; width: 100%; padding: 1rem; background: #f2f7fc; border-radius: 8px; color: #1a3557; border: 1px solid #e0e7ef; box-shadow: 0 1px 4px rgba(30, 60, 90, 0.06);}
+    & .cgid-diagram-list li:before { content: "\2022"; color: #0ea5e9; font-weight: bold; margin-right: 0.5rem;}
+    & .cgid-item-section {margin-top: 10px;}
+    & .cgid-list-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 18px;}
+    & .cgid-list-item {display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 18px 14px 12px 14px; border-radius: 12px; background: #f1f5f9; border-radius: 14px; box-shadow: 0 1px 6px 0 rgba(30,41,59,0.04);  border: 1px solid #e0e7ef;    }
+    & .cgid-list-img{max-width: 100%;}
+    & .cgid-list-img img {width: 100%;border-radius: 8px;margin-bottom: 8px;box-shadow: 0 1px 4px 0 rgba(30,41,59,0.08);}
+    & .cgid-list-text h5 {font-size: 1.08rem;font-weight: 700;color: #2563eb;margin-bottom: 4px;}
+    & .cgid-list-text ul {margin: 0;padding-left: 18px;color: #334155;font-size: 0.98rem;line-height: 1.6;}
+    & .cgid-item-extra {border-left: 5px solid #2563eb;margin-top: 18px;padding-left: 18px;line-height: 1.6;list-style: disc inside !important;}
+    & .cgid-item-extra li {margin-bottom: 2px;}
+    @media (max-width: 900px) {
+    .cgid-intro-card, .cgid-service-card, .cgid-diagram .image-container {padding: 12px 8px 10px 8px;}
+    .cgid-list-grid {grid-template-columns: 1fr;gap: 12px;}
+    }
+    @media (max-width: 600px) {
+    .cgid-diagram .image-container {flex-direction: column;gap: 10px;align-items: flex-start;}
+    #smr .capability-card{max-width: 100%;}
+    }
+    
+    /* Accordion Styles for Nuclear Services */
+    & .service-section { border-radius: 12px; margin-bottom: 40px; padding: 24px;}
+    & .service-title { margin-bottom: 24px; padding-bottom: 12px; display: flex; align-items: center; gap: 12px; font-size: 1.25rem; font-weight: 600; color: #1a365d; border-bottom: 2px solid #e2e8f0;}
+    & .service-title i { color: #3182ce; font-size: 1.2em;}
+    & .accordion-container { display: flex; flex-direction: column; gap: 8px;}
+    & .accordion-item { border: 1px solid #e2e8f0; border-radius: 8px; background: white; overflow: hidden; transition: all 0.3s ease;}
+    & .accordion-item:hover {box-shadow: 0 2px 8px rgba(0,0,0,0.08);}
+    & .accordion-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: #ffffff; border-bottom: 1px solid transparent; cursor: pointer; transition: all 0.3s ease; user-select: none;}
+    & .accordion-header:hover {background: #f7fafc;}
+    & .accordion-header.active {background: #edf2f7; border-bottom-color: #e2e8f0;}
+    & .accordion-header span { display: flex; align-items: center; gap: 10px; color: #2d3748; font-size: 1.05rem; font-weight: 500;}
+    & .accordion-header i:first-child { color: #4299e1; font-size: 1.1em;}
+    & .accordion-icon { color: #718096; font-size: 0.9em; transition: transform 0.3s ease;}
+    & .accordion-header.active .accordion-icon {transform: rotate(180deg);}
+    & .accordion-content { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; background: #ffffff; display: flex; justify-content: space-between;}
+    & .ac-top {display: flex; justify-content: space-between;}
+    & .ac-top .bold {font-weight: bold; color: #1a2d52;}
+    & .accordion-content:has(.ac-top) {flex-direction: column; gap: 20px;}
+    & .accordion-content.active { padding: 16px 20px; max-height: 500px;}
+    & .accordion-content.active:has(.ac-top) { padding: 16px 20px; max-height: 10000px;}
+    & .accordion-content-image { display: flex; align-items: center; justify-content: center; margin-bottom: 16px;width: 250px;}
+    & .accordion-content-image img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); object-fit: cover; aspect-ratio: 16/11;}
+    & .accordion-content ul { margin: 0; padding-left: 20px; list-style: none;}
+    & .accordion-content li {margin-bottom: 8px;padding-left: 16px; color: #4a5568; font-size: 0.95rem; line-height: 1.5; position: relative;}
+    & .accordion-content li:before { content: "•"; color: #4299e1; font-weight: bold; position: absolute; left: 0;}
+    & .accordion-content:has(.ac-top) .cgid-service-card li:before { content: "";}
+    & .accordion-content:has(.ac-top) .cgid-diagram li:before { padding-left: 7px; }
+    & .cgid-brief { margin-top: 16px; padding: 16px; background: #edf7ff; border-left: 4px solid #4299e1; border-radius: 0 8px 8px 0;}
+    & .cgid-brief p { margin: 0; color: #2d3748; font-size: 0.95rem; line-height: 1.6;}
+
+    /* Strengths Grid Styles */
+    & .strengths-grid{display: flex; flex-wrap: wrap; gap: 24px; margin-top: 20px; justify-content: center;align-items: center;}
+    & .strength-card {
+        width: 100%; max-width: 47%;
+        display: flex; align-items: flex-start; gap: 16px; padding: 24px; background: white; 
+        border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; transition: all 0.3s ease;}
+    & .strength-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08);}
+    & .strength-icon {
+        display: flex; align-items: center; justify-content: center; width: 48px; height: 48px;
+        border-radius: 50%; background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%); color: white; font-size: 1.2em; flex-shrink: 0;}
+    & .strength-content h4 { margin: 0 0 8px 0; font-size: 1.1rem; font-weight: 600; color: #1a365d;}
+    & .strength-content p { margin: 0; color: #4a5568; font-size: 0.9rem; line-height: 1.5;}
+
+    @media (max-width: 768px) {
+        .service-section { padding: 16px; margin-bottom: 24px;}
+        .service-title { font-size: 1.1rem; margin-bottom: 16px;}
+        .accordion-header {padding: 12px 16px;}
+        .accordion-header span {font-size: 0.95rem;}
+        .accordion-content.active {padding: 12px 16px;}
+        .accordion-content ul {padding: 0;}
+        .accordion-content-image {width: auto; max-width: 40%; margin-left: 5px;}
+        .strengths-grid {flex-direction: column; align-items: center; gap: 16px;}
+        .strength-card {max-width: 100%; width: 100%; padding: 16px;}
+    }
+
+    /* CGID 공급실적 & 공급사 유자격 섹션 */
+    & .cgid-supply-section {padding: 2rem;}
+    & .cgid-supply-grid { display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between;}
+    & .cgid-supply-records, 
+    & .cgid-supply-qualify { flex: 1 1 320px; min-width: 260px;}
+    & .cgid-supply-title { font-size: 1.15rem; font-weight: 700; color: #1e293b; margin-bottom: 18px; letter-spacing: -0.5px;}
+    & .cgid-supply-table-group {display: flex;flex-direction: column;gap: 18px;}
+    & .cgid-supply-table-block { padding: 14px 5px 10px 5px;}
+    & .cgid-supply-table-label { font-size: 1.02em; font-weight: 600; color: #2563eb; margin-bottom: 8px;}
+    & .cgid-supply-table { width: 100%; border-collapse: collapse; font-size: 0.98em;}
+    & .cgid-supply-table td { padding: 4px 8px 4px 0; border-bottom: 1px solid #a5a5a556; color: #334155;}
+    & .cgid-supply-table tr:last-child td {border-bottom: none;}
+    & .cgid-supply-qualify-group { display: flex; flex-direction: column;gap: 18px;}
+    @media (max-width: 900px) {
+        .cgid-supply-grid { flex-direction: column; gap: 18px; padding: 18px 8px;}
+    }
+}

@@ -9,14 +9,6 @@
 @import "components/sidebar.css";
 
 /* ===== EXPEND 기능 ===== */
-/* @import "expend/breadcrumb.css"; */
-
-/* YPP Website - Main Stylesheet */
-
-
-/* ===== LAYOUT COMPONENTS ===== */
-/* .container {max-width: 1200px;margin: 0 auto;padding: var(--container-padding);} */
-/* .container {margin: 0 auto;padding: var(--container-padding);} */
 img{
     max-width: 100%;
     border-radius: var(--br);

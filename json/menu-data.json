@@ -6,14 +6,14 @@
         "en": "Company"
       },
       "megaMenuImage": "../assets/images/menu/SAMPLE%20IMAGE.png",
-      "url": "/pages/company/about.html?tab=회사소개-기업현황",
+      "url": "/pages/company/about.html?tab=aboutus-overview",
       "children": {
         "status": {
           "title": {
             "ko": "기업현황",
             "en": "About"
           },
-          "url": "/pages/company/about.html?tab=회사소개-기업현황",
+          "url": "/pages/company/about.html?tab=aboutus-overview",
           "sections": ["소개", "인사말", "연혁", "조직도"]
         },
         "business": {
@@ -21,7 +21,7 @@
             "ko": "주요사업",
             "en": "Main Business"
           },
-          "url": "/pages/company/about.html?tab=business",
+          "url": "/pages/company/about.html?tab=aboutus-mainbusiness",
           "sections": ["사업소개", "파트너", "인허가", "유자격"]
         },
         "central-research-institute": {

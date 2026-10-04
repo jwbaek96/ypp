@@ -37,13 +37,15 @@
 
 .sidebar-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 1.5rem;
 }
 
 .sidebar-logo {
     height: 40px;
+    object-fit: contain;
+    display: none;
 }
 
 .sidebar-close {

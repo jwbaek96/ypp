@@ -420,7 +420,7 @@ const SimplePopupModal = {
         <div class="popup-header">
           <h3 class="popup-title">${title}</h3>
         </div>
-        <div class="popup-content">
+        <div class="popup-item-content">
           ${this.renderAcademyContent(academyData, currentLang)}
         </div>
       </div>
@@ -448,7 +448,7 @@ const SimplePopupModal = {
     card.appendChild(header);
 
     const content = document.createElement('div');
-    content.className = 'popup-content';
+    content.className = 'popup-item-content';
     popup.sections.forEach(section => {
       const sectionElement = document.createElement('div');
       sectionElement.className = 'popup-section';

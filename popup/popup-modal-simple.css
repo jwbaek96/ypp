@@ -149,6 +149,7 @@
   margin-bottom: 15px;
   padding-bottom: 10px;
   border-bottom: 1px solid #e5e7eb;
+  text-align: center;
 }
 
 .popup-grid-item 
@@ -198,10 +199,11 @@
   display: block;
   font-size: var(--font-size-small, 1rem);
   padding: 12px 12px;
-  color: #1764ff;
+  color: var(--c-blue);
   border: 1px solid #e5e7eb;
   border-radius: 4px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 5px;
+  text-align: center;
 }
 
 .popup-grid-item .popup-link:hover {

@@ -145,7 +145,7 @@
         "ko": "업무 및 서비스",
         "en": "Services and Offerings"
       },
-      "url": "/pages/workingscope/index.html",
+      "url": "/pages/workingscope/index.html?tab=development-solution",
       "megaMenuImage": "../assets/images/menu/SAMPLE%20IMAGE.png",
       "children": {
         "development-solution": {

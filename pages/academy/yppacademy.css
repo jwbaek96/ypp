@@ -1,0 +1,75 @@
+.page-header{background: url('./images/ypp아카데미-소개.webp') no-repeat center center;}
+.tab-section-block-header{text-align: center;}
+
+#academy-intro-section{
+    padding: 40px 0 30px 0;
+    /* background: linear-gradient(135deg, #e4e1d4 0%, #f8f9fa 35%, #fff 50%,#f8f9fa 65%, #e4e1d4 100%); */
+    background-size: cover;
+    text-align: center;
+    & #academy-intro-content { max-width: 1000px; margin: 0 auto; ;}
+}
+#academy-images-section {
+    padding: 15px 0;
+    background: linear-gradient(135deg, #d4d6e4 0%, #f8f9fa 35%, #fff 50%,#f8f9fa 65%, #d5d4e4 100%);
+}
+.academy-images-container { display: flex; gap: 20px; justify-content: center; align-items: center; overflow-x: auto; padding: 10px 20px; scrollbar-width: thin;}
+.academy-image-item { flex: 0 0 350px; height: 300px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;}
+.academy-image-item img { width: 100%; height: 100%; object-fit: cover;}
+
+
+#academy-history-timeline {position: relative;max-width: 900px;margin: 0 auto;padding-left: 40px;}
+.timeline-item {position: relative;margin-bottom: 10px;overflow: hidden;}
+.timeline-content {padding: 25px 30px;}
+.timeline-title {font-size: 1.3rem;font-weight: 600;color: var(--c-blue);margin-bottom: 15px;}
+.timeline-details {list-style: none;padding: 0;margin: 0;}
+.timeline-details li {margin-bottom: 12px;padding-left: 20px;position: relative;line-height: 1.5;color: #4b5563;}
+.timeline-details li::before {content: '●';position: absolute;left: 0;color: var(--c-blue);font-weight: bold;}
+.timeline-details li strong {color: var(--c-blue);font-weight: 600;}
+
+/* YPP 교육의 장점 섹션 */
+.strengths-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 30px; max-width: 1350px; margin: 0 auto;}
+.strength-item {flex: 0 0 425px;min-height: 190px;background: white;border-radius: 16px;padding: 30px;box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);transition: all 0.3s ease, box-shadow 0.3s ease;}
+.strength-item:hover {transform: translateY(-2px);box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);}
+.strength-number {
+    height: 1.5rem;
+    aspect-ratio: 1/1;
+    background: linear-gradient(135deg, var(--c-blue), #2352d3);
+    color: white;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-right: .4rem;
+}
+.strength-title {font-size: 1.2rem;font-weight: 600;color: #1e3a8a;margin-bottom: 15px;display: flex;align-items: center;}
+.strength-details {list-style: none;padding: 0;margin: 0;}
+.strength-details li {margin-bottom: 10px;padding-left: 20px;position: relative;line-height: 1.5;}
+.strength-details li::before {content: '▸';position: absolute;left: 0;color: var(--c-blue);font-weight: bold;}
+
+@media (max-width: 768px) {
+    /* 이미지 컨테이너 반응형 */
+    .academy-images-container {flex-wrap: wrap; gap: 15px;padding: 10px 15px;}
+    .academy-image-item {flex: 0 0 45%;}
+    /* 역사 섹션 반응형 */
+    .history-timeline {padding-left: 30px;}
+    .timeline-content {padding: 20px;}
+    /* 장점 섹션 반응형 */
+    .academy-strengths-section {padding: 40px 20px;}
+    .strengths-grid {flex-direction: column;gap: 20px;}
+    .strength-item {padding: 25px; width: 100%;min-height:0;flex: 1;}
+}
+
+@media (max-width: 480px) {
+    #intro .stat-item {padding: 20px 10px; box-shadow: none;}
+    #intro .stat-item:first-child {border-radius: 0; border-bottom: 1px solid #eee;}
+    #intro .stat-number {font-size: 2rem;}
+    .academy-vision-section .vision-steps{gap: 5px;}
+    .vision-step{padding: 20px 10px; box-shadow: none; border-radius: 0; border-bottom: 1px solid #eee;}
+    .academy-images-container {flex-direction: column; justify-content: normal;gap: 10px;}
+    .academy-image-item {flex: 0 0 100%;}
+    .timeline-content {padding: 15px;}
+    #academy-history-timeline {padding-left: 0;}
+    .strength-item {padding: 20px;flex: 0 0 100%}
+}   

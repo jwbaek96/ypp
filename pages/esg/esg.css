@@ -1,0 +1,383 @@
+.page-header {background: url(page-header_ESG.webp);}
+.tab-section-block-header{text-align: center;}
+
+/* paper */
+.box-style-1{ background: #f8fbff; border: 1.5px solid #dbeafe; border-radius: 14px; padding: 32px 24px 24px 24px; margin-top: 36px; box-shadow: 0 2px 12px rgba(33,129,255,0.06);}
+.paper-title{ padding: 20px 0 40px; font-size: 2rem; text-align: center;}
+.paper-intro{ font-size: 1.1em; line-height: 1.6; padding-bottom: 20px;}
+.paper ul{ padding: 0 20px; margin: 20px;}
+.paper ul li{ margin-bottom: 10px; list-style: disc;}
+
+.charter-signature{margin-top: 4rem;}
+.signature-date,
+.signature-name{text-align: center; margin-top: 2rem;}
+.signature-name img{width:unset;}
+
+/* 환경인증서 */
+.certifications-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; margin: 2rem auto;}
+.certification-item { transition: all 0.3s ease; text-align: center;}
+.certification-image { padding: 20px; text-align: center;}
+.certification-image img { max-width: 100%; height: auto; transition: transform 0.3s ease;}
+.certification-item:hover .certification-image img {transform: scale(1.02);}
+.environment-certifications h3.block-title{ text-align: left; border-left: 4px solid var(--primary-blue);}
+@media (max-width: 768px) {
+    .environment-certifications {margin-top: 40px;}
+    .certification-image {padding: 15px;}
+}
+@media (max-width: 480px) {
+    .environment-certifications .block-title {font-size: 1.3rem;}
+    .certifications-grid {padding: 0 10px; grid-template-columns: 1fr 1fr;}
+    .certification-image {padding: 10px;}
+}
+
+.contribution-year{background: var(--c-blue);color: #fff;border-radius: 10px;}
+.content-block >.block-title{text-align: center;}
+/* .esg-report  */
+.charter-intro p:first-child{ font-size: 1.1rem; margin: 30px 0; padding: 0 20px; text-align: center;}
+.charter-section h4{font-size: 1.5rem;margin-bottom: 10px;}
+/* strong{font-weight: bold;} */
+/* p,span,li{color: #181818;} */
+.charter-section{margin-bottom: 20px;}
+.esg-description{text-align: center;margin: 2rem 0;font-size: 1.1rem;}
+.esg-description strong{color: var(--c-blue);}
+.center-esg-img{margin: 2rem 0;}
+.diagram-container{display: grid;grid-template-columns: repeat(3, 1fr);gap: 20px;}
+@media screen and (max-width: 768px) {
+    .diagram-container{grid-template-columns:1fr;}
+}
+.esg-circle{ background-color: var(--c-blue); border-radius: 20px; padding: 20px; text-align: center; position: relative;}
+.esg-circle:first-child{background-color: #77c073;}
+.esg-circle:nth-child(2){background-color: #f1c436;}
+.esg-circle:last-child{background-color: #81b8e2;}
+.esg-circle h4,.esg-circle p, .circle-items ul li{color: #fff;}
+.esg-circle h4,.esg-circle p{ border-bottom: 1px solid #ffffff75; margin: 0; padding: 10px 0;}
+.circle-items ul{ list-style: none; padding: 0; margin: 10px 0 0;}
+.esg-circle h4{font-size: 1.2rem;padding: 10px 0;}
+/* 사회공헌 파트 디자인 */
+.social-contribution-container { background: #f7faff; border-radius: 18px; padding: 32px 24px 24px 24px; box-shadow: 0 2px 12px rgba(33,129,255,0.07); margin-top: 24px;}
+.social-contribution-container p {font-size: 1.1rem;color: #222;margin-bottom: 28px;text-align: center;}
+.contribution-history {margin: 0;padding: 0;list-style: none;}
+.contribution-history > li {margin-bottom: 22px;padding-bottom: 12px;border-bottom: 1px solid #e3eaf7;}
+.contribution-history > li:last-child {border-bottom: none;}
+.contribution-year {
+    display: inline-block;
+    min-width: 70px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    background: var(--c-blue);
+    color: #fff;
+    border-radius: 10px;
+    padding: 3px 16px;
+    margin-bottom: 8px;
+    margin-right: 12px;
+    vertical-align: middle;
+    letter-spacing: 1px;}
+.contribution-history ul {margin: 8px 0 0 0;padding-left: 0;list-style: none;}
+.contribution-history ul li {position: relative;padding-left: 18px;margin-bottom: 6px;color: #333;font-size: 1rem;}
+.contribution-history ul li:before { content: ''; display: inline-block; position: absolute; left: 0; top: 9px; width: 7px; height: 7px; background: var(--c-blue); border-radius: 50%;}
+
+        /* 윤리강령/윤리헌장 스타일 */
+.ethics-box {
+    background: #f8fbff;
+    border: 1.5px solid #dbeafe;
+    border-radius: 14px;
+    padding: 32px 24px 24px 24px;
+    margin-bottom: 36px;
+    box-shadow: 0 2px 12px rgba(33,129,255,0.06);
+}
+.ethics-title {color: var(--c-blue);font-size: 1.5rem;font-weight: 700;margin-bottom: 18px;text-align: center;
+}
+.ethics-section {margin-bottom: 18px;}
+.ethics-section strong {
+    display: block;
+    color: #1e293b;
+    font-size: 1.1rem;
+    margin-bottom: 7px;
+}
+.ethics-section ul {margin: 0 0 0 18px;padding: 0;}
+.ethics-section ul li {
+    margin-bottom: 5px;
+    color: #222;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+.ethics-table-wrap {overflow-x: auto;margin-top: 12px;}
+.ethics-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 0.97rem;
+    margin-bottom: 10px;
+}
+.ethics-table th, .ethics-table td {
+    border: 1px solid #bcd0ee;
+    padding: 8px 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+.ethics-table th {
+    background: #e6f0ff;
+    color: #1e293b;
+    font-weight: 600;
+}
+.ethics-table td {color: #222;}
+.ethics-charter-box {
+    background: #f8fbff;
+    border: 1.5px solid #dbeafe;
+    border-radius: 14px;
+    padding: 32px 24px 24px 24px;
+    margin-top: 36px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(33,129,255,0.06);
+}
+.ethics-charter-box .ethics-title {text-align: center;margin-bottom: 18px;}
+.ethics-charter-box p {
+    color: #1e293b;
+    font-size: 1.08rem;
+    line-height: 1.8;
+    margin: 0;
+}
+.partner-esg-box {
+    background: #f8fbff;
+    border: 2px solid #3bb3c3;
+    border-radius: 14px;
+    padding: 32px 24px 24px 24px;
+    margin: 0 auto 36px auto;
+    box-shadow: 0 2px 12px rgba(33,129,255,0.06);
+}
+.partner-esg-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1796b6;
+    text-align: center;
+    margin-bottom: 18px;
+    border-bottom: 1.5px solid #b7e3ef;
+    padding-bottom: 12px;
+    letter-spacing: 1px;
+}
+.partner-esg-desc {
+    font-size: 1.08rem;
+    color: #222;
+    margin-bottom: 16px;
+    text-align: center;
+    line-height: 1.7;
+}
+.partner-esg-date {
+    text-align: center;
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 18px;
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e3eaf7;
+}
+.partner-esg-section {margin-bottom: 22px;}
+.partner-esg-section h4 {
+    font-size: 1.15rem;
+    color: #1796b6;
+    margin-bottom: 8px;
+    margin-top: 18px;
+    font-weight: 600;
+}
+.partner-esg-section ul {
+    margin: 0 0 0 10px;
+    padding: 0;
+    list-style: none;
+}
+.partner-esg-section ul li {
+    margin-bottom: 10px;
+    color: #222;
+    font-size: 1rem;
+    line-height: 1.7;
+    position: relative;
+    padding-left: 0;
+}
+.partner-esg-section ul li b {color: #1796b6;font-weight: 600;}
+.partner-esg-note {
+    display: block;
+    font-size: 0.95rem;
+    color: #666;
+    margin-top: 6px;
+    background: #eaf8fa;
+    border-radius: 6px;
+    padding: 7px 10px;
+}
+/* 신문고(부패 및 비윤리 신고) 스타일 */
+.report-box {
+    /* background: #f8fbff;
+    border: 1.5px solid #bcd0ee;
+    box-shadow: 0 2px 12px rgba(33,129,255,0.06); */
+    border-radius: 14px;
+    padding: 32px 24px 24px 24px;
+    margin: 0 auto 36px auto;
+}
+.report-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1566b3;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.report-desc {
+    font-size: 1.1rem;
+    color: #222;
+    margin-bottom: 18px;
+    text-align: center;
+}
+.report-info {
+    background: #f3f3f3;
+    border: 1px solid #e3eaf7;
+    border-radius: 7px;
+    padding: 18px 18px 14px 18px;
+    margin-bottom: 22px;
+    color: #222;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    text-align: center;
+}
+.report-table-wrap {margin-bottom: 32px;}
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 1.05rem;
+}
+.report-table th {
+    background: #1566b3;
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 0;
+    border: none;
+    font-size: 1.1rem;
+}
+.report-table td {
+    color: #1566b3;
+    padding: 10px 0 10px 18px;
+    border-bottom: 1px solid #e3eaf7;
+    border-left: 1px solid #e3eaf7;
+    border-right: 1px solid #e3eaf7;
+    font-size: 1rem;
+}
+
+.report-btn-wrap {text-align: center;margin-top: 24px;}
+.report-btn {
+    background: #1566b3;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 48px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.report-btn:hover {background: #2181ff;}
+
+.report-popup-bg {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.25);
+    align-items: center;
+    justify-content: center;
+}
+---
+#report-popup-checkbox {display: none;}
+#report-popup-checkbox:checked ~ .report-popup-bg {display: flex;}
+.report-popup {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(33,129,255,0.13);
+    padding: 32px 28px 24px 28px;
+    max-width: 1080px;
+    width: 100%;
+    position: relative;
+    animation: popup-fadein 0.2s;
+}
+@keyframes popup-fadein {
+    from { opacity: 0; transform: scale(0.97);}
+    to { opacity: 1; transform: scale(1);}
+}
+.report-popup-header {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1566b3;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.report-popup-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #888;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.report-popup-form label {
+    display: block;
+    padding: 8px 0;
+    margin: 0;
+    color: #1566b3; font-size: 1rem; font-weight: 600;
+    border: none; border-radius: 5px;
+    cursor: pointer;
+}
+.report-popup-form input[type="text"],
+.report-popup-form textarea {
+    width: 100%;
+    border: 1px solid #bcd0ee;
+    border-radius: 5px;
+    padding: 8px 10px;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    background: #f8fbff;
+    color: #222;
+    box-sizing: border-box;
+}
+.report-popup-form textarea {resize: vertical;min-height: 90px;}
+.report-popup-form input[type="file"] {width: 100%;padding: 8px 5px;}
+.report-popup-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+}
+.report-popup-submit {
+    background: #1566b3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 26px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+label.report-popup-cancel {
+    background: #e3eaf7;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 26px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+@media (max-width: 600px) {
+    .report-popup {min-width: 0;width: 95vw;padding: 18px 6vw 16px 6vw;}
+}
+/* ===ESG페이지 별도 추가 스타일=== */
+.tab-download {
+    text-decoration: none;
+    color: var(--text-secondary, #666);
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: .92rem;
+    padding: 1rem 1.5rem;
+}@media (max-width: 768px) {
+    .tab-download {flex: 0 0 auto;padding: 0.85rem 1rem;}
+}

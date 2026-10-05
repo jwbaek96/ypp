@@ -114,8 +114,8 @@
         },
         {
           "name": {
-                "kor": "작업 예정 기간: 2026년 10월 4일 ~ 10월 5일",
-                "eng": "Scheduled update period: October 4–5, 2026"
+                "kor": "작업 예정 기간: 2026년 10월 4일 ~ ",
+                "eng": "Scheduled update period: October 4–, 2026"
           },
           "items": [
             {

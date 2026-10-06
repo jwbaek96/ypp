@@ -109,7 +109,7 @@
     & .tab-section-block-header h2{margin-bottom: 1.5rem;}
     & #aboutus-overview-인사말-content{ display: grid;grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);gap: 30px;}
     & #aboutus-overview-인사말-text {min-width: 0; container-type: inline-size;
-        & h2 {font-size: clamp(1.2rem, 7cqi, 2.5rem);font-weight: 900; line-height: 1.2; margin: 0 0 2rem 0;white-space: nowrap;}
+        & h2 {font-size: clamp(1.2rem, 7cqi, 2.5rem);font-weight: 900; line-height: 1.2; margin: 0 0 2rem 0;}
         & p {font-size: clamp(0.875rem, 4.5cqi, 1.25rem); margin-top: 1.25rem; color: rgb(87, 94, 104); font-weight: 300;}
         & h3 {font-size: clamp(1rem, 5cqi, 1.5rem); margin-top: 2rem; color: rgb(29, 99, 241); font-style: italic;}
     }

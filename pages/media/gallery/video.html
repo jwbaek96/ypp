@@ -33,86 +33,64 @@
     <div id="sidebar-container"></div>
 
     <!-- Main Content -->
-    <main class="main-content">
-        <!-- Page Header -->
+    <main>
         <section class="page-header">
-            <div class="container">
-                <div class="page-header-content">
-                    <h1 class="page-title" data-kor="비디오 갤러리" data-eng="Video Gallery"></h1>
-                    <p class="page-subtitle" data-eng="YPP's Latest Video News Updates" data-kor="YPP의 최신 영상 소식 자료">YPP의 최신 영상 소식 자료</p>
-                </div>
+            <div class="page-header-content">
+                <h1 class="page-header-title"  data-eng="Video Gallery"data-kor="비디오 갤러리"></h1>
+                <p class="page-header-subtitle" data-eng="YPP's Latest Video News Updates"data-kor="YPP의 최신 영상 소식 자료"></p>
             </div>
         </section>
 
-        <!-- Breadcrumb -->
-        <!-- <section class="breadcrumb-section">
-            <div class="container">
-                <nav class="breadcrumb">
-                    <a href="/"data-eng="Home"data-kor="홈">>홈</a>
-                    <span class="breadcrumb-separator">></span>
-                    <span data-eng="Community"data-kor="커뮤니티">커뮤니티</span>
-                    <span class="breadcrumb-separator">></span>
-                    <span data-eng="Gallery"data-kor="갤러리">갤러리</span>
-                    <span class="breadcrumb-separator">></span>
-                    <a href="press.html" class="breadcrumb-current" data-kor="비디오갤러리" data-eng="Video Gallery"></a>
-                </nav>
-            </div>
-        </section> -->
-
         <!-- Content Section -->
-        <section class="content-section">
-            <div class="container">
+        <section class="page-content section-mxw">
+            <!-- Press Release List Section -->
+            <div id="press-list-section" class="press-list">
+                <div class="list-header">
+                    <span class="total-count"><span data-kor="총 " data-eng="Total "></span><strong>0</strong><span data-kor=" 건" data-eng=" items"></span></span>
+                </div>
 
-                <!-- Press Release List Section -->
-                <div id="press-list-section" class="press-list">
-                    <div class="list-header">
-                        <span class="total-count"><span data-kor="총 " data-eng="Total "></span><strong>0</strong><span data-kor=" 건" data-eng=" items"></span></span>
-                    </div>
-
-                    <div class="press-items">
-                        <!-- 보도자료 항목들이 여기에 동적으로 추가됩니다 -->
-                        <div class="loading-message">
-                            <p>
-                                <i class="fas fa-spinner fa-spin"></i> 
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="pagination">
-                        <button class="page-btn prev" disabled>이전</button>
-                        <div class="page-numbers">
-                            <button class="page-number active">1</button>
-                        </div>
-                        <button class="page-btn next" disabled>다음</button>
+                <div class="press-items">
+                    <!-- 보도자료 항목들이 여기에 동적으로 추가됩니다 -->
+                    <div class="loading-message">
+                        <p>
+                            <i class="fas fa-spinner fa-spin"></i> 
+                        </p>
                     </div>
                 </div>
 
-                <!-- Press Article Detail Section -->
-                <div id="press-detail-section" class="press-article-detail hidden">
-                    <div class="article-header">
-                        <button class="back-to-list" onclick="videoPageController.goBackToList()">
-                            <i class="fas fa-arrow-left"></i><span data-kor="목록으로 돌아가기" data-eng="Back to list">목록으로 돌아가기</span>
-                        </button>
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="page-btn prev" disabled>이전</button>
+                    <div class="page-numbers">
+                        <button class="page-number active">1</button>
                     </div>
-                    
-                    <article class="press-article">
-                        <h1 class="article-title"></h1>
-                        <div class="article-meta">
-                            <span class="article-date"></span>
-                        </div>
-                        <div class="article-images"></div>
-                        <div class="article-content"></div>
-                    </article>
-                    
-                    <div class="article-navigation">
-                        <button class="nav-btn prev-article" onclick="videoPageController.navigateArticle(-1)">
-                            <span>이전 비디오</span>
-                        </button>
-                        <button class="nav-btn next-article" onclick="videoPageController.navigateArticle(1)">
-                            <span>다음 비디오</span>
-                        </button>
+                    <button class="page-btn next" disabled>다음</button>
+                </div>
+            </div>
+            <!-- Press Article Detail Section -->
+            <div id="press-detail-section" class="press-article-detail hidden">
+                <div class="article-header">
+                    <button class="back-to-list" onclick="videoPageController.goBackToList()">
+                        <i class="fas fa-arrow-left"></i><span data-kor="목록으로 돌아가기" data-eng="Back to list">목록으로 돌아가기</span>
+                    </button>
+                </div>
+                
+                <article class="press-article">
+                    <h1 class="article-title"></h1>
+                    <div class="article-meta">
+                        <span class="article-date"></span>
                     </div>
+                    <div class="article-images"></div>
+                    <div class="article-content"></div>
+                </article>
+                
+                <div class="article-navigation">
+                    <button class="nav-btn prev-article" onclick="videoPageController.navigateArticle(-1)">
+                        <span>이전 비디오</span>
+                    </button>
+                    <button class="nav-btn next-article" onclick="videoPageController.navigateArticle(1)">
+                        <span>다음 비디오</span>
+                    </button>
                 </div>
             </div>
         </section>

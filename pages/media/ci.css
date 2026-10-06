@@ -1,0 +1,23 @@
+.ci-section-gradient {
+    background: linear-gradient(330deg, #1c4db7 0%, #a21caf 60%, #f51e1e 100%);
+    color: #fff !important;
+    border: none;
+    box-shadow:
+        0 0 11px -2px #EC4899, 0 0px 17px -1px #a21caf;
+}
+.ci-section-gradient .ci-section-title,
+.ci-section-gradient .ci-section-content,
+.ci-section-gradient .ci-section-content * {
+    color: #fff !important;
+}
+.ci-section-gradient .ci-section-title {
+    border-bottom: 2px solid rgba(255,255,255,0.4);
+}
+.ci-section-gradient-content {
+    background: transparent !important;
+    color: #fff !important;
+}
+.ci-section-gradient-content ul,
+.ci-section-gradient-content li {
+    color: #fff !important;
+}

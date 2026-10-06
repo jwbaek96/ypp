@@ -19,7 +19,7 @@
     </button>
 </section>
 <style>
-    #hero-section-container{padding: 11px;}
+#hero-section-container{padding: 11px; transition: margin-top 0.3s ease;}
 .hero-section {position: relative;overflow: hidden; border-radius: 11px;}
 .hero-background {width: 100%;display: flex;justify-content: center;}
 .hero-video {position: relative;width: 110%;object-fit: cover; scale: 1.01;}
@@ -58,6 +58,7 @@
 
 /* 모바일 반응형 */
 @media (max-width: 768px) {
+    #hero-section-container{margin-top: calc(var(--header-container-height));}
     .video-overlay {background: rgba(0, 0, 0, 0.15);width: 110%;}
     .hero-video {min-height: 25dvh;}
     .mute-toggle-btn {

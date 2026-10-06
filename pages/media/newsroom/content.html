@@ -15,6 +15,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/pages/layout.css">
+    <link rel="stylesheet" href="content.css">
     
     <!-- 메타 시스템 -->
     <script src="../../../js/head-meta.js"></script>
@@ -30,35 +31,14 @@
     <div id="sidebar-container"></div>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main>
         <!-- Page Header -->
         <section class="page-header">
-            <div class="container">
-                <div class="page-header-content">
-                <h1 class="page-title"
-                    data-eng="Media Content"
-                    data-kor="미디어컨텐츠">미디어컨텐츠</h1>
-                <p class="page-subtitle"
-                    data-eng="YPP content through various media"
-                    data-kor="다양한 미디어를 통한 YPP 컨텐츠">다양한 미디어를 통한 YPP 컨텐츠</p>
+            <div class="page-header-content">
+                <h1 class="page-header-title"  data-eng="Media Content" data-kor="미디어컨텐츠"></h1>
+                <p class="page-header-subtitle" data-eng="YPP content through various media" data-kor="다양한 미디어를 통한 YPP 컨텐츠"></p>
             </div>
         </section>
-
-        <!-- Breadcrumb -->
-        <!-- <section class="breadcrumb-section">
-            <div class="container">
-                <nav class="breadcrumb">
-                    <a href="/"data-eng="Home"data-kor="홈">>홈</a>
-                    <span class="breadcrumb-separator">></span>
-                    <span data-eng="Media"data-kor="홍보">홍보</span>
-                    <span class="breadcrumb-separator">></span>
-                    <span data-eng="Media Room"data-kor="미디어룸">미디어룸</span>
-                    <span class="breadcrumb-separator">></span>
-                    <span class="breadcrumb-current"
-                     data-eng="Media Content" data-kor="미디어컨텐츠">미디어컨텐츠</span>
-                </nav>
-            </div>
-        </section> -->
 
         <!-- Section Navigation -->
         <section class="section-navigation">
@@ -81,16 +61,14 @@
         </section>
 
         <!-- Content Section -->
-        <section class="content-section">
-            <div class="container">
-                <div class="content-header">
-                    <h2 class="content-title"
-                        data-eng="A Global Leading Energy Company with Competitive Edge<br>YPP Corporation"
-                        data-kor="글로벌 경쟁력을 갖춘 초일류 에너지 기업<br>와이피피(주)">글로벌 경쟁력을 갖춘 초일류 에너지 기업, 와이피피(주)</h2>
-                    <p class="content-subtitle"
-                        data-eng="We are moving towards tomorrow's dream with customer-centered values and continuous technological development."
-                        data-kor="고객 중심의 가치와 끊임없는 기술 개발로 내일의 꿈을 향해 나아갑니다.">고객 중심의 가치와 끊임없는 기술 개발로 내일의 꿈을 향해 나아갑니다.</p>
-                </div>
+        <section class="page-content section-mxw">
+                <section class="tab-section tab-section-header" id="">
+                    <h2 class="content-title" data-eng="A Global Leading Energy Company with Competitive Edge<br>YPP Corporation" data-kor="글로벌 경쟁력을 갖춘 초일류 에너지 기업<br>와이피피(주)"></h2>
+                    <p class="content-subtitle" data-eng="We are moving towards tomorrow's dream with customer-centered values and continuous technological development."data-kor="고객 중심의 가치와 끊임없는 기술 개발로 내일의 꿈을 향해 나아갑니다."></p>
+                </section>
+                
+                <div class="section-blank-2rem"></div>
+                <div class="section-blank-2rem"></div>
                 
                 <div class="content-grid">
                     <!-- 기존 미디어룸 자료 -->
@@ -142,16 +120,20 @@
                             </div>
                           </div> -->
                         </div>
-                      </div>
+                    </div>
                       
                     <!-- 동영상 팝업 오버레이 -->
                     <div id="promo-video-modal" style="display:none;">
-                    <div class="promo-modal-bg"></div>
-                    <div class="promo-modal-content">
-                        <button id="promo-modal-close">닫기</button>
-                        <iframe id="promo-modal-iframe" width="100%" height="480" frameborder="0" allowfullscreen></iframe>
+                        <div class="promo-modal-bg"></div>
+                        <div class="promo-modal-content">
+                            <button id="promo-modal-close">닫기</button>
+                            <iframe id="promo-modal-iframe" width="100%" height="480" frameborder="0" allowfullscreen></iframe>
+                        </div>
                     </div>
-                    </div>
+                    
+                    <div class="section-blank-2rem"></div>
+                    <div class="section-blank-2rem"></div>
+                
                     
                     <!-- 브로슈어 -->
                     <div id="brochure-section" class="content-block section-spy">
@@ -169,6 +151,9 @@
                         </div>
                       </div>
                     </div>
+                    
+                    <div class="section-blank-2rem"></div>
+                    
                     <!-- 유튜브 자료 -->
                     <a id="youtube-link" href="https://www.youtube.com/watch?v=T--cdVHi-Kk" class="external-links content-block section-spy" target="_blank">
                         <div class="youtube-link-content">
@@ -181,6 +166,8 @@
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </span>
                     </a>
+                    
+                    <div class="section-blank-1rem"></div>
                     
                     <!-- 나무위키 링크 -->
                     <a id="external-links" class="external-links content-block section-spy" href="https://namu.wiki/w/%EC%99%80%EC%9D%B4%ED%94%BC%ED%94%BC(%EC%A3%BC)" target="_blank" rel="noopener" >
@@ -196,8 +183,9 @@
                     </a>
                     
                 </div>
-            </div>
         </section>
+        <div class="section-blank-2rem"></div>
+        
     </main>
 
     <!-- Footer Container -->
@@ -399,73 +387,6 @@ window.initContentPage = initContentPage;
 window.goToSection = goToSection;
 window.getCurrentSection = getCurrentSection;
 </script>
-
-
-<style>
-.brochure-box{display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; padding: 10px 0;}
-#brochure-section:hover{box-shadow: none;}
-.brochure-title{margin: 0 auto 0 0;}
-.brochure-list{display: flex; flex-direction: row; gap: 16px;}
-.brochure-btn {
-    display: flex; align-items: center; gap: 8px; 
-    border-radius: 8px; text-decoration: none; padding: 12px 16px; 
-    background: #222; color: #fff; font-size: 16px; transition: all 0.3s ease;
-}
-.brochure-btn:hover { background: #353535; scale: 1.02; }
-/* =================================== */
-a.external-links:hover{scale: 1.005; text-decoration: none; color: white;}
-.external-links{
-    display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;
-    color: white; font-size: 24px;font-weight: 700;
-    border: none;
-    transition: all 0.3s ease;
-}
-#external-links{background: linear-gradient(135deg, #66ea70 0%, #4b8da2 125%);}
-#external-links:hover{box-shadow: 0 -2px 20px rgba(111, 234, 102, 0.4), 0 -4px 15px rgba(75, 162, 142, 0.3), 0 -2px 10px rgba(147, 237, 251, 0.2);}
-
-#youtube-link{background: linear-gradient(135deg, #ff0000 0%, #ff4d00 125%);}
-#youtube-link:hover{cursor: pointer; box-shadow: 0 -2px 20px rgba(255, 0, 0, 0.4), 0 -4px 15px rgba(255, 77, 0, 0.3), 0 -2px 10px rgba(255, 153, 153, 0.2);}
-
-.external-link-title, .external-link-desc {  color: white; font-size: 24px;font-weight: 700; margin: 0; }
-.external-link-desc{ font-size: .9rem; font-weight: 400; color: #ffffffe0; margin-top: 9px;}
-
-/* =================================== */
-#existing-media{margin-bottom: 32px;}
-.promo-media { width: 100%; }
-.promo-main-video { width: 100%; margin-bottom: 32px; }
-.promo-prev-videos { display: flex; gap: 24px; }
-.promo-video-item { 
-    position: relative; width: 100%; max-width: 100%; border-radius: 16px; overflow: hidden; background: #222; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;}
-.promo-video-item:hover {box-shadow: 0 4px 20px rgba(0,0,0,0.5);}
-.promo-video-item:hover .promo-thumb-img { transform: scale(1.05); }
-.promo-thumb-img { width: 100%; height: 520px; object-fit: cover; display: block; transition: transform 0.3s ease}
-.promo-prev-videos .promo-thumb-img { height: 320px; }
-.promo-overlay { 
-    position: absolute; left: 0; bottom: 0; width: 100%; z-index: 2; padding: 24px; 
-    background: rgba(0,0,0,0.5); color: #ffffff; backdrop-filter: blur(8px);
-    display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; }
-.promo-title { font-size: 1.2rem; font-weight: bold;}
-.promo-play-btns { display: flex; gap: 12px; }
-.promo-play-btn {  border: none; border-radius: 0; font-size: 1rem; cursor: pointer; }
-.promo-play-btn.ko { background: rgba(0,0,0,0); color: #ffffff; border-right: 1px solid #fff; padding-right: 12px;}
-.promo-play-btn.en { background: rgba(0,0,0,0); color: #ffffff; }
-.promo-play-btns button:hover{ text-shadow: 0 0 5px rgba(255,255,255,0.8);}
-
-/* 팝업 오버레이 스타일 */
-#promo-video-modal { position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); z-index:9999; display:none; align-items:center; justify-content:center; }
-#promo-video-modal.active { display:flex; }
-.promo-modal-bg { position:absolute; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); }
-.promo-modal-content { position:relative; width: 100%; border-radius:16px; padding:24px; z-index:2;}
-#promo-modal-close { position:fixed; top:16px; right:16px; background:#222; color:#fff; border:none; border-radius:8px; padding:8px 16px; cursor:pointer; }
-#promo-modal-iframe { width:100%; border-radius:8px; background:#000; }
-@media screen and (max-width: 768px) {
-    .promo-prev-videos { flex-direction: column; }
-    .promo-thumb-img { height: 320px; }
-    .promo-prev-videos .promo-thumb-img { height: 180px; }
-    #promo-modal-iframe { height: 320px; }
-}
-</style>
 
 <script>
 function getDriveEmbedUrl(fileId) {

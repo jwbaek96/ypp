@@ -12,23 +12,26 @@
 }
 
 .footer-content {
-    /* display: grid;
-    grid-template-columns: 2fr 1fr 1fr; */
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
     gap: 3rem;
     margin-bottom: 2rem;
 }
 
+
 .footer-logo img {
+    width: inherit;
     height: 65px;
     margin-bottom: 1rem;
-    filter: brightness(0) saturate(100%) invert(70%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(85%);
+    filter: saturate(100%) invert(70%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(150%) contrast(100%);
     /* filter: grayscale(); */
-    /* 밝은 회색으로 변환 */
+    object-fit: contain !important;
 }
 
+.footer-desc{font-weight: 300;}
 .footer-desc,
 .footer ul li a {
     color: rgba(255, 255, 255, 0.8);
@@ -38,11 +41,13 @@
     color: var(--primary-blue);
 }
 .footer-title {
-    color: var(--white);
+    color: rgba(255, 255, 255, 0.948);
     margin-bottom: 1rem;
     font-size: var(--font-size-body, 1.2rem);
 }
 
+.footer-section:last-child{margin-top: 1rem;}
+.footer-contact{margin-top: 1rem;}
 .footer-links,
 .footer-contact {
     list-style: none;
@@ -58,13 +63,10 @@
     transition: color 0.3s ease;
 }
 
-.footer-links a:hover {
-    color: var(--primary-blue);
-}
-
 .footer-contact li {
     color: rgba(255, 255, 255, 0.8);
     font-size: var(--font-size-small, 1rem);
+    font-weight: 100;
 }
 
 .footer-bottom {

@@ -1,118 +1,95 @@
 <!-- 인트로 섹션 -->
-<section class="intro-section">
-    <div class="container">
-        <div class="intro-grid">
-            <div class="intro-content">
-                <h1 class="intro-title">
-                        <span data-kor="안전하고 지속가능한" data-eng="Opening the Future of">
-                        안전하고 지속가능한
-                    </span>
-                    <br>
-                    <span class="bold-text"
-                    data-kor="에너지의 미래" data-eng="Safe and Sustainable Energy">
-                        에너지의 미래
-                    </span>
-                    <span data-kor="를 여는 YPP" data-eng="">
-                        를 여는 YPP
-                    </span>
-                </h1>
-                <p class="intro-subtitle"
-                data-kor="1982년부터 40년간 전력계통 분야를 선도해온 기술력으로<br>
-                    글로벌 에너지 솔루션의 새로운 표준을 제시합니다"
+<section id="intro-section" class="section-block section-mxw">
+    <div class="intro-grid">
+        <div id="intro-text">
+            <p class="section-eyebrow">ABOUT YPP</p>
+            <div class="intro-title">
+                <P data-kor="안전하고 지속가능한" data-eng="Opening the Future of">안전하고 지속가능한</P>
+                <P data-kor="에너지의 미래를 여는 YPP" data-eng="Safe and Sustainable Energy">에너지의 미래</P>
+            </div>
+            <div class="section-blank-1rem"></div>
+            <p class="intro-subtitle"
+                data-kor="1982년부터 40년간 전력계통 분야를 선도해온 기술력으로<br> 글로벌 에너지 솔루션의 새로운 표준을 제시합니다"
                 data-eng="With 40 years of leadership in power system technology since 1982, we have been setting new standards for global energy solutions.">
-                    1982년부터 40년간 전력계통 분야를 선도해온 기술력으로<br>
-                    글로벌 에너지 솔루션의 새로운 표준을 제시합니다
-                </p>
-                <div class="intro-actions">
-                    <a href="pages/company/about.html" class="intro-btn primary" data-eng="About Us" data-kor="회사소개 보기">회사소개 보기</a>
-                    <!-- <a href="#products" class="intro-btn secondary">제품 카탈로그</a> -->
-                    <a href="#academy" class="intro-btn accent" data-eng="YPP Academy" data-kor="YPP 아카데미">YPP 아카데미</a>
-                </div>
+                1982년부터 40년간 전력계통 분야를 선도해온 기술력으로<br>글로벌 에너지 솔루션의 새로운 표준을 제시합니다
+            </p>
+            <div class="intro-actions">
+                <a href="pages/company/about.html">
+                    <span data-eng="Learn More" data-kor="더 알아보기">더 알아보기</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
-            <div class="intro-visual">
-                <img src="assets/images/index/YPP아르센타워.jpg" alt="YPP 에너지 솔루션">
-            </div>
+        </div>
+        <div class="intro-visual">
+            <img src="assets/images/index/YPP아르센타워.jpg" alt="YPP 에너지 솔루션">
         </div>
     </div>
 </section>
 <style>
-    /* 인트로 섹션 - 개선된 버전 */
-.intro-section {background: var(--white);display: flex;align-items: center;padding: 100px 0;}
-.intro-section .container {max-width: 1200px;margin: 0 auto;padding: 0 2rem;width: 100%;}
-.intro-grid {display: grid;grid-template-columns: 1fr 1fr;align-items: center;gap: 4rem;height: 100%;}
-.intro-content {text-align: left;}
-.intro-title {font-size: var(--font-size-large, 2.5rem);font-weight: 400;margin-bottom: 1.5rem;color: var(--text-primary);line-height: 1.2;}
-.intro-title .bold-text {font-weight: 900;}
-.intro-subtitle {font-size: var(--font-size-body, 1.2rem);color: var(--text-secondary);margin-bottom: 3rem;line-height: 1.6;}
+#intro-section {display: flex;align-items: center; justify-content:space-between;}
+.intro-grid { width: 100%;display: grid;grid-template-columns: 1fr 1fr;align-items: center;gap: 4rem;height: 100%;}
+#intro-text {text-align: left; margin-bottom: auto;}
+.intro-title p{font-size: var(--font-size-large, 2.5rem);font-weight: bold;color: var(--c-black);line-height: 1.4;}
+.intro-subtitle {font-size: var(--font-size-body, 1.2rem);}
 .intro-actions {display: flex;gap: 1rem;flex-wrap: nowrap;margin-top: 2rem;justify-content: flex-start;}
-/* 인트로 버튼 */
-.intro-btn {
+.intro-actions a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
     padding: 12px 24px;
-    font-size: var(--font-size-body, 1.2rem);
+    
+    color: var(--c-blue);
+    font-size: var(--font-size-small);
     font-weight: 500;
     text-decoration: none;
-    border: 2px solid transparent;
-    border-radius: calc(var(--br)/2);
+
+    background-color: #fff;
+    border: 2px solid var(--c-blue);
+    border-radius: 50px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: transform 0.2s ease;
     min-width: 140px;
     text-align: center;
-    font-family: inherit;}
-/* Primary 버튼 - 실선 블루 */
-.intro-btn.primary {background: var(--primary-blue);color: var(--white);border-color: var(--primary-blue);}
-.intro-btn.primary:hover {background: #0052a3;border-color: #0052a3;transform: translateY(-1px);}
-/* Secondary 버튼 - 투명 배경 블루 테두리 */
-.intro-btn.secondary {background: transparent;color: var(--primary-blue);border-color: var(--primary-blue);}
-.intro-btn.secondary:hover {background: var(--primary-blue);color: var(--white);transform: translateY(-1px);}
-/* Accent 버튼 - 회색 배경 */
-.intro-btn.accent {background: var(--dark-gray);color: var(--white);border-color: var(--dark-gray);}
-.intro-btn.accent:hover {background: var(--black);border-color: var(--black);transform: translateY(-1px);}
-/* 버튼 포커스 상태 (접근성) */
-.intro-btn:focus {outline: 2px solid var(--primary-blue);outline-offset: 2px;}
+}
+.intro-actions a:hover{
+    background-color: var(--c-blue); 
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
 /* 인트로 비주얼 - 이미지 오버플로우 방지 */
 .intro-visual {display: flex;justify-content: center;align-items: center;width: 100%;height: 100%;overflow: hidden;border-radius: 15px;}   
-.intro-visual img {width: 100%;height: 100%;max-width: 100%;max-height: 600px;object-fit: cover;object-position: center;box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);transition: transform 0.3s ease;}
+.intro-visual img {width: 100%;height: 100%;max-width: 100%;max-height: 490px;object-fit: cover;object-position: center;box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);transition: transform 0.3s ease;}
 .intro-visual img:hover {transform: scale(1.02);}
 
 /* 태블릿 반응형 */
 @media (max-width: 1024px) {
-    .intro-section {padding: 80px 0;}
     .intro-grid {gap: 3rem;}
     .intro-title {font-size: var(--font-size-large, 2.5rem);}
-    .intro-visual img {max-height: 500px;}
 }
 
 /* 모바일 반응형 */
-@media (max-width: 768px) {
-    .intro-section {min-height: auto;padding: 60px 0;}
-    .intro-section .container {padding: 0 1rem;}
+@media (max-width: 900px) {
     .intro-grid {grid-template-columns: 1fr;gap: 2.5rem;text-align: center;}
-    
-    /* 모바일에서 콘텐츠가 위, 비주얼이 아래 */
-    .intro-content {order: 1;text-align: center;}
+    #intro-text {order: 1;text-align: center;}
     .intro-visual {order: 2;}
-    .intro-title {font-size: var(--font-size-large, 2.5rem);margin-bottom: 1rem;}
-    .intro-subtitle {font-size: var(--font-size-body, 1.2rem);margin-bottom: 2rem;line-height: 1.5;}
+    .intro-title {font-size: var(--font-size-large, 2.5rem);}
+    .intro-subtitle {font-size:inherit;}
     .intro-actions {justify-content: center;gap: 0.5rem;flex-wrap: nowrap;}
-    .intro-btn {padding: 10px 16px;font-size: var(--font-size-small, 1rem);min-width: auto;flex: 1;white-space: nowrap;}
-    .intro-visual img {max-height: 300px;border-radius: 12px;}
+    .intro-actions a {font-size: .9rem; padding: 8px 24px;}
+    .intro-visual img {max-height: 260px;border-radius: 12px;}
 }
 
 /* 초소형 모바일 반응형 */
 @media (max-width: 480px) {
-    .intro-visual img {max-height: 200px;border-radius: 12px;}
-    .intro-section {padding: 40px 0;}
+    .intro-visual img {max-height: 220px;}
+    #intro-section {padding: 40px 0;}
     .intro-grid {gap: 2rem;}
     .intro-title {font-size: var(--font-size-large, 2.5rem);}
-    .intro-subtitle {font-size: var(--font-size-body, 1.2rem);margin-bottom: 1.5rem;}
+    /* .intro-subtitle {font-size: var(--font-size-body, 1.2rem);margin-bottom: 1.5rem;} */
     .intro-actions {gap: 0.4rem;}
-    .intro-btn {padding: 9px 12px;font-size: var(--font-size-body, 1.2rem);flex: 1;}
 }
-
-/* 버튼 호버 효과 (인트로 섹션 내) */
-.intro-actions .intro-btn {transition: all 0.3s ease;}
-.intro-actions .intro-btn:hover {transform: translateY(-2px);box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);}
 </style>

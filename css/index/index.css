@@ -1,3 +1,24 @@
 /* ===== LAYOUT COMPONENTS ===== */
 @import "loading.css";
 @import "popup.css";
+
+
+/* 인덱스 공통 */
+.section-block{padding: 10px;}
+.section-block-header{}
+.section-eyebrow{
+    color: var(--c-blue); 
+    font-weight: bold; 
+    font-size: var(--font-size-small, 0.875rem); 
+    letter-spacing: 0.05em; 
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.section-block-title{
+    font-size: var(--font-size-large, 2rem);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .section-block-header{text-align: center;}
+}

@@ -33,7 +33,7 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
 
 <!-- 리뉴얼 작업 시 잠금 화면 활성화 스크립트 -->
-     <!-- <script src="./redirect.js"></script>-->
+     <!-- <script src="./redirect.js"></script> -->
 
 </head>
 <body>
@@ -49,17 +49,31 @@
     <div id="sidebar-container"></div>
 
     <!-- Main Content -->
-    <main class="main-content">
-        <!-- 브레드크럼 (필요시) -->
-        <!-- <div id="breadcrumb-container"></div> -->
-        
+    <main>
         <!-- 섹션 컨테이너들 -->
         <div id="hero-section-container"></div>
+        <div class="section-blank-4rem"></div>
+
         <div id="intro-section-container"></div>
+        
+        <div class="section-blank-4rem"></div>
+        <div class="divline section-mxw"></div>
+        <div class="section-blank-4rem"></div>
+        
         <div id="epc-business-container"></div>
-        <div id="protection-products-container"></div>
-        <div id="company-overview-container"></div>
+
+        <div class="section-blank-4rem"></div>
+        <div class="divline section-mxw"></div>
+        <div class="section-blank-4rem"></div>
+
+        <!-- <div id="protection-products-container"></div> -->
+        
+        <!-- <div id="company-overview-container"></div> -->
+        
         <div id="academy-container"></div>
+
+        <div class="section-blank-4rem"></div>
+        
         <div id="contact-container"></div>
         
     </main>
@@ -358,11 +372,11 @@ document.addEventListener('click', function(e) {
 </html>
 <!-- 인덱스 스타일 -->
 <style>
-    .index-section-header{text-align: left;}
-    .index-section-title{font-size: 2.5rem;font-weight: 700;margin-bottom: 2.5rem;text-transform: uppercase;}
-    .index-section-title:hover{color: #007bff;transition: color 0.3s ease;}
-    .index-section-description{font-size: var(--font-size-body, 1.2rem);font-weight: normal;line-height: 1.5;margin: 1rem 0;text-transform:initial;}
-    .index-section-subtitle{font-size: var(--font-size-h3, 2rem);font-weight: 600;padding: .2rem 1rem;border-left: 7px solid #007bff;vertical-align: middle;margin-bottom: 1.5rem;}
+    /* .index-section-header{text-align: left;} */
+    /* .index-section-title{font-size: 2.5rem;font-weight: 700;margin-bottom: 2.5rem;text-transform: uppercase;} */
+    /* .index-section-title:hover{color: #007bff;transition: color 0.3s ease;} */
+    /* .index-section-description{font-size: var(--font-size-body, 1.2rem);font-weight: normal;line-height: 1.5;margin: 1rem 0;text-transform:initial;} */
+    /* .index-section-subtitle{font-size: var(--font-size-h3, 2rem);font-weight: 600;padding: .2rem 1rem;border-left: 7px solid #007bff;vertical-align: middle;margin-bottom: 1.5rem;} */
     
     #keypartners .container,
     #contact .container,
@@ -373,6 +387,4 @@ document.addEventListener('click', function(e) {
         .index-section-subtitle{font-size: 1rem;}
     }
 
-    .section-blank-1rem {height: 1rem;}
-    .section-blank-2rem {height: 2rem;}
 </style>

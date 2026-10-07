@@ -85,7 +85,7 @@
     {
       "id": 2,
       "type": "notice",
-      "enabled": false,
+      "enabled": true,
       "title": {
         "kor": "웹사이트 개선 작업 안내",
         "eng": "Website Update Notice"

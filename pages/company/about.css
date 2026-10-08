@@ -21,7 +21,7 @@
         & #aboutus-overview-소개-회사정보-이미지1{height: 360px;}
         & #aboutus-overview-소개-회사정보-핵심정보 {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             border-top: 1px solid #dfe5ed;
             border-bottom: 1px solid #dfe5ed;
         }
@@ -84,6 +84,7 @@
             #aboutus-overview-소개-회사정보-핵심정보>div:nth-child(3)::before {display: none;}
             #aboutus-overview-소개-회사정보-핵심정보>div:nth-child(3),
             #aboutus-overview-소개-회사정보-핵심정보>div:nth-child(4) {border-top: 1px solid #e5e9ef;}
+            #aboutus-overview-소개-회사정보-핵심정보>div:nth-child(2) {border-bottom: 1px solid #e5e9ef;}
         }
         @media (max-width: 650px) {
             #aboutus-overview-소개-회사정보-이미지1 {height: 220px;}

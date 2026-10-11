@@ -290,6 +290,7 @@ const SimplePopupModal = {
     const counterEl = document.getElementById('popup-counter');
     
     if (gridContainer) {
+      gridContainer.classList.toggle('single-popup', this.popups.length === 1);
       gridContainer.innerHTML = '';
       
       currentPagePopups.forEach((popup, index) => {

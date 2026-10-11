@@ -22,7 +22,8 @@
   padding: 20px;
   border-radius: 12px;
   max-width: 95vw;
-  max-height: 80vh;
+  max-height: 80vh, 600px;
+  max-height: min(80vh, 850px);
   height: 100%;
   position: relative;
   overflow: hidden;
@@ -41,6 +42,10 @@
   height: 100%;
   overflow-y: auto;
   margin-top: auto;
+}
+
+.popup-grid-container.single-popup {
+  grid-template-columns: 1fr;
 }
 
 .popup-grid-item {
@@ -135,7 +140,6 @@
   background: white;
   color: #333;
   padding: 20px;
-  height: 100%;
   display: flex;
   flex-direction: column;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -143,6 +147,7 @@
   overflow-y: auto;
   /* min-width: 350px; */
   width:480px;
+  height: 100%;
 }
 
 .popup-grid-item .popup-header {

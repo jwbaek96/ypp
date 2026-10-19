@@ -63,10 +63,14 @@ function reinitializeIfNeeded() {
     }
 }
 
+window.reinitializeBusinessSlider = reinitializeIfNeeded;
+
 // 회전 및 업데이트 함수
 function updateCarousel() {
     const carouselItems = document.querySelectorAll('.carousel-item');
     const containerWidth = carousel.offsetWidth;
+    if (containerWidth === 0 || carouselItems.length === 0) return;
+
     const radius = containerWidth * 0.5; // 컨테이너 크기에 비례
     
     let maxZ = -Infinity;

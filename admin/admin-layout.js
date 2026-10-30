@@ -22,9 +22,9 @@
             links: [
                 { label: '인허가', href: '/admin/page.html?page=%EC%9D%B8%ED%97%88%EA%B0%80', icon: 'fa-file-signature' },
                 { label: '유자격·수상', href: '/admin/page.html?page=%EC%9C%A0%EC%9E%90%EA%B2%A9', icon: 'fa-award' },
-                { label: '인사이드', icon: 'fa-images', sheetUrl: 'https://docs.google.com/spreadsheets/d/1883SgdNBFGLDyGXs5zITslHQPV-Oa90ilt9eG7af70c/edit?usp=sharing' },
-                { label: '아카데미 갤러리', icon: 'fa-camera', sheetUrl: 'https://docs.google.com/spreadsheets/d/1gY5o_fHrXxAShXdSzqhyZBdLskbsAEwIdihci0UeU8c/edit?usp=sharing' },
-                { label: '비디오', icon: 'fa-video', sheetUrl: 'https://docs.google.com/spreadsheets/d/1BopJLpq_yYbpJDTFtUxPRQKW2p5A1S9FE-wuXN32ph4/edit?usp=sharing' }
+                { label: '인사이드', icon: 'fa-images', sheetUrl: 'https://docs.google.com/spreadsheets/d/1883SgdNBFGLDyGXs5zITslHQPV-Oa90ilt9eG7af70c/edit?usp=sharing', createUrl: 'https://tally.so/r/n09LMN' },
+                { label: '아카데미 갤러리', icon: 'fa-camera', sheetUrl: 'https://docs.google.com/spreadsheets/d/1gY5o_fHrXxAShXdSzqhyZBdLskbsAEwIdihci0UeU8c/edit?usp=sharing', createUrl: 'https://tally.so/r/wojrpX' },
+                { label: '비디오', icon: 'fa-video', sheetUrl: 'https://docs.google.com/spreadsheets/d/1BopJLpq_yYbpJDTFtUxPRQKW2p5A1S9FE-wuXN32ph4/edit?usp=sharing', createUrl: 'https://tally.so/r/wdrkGy' }
             ]
         },
         {

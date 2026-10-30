@@ -242,15 +242,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const sheetModalItems = {
                 inside: {
                     title: '인사이드',
-                    sheetUrl: 'https://docs.google.com/spreadsheets/d/1883SgdNBFGLDyGXs5zITslHQPV-Oa90ilt9eG7af70c/edit?usp=sharing'
+                    sheetUrl: 'https://docs.google.com/spreadsheets/d/1883SgdNBFGLDyGXs5zITslHQPV-Oa90ilt9eG7af70c/edit?usp=sharing',
+                    createUrl: 'https://tally.so/r/n09LMN'  
                 },
                 academy: {
                     title: '아카데미 갤러리',
-                    sheetUrl: 'https://docs.google.com/spreadsheets/d/1gY5o_fHrXxAShXdSzqhyZBdLskbsAEwIdihci0UeU8c/edit?usp=sharing'
+                    sheetUrl: 'https://docs.google.com/spreadsheets/d/1gY5o_fHrXxAShXdSzqhyZBdLskbsAEwIdihci0UeU8c/edit?usp=sharing',
+                    createUrl: 'https://tally.so/r/wojrpX'
                 },
                 video: {
                     title: '비디오',
-                    sheetUrl: 'https://docs.google.com/spreadsheets/d/1BopJLpq_yYbpJDTFtUxPRQKW2p5A1S9FE-wuXN32ph4/edit?usp=sharing'
+                    sheetUrl: 'https://docs.google.com/spreadsheets/d/1BopJLpq_yYbpJDTFtUxPRQKW2p5A1S9FE-wuXN32ph4/edit?usp=sharing',
+                    createUrl: 'https://tally.so/r/wdrkGy'
                 },
                 'news-popup': {
                     title: '보도자료 및 팝업',
